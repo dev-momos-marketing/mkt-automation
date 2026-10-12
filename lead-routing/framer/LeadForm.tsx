@@ -6,8 +6,8 @@ const ENDPOINT = "https://momos-lead-routing.marketing-team-a27.workers.dev"
 const FALLBACK = "/book-a-demo-us"
 // The Worker gives Claude 3s to check the lead. This leaves room for the network on top.
 const TIMEOUT_MS = 5000
-const TERMS_URL = "/terms-of-service"
-const PRIVACY_URL = "/privacy-policy"
+const TERMS_URL = "/legal"
+const PRIVACY_URL = "/legal"
 
 const RED = "#C94A3E"
 const TEXT = "#1A1A1A"
