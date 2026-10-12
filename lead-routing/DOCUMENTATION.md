@@ -401,7 +401,6 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 
 - **Google Ads conversion.** The old form fired `conversion_event_submit_lead_form` (AW-17410413276). The new form doesn't yet. Decide whether to fire it for routed leads only.
 - **Sales email in the popup.** Confirm `sales@momos.com` is the right inbox.
-- **Form code on `main`.** The latest `LeadForm.tsx` is on branch `claude/sleepy-fermat-jjhvup`. Merge it so `main` matches what's live in Framer.
 - **Research cost check.** After a few real leads, check the Console shows web search costs. If there's no web search cost, the research isn't running.
 - **Haiku research quality.** After switching research to Haiku, compare a week of Slack summaries with the Opus ones. If locations or companies are often wrong, set `RESEARCH_MODEL = "opus"`.
 
