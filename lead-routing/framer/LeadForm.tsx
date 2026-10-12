@@ -1,7 +1,7 @@
 import { useState, useRef } from "react"
 
-// Paste the Worker URL from Cloudflare here.
-const ENDPOINT = "https://momos-lead-routing.YOUR-SUBDOMAIN.workers.dev"
+// The Worker URL from Cloudflare.
+const ENDPOINT = "https://momos-lead-routing.marketing-team-a27.workers.dev"
 // Where visitors go if the Worker cannot be reached at all.
 const FALLBACK = "/book-a-demo-us"
 // The Worker gives Claude 3s to check the lead. This leaves room for the network on top.
