@@ -17,7 +17,7 @@ Visitor fills the form on momos.com (Framer)
 Cloudflare Worker  ── spam check + region (instant)
         │          ── Claude Haiku 5.5: ICP fit? (max 3 s)
         │
-        ├─ fit / maybe, East US / Europe / Middle East ──► Jill: momos.com/book-a-demo-us
+        ├─ fit / maybe, East US / Europe / Middle East ──► Jill: Google Calendar
         ├─ fit / maybe, West US / APAC                 ──► James: Google Calendar
         └─ confident not-fit or spam                   ──► Thank-you popup (stays on page)
 
@@ -82,7 +82,7 @@ lead-routing/
 3. **Region (Worker, instant).** Country plus browser time zone, with Cloudflare's IP lookup as a backup (see section 4).
 4. **ICP gate (Claude Haiku 5.5, max 3 s).** Fit, maybe or not_fit, with a confidence score (see section 5).
 5. **Answer.** The Worker returns one URL:
-   - **Jill:** `https://www.momos.com/book-a-demo-us`
+   - **Jill:** `https://calendar.app.google/RgDyFpMoE46wfyFv9`
    - **James:** `https://calendar.app.google/LxFWWodxZMcd957n6`
    - **Not fit / spam:** no redirect. The visitor stays on the page and sees the thank-you popup. (Behind the scenes the Worker replies with `https://www.momos.com/thank-you` as a code word. The form spots it and opens the popup instead. Nobody is ever sent to that address, and the page doesn't need to exist.)
 6. **Background research (Claude Haiku 5.5 + web search, up to 25 s).** Starts after the answer, so the visitor never waits for it. The result goes to Zapier.
@@ -234,7 +234,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | Constant | Value | Purpose |
 |---|---|---|
 | `ENDPOINT` | Worker URL | Where the form posts |
-| `FALLBACK` | `/book-a-demo-us` | Used if the Worker is unreachable |
+| `FALLBACK` | `/book-a-demo-us` | Used if the Worker is unreachable. Since Jill moved to Google Calendar (Oct 2026), landing here always means the fallback was used. |
 | `TIMEOUT_MS` | 5000 | Max wait before the fallback |
 | `TERMS_URL` / `PRIVACY_URL` | momos.com/legal/terms-of-use · momos.com/legal | Consent links |
 | `NOT_FIT_PATH` | `/thank-you` | Code word from the Worker meaning "show the popup, don't redirect" |
@@ -272,7 +272,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | Setting | Value | Why |
 |---|---|---|
 | `JAMES_URL` | https://calendar.app.google/LxFWWodxZMcd957n6 | James's calendar |
-| `JILL_URL` | https://www.momos.com/book-a-demo-us | Jill's booking page |
+| `JILL_URL` | https://calendar.app.google/RgDyFpMoE46wfyFv9 | Jill's Google Calendar |
 | `NOT_FIT_URL` | https://www.momos.com/thank-you | Code word telling the form to show the popup. Not a real redirect; no page needed. |
 | `ALLOWED_ORIGINS` | https://www.momos.com, https://momos.com (plus any `*.framer.app` / `*.framer.website` / `*.framer.ai` preview) | Which sites may call the Worker |
 | `RESEARCH_MODEL` | `haiku` | Which Claude does the background research: `haiku` (cheap) or `opus` (thorough). See section 17 for costs. |
@@ -330,7 +330,7 @@ It covers East/EMEA → Jill, West/APAC → James, small/unclear → still a cal
 | Emily Chen · emily.chen@stanford.edu · Stanford University · Student · US · 1-5 | Popup |
 | John Doe · johndoe@mailinator.com · asdf · asdf · US · 1-5 | Popup (spam, no Claude) |
 
-**Tip:** Jill's page is also the fallback. A lead landing there doesn't prove the Worker answered. James's calendar and the popup only appear when it did. Check Cloudflare Logs to be sure.
+**Tip:** both AEs now use Google Calendar links, so landing on `momos.com/book-a-demo-us` always means the form's fallback was used (the Worker wasn't reached).
 
 Delete test leads in Salesforce afterwards.
 

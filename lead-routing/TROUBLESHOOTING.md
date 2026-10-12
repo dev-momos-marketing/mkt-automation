@@ -11,12 +11,12 @@ Owner: Vincent (Marketing) · Every account below logs in with **marketing-team@
 1. A visitor fills in the **Book a Demo** form on momos.com.
 2. The form sends it to our **routing service** on Cloudflare. In about 2 seconds, Claude (AI) checks whether it's a real restaurant brand.
 3. The visitor is then sent to the right person:
-   - **Jill** (East US, Europe, Middle East, Africa): momos.com/book-a-demo-us
+   - **Jill** (East US, Europe, Middle East, Africa): Jill's Google Calendar
    - **James** (West US, Asia-Pacific): James's Google Calendar
    - **Not a fit, or junk**: a "Thanks for reaching out!" popup. They stay on the page.
 4. About 30 seconds later, Claude looks the company up online. A summary lands in **Slack** and a lead is created in **Salesforce** (through **Zapier**). This lead is also stored in Conversion.ai.
 
-**It's built to fail safe.** If the AI or the routing service breaks, visitors still land on Jill's booking page. Real prospects can still book. What you lose is the routing to James and the Slack/Salesforce summary.
+**It's built to fail safe.** If the AI or the routing service breaks, visitors land on the backup booking page **momos.com/book-a-demo-us**. Real prospects can still book. What you lose is the routing to James and the Slack/Salesforce summary.
 
 ---
 
@@ -30,20 +30,20 @@ Do this whenever something feels off, and after any change. Use a normal browser
 | **B. Junk lead** | John Doe · johndoe@mailinator.com · asdf · asdf · United States · 1-5 | The **thank-you popup** appears and you stay on the page. No Slack message (that's correct). |
 
 - **Both work:** everything is fine. Delete the test lead in Salesforce.
-- **Test A lands on Jill's page instead:** go to problem 1 below.
+- **Test A lands on momos.com/book-a-demo-us instead:** go to problem 1 below.
 - **Test A works but no Slack message:** go to problem 3.
 
 ---
 
 ## 3. Problems and what to do
 
-### Problem 1: Everyone goes to Jill's page (even Australia, West Coast and junk leads)
+### Problem 1: Everyone lands on momos.com/book-a-demo-us (even Australia, West Coast and junk leads)
 **What it means:** the form can't reach the routing service, so it uses the safe fallback.
 
 1. Log in to **dash.cloudflare.com** → **Workers & Pages** → **momos-lead-routing**.
 2. Open the **Deployments** tab. If a deployment happened around when it broke, someone changed something. Click **⋯** next to the previous deployment → **Rollback**. Then redo the health check.
 3. Check **cloudflarestatus.com** for an outage.
-4. Still broken? Message Vincent with the time it started. Visitors are still reaching Jill in the meantime.
+4. Still broken? Message Vincent with the time it started. Visitors can still book from the backup page in the meantime.
 
 ### Problem 2: The form is missing, blank, or looks broken on the website
 **What it means:** the form's code in Framer got damaged, usually by a cut-off paste.

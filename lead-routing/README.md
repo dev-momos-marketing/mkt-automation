@@ -5,7 +5,7 @@ Framer form ──► Cloudflare Worker
                   ├─ spam check + region (instant)
                   ├─ Claude Haiku: ICP fit? (max 3s, spinner on the form)
                   │
-                  ├─ fit / maybe, Jill  ──► momos.com/book-a-demo-us
+                  ├─ fit / maybe, Jill  ──► Jill's Google Calendar
                   ├─ fit / maybe, James ──► James's Google Calendar
                   └─ not fit / spam     ──► momos.com/thank-you
 
@@ -72,7 +72,7 @@ curl -X POST https://momos-lead-routing.<your-subdomain>.workers.dev \
   -d '{"firstName":"Test","lastName":"Lead","email":"test@shakeshack.com","company":"Shake Shack","title":"Marketing Director","country":"US","locations":"50-249","timezone":"America/New_York","elapsedMs":8000}'
 ```
 
-Expect `{"url":"https://www.momos.com/book-a-demo-us"}`. Try an agency (`"company":"Bright Digital Agency"`) and expect the thank-you page.
+Expect `"url":"https://calendar.app.google/RgDyFpMoE46wfyFv9"` (Jill). Try an agency (`"company":"Bright Digital Agency"`) and expect the thank-you page.
 
 ### 4. Framer
 

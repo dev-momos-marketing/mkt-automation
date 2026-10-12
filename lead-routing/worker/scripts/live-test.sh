@@ -3,7 +3,9 @@
 # Each lead is a real Claude call (fractions of a cent).
 
 U="${U:-https://momos-lead-routing.marketing-team-a27.workers.dev}"
-JILL="book-a-demo-us"; JAMES="calendar.app.google"; NOTFIT="thank-you"
+# Both AEs use Google Calendar booking links, so match on the unique end of each link.
+# book-a-demo-us means the Worker answered with the fallback (bad request).
+JILL="RgDyFpMoE46wfyFv9"; JAMES="LxFWWodxZMcd957n6"; NOTFIT="thank-you"
 pass=0; fail=0
 
 t() { # t "label" EXPECT 'json'

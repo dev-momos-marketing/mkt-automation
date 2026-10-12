@@ -16,7 +16,7 @@ hostname = "api.anthropic.com"
 
 [vars]
 JAMES_URL = "https://calendar.app.google/LxFWWodxZMcd957n6"
-JILL_URL = "https://www.momos.com/book-a-demo-us"
+JILL_URL = "https://calendar.app.google/RgDyFpMoE46wfyFv9"
 NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
