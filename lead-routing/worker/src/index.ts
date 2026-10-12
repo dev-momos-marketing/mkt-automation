@@ -48,7 +48,7 @@ export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: stri
 async function gate(form: FormData, instant: Instant, env: Env): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
   try {
-    const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY, form, FIT_BUDGET_MS), FIT_BUDGET_MS, "fit check took too long");
+    const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS), FIT_BUDGET_MS, "fit check took too long");
     if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
       return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
     }
@@ -112,7 +112,7 @@ async function verifyAndSend(form: FormData, instant: Instant, url: string, fit:
   // Obvious spam skips Claude to save time and money. It still goes to Zapier so nothing disappears.
   if (instant.status !== "spam") {
     try {
-      v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY, form, instant, CLAUDE_BUDGET_MS), CLAUDE_BUDGET_MS, "Claude took too long");
+      v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, CLAUDE_BUDGET_MS), CLAUDE_BUDGET_MS, "Claude took too long");
     } catch (err) {
       error = err instanceof Error ? err.message : String(err);
     }
