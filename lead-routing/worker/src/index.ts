@@ -59,6 +59,15 @@ async function gate(form: FormData, instant: Instant, env: Env, timings: Timings
   }
 }
 
+function testTimezone(pageUrl: unknown): string | null {
+  try {
+    const tz = new URL(String(pageUrl)).searchParams.get("tz");
+    return tz && /^[A-Za-z_]+\/[A-Za-z_\/-]+$/.test(tz) ? tz : null;
+  } catch {
+    return null;
+  }
+}
+
 function urlFor(instant: Instant, env: Env): string {
   if (instant.ae === "james") return env.JAMES_URL;
   if (instant.ae === "jill") return env.JILL_URL;
@@ -145,6 +154,11 @@ export default {
     } catch {
       return Response.json({ url: env.JILL_URL }, { status: 400, headers });
     }
+
+    // Testing: ?tz=America/Los_Angeles on the form's page acts as that time zone. Read from the
+    // page URL the form sends, so it works without changing the Framer code.
+    const testTz = testTimezone(form.pageUrl);
+    if (testTz) form = { ...form, timezone: testTz };
 
     const cf = (req as Request & { cf?: IpLocation }).cf ?? {};
     const started = Date.now();

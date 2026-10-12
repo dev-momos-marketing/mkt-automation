@@ -247,6 +247,15 @@ test("unsure not_fit and maybe still get a calendar", async () => {
   assert.equal((await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", maybe) })).json.url, env.JAMES_URL);
 });
 
+test("?tz= on the page URL overrides the browser time zone (for testing)", async () => {
+  const fromVietnam = { ...form, country: "US", timezone: "Asia/Ho_Chi_Minh" };
+  assert.equal((await run(fromVietnam, claudeOk)).json.url, env.JILL_URL);
+  const west = { ...fromVietnam, pageUrl: "https://www.momos.com/get-started-new?tz=America/Los_Angeles" };
+  assert.equal((await run(west, claudeOk)).json.url, env.JAMES_URL);
+  const east = { ...fromVietnam, pageUrl: "https://www.momos.com/get-started-new?tz=America/New_York" };
+  assert.equal((await run(east, claudeOk)).json.url, env.JILL_URL);
+});
+
 test("fit check failure lets the lead through", async () => {
   const { json, sent } = await run(form, claudeOk, {
     fit: () => Response.json({ type: "error", error: { type: "overloaded_error", message: "busy" } }, { status: 529 }),

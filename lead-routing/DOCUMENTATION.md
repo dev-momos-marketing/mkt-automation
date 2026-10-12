@@ -287,7 +287,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 
 **Reply to the form:** `{ url, ae, region }`. The form only uses `url`. It prints `[Momos form] routed to …` in the browser console for testing.
 
-**Testing from outside North America:** add `?tz=America/Los_Angeles` (or any time zone) to the page URL. The form sends that instead of the browser's time zone. A VPN alone doesn't change the time zone, so from Asia every US lead goes to Jill.
+**Testing from outside North America:** add `?tz=America/Los_Angeles` (or any time zone) to the page URL. The Worker reads it from the page URL the form sends and uses it instead of the browser's time zone (no Framer change needed). A VPN alone doesn't change the time zone, so from Asia every US lead goes to Jill.
 
 ---
 
