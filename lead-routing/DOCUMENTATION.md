@@ -82,7 +82,7 @@ lead-routing/
 5. **Answer.** The Worker returns one URL:
    - **Jill:** `https://www.momos.com/book-a-demo-us`
    - **James:** `https://calendar.app.google/LxFWWodxZMcd957n6`
-   - **Not fit / spam:** `https://www.momos.com/thank-you`. The form sees this URL and shows the thank-you popup instead of leaving the page.
+   - **Not fit / spam:** no redirect. The visitor stays on the page and sees the thank-you popup. (Behind the scenes the Worker replies with `https://www.momos.com/thank-you` as a code word. The form spots it and opens the popup instead. Nobody is ever sent to that address, and the page doesn't need to exist.)
 6. **Background research (Claude Opus 5.5 + web search, up to 25 s).** Starts after the answer, so the visitor never waits for it. The result goes to Zapier.
 7. **Zapier.** The Filter lets only `routing__status = routed` through. Then Salesforce creates the lead and Slack posts the message.
 
@@ -231,7 +231,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | `FALLBACK` | `/book-a-demo-us` | Used if the Worker is unreachable |
 | `TIMEOUT_MS` | 5000 | Max wait before the fallback |
 | `TERMS_URL` / `PRIVACY_URL` | momos.com/legal/terms-of-use · momos.com/legal | Consent links |
-| `NOT_FIT_PATH` | `/thank-you` | If the Worker returns this, show the popup |
+| `NOT_FIT_PATH` | `/thank-you` | Code word from the Worker meaning "show the popup, don't redirect" |
 | `SALES_EMAIL` | sales@momos.com | Shown in the popup for misjudged restaurants. **Confirm this inbox.** |
 
 **Look:** copied from the original get-started form:
@@ -267,7 +267,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 |---|---|---|
 | `JAMES_URL` | https://calendar.app.google/LxFWWodxZMcd957n6 | James's calendar |
 | `JILL_URL` | https://www.momos.com/book-a-demo-us | Jill's booking page |
-| `NOT_FIT_URL` | https://www.momos.com/thank-you | The signal for the popup |
+| `NOT_FIT_URL` | https://www.momos.com/thank-you | Code word telling the form to show the popup. Not a real redirect; no page needed. |
 | `ALLOWED_ORIGINS` | https://www.momos.com, https://momos.com (plus any `*.framer.app` / `*.framer.website` / `*.framer.ai` preview) | Which sites may call the Worker |
 | `[observability] enabled = true` | | One log line per lead in Observability → Logs |
 | `[placement] mode = "targeted", hostname = "api.anthropic.com"` | | Runs the Worker next to Claude's API. Without it, visitors near Hong Kong got "403 Request not allowed". |
