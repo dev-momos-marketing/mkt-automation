@@ -34,9 +34,10 @@ const CSS = `
 .mlf-input:hover { border-color: rgba(10,11,11,0.2); }
 .mlf-input:focus { background: #FFFFFF; border-color: #D73E33; box-shadow: 0 0 0 4px rgba(255,120,122,0.15); }
 select.mlf-input { appearance: none; -webkit-appearance: none; padding-right: 44px; cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' fill='none'%3E%3Cpath d='M1 1.5 6 6.5l5-5' stroke='%2315181E' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; }
-.mlf-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.mlf-chips { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; }
+.mlf-chip { display: block; }
 .mlf-chip input { position: absolute; opacity: 0; pointer-events: none; }
-.mlf-chip span { display: inline-block; padding: 8px 18px; font-size: 14px; line-height: 1.56; font-weight: 500; color: #15181E; background: #FFFFFF; border: 1px solid #FF787A; border-radius: 30px; cursor: pointer; transition: all .2s; }
+.mlf-chip span { display: block; text-align: center; padding: 10px 8px; font-size: 14px; line-height: 1.56; font-weight: 500; color: #15181E; background: #FFFFFF; border: 1px solid #FF787A; border-radius: 30px; cursor: pointer; transition: all .2s; }
 .mlf-chip:hover span { background: #FFF0F0; }
 .mlf-chip input:checked + span { background: #D73E33; border-color: #D73E33; color: #FFFFFF; }
 .mlf-chip input:focus-visible + span { box-shadow: 0 0 0 4px rgba(255,120,122,0.25); }
@@ -47,7 +48,7 @@ select.mlf-input { appearance: none; -webkit-appearance: none; padding-right: 44
 .mlf-button:hover .mlf-arrow { transform: translateX(3px); }
 .mlf-consent { margin: 0; font-size: 12px; line-height: 1.5; color: #4D4D4D; text-align: center; }
 .mlf-consent a { color: #D73E33; text-decoration: underline; text-underline-offset: 2px; }
-@media (max-width: 480px) { .mlf-card { padding: 20px; } .mlf-button { font-size: 16px; } }
+@media (max-width: 480px) { .mlf-card { padding: 20px; } .mlf-chips { grid-template-columns: repeat(2, 1fr); } .mlf-button { font-size: 16px; } }
 `
 
 /**
