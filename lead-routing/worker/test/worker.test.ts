@@ -95,7 +95,7 @@ const fitOk = { icp_fit: "fit", confidence: 0.9, reason: "Burger chain with 18 l
 type Handler = (req: Request) => Response | Promise<Response>;
 
 // Runs the Worker with Claude, DNS and Zapier faked out. Any homepage fetch is recorded in `pages`.
-// `fit` answers the Haiku gate, `claude` answers the Opus research.
+// `fit` answers the fit check (no tools), `claude` answers the research (has web search).
 async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: Env } = {}) {
   const sent: any[] = [];
   const fitCalls: any[] = [];
@@ -111,7 +111,7 @@ async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: 
     }
     if (req.url.includes("api.anthropic.com")) {
       const json = (await req.clone().json()) as any;
-      if (json.model === "claude-haiku-5-5") {
+      if (!json.tools) {
         fitCalls.push(json);
         return fit(req);
       }
@@ -167,11 +167,24 @@ const verification = {
 
 const claudeOk = async (req: Request) => {
   const body = (await req.json()) as any;
-  assert.equal(body.model, "claude-opus-5-5");
-  assert.equal(body.fallbacks, "default");
-  assert.equal(body.tools[0].type, "web_search_20260209");
-  return claudeJson("claude-opus-5-5", verification);
+  assert.equal(body.model, "claude-haiku-5-5");
+  assert.equal(body.fallbacks, undefined);
+  assert.equal(body.tools[0].type, "web_search_20250305");
+  return claudeJson("claude-haiku-5-5", verification);
 };
+
+test("RESEARCH_MODEL = opus researches with Opus and its fallback", async () => {
+  let seen: any;
+  const opus = async (req: Request) => {
+    seen = await req.json();
+    return claudeJson("claude-opus-5-5", verification);
+  };
+  const { sent } = await run(form, opus, { env: { ...env, RESEARCH_MODEL: "opus" } });
+  assert.equal(seen.model, "claude-opus-5-5");
+  assert.equal(seen.fallbacks, "default");
+  assert.equal(seen.tools[0].type, "web_search_20260209");
+  assert.equal(sent[0].verification.summary, verification.summary);
+});
 
 test("answers with the calendar, then sends Claude's JSON to Zapier", async () => {
   const { res, json, ms, sent } = await run(form, claudeOk);

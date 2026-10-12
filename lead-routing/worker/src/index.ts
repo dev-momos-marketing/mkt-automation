@@ -5,7 +5,7 @@
 //    the result goes to Zapier (Salesforce + Slack).
 import { instantRoute, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
-import { verifyLead, type Verification } from "./verify.ts";
+import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 
 export interface Env {
   ANTHROPIC_API_KEY: string;
@@ -14,6 +14,7 @@ export interface Env {
   JILL_URL: string;
   NOT_FIT_URL: string;
   ALLOWED_ORIGINS: string; // comma separated
+  RESEARCH_MODEL?: string; // "haiku" (default) or "opus"
 }
 
 type Ctx = { waitUntil(p: Promise<unknown>): void };
@@ -106,13 +107,17 @@ export function zapierPayload(form: FormData, instant: Instant, url: string, fit
   };
 }
 
+function researchModel(env: Env): ResearchModel {
+  return env.RESEARCH_MODEL?.trim().toLowerCase() === "opus" ? "opus" : "haiku";
+}
+
 async function verifyAndSend(form: FormData, instant: Instant, url: string, fit: FitResult, env: Env, hook: string) {
   let v: Verification | null = null;
   let error: string | undefined;
   // Obvious spam skips Claude to save time and money. It still goes to Zapier so nothing disappears.
   if (instant.status !== "spam") {
     try {
-      v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, CLAUDE_BUDGET_MS), CLAUDE_BUDGET_MS, "Claude took too long");
+      v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, CLAUDE_BUDGET_MS, researchModel(env)), CLAUDE_BUDGET_MS, "Claude took too long");
     } catch (err) {
       error = err instanceof Error ? err.message : String(err);
     }
