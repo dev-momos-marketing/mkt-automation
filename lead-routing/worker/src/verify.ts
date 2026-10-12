@@ -61,11 +61,17 @@ async function hasMailServer(domain: string): Promise<boolean | null> {
   }
 }
 
+// Which Claude does the research. Set RESEARCH_MODEL in wrangler.toml.
+// haiku: about 85% cheaper; the web search fee is most of what's left.
+// opus: more thorough on unknown companies, and retries on another model if it declines.
+export type ResearchModel = "haiku" | "opus";
+
 export async function verifyLead(
   apiKey: string,
   form: FormData,
   instant: Instant,
   timeoutMs: number,
+  which: ResearchModel = "haiku",
 ): Promise<Verification> {
   const domain = String(form.email ?? "").split("@")[1] ?? "";
   const mx = domain ? await hasMailServer(domain) : null;
@@ -90,16 +96,28 @@ export async function verifyLead(
 
   // Web search can pause a long turn. Continue it once if that happens.
   for (let i = 0; i < 2; i++) {
-    const response = await client.beta.messages.parse({
-      model: "claude-opus-5-5",
+    const shared = {
       max_tokens: 8000,
-      betas: ["server-side-fallback-2026-07-01"],
-      fallbacks: "default",
-      output_config: { effort: "low", format: betaZodOutputFormat(Verification) },
+      output_config: { effort: "low" as const, format: betaZodOutputFormat(Verification) },
       system: SYSTEM,
-      tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 3 }],
       messages,
-    });
+    };
+    const response =
+      which === "opus"
+        ? await client.beta.messages.parse({
+            ...shared,
+            model: "claude-opus-5-5",
+            betas: ["server-side-fallback-2026-07-01"],
+            fallbacks: "default",
+            tools: [{ type: "web_search_20260209", name: "web_search", max_uses: 3 }],
+          })
+        : // Haiku uses the basic web search tool (the filtering version needs Opus or Sonnet)
+          // and has no server-side fallback.
+          await client.beta.messages.parse({
+            ...shared,
+            model: "claude-haiku-5-5",
+            tools: [{ type: "web_search_20250305", name: "web_search", max_uses: 3 }],
+          });
     if (response.stop_reason === "refusal") throw new Error("Claude declined this lead");
     if (response.stop_reason === "pause_turn") {
       messages.push({ role: "assistant", content: response.content });

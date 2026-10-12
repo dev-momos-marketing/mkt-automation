@@ -19,6 +19,8 @@ JAMES_URL = "https://calendar.app.google/LxFWWodxZMcd957n6"
 JILL_URL = "https://www.momos.com/book-a-demo-us"
 NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
+# Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
+RESEARCH_MODEL = "haiku"
 
 # Secrets (set in Cloudflare: Worker > Settings > Variables and Secrets, never commit):
 #   ANTHROPIC_API_KEY   required

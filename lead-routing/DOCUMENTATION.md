@@ -20,13 +20,13 @@ Cloudflare Worker  ── spam check + region (instant)
         └─ confident not-fit or spam                   ──► Thank-you popup (stays on page)
 
         after the visitor is redirected (background, up to 25 s):
-        └─ Claude Opus 5.5 + web search ──► JSON ──► Zapier ──► Salesforce lead + Slack message
+        └─ Claude Haiku 5.5 + web search ──► JSON ──► Zapier ──► Salesforce lead + Slack message
 ```
 
 | | |
 |---|---|
 | Time from click to calendar | About 2 seconds |
-| Cost | About $0.0001 per lead for the fit check and about $0.15 per real lead for the research. Roughly $13 a month at 100 submissions, $128 at 1,000. See section 17. |
+| Cost | About $0.0001 per lead for the fit check and about $0.02–0.03 per real lead for the research. Roughly $2 a month at 100 submissions, $20 at 1,000. See section 17. |
 | If anything breaks | The visitor still lands on a calendar. A real lead is never blocked. |
 | Where it runs | Framer (form), Cloudflare (Worker), Anthropic (Claude), Zapier (Salesforce + Slack) |
 
@@ -39,7 +39,7 @@ Cloudflare Worker  ── spam check + region (instant)
 | Framer code component `LeadForm` | The form on the page. Sends the answers to the Worker and redirects, or shows the popup. | Framer project "Momos Website 2025" → Assets → Code → `LeadForm`. Used on `/get-started-new` in the Hero. | marketing-team@momos.com |
 | Cloudflare Worker `momos-lead-routing` | Spam check, region, ICP gate, background research, sends to Zapier. | https://momos-lead-routing.marketing-team-a27.workers.dev (POST only) | marketing-team@momos.com |
 | Source code | Worker and form code, tests, docs. | GitHub `dev-momos-marketing/mkt-automation`, folder `lead-routing/` | Shared GitHub org |
-| Anthropic API | Claude Haiku 5.5 (fit check) and Claude Opus 5.5 (research). | console.anthropic.com | marketing-team@momos.com |
+| Anthropic API | Claude Haiku 5.5 (fit check and research; research can be switched to Opus 5.5). | console.anthropic.com | marketing-team@momos.com |
 | Zapier Zap "Get-started Form Automation \| 2027" | Catch Hook, then Filter, Salesforce Create Lead and Slack message. | Zapier | Shared (Slack connection still to move off @vincent) |
 | Salesforce | Lead records with research summary and UTMs. | Salesforce | — |
 | Slack | One formatted message per routed lead. | Sales channel | — |
@@ -56,7 +56,7 @@ lead-routing/
     ├── src/index.ts        Request handling, the 3 s gate, Zapier payload
     ├── src/route.ts        Spam checks, region rules, region → AE
     ├── src/fit.ts          Claude Haiku ICP check (prompt lives here)
-    ├── src/verify.ts       Claude Opus research with web search (prompt lives here)
+    ├── src/verify.ts       Claude research with web search (prompt lives here)
     ├── test/worker.test.ts 15 unit tests (Claude and Zapier faked)
     └── scripts/live-test.sh 24 real leads against the live Worker
 ```
@@ -83,7 +83,7 @@ lead-routing/
    - **Jill:** `https://www.momos.com/book-a-demo-us`
    - **James:** `https://calendar.app.google/LxFWWodxZMcd957n6`
    - **Not fit / spam:** no redirect. The visitor stays on the page and sees the thank-you popup. (Behind the scenes the Worker replies with `https://www.momos.com/thank-you` as a code word. The form spots it and opens the popup instead. Nobody is ever sent to that address, and the page doesn't need to exist.)
-6. **Background research (Claude Opus 5.5 + web search, up to 25 s).** Starts after the answer, so the visitor never waits for it. The result goes to Zapier.
+6. **Background research (Claude Haiku 5.5 + web search, up to 25 s).** Starts after the answer, so the visitor never waits for it. The result goes to Zapier.
 7. **Zapier.** The Filter lets only `routing__status = routed` through. Then Salesforce creates the lead and Slack posts the message.
 
 **Safety nets**
@@ -136,11 +136,14 @@ The form has no State field on purpose, to keep it short. The time zone does tha
 
 ---
 
-## 6. Background research (Claude Opus 5.5 + web search)
+## 6. Background research (Claude Haiku 5.5 + web search)
 
 Runs only when the `ZAPIER_HOOK_URL` secret is set, and is skipped for spam.
 
-- **Model:** `claude-opus-5-5`, effort low, web search tool (max 3 searches), structured JSON output.
+- **Model:** set by `RESEARCH_MODEL` in `wrangler.toml`.
+  - `haiku` (default since October 2026): `claude-haiku-5-5`, effort low, basic web search tool `web_search_20250305` (max 3 searches), structured JSON output. About 85% cheaper than Opus.
+  - `opus`: `claude-opus-5-5`, effort low, web search with result filtering `web_search_20260209` (max 3 searches), and server-side fallback to another model if Opus declines. More thorough on unknown or tricky companies.
+  - Switching: change the value in `worker/wrangler.toml` and push to `main`. No other code change.
 - **Extra signal:** the Worker also checks whether the email domain has a mail server (DNS MX lookup via Cloudflare DNS).
 - **What it checks:** whether the company is real (and finds its website), whether it's F&B, the real number of locations compared with the form, whether the email and title fit the company, and where the company is based.
 
@@ -269,6 +272,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | `JILL_URL` | https://www.momos.com/book-a-demo-us | Jill's booking page |
 | `NOT_FIT_URL` | https://www.momos.com/thank-you | Code word telling the form to show the popup. Not a real redirect; no page needed. |
 | `ALLOWED_ORIGINS` | https://www.momos.com, https://momos.com (plus any `*.framer.app` / `*.framer.website` / `*.framer.ai` preview) | Which sites may call the Worker |
+| `RESEARCH_MODEL` | `haiku` | Which Claude does the background research: `haiku` (cheap) or `opus` (thorough). See section 17 for costs. |
 | `[observability] enabled = true` | | One log line per lead in Observability → Logs |
 | `[placement] mode = "targeted", hostname = "api.anthropic.com"` | | Runs the Worker next to Claude's API. Without it, visitors near Hong Kong got "403 Request not allowed". |
 
@@ -286,8 +290,8 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 - API key stored only as the Cloudflare secret.
 - **Models:**
   - `claude-haiku-5-5`: gate, every non-spam lead
-  - `claude-opus-5-5` with web search: research, every non-spam lead when Zapier is on
-- **Cost:** check Console → Cost, grouped by model. Haiku should show for every lead; Opus and web search should show when research is running. Estimates by volume and suggested spend limits are in section 17.
+  - `claude-haiku-5-5` with web search: research, every non-spam lead when Zapier is on (or `claude-opus-5-5` if `RESEARCH_MODEL = "opus"`)
+- **Cost:** check Console → Cost, grouped by model. Haiku should show for every lead (twice when research runs), and web search should show when research is running. Estimates by volume and suggested spend limits are in section 17.
 
 ---
 
@@ -337,6 +341,7 @@ Delete test leads in Salesforce afterwards.
 | Make the gate stricter or looser | `NOT_FIT_MIN_CONFIDENCE` in `worker/src/fit.ts` (higher = turn fewer away) |
 | Change what counts as ICP | The `SYSTEM` prompt in `worker/src/fit.ts` (gate) and `worker/src/verify.ts` (research) |
 | Always turn away 1–5 locations | Add `"1-5"` to `NOT_FIT_BUCKETS` in `worker/src/route.ts` |
+| Switch research between Haiku and Opus | `RESEARCH_MODEL` in `worker/wrangler.toml` (`haiku` or `opus`), then push to main |
 | Turn off research and Zapier | Delete the `ZAPIER_HOOK_URL` secret |
 | Allow another website to use the form | `ALLOWED_ORIGINS` in `worker/wrangler.toml` |
 | Change the popup text or sales email | `SALES_EMAIL` and the popup JSX at the bottom of `framer/LeadForm.tsx`, then re-paste into Framer |
@@ -355,7 +360,7 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 | No log lines | Observability off | `[observability] enabled = true`, then redeploy |
 | `401` / auth errors | API key wrong or stored as a Build variable | Store it as a runtime **Secret** named `ANTHROPIC_API_KEY` |
 | Slack shows `unavailable` verdicts | Research took over 25 s or errored | Occasional is fine; frequent means check Anthropic status and credit |
-| No Opus or web search cost in the Console | Research not running | Check the `ZAPIER_HOOK_URL` secret exists, and that Zapier History shows runs with verification filled in |
+| No web search cost in the Console | Research not running | Check the `ZAPIER_HOOK_URL` secret exists, and that Zapier History shows runs with verification filled in |
 | Framer: "Component file does not exist" or code cut off | Paste was truncated | Re-paste in parts, check the last line is `}`, re-insert the component |
 | A real restaurant got the popup | The gate was over-confident | Check its log line. Adjust the prompt or raise `NOT_FIT_MIN_CONFIDENCE`. The popup gives them the sales email in the meantime. |
 
@@ -386,6 +391,7 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 | Software vendors to restaurants count as not-fit | They're vendors or competitors, not customers. |
 | Popup instead of a thank-you page | Keeps people on the site, and no extra page to maintain. |
 | Booking-detection Zap not built | Not needed for now. |
+| Research on Haiku instead of Opus | About 85% cheaper. The AE summary is a quick check, not a deep dossier. Switch back with one setting if summaries get worse. |
 
 ---
 
@@ -394,7 +400,8 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 - **Google Ads conversion.** The old form fired `conversion_event_submit_lead_form` (AW-17410413276). The new form doesn't yet. Decide whether to fire it for routed leads only.
 - **Sales email in the popup.** Confirm `sales@momos.com` is the right inbox.
 - **Form code on `main`.** The latest `LeadForm.tsx` is on branch `claude/sleepy-fermat-jjhvup`. Merge it so `main` matches what's live in Framer.
-- **Research cost check.** After a few real leads, check the Console shows Opus and web search costs. If only Haiku shows, the research isn't running.
+- **Research cost check.** After a few real leads, check the Console shows web search costs. If there's no web search cost, the research isn't running.
+- **Haiku research quality.** After switching research to Haiku, compare a week of Slack summaries with the Opus ones. If locations or companies are often wrong, set `RESEARCH_MODEL = "opus"`.
 
 ---
 
@@ -423,48 +430,58 @@ Check console.anthropic.com → Cost against these once a month. Prices can chan
 | Output: verdict JSON | ~60 | $0.00003 |
 | **Per lead** | | **~$0.0001** (10,000 leads ≈ $1) |
 
-**Research (Opus + web search, every non-spam lead, including not-fits)**
+**Research (every non-spam lead, including not-fits)**
 
-Search results are added to Claude's input, which is why input tokens are the biggest part.
+Search results are added to Claude's input, which is why input tokens are the biggest part of the token cost. With Haiku, the $0.01-per-search fee is most of the bill.
+
+*Haiku (`RESEARCH_MODEL = "haiku"`, the default).* Haiku uses the basic search tool, which passes full results to Claude, so it reads more tokens than Opus. They're 40× cheaper per token, so it doesn't matter.
 
 | | Light | Typical | Heavy |
 |---|---|---|---|
 | When | Well-known brand, found on 1st search | Most leads | Unknown or odd lead, all 3 searches, turn paused and continued |
 | Searches | 1 ($0.01) | 2 ($0.02) | 3 ($0.03) |
-| Input tokens (incl. search results) | ~10,000 ($0.04) | ~25,000 ($0.10) | ~50,000 ($0.20) |
+| Input tokens (incl. search results) | ~15,000 ($0.0015) | ~35,000 ($0.0035) | ~70,000 ($0.007) |
+| Output tokens (thinking + JSON) | ~1,000 ($0.0005) | ~1,500 ($0.0008) | ~3,000 ($0.0015) |
+| **Per lead** | **~$0.012** | **~$0.024** | **~$0.04** |
+
+*Opus (`RESEARCH_MODEL = "opus"`).*
+
+| | Light | Typical | Heavy |
+|---|---|---|---|
+| Searches | 1 ($0.01) | 2 ($0.02) | 3 ($0.03) |
+| Input tokens (incl. filtered search results) | ~10,000 ($0.04) | ~25,000 ($0.10) | ~50,000 ($0.20) |
 | Output tokens (thinking + JSON) | ~1,000 ($0.02) | ~1,500 ($0.03) | ~3,000 ($0.06) |
 | **Per lead** | **~$0.07** | **~$0.15** | **~$0.30** |
 
-The hard limits in the code keep the worst case bounded: max 3 searches, effort `low`, 8,000 output tokens per call, at most 2 calls, 25 seconds total.
+The hard limits in the code keep the worst case bounded on either model: max 3 searches, effort `low`, 8,000 output tokens per call, at most 2 calls, 25 seconds total.
 
 ### Monthly cost by number of form submissions
 
-Assumes about 15% of submissions are spam (no Claude cost). The other 85% get both the fit check and the research.
+Assumes about 15% of submissions are spam (no Claude cost). The other 85% get both the fit check and the research. The fit check adds under $0.50 a month even at 5,000 submissions, so it's left out of the totals.
 
-| Submissions / month | Leads checked | Fit check | Research (light) | **Research (typical)** | Research (heavy) | **Typical total** | Suggested spend limit |
-|---|---|---|---|---|---|---|---|
-| 50 | ~43 | <$0.01 | $3 | **$6** | $13 | **~$6** | $15 |
-| 100 | 85 | $0.01 | $6 | **$13** | $26 | **~$13** | $25 |
-| 250 | ~213 | $0.02 | $15 | **$32** | $64 | **~$32** | $65 |
-| 500 | 425 | $0.04 | $30 | **$64** | $128 | **~$64** | $130 |
-| 1,000 | 850 | $0.09 | $60 | **$128** | $255 | **~$128** | $260 |
-| 2,500 | 2,125 | $0.21 | $149 | **$319** | $638 | **~$319** | $650 |
-| 5,000 | 4,250 | $0.43 | $298 | **$638** | $1,275 | **~$638** | $1,300 |
+| Submissions / month | Leads checked | **Haiku research, typical** | Haiku, heavy | Opus research, typical | Opus, heavy | Suggested spend limit (Haiku) |
+|---|---|---|---|---|---|---|
+| 50 | ~43 | **~$1** | $2 | $6 | $13 | $5 |
+| 100 | 85 | **~$2** | $3 | $13 | $26 | $5 |
+| 250 | ~213 | **~$5** | $9 | $32 | $64 | $10 |
+| 500 | 425 | **~$10** | $17 | $64 | $128 | $20 |
+| 1,000 | 850 | **~$20** | $34 | $128 | $255 | $40 |
+| 2,500 | 2,125 | **~$51** | $85 | $319 | $638 | $100 |
+| 5,000 | 4,250 | **~$102** | $170 | $638 | $1,275 | $200 |
 
 How to read it:
 
-- **The fit check is basically free** at any volume. Even 5,000 submissions a month is under $0.50.
-- **The research is ~99% of the bill.** Budget about **$0.13 per submission** (typical research × 85% non-spam).
-- **Suggested spend limit** is about 2× the typical month (≈ the heavy column), so a spam wave or a run of hard leads doesn't stop the system mid-month. If the limit is hit, the API refuses calls: the fit check fails open (leads still reach a calendar), but research stops until the limit resets or is raised.
+- **The fit check is basically free** at any volume.
+- **On Haiku, budget about $0.02 per submission.** On Opus it's about $0.13.
+- **Suggested spend limit** is about 2× the typical month (a bit over the heavy column), so a spam wave or a run of hard leads doesn't stop the system mid-month. If you switch research to Opus, raise the limit to about the Opus heavy column. If the limit is hit, the API refuses calls: the fit check fails open (leads still reach a calendar), but research stops until the limit resets or is raised.
 - If spam is higher than 15%, costs go down (spam is free). If the share of not-fit leads is high, costs stay the same, because not-fits are still researched.
 
-### Ways to cut the cost (if needed)
+### Ways to cut the cost further (if needed)
 
 | Change | Effect on the research cost | Trade-off |
 |---|---|---|
 | Skip research for not-fit leads | Saves the not-fit share (often 10–30%) | No Salesforce/Slack record with research for vendors, job seekers, etc. They'd still need logging some other way. |
-| Lower web search `max_uses` from 3 to 2 | ~10–20% less, mostly on heavy leads | Slightly less thorough on unknown companies |
-| Switch research to `claude-sonnet-5-5` ($2 / $10 per million) | ~45% less (~$0.08 per lead) | Test on 10–20 real leads first to check summary quality |
+| Lower web search `max_uses` from 3 to 2 | ~10–25% less on Haiku (searches are most of its cost) | Slightly less thorough on unknown companies |
 | Turn research off (remove `ZAPIER_HOOK_URL`) | ~100% less: fit check only (~$0.0001 per lead) | No Salesforce lead or Slack message from the system at all |
 
 Each of these is a small change in `worker/src/index.ts` or `worker/src/verify.ts`. Ask before changing; the current setup is the agreed default.
@@ -473,9 +490,9 @@ Each of these is a small change in `worker/src/index.ts` or `worker/src/verify.t
 
 The table above is an estimate from the code. To get the real cost per lead:
 
-1. Console → Cost, last 30 days, grouped by model. Note the Haiku, Opus and web search totals.
+1. Console → Cost, last 30 days, grouped by model. Note the Haiku, Opus (if used) and web search totals.
 2. Cloudflare → Workers → `momos-lead-routing` → Logs (or Zapier → History) for the number of leads in the same period.
-3. Opus + web search total ÷ number of non-spam leads = your real research cost per lead. Update the "Typical" column if it's far off.
+3. Haiku (or Opus) + web search total ÷ number of non-spam leads = your real cost per lead. Haiku runs twice per lead (fit check + research), but almost all of its cost is the research. Update the "Typical" column if it's far off.
 
 ### Other services (not Anthropic)
 
