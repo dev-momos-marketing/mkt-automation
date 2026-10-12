@@ -122,7 +122,8 @@ export default function LeadForm() {
     const data = Object.fromEntries(new FormData(form))
     const params = new URLSearchParams(window.location.search)
     data.elapsedMs = Date.now() - loadedAt.current
-    data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
+    // ?tz=America/Los_Angeles in the page URL pretends to be in that time zone (for testing routing).
+    data.timezone = params.get("tz") || Intl.DateTimeFormat().resolvedOptions().timeZone
     data.pageUrl = window.location.href
     data.referrer = document.referrer
     ;["utm_source", "utm_medium", "utm_campaign", "utm_term", "utm_content", "utm_channel", "gclid"].forEach((k) => {
@@ -139,7 +140,9 @@ export default function LeadForm() {
         body: JSON.stringify(data),
         signal: ctrl.signal,
       })
-      const { url } = await res.json()
+      const reply = await res.json()
+      const url = reply.url
+      console.info("[Momos form] routed to", reply.ae || "popup", "· region", reply.region, "·", url)
       if (url.includes(NOT_FIT_PATH)) {
         form.reset()
         loadedAt.current = Date.now()

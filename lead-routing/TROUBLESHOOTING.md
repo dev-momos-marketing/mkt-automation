@@ -89,6 +89,27 @@ Do this whenever something feels off, and after any change. Use a normal browser
 2. Just forward the lead to the right person.
 3. If it keeps happening for one country, tell Vincent.
 
+### Problem 6b: Testing from outside the US and every US lead goes to Jill
+**This is expected.** For US, Canada and Mexico, the form decides East vs West from the **computer's time zone**. A VPN doesn't change that. From Vietnam, your time zone is Asia, so the system can't tell the coast and defaults to Jill.
+
+To test like a real West Coast visitor, add **`?tz=America/Los_Angeles`** to the end of the page address, e.g. `momos.com/get-started-new?tz=America/Los_Angeles`.
+
+| Add to the address | Pick country | Should go to |
+|---|---|---|
+| `?tz=America/Los_Angeles` | United States | **James** |
+| `?tz=America/New_York` | United States | **Jill** |
+| (nothing) | Australia | **James** |
+| (nothing) | United Kingdom | **Jill** |
+
+**To see why a lead went where it did:** Cloudflare → Workers & Pages → **momos-lead-routing** → **Observability** → **Logs**. Each lead has one line:
+- `ae`: who it went to
+- `region`: the region it was given
+- `form_country`: the country they picked
+- `timezone`: their computer's time zone
+- `ip_country` / `ip_region`: where their internet connection is
+
+Send a screenshot of that line to Vincent.
+
 ### Problem 7: James's or Jill's booking link changed
 You can update it yourself in GitHub (takes 2 minutes).
 

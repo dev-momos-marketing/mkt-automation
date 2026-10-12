@@ -154,11 +154,14 @@ export default {
     // One line per lead in Cloudflare's Logs tab. No email or name, just enough to audit the gate.
     console.log(JSON.stringify({
       company: form.company, status: instant.status, reason: instant.reason, region: instant.region,
+      // Why this region: what the form said and where Cloudflare thinks the visitor is.
+      form_country: form.country, timezone: form.timezone, ip_country: cf.country ?? null, ip_region: cf.regionCode ?? null,
       ae: instant.ae, icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : null,
       fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
       total_ms: Date.now() - started, ...timings,
     }));
     if (env.ZAPIER_HOOK_URL) ctx.waitUntil(verifyAndSend(form, instant, url, fit, env, env.ZAPIER_HOOK_URL));
-    return Response.json({ url }, { headers });
+    // ae and region are only for checking tests in the browser console. The form only uses url.
+    return Response.json({ url, ae: instant.ae, region: instant.region }, { headers });
   },
 };

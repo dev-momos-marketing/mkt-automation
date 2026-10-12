@@ -283,7 +283,11 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 - `ANTHROPIC_API_KEY`: required
 - `ZAPIER_HOOK_URL`: turns on research and the Zapier hand-off
 
-**Log line per lead** (no names or emails): company, status, reason, region, ae, icp_fit, confidence, fit_reason, fit_error, total_ms, claude_ms.
+**Log line per lead** (no names or emails): company, status, reason, region, form_country, timezone, ip_country, ip_region, ae, icp_fit, confidence, fit_reason, fit_error, total_ms, claude_ms.
+
+**Reply to the form:** `{ url, ae, region }`. The form only uses `url`. It prints `[Momos form] routed to …` in the browser console for testing.
+
+**Testing from outside North America:** add `?tz=America/Los_Angeles` (or any time zone) to the page URL. The form sends that instead of the browser's time zone. A VPN alone doesn't change the time zone, so from Asia every US lead goes to Jill.
 
 ---
 

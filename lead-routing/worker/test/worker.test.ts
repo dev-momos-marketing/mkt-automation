@@ -201,6 +201,7 @@ test("answers with the calendar, then sends Claude's JSON to Zapier", async () =
   const { res, json, ms, sent } = await run(form, claudeOk);
   console.log(`worker answered in ${ms.toFixed(2)} ms`);
   assert.equal(json.url, env.JAMES_URL);
+  assert.equal((json as any).ae, "james");
   assert.equal(res.headers.get("access-control-allow-origin"), "https://www.momos.com");
   assert.equal(sent.length, 1);
   assert.equal(sent[0].routing.ae, "James");
