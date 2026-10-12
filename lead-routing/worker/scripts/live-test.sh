@@ -1,4 +1,4 @@
-# Sends test leads to the live Worker and checks where each one is sent.
+# Sends 24 test leads to the live Worker and checks where each one is sent.
 # Run: bash scripts/live-test.sh   (or paste the whole file into Terminal)
 # Each lead is a real Claude call (fractions of a cent).
 
@@ -32,6 +32,7 @@ t "Taco chain, Tijuana" JAMES '{"email":"t@tacoselgordo.com","company":"Tacos El
 echo "── Small or unclear (maybe) → still gets a calendar"
 t "One cafe, gmail, Chicago" JILL '{"email":"sunnysidecafe@gmail.com","company":"Sunny Side Cafe","title":"Owner","country":"US","locations":"1-5","timezone":"America/Chicago","elapsedMs":8000}'
 t "Small bakery, Seattle" JAMES '{"email":"hello@lunabakeshop.com","company":"Luna Bake Shop","title":"Founder","country":"US","locations":"1-5","timezone":"America/Los_Angeles","elapsedMs":8000}'
+t "Restaurant marketing agency" JILL '{"email":"hello@savorrestaurantmarketing.com","company":"Savor Restaurant Marketing","title":"Founder","country":"US","locations":"1-5","timezone":"America/New_York","elapsedMs":8000}'
 t "Unknown group, vague title" JILL '{"email":"ops@hgrouphq.com","company":"H Group","title":"Operations","country":"US","locations":"6-49","timezone":"America/New_York","elapsedMs":8000}'
 
 echo "── Not fit → thank-you"
