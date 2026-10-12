@@ -40,8 +40,16 @@ export const ROUTES: Record<Region, AEKey> = {
 // Claude decides. Add "1-5" here to always send small brands to NOT_FIT_URL.
 export const NOT_FIT_BUCKETS: string[] = [];
 
-const EMEA = new Set(["GB", "IE", "FR", "DE", "ES", "IT", "NL", "TR", "AE", "SA", "QA", "KW", "BH", "OM", "PT", "BE", "CH", "AT", "SE", "NO", "DK", "FI", "PL", "GR", "IL", "EG", "ZA"]);
-const APAC = new Set(["AU", "NZ", "SG", "MY", "TH", "VN", "PH", "ID", "JP", "KR", "HK", "IN", "TW", "CN", "MO"]);
+// Matches every country in the form. Latin America and the Caribbean aren't listed here,
+// so the visitor's time zone decides (Eastern-ish goes to Jill, Pacific/Mountain to James).
+const EMEA = new Set((
+  "GB IE FR DE ES PT IT NL BE LU CH AT DK SE NO FI IS PL CZ SK HU RO BG GR CY MT SI HR RS BA ME MK AL XK EE LV LT UA MD BY RU AD MC SM LI VA GI JE GG IM " +
+  "AE SA QA KW BH OM IL JO LB IQ IR TR YE PS SY AM AZ GE KZ KG TJ TM UZ " +
+  "EG MA DZ TN LY SD SS ET ER DJ SO KE UG TZ RW BI CD CG CM GA GQ CF TD NG GH CI SN ML BF NE GM GN GW SL LR TG BJ MR CV ST AO ZM ZW MW MZ BW NA ZA LS SZ MG MU SC KM RE"
+).split(" "));
+const APAC = new Set((
+  "AU NZ SG MY TH VN PH ID JP KR HK MO TW CN IN PK BD LK NP BT MV AF MN KH LA MM BN TL PG FJ SB VU WS TO KI TV NR PW FM MH NC PF GU"
+).split(" "));
 const NORTH_AMERICA = new Set(["US", "CA", "MX"]);
 
 // Pacific and Mountain time in the US, Canada and Mexico count as West Coast.

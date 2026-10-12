@@ -104,8 +104,9 @@ lead-routing/
 | US, Canada, Mexico | Browser time zone is Pacific or Mountain (e.g. `America/Los_Angeles`, `America/Denver`, `America/Phoenix`, `America/Vancouver`, `America/Tijuana`) | us_west | **James** |
 | US, Canada, Mexico | Any other North American time zone | us_east | **Jill** |
 | US, Canada, Mexico | Time zone missing or not North American (travelling, VPN): Cloudflare's IP state decides. West states: WA, OR, CA, NV, ID, MT, WY, UT, CO, AZ, NM, AK, HI · BC, AB, YT · BCN, BCS, SON, CHH, SIN, NAY | us_west / us_east | James / Jill |
-| UK, Ireland, Europe, Turkey, UAE, Saudi, Qatar, Kuwait, etc. | Country | emea | **Jill** |
-| Australia, NZ, Singapore, Malaysia, Thailand, Vietnam, Philippines, Indonesia, Japan, Korea, HK, India, etc. | Country | apac | **James** |
+| All of Europe, the Middle East, Africa, the Caucasus and Central Asia (e.g. UK, Germany, UAE, Saudi, Turkey, Kenya, South Africa, Kazakhstan) | Country | emea | **Jill** |
+| All of Asia-Pacific and South Asia (e.g. Australia, NZ, Singapore, Japan, Korea, HK, China, India, Pakistan, Pacific islands) | Country | apac | **James** |
+| Latin America and the Caribbean (e.g. Brazil, Colombia, Argentina, Puerto Rico) | Browser time zone: Pacific/Mountain → West, any other `America/…` zone → East | us_west / us_east | James / Jill |
 | "Other" | Guessed from the time zone (America/West, America/other, Europe/Africa/Middle East, Asia/Australia/Pacific), then the IP | — | — |
 | Anything unknown | Default | unknown | **Jill** |
 
@@ -222,7 +223,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | Work Email* | `email` | Browser checks the format |
 | Company* | `company` | |
 | Job Title* | `title` | |
-| Country* | `country` | Dropdown, default US. Codes: US, CA, MX, AU, FR, DE, HK, IN, ID, IE, IT, JP, KW, MY, NL, NZ, PH, QA, SA, SG, KR, ES, TH, TR, AE, GB, VN, OTHER |
+| Country* | `country` | Searchable list styled like the other fields (not the browser's dropdown). About 210 countries plus "Other", default US. US, Canada, UK, Australia, Singapore and UAE are pinned at the top. Type to filter (also matches "UK", "UAE", "USA", "KSA", "Korea", "Holland"); arrow keys + Enter or click to pick. Sends the 2-letter ISO code, e.g. `GB`. Names and flags come from the browser (`Intl.DisplayNames`), so the code only lists codes (`CODES` in the form). |
 | How many locations…?* | `locations` | 1-5 · 6-49 · 50-249 · 250+ |
 | (hidden) | `website` | Honeypot: humans never fill it |
 
@@ -336,7 +337,8 @@ Delete test leads in Salesforce afterwards.
 | Change James's or Jill's link | `JAMES_URL` / `JILL_URL` in `worker/wrangler.toml`, then push to main |
 | Change who covers a region | `ROUTES` in `worker/src/route.ts` |
 | Add a West Coast time zone or state | `WEST_ZONES` / `WEST_STATES` in `worker/src/route.ts` |
-| Add a country to EMEA or APAC | `EMEA` / `APAC` in `worker/src/route.ts` (and add it to `COUNTRIES` in the form) |
+| Add a country, or move one between regions | `CODES` in `framer/LeadForm.tsx` (what visitors can pick) and `EMEA` / `APAC` in `worker/src/route.ts` (where it routes). A code in neither region list routes by time zone. |
+| Change the countries pinned at the top | `TOP` in `framer/LeadForm.tsx` |
 | Block another throwaway email domain | `DISPOSABLE` in `worker/src/route.ts` |
 | Make the gate stricter or looser | `NOT_FIT_MIN_CONFIDENCE` in `worker/src/fit.ts` (higher = turn fewer away) |
 | Change what counts as ICP | The `SYSTEM` prompt in `worker/src/fit.ts` (gate) and `worker/src/verify.ts` (research) |

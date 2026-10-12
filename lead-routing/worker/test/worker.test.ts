@@ -44,6 +44,17 @@ test("regions", () => {
   assert.equal(regionFor("OTHER", ""), "unknown");
 });
 
+test("every country in the form has a region", () => {
+  assert.equal(regionFor("KE", "Europe/London"), "emea");
+  assert.equal(regionFor("PL", "America/New_York"), "emea");
+  assert.equal(regionFor("KZ", "Asia/Almaty"), "emea");
+  assert.equal(regionFor("PK", "Europe/London"), "apac");
+  assert.equal(regionFor("FJ", ""), "apac");
+  // Latin America follows the time zone.
+  assert.equal(regionFor("BR", "America/Sao_Paulo"), "us_east");
+  assert.equal(regionFor("CO", "America/Los_Angeles"), "us_west");
+});
+
 test("IP state is the backup when the time zone is missing or foreign", () => {
   // Time zone wins when it is North American.
   assert.equal(regionFor("US", "America/New_York", { country: "US", regionCode: "CA" }), "us_east");
