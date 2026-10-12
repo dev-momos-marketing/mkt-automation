@@ -55,6 +55,10 @@ const s = {
   link: { color: "#2F5BEA" },
 }
 
+/**
+ * @framerSupportedLayoutWidth any
+ * @framerSupportedLayoutHeight auto
+ */
 export default function LeadForm() {
   const [tab, setTab] = useState("na")
   const [loading, setLoading] = useState(false)
