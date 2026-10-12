@@ -26,7 +26,7 @@ Cloudflare Worker  ── spam check + region (instant)
 | | |
 |---|---|
 | Time from click to calendar | About 2 seconds |
-| Cost | Fractions of a cent per lead for the fit check. The research adds a few cents per real lead (web searches are billed). First day of testing: $0.01 total. |
+| Cost | About $0.0001 per lead for the fit check and about $0.15 per real lead for the research. Roughly $13 a month at 100 submissions, $128 at 1,000. See section 17. |
 | If anything breaks | The visitor still lands on a calendar. A real lead is never blocked. |
 | Where it runs | Framer (form), Cloudflare (Worker), Anthropic (Claude), Zapier (Salesforce + Slack) |
 
@@ -287,7 +287,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 - **Models:**
   - `claude-haiku-5-5`: gate, every non-spam lead
   - `claude-opus-5-5` with web search: research, every non-spam lead when Zapier is on
-- **Cost:** check Console → Cost, grouped by model. Haiku should show for every lead; Opus and web search should show when research is running.
+- **Cost:** check Console → Cost, grouped by model. Haiku should show for every lead; Opus and web search should show when research is running. Estimates by volume and suggested spend limits are in section 17.
 
 ---
 
@@ -395,3 +395,92 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 - **Sales email in the popup.** Confirm `sales@momos.com` is the right inbox.
 - **Form code on `main`.** The latest `LeadForm.tsx` is on branch `claude/sleepy-fermat-jjhvup`. Merge it so `main` matches what's live in Framer.
 - **Research cost check.** After a few real leads, check the Console shows Opus and web search costs. If only Haiku shows, the research isn't running.
+
+---
+
+## 17. API usage and cost by volume
+
+### Prices used (Anthropic list prices, October 2026)
+
+| Item | Price |
+|---|---|
+| Claude Haiku 5.5 (fit check) | $0.10 per million input tokens · $0.50 per million output tokens |
+| Claude Opus 5.5 (research) | $4 per million input tokens · $20 per million output tokens |
+| Web search | $10 per 1,000 searches ($0.01 each) |
+| Code execution used by web search filtering | Free when used with web search |
+
+Check console.anthropic.com → Cost against these once a month. Prices can change.
+
+### What one lead costs
+
+**Spam** (honeypot, too fast, disposable email, junk text) is stopped in the Worker before Claude is called. **Cost: $0.**
+
+**Fit check (Haiku, every non-spam lead)**
+
+| | Tokens | Cost |
+|---|---|---|
+| Input: instructions + lead | ~700 | $0.00007 |
+| Output: verdict JSON | ~60 | $0.00003 |
+| **Per lead** | | **~$0.0001** (10,000 leads ≈ $1) |
+
+**Research (Opus + web search, every non-spam lead, including not-fits)**
+
+Search results are added to Claude's input, which is why input tokens are the biggest part.
+
+| | Light | Typical | Heavy |
+|---|---|---|---|
+| When | Well-known brand, found on 1st search | Most leads | Unknown or odd lead, all 3 searches, turn paused and continued |
+| Searches | 1 ($0.01) | 2 ($0.02) | 3 ($0.03) |
+| Input tokens (incl. search results) | ~10,000 ($0.04) | ~25,000 ($0.10) | ~50,000 ($0.20) |
+| Output tokens (thinking + JSON) | ~1,000 ($0.02) | ~1,500 ($0.03) | ~3,000 ($0.06) |
+| **Per lead** | **~$0.07** | **~$0.15** | **~$0.30** |
+
+The hard limits in the code keep the worst case bounded: max 3 searches, effort `low`, 8,000 output tokens per call, at most 2 calls, 25 seconds total.
+
+### Monthly cost by number of form submissions
+
+Assumes about 15% of submissions are spam (no Claude cost). The other 85% get both the fit check and the research.
+
+| Submissions / month | Leads checked | Fit check | Research (light) | **Research (typical)** | Research (heavy) | **Typical total** | Suggested spend limit |
+|---|---|---|---|---|---|---|---|
+| 50 | ~43 | <$0.01 | $3 | **$6** | $13 | **~$6** | $15 |
+| 100 | 85 | $0.01 | $6 | **$13** | $26 | **~$13** | $25 |
+| 250 | ~213 | $0.02 | $15 | **$32** | $64 | **~$32** | $65 |
+| 500 | 425 | $0.04 | $30 | **$64** | $128 | **~$64** | $130 |
+| 1,000 | 850 | $0.09 | $60 | **$128** | $255 | **~$128** | $260 |
+| 2,500 | 2,125 | $0.21 | $149 | **$319** | $638 | **~$319** | $650 |
+| 5,000 | 4,250 | $0.43 | $298 | **$638** | $1,275 | **~$638** | $1,300 |
+
+How to read it:
+
+- **The fit check is basically free** at any volume. Even 5,000 submissions a month is under $0.50.
+- **The research is ~99% of the bill.** Budget about **$0.13 per submission** (typical research × 85% non-spam).
+- **Suggested spend limit** is about 2× the typical month (≈ the heavy column), so a spam wave or a run of hard leads doesn't stop the system mid-month. If the limit is hit, the API refuses calls: the fit check fails open (leads still reach a calendar), but research stops until the limit resets or is raised.
+- If spam is higher than 15%, costs go down (spam is free). If the share of not-fit leads is high, costs stay the same, because not-fits are still researched.
+
+### Ways to cut the cost (if needed)
+
+| Change | Effect on the research cost | Trade-off |
+|---|---|---|
+| Skip research for not-fit leads | Saves the not-fit share (often 10–30%) | No Salesforce/Slack record with research for vendors, job seekers, etc. They'd still need logging some other way. |
+| Lower web search `max_uses` from 3 to 2 | ~10–20% less, mostly on heavy leads | Slightly less thorough on unknown companies |
+| Switch research to `claude-sonnet-5-5` ($2 / $10 per million) | ~45% less (~$0.08 per lead) | Test on 10–20 real leads first to check summary quality |
+| Turn research off (remove `ZAPIER_HOOK_URL`) | ~100% less: fit check only (~$0.0001 per lead) | No Salesforce lead or Slack message from the system at all |
+
+Each of these is a small change in `worker/src/index.ts` or `worker/src/verify.ts`. Ask before changing; the current setup is the agreed default.
+
+### Measuring the real numbers
+
+The table above is an estimate from the code. To get the real cost per lead:
+
+1. Console → Cost, last 30 days, grouped by model. Note the Haiku, Opus and web search totals.
+2. Cloudflare → Workers → `momos-lead-routing` → Logs (or Zapier → History) for the number of leads in the same period.
+3. Opus + web search total ÷ number of non-spam leads = your real research cost per lead. Update the "Typical" column if it's far off.
+
+### Other services (not Anthropic)
+
+| Service | Cost at these volumes |
+|---|---|
+| Cloudflare Workers | Free plan covers it (100,000 requests a day). Waiting on Claude doesn't count as CPU time. |
+| Zapier | Each routed lead uses a few tasks (lookup table, Salesforce, Slack). Check Zapier → History against your plan's monthly task allowance at 1,000+ leads. |
+| Framer | No extra cost. |
