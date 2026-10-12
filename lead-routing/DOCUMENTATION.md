@@ -225,7 +225,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | Work Email* | `email` | Browser checks the format |
 | Company* | `company` | |
 | Job Title* | `title` | |
-| Country* | `country` | Searchable list styled like the other fields (not the browser's dropdown). About 210 countries plus "Other", default US. US, Canada, UK, Australia, Singapore and UAE are pinned at the top. Type to filter (also matches "UK", "UAE", "USA", "KSA", "Korea", "Holland"); arrow keys + Enter or click to pick. Sends the 2-letter ISO code, e.g. `GB`. Names and flags come from the browser (`Intl.DisplayNames`), so the code only lists codes (`CODES` in the form). |
+| Country* | `country` | Searchable list styled like the other fields (not the browser's dropdown). About 210 countries plus "Other". **Pre-selected** from the visitor's time zone (e.g. `Australia/Sydney` → Australia), then their browser language (e.g. `en-AU`; `en-US` is ignored because many non-US visitors use it). If neither gives a match it starts empty ("Select your country") and is **required**. US, Canada, UK, Australia, Singapore and UAE are pinned at the top. Type to filter (also matches "UK", "UAE", "USA", "KSA", "Korea", "Holland"). Sends the 2-letter ISO code, e.g. `GB`. Time zone map: `TZ_COUNTRY` in the form. |
 | How many locations…?* | `locations` | 1-5 · 6-49 · 50-249 · 250+ |
 | (hidden) | `website` | Honeypot: humans never fill it |
 
@@ -277,6 +277,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | `ALLOWED_ORIGINS` | https://www.momos.com, https://momos.com (plus any `*.framer.app` / `*.framer.website` / `*.framer.ai` preview) | Which sites may call the Worker |
 | `RESEARCH_MODEL` | `haiku` | Which Claude does the background research: `haiku` (cheap) or `opus` (thorough). See section 17 for costs. |
 | `[previews.vars]`, `[previews.placement]` | Same values as `[vars]` / `[placement]` | Required by Cloudflare's builds since Oct 2026 (for Preview deployments). Keep in step with `[vars]`, or the build fails. |
+| `[[ratelimits]] SUBMIT_LIMIT` | 5 per 60 s, per IP address | Spam-flood guard. The 6th submission in a minute from one IP gets the popup, with no Claude call and nothing sent to Zapier. Logged as `reason: "rate limited"`. Change `limit` (period must be 10 or 60), in both the top-level and `[[previews.ratelimits]]` blocks. |
 | `[observability] enabled = true` | | One log line per lead in Observability → Logs |
 | `[placement] mode = "targeted", hostname = "api.anthropic.com"` | | Runs the Worker next to Claude's API. Without it, visitors near Hong Kong got "403 Request not allowed". |
 

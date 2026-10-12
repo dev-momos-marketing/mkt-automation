@@ -144,7 +144,7 @@ async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: 
     const res = await worker.fetch(
       new Request("https://w.example", {
         method: "POST",
-        headers: { "content-type": "text/plain", origin: "https://www.momos.com" },
+        headers: { "content-type": "text/plain", origin: "https://www.momos.com", "cf-connecting-ip": "203.0.113.7" },
         body: JSON.stringify(body),
       }),
       opts.env ?? env,
@@ -254,6 +254,17 @@ test("?tz= on the page URL overrides the browser time zone (for testing)", async
   assert.equal((await run(west, claudeOk)).json.url, env.JAMES_URL);
   const east = { ...fromVietnam, pageUrl: "https://www.momos.com/get-started-new?tz=America/New_York" };
   assert.equal((await run(east, claudeOk)).json.url, env.JILL_URL);
+});
+
+test("more than 5 submissions a minute from one IP get the popup, with no Claude or Zapier", async () => {
+  let calls = 0;
+  const limiter = { limit: async () => ({ success: ++calls <= 5 }) };
+  const limited = { ...env, SUBMIT_LIMIT: limiter };
+  for (let i = 0; i < 5; i++) assert.equal((await run(form, claudeOk, { env: limited })).json.url, env.JAMES_URL);
+  const sixth = await run(form, claudeOk, { env: limited });
+  assert.equal(sixth.json.url, env.NOT_FIT_URL);
+  assert.equal(sixth.sent.length, 0);
+  assert.equal(sixth.fitCalls.length, 0);
 });
 
 test("fit check failure lets the lead through", async () => {

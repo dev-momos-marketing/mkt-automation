@@ -38,6 +38,50 @@ const COUNTRIES = (() => {
   const top = TOP.map((code) => list.find((c) => c.code === code))
   return [...top, ...list.filter((c) => !TOP.includes(c.code)), { code: "OTHER", name: "Other", flag: "🌍", search: "other" }]
 })()
+// Pre-selects the country from the visitor's time zone, then their browser language (e.g. en-AU).
+// No good guess means the field starts empty and they must pick.
+const TZ_COUNTRY = Object.fromEntries(Object.entries({
+  US: "New_York Chicago Denver Los_Angeles Phoenix Anchorage Juneau Sitka Nome Yakutat Metlakatla Adak Boise Detroit Menominee Indianapolis Louisville Fort_Wayne Knox_IN Shiprock",
+  CA: "Toronto Vancouver Edmonton Winnipeg Halifax St_Johns Regina Moncton Glace_Bay Goose_Bay Whitehorse Dawson Dawson_Creek Fort_Nelson Swift_Current Creston Atikokan Iqaluit",
+  MX: "Mexico_City Cancun Merida Monterrey Matamoros Chihuahua Ciudad_Juarez Ojinaga Hermosillo Mazatlan Bahia_Banderas Tijuana",
+  BR: "Sao_Paulo Fortaleza Recife Bahia Belem Manaus Cuiaba Campo_Grande Porto_Velho Boa_Vista Rio_Branco Maceio Araguaina Santarem Noronha",
+  AR: "Argentina/Buenos_Aires Buenos_Aires", CO: "Bogota", PE: "Lima", CL: "Santiago", VE: "Caracas", EC: "Guayaquil", UY: "Montevideo",
+  PA: "Panama", CR: "Costa_Rica", GT: "Guatemala", DO: "Santo_Domingo", PR: "Puerto_Rico", JM: "Jamaica",
+}).flatMap(([c, z]) => z.split(" ").map((name) => ["America/" + name, c])))
+Object.assign(TZ_COUNTRY, {
+  "Pacific/Honolulu": "US", "Europe/London": "GB", "Europe/Dublin": "IE", "Europe/Paris": "FR", "Europe/Berlin": "DE",
+  "Europe/Madrid": "ES", "Europe/Lisbon": "PT", "Europe/Rome": "IT", "Europe/Amsterdam": "NL", "Europe/Brussels": "BE",
+  "Europe/Luxembourg": "LU", "Europe/Zurich": "CH", "Europe/Vienna": "AT", "Europe/Copenhagen": "DK", "Europe/Stockholm": "SE",
+  "Europe/Oslo": "NO", "Europe/Helsinki": "FI", "Europe/Warsaw": "PL", "Europe/Prague": "CZ", "Europe/Budapest": "HU",
+  "Europe/Bucharest": "RO", "Europe/Sofia": "BG", "Europe/Athens": "GR", "Europe/Istanbul": "TR", "Europe/Kiev": "UA",
+  "Europe/Kyiv": "UA", "Europe/Moscow": "RU", "Europe/Belgrade": "RS", "Europe/Zagreb": "HR", "Europe/Malta": "MT",
+  "Asia/Nicosia": "CY", "Asia/Dubai": "AE", "Asia/Riyadh": "SA", "Asia/Qatar": "QA", "Asia/Kuwait": "KW", "Asia/Bahrain": "BH",
+  "Asia/Muscat": "OM", "Asia/Jerusalem": "IL", "Asia/Tel_Aviv": "IL", "Asia/Amman": "JO", "Asia/Beirut": "LB", "Asia/Baghdad": "IQ",
+  "Asia/Singapore": "SG", "Asia/Kuala_Lumpur": "MY", "Asia/Bangkok": "TH", "Asia/Ho_Chi_Minh": "VN", "Asia/Saigon": "VN",
+  "Asia/Manila": "PH", "Asia/Jakarta": "ID", "Asia/Makassar": "ID", "Asia/Tokyo": "JP", "Asia/Seoul": "KR", "Asia/Hong_Kong": "HK",
+  "Asia/Macau": "MO", "Asia/Taipei": "TW", "Asia/Shanghai": "CN", "Asia/Kolkata": "IN", "Asia/Calcutta": "IN", "Asia/Karachi": "PK",
+  "Asia/Dhaka": "BD", "Asia/Colombo": "LK", "Asia/Kathmandu": "NP", "Asia/Phnom_Penh": "KH", "Asia/Yangon": "MM", "Asia/Almaty": "KZ",
+  "Asia/Tbilisi": "GE", "Asia/Baku": "AZ", "Asia/Yerevan": "AM", "Pacific/Auckland": "NZ", "Pacific/Fiji": "FJ",
+  "Africa/Johannesburg": "ZA", "Africa/Lagos": "NG", "Africa/Nairobi": "KE", "Africa/Cairo": "EG", "Africa/Casablanca": "MA",
+  "Africa/Accra": "GH", "Africa/Tunis": "TN", "Africa/Algiers": "DZ", "Africa/Addis_Ababa": "ET", "Africa/Kampala": "UG",
+  "Africa/Dar_es_Salaam": "TZ", "Africa/Kigali": "RW", "Africa/Lusaka": "ZM", "Africa/Harare": "ZW", "Indian/Mauritius": "MU",
+})
+
+function guessCountry() {
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone || ""
+    if (TZ_COUNTRY[tz]) return TZ_COUNTRY[tz]
+    if (tz.startsWith("Australia/")) return "AU"
+    if (/^America\/(Indiana|Kentucky|North_Dakota)\//.test(tz)) return "US"
+    // en-US is skipped: lots of people outside the US use it.
+    for (const lang of navigator.languages || [navigator.language]) {
+      const region = (lang || "").split("-")[1]?.toUpperCase()
+      if (region && region !== "US" && CODES.includes(region)) return region
+    }
+  } catch {}
+  return ""
+}
+
 const LOCATIONS = ["1-5", "6-49", "50-249", "250+"]
 
 // Copied from the original momos.com/get-started form: same card, fields, button and text styles.
@@ -105,6 +149,13 @@ export default function LeadForm() {
   const [loading, setLoading] = useState(false)
   const [thanks, setThanks] = useState(false)
   const loadedAt = useRef(Date.now())
+
+  // Back button: the browser can restore this page as it was mid-submit. Unlock the button.
+  useEffect(() => {
+    const onShow = (e) => e.persisted && setLoading(false)
+    window.addEventListener("pageshow", onShow)
+    return () => window.removeEventListener("pageshow", onShow)
+  }, [])
 
   useEffect(() => {
     if (!thanks) return
@@ -240,7 +291,7 @@ export default function LeadForm() {
 
 // A searchable country list styled like the other fields (no browser dropdown).
 function CountryPicker() {
-  const [value, setValue] = useState("US")
+  const [value, setValue] = useState("")
   const [open, setOpen] = useState(false)
   const [query, setQuery] = useState("")
   const [active, setActive] = useState(0)
@@ -248,6 +299,11 @@ function CountryPicker() {
   const q = query.trim().toLowerCase()
   const matches = q ? COUNTRIES.filter((c) => c.search.includes(q)) : COUNTRIES
   const selected = COUNTRIES.find((c) => c.code === value)
+
+  // Guess after load, in the browser (Framer pre-renders the page on a server in another time zone).
+  useEffect(() => {
+    setValue((v) => v || guessCountry())
+  }, [])
 
   // Opening highlights the current country. Typing highlights the first match.
   useEffect(() => {
@@ -285,7 +341,7 @@ function CountryPicker() {
     }
   }
 
-  const label = `${selected.flag}  ${selected.name}`
+  const label = selected ? `${selected.flag}  ${selected.name}` : ""
   return (
     <div className={open ? "mlf-combo is-open" : "mlf-combo"}>
       <input type="hidden" name="country" value={value} />
@@ -299,7 +355,8 @@ function CountryPicker() {
         aria-activedescendant={open && matches[active] ? `mlf-c-${matches[active].code}` : undefined}
         autoComplete="off"
         value={open ? query : label}
-        placeholder={open ? "Search countries" : label}
+        placeholder={open ? "Search countries" : "Select your country"}
+        required
         onFocus={() => setOpen(true)}
         onClick={() => setOpen(true)}
         onBlur={() => { setOpen(false); setQuery("") }}

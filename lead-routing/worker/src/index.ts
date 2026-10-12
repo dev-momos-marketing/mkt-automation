@@ -15,6 +15,7 @@ export interface Env {
   NOT_FIT_URL: string;
   ALLOWED_ORIGINS: string; // comma separated
   RESEARCH_MODEL?: string; // "haiku" (default) or "opus"
+  SUBMIT_LIMIT?: { limit(options: { key: string }): Promise<{ success: boolean }> }; // see wrangler.toml
 }
 
 type Ctx = { waitUntil(p: Promise<unknown>): void };
@@ -56,6 +57,17 @@ async function gate(form: FormData, instant: Instant, env: Env, timings: Timings
     return { instant, fit };
   } catch (err) {
     return { instant, fit: { icp_fit: "unavailable", error: err instanceof Error ? err.message : String(err) } };
+  }
+}
+
+// True when this IP has sent more than the limit in wrangler.toml. Fails open if the limiter is missing or errors.
+async function rateLimited(req: Request, env: Env): Promise<boolean> {
+  const ip = req.headers.get("cf-connecting-ip");
+  if (!env.SUBMIT_LIMIT || !ip) return false;
+  try {
+    return !(await env.SUBMIT_LIMIT.limit({ key: ip })).success;
+  } catch {
+    return false;
   }
 }
 
@@ -144,6 +156,11 @@ export default {
     const headers = cors(req, env);
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
     if (req.method !== "POST") return new Response("POST only", { status: 405, headers });
+
+    if (await rateLimited(req, env)) {
+      console.log(JSON.stringify({ status: "spam", reason: "rate limited" }));
+      return Response.json({ url: env.NOT_FIT_URL, ae: null, region: null }, { headers });
+    }
 
     let form: FormData;
     try {

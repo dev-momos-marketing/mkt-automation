@@ -80,6 +80,11 @@ Do this whenever something feels off, and after any change. Use a normal browser
 2. Reach out to them by hand. The popup also gave them **sales@momos.com**, so check that inbox too.
 3. Tell Vincent the company name so the AI's rules can be tuned.
 
+### Problem 5b: Testing and suddenly every lead gets the "thanks" popup
+**What it means:** you hit the spam guard. **More than 5 submissions in one minute from the same internet connection** get the popup, and nothing goes to Slack or Salesforce. Your whole office counts as one connection.
+
+Wait one minute and test again. In Cloudflare's logs these show as `reason: "rate limited"`.
+
 ### Problem 6: A lead went to the "wrong" salesperson
 1. Check against the rules:
    - **US, Canada and Mexico** depend on the visitor's computer time zone: Pacific and Mountain go to James, everything else to Jill.

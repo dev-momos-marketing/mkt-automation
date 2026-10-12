@@ -22,6 +22,13 @@ ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
 
+# At most 5 form submissions a minute from one IP address. Extra ones get the popup without
+# calling Claude or Zapier, so a bot can't flood Slack and Salesforce.
+[[ratelimits]]
+name = "SUBMIT_LIMIT"
+namespace_id = "1001"
+simple = { limit = 5, period = 60 }
+
 # Cloudflare's builds require settings for Preview deployments (test copies built from
 # non-main branches). These are only links and site names, safe to share with Previews.
 # Keep them in step with [vars] above.
@@ -35,6 +42,11 @@ RESEARCH_MODEL = "haiku"
 [previews.placement]
 mode = "targeted"
 hostname = "api.anthropic.com"
+
+[[previews.ratelimits]]
+name = "SUBMIT_LIMIT"
+namespace_id = "1002"
+simple = { limit = 5, period = 60 }
 
 # Secrets (set in Cloudflare: Worker > Settings > Variables and Secrets, never commit):
 #   ANTHROPIC_API_KEY   required
