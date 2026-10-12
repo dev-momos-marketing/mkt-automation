@@ -1,4 +1,5 @@
-import { useState, useRef } from "react"
+import { useState, useRef, useEffect } from "react"
+import { createPortal } from "react-dom"
 
 // The Worker URL from Cloudflare.
 const ENDPOINT = "https://momos-lead-routing.marketing-team-a27.workers.dev"
@@ -8,6 +9,9 @@ const FALLBACK = "/book-a-demo-us"
 const TIMEOUT_MS = 5000
 const TERMS_URL = "https://www.momos.com/legal/terms-of-use"
 const PRIVACY_URL = "https://www.momos.com/legal"
+// Not-fit and spam leads get a thank-you popup instead of leaving the page.
+const NOT_FIT_PATH = "/thank-you"
+const SALES_EMAIL = "sales@momos.com"
 
 // One list for every region. The Worker routes on country plus browser time zone.
 const COUNTRIES = [
@@ -47,6 +51,21 @@ select.mlf-input { appearance: none; -webkit-appearance: none; padding-right: 48
 .mlf-button:disabled { opacity: .85; cursor: default; }
 .mlf-consent { margin: 0; font-size: 14px; line-height: 1.55; color: #4D4D4D; }
 .mlf-consent a { color: #0074D9; text-decoration: underline; }
+.mlf-overlay { position: fixed; inset: 0; z-index: 9999; display: flex; align-items: center; justify-content: center; padding: 20px; background: rgba(21,24,30,0.45); font-family: 'Poppins', 'Poppins Placeholder', sans-serif; animation: mlf-fade .2s ease-out; }
+.mlf-modal { position: relative; width: 100%; max-width: 480px; padding: 40px; text-align: center; color: #15181E; background: #FFFFFF; border-radius: 20px; box-shadow: 0px 10px 46px -0.25px rgba(21,24,30,0.25); animation: mlf-pop .25s ease-out; }
+.mlf-modal * { box-sizing: border-box; font-family: inherit; }
+.mlf-close { position: absolute; top: 16px; right: 16px; width: 32px; height: 32px; font-size: 20px; line-height: 1; color: #4D4D4D; background: rgba(0,0,0,0.04); border: none; border-radius: 99px; cursor: pointer; }
+.mlf-check { width: 56px; height: 56px; margin: 0 auto 20px; display: flex; align-items: center; justify-content: center; background: #FFF0F0; border-radius: 99px; }
+.mlf-modal h3 { margin: 0 0 8px; font-size: 24px; line-height: 1.3; font-weight: 600; letter-spacing: -0.03em; }
+.mlf-modal p { margin: 0; font-size: 16px; line-height: 1.6; color: #4D4D4D; }
+.mlf-links { display: flex; flex-direction: column; gap: 10px; margin: 24px 0; }
+.mlf-links a { display: block; padding: 12px 16px; font-size: 15px; font-weight: 500; color: #15181E; text-decoration: none; background: rgba(0,0,0,0.03); border: 1px solid rgba(0,0,0,0.08); border-radius: 12px; }
+.mlf-links a:hover { border-color: #D73E33; }
+.mlf-modal .mlf-small { font-size: 14px; }
+.mlf-modal .mlf-small a { color: #D73E33; font-weight: 500; }
+@keyframes mlf-fade { from { opacity: 0 } to { opacity: 1 } }
+@keyframes mlf-pop { from { opacity: 0; transform: translateY(12px) } to { opacity: 1; transform: none } }
+@media (max-width: 809px) { .mlf-modal { padding: 32px 24px; } .mlf-modal h3 { font-size: 20px; } }
 @media (max-width: 1199px) { .mlf-label { font-size: 12px; } .mlf-button { font-size: 16px; } }
 @media (max-width: 809px) { .mlf-card { padding: 24px; gap: 20px; } .mlf-row { grid-template-columns: 1fr; } .mlf-chips { grid-template-columns: repeat(2, 1fr); } .mlf-button { font-size: 14px; } .mlf-consent { font-size: 12px; line-height: 1.5; } }
 `
@@ -57,14 +76,23 @@ select.mlf-input { appearance: none; -webkit-appearance: none; padding-right: 48
  */
 export default function LeadForm() {
   const [loading, setLoading] = useState(false)
+  const [thanks, setThanks] = useState(false)
   const loadedAt = useRef(Date.now())
+
+  useEffect(() => {
+    if (!thanks) return
+    const onKey = (e) => e.key === "Escape" && setThanks(false)
+    window.addEventListener("keydown", onKey)
+    return () => window.removeEventListener("keydown", onKey)
+  }, [thanks])
 
   async function onSubmit(e) {
     e.preventDefault()
     if (loading) return
     setLoading(true)
 
-    const data = Object.fromEntries(new FormData(e.target))
+    const form = e.currentTarget
+    const data = Object.fromEntries(new FormData(form))
     const params = new URLSearchParams(window.location.search)
     data.elapsedMs = Date.now() - loadedAt.current
     data.timezone = Intl.DateTimeFormat().resolvedOptions().timeZone
@@ -85,6 +113,13 @@ export default function LeadForm() {
         signal: ctrl.signal,
       })
       const { url } = await res.json()
+      if (url.includes(NOT_FIT_PATH)) {
+        form.reset()
+        loadedAt.current = Date.now()
+        setLoading(false)
+        setThanks(true)
+        return
+      }
       window.top.location.href = url
     } catch {
       window.top.location.href = FALLBACK
@@ -152,6 +187,26 @@ export default function LeadForm() {
           </p>
         </div>
       </form>
+      {thanks && createPortal(
+        <div className="mlf-overlay" onClick={(e) => e.target === e.currentTarget && setThanks(false)}>
+          <div className="mlf-modal" role="dialog" aria-modal="true">
+            <button className="mlf-close" aria-label="Close" onClick={() => setThanks(false)}>×</button>
+            <div className="mlf-check">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#D73E33" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" /></svg>
+            </div>
+            <h3>Thanks for reaching out!</h3>
+            <p>We've received your details. Our team reviews every request and will get back to you if Momos is a good fit.</p>
+            <div className="mlf-links">
+              <a href="/case-studies">See how brands use Momos →</a>
+              <a href="/blog">Read the Momos blog →</a>
+            </div>
+            <p className="mlf-small">
+              Run a restaurant or franchise group? Email <a href={`mailto:${SALES_EMAIL}`}>{SALES_EMAIL}</a> and we'll set up a demo.
+            </p>
+          </div>
+        </div>,
+        document.body
+      )}
     </div>
   )
 }
