@@ -21,6 +21,7 @@ ICP:
 - fit: a restaurant, cafe, bar, QSR, bakery, F&B franchise, food hall or hospitality group with 6+ locations, or a franchisor / brand HQ.
 - maybe: F&B with 1-5 locations, or F&B but the size is unclear, or you cannot tell what the company does.
 - not_fit: clearly not F&B (agencies, consultancies, software vendors, investors, recruiters, schools), or the person is a job seeker, student, journalist or someone selling to Momos.
+- not_fit also covers companies that sell to restaurants rather than run them, even though they work in F&B: POS and payments (Toast, Square, Lightspeed), delivery and ordering (DoorDash, Uber Eats, Olo, ChowNow), reservations (OpenTable, SevenRooms, Resy), review and reputation software (Birdeye, Podium, Yext, Reputation, Ovation), food distributors and restaurant marketing agencies. They are vendors or competitors, not customers.
 
 You only have the form. Use what you know about the company and its email domain. Do not guess against the lead: if the evidence is thin, answer maybe. Answer not_fit with high confidence only when the evidence clearly says so.
 
