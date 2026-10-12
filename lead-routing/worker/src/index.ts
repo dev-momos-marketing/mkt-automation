@@ -148,6 +148,7 @@ export default {
     console.log(JSON.stringify({
       company: form.company, status: instant.status, reason: instant.reason, region: instant.region,
       ae: instant.ae, icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : null,
+      fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
     }));
     if (env.ZAPIER_HOOK_URL) ctx.waitUntil(verifyAndSend(form, instant, url, fit, env, env.ZAPIER_HOOK_URL));
     return Response.json({ url }, { headers });
