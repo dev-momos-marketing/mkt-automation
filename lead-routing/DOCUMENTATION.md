@@ -2,6 +2,8 @@
 
 > **What it is:** The "Book a Demo" form on momos.com checks each lead with Claude in about 2 seconds. Good leads go straight to the right salesperson's calendar. Junk gets a polite thank-you popup. In the background, Claude researches every real lead on the web and sends a summary to Salesforce and Slack.
 
+Non-technical? Start with **TROUBLESHOOTING.md** (the plain-English "what to do if something breaks" guide).
+
 Owner: Marketing (Vincent) · Shared account: marketing-team@momos.com · Last updated: October 2026
 
 ---
