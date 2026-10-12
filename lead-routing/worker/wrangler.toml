@@ -7,6 +7,13 @@ compatibility_flags = ["nodejs_compat"]
 [observability]
 enabled = true
 
+# Run next to Claude's API instead of next to the visitor. Cloudflare otherwise runs the
+# Worker in the visitor's nearest data center, and some (Hong Kong, for visitors in
+# Vietnam) are in regions the Claude API refuses with "403 Request not allowed".
+[placement]
+mode = "targeted"
+hostname = "api.anthropic.com"
+
 [vars]
 JAMES_URL = "https://calendar.app.google/LxFWWodxZMcd957n6"
 JILL_URL = "https://www.momos.com/book-a-demo-us"
