@@ -94,7 +94,7 @@ function claudeJson(model: string, out: unknown) {
 const fitOk = { icp_fit: "fit", confidence: 0.9, reason: "Burger chain with 18 locations." };
 type Handler = (req: Request) => Response | Promise<Response>;
 
-// Runs the Worker with Claude, DNS, the company homepage and Zapier faked out.
+// Runs the Worker with Claude, DNS and Zapier faked out. Any homepage fetch is recorded in `pages`.
 // `fit` answers the Haiku gate, `claude` answers the Opus research.
 async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: Env } = {}) {
   const sent: any[] = [];
@@ -188,48 +188,21 @@ test("answers with the calendar, then sends Claude's JSON to Zapier", async () =
   assert.equal(sent[0].fit.icp_fit, "fit");
 });
 
-test("the fit check sees the form and the company homepage", async () => {
+test("the fit check sees the form only, with no homepage lookup", async () => {
   const { fitCalls, pages } = await run(form, claudeOk);
-  assert.equal(pages.length, 1);
+  assert.equal(pages.length, 0);
   assert.equal(fitCalls.length, 1);
   assert.deepEqual(fitCalls[0].thinking, { type: "disabled" });
   assert.equal(fitCalls[0].output_config.effort, "low");
   assert.ok(fitCalls[0].max_tokens <= 200);
   const content = fitCalls[0].messages[0].content as string;
-  assert.ok(content.includes("Burger Co & Friends | 18 Locations"));
-  assert.ok(content.includes("Smash burgers across California."));
+  assert.ok(content.includes('"email_domain": "burgerco.com"'));
   assert.ok(!content.includes("ana@burgerco.com"), "the full email is not sent to the gate");
 });
 
-test("the homepage is read only up to </head>", async () => {
-  const realFetch = globalThis.fetch;
-  let pulled = 0;
-  globalThis.fetch = (async () => {
-    const body20 = Array.from({ length: 20 }, () => "<p>" + "x".repeat(5_000) + "</p>");
-    const chunks = ['<html><head><title>Burger Co</title>', '<meta name="description" content="Burgers."></head>', ...body20];
-    const body = new ReadableStream<Uint8Array>({
-      pull(c) {
-        const next = chunks[pulled++];
-        if (next === undefined) c.close();
-        else c.enqueue(new TextEncoder().encode(next));
-      },
-    });
-    return new Response(body, { headers: { "content-type": "text/html" } });
-  }) as typeof fetch;
-  try {
-    const { homepage } = await import("../src/fit.ts");
-    assert.deepEqual(await homepage("burgerco.com", 1000), { title: "Burger Co", description: "Burgers." });
-    // The stream may buffer a chunk ahead, but the other 19 body chunks are never downloaded.
-    assert.ok(pulled <= 4, `read ${pulled} of 22 chunks, the body should be skipped`);
-  } finally {
-    globalThis.fetch = realFetch;
-  }
-});
-
-test("personal email skips the homepage", async () => {
-  const { json, pages, fitCalls } = await run({ ...form, email: "ana@gmail.com" }, claudeOk);
+test("personal email is flagged to Claude", async () => {
+  const { json, fitCalls } = await run({ ...form, email: "ana@gmail.com" }, claudeOk);
   assert.equal(json.url, env.JAMES_URL);
-  assert.equal(pages.length, 0);
   assert.ok((fitCalls[0].messages[0].content as string).includes('"personal_email": true'));
 });
 

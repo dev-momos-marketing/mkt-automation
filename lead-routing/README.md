@@ -32,7 +32,7 @@ To change who gets which region, edit `ROUTES` in `worker/src/route.ts`.
 
 ## ICP check
 
-Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country, location count, and the title and description of the company's homepage (loaded from the email domain). There is no web search here, so it stays fast.
+Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country and location count, and judges from what it already knows. There is no web search or website lookup here, so it stays fast (about 1 to 1.5 seconds).
 
 - `fit` or `maybe`: the visitor gets their AE's calendar.
 - `not_fit` with confidence 0.8 or more: the visitor goes to the not-fit page.

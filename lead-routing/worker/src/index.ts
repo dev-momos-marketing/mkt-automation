@@ -143,7 +143,7 @@ export default {
 
     const cf = (req as Request & { cf?: IpLocation }).cf ?? {};
     const started = Date.now();
-    const timings: Timings = { homepage_ms: 0, claude_ms: 0 };
+    const timings: Timings = { claude_ms: 0 };
     const { instant, fit } = await gate(form, instantRoute(form, { country: cf.country, regionCode: cf.regionCode }), env, timings);
     const url = urlFor(instant, env);
     // One line per lead in Cloudflare's Logs tab. No email or name, just enough to audit the gate.
