@@ -26,7 +26,7 @@ Cloudflare Worker  ── spam check + region (instant)
 | | |
 |---|---|
 | Time from click to calendar | About 2 seconds |
-| Cost | About $0.0001 per lead for the fit check and about $0.02–0.03 per real lead for the research. Roughly $2 a month at 100 submissions, $20 at 1,000. See section 17. |
+| Cost | About $0.025 per real lead (fit check + research). Spam costs nothing. Typical month: about $2.50 at 100 submissions, $12.50 at 500. See section 17. |
 | If anything breaks | The visitor still lands on a calendar. A real lead is never blocked. |
 | Where it runs | Framer (form), Cloudflare (Worker), Anthropic (Claude), Zapier (Salesforce + Slack) |
 
@@ -455,26 +455,29 @@ Search results are added to Claude's input, which is why input tokens are the bi
 
 The hard limits in the code keep the worst case bounded on either model: max 3 searches, effort `low`, 8,000 output tokens per call, at most 2 calls, 25 seconds total.
 
-### Monthly cost by number of form submissions
+### Typical monthly cost
 
-Assumes about 15% of submissions are spam (no Claude cost). The other 85% get both the fit check and the research. The fit check adds under $0.50 a month even at 5,000 submissions, so it's left out of the totals.
+**Spam costs nothing.** It's caught in the Worker before Claude is called. So the table below counts every submission as a real lead. That's the most it can cost; any spam in the month only brings it down.
 
-| Submissions / month | Leads checked | **Haiku research, typical** | Haiku, heavy | Opus research, typical | Opus, heavy | Suggested spend limit (Haiku) |
-|---|---|---|---|---|---|---|
-| 50 | ~43 | **~$1** | $2 | $6 | $13 | $5 |
-| 100 | 85 | **~$2** | $3 | $13 | $26 | $5 |
-| 250 | ~213 | **~$5** | $9 | $32 | $64 | $10 |
-| 500 | 425 | **~$10** | $17 | $64 | $128 | $20 |
-| 1,000 | 850 | **~$20** | $34 | $128 | $255 | $40 |
-| 2,500 | 2,125 | **~$51** | $85 | $319 | $638 | $100 |
-| 5,000 | 4,250 | **~$102** | $170 | $638 | $1,275 | $200 |
+Cost per real lead: fit check ~$0.0001 + research ~$0.024 (Haiku) = **about $0.025**. On Opus it's about $0.15.
+
+| Submissions / month | **Typical, Haiku (current)** | Busy month, Haiku (every lead needs 3 searches) | Typical, if switched to Opus |
+|---|---|---|---|
+| 25 | **~$0.60** | $1 | $4 |
+| 50 | **~$1.25** | $2 | $8 |
+| 100 | **~$2.50** | $4 | $15 |
+| 150 | **~$3.75** | $6 | $23 |
+| 200 | **~$5** | $8 | $30 |
+| 300 | **~$7.50** | $12 | $45 |
+| 400 | **~$10** | $16 | $60 |
+| 500 | **~$12.50** | $20 | $75 |
 
 How to read it:
 
-- **The fit check is basically free** at any volume.
-- **On Haiku, budget about $0.02 per submission.** On Opus it's about $0.13.
-- **Suggested spend limit** is about 2× the typical month (a bit over the heavy column), so a spam wave or a run of hard leads doesn't stop the system mid-month. If you switch research to Opus, raise the limit to about the Opus heavy column. If the limit is hit, the API refuses calls: the fit check fails open (leads still reach a calendar), but research stops until the limit resets or is raised.
-- If spam is higher than 15%, costs go down (spam is free). If the share of not-fit leads is high, costs stay the same, because not-fits are still researched.
+- **Expect a few dollars a month.** At normal volume (under 500 submissions), research on Haiku stays under about $12.50 a month, and usually much less.
+- **The fit check is basically free.** 500 leads is about 5 cents.
+- **Suggested monthly spend limit: $25.** It covers a busy month at 500 submissions with room to spare. If you switch research to Opus, raise it to about $150. If the limit is ever hit, the API refuses calls: the fit check fails open (leads still reach a calendar), but research stops until the limit resets or is raised.
+- **If volume ever grows** past 500: budget about $0.025 per submission on Haiku (1,000 ≈ $25, 5,000 ≈ $125).
 
 ### Ways to cut the cost further (if needed)
 
