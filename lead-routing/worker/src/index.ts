@@ -4,7 +4,7 @@
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
 import { instantRoute, type FormData, type Instant, type IpLocation } from "./route.ts";
-import { checkFit, NOT_FIT_MIN_CONFIDENCE, type Fit } from "./fit.ts";
+import { checkFit, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type Verification } from "./verify.ts";
 
 export interface Env {
@@ -45,10 +45,10 @@ export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: stri
 
 // Asks Claude about fit and turns a confident not_fit into a not_fit route.
 // Any failure lets the lead through: a real lead is never blocked by a slow or broken check.
-async function gate(form: FormData, instant: Instant, env: Env): Promise<{ instant: Instant; fit: FitResult }> {
+async function gate(form: FormData, instant: Instant, env: Env, timings: Timings): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
   try {
-    const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS), FIT_BUDGET_MS, "fit check took too long");
+    const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS, timings), FIT_BUDGET_MS, "fit check took too long");
     if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
       return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
     }
@@ -142,13 +142,16 @@ export default {
     }
 
     const cf = (req as Request & { cf?: IpLocation }).cf ?? {};
-    const { instant, fit } = await gate(form, instantRoute(form, { country: cf.country, regionCode: cf.regionCode }), env);
+    const started = Date.now();
+    const timings: Timings = { homepage_ms: 0, claude_ms: 0 };
+    const { instant, fit } = await gate(form, instantRoute(form, { country: cf.country, regionCode: cf.regionCode }), env, timings);
     const url = urlFor(instant, env);
     // One line per lead in Cloudflare's Logs tab. No email or name, just enough to audit the gate.
     console.log(JSON.stringify({
       company: form.company, status: instant.status, reason: instant.reason, region: instant.region,
       ae: instant.ae, icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : null,
       fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
+      total_ms: Date.now() - started, ...timings,
     }));
     if (env.ZAPIER_HOOK_URL) ctx.waitUntil(verifyAndSend(form, instant, url, fit, env, env.ZAPIER_HOOK_URL));
     return Response.json({ url }, { headers });
