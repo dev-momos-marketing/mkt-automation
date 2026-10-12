@@ -3,6 +3,10 @@ main = "src/index.ts"
 compatibility_date = "2026-10-01"
 compatibility_flags = ["nodejs_compat"]
 
+# One log line per lead in the dashboard: Worker > Observability > Logs.
+[observability]
+enabled = true
+
 [vars]
 JAMES_URL = "https://calendar.app.google/LxFWWodxZMcd957n6"
 JILL_URL = "https://www.momos.com/book-a-demo-us"
