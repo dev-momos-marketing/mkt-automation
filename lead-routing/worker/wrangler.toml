@@ -22,6 +22,20 @@ ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
 
+# Cloudflare's builds require settings for Preview deployments (test copies built from
+# non-main branches). These are only links and site names, safe to share with Previews.
+# Keep them in step with [vars] above.
+[previews.vars]
+JAMES_URL = "https://calendar.app.google/LxFWWodxZMcd957n6"
+JILL_URL = "https://calendar.app.google/RgDyFpMoE46wfyFv9"
+NOT_FIT_URL = "https://www.momos.com/thank-you"
+ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
+RESEARCH_MODEL = "haiku"
+
+[previews.placement]
+mode = "targeted"
+hostname = "api.anthropic.com"
+
 # Secrets (set in Cloudflare: Worker > Settings > Variables and Secrets, never commit):
 #   ANTHROPIC_API_KEY   required
 #   ZAPIER_HOOK_URL     optional. When set, Claude researches each lead after the redirect

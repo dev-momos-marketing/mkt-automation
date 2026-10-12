@@ -115,7 +115,7 @@ You can update it yourself in GitHub (takes 2 minutes).
 
 1. Go to **github.com/dev-momos-marketing/mkt-automation** → `lead-routing` → `worker` → `wrangler.toml`.
 2. Click the **pencil** icon (Edit).
-3. Change the link next to `JAMES_URL =` or `JILL_URL =`. Keep the quote marks.
+3. Change the link next to `JAMES_URL =` or `JILL_URL =`. Keep the quote marks. **Each link appears twice** (under `[vars]` and under `[previews.vars]`). Change both, or Cloudflare's build may fail.
 4. Click **Commit changes** → commit to **main**.
 5. Wait about 2 minutes (it goes live by itself), then run the health check.
 

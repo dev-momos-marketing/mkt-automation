@@ -276,6 +276,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 | `NOT_FIT_URL` | https://www.momos.com/thank-you | Code word telling the form to show the popup. Not a real redirect; no page needed. |
 | `ALLOWED_ORIGINS` | https://www.momos.com, https://momos.com (plus any `*.framer.app` / `*.framer.website` / `*.framer.ai` preview) | Which sites may call the Worker |
 | `RESEARCH_MODEL` | `haiku` | Which Claude does the background research: `haiku` (cheap) or `opus` (thorough). See section 17 for costs. |
+| `[previews.vars]`, `[previews.placement]` | Same values as `[vars]` / `[placement]` | Required by Cloudflare's builds since Oct 2026 (for Preview deployments). Keep in step with `[vars]`, or the build fails. |
 | `[observability] enabled = true` | | One log line per lead in Observability → Logs |
 | `[placement] mode = "targeted", hostname = "api.anthropic.com"` | | Runs the Worker next to Claude's API. Without it, visitors near Hong Kong got "403 Request not allowed". |
 
@@ -340,7 +341,7 @@ Delete test leads in Salesforce afterwards.
 
 | I want to… | Change |
 |---|---|
-| Change James's or Jill's link | `JAMES_URL` / `JILL_URL` in `worker/wrangler.toml`, then push to main |
+| Change James's or Jill's link | `JAMES_URL` / `JILL_URL` in `worker/wrangler.toml`, in both `[vars]` and `[previews.vars]`, then push to main |
 | Change who covers a region | `ROUTES` in `worker/src/route.ts` |
 | Add a West Coast time zone or state | `WEST_ZONES` / `WEST_STATES` in `worker/src/route.ts` |
 | Add a country, or move one between regions | `CODES` in `framer/LeadForm.tsx` (what visitors can pick) and `EMEA` / `APAC` in `worker/src/route.ts` (where it routes). A code in neither region list routes by time zone. |
