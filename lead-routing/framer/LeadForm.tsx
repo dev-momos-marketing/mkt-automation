@@ -22,9 +22,12 @@ const COUNTRIES = [
 const LOCATIONS = ["1-5", "6-49", "50-249", "250+"]
 
 // Styling copied from momos.com (Poppins, brand red, 20px cards, 12px fields, gradient CTA).
+// Poppins is loaded here as well, so the form never falls back to a system font.
 const CSS = `
-.mlf { font-family: 'Poppins', 'Poppins Placeholder', sans-serif; color: #15181E; width: 100%; -webkit-font-smoothing: antialiased; }
-.mlf * { box-sizing: border-box; font-family: inherit; }
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+.mlf { font-family: 'Poppins', 'Poppins Placeholder', sans-serif; font-weight: 400; letter-spacing: -0.01em; color: #15181E; width: 100%; -webkit-font-smoothing: antialiased; }
+.mlf * { box-sizing: border-box; font-family: inherit; letter-spacing: inherit; }
+.mlf input, .mlf select, .mlf button { font-family: 'Poppins', 'Poppins Placeholder', sans-serif; }
 .mlf-card { background: #FFFFFF; border: 1px solid rgba(10,11,11,0.1); border-radius: 20px; padding: 32px; display: flex; flex-direction: column; gap: 20px; }
 .mlf-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; }
 .mlf-field { display: flex; flex-direction: column; gap: 8px; }
