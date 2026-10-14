@@ -124,6 +124,13 @@ You can update it yourself in GitHub (takes 2 minutes).
 4. Click **Commit changes** → commit to **main**.
 5. Wait about 2 minutes (it goes live by itself), then run the health check.
 
+### Problem 7b: Cloudflare shows "Latest build failed"
+**What it means:** a change pushed to GitHub didn't go live. The previous version keeps running, so visitors aren't affected.
+
+1. Cloudflare → Workers & Pages → **momos-lead-routing** → **Deployments**. Click the red **Build ↗** next to the failed row and read the red lines.
+2. **`504 Gateway Timeout`** or **`malformed response from the API`**: Cloudflare had a hiccup, not us. Any new push to `main` (even a small doc edit in GitHub) starts a fresh build.
+3. **Anything else** (e.g. "missing a `previews` block"): send the red lines to Vincent.
+
 ### Problem 8: The Anthropic bill suddenly jumps
 1. **console.anthropic.com** → **Cost**. Normal is a few dollars a month.
 2. The spend limit stops it going above the cap, so there's no runaway risk.
