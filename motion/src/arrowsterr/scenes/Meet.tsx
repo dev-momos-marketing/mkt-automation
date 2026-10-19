@@ -40,7 +40,7 @@ export const Meet: React.FC = () => {
   const mapY = vertical ? 1180 : 760;
   const x0 = vertical ? 110 : 260;
   const x1 = vertical ? width - 110 : width - 520;
-  const lay = cue("meet-visible");
+  const lay = cue("meet-3");
   const solidAt = lay + 40;
 
   return (
@@ -74,7 +74,7 @@ export const Meet: React.FC = () => {
       <Logo height={LH} style={{ position: "absolute", left: logoLeft, top: LY, opacity: swap }} />
 
       <AbsoluteFill style={{ top: LY + LH + (vertical ? 90 : 60), bottom: "auto", alignItems: "center", padding: vertical ? "0 56px" : "0 160px" }}>
-        <Rise delay={Math.max(cue("meet-platform"), arrive + 30)}>
+        <Rise delay={Math.max(cue("meet-2"), arrive + 30)}>
           <Headline lead="The end-to-end agentic" payoff="SEO/GEO platform" breakBefore size={vertical ? 84 : 104} style={{ textAlign: "center" }} />
         </Rise>
       </AbsoluteFill>

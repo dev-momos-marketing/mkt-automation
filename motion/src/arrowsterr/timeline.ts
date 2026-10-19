@@ -17,4 +17,4 @@ export const sceneStart = (scene: Scene) => timeline.scenes[scene].start;
 export const SCENES = Object.keys(timeline.scenes) as Scene[];
 
 // Shared visual beats (the score hits the same frames).
-export const CARD_LAND = [0, 1, 2].map((i) => cue("list-recommends") + 10 + i * 8);
+export const CARD_LAND = [0, 1, 2].map((i) => cue("list-1") + 22 + i * 8);

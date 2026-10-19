@@ -1,19 +1,8 @@
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { color, font, radius, type } from "../brand";
-import { FlapCounter, Pan, RadialGauge, SplitFlap } from "../fx";
+import { Pan, RadialGauge, SplitFlap } from "../fx";
 import { cue, cueEnd } from "../timeline";
 import { Chevron, clamp, EASE, Rise, Tag, Ticks, typed, useIn, useIsVertical, Window } from "../ui";
-
-// Visibility HUD in the corner of every station: clacks to the stage's new value.
-const VisHud: React.FC<{ value: number; from: number; at: number }> = ({ value, from, at }) => {
-  const vertical = useIsVertical();
-  return (
-    <div style={{ position: "absolute", right: vertical ? 56 : 120, top: vertical ? 200 : 64, display: "flex", alignItems: "center", gap: 18 }}>
-      <span style={{ ...type.label, fontSize: 28, color: color.ink2 }}>Visibility</span>
-      <FlapCounter value={value} from={from} suffix="%" start={at} size={44} />
-    </div>
-  );
-};
 
 const StationTitle: React.FC<{ n: string; title: string }> = ({ n, title }) => {
   const vertical = useIsVertical();
@@ -38,12 +27,11 @@ const BOARD = [
 export const See: React.FC = () => {
   const vertical = useIsVertical();
   const a = cue("see-1");
-  const b = cue("see-2");
+  const b = a + 34; // Acme's column flips to Missing mid-line
   const flap = vertical ? 22 : 28;
   return (
     <Pan>
       <StationTitle n="01" title="See" />
-      <VisHud value={18} from={0} at={cueEnd("see-2")} />
       <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingTop: vertical ? 120 : 40 }}>
         <Window title="AI answers · checked daily" width={vertical ? 1000 : 1640} bodyStyle={{ display: "flex", flexDirection: "column", gap: 14, padding: vertical ? 24 : 32 }}>
           <div style={{ display: "grid", gridTemplateColumns: vertical ? "1fr 220px 190px" : "1fr 320px 260px", ...type.label, color: color.ink2, paddingBottom: 6 }}>
@@ -100,7 +88,6 @@ export const Find: React.FC = () => {
   return (
     <Pan>
       <StationTitle n="02" title="Find" />
-      <VisHud value={34} from={18} at={cueEnd("find-2")} />
 
       {/* Vortex: spiral arms of chevrons and particles pulled into the centre. */}
       <div style={{ position: "absolute", left: vortex.x, top: vortex.y, width: 0, height: 0, opacity: vortexOn }}>
@@ -181,12 +168,12 @@ export const Plan: React.FC = () => {
   const { width, height } = useVideoConfig();
   const vertical = height > width;
   const a = cue("plan-1");
-  const b = cue("plan-2");
+  const b = a + 30; // blocks drop as "by revenue" lands
   const sorted = [...TOPICS].sort((x, y) => y[2] - x[2]);
 
   // Carousel spin, decelerating into a ranked column.
-  const settle = interpolate(frame, [a + 24, a + 48], [0, 1], { ...clamp, easing: EASE });
-  const spin = interpolate(frame, [a, a + 48], [0, 360 + 72], { ...clamp, easing: Easing.out(Easing.cubic) });
+  const settle = interpolate(frame, [a + 10, a + 26], [0, 1], { ...clamp, easing: EASE });
+  const spin = interpolate(frame, [a - 6, a + 26], [0, 360 + 72], { ...clamp, easing: Easing.out(Easing.cubic) });
   const colX = vertical ? width / 2 : width * 0.28;
   const colTop = vertical ? 330 : 220;
   const cardW = vertical ? 760 : 620;
@@ -201,7 +188,6 @@ export const Plan: React.FC = () => {
   return (
     <Pan>
       <StationTitle n="03" title="Plan" />
-      <VisHud value={47} from={34} at={cueEnd("plan-2")} />
 
       {TOPICS.map((t, i) => {
         const rank = sorted.indexOf(t);
@@ -301,7 +287,6 @@ export const Create: React.FC = () => {
     <Pan exit={false}>
       <div style={{ opacity: others }}>
         <StationTitle n="04" title="Create" />
-        <VisHud value={60} from={47} at={cueEnd("create-ai")} />
       </div>
 
       {/* Markdown source streaming in. */}

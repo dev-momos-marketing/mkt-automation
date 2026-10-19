@@ -2,7 +2,7 @@ import { getLength } from "@remotion/paths";
 import { lightLeak } from "@remotion/effects/light-leak";
 import { AbsoluteFill, Easing, interpolate, random, Solid, useCurrentFrame, useVideoConfig } from "remotion";
 import { color, font, motif, radius, type } from "../brand";
-import { AcmeChip, ChevronConfetti, DecodeText, FlapCounter, getPointAtLength, Pan, SonarRings, Starburst, useShake } from "../fx";
+import { AcmeChip, ChevronConfetti, DecodeText, getPointAtLength, Pan, SonarRings, Starburst, useShake } from "../fx";
 import { cue } from "../timeline";
 import { clamp, EASE, Headline, Logo, NotchButton, Rise, SparkStar, Tag, Ticks, useIn } from "../ui";
 import { ChatBar, PROMPT } from "./Intro";
@@ -87,7 +87,7 @@ export const Land: React.FC = () => {
   const snap = interpolate(frame, [hit, hit + 3, hit + 8], [1.25, 0.97, 1], clamp);
   const shake = useShake([hit, rec], 14, 10);
   const listW = vertical ? 960 : 1180;
-  const listTop = vertical ? 620 : 300;
+  const listTop = vertical ? 700 : 300;
   const rowH = 122;
 
   // Dart flight path into slot #2.
@@ -100,14 +100,14 @@ export const Land: React.FC = () => {
   return (
     <Pan exit={false}>
       <AbsoluteFill style={{ translate: shake }}>
-        <AbsoluteFill style={{ alignItems: "center", paddingTop: vertical ? 300 : 70, gap: 28 }}>
+        <AbsoluteFill style={{ alignItems: "center", paddingTop: vertical ? 380 : 70, gap: 28 }}>
           <Rise delay={2}>
             <span style={{ ...type.num, fontSize: 28, color: color.signalText }}>06:00 UTC · daily check</span>
           </Rise>
-          <ChatBar width={listW} size={vertical ? 34 : 36} text={<DecodeText text={PROMPT} start={cue("land-next")} perChar={0.6} scramble={4} />} />
+          <ChatBar width={listW} size={vertical ? 34 : 36} text={<DecodeText text={PROMPT} start={cue("land-1")} perChar={0.6} scramble={4} />} />
         </AbsoluteFill>
         <div style={{ position: "absolute", left: width / 2 - listW / 2, top: listTop + 60, width: listW, display: "flex", flexDirection: "column", gap: 18 }}>
-          <Rise delay={cue("land-next") + 20}>
+          <Rise delay={cue("land-1") + 20}>
             <Row rank={1} {...ROWS[0]} />
           </Rise>
           <div style={{ height: room * (rowH + 4), position: "relative" }}>
@@ -133,7 +133,7 @@ export const Land: React.FC = () => {
             )}
           </div>
           {ROWS.slice(1).map((r, i) => (
-            <Rise key={r.name} delay={cue("land-next") + 26 + i * 6}>
+            <Rise key={r.name} delay={cue("land-1") + 26 + i * 6}>
               <Row rank={frame >= hit ? i + 3 : i + 2} {...r} />
             </Rise>
           ))}
@@ -146,10 +146,6 @@ export const Land: React.FC = () => {
         <div style={{ position: "absolute", left: slotX, top: slotY, width: 0, height: 0 }}>
           <SonarRings at={hit} size={200} count={3} />
         </div>
-        <Rise delay={4} style={{ position: "absolute", right: vertical ? 56 : 120, top: vertical ? 200 : 64, display: "flex", alignItems: "center", gap: 18 }}>
-          <span style={{ ...type.label, fontSize: 28, color: color.ink2 }}>Visibility</span>
-          <FlapCounter value={60} from={0} suffix="%" start={rec} size={44} />
-        </Rise>
       </AbsoluteFill>
       {/* Warm light leak over the win. */}
       {frame >= rec && frame < rec + 30 && (

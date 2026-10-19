@@ -11,28 +11,38 @@ const SPACING = 32;
 // Every beat that physically hits the grid. Positions are rough per-layout centres.
 const ripples = (vertical: boolean): Ripple[] => {
   const r: Ripple[] = [];
-  // Keystrokes while the prompt types.
-  for (let i = 0; i < 26; i++) r.push({ at: absCue("ask-when") - 4 + i * 2.4, x: 0.5, y: 0.5, amp: 5, speed: 9 });
+  // Cursor blinks, then keystrokes while the question decodes.
+  for (let i = 0; i < 6; i++) r.push({ at: 4 + i * 16, x: 0.5, y: 0.5, amp: 3, speed: 8 });
+  for (let i = 0; i < 18; i++) r.push({ at: absCue("hook-2") - 2 + i * 2.4, x: 0.5, y: 0.5, amp: 5, speed: 9 });
   // Cards landing on the shortlist.
   CARD_LAND.forEach((f, i) =>
     r.push({ at: sceneStart("shortlist") + f, x: vertical ? 0.5 : 0.27 + i * 0.23, y: vertical ? 0.42 + i * 0.12 : 0.55, amp: 14 }),
   );
-  // Stamps on the 5 engines, then the shatter.
-  for (let i = 0; i < 5; i++) r.push({ at: absCue("inv-zero") + 4 + i * 4, x: 0.18 + i * 0.16, y: vertical ? 0.4 : 0.38, amp: 12 });
-  r.push({ at: absCue("inv-you"), x: 0.5, y: vertical ? 0.62 : 0.74, amp: 26, speed: 18 });
-  // The logo forge shockwave and the drop.
-  r.push({ at: absCue("meet-name") + 18, x: 0.5, y: vertical ? 0.3 : 0.28, amp: 40, speed: 22 });
+  // Each engine window lighting up, then its stamp.
+  (["all-claude", "all-gemini", "all-perplexity", "all-google"] as const).forEach((c, i) => {
+    const x = vertical ? (i % 2 ? 0.75 : 0.25) : 0.14 + i * 0.24;
+    const y = vertical ? (i < 2 ? 0.38 : 0.66) : 0.52;
+    r.push({ at: absCue(c), x, y, amp: 10 });
+    r.push({ at: absCue(c) + 12, x, y, amp: 14 });
+  });
+  // The tear, the shatter.
+  r.push({ at: absCue("zero-1"), x: 0.5, y: 0.45, amp: 30, speed: 24 });
+  r.push({ at: absCue("zero-2"), x: 0.5, y: vertical ? 0.62 : 0.7, amp: 26, speed: 18 });
+  // HUD boot, the logo forge shockwave (drop 1).
+  r.push({ at: absCue("fix-1"), x: vertical ? 0.85 : 0.9, y: vertical ? 0.13 : 0.1, amp: 12, speed: 12 });
+  r.push({ at: absCue("meet-1") + 18, x: 0.5, y: vertical ? 0.3 : 0.28, amp: 40, speed: 22 });
   // Falling blocks in the plan.
-  for (let i = 0; i < 5; i++) r.push({ at: absCue("plan-2") + 6 + i * 6, x: vertical ? 0.2 + i * 0.15 : 0.56 + i * 0.08, y: 0.7, amp: 8 });
-  // Sonic boom, the Spark, the close.
+  for (let i = 0; i < 5; i++) r.push({ at: absCue("plan-1") + 30 + i * 6, x: vertical ? 0.2 + i * 0.15 : 0.56 + i * 0.08, y: 0.7, amp: 8 });
+  // Sonic boom, the landing, the Spark, the close.
   r.push({ at: absCue("ship") + 10, x: 0.5, y: 0.5, amp: 34, speed: 26 });
+  r.push({ at: absCue("land-there") + 12, x: 0.3, y: vertical ? 0.42 : 0.45, amp: 20, speed: 16 });
   r.push({ at: absCue("land-rec"), x: 0.5, y: vertical ? 0.45 : 0.5, amp: 44, speed: 20 });
   r.push({ at: absCue("close-start"), x: 0.5, y: 0.55, amp: 26, speed: 20 });
   return r;
 };
 
 // How far the "camera" has travelled: each scene change pans the world left.
-const PAN = new Set<Scene>(["shortlist", "meet", "see", "find", "plan", "create", "land"]);
+const PAN = new Set<Scene>(["shortlist", "everywhere", "fix", "meet", "see", "find", "plan", "create", "land"]);
 const panOffset = (frame: number, width: number) => {
   let x = 0;
   for (const s of SCENES) {

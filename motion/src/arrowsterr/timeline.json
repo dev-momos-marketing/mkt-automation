@@ -1,200 +1,180 @@
 {
   "fps": 30,
   "beat": 15,
-  "total": 1980,
+  "total": 1785,
   "scenes": {
-    "ask": {
+    "hook": {
       "start": 0,
-      "length": 150
-    },
-    "shortlist": {
-      "start": 150,
-      "length": 180
-    },
-    "engines": {
-      "start": 330,
       "length": 195
     },
-    "invisible": {
-      "start": 525,
-      "length": 120
-    },
-    "navigator": {
-      "start": 645,
-      "length": 90
-    },
-    "meet": {
-      "start": 735,
-      "length": 225
-    },
-    "see": {
-      "start": 960,
+    "shortlist": {
+      "start": 195,
       "length": 165
     },
+    "everywhere": {
+      "start": 360,
+      "length": 135
+    },
+    "zero": {
+      "start": 495,
+      "length": 105
+    },
+    "fix": {
+      "start": 600,
+      "length": 105
+    },
+    "meet": {
+      "start": 705,
+      "length": 210
+    },
+    "see": {
+      "start": 915,
+      "length": 105
+    },
     "find": {
-      "start": 1125,
+      "start": 1020,
       "length": 135
     },
     "plan": {
-      "start": 1260,
-      "length": 150
+      "start": 1155,
+      "length": 90
     },
     "create": {
-      "start": 1410,
+      "start": 1245,
       "length": 165
     },
     "ship": {
-      "start": 1575,
+      "start": 1410,
       "length": 60
     },
     "land": {
-      "start": 1635,
+      "start": 1470,
       "length": 135
     },
     "close": {
-      "start": 1770,
-      "length": 210
+      "start": 1605,
+      "length": 180
     }
   },
   "cues": {
-    "ask-quick": {
-      "scene": "ask",
+    "hook-1": {
+      "scene": "hook",
       "at": 10,
-      "frames": 26
+      "frames": 102
     },
-    "ask-when": {
-      "scene": "ask",
-      "at": 44,
-      "frames": 78
+    "hook-2": {
+      "scene": "hook",
+      "at": 118,
+      "frames": 47
     },
-    "list-ask": {
+    "list-1": {
       "scene": "shortlist",
       "at": 4,
+      "frames": 80
+    },
+    "list-2": {
+      "scene": "shortlist",
+      "at": 92,
+      "frames": 28
+    },
+    "list-3": {
+      "scene": "shortlist",
+      "at": 126,
+      "frames": 13
+    },
+    "all-0": {
+      "scene": "everywhere",
+      "at": 6,
       "frames": 29
     },
-    "list-recommends": {
-      "scene": "shortlist",
-      "at": 37,
-      "frames": 55
-    },
-    "list-so": {
-      "scene": "shortlist",
-      "at": 102,
-      "frames": 14
-    },
-    "list-you": {
-      "scene": "shortlist",
-      "at": 120,
-      "frames": 31
-    },
-    "eng-check": {
-      "scene": "engines",
-      "at": 6,
-      "frames": 23
-    },
-    "eng-chatgpt": {
-      "scene": "engines",
-      "at": 35,
-      "frames": 32
-    },
-    "eng-claude": {
-      "scene": "engines",
-      "at": 69,
+    "all-claude": {
+      "scene": "everywhere",
+      "at": 36,
       "frames": 16
     },
-    "eng-gemini": {
-      "scene": "engines",
-      "at": 87,
+    "all-gemini": {
+      "scene": "everywhere",
+      "at": 54,
       "frames": 20
     },
-    "eng-perplexity": {
-      "scene": "engines",
-      "at": 109,
+    "all-perplexity": {
+      "scene": "everywhere",
+      "at": 76,
       "frames": 23
     },
-    "eng-google": {
-      "scene": "engines",
-      "at": 134,
-      "frames": 29
+    "all-google": {
+      "scene": "everywhere",
+      "at": 101,
+      "frames": 16
     },
-    "inv-zero": {
-      "scene": "invisible",
+    "zero-1": {
+      "scene": "zero",
       "at": 6,
       "frames": 42
     },
-    "inv-you": {
-      "scene": "invisible",
+    "zero-2": {
+      "scene": "zero",
       "at": 56,
-      "frames": 26
+      "frames": 27
     },
-    "nav-good": {
-      "scene": "navigator",
-      "at": 8,
-      "frames": 22
+    "fix-1": {
+      "scene": "fix",
+      "at": 14,
+      "frames": 28
     },
-    "nav-need": {
-      "scene": "navigator",
-      "at": 36,
-      "frames": 39
+    "fix-2": {
+      "scene": "fix",
+      "at": 52,
+      "frames": 32
     },
-    "meet-name": {
+    "meet-1": {
       "scene": "meet",
       "at": 6,
       "frames": 29
     },
-    "meet-platform": {
+    "meet-2": {
       "scene": "meet",
       "at": 43,
       "frames": 93
     },
-    "meet-visible": {
+    "meet-3": {
       "scene": "meet",
-      "at": 140,
-      "frames": 61
+      "at": 138,
+      "frames": 51
     },
     "see-1": {
       "scene": "see",
       "at": 6,
-      "frames": 42
-    },
-    "see-2": {
-      "scene": "see",
-      "at": 52,
-      "frames": 77
+      "frames": 69
     },
     "find-1": {
       "scene": "find",
       "at": 6,
-      "frames": 56
+      "frames": 57
     },
     "find-2": {
       "scene": "find",
-      "at": 66,
-      "frames": 33
+      "at": 65,
+      "frames": 45
     },
     "plan-1": {
       "scene": "plan",
       "at": 6,
-      "frames": 69
-    },
-    "plan-2": {
-      "scene": "plan",
-      "at": 79,
-      "frames": 33
+      "frames": 38
     },
     "create-1": {
       "scene": "create",
       "at": 6,
-      "frames": 70
+      "frames": 60
     },
     "create-google": {
       "scene": "create",
-      "at": 82,
+      "at": 72,
       "frames": 28
     },
     "create-ai": {
       "scene": "create",
-      "at": 114,
+      "at": 104,
       "frames": 31
     },
     "ship": {
@@ -202,19 +182,19 @@
       "at": 4,
       "frames": 18
     },
-    "land-next": {
+    "land-1": {
       "scene": "land",
       "at": 6,
       "frames": 42
     },
     "land-there": {
       "scene": "land",
-      "at": 60,
+      "at": 58,
       "frames": 22
     },
     "land-rec": {
       "scene": "land",
-      "at": 88,
+      "at": 86,
       "frames": 24
     },
     "close-name": {

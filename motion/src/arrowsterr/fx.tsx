@@ -21,12 +21,16 @@ import { clamp, EASE } from "./ui";
 
 // Scene wrapper: slides in from the right and out to the left with motion blur,
 // so back-to-back scenes read as one camera move across the grid.
+// `zoomOut` flies the camera *through* a point (in % of the frame) instead of
+// panning; `zoomIn` arrives from a pulled-back, blurred wide shot.
 export const Pan: React.FC<{
   children: React.ReactNode;
   enter?: boolean;
   exit?: boolean;
   dur?: number;
-}> = ({ children, enter = true, exit = true, dur = 10 }) => {
+  zoomIn?: boolean;
+  zoomOut?: { x: number; y: number };
+}> = ({ children, enter = true, exit = true, dur = 10, zoomIn, zoomOut }) => {
   const frame = useCurrentFrame();
   const { durationInFrames, width } = useVideoConfig();
   const inP = enter ? interpolate(frame, [0, dur], [1, 0], { ...clamp, easing: EASE }) : 0;
@@ -36,12 +40,105 @@ export const Pan: React.FC<{
         easing: Easing.bezier(0.55, 0, 1, 0.45),
       })
     : 0;
+  if (zoomIn || zoomOut) {
+    const sIn = zoomIn ? 1 - inP * 0.45 : 1;
+    const sOut = zoomOut ? 1 + outP * outP * 5 : 1;
+    const xOut = zoomOut ? 0 : -outP * width * 0.45;
+    const blur = (zoomIn ? inP : 0) * 16 + (zoomOut ? outP : 0) * 20 + (!zoomIn ? inP * 14 : 0);
+    return (
+      <AbsoluteFill
+        style={{
+          translate: `${(!zoomIn ? inP * width * 0.45 : 0) + xOut}px 0`,
+          scale: `${sIn * sOut}`,
+          transformOrigin: zoomOut ? `${zoomOut.x}% ${zoomOut.y}%` : "50% 50%",
+          opacity: zoomOut ? 1 - outP * outP : 1,
+          filter: blur > 0.3 ? `blur(${blur}px)` : undefined,
+        }}
+      >
+        {children}
+      </AbsoluteFill>
+    );
+  }
   const x = inP * width * 0.45 - outP * width * 0.45;
   const blur = (inP + outP) * 14;
   return (
     <AbsoluteFill style={{ translate: `${x}px 0`, filter: blur > 0.3 ? `blur(${blur}px)` : undefined }}>
       {children}
     </AbsoluteFill>
+  );
+};
+
+// Glitch tear: horizontal bands rip sideways with blue/sky channel flashes.
+export const TearFlash: React.FC<{ at: number; dur?: number }> = ({ at, dur = 12 }) => {
+  const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+  const t = frame - at;
+  if (t < 0 || t > dur) return null;
+  const k = 1 - t / dur;
+  return (
+    <AbsoluteFill style={{ pointerEvents: "none" }}>
+      {Array.from({ length: 9 }).map((_, i) => {
+        const y = random(`ty${i}-${Math.floor(frame / 2)}`) * height;
+        const h = 6 + random(`th${i}-${Math.floor(frame / 2)}`) * 60;
+        const off = (random(`to${i}-${frame}`) - 0.5) * 240 * k;
+        return (
+          <div key={i} style={{ position: "absolute", left: off, top: y, width, height: h, background: i % 3 === 0 ? color.signal : i % 3 === 1 ? color.sky : color.inkStrong, opacity: 0.18 + 0.5 * k * random(`tp${i}-${frame}`), mixBlendMode: "multiply" }} />
+        );
+      })}
+      <AbsoluteFill style={{ background: color.bg, opacity: t < 2 ? 0.6 : 0 }} />
+    </AbsoluteFill>
+  );
+};
+
+// Data rain: columns of answer tokens drifting down behind the engines.
+const TOKENS = ["crm", "best", "startup", "Northwind", "Globex", "Initech", "pricing", "email", "seats", "free", "top", "pick", "recommend", "2026", "vs", "review"];
+export const DataRain: React.FC<{ opacity?: number; cols?: number }> = ({ opacity = 0.16, cols = 22 }) => {
+  const frame = useCurrentFrame();
+  const { width, height } = useVideoConfig();
+  return (
+    <AbsoluteFill style={{ opacity, pointerEvents: "none", overflow: "hidden" }}>
+      {Array.from({ length: cols }).map((_, c) => {
+        const speed = 3 + random(`rs${c}`) * 5;
+        const x = (c / cols) * width + random(`rx${c}`) * 30;
+        return (
+          <div key={c} style={{ position: "absolute", left: x, top: ((frame * speed + random(`ro${c}`) * height) % (height + 600)) - 600, display: "flex", flexDirection: "column", gap: 10 }}>
+            {Array.from({ length: 12 }).map((_, k) => (
+              <span key={k} style={{ fontFamily: font.mono, fontSize: 22, color: k === 11 ? color.signal : color.sky, opacity: (k + 1) / 12 }}>
+                {TOKENS[Math.floor(random(`rt${c}-${k}`) * TOKENS.length)]}
+              </span>
+            ))}
+          </div>
+        );
+      })}
+    </AbsoluteFill>
+  );
+};
+
+// Navigator compass: ring draws on, ticks spin up, needle swings to `heading` (deg).
+export const Compass: React.FC<{ size: number; boot: number; heading: number }> = ({ size, boot, heading }) => {
+  const frame = useCurrentFrame();
+  const t = frame - boot;
+  const ring = interpolate(t, [0, 12], [0, 1], { ...clamp, easing: EASE });
+  const ticksSpin = interpolate(t, [4, 20], [180, 0], { ...clamp, easing: EASE });
+  const swing = t < 14 ? -120 : heading + Math.sin((t - 14) / 3) * 30 * Math.exp(-(t - 14) / 8);
+  const r = 0.44;
+  const circ = 2 * Math.PI * r;
+  return (
+    <svg width={size} height={size} viewBox="-0.5 -0.5 1 1" style={{ overflow: "visible" }}>
+      <circle r={r} fill={color.bg} stroke={color.signal} strokeWidth={0.025} strokeDasharray={`${ring * circ} ${circ}`} transform="rotate(-90)" />
+      <g transform={`rotate(${ticksSpin})`} opacity={ring}>
+        {Array.from({ length: 36 }).map((_, i) => {
+          const a = (i / 36) * Math.PI * 2;
+          const long = i % 9 === 0;
+          return <line key={i} x1={Math.cos(a) * (long ? 0.32 : 0.36)} y1={Math.sin(a) * (long ? 0.32 : 0.36)} x2={Math.cos(a) * 0.41} y2={Math.sin(a) * 0.41} stroke={long ? color.inkStrong : color.lineStrong} strokeWidth={long ? 0.02 : 0.01} />;
+        })}
+      </g>
+      <g transform={`rotate(${swing})`} opacity={interpolate(t, [8, 14], [0, 1], clamp)}>
+        <path d="M 0 -0.3 L 0.06 0.02 L 0 -0.04 L -0.06 0.02 Z" fill={color.signal} />
+        <path d="M 0 0.22 L 0.04 0.02 L -0.04 0.02 Z" fill={color.lineStrong} />
+        <circle r={0.035} fill={color.inkStrong} />
+      </g>
+    </svg>
   );
 };
 
@@ -256,10 +353,11 @@ export const Shatter: React.FC<{
   height: number;
   cols?: number;
   rows?: number;
+  speed?: number;
   children: React.ReactNode;
-}> = ({ at, width, height, cols = 10, rows = 4, children }) => {
+}> = ({ at, width, height, cols = 10, rows = 4, speed = 1, children }) => {
   const frame = useCurrentFrame();
-  const t = frame - at;
+  const t = (frame - at) * speed;
   if (t < 0) return <div style={{ width, height }}>{children}</div>;
   const shards = [];
   const w = width / cols;

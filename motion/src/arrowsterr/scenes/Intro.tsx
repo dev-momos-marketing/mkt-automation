@@ -1,10 +1,11 @@
-import { noise2D } from "@remotion/noise";
 import { AbsoluteFill, Easing, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { color, radius, type } from "../brand";
 import {
   AcmeChip,
   AiLogo,
   CometRoute,
+  Compass,
+  DataRain,
   DecodeText,
   ENGINES,
   FlapCounter,
@@ -13,6 +14,7 @@ import {
   Shatter,
   SonarRings,
   Stamp,
+  TearFlash,
   useShake,
 } from "../fx";
 import { CARD_LAND, cue, type Cue } from "../timeline";
@@ -21,11 +23,12 @@ import { Chevron, clamp, EASE, Rise, Tag, Ticks, useIn, useIsVertical } from "..
 export const PROMPT = "What's the best CRM for a startup?";
 
 // The AI chat bar the whole story starts in.
-export const ChatBar: React.FC<{ text: React.ReactNode; width: number; size?: number; caret?: boolean }> = ({
+export const ChatBar: React.FC<{ text: React.ReactNode; width: number; size?: number; caret?: boolean; logo?: string }> = ({
   text,
   width,
   size = 44,
   caret,
+  logo,
 }) => {
   const frame = useCurrentFrame();
   return (
@@ -41,6 +44,7 @@ export const ChatBar: React.FC<{ text: React.ReactNode; width: number; size?: nu
         borderRadius: radius.lg,
       }}
     >
+      {logo && <AiLogo logo={logo} size={size * 1.1} />}
       <span style={{ ...type.lead, fontSize: size, color: color.ink, flex: 1, minHeight: size * 1.4 }}>
         {text}
         {caret && <span style={{ display: "inline-block", width: 4, height: size * 1.1, marginLeft: 4, verticalAlign: "middle", background: color.signal, opacity: Math.floor(frame / 8) % 2 ? 0 : 1 }} />}
@@ -52,28 +56,24 @@ export const ChatBar: React.FC<{ text: React.ReactNode; width: number; size?: nu
   );
 };
 
-// 1. Cold open: a cursor, then the buyer's question decodes into the chat bar.
-export const Ask: React.FC = () => {
+// 1. "Your next customer just asked ChatGPT one question." The question decodes as it's read.
+export const Hook: React.FC = () => {
   const vertical = useIsVertical();
-  const typingAt = cue("ask-when") - 4;
   const frame = useCurrentFrame();
+  const typingAt = cue("hook-2") - 2;
+  const logoIn = useIn(cue("hook-1") + 30, 10);
   return (
     <Pan enter={false}>
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", flexDirection: "column", gap: 40 }}>
-        <Rise delay={cue("ask-quick")}>
-          <span style={{ ...type.label, fontSize: 30, color: color.ink2 }}>Quick question.</span>
-        </Rise>
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", flexDirection: "column", gap: 36 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 16, opacity: logoIn, translate: `0 ${(1 - logoIn) * 16}px` }}>
+          <AiLogo logo="chatgpt.svg" size={44} />
+          <span style={{ ...type.label, fontSize: 32, fontWeight: 600, color: color.inkStrong }}>ChatGPT</span>
+        </div>
         <ChatBar
           width={vertical ? 960 : 1240}
           size={vertical ? 40 : 46}
           caret
-          text={
-            frame < typingAt ? (
-              <span style={{ color: color.ink3 }}>Ask anything</span>
-            ) : (
-              <DecodeText text={PROMPT} start={typingAt} perChar={1.6} scramble={5} />
-            )
-          }
+          text={frame < typingAt ? <span style={{ color: color.ink3 }}>Ask anything</span> : <DecodeText text={PROMPT} start={typingAt} perChar={1.25} scramble={5} />}
         />
       </AbsoluteFill>
     </Pan>
@@ -137,24 +137,21 @@ const DealtCard: React.FC<{ rank: number; name: string; note: string; land: numb
   );
 };
 
-// 2. AI hands back a shortlist. The 4th slot is empty, and your ghost glitches in it.
+// 2. AI hands over its shortlist. "Guess who's missing? You." Then we zoom through the gap.
 export const Shortlist: React.FC = () => {
   const frame = useCurrentFrame();
   const vertical = useIsVertical();
-  const so = cue("list-so");
-  const you = cue("list-you");
-  const dive = interpolate(frame, [you, you + 30], [1, vertical ? 1.05 : 1.06], { ...clamp, easing: EASE });
-  const slot = useIn(so, 10);
+  const missing = cue("list-2");
+  const you = cue("list-3");
+  const slot = useIn(missing, 10);
   const w = vertical ? 900 : 400;
   const h = vertical ? 200 : 300;
 
   return (
-    <Pan>
-      <AbsoluteFill style={{ alignItems: "center", paddingTop: vertical ? 260 : 90, gap: vertical ? 40 : 56, scale: `${dive}`, transformOrigin: vertical ? "50% 82%" : "70% 60%" }}>
-        <ChatBar width={vertical ? 960 : 1240} size={vertical ? 34 : 36} text={PROMPT} />
-        <Rise delay={cue("list-ask")} style={{ alignSelf: vertical ? "center" : undefined }}>
-          <DecodeText text="Here's a shortlist for startups:" start={cue("list-ask")} perChar={0.8} style={{ ...type.lead, color: color.ink2 }} />
-        </Rise>
+    <Pan zoomOut={vertical ? { x: 50, y: 78 } : { x: 84, y: 62 }} dur={12}>
+      <AbsoluteFill style={{ alignItems: "center", paddingTop: vertical ? 260 : 90, gap: vertical ? 40 : 56 }}>
+        <ChatBar width={vertical ? 960 : 1240} size={vertical ? 34 : 36} text={PROMPT} logo="chatgpt.svg" />
+        <DecodeText text="Here's a shortlist for startups:" start={cue("list-1") + 6} perChar={0.7} style={{ ...type.lead, color: color.ink2 }} />
         <div style={{ display: "flex", flexDirection: vertical ? "column" : "row", gap: 28 }}>
           {COMPETITORS.map((c, i) => (
             <DealtCard key={c.name} rank={i + 1} name={c.name} note={c.note} land={CARD_LAND[i]} w={w} h={h} />
@@ -165,7 +162,7 @@ export const Shortlist: React.FC = () => {
               height: h,
               boxSizing: "border-box",
               borderRadius: radius.md,
-              border: `3px dashed ${color.lineStrong}`,
+              border: `3px dashed ${frame >= you ? color.neg : color.lineStrong}`,
               display: "flex",
               flexDirection: "column",
               alignItems: "center",
@@ -176,8 +173,8 @@ export const Shortlist: React.FC = () => {
             }}
           >
             <span style={{ ...type.num, fontSize: 28, color: color.ink3 }}>#4</span>
-            <Ticks delay={you + 10}>
-              <Glitch intensity={frame >= you ? 1 : 0.4} seed="slot">
+            <Ticks delay={you}>
+              <Glitch intensity={frame >= you ? 1 : 0.45} seed="slot">
                 <AcmeChip size={34} />
               </Glitch>
             </Ticks>
@@ -188,164 +185,153 @@ export const Shortlist: React.FC = () => {
   );
 };
 
-const ENGINE_CUES: Cue[] = ["eng-chatgpt", "eng-claude", "eng-gemini", "eng-perplexity", "eng-google"];
+const ALL: { cue: Cue; engine: number }[] = [
+  { cue: "all-claude", engine: 1 },
+  { cue: "all-gemini", engine: 2 },
+  { cue: "all-perplexity", engine: 3 },
+  { cue: "all-google", engine: 4 },
+];
 
-const useArc = () => {
-  const { width, height } = useVideoConfig();
-  const vertical = height > width;
-  const hub = { x: width / 2, y: height * (vertical ? 0.7 : 0.8) };
-  const nodes = ENGINES.map((_, i) => {
-    const a = Math.PI * (1.15 + (i / 4) * 0.7); // arc above the hub
-    const rx = width * (vertical ? 0.4 : 0.36);
-    const ry = height * (vertical ? 0.3 : 0.5);
-    return { x: hub.x + Math.cos(a) * rx, y: hub.y + Math.sin(a) * ry };
-  });
-  return { hub, nodes, vertical, width, height };
-};
-
-// The engine arc: 5 real AI engines on orbiting rings around the buyer's prompt.
-const EngineArc: React.FC<{ lit: (i: number) => boolean; children?: React.ReactNode; stamps?: boolean }> = ({
-  lit,
-  stamps,
-  children,
-}) => {
+// One engine's live answer: lights up when named, streams its shortlist, stamps you out.
+const EngineWindow: React.FC<{ engine: number; at: number; w: number; h: number }> = ({ engine, at, w, h }) => {
   const frame = useCurrentFrame();
-  const { hub, nodes, vertical, width, height } = useArc();
-  const size = vertical ? 150 : 170;
-  const sweepStart = cue("eng-check");
-  const sweep = -160 + ((frame - sweepStart) * 2.2) % 140;
-
+  const on = frame >= at;
+  const e = ENGINES[engine];
+  const pop = on ? interpolate(frame - at, [0, 4, 10], [1, 1.05, 1], clamp) : 1;
   return (
-    <AbsoluteFill>
-      {!stamps && frame >= sweepStart && (
-        <svg width={width} height={height} style={{ position: "absolute", inset: 0 }}>
-          <path
-            d={`M ${hub.x} ${hub.y} L ${hub.x + Math.cos(((sweep - 12) * Math.PI) / 180) * 2400} ${hub.y + Math.sin(((sweep - 12) * Math.PI) / 180) * 2400} L ${hub.x + Math.cos((sweep * Math.PI) / 180) * 2400} ${hub.y + Math.sin((sweep * Math.PI) / 180) * 2400} Z`}
-            fill={color.signal}
-            opacity={0.07}
-          />
-        </svg>
-      )}
-      {nodes.map((n, i) => {
-        const on = lit(i);
-        const bobX = noise2D(`bx${i}`, frame * 0.02, 0) * 10;
-        const bobY = noise2D(`by${i}`, frame * 0.02, 1) * 8;
-        const pop = on ? interpolate(frame - cue(ENGINE_CUES[i]), [0, 4, 10], [1, 1.14, 1.06], clamp) : 1;
+    <div
+      style={{
+        position: "relative",
+        width: w,
+        height: h,
+        boxSizing: "border-box",
+        background: color.bg,
+        border: `3px solid ${on ? color.signal : color.line}`,
+        borderRadius: radius.lg,
+        padding: 24,
+        display: "flex",
+        flexDirection: "column",
+        gap: 14,
+        opacity: on ? 1 : 0.4,
+        filter: on ? undefined : "grayscale(1)",
+        scale: `${pop}`,
+      }}
+    >
+      <div style={{ display: "flex", alignItems: "center", gap: 14, position: "relative" }}>
+        <span style={{ position: "relative", display: "flex" }}>
+          <AiLogo logo={e.logo} size={48} />
+          <SonarRings at={at} size={60} />
+        </span>
+        <span style={{ ...type.label, fontSize: 32, fontWeight: 600, color: color.inkStrong }}>{e.name}</span>
+      </div>
+      <span style={{ ...type.ui, fontSize: 24, color: color.ink3 }}>{PROMPT}</span>
+      {COMPETITORS.map((c, i) => {
+        const t = at + 4 + i * 3;
         return (
-          <div key={ENGINES[i].id} style={{ position: "absolute", left: n.x - size / 2 + bobX, top: n.y - size / 2 + bobY, width: size, height: size }}>
-            <svg width={size * 1.9} height={size * 1.9} viewBox="-1 -1 2 2" style={{ position: "absolute", left: -size * 0.45, top: -size * 0.45, overflow: "visible", rotate: `${frame * (i % 2 ? 0.8 : -0.6)}deg` }}>
-              <ellipse rx={0.95} ry={0.42} fill="none" stroke={on ? color.sky : color.lineStrong} strokeWidth={0.012} strokeDasharray="0.05 0.04" transform={`rotate(${i * 30 - 20})`} />
-            </svg>
-            <div
-              style={{
-                position: "absolute",
-                inset: 0,
-                borderRadius: "50%",
-                background: color.bg,
-                border: `3px solid ${on ? color.signal : color.line}`,
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                scale: `${pop}`,
-              }}
-            >
-              <AiLogo logo={ENGINES[i].logo} size={size * 0.48} style={{ opacity: on || stamps ? 1 : 0.45, filter: on || stamps ? undefined : "grayscale(1)" }} />
-            </div>
-            {!stamps && <SonarRings at={cue(ENGINE_CUES[i])} size={size} />}
-            <div style={{ position: "absolute", top: size + 14, left: -60, right: -60, textAlign: "center", ...type.label, fontSize: vertical ? 26 : 28, fontWeight: 600, color: on ? color.inkStrong : color.ink3 }}>
-              {ENGINES[i].name}
-            </div>
-            {stamps && <Stamp at={cue("inv-zero") + 4 + i * 4} label="Not recommended" style={{ left: -20, top: size * 0.32 }} />}
+          <div key={c.name} style={{ display: "flex", alignItems: "center", gap: 12, padding: "10px 14px", borderRadius: radius.sm, background: color.bg3, opacity: interpolate(frame, [t, t + 4], [0, 1], clamp), translate: `${interpolate(frame, [t, t + 6], [-24, 0], { ...clamp, easing: EASE })}px 0` }}>
+            <span style={{ ...type.num, fontSize: 24, color: color.ink2 }}>{i + 1}</span>
+            <span style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 28, color: color.ink }}>{c.name}</span>
           </div>
         );
       })}
-      {!stamps &&
-        ENGINE_CUES.map((c, i) => {
-          const n = nodes[i];
-          const midX = (hub.x + n.x) / 2;
-          return (
-            <CometRoute
-              key={c}
-              d={`M ${hub.x} ${hub.y - 60} Q ${midX} ${hub.y - 260} ${n.x} ${n.y + size * 0.55}`}
-              start={cue(c) - 8}
-              dur={9}
-              width={width}
-              height={height}
-              stroke={3}
-              headSize={26}
-            />
-          );
-        })}
-      {children}
-    </AbsoluteFill>
+      <div style={{ position: "relative", marginTop: 6, opacity: interpolate(frame, [at + 12, at + 14], [0, 1], clamp) }}>
+        <div style={{ padding: "10px 14px", borderRadius: radius.sm, border: `2px dashed ${color.lineStrong}`, display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ ...type.num, fontSize: 24, color: color.ink3 }}>4</span>
+          <span style={{ fontFamily: "Inter", fontWeight: 600, fontSize: 26, color: color.ink3 }}>acme.com</span>
+        </div>
+        <Stamp at={at + 12} label="Not recommended" style={{ right: -6, top: -14 }} />
+      </div>
+    </div>
   );
 };
 
-// 3. "Let's check": the prompt fires to 5 engines; each lights up as it's named.
-export const Engines: React.FC = () => {
-  const frame = useCurrentFrame();
-  const { hub, vertical } = useArc();
+// 3. "Same story on Claude. Gemini. Perplexity. Google." Four live answers, one by one.
+export const Everywhere: React.FC = () => {
+  const vertical = useIsVertical();
+  const shake = useShake(ALL.map((a) => cue(a.cue) + 12), 10, 8);
+  const w = vertical ? 470 : 410;
+  const h = vertical ? 560 : 600;
   return (
-    <Pan exit={false}>
-      <EngineArc lit={(i) => frame >= cue(ENGINE_CUES[i])}>
-        <div style={{ position: "absolute", left: hub.x, top: hub.y, translate: "-50% -50%" }}>
-          <ChatBar width={vertical ? 760 : 880} size={vertical ? 30 : 32} text={PROMPT} />
+    <Pan zoomIn exit={false}>
+      <DataRain />
+      <AbsoluteFill style={{ translate: shake, justifyContent: "center", alignItems: "center", flexDirection: "column", gap: vertical ? 40 : 48 }}>
+        <DecodeText text="Same question. Every engine." start={cue("all-0")} perChar={0.8} style={{ ...type.h2, color: color.inkStrong }} />
+        <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: 24, width: vertical ? w * 2 + 24 : undefined }}>
+          {ALL.map((a) => (
+            <EngineWindow key={a.cue} engine={a.engine} at={cue(a.cue)} w={w} h={h} />
+          ))}
         </div>
-      </EngineArc>
+      </AbsoluteFill>
     </Pan>
   );
 };
 
-// 4. "Zero recommendations": stamps slam down, your ghost shatters, 0% clacks in.
-export const Invisible: React.FC = () => {
-  const { hub, vertical } = useArc();
-  const hits = [0, 1, 2, 3, 4].map((i) => cue("inv-zero") + 4 + i * 4);
-  const shake = useShake([...hits, cue("inv-you")], 12);
-  const you = cue("inv-you");
+// 4. "Zero recommendations. Zero deals." A tear, a giant 0, a slow-motion shatter.
+export const Zero: React.FC = () => {
+  const frame = useCurrentFrame();
+  const vertical = useIsVertical();
+  const z1 = cue("zero-1");
+  const z2 = cue("zero-2");
+  const drain = interpolate(frame, [z2, z2 + 20], [0, 1], clamp);
+  const push = interpolate(frame, [z1, z2 + 40], [1, 1.08], clamp);
+  const shake = useShake([z1, z2], 18, 10);
   return (
     <Pan enter={false}>
-      <AbsoluteFill style={{ translate: shake }}>
-        <EngineArc lit={() => false} stamps>
-          <div style={{ position: "absolute", left: hub.x, top: hub.y, translate: "-50% -50%", display: "flex", flexDirection: vertical ? "column" : "row", alignItems: "center", gap: vertical ? 40 : 80 }}>
-            <Shatter at={you} width={vertical ? 400 : 420} height={vertical ? 92 : 96} cols={12} rows={4}>
-              <Glitch intensity={0.8} seed="inv">
-                <AcmeChip size={vertical ? 38 : 40} />
-              </Glitch>
-            </Shatter>
-            <Rise delay={you + 4} style={{ display: "flex", alignItems: "center", gap: 24 }}>
-              <span style={{ ...type.label, fontSize: 32, color: color.ink2 }}>Visibility</span>
-              <FlapCounter value={0} suffix="%" start={you + 4} size={72} />
-            </Rise>
-          </div>
-        </EngineArc>
+      <AbsoluteFill style={{ translate: shake, scale: `${push}`, filter: drain > 0 ? `grayscale(${drain}) contrast(${1 + drain * 0.15})` : undefined, justifyContent: "center", alignItems: "center", flexDirection: "column", gap: vertical ? 48 : 40 }}>
+        <Rise delay={z1} dur={6} style={{ display: "flex", alignItems: "center", gap: vertical ? 24 : 40, flexDirection: vertical ? "column" : "row" }}>
+          <FlapCounter value={0} start={z1 + 2} size={vertical ? 260 : 300} tile={color.bg3} />
+          <span style={{ ...type.h1, color: color.inkStrong, maxWidth: 600 }}>AI recommendations</span>
+        </Rise>
+        <div style={{ height: 120, display: "flex", alignItems: "center" }}>
+          <Shatter at={z2} width={vertical ? 400 : 420} height={vertical ? 92 : 96} cols={14} rows={5} speed={0.45}>
+            <Glitch intensity={0.6} seed="zero">
+              <AcmeChip size={vertical ? 38 : 40} />
+            </Glitch>
+          </Shatter>
+        </div>
+        <Rise delay={z2 + 4}>
+          <span style={{ ...type.h2, color: color.neg }}>0 deals</span>
+        </Rise>
       </AbsoluteFill>
+      <TearFlash at={z1 - 2} dur={12} />
     </Pan>
   );
 };
 
-// 5. "Good news." A beat of calm, then the navigator streaks in.
-export const Navigator: React.FC = () => {
+// 5. "Here's the fix. You need a navigator." The nav display boots; a comet launches from it.
+export const Fix: React.FC = () => {
   const { width, height } = useVideoConfig();
   const vertical = height > width;
-  const need = cue("nav-need");
   const frame = useCurrentFrame();
-  const textOut = interpolate(frame, [need + 8, need + 20], [1, 0], clamp);
-  const y = height * 0.5;
+  const f1 = cue("fix-1");
+  const f2 = cue("fix-2");
+  // The compass boots big in the centre, then flies to the HUD corner on "navigator".
+  const fly = interpolate(frame, [f2 + 6, f2 + 26], [0, 1], { ...clamp, easing: EASE });
+  const big = vertical ? 380 : 420;
+  const small = 120;
+  const hud = { x: width - (vertical ? 56 : 120) - small / 2, y: (vertical ? 200 : 64) + small / 2 };
+  const size = interpolate(fly, [0, 1], [big, small]);
+  const cx = interpolate(fly, [0, 1], [width / 2, hud.x]);
+  const cy = interpolate(fly, [0, 1], [height * 0.42, hud.y]);
+  const textOut = interpolate(frame, [f2 + 4, f2 + 14], [1, 0], clamp);
   return (
-    <Pan>
-      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", opacity: textOut }}>
-        <DecodeText text="Good news." start={cue("nav-good")} perChar={1.4} style={{ ...type.display, fontSize: vertical ? 120 : 150, color: color.inkStrong }} />
+    <Pan enter={false} exit={false}>
+      <div style={{ position: "absolute", left: cx - size / 2, top: cy - size / 2 }}>
+        <Compass size={size} boot={f1 - 8} heading={45} />
+      </div>
+      <AbsoluteFill style={{ justifyContent: "center", alignItems: "center", paddingTop: vertical ? 620 : 560, opacity: textOut }}>
+        <DecodeText text="Here's the fix." start={f1} perChar={1.2} style={{ ...type.display, fontSize: vertical ? 110 : 120, color: color.inkStrong }} />
       </AbsoluteFill>
       <CometRoute
-        d={`M -100 ${y + 260} C ${width * 0.3} ${y + 240}, ${width * 0.45} ${y - 40}, ${width * 0.62} ${y - 120} S ${width * 0.95} ${y - 360}, ${width + 200} ${y - 420}`}
-        start={need}
-        dur={34}
+        d={`M ${width / 2} ${height * 0.42} C ${width * 0.55} ${height * 0.75}, ${width * 0.2} ${height * 0.8}, ${width * 0.35} ${height * 0.55} S ${width * 0.8} ${height * 0.3}, ${width + 200} ${height * 0.2}`}
+        start={f2 + 2}
+        dur={30}
         width={width}
         height={height}
         stroke={8}
         headSize={70}
       />
-      <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: vertical ? 420 : 120, opacity: useIn(need + 10, 10) }}>
+      <AbsoluteFill style={{ justifyContent: "flex-end", alignItems: "center", paddingBottom: vertical ? 420 : 120, opacity: useIn(f2 + 8, 10) }}>
         <span style={{ ...type.h2, color: color.inkStrong }}>
           You need a <span style={{ color: color.signalText }}>navigator</span>
         </span>
