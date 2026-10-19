@@ -3,3 +3,4 @@ out/
 .venv-tts/
 .cache/
 public/audio/alfie-music.wav
+__pycache__/
