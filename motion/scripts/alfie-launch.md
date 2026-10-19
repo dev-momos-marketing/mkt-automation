@@ -29,7 +29,7 @@ Shared motion grammar keeps it one film: everything travels right-to-left, the c
 
 ## Before publishing
 
-- [ ] Logos in `public/brand/` (`momos-logo.png`, `alfie.png`).
+- [x] Logos in `public/brand/` (`momos-logo.png`, `alfie.png`).
 - [ ] Confirm CTA URL and button copy.
 
 ## Soundtrack

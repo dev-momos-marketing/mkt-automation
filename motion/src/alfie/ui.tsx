@@ -99,28 +99,71 @@ export const MaskWords: React.FC<{
   );
 };
 
+// Source art is 418x512; the dumpling (Alfie's head and body) is centered near (210, 175).
+const ALFIE_W = 418;
+const ALFIE_H = 512;
+
+// Head crop of the mascot on a brand-red disc (the cream art vanishes on beige).
 export const AlfieAvatar: React.FC<{ size: number; style?: React.CSSProperties }> = ({
   size,
   style,
-}) => (
-  <div
-    style={{
-      width: size,
-      height: size,
-      flexShrink: 0,
-      borderRadius: radius.full,
-      background: color.white,
-      boxShadow: shadow.s,
-      overflow: "hidden",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      ...style,
-    }}
-  >
-    <Img src={ALFIE_ICON} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-  </div>
-);
+}) => {
+  const w = size * 1.12;
+  const s = w / ALFIE_W;
+  return (
+    <div
+      style={{
+        position: "relative",
+        width: size,
+        height: size,
+        flexShrink: 0,
+        borderRadius: radius.full,
+        background: color.brand,
+        boxShadow: shadow.s,
+        overflow: "hidden",
+        ...style,
+      }}
+    >
+      <Img
+        src={ALFIE_ICON}
+        style={{
+          position: "absolute",
+          width: w,
+          height: ALFIE_H * s,
+          left: size / 2 - 210 * s,
+          top: size * 0.6 - 175 * s,
+          maxWidth: "none",
+        }}
+      />
+    </div>
+  );
+};
+
+// The full mascot with a gentle idle float.
+export const AlfieFull: React.FC<{
+  height: number;
+  delay?: number;
+  style?: React.CSSProperties;
+}> = ({ height, delay = 0, style }) => {
+  const frame = useCurrentFrame();
+  const pop = useEnter(delay, 11);
+  const t = Math.max(0, frame - delay);
+  return (
+    <Img
+      src={ALFIE_ICON}
+      style={{
+        height,
+        width: (height * ALFIE_W) / ALFIE_H,
+        opacity: Math.min(1, pop * 2),
+        scale: `${0.4 + pop * 0.6}`,
+        translate: `0 ${Math.sin(t / 14) * height * 0.015}px`,
+        rotate: `${Math.sin(t / 22) * 2.5}deg`,
+        transformOrigin: "50% 90%",
+        ...style,
+      }}
+    />
+  );
+};
 
 export const Bubble: React.FC<{
   from: "guest" | "alfie";

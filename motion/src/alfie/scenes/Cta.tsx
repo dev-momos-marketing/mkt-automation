@@ -1,6 +1,6 @@
 import { AbsoluteFill, Img, interpolate, Sequence, useCurrentFrame } from "remotion";
 import { color, radius, type } from "../../brand";
-import { clamp, MOMOS_LOGO, Rise, useEnter, useIsVertical } from "../ui";
+import { AlfieFull, clamp, MOMOS_LOGO, Rise, useEnter, useIsVertical } from "../ui";
 import { BeatWords, beatsLength, type Beat } from "./BeatWords";
 
 const WORDS: Beat[] = [
@@ -24,20 +24,54 @@ const EndCard: React.FC = () => {
   const frame = useCurrentFrame();
   const vertical = useIsVertical();
   const button = useEnter(12, 11);
+  const disc = useEnter(0, 14);
   // A sheen sweeps across the button once it lands.
   const sheen = interpolate(frame, [26, 46], [-30, 130], clamp);
 
+  const mascot = vertical ? 520 : 560;
   return (
     <AbsoluteFill
       style={{
         justifyContent: "center",
         alignItems: "center",
-        flexDirection: "column",
-        gap: vertical ? 72 : 64,
+        flexDirection: vertical ? "column" : "row",
+        gap: vertical ? 40 : 120,
       }}
     >
+      <div
+        style={{
+          position: "relative",
+          width: mascot * 0.9,
+          height: mascot,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+        }}
+      >
+        {/* Soft brand disc behind Alfie: the cream art needs contrast on beige. */}
+        <div
+          style={{
+            position: "absolute",
+            width: mascot * 0.82,
+            height: mascot * 0.82,
+            top: mascot * 0.02,
+            borderRadius: radius.full,
+            background: color.brandBg,
+            scale: `${disc}`,
+          }}
+        />
+        <AlfieFull height={mascot * 0.92} delay={4} style={{ position: "relative" }} />
+      </div>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: vertical ? "center" : "flex-start",
+          gap: vertical ? 48 : 56,
+        }}
+      >
       <Rise>
-        <Img src={MOMOS_LOGO} style={{ height: vertical ? 120 : 110, objectFit: "contain" }} />
+        <Img src={MOMOS_LOGO} style={{ height: vertical ? 104 : 120, objectFit: "contain" }} />
       </Rise>
       <div
         style={{
@@ -64,6 +98,7 @@ const EndCard: React.FC = () => {
       <Rise delay={20}>
         <div style={{ ...type.h3, fontWeight: 500, color: color.neutral700 }}>momos.com/alfie</div>
       </Rise>
+      </div>
     </AbsoluteFill>
   );
 };

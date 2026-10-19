@@ -1,7 +1,7 @@
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { color, type } from "../../brand";
 import {
-  AlfieAvatar,
+  AlfieFull,
   Grain,
   LightLeak,
   LiquidGlow,
@@ -18,7 +18,8 @@ export const Reveal: React.FC = () => {
   const { durationInFrames } = useVideoConfig();
   const vertical = useIsVertical();
   const icon = useEnter(6, 16);
-  const size = vertical ? 300 : 280;
+  const size = vertical ? 400 : 330; // ring diameter around the mascot
+  const mascot = vertical ? 560 : 440;
 
   return (
     <AbsoluteFill style={{ background: color.ink, overflow: "hidden" }}>
@@ -34,7 +35,15 @@ export const Reveal: React.FC = () => {
             gap: 48,
           }}
         >
-          <div style={{ position: "relative", width: size, height: size }}>
+          <div
+            style={{
+              position: "relative",
+              width: size,
+              height: mascot * 0.9,
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
             {[0, 1, 2].map((i) => {
               // Rings pulse outward from the icon, one per beat.
               const t = (frame - 20 - i * 15 + 300) % 45;
@@ -44,7 +53,9 @@ export const Reveal: React.FC = () => {
                   key={i}
                   style={{
                     position: "absolute",
-                    inset: 0,
+                    width: size,
+                    height: size,
+                    top: mascot * 0.04,
                     borderRadius: "50%",
                     border: `3px solid ${color.brandFg}`,
                     opacity: on ? interpolate(t, [0, 45], [0.7, 0]) : 0,
@@ -53,12 +64,13 @@ export const Reveal: React.FC = () => {
                 />
               );
             })}
-            <AlfieAvatar
-              size={size}
+            <AlfieFull
+              height={mascot}
+              delay={6}
               style={{
-                scale: `${0.5 + icon * 0.5}`,
-                opacity: icon,
-                boxShadow: `0 0 ${80 * icon}px ${color.brandFg}88`,
+                position: "absolute",
+                top: 0,
+                filter: `drop-shadow(0 0 ${60 * icon}px ${color.brandFg}aa)`,
               }}
             />
           </div>
