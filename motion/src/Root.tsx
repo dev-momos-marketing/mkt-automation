@@ -18,7 +18,7 @@ export const RemotionRoot: React.FC = () => {
         width={1080}
         height={1920}
         fps={30}
-        durationInFrames={420}
+        durationInFrames={390}
         defaultProps={{ showSafeZone: false }}
       />
       <Folder name="ReviewReply-scenes">
@@ -37,7 +37,7 @@ export const RemotionRoot: React.FC = () => {
           width={1080}
           height={1920}
           fps={30}
-          durationInFrames={120}
+          durationInFrames={90}
           defaultProps={{ style: { backgroundColor: color.cream } }}
         />
         <Composition
@@ -76,7 +76,7 @@ export const RemotionRoot: React.FC = () => {
           durationInFrames={150}
           defaultProps={{
             label: "momos drafted a reply",
-            reply: "So sorry, Alex.\nFriday got away from us.\nDessert's on the house.",
+            reply: "So sorry, Alex.\nFriday got away from us.\nDessert’s on the house.",
             typeAt: 10,
             sendAt: 110,
             style: { position: "absolute", left: 180, top: 700 },

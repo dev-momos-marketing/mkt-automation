@@ -90,7 +90,7 @@ const ReviewSceneInner: React.FC = () => {
         name="Reply composer"
         from={3 * fps + 6}
         label="momos drafted a reply"
-        reply={"So sorry, Alex.\nFriday got away from us.\nDessert's on the house."}
+        reply={"So sorry, Alex.\nFriday got away from us.\nDessert’s on the house."}
         typeAt={0.8 * fps}
         sendAt={7 * fps - (3 * fps + 6)}
         style={{

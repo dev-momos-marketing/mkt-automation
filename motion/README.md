@@ -25,7 +25,7 @@ shot list → build → review loop. Example:
 | `src/brand/theme.ts` | colours, type, easing, durations, beat grid, safe zones: the only place values live |
 | `src/brand/fonts.ts` | Poppins, loaded locally from `public/fonts/` |
 | `src/kit/` | reusable pieces: `MaskLine`, `ReviewCard`, `ReplyComposer`, `InboxRow`, `Stars`, `SafeZoneOverlay` |
-| `src/videos/review-reply/` | sample 15s 9:16 ad |
+| `src/videos/review-reply/` | sample 13s 9:16 ad (rendered: `samples/review-reply-9x16.mp4`) |
 | `videos/<slug>/brief.md` | the brief for each video |
 | `brand/brand.md` | brand values for video, open items, claims table |
 | `.claude/skills/momos-motion/` | house taste skill: tokens, choreography, specs, formats, gotchas |

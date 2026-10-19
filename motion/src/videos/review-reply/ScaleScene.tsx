@@ -18,8 +18,8 @@ const headline: React.CSSProperties = {
 const ROW_TOP = 590;
 const ROW_STEP = 177 + 16;
 
-// Shot 3 (4s, 8 beats): hard cut to a wider shot. The inbox is already landing on
-// frame 0 and every row gets answered on the half-beats under one headline.
+// Shot 3 (3s, 6 beats): hard cut to a wider shot. The headline is mid-reveal on frame 0,
+// rows land 60ms apart, and every row gets answered on the half-beats.
 const ScaleSceneInner: React.FC = () => {
   const frame = useCurrentFrame();
   const { fps } = useVideoConfig();
@@ -45,7 +45,7 @@ const ScaleSceneInner: React.FC = () => {
         position: "absolute",
         inset: 0,
         transformOrigin: "504px 748px",
-        scale: interpolate(frame, [0, 4 * fps], [1, 1.03]),
+        scale: interpolate(frame, [0, 3 * fps], [1, 1.015]),
       }}
     >
       <div style={{ position: "absolute", left: column916.left, top: column916.top }}>
@@ -61,21 +61,21 @@ const ScaleSceneInner: React.FC = () => {
         rating={5}
         snippet="Best laksa in town."
         repliedAt={0.75 * fps}
-        style={{ ...rowEnter(-8), top: ROW_TOP }}
+        style={{ ...rowEnter(0), top: ROW_TOP }}
       />
       <InboxRow
         name="Row 2"
         rating={4}
         snippet="Great brunch, slow coffee."
         repliedAt={1 * fps}
-        style={{ ...rowEnter(-6), top: ROW_TOP + ROW_STEP }}
+        style={{ ...rowEnter(2), top: ROW_TOP + ROW_STEP }}
       />
       <InboxRow
         name="Row 3"
         rating={2}
         snippet="Our booking got lost."
         repliedAt={1.25 * fps}
-        style={{ ...rowEnter(-4), top: ROW_TOP + ROW_STEP * 2 }}
+        style={{ ...rowEnter(4), top: ROW_TOP + ROW_STEP * 2 }}
       />
     </div>
   );

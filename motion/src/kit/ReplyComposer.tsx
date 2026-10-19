@@ -40,10 +40,10 @@ const ReplyComposerInner: React.FC<ReplyComposerProps> = ({ label, reply, typeAt
   const caretOn =
     frame >= typeAt - 4 && frame < sendAt && (!typingDone || Math.floor((frame - doneAt) / 15) % 2 === 0);
   // The button wakes up when the reply is ready, so it never outshines an empty box.
-  const ready = interpolate(frame, [doneAt, doneAt + dur.micro * fps], [0, 1], {
+  // It snaps (2 frames) rather than crossfading, which would pass through coral.
+  const ready = interpolate(frame, [doneAt, doneAt + 2], [0, 1], {
     extrapolateLeft: "clamp",
     extrapolateRight: "clamp",
-    easing: ease.settle,
   });
 
   return (

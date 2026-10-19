@@ -17,7 +17,7 @@ const EndCardSceneInner: React.FC = () => {
         position: "absolute",
         inset: 0,
         transformOrigin: "50% 45%",
-        scale: interpolate(frame, [0, 2 * fps], [1, 1.06]),
+        scale: interpolate(frame, [0, 2 * fps], [1, 1.025]),
         fontFamily,
       }}
     >
