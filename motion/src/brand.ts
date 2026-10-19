@@ -1,11 +1,19 @@
 // Momos brand tokens (Brand Guidelines v4 / Website 3.0), adapted for video.
 // Web pixel sizes are scaled up for video in `type` below; colors are verbatim.
-import { loadFont } from "@remotion/google-fonts/Poppins";
+import { loadFont } from "@remotion/fonts";
+import { staticFile } from "remotion";
 
-export const { fontFamily } = loadFont("normal", {
-  weights: ["400", "500", "700"],
-  subsets: ["latin"],
-});
+// Poppins is bundled in public/fonts (OFL) so renders work offline and never
+// silently fall back to a system font.
+export const fontFamily = "Poppins";
+
+for (const weight of ["400", "500", "700"]) {
+  loadFont({
+    family: fontFamily,
+    url: staticFile(`fonts/poppins-latin-${weight}-normal.woff2`),
+    weight,
+  });
+}
 
 export const color = {
   brand: "#D73E33", // primary CTA, headlines

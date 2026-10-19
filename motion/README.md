@@ -16,6 +16,8 @@ npm run still        # single frame -> out/thumbnail.png
 ## What's here
 
 - `src/Root.tsx`: registers the compositions (id, size, fps, length, default props).
+- `src/brand.ts`: Momos brand tokens for video (colors, Poppins, type scale). Import from here; never hard-code.
+- `src/alfie/`: Alfie launch video (16:9 and 9:16). Script in `scripts/alfie-launch.md`. Render with `npm run render:alfie`.
 - `src/MomosPromo.tsx`: an 8-second promo made of four `<Sequence>` scenes (logo, headline, features, CTA).
   The props (headline, features, CTA, colors) are defined with a zod schema, so you can edit them in the Studio sidebar.
 
