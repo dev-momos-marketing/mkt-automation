@@ -31,7 +31,7 @@ Shared motion grammar keeps it one film: everything travels right-to-left, the c
 
 - [ ] Logos in `public/brand/` (`momos-logo.png`, `alfie.png`).
 - [ ] Confirm CTA URL and button copy.
-- [ ] Optional: a 120 bpm music bed and voiceover via `<Audio>`.
+- [ ] Optional: a 120 bpm music bed under the voiceover (duck it to about -20 dB while lines play).
 
 ## Voiceover
 
