@@ -15,7 +15,17 @@ Every new video gets its own deliberate style. Don't default to "gradient backgr
 4. Build, then render 3–4 stills (`npx remotion still <id> out/f.png --frame=N`) and critique them before rendering the full video.
 5. Append one line to `STYLE_LOG.md`: date, composition id, direction, what worked / what didn't.
 
-When Momos brand assets are available (logo, colors, fonts), they override palette and type, but the layout and motion direction should still vary.
+## Momos brand (always applies)
+
+Import everything from `src/brand.ts`: never hard-code hex values or font names. Brand overrides each direction's palette and type; layout and motion still vary per direction.
+
+- **Font:** Poppins only (700 headlines, 500 subheads/labels, 400 body). No 300 weight: thin strokes shimmer after compression.
+- **Color ratio:** ~60% beige/white/cream base, ~30% ink `#14181D`, ≤10% brand red `#D73E33`. Red marks the one thing that matters in a scene (key word, CTA, the number that moved), never decoration or full-frame fills.
+- **Accents:** pick at most one accent family (purple / olive / ochre / blue) per video, used for data or categories. Light shades for fills, dark shades for text or strokes.
+- **Contrast:** `brandFg #FF787A` is for dark backgrounds only (2.4:1 on beige). Red on beige is 4.3:1, so use it for large text (≥56px) only. Ink on beige is 16.8:1, so use it for all body text.
+- **Small red text** blurs under H.264 chroma subsampling. Keep red text ≥56px and bold, or put white text on a red block (4.5:1).
+- **Type scale:** use `type.*` from brand.ts. 32px is the floor at 1080p.
+- **Beige + red is close to a generic "AI cream + terracotta" look** (see frontend-design). Make it distinctive through motion, real product UI, real restaurant/guest content and layout, not by changing brand colors.
 
 ## Directions
 
