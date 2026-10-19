@@ -39,3 +39,13 @@ npx remotion render MomosPromo out/momos-promo.mp4 --browser-executable=/path/to
 
 Remotion is free for individuals and companies with up to 3 employees; larger companies need a
 [company license](https://www.remotion.pro/license). Check this before using it in production.
+
+## Agent skills
+
+Claude Code picks these up automatically when working in `motion/`:
+
+- `remotion-*` (from [remotion-dev/skills](https://www.remotion.dev/docs/ai/skills)): correct Remotion APIs, captions, audio, transitions, rendering. Update with `npx remotion skills update`.
+- `frontend-design` (from [anthropics/skills](https://github.com/anthropics/skills)): design taste, avoiding templated "AI" looks.
+- `motion-style-directions` (ours): a menu of distinct video styles plus a `STYLE_LOG.md` so each new video uses a different direction.
+
+Add more with `npx skills add <owner/repo> --skill <name> -a claude-code`, and read the skill before committing it, because skills run with full agent permissions.
