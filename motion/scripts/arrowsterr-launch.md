@@ -1,45 +1,64 @@
-# Arrowsterr: "Get on the shortlist"
+# Arrowsterr v2: "You need a navigator"
 
-**Format:** ~44s, 16:9 and 9:16, 30fps. Works muted.
-**One idea:** Buyers now ask AI for software recommendations. Arrowsterr takes you from invisibility to visibility, end to end.
-**Arc:** the film opens and closes on the same AI shortlist. First you're missing from it, at the end you're on it. A **visibility meter** runs through the middle and climbs as each stage of the platform does its job.
-**Sources:** product claims, stage names and sample data (Tablely, Revora, 6 engines, 14 gaps, 1,900/mo, $8.4k/mo, Google 92 / AI 88, Free forever plan) come from the arrowsterr.com homepage (read 2026-10-19). The 0% → 60% climb and the final shortlist are illustrative.
+**Format:** ~52s, 16:9 and 9:16, 30fps. Works muted (on-screen text carries every beat).
+**Tone:** a friend talking you through it. Short lines, questions, a little wit. Brand voice rules hold: "you", digits, no em dashes, no emoji, no "not X, Y", no lists of three.
+**Concept:** Arrowsterr is the Navigator (arrow for direction, star for arrival). The film is **one continuous shot** across a giant flight grid. A Signal Blue **route line** with a glowing arrowhead flies from station to station, and the camera rides with it. Each station is one step from invisible to visible. The route ends where the star is: your name on the AI shortlist.
+**Sources:** product claims, step names and sample data come from the arrowsterr.com homepage. The 0% to 60% climb, the engine scores and the final shortlist are illustrative.
 
-## The visual metaphor
+## The through-line
 
-Your brand, **tablely.com**, starts as a ghost: dashed outline, `ink-4` grey, barely there. Each stage fills it in a little more. By the payoff it is solid `ink-strong` in the AI's answer, with the film's one gold Spark.
+- **The route:** a 6px `signal` line that draws itself between stations, with a comet-trail arrowhead (motion-blurred copies) and a soft blue wake. It never points down or left.
+- **The camera:** one virtual camera over a 3x-size world. It glides, banks and dives between stations instead of cutting.
+- **Your brand chip:** `tablely.com` starts as a dashed ghost, gets "decoded" as the platform works, and arrives solid on the shortlist.
+- **The meter:** a rolling odometer (digits spin like a flight board) that climbs from 0% to 60% along the way.
 
 ## Script
 
-| # | Time | Beat | On screen | Voiceover |
-|---|------|------|-----------|-----------|
-| 1 | 0:00–0:04 | **The question** | An AI chat on the flight grid. A buyer types: *"What's the best review software for small cafes?"* The answer streams in as a shortlist: **1. Revora · 2. Guestly · 3. Plateful**. | "Buyers now ask AI for software recommendations." |
-| 2 | 0:04–0:08 | **The shortlist** | Camera pushes in on the list. A fourth slot appears, empty, dashed. Target ticks snap around it. Inside, a ghost of **tablely.com** in `ink-4`. | "Are you part of the shortlist?" |
-| 3 | 0:08–0:12 | **Invisible** | The same question fans out to 6 engines in parallel lanes: ChatGPT, Claude, Gemini, Perplexity, AI Overviews, AI Mode. Every lane returns `tablely.com · not named`. The meter on the right reads **Visibility 0%**, in Geist Mono. | "Right now, AI names your rivals and skips you." |
-| 4 | 0:12–0:17 | **Meet Arrowsterr** | Hard cut to clean `bg`. The logo builds: the Climb chevrons rise, the sparkle lands on top. Headline: **The end-to-end agentic *SEO/GEO platform*** (payoff in `signal-text`). A 4-step rail appears below: See, Find, Plan, Create. | "Meet Arrowsterr. The end-to-end agentic SEO and GEO platform that brings you from invisibility to visibility." |
-| 5 | 0:17–0:22 | **01 See** | AI Visibility view. Six engines, scores by topic, and **14 gaps found**: prompts where Revora is cited and you are missing. The ghost brand gains its outline. Meter: `0% → 18%`. | "See how often 6 AI engines name you, and who they name instead." |
-| 6 | 0:22–0:26 | **02 Find** | One gap row lifts and compiles into keywords: `review software for cafes · 1,900/mo · KD 28 · Buy`, then 2 more rows. Meter: `→ 34%`. | "Turn every gap into keywords with real search volume." |
-| 7 | 0:26–0:31 | **03 Plan** | The Revenue-driven Topic Bank sorts itself by value ($2.1k, $1.4k, $1.2k) and drops into a Mon to Fri plan. **$8.4k/mo** traffic value locks in. Meter: `→ 47%`. | "An AI agent ranks topics by revenue and plans your month." |
-| 8 | 0:31–0:36 | **04 Create** | The Agentic Writer streams *"The best review software for cafes in 2026"*. Gauges climb to **Google 92** and **AI 88**. **Export draft**, then `live`. Meter: `→ 60% ▲ +60 pts`. The ghost brand is now solid. | "The Agentic Writer drafts pages built to rank on Google and get cited by AI." |
-| 9 | 0:36–0:40 | **Visible** | Back to the opening chat. Same question, new answer. **tablely.com** slides into the shortlist at #2, solid `ink-strong`, with the film's one gold Spark: **New citation**. | "Ask again. Now you're on the shortlist." |
-| 10 | 0:40–0:44 | **Close** | Night band, Climb watermark. **Win organic search everywhere, *all at once*** (payoff in `#8FB0FF`). Notched **Start free trial**, ghost **Book a demo**. Free forever plan. No card needed. White logo. | "Arrowsterr. Start free today." |
+| # | Time | Voiceover | Picture | WOW moment |
+|---|------|-----------|---------|------------|
+| 1 | 0:00 | "Quick question." | Black-to-grid fade. A single blinking cursor in the middle of an empty flight grid. | Cursor blink is the only thing moving: a calm, techie cold open. |
+| 2 | 0:02 | "When your buyers need new software, what do they do?" | The cursor types the buyer's prompt into an AI chat bar: *"best review software for small cafes"*. | Each word **decodes** in from scrambled mono glyphs, like a terminal. |
+| 3 | 0:06 | "They ask AI. And AI hands them a shortlist." | The answer streams in. Three brand cards (Revora, Guestly, Plateful) **deal** onto the table one by one, like cards with a snap. | Card-deal motion with a sharp snap on each landing, synced to the beat. |
+| 4 | 0:10 | "So. Are you on it?" | Camera pushes in on an empty fourth slot. A dashed ghost of `tablely.com` flickers inside. Target ticks lock on. | Ghost **flicker**: the chip glitches in and out like a dropped signal. |
+| 5 | 0:13 | "Let's check. ChatGPT. Claude. Gemini. Perplexity. Google's AI." | Camera pulls back fast. The prompt fires out as 6 beams to 6 engine nodes arranged in an arc. Each node lights up as it's named. | **Radar sweep**: a scanning arc passes over the nodes, each one pinging with sonar rings. |
+| 6 | 0:18 | "Not a single mention. You're invisible." | Every node returns a red "Not named". The ghost chip dissolves into drifting dots. Odometer rolls to **0%**. | **Pixel dissolve** of the chip into the dot grid itself. |
+| 7 | 0:21 | "Good news. You just need a navigator." | Silence for a beat. A Signal Blue arrowhead appears at the left edge and the route line starts to draw. | The route's first stroke: the moment the film's "engine" switches on. |
+| 8 | 0:24 | "Meet Arrowsterr." | The route sweeps up into the logo: two chevrons climb out of the line and the sparkle lands on top. | **Logo build from the route itself**, then a single clean shockwave ring. |
+| 9 | 0:26 | "The end-to-end agentic SEO and GEO platform that takes you from invisible to visible." | Headline types in with the payoff in blue. The route races ahead and drops 4 waypoint pins: See, Find, Plan, Create. | Waypoints **pin-drop** onto the grid; the camera banks to follow the route. |
+| 10 | 0:32 | "First, it shows where AI names your rivals instead of you." | **Station 01 See.** The engine arc returns as live bars. Gap rows peel off the answers. **14 gaps found**. | Gap rows **peel up** like stickers and hang in the air. |
+| 11 | 0:36 | "Then it turns every gap into keywords people really search." | **Station 02 Find.** One gap row is pulled into a funnel and comes out the other side as keyword rows with volumes. | **Funnel morph**: the row compresses into a stream of particles that re-form as a table. |
+| 12 | 0:40 | "Its AI agent ranks them by revenue and plans your month." | **Station 03 Plan.** Topic cards shuffle themselves into value order, then fly into a Mon to Fri calendar. **$8.4k/mo**. | **Auto-sort shuffle** with cards swapping places in mid-air; odometer rolls the dollar total. |
+| 13 | 0:44 | "And the Agentic Writer drafts the pages. Built for Google. Built for AI." | **Station 04 Create.** A page writes itself line by line. Scores fill to **92** and **88**. | **Page fold**: the finished page folds itself into a paper arrow. |
+| 14 | 0:48 | "Ship it." | The paper arrow launches along the route, back toward the AI chat. | **Launch**: a whip-pan with motion blur as the camera chases the arrow. |
+| 15 | 0:49 | "Next morning, ask again. There you are." | The arrow hits the fourth slot. `tablely.com` locks in, solid, at #2. The odometer lands on **60%**. | **The Spark**: one gold four-point star bursts with light rays and a warm light leak. The only gold in the film. |
+| 16 | 0:52 | "Arrowsterr. Get named in AI answers. Start free today." | The camera rises off the grid into the Night panel. The Climb watermark rises behind the headline and the notched **Start free trial** button. | **Chevron wipe**: a giant Climb mark sweeps up the frame to reveal the Night close. |
 
-## Why it works
+## The WOW effects and how they're built
 
-- **The question is the hook.** Every buyer has asked AI for a tool recommendation. Seeing a shortlist without your name lands in 4 seconds.
-- **One question, asked twice.** Opening and closing on the same prompt makes the before-and-after impossible to miss.
-- **The meter carries the promise.** "Invisibility to visibility" is shown as a number climbing stage by stage, so the end-to-end claim is proven on screen.
-- **The 4 stages are the homepage's own "How it works"**: view your AI visibility, research keywords from AI gaps, build a Revenue-driven Topic Bank, produce content Google and AI love.
-- **Techie in the texture:** parallel engine lanes, mono metrics, keyword rows that compile, a streaming writer and live status flips. The voice stays plain.
+All of these are DOM and SVG effects, so they render anywhere, including this cloud sandbox.
 
-## Brand compliance
+| Effect | Build |
+|---|---|
+| Continuous camera | One "world" layer 3x the frame; camera = `translate` + `scale` + slight `rotate` keyframed per voice cue with the brand ease. |
+| Route line + comet arrowhead | `@remotion/paths` `evolvePath` for the line; arrowhead placed with `getPointAtLength` + `getTangentAtLength`; 6 trailing copies with falling opacity as the motion blur. |
+| Decode text | Characters cycle through random mono glyphs (seeded `random()`) before settling, left to right. |
+| Card deal | Cards fly in from off-frame with rotation that settles to 0 on a hard stop (no bounce), plus a 2-frame scale snap. |
+| Radar sweep + sonar pings | A rotating SVG wedge masked over the engine arc; rings expand from each node as the sweep passes. |
+| Glitch flicker / pixel dissolve | Chip opacity driven by seeded noise; dissolve splits the chip into a grid of squares that drift and fade into the dot grid. |
+| Funnel morph | Row text splits into dots that travel along converging bezier paths, then re-form as the table. |
+| Auto-sort shuffle | Cards animate between list positions with a lift (`translateZ` + shadow-free scale) while they cross. |
+| Page fold into paper arrow | Page split into triangles with CSS 3D `rotateX/rotateY`, collapsing into a chevron shape. |
+| Odometer | Each digit is a vertical strip of 0 to 9 sliding to its value, mono and tabular. |
+| Spark burst | Gold star scales in with 8 thin rays; a WebGL `lightLeak` on a `<Solid>` (verified to render here), hue-shifted to gold, screen-blended. |
+| Chevron wipe | A custom `TransitionSeries` presentation: the Climb path as a growing mask from bottom to top. |
 
-- Greys ~85% on the flight grid, `signal` ~10%, `night` only for the close, gold Spark once (scene 9).
-- Funnel Display headlines with one payoff phrase each; every number in Geist Mono with an `aw-delta`.
-- Motion moves up or right: 8px rise and fade, `cubic-bezier(.22,1,.36,1)`, no bounce or spin.
-- Copy: digits, "you", no em dashes, no emoji, no lists of three in the voiceover.
+## Brand notes
+
+- Colour, type and copy rules hold everywhere: greys and the flight grid carry the frame, Signal Blue for the route and payoff words, gold only at the Spark, Night only at the close, every number in Geist Mono.
+- **One deliberate bend:** the website's motion rules (no spins, no parallax) are relaxed for the film's camera moves, radar sweep and page fold. Everything still travels up or right, and nothing bounces.
 
 ## Sound
 
-- Calm, precise electronic at about 124 bpm. Sparse and tense in scenes 1–3, a clean lift on "Meet Arrowsterr", building through the 4 stages, a bright chime on the Spark, resolving on the close.
-- Voice: confident, calm, mid-tempo. "SEO/GEO" is read as "SEO and GEO".
+- Calm electronic at 120 bpm with a story arc: near silence and a ticking clock for the cold open, card-snap clicks on the deal, sonar pings on the radar, a deep pulse under "You're invisible", then a clean drop on "Meet Arrowsterr".
+- Through the stations: a driving groove with a pluck arpeggio. A whoosh on the launch, one bright chime on the Spark, and a resolve on the close.
+- Voice: warm, conversational, smiling on "Good news" and "There you are".
