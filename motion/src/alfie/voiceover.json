@@ -1,0 +1,62 @@
+{
+  "voice": "af_heart",
+  "fps": 30,
+  "end": 1020,
+  "lines": [
+    {
+      "id": "01-hook",
+      "at": 4,
+      "text": "Nine forty-seven. No fries. Again."
+    },
+    {
+      "id": "02-cascade",
+      "at": 100,
+      "text": "Every night, it piles up. Reviews. Surveys. Chats. And nobody's answering."
+    },
+    {
+      "id": "03-reveal",
+      "at": 252,
+      "text": "Meet Alfie. The Experience Agent from Momos."
+    },
+    {
+      "id": "04-proof",
+      "at": 378,
+      "text": "While it types, Alfie checks the order, applies your recovery policy, and adds the points."
+    },
+    {
+      "id": "05-proof-end",
+      "at": 600,
+      "text": "Before the guest has even closed the app."
+    },
+    {
+      "id": "06-reach",
+      "at": 656,
+      "text": "On every channel your guests use."
+    },
+    {
+      "id": "07-handoff",
+      "at": 740,
+      "text": "And when your team steps in, Alfie hands over the full story."
+    },
+    {
+      "id": "08-resolve",
+      "at": 841,
+      "text": "Resolve."
+    },
+    {
+      "id": "09-recover",
+      "at": 871,
+      "text": "Recover."
+    },
+    {
+      "id": "10-bring",
+      "at": 901,
+      "text": "Bring them back."
+    },
+    {
+      "id": "11-cta",
+      "at": 936,
+      "text": "Book a demo at momos dot com slash Alfie."
+    }
+  ]
+}

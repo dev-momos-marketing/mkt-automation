@@ -4,13 +4,13 @@ import { clamp, MOMOS_LOGO, Rise, useEnter, useIsVertical } from "../ui";
 import { BeatWords, beatsLength, type Beat } from "./BeatWords";
 
 const WORDS: Beat[] = [
-  { text: "Resolve." },
-  { text: "Recover.", dark: true },
+  { text: "Resolve.", beats: 2 },
+  { text: "Recover.", dark: true, beats: 2 },
   { text: "Bring them back.", beats: 2 },
 ];
 const END = beatsLength(WORDS);
 
-export const CTA_LENGTH = END + 75;
+export const CTA_LENGTH = END + 90;
 
 // 7. CTA: the product's verbs on the beat, then the end card.
 export const Cta: React.FC = () => (

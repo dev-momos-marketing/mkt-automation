@@ -11,6 +11,7 @@ import { Hook, HOOK_LENGTH } from "./scenes/Hook";
 import { Proof, PROOF_LENGTH } from "./scenes/Proof";
 import { Reach, REACH_LENGTH } from "./scenes/Reach";
 import { Reveal, REVEAL_LENGTH } from "./scenes/Reveal";
+import { Voiceover } from "./Voiceover";
 
 // Script: scripts/alfie-launch.md. Frames at 30fps; one beat = 15 frames.
 const T = 15;
@@ -57,6 +58,7 @@ export const AlfieLaunch: React.FC = () => {
           <Cta />
         </TransitionSeries.Sequence>
       </TransitionSeries>
+      <Voiceover />
     </AbsoluteFill>
   );
 };

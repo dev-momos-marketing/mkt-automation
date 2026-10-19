@@ -17,6 +17,7 @@
     "@remotion/effects": "4.0.536",
     "@remotion/fonts": "4.0.536",
     "@remotion/layout-utils": "4.0.536",
+    "@remotion/media": "4.0.536",
     "@remotion/motion-blur": "4.0.536",
     "@remotion/noise": "4.0.536",
     "@remotion/paths": "4.0.536",
