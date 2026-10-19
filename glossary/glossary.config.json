@@ -1,0 +1,15 @@
+{
+  "collection": "Glossary",
+  "categories": ["Metrics", "Reviews & Reputation", "Guest Feedback", "AI & Analytics", "Operations"],
+  "fields": {
+    "term": { "name": "Term", "type": "string" },
+    "definition": { "name": "Definition", "type": "string" },
+    "body": { "name": "Body", "type": "formattedText" },
+    "faq": { "name": "FAQ", "type": "formattedText" },
+    "category": { "name": "Category", "type": "enum" },
+    "related": { "name": "Related Terms", "type": "multiCollectionReference" },
+    "seoTitle": { "name": "SEO Title", "type": "string" },
+    "seoDescription": { "name": "SEO Description", "type": "string" },
+    "updated": { "name": "Updated", "type": "date" }
+  }
+}
