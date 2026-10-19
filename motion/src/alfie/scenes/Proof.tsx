@@ -10,15 +10,17 @@ import {
   TypingDots,
   useIsVertical,
 } from "../ui";
+import { sceneLength, TIMELINE } from "../timeline";
 
-export const PROOF_LENGTH = 330;
-
-const EXPLODE = [48, 84] as const;
-const CARD_AT = [60, 76, 92];
-const COLLAPSE_AT = [196, 204, 212];
-const REPLY_AT = 222;
-const THANKS_AT = 288;
-const RESOLVED_AT = 300;
+// All beats come from the voiceover timing: each layer arrives as it's named.
+const P = TIMELINE.proof;
+const PROOF_LENGTH = sceneLength("proof");
+const EXPLODE = [P.explode, P.explode + 36] as const;
+const CARD_AT = P.cards;
+const COLLAPSE_AT = P.collapse;
+const REPLY_AT = P.reply;
+const THANKS_AT = P.thanks;
+const RESOLVED_AT = P.resolved;
 
 const ease = Easing.bezier(0.16, 1, 0.3, 1);
 

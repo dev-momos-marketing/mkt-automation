@@ -2,8 +2,6 @@ import { AbsoluteFill, Easing, interpolate, useCurrentFrame } from "remotion";
 import { color, type } from "../../brand";
 import { AlfieAvatar, clamp, Rise, useIsVertical } from "../ui";
 
-export const REACH_LENGTH = 105;
-
 const ROWS = ["Website chat", "Mobile app", "Post-visit surveys", "Delivery apps"];
 
 // 5. Reach: channels as giant marquee type, rows drifting in opposite directions.

@@ -10,8 +10,7 @@ import {
   useEnter,
   useIsVertical,
 } from "../ui";
-
-export const REVEAL_LENGTH = 120;
+import { cue } from "../timeline";
 
 // 3. Reveal: the only dark scene. Light leak, liquid glow, the icon rises.
 export const Reveal: React.FC = () => {
@@ -66,11 +65,11 @@ export const Reveal: React.FC = () => {
           <div style={{ textAlign: "center" }}>
             <MaskWords
               text="Meet Alfie."
-              delay={28}
+              delay={cue("reveal-meet")}
               stagger={6}
               style={{ ...type.display, fontSize: vertical ? 150 : 170, color: color.white }}
             />
-            <Rise delay={44}>
+            <Rise delay={cue("reveal-agent")}>
               <div style={{ ...type.h3, color: color.beige }}>
                 The Experience Agent from Momos
               </div>

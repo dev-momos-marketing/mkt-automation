@@ -1,61 +1,128 @@
 {
   "voice": "af_heart",
-  "fps": 30,
-  "end": 1020,
-  "lines": [
+  "gapFrames": 3,
+  "phrases": [
     {
-      "id": "01-hook",
+      "id": "hook-time",
+      "scene": "hook",
+      "at": 2,
+      "text": "Nine forty-seven."
+    },
+    {
+      "id": "hook-nofries",
+      "scene": "hook",
+      "at": 31,
+      "text": "No fries."
+    },
+    {
+      "id": "hook-again",
+      "scene": "hook",
+      "at": 62,
+      "text": "Again."
+    },
+    {
+      "id": "cascade-night",
+      "scene": "cascade",
       "at": 4,
-      "text": "Nine forty-seven. No fries. Again."
+      "text": "Every night, it piles up."
     },
     {
-      "id": "02-cascade",
-      "at": 100,
-      "text": "Every night, it piles up. Reviews. Surveys. Chats. And nobody's answering."
+      "id": "cascade-reviews",
+      "scene": "cascade",
+      "text": "Reviews."
     },
     {
-      "id": "03-reveal",
-      "at": 252,
-      "text": "Meet Alfie. The Experience Agent from Momos."
+      "id": "cascade-surveys",
+      "scene": "cascade",
+      "text": "Surveys."
     },
     {
-      "id": "04-proof",
-      "at": 378,
-      "text": "While it types, Alfie checks the order, applies your recovery policy, and adds the points."
+      "id": "cascade-chats",
+      "scene": "cascade",
+      "text": "Chats."
     },
     {
-      "id": "05-proof-end",
-      "at": 600,
+      "id": "cascade-nobody",
+      "scene": "cascade",
+      "text": "Nobody answers."
+    },
+    {
+      "id": "reveal-meet",
+      "scene": "reveal",
+      "at": 28,
+      "text": "Meet Alfie."
+    },
+    {
+      "id": "reveal-agent",
+      "scene": "reveal",
+      "text": "The Experience Agent from Momos."
+    },
+    {
+      "id": "proof-while",
+      "scene": "proof",
+      "at": 48,
+      "text": "While it types,"
+    },
+    {
+      "id": "proof-order",
+      "scene": "proof",
+      "text": "Alfie checks the order,"
+    },
+    {
+      "id": "proof-policy",
+      "scene": "proof",
+      "text": "applies your recovery policy,"
+    },
+    {
+      "id": "proof-points",
+      "scene": "proof",
+      "text": "and adds the points."
+    },
+    {
+      "id": "proof-before",
+      "scene": "proof",
+      "at": "reply",
       "text": "Before the guest has even closed the app."
     },
     {
-      "id": "06-reach",
-      "at": 656,
+      "id": "reach",
+      "scene": "reach",
+      "at": 8,
       "text": "On every channel your guests use."
     },
     {
-      "id": "07-handoff",
-      "at": 740,
-      "text": "And when your team steps in, Alfie hands over the full story."
+      "id": "handoff-when",
+      "scene": "handoff",
+      "at": 4,
+      "text": "And when your team steps in,"
     },
     {
-      "id": "08-resolve",
-      "at": 841,
+      "id": "handoff-alfie",
+      "scene": "handoff",
+      "text": "Alfie hands over the full story."
+    },
+    {
+      "id": "cta-resolve",
+      "scene": "cta",
+      "at": 1,
       "text": "Resolve."
     },
     {
-      "id": "09-recover",
-      "at": 871,
+      "id": "cta-recover",
+      "scene": "cta",
+      "at": 31,
       "text": "Recover."
     },
     {
-      "id": "10-bring",
-      "at": 901,
+      "id": "cta-bring",
+      "scene": "cta",
+      "at": 61,
       "text": "Bring them back."
     },
     {
-      "id": "11-cta",
-      "at": 936,
+      "id": "cta-demo",
+      "scene": "cta",
+      "at": 96,
       "text": "Book a demo at momos dot com slash Alfie."
     }
   ]

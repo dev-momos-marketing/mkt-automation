@@ -3,10 +3,10 @@ import { color } from "../../brand";
 import { Bubble, useIsVertical, useShake } from "../ui";
 import { BeatWords, beatsLength, type Beat } from "./BeatWords";
 
+// Each card holds for as long as its line is spoken (see voiceover.json).
 const WORDS: Beat[] = [
-  { text: "9:47 PM" },
-  { text: "Order #4182", dark: true },
-  { text: "No fries." },
+  { text: "9:47 PM", beats: 2 },
+  { text: "No fries.", dark: true, beats: 2 },
 ];
 const SLAM = beatsLength(WORDS);
 
@@ -39,5 +39,3 @@ export const Hook: React.FC = () => {
     </AbsoluteFill>
   );
 };
-
-export const HOOK_LENGTH = SLAM + 45;

@@ -4,61 +4,56 @@ import { slide } from "@remotion/transitions/slide";
 import { wipe } from "@remotion/transitions/wipe";
 import { AbsoluteFill, useVideoConfig } from "remotion";
 import { color, fontFamily } from "../brand";
-import { Cascade, CASCADE_LENGTH } from "./scenes/Cascade";
-import { Cta, CTA_LENGTH } from "./scenes/Cta";
-import { Handoff, HANDOFF_LENGTH } from "./scenes/Handoff";
-import { Hook, HOOK_LENGTH } from "./scenes/Hook";
-import { Proof, PROOF_LENGTH } from "./scenes/Proof";
-import { Reach, REACH_LENGTH } from "./scenes/Reach";
-import { Reveal, REVEAL_LENGTH } from "./scenes/Reveal";
-import { Voiceover } from "./Voiceover";
+import { Cascade } from "./scenes/Cascade";
+import { Cta } from "./scenes/Cta";
+import { Handoff } from "./scenes/Handoff";
+import { Hook } from "./scenes/Hook";
+import { Proof } from "./scenes/Proof";
+import { Reach } from "./scenes/Reach";
+import { Reveal } from "./scenes/Reveal";
+import { Soundtrack } from "./Soundtrack";
+import { sceneLength, TIMELINE } from "./timeline";
 
 // Script: scripts/alfie-launch.md. Frames at 30fps; one beat = 15 frames.
+// Scene lengths and the total come from timeline.json (scripts/build-soundtrack.py),
+// whose transition overlaps (15 frames) must match the transitions below.
 const T = 15;
 const timing = linearTiming({ durationInFrames: T });
 
-export const ALFIE_DURATION =
-  HOOK_LENGTH +
-  CASCADE_LENGTH +
-  REVEAL_LENGTH +
-  PROOF_LENGTH +
-  REACH_LENGTH +
-  HANDOFF_LENGTH +
-  CTA_LENGTH -
-  4 * T;
+export const ALFIE_DURATION = TIMELINE.total;
 
 export const AlfieLaunch: React.FC = () => {
   const { width, height } = useVideoConfig();
   return (
     <AbsoluteFill style={{ fontFamily, background: color.beige }}>
       <TransitionSeries>
-        <TransitionSeries.Sequence name="Hook" durationInFrames={HOOK_LENGTH}>
+        <TransitionSeries.Sequence name="Hook" durationInFrames={sceneLength("hook")}>
           <Hook />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence name="Cascade" durationInFrames={CASCADE_LENGTH}>
+        <TransitionSeries.Sequence name="Cascade" durationInFrames={sceneLength("cascade")}>
           <Cascade />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={iris({ width, height })} timing={timing} />
-        <TransitionSeries.Sequence name="Reveal" durationInFrames={REVEAL_LENGTH}>
+        <TransitionSeries.Sequence name="Reveal" durationInFrames={sceneLength("reveal")}>
           <Reveal />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={slide({ direction: "from-right" })} timing={timing} />
-        <TransitionSeries.Sequence name="Proof" durationInFrames={PROOF_LENGTH}>
+        <TransitionSeries.Sequence name="Proof" durationInFrames={sceneLength("proof")}>
           <Proof />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={slide({ direction: "from-right" })} timing={timing} />
-        <TransitionSeries.Sequence name="Reach" durationInFrames={REACH_LENGTH}>
+        <TransitionSeries.Sequence name="Reach" durationInFrames={sceneLength("reach")}>
           <Reach />
         </TransitionSeries.Sequence>
         <TransitionSeries.Transition presentation={wipe({ direction: "from-right" })} timing={timing} />
-        <TransitionSeries.Sequence name="Handoff" durationInFrames={HANDOFF_LENGTH}>
+        <TransitionSeries.Sequence name="Handoff" durationInFrames={sceneLength("handoff")}>
           <Handoff />
         </TransitionSeries.Sequence>
-        <TransitionSeries.Sequence name="CTA" durationInFrames={CTA_LENGTH}>
+        <TransitionSeries.Sequence name="CTA" durationInFrames={sceneLength("cta")}>
           <Cta />
         </TransitionSeries.Sequence>
       </TransitionSeries>
-      <Voiceover />
+      <Soundtrack />
     </AbsoluteFill>
   );
 };

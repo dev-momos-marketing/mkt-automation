@@ -1,0 +1,163 @@
+{
+  "fps": 30,
+  "beat": 15,
+  "total": 1065,
+  "scenes": {
+    "hook": {
+      "start": 0,
+      "length": 105
+    },
+    "cascade": {
+      "start": 105,
+      "length": 150
+    },
+    "reveal": {
+      "start": 240,
+      "length": 120
+    },
+    "proof": {
+      "start": 345,
+      "length": 345
+    },
+    "reach": {
+      "start": 675,
+      "length": 105
+    },
+    "handoff": {
+      "start": 765,
+      "length": 120
+    },
+    "cta": {
+      "start": 885,
+      "length": 180
+    }
+  },
+  "cues": {
+    "hook-time": {
+      "scene": "hook",
+      "at": 2,
+      "frames": 34
+    },
+    "hook-nofries": {
+      "scene": "hook",
+      "at": 31,
+      "frames": 26
+    },
+    "hook-again": {
+      "scene": "hook",
+      "at": 62,
+      "frames": 16
+    },
+    "cascade-night": {
+      "scene": "cascade",
+      "at": 4,
+      "frames": 44
+    },
+    "cascade-reviews": {
+      "scene": "cascade",
+      "at": 51,
+      "frames": 20
+    },
+    "cascade-surveys": {
+      "scene": "cascade",
+      "at": 74,
+      "frames": 21
+    },
+    "cascade-chats": {
+      "scene": "cascade",
+      "at": 98,
+      "frames": 18
+    },
+    "cascade-nobody": {
+      "scene": "cascade",
+      "at": 119,
+      "frames": 32
+    },
+    "reveal-meet": {
+      "scene": "reveal",
+      "at": 28,
+      "frames": 24
+    },
+    "reveal-agent": {
+      "scene": "reveal",
+      "at": 55,
+      "frames": 56
+    },
+    "proof-while": {
+      "scene": "proof",
+      "at": 48,
+      "frames": 26
+    },
+    "proof-order": {
+      "scene": "proof",
+      "at": 77,
+      "frames": 37
+    },
+    "proof-policy": {
+      "scene": "proof",
+      "at": 117,
+      "frames": 49
+    },
+    "proof-points": {
+      "scene": "proof",
+      "at": 169,
+      "frames": 32
+    },
+    "proof-before": {
+      "scene": "proof",
+      "at": 237,
+      "frames": 54
+    },
+    "reach": {
+      "scene": "reach",
+      "at": 8,
+      "frames": 52
+    },
+    "handoff-when": {
+      "scene": "handoff",
+      "at": 4,
+      "frames": 39
+    },
+    "handoff-alfie": {
+      "scene": "handoff",
+      "at": 46,
+      "frames": 51
+    },
+    "cta-resolve": {
+      "scene": "cta",
+      "at": 1,
+      "frames": 21
+    },
+    "cta-recover": {
+      "scene": "cta",
+      "at": 31,
+      "frames": 19
+    },
+    "cta-bring": {
+      "scene": "cta",
+      "at": 61,
+      "frames": 24
+    },
+    "cta-demo": {
+      "scene": "cta",
+      "at": 96,
+      "frames": 76
+    }
+  },
+  "proof": {
+    "explode": 48,
+    "cards": [
+      77,
+      117,
+      169
+    ],
+    "collapse": [
+      209,
+      217,
+      225
+    ],
+    "reply": 235,
+    "thanks": 301,
+    "resolved": 313
+  }
+}

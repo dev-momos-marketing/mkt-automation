@@ -1,6 +1,6 @@
 # Alfie launch video v2: script
 
-**Format:** 34s, 16:9 (`AlfieLaunch`) and 9:16 (`AlfieLaunchVertical`). Cut to a 120 bpm grid (one beat = 15 frames), so a music track drops straight in. Works muted.
+**Format:** 35.5s, 16:9 (`AlfieLaunch`) and 9:16 (`AlfieLaunchVertical`). Cut to a 120 bpm grid (one beat = 15 frames), so a music track drops straight in. Works muted.
 **One idea:** Guest problems pile up across every channel. Alfie answers each one and actually fixes it.
 **Styles** (from the style library, chosen for energy and Momos fit):
 
@@ -31,30 +31,43 @@ Shared motion grammar keeps it one film: everything travels right-to-left, the c
 
 - [ ] Logos in `public/brand/` (`momos-logo.png`, `alfie.png`).
 - [ ] Confirm CTA URL and button copy.
-- [ ] Optional: a 120 bpm music bed under the voiceover (duck it to about -20 dB while lines play).
 
-## Voiceover
+## Soundtrack
 
-Generated locally with [Kokoro](https://github.com/thewh1teagle/kokoro-onnx) (open-source TTS), voice `af_heart`. Lines and start times live in `src/alfie/voiceover.json`; the table in the script above is the visual plan, this is what's actually spoken.
+Built by `scripts/build-soundtrack.py` (setup in its header):
 
-| Line | Starts | Spoken |
+1. **Voiceover**: each phrase in `src/alfie/voiceover.json` is spoken by Kokoro (open-source TTS, voice `af_heart`) and measured.
+2. **Sync**: phrases are placed on the timeline and the animation beats that depend on speech are derived from them (`src/alfie/timeline.json`). The order / policy / points layers land as each is named, cascade cards pulse on "Reviews / Surveys / Chats", cards vanish on "Nobody answers", the hand-off draws on "Alfie hands over". Edit a phrase and the animation follows.
+3. **Music**: an original stadium-anthem bed composed in code on the 120 bpm grid: stomp-stomp-clap, distorted power chords (D minor, i–VI–III–VII), a clean pad and a tech arpeggio for the corporate side. Riser into the reveal, a big hit as the iris opens, one hit per CTA word, and a D major lift on the end card.
+4. **Mix**: music ducked under every line, written to `public/audio/alfie-mix.wav`.
+
+| Time | Scene | Spoken |
 |---|---|---|
-| 01-hook | 0.1s | Nine forty-seven. No fries. Again. |
-| 02-cascade | 3.3s | Every night, it piles up. Reviews. Surveys. Chats. And nobody's answering. |
-| 03-reveal | 8.4s | Meet Alfie. The Experience Agent from Momos. |
-| 04-proof | 12.6s | While it types, Alfie checks the order, applies your recovery policy, and adds the points. |
-| 05-proof-end | 20.0s | Before the guest has even closed the app. |
-| 06-reach | 21.9s | On every channel your guests use. |
-| 07-handoff | 24.7s | And when your team steps in, Alfie hands over the full story. |
-| 08-resolve | 28.0s | Resolve. |
-| 09-recover | 29.0s | Recover. |
-| 10-bring | 30.0s | Bring them back. |
-| 11-cta | 31.2s | Book a demo at momos dot com slash Alfie. |
-
-To change a line or the voice: edit `src/alfie/voiceover.json` (or pass `--voice`), run `scripts/generate-voiceover.py` (setup steps in its header), then re-render. The script warns when a line won't fit before the next one.
+|  0.1s | hook | Nine forty-seven. |
+|  1.0s | hook | No fries. |
+|  2.1s | hook | Again. |
+|  3.6s | cascade | Every night, it piles up. |
+|  5.2s | cascade | Reviews. |
+|  6.0s | cascade | Surveys. |
+|  6.8s | cascade | Chats. |
+|  7.5s | cascade | Nobody answers. |
+|  8.9s | reveal | Meet Alfie. |
+|  9.8s | reveal | The Experience Agent from Momos. |
+| 13.1s | proof | While it types, |
+| 14.1s | proof | Alfie checks the order, |
+| 15.4s | proof | applies your recovery policy, |
+| 17.1s | proof | and adds the points. |
+| 19.4s | proof | Before the guest has even closed the app. |
+| 22.8s | reach | On every channel your guests use. |
+| 25.6s | handoff | And when your team steps in, |
+| 27.0s | handoff | Alfie hands over the full story. |
+| 29.5s | cta | Resolve. |
+| 30.5s | cta | Recover. |
+| 31.5s | cta | Bring them back. |
+| 32.7s | cta | Book a demo at momos dot com slash Alfie. |
 
 Deliver with loudness normalized for social (-14 LUFS):
 
 ```bash
-ffmpeg -i out/alfie-launch.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -c:a aac -b:a 192k out/alfie-launch-final.mp4
+ffmpeg -i out/alfie-launch.mp4 -c:v copy -af loudnorm=I=-14:TP=-1.5:LRA=11 -ar 48000 -c:a aac -b:a 192k out/alfie-launch-final.mp4
 ```

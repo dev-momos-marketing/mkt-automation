@@ -1,9 +1,11 @@
 import { evolvePath, getPointAtLength, getLength } from "@remotion/paths";
 import { AbsoluteFill, interpolate, useCurrentFrame, useVideoConfig } from "remotion";
 import { color, radius, shadow, type } from "../../brand";
+import { cue } from "../timeline";
 import { AlfieAvatar, Check, clamp, MaskWords, Rise, useEnter, useIsVertical } from "../ui";
 
-export const HANDOFF_LENGTH = 105;
+// Line 2 and the hand-off itself start when the voice says "Alfie hands over".
+const HAND = cue("handoff-alfie");
 
 // Explicit line breaks so no headline leaves an orphan word.
 const LINES = ["When a person should step in,", "Alfie hands over the full story."];
@@ -16,15 +18,15 @@ export const Handoff: React.FC = () => {
   const frame = useCurrentFrame();
   const { width, height } = useVideoConfig();
   const vertical = useIsVertical();
-  const team = useEnter(8);
+  const team = useEnter(HAND - 6);
 
   const a = vertical ? { x: width / 2, y: 760 } : { x: 360, y: 560 };
   const b = vertical ? { x: width / 2, y: 1380 } : { x: 1100, y: 560 };
   const path = vertical
     ? `M ${a.x} ${a.y} C ${a.x + 300} ${a.y + 200}, ${b.x - 300} ${b.y - 260}, ${b.x} ${b.y - 120}`
     : `M ${a.x + 110} ${a.y} C ${a.x + 330} ${a.y - 220}, ${b.x - 340} ${b.y - 220}, ${b.x - 40} ${b.y}`;
-  const draw = interpolate(frame, [14, 44], [0, 1], clamp);
-  const travel = interpolate(frame, [30, 56], [0, 1], clamp);
+  const draw = interpolate(frame, [HAND, HAND + 28], [0, 1], clamp);
+  const travel = interpolate(frame, [HAND + 16, HAND + 40], [0, 1], clamp);
   const evolved = evolvePath(draw, path);
   const dot = getPointAtLength(path, getLength(path) * travel);
 
@@ -35,7 +37,7 @@ export const Handoff: React.FC = () => {
           <MaskWords
             key={line}
             text={line}
-            delay={i * 6}
+            delay={lineDelay(i, vertical)}
             style={{ ...type.h2, color: i < 1 || (vertical && i < 2) ? color.neutral700 : color.ink }}
           />
         ))}
@@ -97,9 +99,9 @@ export const Handoff: React.FC = () => {
           <div style={{ ...type.h3, fontWeight: 700, color: color.ink }}>Store manager</div>
         </div>
         {ITEMS.map((item, i) => (
-          <Rise key={item} delay={56 + i * 6} distance={20}>
+          <Rise key={item} delay={HAND + 40 + i * 6} distance={20}>
             <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-              <Check delay={58 + i * 6} size={52} />
+              <Check delay={HAND + 42 + i * 6} size={52} />
               <div style={{ ...type.body, fontSize: 36, fontWeight: 500, color: color.ink }}>
                 {item}
               </div>
@@ -109,4 +111,10 @@ export const Handoff: React.FC = () => {
       </div>
     </AbsoluteFill>
   );
+};
+
+const lineDelay = (i: number, vertical: boolean) => {
+  const second = vertical ? i >= 2 : i >= 1;
+  const within = vertical ? i % 2 : 0;
+  return (second ? HAND : cue("handoff-when")) + within * 6;
 };

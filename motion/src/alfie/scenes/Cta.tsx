@@ -10,8 +10,6 @@ const WORDS: Beat[] = [
 ];
 const END = beatsLength(WORDS);
 
-export const CTA_LENGTH = END + 90;
-
 // 7. CTA: the product's verbs on the beat, then the end card.
 export const Cta: React.FC = () => (
   <AbsoluteFill style={{ background: color.beige }}>

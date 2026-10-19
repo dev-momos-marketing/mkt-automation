@@ -9,6 +9,7 @@ import {
   useVideoConfig,
 } from "remotion";
 import { color, radius, shadow, type } from "../../brand";
+import { cue } from "../timeline";
 import { clamp, MaskWords, useIsVertical } from "../ui";
 
 const MESSAGES = [
@@ -33,9 +34,16 @@ const MESSAGES = [
 ];
 
 const SPAWN_END = 100; // last card lands here; arrivals accelerate
-const COLLAPSE = [112, 138] as const;
+// Cards vanish as the voice says "Nobody answers."
+const COLLAPSE = [cue("cascade-nobody") - 4, cue("cascade-nobody") + 22] as const;
 
-export const CASCADE_LENGTH = 150;
+// Each channel's cards pulse when the voice names it.
+const PULSE: Record<string, number> = {
+  "Google review": cue("cascade-reviews"),
+  "Post-visit survey": cue("cascade-surveys"),
+  "App chat": cue("cascade-chats"),
+  "Website chat": cue("cascade-chats"),
+};
 
 // 2. Problem: messages from every channel pile up, faster and faster.
 export const Cascade: React.FC = () => {
@@ -75,6 +83,7 @@ export const Cascade: React.FC = () => {
         const curY = interpolate(fall, [0, 1], [startY, y]);
         // Fake motion blur: blur proportional to vertical speed.
         const speed = Math.abs(curY - interpolate(prev, [0, 1], [startY, y]));
+        const pulse = interpolate(frame - (PULSE[m.channel] ?? -999), [0, 3, 14], [0, 1, 0], clamp);
         const cx = width / 2 - 300;
         const cy = height / 2 - 60;
         return (
@@ -85,14 +94,15 @@ export const Cascade: React.FC = () => {
               left: interpolate(collapse, [0, 1], [x, cx]),
               top: interpolate(collapse, [0, 1], [curY, cy]),
               rotate: `${(random(`r${i}`) - 0.5) * 16 * (1 - collapse)}deg`,
-              scale: `${1 - collapse}`,
+              scale: `${(1 - collapse) * (1 + 0.08 * pulse)}`,
+              zIndex: pulse > 0 ? 1 : 0,
               filter: `blur(${Math.min(8, speed * 0.04)}px)`,
               width: vertical ? 560 : 600,
               boxSizing: "border-box",
               padding: "26px 34px",
               borderRadius: radius.md,
               background: color.white,
-              boxShadow: shadow.m,
+              boxShadow: pulse > 0 ? `0 0 0 ${6 * pulse}px ${color.brand}, ${shadow.m}` : shadow.m,
               display: "flex",
               flexDirection: "column",
               gap: 6,
@@ -138,7 +148,7 @@ export const Cascade: React.FC = () => {
         >
           <MaskWords
             text="Every night, it piles up."
-            delay={8}
+            delay={cue("cascade-night")}
             style={{ ...type.h2, color: color.white }}
           />
         </div>
