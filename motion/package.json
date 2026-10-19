@@ -1,0 +1,25 @@
+{
+  "name": "momos-motion",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Programmatic marketing videos for Momos, built with Remotion",
+  "scripts": {
+    "dev": "remotion studio",
+    "render": "remotion render MomosPromo out/momos-promo.mp4",
+    "render:square": "remotion render MomosPromoSquare out/momos-promo-square.mp4",
+    "still": "remotion still MomosPromo out/thumbnail.png --frame=60",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.536",
+    "@remotion/zod-types": "4.0.536",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.536",
+    "zod": "4.5.4"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.12",
+    "typescript": "5.6.3"
+  }
+}
