@@ -1,0 +1,24 @@
+{
+  "voice": "af_heart",
+  "gapFrames": 4,
+  "phrases": [
+    { "id": "aw-q1", "scene": "question", "at": 8, "text": "Buyers now ask AI for software recommendations." },
+    { "id": "aw-q2", "scene": "question", "at": 108, "text": "Are you part of the shortlist?" },
+    { "id": "aw-inv", "scene": "invisible", "at": 10, "text": "Right now, AI names your rivals and skips you." },
+    { "id": "aw-m1", "scene": "meet", "at": 8, "text": "Meet Arrowsterr." },
+    { "id": "aw-m2", "scene": "meet", "text": "The end-to-end agentic SEO and GEO platform" },
+    { "id": "aw-m3", "scene": "meet", "text": "that brings you from invisibility to visibility." },
+    { "id": "aw-s1", "scene": "see", "at": 8, "text": "See how often 6 AI engines name you," },
+    { "id": "aw-s2", "scene": "see", "text": "and who they name instead." },
+    { "id": "aw-f1", "scene": "find", "at": 8, "text": "Turn every gap into keywords with real search volume." },
+    { "id": "aw-p1", "scene": "plan", "at": 8, "text": "An AI agent ranks topics by revenue" },
+    { "id": "aw-p2", "scene": "plan", "text": "and plans your month." },
+    { "id": "aw-c1", "scene": "create", "at": 8, "text": "The Agentic Writer drafts pages" },
+    { "id": "aw-c2", "scene": "create", "text": "built to rank on Google" },
+    { "id": "aw-c3", "scene": "create", "text": "and get cited by AI." },
+    { "id": "aw-v1", "scene": "visible", "at": 30, "text": "Ask again." },
+    { "id": "aw-v2", "scene": "visible", "text": "Now you're on the shortlist." },
+    { "id": "aw-e1", "scene": "close", "at": 14, "text": "Arrowsterr." },
+    { "id": "aw-e2", "scene": "close", "text": "Start free today." }
+  ]
+}

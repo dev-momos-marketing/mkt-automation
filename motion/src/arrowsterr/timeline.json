@@ -1,0 +1,145 @@
+{
+  "fps": 30,
+  "beat": 15,
+  "total": 1350,
+  "transitions": {
+    "question": 0,
+    "invisible": 0,
+    "meet": 12,
+    "see": 12,
+    "find": 12,
+    "plan": 12,
+    "create": 12,
+    "visible": 15
+  },
+  "scenes": {
+    "question": {
+      "start": 0,
+      "length": 180
+    },
+    "invisible": {
+      "start": 180,
+      "length": 120
+    },
+    "meet": {
+      "start": 300,
+      "length": 240
+    },
+    "see": {
+      "start": 528,
+      "length": 150
+    },
+    "find": {
+      "start": 666,
+      "length": 135
+    },
+    "plan": {
+      "start": 789,
+      "length": 150
+    },
+    "create": {
+      "start": 927,
+      "length": 180
+    },
+    "visible": {
+      "start": 1095,
+      "length": 135
+    },
+    "close": {
+      "start": 1215,
+      "length": 135
+    }
+  },
+  "cues": {
+    "aw-q1": {
+      "scene": "question",
+      "at": 8,
+      "frames": 93
+    },
+    "aw-q2": {
+      "scene": "question",
+      "at": 108,
+      "frames": 41
+    },
+    "aw-inv": {
+      "scene": "invisible",
+      "at": 10,
+      "frames": 75
+    },
+    "aw-m1": {
+      "scene": "meet",
+      "at": 8,
+      "frames": 29
+    },
+    "aw-m2": {
+      "scene": "meet",
+      "at": 41,
+      "frames": 93
+    },
+    "aw-m3": {
+      "scene": "meet",
+      "at": 138,
+      "frames": 77
+    },
+    "aw-s1": {
+      "scene": "see",
+      "at": 8,
+      "frames": 70
+    },
+    "aw-s2": {
+      "scene": "see",
+      "at": 82,
+      "frames": 39
+    },
+    "aw-f1": {
+      "scene": "find",
+      "at": 8,
+      "frames": 96
+    },
+    "aw-p1": {
+      "scene": "plan",
+      "at": 8,
+      "frames": 76
+    },
+    "aw-p2": {
+      "scene": "plan",
+      "at": 88,
+      "frames": 33
+    },
+    "aw-c1": {
+      "scene": "create",
+      "at": 8,
+      "frames": 59
+    },
+    "aw-c2": {
+      "scene": "create",
+      "at": 71,
+      "frames": 38
+    },
+    "aw-c3": {
+      "scene": "create",
+      "at": 113,
+      "frames": 41
+    },
+    "aw-v1": {
+      "scene": "visible",
+      "at": 30,
+      "frames": 22
+    },
+    "aw-v2": {
+      "scene": "visible",
+      "at": 56,
+      "frames": 40
+    },
+    "aw-e1": {
+      "scene": "close",
+      "at": 14,
+      "frames": 22
+    },
+    "aw-e2": {
+      "scene": "close",
+      "at": 40,
+      "frames": 32
+    }
+  }
+}

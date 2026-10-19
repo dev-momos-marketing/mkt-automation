@@ -10,7 +10,9 @@
     "still": "remotion still MomosPromo out/thumbnail.png --frame=60",
     "typecheck": "tsc --noEmit",
     "render:alfie": "remotion render AlfieLaunch out/alfie-launch.mp4 --crf=18",
-    "render:alfie-vertical": "remotion render AlfieLaunchVertical out/alfie-launch-vertical.mp4 --crf=18"
+    "render:alfie-vertical": "remotion render AlfieLaunchVertical out/alfie-launch-vertical.mp4 --crf=18",
+    "render:arrowsterr": "remotion render ArrowsterrLaunch out/arrowsterr-launch.mp4 --crf=18",
+    "render:arrowsterr-vertical": "remotion render ArrowsterrLaunchVertical out/arrowsterr-launch-vertical.mp4 --crf=18"
   },
   "dependencies": {
     "@remotion/cli": "4.0.536",
