@@ -1,32 +1,34 @@
-# Alfie launch video: script
+# Alfie launch video v2: script
 
-**Format:** ~32s, 16:9 (`AlfieLaunch`) and 9:16 (`AlfieLaunchVertical`). Works muted; the voiceover is optional.
-**One idea:** A guest complaint used to wait days. Alfie resolves it in the same conversation.
-**Style direction:** Product UI demo, bookended with kinetic type. Brand palette, olive as the only accent (success states).
+**Format:** ~32s, 16:9 (`AlfieLaunch`) and 9:16 (`AlfieLaunchVertical`). Cut to a 120 bpm grid (one beat = 15 frames), so a music track drops straight in. Works muted.
+**One idea:** Guest problems pile up across every channel. Alfie answers each one and actually fixes it.
+**Styles** (from the style library, chosen for energy and Momos fit):
 
-> Guest name, order number, store and points amount are illustrative. No performance stats are claimed.
+| Scene | Style | Why |
+|---|---|---|
+| Hook, CTA | 1 Kinetic type (beat-cut) | Stops the scroll; one word per beat |
+| Problem | 10 Notification cascade | Shows the volume problem as physical chaos |
+| Reveal | 21 Cinematic premium (inverted) + 24 Liquid | The one dark, glowing moment: the product arrives |
+| Proof | 5 Chat-native + 8 Exploded UI + 16 Hand-annotated | Shows what Alfie does *behind* the reply |
+| Reach | 4 Typographic poster (marquee) | Channels as giant moving type |
+| Handoff | 15 Line draw-on | Calm, clear: a path to your team |
+
+Shared motion grammar keeps it one film: everything travels right-to-left, the chat bubble is the recurring motif, calm springs for UI, hard cuts for type.
+
+> Guest name, order, store, points and the "Unanswered" counter are illustrative. No performance stats are claimed.
 
 | # | Time | On screen | Voiceover (optional) |
 |---|------|-----------|----------------------|
-| 1 | 0:00–0:03 | **Hook.** 9:47 PM. A guest message pops in: *"My order just arrived and the fries are missing. Again."* Then: **Every restaurant gets this message.** | "Nine forty-seven PM. The fries are missing. Again." |
-| 2 | 0:03–0:08 | **The old way.** "Usually, it waits." A ticket card sits *Unread* while its timer climbs from 10 minutes to 3 days. The card fades out: **By then, the guest has moved on.** | "Usually, that message waits. And by the time someone gets to it, the guest has moved on." |
-| 3 | 0:08–0:10 | **The turn.** The frame cuts to ink. **Now it gets answered in seconds.** | "Now, it gets answered in seconds." |
-| 4 | 0:10–0:23 | **Alfie in action.** A live chat. Alfie is typing while, on the right, its steps check off: *Found order #4182 at Downtown*, *Checked your recovery policy*, *Added 200 loyalty points*, *Fries on us next time*. Alfie replies; the guest says *"That was quick. Thank you!"* The case shows **Resolved**. | "Alfie finds the order, checks your recovery policy, and makes it right, in your brand's voice, before the guest has closed the app." |
-| 5 | 0:23–0:26 | **Reveal.** *Meet* / **Alfie** / *The Experience Agent from Momos* | "Meet Alfie. The Experience Agent from Momos." |
-| 6 | 0:26–0:30 | **Reach.** "Alfie works across" Website chat / Mobile app / Post-visit surveys / Delivery platforms. Then: *And when your team should step in, Alfie hands over the full story.* | "On every channel your guests use. And when your team should step in, Alfie hands over the full story." |
-| 7 | 0:30–0:32 | **CTA.** **Resolve. Recover. Bring them back.** [Book a demo] momos.com/alfie | "Resolve. Recover. Bring them back. Book a demo at momos.com/alfie." |
-
-## Why it's built this way
-
-- **The guest's words open the video**, not our logo. That's the strongest hook for a muted autoplay feed.
-- **Problem → turn → proof → name.** The product name lands *after* the viewer has seen what it does, so the reveal has a payoff.
-- **The demo shows actions, not adjectives.** The checklist proves Alfie *acts* (finds the order, applies policy, issues points). That's the difference from a chatbot that only talks.
-- **One emotional beat:** the ticket fading out ("the guest has moved on") is the cost of doing nothing.
-- **Three-beat close** ("Resolve. Recover. Bring them back.") follows the product's own verbs and ends on the business outcome: repeat visits.
+| 1 | 0:00–0:03 | **Beat cuts:** "9:47 PM" → "Order #4182" → "No fries." Then the guest's bubble slams in with a shake: *"My order just arrived and the fries are missing. Again."* | "Nine forty-seven PM. Order forty-one eighty-two. No fries." |
+| 2 | 0:03–0:08 | **Cascade:** messages from every channel rain in faster and faster: a 1-star review, a survey, app chat, a delivery complaint. The counter climbs. **Every night, it piles up.** Then everything gets pulled into one point. | "Every night, it piles up. Reviews, surveys, chats, delivery apps." |
+| 3 | 0:08–0:12 | **Reveal:** dark frame, light leak, glowing liquid shapes. Alfie's icon rises. **Meet Alfie.** *The Experience Agent from Momos.* | "Meet Alfie. The Experience Agent from Momos." |
+| 4 | 0:12–0:23 | **Proof:** a live chat. As Alfie types, the interface explodes into 3D layers: the **order** (fries crossed out by hand), the **recovery policy** (highlighted), the **loyalty balance** (+200 counting up). Layers snap back; Alfie replies; the guest says thanks; **Resolved** gets circled. | "Alfie checks the order, applies your recovery policy, and adds the points, before the guest has closed the app." |
+| 5 | 0:23–0:26 | **Reach:** four giant rows of type slide across the frame: Website chat / Mobile app / Post-visit surveys / Delivery apps. | "On every channel your guests use." |
+| 6 | 0:26–0:29 | **Handoff:** a line draws from Alfie to your team and delivers a card: full conversation, order details, suggested next step. | "And when a person should step in, Alfie hands over the full story." |
+| 7 | 0:29–0:32 | **Beat cuts:** "Resolve." → "Recover." → "Bring them back." End card: Momos logo, [Book a demo], momos.com/alfie. | "Resolve. Recover. Bring them back." |
 
 ## Before publishing
 
-- [ ] Swap the text wordmark for the real Momos/Alfie logo (SVG).
-- [ ] Confirm the CTA URL (`momos.com/alfie`) and button copy.
-- [ ] Optional: add a music bed and voiceover (`<Audio>` in `AlfieLaunch.tsx`).
-- [ ] Optional: replace the illustrative chat with a real (anonymised) conversation.
+- [ ] Logos in `public/brand/` (`momos-logo.png`, `alfie.png`).
+- [ ] Confirm CTA URL and button copy.
+- [ ] Optional: a 120 bpm music bed and voiceover via `<Audio>`.

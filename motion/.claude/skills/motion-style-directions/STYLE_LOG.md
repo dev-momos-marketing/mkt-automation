@@ -4,3 +4,4 @@ One line per video: date | composition | direction | notes
 
 - 2026-10-19 | MomosPromo | Generic gradient starter | Placeholder colors/copy; spring-in pills. Avoid repeating.
 - 2026-10-19 | AlfieLaunch / AlfieLaunchVertical | Product UI demo + kinetic type bookends | Guest message as hook, one dark "turn" frame, action checklist beside chat. Olive as only accent. Two-line headlines beat auto-wrap (orphans).
+- 2026-10-19 | AlfieLaunch v2 | 1 Kinetic + 10 Cascade + 21/24 Cinematic-liquid + 5/8/16 Chat-exploded-annotated + 4 Marquee + 15 Line draw | User asked for max diversity, so the 2-style cap was waived; one film held together by a 120 bpm grid, right-to-left travel and the chat bubble motif. Exploded 3D layers and the marquee are the strongest moments. Vertical needs its own spacing for 3D cards.

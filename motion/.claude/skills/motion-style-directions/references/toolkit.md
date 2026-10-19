@@ -7,7 +7,7 @@ Install add-ons with `npx remotion add @remotion/<pkg>` so versions match.
 
 Some tools draw through WebGL / HTML-in-canvas. They need a recent Chrome:
 - Rendering: use Remotion's own Chrome Headless Shell (the default download) and `Config.setChromiumOpenGlRenderer("angle")`.
-- The cloud sandbox's preinstalled Chromium (`/opt/pw-browsers/...`) is older, so **render a still of any canvas-based transition or effect before relying on it**. If it fails, fall back to the DOM option in the same row.
+- The cloud sandbox's preinstalled Chromium (`/opt/pw-browsers/...`) is Chrome 141. Verified 2026-10-19: **effects on `<Solid>` / `<Img>` work** (with GL set to `angle`); **anything using `<HtmlInCanvas>` fails** ("HTML in Canvas is not supported in Chrome 141"), and that includes every "canvas" transition below. In the sandbox, use DOM transitions and fake the rest with CSS/SVG: grain via SVG `feTurbulence`, motion blur via `filter: blur()` scaled by speed, glow via blurred shapes.
 - Studio preview of HTML-in-canvas needs Chrome 149+ with `chrome://flags/#canvas-draw-element`.
 
 ## Transitions (`@remotion/transitions/<name>`)
