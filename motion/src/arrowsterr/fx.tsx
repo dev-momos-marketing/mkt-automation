@@ -367,18 +367,19 @@ export const Stamp: React.FC<{ at: number; label: string; style?: React.CSSPrope
 };
 
 // Starburst: thin rays plus a horizontal flare streak, for the logo and the Spark.
-export const Starburst: React.FC<{ at: number; size: number; tint: string; rays?: number; spin?: number }> = ({
+export const Starburst: React.FC<{ at: number; size: number; tint: string; rays?: number; spin?: number; life?: number }> = ({
   at,
   size,
   tint,
   rays = 12,
   spin = 0.4,
+  life = 70,
 }) => {
   const frame = useCurrentFrame();
   const t = frame - at;
-  if (t < 0 || t > 70) return null;
+  if (t < 0 || t > life) return null;
   const grow = interpolate(t, [0, 8], [0.2, 1], { ...clamp, easing: EASE });
-  const fade = interpolate(t, [10, 70], [1, 0], clamp);
+  const fade = interpolate(t, [Math.min(10, life / 3), life], [1, 0], clamp);
   return (
     <svg
       width={size}

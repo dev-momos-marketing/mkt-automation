@@ -21,7 +21,7 @@ const ripples = (vertical: boolean): Ripple[] => {
   for (let i = 0; i < 5; i++) r.push({ at: absCue("inv-zero") + 4 + i * 4, x: 0.18 + i * 0.16, y: vertical ? 0.4 : 0.38, amp: 12 });
   r.push({ at: absCue("inv-you"), x: 0.5, y: vertical ? 0.62 : 0.74, amp: 26, speed: 18 });
   // The logo forge shockwave and the drop.
-  r.push({ at: absCue("meet-name") + 14, x: 0.5, y: vertical ? 0.3 : 0.28, amp: 40, speed: 22 });
+  r.push({ at: absCue("meet-name") + 18, x: 0.5, y: vertical ? 0.3 : 0.28, amp: 40, speed: 22 });
   // Falling blocks in the plan.
   for (let i = 0; i < 5; i++) r.push({ at: absCue("plan-2") + 6 + i * 6, x: vertical ? 0.2 + i * 0.15 : 0.56 + i * 0.08, y: 0.7, amp: 8 });
   // Sonic boom, the Spark, the close.

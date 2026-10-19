@@ -24,11 +24,11 @@ export const Meet: React.FC = () => {
   const markCy = LY + LH / 2;
 
   // The comet arrives at the mark's centre, then the mark is forged there big.
-  const arrive = 20;
-  const forge = interpolate(frame, [arrive, arrive + 14], [1, 0], { ...clamp, easing: EASE }); // 1 = extruded
-  const star = useIn(arrive + 6, 8);
-  const settle = interpolate(frame, [arrive + 20, arrive + 36], [0, 1], { ...clamp, easing: EASE });
-  const swap = interpolate(frame, [arrive + 34, arrive + 40], [0, 1], clamp);
+  const arrive = 16;
+  const forge = interpolate(frame, [arrive, arrive + 10], [1, 0], { ...clamp, easing: EASE }); // 1 = extruded
+  const star = useIn(arrive + 4, 6);
+  const settle = interpolate(frame, [arrive + 14, arrive + 28], [0, 1], { ...clamp, easing: EASE });
+  const swap = interpolate(frame, [arrive + 27, arrive + 32], [0, 1], clamp);
   const bigH = vertical ? 340 : 360;
   const bigCy = vertical ? height * 0.38 : height * 0.46;
   const h = interpolate(settle, [0, 1], [bigH, LH]);
@@ -68,13 +68,13 @@ export const Meet: React.FC = () => {
         </svg>
       )}
       <div style={{ position: "absolute", left: width / 2, top: bigCy - bigH * 0.38, width: 0, height: 0 }}>
-        <Starburst at={arrive + 12} size={vertical ? 900 : 1100} tint={color.sky} rays={16} />
-        <SonarRings at={arrive + 12} size={bigH * 0.9} tint={color.sky} count={2} />
+        <Starburst at={arrive + 8} size={vertical ? 900 : 1100} tint={color.sky} rays={16} life={16} />
+        <SonarRings at={arrive + 8} size={bigH * 0.9} tint={color.sky} count={2} />
       </div>
       <Logo height={LH} style={{ position: "absolute", left: logoLeft, top: LY, opacity: swap }} />
 
       <AbsoluteFill style={{ top: LY + LH + (vertical ? 90 : 60), bottom: "auto", alignItems: "center", padding: vertical ? "0 56px" : "0 160px" }}>
-        <Rise delay={cue("meet-platform")}>
+        <Rise delay={Math.max(cue("meet-platform"), arrive + 30)}>
           <Headline lead="The end-to-end agentic" payoff="SEO/GEO platform" breakBefore size={vertical ? 84 : 104} style={{ textAlign: "center" }} />
         </Rise>
       </AbsoluteFill>
