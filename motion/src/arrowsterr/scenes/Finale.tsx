@@ -182,6 +182,7 @@ export const Close: React.FC = () => {
   const gather = interpolate(frame, [16, 56], [0, 1], { ...clamp, easing: EASE });
   const fill = interpolate(frame, [50, 70], [0, 0.06], clamp);
   const shine = interpolate(frame, [cue("close-start") + 8, cue("close-start") + 26], [-30, 130], clamp);
+  const logoIn = useIn(20, 10);
 
   return (
     <AbsoluteFill style={{ fontFamily: font.sans, overflow: "hidden" }}>
@@ -204,7 +205,7 @@ export const Close: React.FC = () => {
           <svg viewBox="4 24 56 39" width={markW} height={markH} style={{ position: "absolute", left: mx, top: my }}>
             <path d={motif.climb} fill={`rgba(255,255,255,${fill})`} />
           </svg>
-          <Logo white height={vertical ? 56 : 52} style={{ position: "absolute", left: vertical ? 64 : 120, top: vertical ? 220 : 88, opacity: useIn(20, 10) }} />
+          <Logo white height={vertical ? 56 : 52} style={{ position: "absolute", left: vertical ? 64 : 120, top: vertical ? 220 : 88, opacity: logoIn }} />
           <AbsoluteFill style={{ justifyContent: "center", padding: vertical ? "0 64px" : "0 120px", gap: vertical ? 56 : 48 }}>
             <Rise delay={cue("close-get")}>
               <Headline lead="Get recommended" payoff="in AI answers" breakBefore onNight size={vertical ? 110 : 128} />
