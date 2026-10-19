@@ -9,6 +9,12 @@ export const TIMELINE = timeline;
 // Scene-relative frame where a voiceover phrase starts / ends.
 export const cue = (id: Cue) => timeline.cues[id].at;
 export const cueEnd = (id: Cue) => timeline.cues[id].at + timeline.cues[id].frames;
+// Absolute frame of a cue (for layers that live outside the scenes).
+export const absCue = (id: Cue) => timeline.scenes[timeline.cues[id].scene as Scene].start + timeline.cues[id].at;
 
 export const sceneLength = (scene: Scene) => timeline.scenes[scene].length;
 export const sceneStart = (scene: Scene) => timeline.scenes[scene].start;
+export const SCENES = Object.keys(timeline.scenes) as Scene[];
+
+// Shared visual beats (the score hits the same frames).
+export const CARD_LAND = [0, 1, 2].map((i) => cue("list-recommends") + 10 + i * 8);

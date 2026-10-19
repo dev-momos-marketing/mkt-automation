@@ -1,11 +1,15 @@
 # Arrowsterr v3: "You need a navigator"
 
-**Format:** ~52s, 16:9 and 9:16, 30fps. Works muted.
+**Format:** 66s, 16:9 and 9:16, 30fps. Works muted.
 **Tone:** a friend talking you through it. Short lines, questions, a little wit. Brand voice rules hold: "you", digits, no em dashes, no emoji, no "not X, Y", no lists of three in prose.
 **Wording:** "competitors" (never "rivals"), "recommend" (never "name").
 **Niche:** a startup buyer asking AI for a CRM. You are **Acme (acme.com)**. Competitors: **Northwind, Globex, Initech** (the brand guideline's sample names).
 **Concept:** Arrowsterr is the Navigator (arrow for direction, star for arrival). One continuous shot over a giant, living flight grid. A Signal Blue **route** with a comet arrowhead flies from station to station and the camera rides with it, ending where the star is: Acme on the AI shortlist.
 **Sources:** product claims, step names and keyword data (crm software 49,500, best crm software 12,100) come from the arrowsterr.com homepage demo. The 0% to 60% climb, the shortlist, the topic values and the final recommendation are illustrative.
+
+## Real AI logos
+
+The engine arc uses the real ChatGPT (OpenAI), Claude, Gemini, Perplexity and Google marks, from the open LobeHub icon set (MIT), in `public/ai-logos/`. They identify the engines Arrowsterr tracks; nothing implies their makers endorse Arrowsterr. Logos are shown unmodified on white discs.
 
 ## Recurring devices
 
@@ -53,6 +57,19 @@
 
 - Colour, type and copy rules hold everywhere. Greys and the grid carry the frame, Signal Blue for the route and payoff, gold only at the Spark, Night only at the close, every number in Geist Mono.
 - **Deliberate bends for the film:** the website's motion rules (no spins, no parallax, no confetti-style effects) are relaxed for the camera, orbit, flips, shatter and the chevron burst. Everything still travels up or right.
+
+## Music (original, composed in code)
+
+Built by `scripts/build-arrowsterr-soundtrack.py`, on the 120 bpm grid and placed from the same cue sheet as the animation:
+
+- **Intro:** filtered pluck arpeggio, soft pad, ticking hats, real keystroke clicks while the prompt types, a card snap on every card landing, a sonar ping on each engine as it's named.
+- **Invisible:** 5 stamp thuds, a glass shatter and a sub drop, then near silence.
+- **Build:** a snare roll accelerating from quarter notes to 32nds, a noise riser, supersaw chords with the filter opening, a comet whoosh, then half a beat of silence.
+- **Drop 1, "Meet Arrowsterr":** impact, 4-on-the-floor kick, sidechain-pumped supersaw chords (F#m, D, A, E), a sub bass and an 8-note lead hook.
+- **Stations:** the groove continues with the lead out and an arpeggio, under split-flap clacks, a vortex whoosh, a laser zap and block thuds.
+- **Ship it:** riser into a sonic boom. **Drop 2, "Recommended":** a chime on the Spark and the full hook again.
+- **Close:** one huge F# major chord, a crash and a ring-out.
+- Mixed under the voice with ducking, normalized to -14 LUFS for social.
 
 ## Sound
 
