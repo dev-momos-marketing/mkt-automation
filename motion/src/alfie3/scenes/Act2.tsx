@@ -116,7 +116,7 @@ export const FixScene: React.FC = () => {
             <Bubble from="alfie" delay={voice + 4} typeFrames={36} size={30} text="So sorry, Maya. Your fries were missed. I've added 200 points and your next fries are on us." />
             <Bubble from="guest" delay={thanks} size={30} text="Wow, that was fast. Thank you!" />
           </div>
-          <Slam at={closed} label="Resolved" tone="olive" size={vertical ? 64 : 72} style={{ right: 40, top: vertical ? 110 : 140 }} />
+          <Slam at={closed} label="Resolved" tone="olive" size={vertical ? 64 : 72} style={{ right: vertical ? 24 : 40, top: vertical ? 14 : 140 }} />
         </div>
 
         {/* Agent trace + the receipts of what it did */}

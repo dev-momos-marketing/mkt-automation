@@ -82,8 +82,8 @@ export const BagScene: React.FC = () => {
   const bagW = vertical ? 420 : 400;
   return (
     <Pan>
-      <AbsoluteFill style={{ flexDirection: vertical ? "column" : "row", justifyContent: "center", alignItems: "center", gap: vertical ? 40 : 160, paddingTop: vertical ? 120 : 0 }}>
-        <div style={{ position: "relative", width: bagW, height: vertical ? 900 : 760 }}>
+      <AbsoluteFill style={{ flexDirection: vertical ? "column" : "row", justifyContent: "center", alignItems: "center", gap: vertical ? 30 : 160, paddingTop: vertical ? 220 : 0 }}>
+        <div style={{ position: "relative", width: bagW, height: vertical ? 760 : 760 }}>
           {/* receipt rising out of the bag */}
           <div style={{ position: "absolute", left: bagW * 0.12, top: interpolate(pop, [0, 1], [300, 0]), zIndex: 1 }}>
             <Receipt width={bagW * 0.76}>
@@ -107,14 +107,14 @@ export const BagScene: React.FC = () => {
           </svg>
         </div>
         <div style={{ opacity: phoneIn, translate: `0 ${(1 - phoneIn) * 600}px` }}>
-          <Phone w={vertical ? 520 : 470} h={vertical ? 760 : 820} buzzAt={again}>
+          <Phone w={vertical ? 500 : 470} h={vertical ? 680 : 820} buzzAt={again}>
             {frame >= again && (
               <Bubble from="guest" delay={again} size={30} text="My order just arrived and the fries are missing. Again." />
             )}
           </Phone>
         </div>
       </AbsoluteFill>
-      <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", paddingTop: vertical ? 160 : 70 }}>
+      <AbsoluteFill style={{ justifyContent: "flex-start", alignItems: "center", paddingTop: vertical ? 110 : 70 }}>
         <Decode text="No fries." start={fries} perChar={1.2} style={{ ...type.h2, fontFamily, color: color.brand, opacity: interpolate(frame, [fries, fries + 2], [0, 1], clamp) }} />
       </AbsoluteFill>
     </Pan>

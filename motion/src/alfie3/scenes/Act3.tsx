@@ -126,7 +126,7 @@ export const LanesScene: React.FC = () => {
       <div style={{ position: "absolute", left: hub.x - 140, top: hub.y - 140 }}>
         <AlfieAvatar size={280} style={{ boxShadow: `0 0 0 ${10 + Math.sin(frame / 4) * 4}px ${color.brandBg}` }} />
       </div>
-      <div style={{ position: "absolute", left: vertical ? hub.x : width - 140, top: vertical ? height * 0.89 : hub.y, translate: vertical ? "-50% 0" : "-50% -50%", fontFamily, fontWeight: 700, fontSize: 40, color: color.oliveDark, opacity: useIn(cue("lanes-web") + 20, 10) }}>
+      <div style={{ position: "absolute", left: vertical ? hub.x : width - 140, top: vertical ? height * 0.89 : hub.y - 64, translate: vertical ? "-50% 0" : "-50% -50%", fontFamily, fontWeight: 700, fontSize: 40, color: color.oliveDark, opacity: useIn(cue("lanes-web") + 20, 10) }}>
         Resolved
       </div>
     </Pan>
@@ -178,8 +178,8 @@ export const HandoffScene: React.FC = () => {
   const { fps, width, height } = useVideoConfig();
   const vertical = useIsVertical();
   const go = cue("handoff-2");
-  const from = { x: vertical ? width / 2 : width * 0.2, y: vertical ? height * 0.22 : height * 0.5 };
-  const to = { x: vertical ? width / 2 : width * 0.66, y: vertical ? height * 0.6 : height * 0.5 };
+  const from = { x: vertical ? width / 2 : width * 0.12, y: vertical ? height * 0.16 : height * 0.5 };
+  const to = { x: vertical ? width / 2 : width * 0.76, y: vertical ? height * 0.7 : height * 0.5 };
   const fly = interpolate(frame, [go, go + 20], [0, 1], { ...clamp, easing: EASE });
   const arc = Math.sin(Math.PI * fly) * -200;
   const land = spring({ frame: frame - go - 20, fps, config: { damping: 14 } });
@@ -202,7 +202,7 @@ export const HandoffScene: React.FC = () => {
       {frame >= go && fly < 1 && (
         <div style={{ position: "absolute", left: from.x + (to.x - from.x) * fly - 120, top: from.y + (to.y - from.y) * fly + arc - 60, width: 240, height: 120, borderRadius: radius.md, background: color.white, boxShadow: shadow.l, rotate: `${fly * 12}deg`, scale: `${1 - fly * 0.4}` }} />
       )}
-      <div style={{ position: "absolute", left: vertical ? (width - cardW) / 2 : width * 0.66 - 560 - 340, top: vertical ? height * 0.36 : height * 0.18, width: cardW, opacity: useIn(cue("handoff-1"), 10) }}>
+      <div style={{ position: "absolute", left: vertical ? (width - cardW) / 2 : width * 0.23, top: vertical ? height * 0.3 : height * 0.3, width: cardW, opacity: useIn(cue("handoff-1"), 10) }}>
         <div style={{ background: color.white, borderRadius: radius.lg, boxShadow: shadow.m, padding: 32, display: "flex", flexDirection: "column", gap: 20, fontFamily }}>
           <span style={{ fontWeight: 700, fontSize: 36, color: color.ink }}>Handed over with</span>
           {["Full conversation", "Order details", "Suggested next step"].map((t, i) => (
