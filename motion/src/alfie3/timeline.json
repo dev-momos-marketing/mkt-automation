@@ -1,0 +1,215 @@
+{
+  "fps": 30,
+  "beat": 15,
+  "total": 1680,
+  "scenes": {
+    "printer": {
+      "start": 0,
+      "length": 105
+    },
+    "rail": {
+      "start": 105,
+      "length": 60
+    },
+    "bag": {
+      "start": 165,
+      "length": 165
+    },
+    "flood": {
+      "start": 330,
+      "length": 75
+    },
+    "freeze": {
+      "start": 405,
+      "length": 60
+    },
+    "reveal": {
+      "start": 465,
+      "length": 135
+    },
+    "fix": {
+      "start": 600,
+      "length": 300
+    },
+    "wall": {
+      "start": 900,
+      "length": 90
+    },
+    "lanes": {
+      "start": 990,
+      "length": 120
+    },
+    "night": {
+      "start": 1110,
+      "length": 75
+    },
+    "handoff": {
+      "start": 1185,
+      "length": 120
+    },
+    "morning": {
+      "start": 1305,
+      "length": 150
+    },
+    "beats": {
+      "start": 1455,
+      "length": 90
+    },
+    "end": {
+      "start": 1545,
+      "length": 135
+    }
+  },
+  "cues": {
+    "open-1": {
+      "scene": "printer",
+      "at": 12,
+      "frames": 64
+    },
+    "rail-1": {
+      "scene": "rail",
+      "at": 4,
+      "frames": 37
+    },
+    "bag-1": {
+      "scene": "bag",
+      "at": 4,
+      "frames": 75
+    },
+    "bag-fries": {
+      "scene": "bag",
+      "at": 87,
+      "frames": 26
+    },
+    "bag-again": {
+      "scene": "bag",
+      "at": 119,
+      "frames": 16
+    },
+    "flood-1": {
+      "scene": "flood",
+      "at": 6,
+      "frames": 42
+    },
+    "freeze-1": {
+      "scene": "freeze",
+      "at": 8,
+      "frames": 46
+    },
+    "reveal-meet": {
+      "scene": "reveal",
+      "at": 14,
+      "frames": 24
+    },
+    "reveal-agent": {
+      "scene": "reveal",
+      "at": 48,
+      "frames": 56
+    },
+    "fix-watch": {
+      "scene": "fix",
+      "at": 6,
+      "frames": 48
+    },
+    "fix-order": {
+      "scene": "fix",
+      "at": 62,
+      "frames": 27
+    },
+    "fix-policy": {
+      "scene": "fix",
+      "at": 95,
+      "frames": 47
+    },
+    "fix-right": {
+      "scene": "fix",
+      "at": 148,
+      "frames": 26
+    },
+    "fix-voice": {
+      "scene": "fix",
+      "at": 184,
+      "frames": 23
+    },
+    "fix-closed": {
+      "scene": "fix",
+      "at": 231,
+      "frames": 25
+    },
+    "wall-1": {
+      "scene": "wall",
+      "at": 6,
+      "frames": 46
+    },
+    "lanes-web": {
+      "scene": "lanes",
+      "at": 6,
+      "frames": 26
+    },
+    "lanes-app": {
+      "scene": "lanes",
+      "at": 34,
+      "frames": 18
+    },
+    "lanes-surveys": {
+      "scene": "lanes",
+      "at": 54,
+      "frames": 20
+    },
+    "lanes-delivery": {
+      "scene": "lanes",
+      "at": 76,
+      "frames": 24
+    },
+    "night-1": {
+      "scene": "night",
+      "at": 4,
+      "frames": 21
+    },
+    "handoff-1": {
+      "scene": "handoff",
+      "at": 6,
+      "frames": 36
+    },
+    "handoff-2": {
+      "scene": "handoff",
+      "at": 44,
+      "frames": 51
+    },
+    "morning-1": {
+      "scene": "morning",
+      "at": 10,
+      "frames": 78
+    },
+    "morning-quiet": {
+      "scene": "morning",
+      "at": 98,
+      "frames": 31
+    },
+    "beat-resolve": {
+      "scene": "beats",
+      "at": 1,
+      "frames": 21
+    },
+    "beat-recover": {
+      "scene": "beats",
+      "at": 31,
+      "frames": 19
+    },
+    "beat-back": {
+      "scene": "beats",
+      "at": 61,
+      "frames": 24
+    },
+    "end-1": {
+      "scene": "end",
+      "at": 8,
+      "frames": 38
+    },
+    "end-2": {
+      "scene": "end",
+      "at": 52,
+      "frames": 23
+    }
+  }
+}
