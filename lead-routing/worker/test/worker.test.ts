@@ -284,6 +284,22 @@ test("more than 5 submissions a minute from one IP get the popup, with no Claude
   assert.equal(sixth.fitCalls.length, 0);
 });
 
+test("an ICP fit with no known region is followed up, not routed", async () => {
+  const { json, sent } = await run({ ...form, country: "OTHER", timezone: "" }, claudeOk);
+  assert.equal(json.url, env.NOT_FIT_URL);
+  assert.equal(sent[0].routing.status, "follow_up");
+  assert.equal(sent[0].routing.reason, "region unknown");
+  assert.equal(sent[0].routing.ae, "Jill", "unknown regions are followed up by Jill");
+});
+
+test("spam is decided before anything else: no Claude, no region", async () => {
+  const { json, sent, fitCalls } = await run({ ...form, email: "x@mailinator.com" }, claudeOk);
+  assert.equal(json.url, env.NOT_FIT_URL);
+  assert.equal(fitCalls.length, 0);
+  assert.equal(sent[0].routing.status, "spam");
+  assert.equal(sent[0].routing.ae, "");
+});
+
 test("fit check failure means follow-up, not a blind booking", async () => {
   const { json, sent } = await run(form, claudeOk, {
     fit: () => Response.json({ type: "error", error: { type: "overloaded_error", message: "busy" } }, { status: 529 }),

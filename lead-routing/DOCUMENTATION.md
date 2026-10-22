@@ -75,13 +75,15 @@ lead-routing/
    - any UTMs in the URL (`utm_source`, `utm_medium`, `utm_campaign`, `utm_term`, `utm_content`, `utm_channel`, `gclid`)
 
    It sends everything to the Worker as `text/plain`, which skips the browser's extra CORS round trip. The button shows "Matching you with the right person...".
-2. **Spam check (Worker, instant).** Any of these marks the lead as spam, and Claude never sees it:
+The Worker decides in a fixed priority order: **spam → ICP → region**. A lead only books a calendar if it passes all three.
+
+2. **Spam check (Worker, instant).** First, more than 5 submissions a minute from one IP get the popup straight away. Then any of these marks the lead as spam, and Claude never sees it:
    - the hidden honeypot field `website` is filled
    - the form was filled in under 2 seconds
    - the email is invalid
    - the email is on the throwaway list (mailinator, yopmail, 10minutemail, etc.)
-3. **Region (Worker, instant).** Country plus browser time zone, with Cloudflare's IP lookup as a backup (see section 4).
-4. **ICP gate (Claude Haiku 5.5, max 3 s).** Fit, maybe or not_fit, with a confidence score (see section 5). Skipped for 1–5 locations, which always go to follow-up.
+3. **ICP check.** First the instant rule: 1–5 locations always go to follow-up. Then Claude Haiku 5.5 (max 3 s) answers fit, maybe or not_fit with a confidence score (see section 5). Only a confident fit continues.
+4. **Region → AE.** Country plus browser time zone, with Cloudflare's IP lookup as a backup (see section 4). A known region picks the AE's calendar. If the region can't be determined, the lead goes to follow-up (Jill) instead of being routed.
 5. **Answer.** The Worker returns one URL:
    - **Jill:** `https://calendar.app.google/RgDyFpMoE46wfyFv9`
    - **James:** `https://calendar.app.google/LxFWWodxZMcd957n6`
@@ -142,6 +144,7 @@ The form has no State field on purpose, to keep it short. The time zone does tha
 | not_fit, confidence ≥ 0.8 (`NOT_FIT_MIN_CONFIDENCE`) | Thank-you popup | `not_fit` | None |
 | maybe, low-confidence fit or not_fit, or no answer within 3 s | Thank-you popup | `follow_up` | The region's AE (`routing.ae`) |
 | 1–5 locations (`FOLLOW_UP_BUCKETS` in `worker/src/route.ts`, Claude not asked) | Thank-you popup | `follow_up` | The region's AE |
+| Confident fit, but the region can't be determined | Thank-you popup | `follow_up` (`reason: region unknown`) | Jill |
 
 Follow-up leads still get the background research, so the Slack message has the context the AE needs.
 

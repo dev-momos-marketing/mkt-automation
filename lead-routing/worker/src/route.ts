@@ -108,16 +108,25 @@ export function regionFor(country = "", timezone = "", ip: IpLocation = {}): Reg
   return westFromIp(ip) ?? "unknown";
 }
 
+// The checks that need no AI, in priority order: spam first, then the location-count part of
+// the ICP check. Claude's ICP check (index.ts) runs next, and the region decides the AE last.
 export function instantRoute(d: FormData, ip: IpLocation = {}): Instant {
+  const spam = spamReason(d);
+  if (spam) return { status: "spam", reason: spam, region: "unknown", ae: null };
+
+  // The region is only used to name the AE: the one who gets the booking or does the follow-up.
   const region = regionFor(String(d.country ?? ""), String(d.timezone ?? ""), ip);
+  if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, ae: ROUTES[region] };
+  return { status: "routed", reason: "ok", region, ae: ROUTES[region] };
+}
+
+// 1. Spam. No AI, no cost.
+function spamReason(d: FormData): string | null {
   const email = String(d.email ?? "").trim().toLowerCase();
   const domain = email.split("@")[1] ?? "";
-
-  if (d.website) return { status: "spam", reason: "honeypot filled", region, ae: null };
-  if (typeof d.elapsedMs === "number" && d.elapsedMs < 2000) return { status: "spam", reason: "form filled in under 2s", region, ae: null };
-  if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/.test(email)) return { status: "spam", reason: "invalid email", region, ae: null };
-  if (DISPOSABLE.has(domain)) return { status: "spam", reason: "throwaway email", region, ae: null };
-  if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, ae: ROUTES[region] };
-
-  return { status: "routed", reason: "ok", region, ae: ROUTES[region] };
+  if (d.website) return "honeypot filled";
+  if (typeof d.elapsedMs === "number" && d.elapsedMs < 2000) return "form filled in under 2s";
+  if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/.test(email)) return "invalid email";
+  if (DISPOSABLE.has(domain)) return "throwaway email";
+  return null;
 }

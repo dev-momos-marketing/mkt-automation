@@ -183,7 +183,14 @@ export default {
     const cf = (req as Request & { cf?: IpLocation }).cf ?? {};
     const started = Date.now();
     const timings: Timings = { claude_ms: 0 };
-    const { instant, fit } = await gate(form, instantRoute(form, { country: cf.country, regionCode: cf.regionCode }), env, timings);
+    // 1. Spam, then the 1-5 locations rule (instantRoute). 2. Claude's ICP check (gate).
+    // 3. Region: only a lead that passed both and has a known region books its AE's calendar.
+    const gated = await gate(form, instantRoute(form, { country: cf.country, regionCode: cf.regionCode }), env, timings);
+    const fit = gated.fit;
+    const instant: Instant =
+      gated.instant.status === "routed" && gated.instant.region === "unknown"
+        ? { ...gated.instant, status: "follow_up", reason: "region unknown" }
+        : gated.instant;
     const url = urlFor(instant, env);
     // One line per lead in Cloudflare's Logs tab. No email or name, just enough to audit the gate.
     console.log(JSON.stringify({
