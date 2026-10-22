@@ -37,7 +37,7 @@ Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is 
 
 - `fit` with confidence 0.7 or more: the visitor gets their AE's calendar (`status: routed`).
 - `not_fit` with confidence 0.8 or more: thank-you popup, no follow-up (`status: not_fit`).
-- The order is always **spam → ICP → region**. A confident fit whose region can't be determined is also a follow-up (Jill).
+- The order is always **spam → ICP → region**. A confident fit is always routed: if the country, time zone and IP don't settle the region, it's guessed from the IP country, then Claude's guess of the company's HQ, then East (Jill).
 - Anything else (`maybe`, unsure, Claude over 3 seconds or failing), and every 1–5 location lead: thank-you popup, and the region's AE follows up (`status: follow_up`, sent to Zapier with `ae` set).
 
 Obvious spam (filled honeypot, form filled in under 2 seconds, bad or throwaway email) never reaches Claude.

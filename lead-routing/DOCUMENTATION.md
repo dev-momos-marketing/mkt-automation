@@ -83,7 +83,7 @@ The Worker decides in a fixed priority order: **spam → ICP → region**. A lea
    - the email is invalid
    - the email is on the throwaway list (mailinator, yopmail, 10minutemail, etc.)
 3. **ICP check.** First the instant rule: 1–5 locations always go to follow-up. Then Claude Haiku 5.5 (max 3 s) answers fit, maybe or not_fit with a confidence score (see section 5). Only a confident fit continues.
-4. **Region → AE.** Country plus browser time zone, with Cloudflare's IP lookup as a backup (see section 4). A known region picks the AE's calendar. If the region can't be determined, the lead goes to follow-up (Jill) instead of being routed.
+4. **Region → AE.** Country plus browser time zone, with Cloudflare's IP lookup as a backup (see section 4). **A confident fit is always routed.** If those clues don't settle the region (e.g. country "Other" with no usable time zone, or a US lead whose computer is on a non-US time zone), the Worker guesses it in this order: the visitor's IP location (country, and the state in North America), then Claude's guess of the company's HQ (`hq_region` from the ICP check), then East (Jill). Guessed regions are flagged `routing.region_guessed = true`.
 5. **Answer.** The Worker returns one URL:
    - **Jill:** `https://calendar.app.google/RgDyFpMoE46wfyFv9`
    - **James:** `https://calendar.app.google/LxFWWodxZMcd957n6`
@@ -144,7 +144,6 @@ The form has no State field on purpose, to keep it short. The time zone does tha
 | not_fit, confidence ≥ 0.8 (`NOT_FIT_MIN_CONFIDENCE`) | Thank-you popup | `not_fit` | None |
 | maybe, low-confidence fit or not_fit, or no answer within 3 s | Thank-you popup | `follow_up` | The region's AE (`routing.ae`) |
 | 1–5 locations (`FOLLOW_UP_BUCKETS` in `worker/src/route.ts`, Claude not asked) | Thank-you popup | `follow_up` | The region's AE |
-| Confident fit, but the region can't be determined | Thank-you popup | `follow_up` (`reason: region unknown`) | Jill |
 
 Follow-up leads still get the background research, so the Slack message has the context the AE needs.
 
@@ -188,7 +187,7 @@ Runs only when the `ZAPIER_HOOK_URL` secret is set, and is skipped for spam.
 ```json
 {
   "lead": { "first_name": "", "last_name": "", "email": "", "company": "", "job_title": "", "country": "", "locations": "" },
-  "routing": { "status": "routed | follow_up | not_fit | spam", "reason": "ok", "ae": "James | Jill", "region": "us_west | us_east | emea | apac | unknown", "redirect_url": "", "region_mismatch": false },
+  "routing": { "status": "routed | follow_up | not_fit | spam", "reason": "ok", "ae": "James | Jill", "region": "us_west | us_east | emea | apac | unknown", "region_guessed": false, "redirect_url": "", "region_mismatch": false },
   "fit": { "icp_fit": "fit | maybe | not_fit | unavailable | skipped", "confidence": 0.9, "reason": "" },
   "verification": { "verdict": "verified | suspicious | spam | unavailable", "icp_fit": "", "confidence": 0.92, "company_name": "", "company_website": "", "industry": "", "locations_claimed": "", "locations_found": "", "hq_country": "", "region": "", "person_matches_company": true, "red_flags": [], "summary": "", "sources": [] },
   "utm": { "utm_source": "", "utm_medium": "", "utm_campaign": "", "utm_term": "", "utm_content": "", "utm_channel": "", "gclid_c": "" },
@@ -298,7 +297,7 @@ _Source: {{utm__utm_source}} / {{utm__utm_campaign}}_
 - `ANTHROPIC_API_KEY`: required
 - `ZAPIER_HOOK_URL`: turns on research and the Zapier hand-off
 
-**Log line per lead** (no names or emails): company, status, reason, region, form_country, timezone, ip_country, ip_region, ae, icp_fit, confidence, fit_reason, fit_error, total_ms, claude_ms.
+**Log line per lead** (no names or emails): company, status, reason, region, form_country, timezone, ip_country, ip_region, region_guessed, ae, icp_fit, confidence, fit_reason, fit_error, total_ms, claude_ms.
 
 **Reply to the form:** `{ url, ae, region }`. The form only uses `url`. It prints `[Momos form] routed to …` in the browser console for testing.
 

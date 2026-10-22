@@ -3,7 +3,7 @@
 // 2. Answers the Framer form: fit goes to the AE's calendar, a confident not-fit to NOT_FIT_URL.
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
-import { instantRoute, type FormData, type Instant, type IpLocation } from "./route.ts";
+import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 
@@ -106,6 +106,8 @@ export function zapierPayload(form: FormData, instant: Instant, url: string, fit
       reason: instant.reason,
       ae: instant.ae ? AE_NAMES[instant.ae] : "",
       region: instant.region,
+      // True when the region was a best guess (IP location or the company's HQ), not the visitor's own clues.
+      region_guessed: instant.status !== "spam" && !instant.regionSure,
       redirect_url: url,
       // Claude may place the company somewhere else than the form did. Worth a look in Slack.
       region_mismatch: !!v && v.region !== "unknown" && v.region !== instant.region,
@@ -184,19 +186,22 @@ export default {
     const started = Date.now();
     const timings: Timings = { claude_ms: 0 };
     // 1. Spam, then the 1-5 locations rule (instantRoute). 2. Claude's ICP check (gate).
-    // 3. Region: only a lead that passed both and has a known region books its AE's calendar.
-    const gated = await gate(form, instantRoute(form, { country: cf.country, regionCode: cf.regionCode }), env, timings);
+    // 3. Region: if the visitor's clues weren't enough, guess it so a confident fit is always routed.
+    const ip: IpLocation = { country: cf.country, regionCode: cf.regionCode };
+    const gated = await gate(form, instantRoute(form, ip), env, timings);
     const fit = gated.fit;
-    const instant: Instant =
-      gated.instant.status === "routed" && gated.instant.region === "unknown"
-        ? { ...gated.instant, status: "follow_up", reason: "region unknown" }
-        : gated.instant;
+    let instant: Instant = gated.instant;
+    if (instant.status !== "spam" && !instant.regionSure) {
+      const region = guessRegion(String(form.country ?? ""), ip, "hq_region" in fit ? fit.hq_region : "unknown");
+      instant = { ...instant, region, ae: instant.ae ? ROUTES[region] : null };
+    }
     const url = urlFor(instant, env);
     // One line per lead in Cloudflare's Logs tab. No email or name, just enough to audit the gate.
     console.log(JSON.stringify({
       company: form.company, status: instant.status, reason: instant.reason, region: instant.region,
       // Why this region: what the form said and where Cloudflare thinks the visitor is.
       form_country: form.country, timezone: form.timezone, ip_country: cf.country ?? null, ip_region: cf.regionCode ?? null,
+      region_guessed: !instant.regionSure,
       ae: instant.ae, icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : null,
       fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
       total_ms: Date.now() - started, ...timings,

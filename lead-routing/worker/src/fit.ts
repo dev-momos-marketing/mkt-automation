@@ -9,6 +9,9 @@ export const Fit = z.object({
   icp_fit: z.enum(["fit", "maybe", "not_fit"]),
   confidence: z.number().describe("0 to 1. How sure you are of icp_fit."),
   reason: z.string().describe("At most 10 words."),
+  hq_region: z
+    .enum(["us_west", "us_east", "emea", "apac", "unknown"])
+    .describe("Where the company is based. Used only when the visitor's own location is unclear."),
 });
 export type Fit = z.infer<typeof Fit>;
 
@@ -29,6 +32,8 @@ ICP:
 - Exception: marketing or digital agencies that specialise in restaurants or hospitality are maybe, not not_fit. They often run Momos for several brands at once.
 
 You only have the form. Use what you know about the company and its email domain. If the evidence is thin, answer maybe, not fit or not_fit. Answer not_fit with high confidence only when the evidence clearly says so.
+
+Also give hq_region: where the company is headquartered, from what you know of it or its email domain (e.g. .com.au is apac, .co.uk is emea). us_west = Pacific or Mountain time in the US, Canada or Mexico. us_east = the rest of the US, Canada and Mexico. emea = Europe, Middle East, Africa. apac = Asia and Oceania. If you don't know, answer unknown.
 
 Answer straight away. Keep reason to 10 words or fewer.
 

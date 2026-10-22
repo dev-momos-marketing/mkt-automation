@@ -103,12 +103,12 @@ function claudeJson(model: string, out: unknown) {
   });
 }
 
-const fitOk = { icp_fit: "fit", confidence: 0.9, reason: "Burger chain with 18 locations." };
+const fitOk = { icp_fit: "fit", confidence: 0.9, reason: "Burger chain with 18 locations.", hq_region: "us_west" };
 type Handler = (req: Request) => Response | Promise<Response>;
 
 // Runs the Worker with Claude, DNS and Zapier faked out. Any homepage fetch is recorded in `pages`.
 // `fit` answers the fit check (no tools), `claude` answers the research (has web search).
-async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: Env } = {}) {
+async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: Env; cf?: Record<string, string> } = {}) {
   const sent: any[] = [];
   const fitCalls: any[] = [];
   const pages: string[] = [];
@@ -142,12 +142,15 @@ async function run(body: unknown, claude: Handler, opts: { fit?: Handler; env?: 
   const waits: Promise<unknown>[] = [];
   try {
     const t0 = performance.now();
+    const request = new Request("https://w.example", {
+      method: "POST",
+      headers: { "content-type": "text/plain", origin: "https://www.momos.com", "cf-connecting-ip": "203.0.113.7" },
+      body: JSON.stringify(body),
+    });
+    // Cloudflare adds request.cf (the visitor's IP location). Fake it when a test needs it.
+    if (opts.cf) Object.defineProperty(request, "cf", { value: opts.cf });
     const res = await worker.fetch(
-      new Request("https://w.example", {
-        method: "POST",
-        headers: { "content-type": "text/plain", origin: "https://www.momos.com", "cf-connecting-ip": "203.0.113.7" },
-        body: JSON.stringify(body),
-      }),
+      request,
       opts.env ?? env,
       { waitUntil: (p) => waits.push(p) },
     );
@@ -233,7 +236,7 @@ test("personal email is flagged to Claude", async () => {
 });
 
 test("confident not_fit goes to the not-fit page", async () => {
-  const notFit = { icp_fit: "not_fit", confidence: 0.95, reason: "Marketing agency, not F&B." };
+  const notFit = { icp_fit: "not_fit", confidence: 0.95, reason: "Marketing agency, not F&B.", hq_region: "us_east" };
   const { json, sent } = await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", notFit) });
   assert.equal(json.url, env.NOT_FIT_URL);
   assert.equal(sent[0].routing.status, "not_fit");
@@ -243,9 +246,9 @@ test("confident not_fit goes to the not-fit page", async () => {
 
 test("anything short of a confident fit gets the popup and goes to Zapier for the AE to follow up", async () => {
   for (const answer of [
-    { icp_fit: "maybe", confidence: 0.9, reason: "Size unclear." },
-    { icp_fit: "fit", confidence: 0.6, reason: "Probably a chain." },
-    { icp_fit: "not_fit", confidence: 0.6, reason: "Hard to tell." },
+    { icp_fit: "maybe", confidence: 0.9, reason: "Size unclear.", hq_region: "unknown" },
+    { icp_fit: "fit", confidence: 0.6, reason: "Probably a chain.", hq_region: "unknown" },
+    { icp_fit: "not_fit", confidence: 0.6, reason: "Hard to tell.", hq_region: "unknown" },
   ]) {
     const { json, sent } = await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", answer) });
     assert.equal(json.url, env.NOT_FIT_URL, answer.reason);
@@ -266,7 +269,8 @@ test("1-5 locations get the popup without asking Claude, and the AE follows up",
 
 test("?tz= on the page URL overrides the browser time zone (for testing)", async () => {
   const fromVietnam = { ...form, country: "US", timezone: "Asia/Ho_Chi_Minh" };
-  assert.equal((await run(fromVietnam, claudeOk)).json.url, env.JILL_URL);
+  // No ?tz: the coast is guessed from the company's HQ, which fitOk says is us_west.
+  assert.equal((await run(fromVietnam, claudeOk)).json.url, env.JAMES_URL);
   const west = { ...fromVietnam, pageUrl: "https://www.momos.com/get-started-new?tz=America/Los_Angeles" };
   assert.equal((await run(west, claudeOk)).json.url, env.JAMES_URL);
   const east = { ...fromVietnam, pageUrl: "https://www.momos.com/get-started-new?tz=America/New_York" };
@@ -284,12 +288,35 @@ test("more than 5 submissions a minute from one IP get the popup, with no Claude
   assert.equal(sixth.fitCalls.length, 0);
 });
 
-test("an ICP fit with no known region is followed up, not routed", async () => {
-  const { json, sent } = await run({ ...form, country: "OTHER", timezone: "" }, claudeOk);
-  assert.equal(json.url, env.NOT_FIT_URL);
-  assert.equal(sent[0].routing.status, "follow_up");
-  assert.equal(sent[0].routing.reason, "region unknown");
-  assert.equal(sent[0].routing.ae, "Jill", "unknown regions are followed up by Jill");
+test("a confident fit is always routed: an unclear region is guessed from the IP, then the company's HQ", async () => {
+  const unclear = { ...form, country: "OTHER", timezone: "" };
+  const fitIn = (hq_region: string) => ({ fit: () => claudeJson("claude-haiku-5-5", { ...fitOk, hq_region }) });
+
+  // The visitor's IP is in Australia: APAC, James.
+  let r = await run(unclear, claudeOk, { ...fitIn("emea"), cf: { country: "AU" } });
+  assert.equal(r.json.url, env.JAMES_URL);
+  assert.equal(r.sent[0].routing.region_guessed, true);
+
+  // No IP clue: Claude's HQ guess decides. A UK-based company goes to Jill.
+  r = await run(unclear, claudeOk, fitIn("emea"));
+  assert.equal(r.json.url, env.JILL_URL);
+  assert.equal(r.sent[0].routing.region, "emea");
+
+  // Nothing at all to go on: still routed, to Jill.
+  r = await run(unclear, claudeOk, fitIn("unknown"));
+  assert.equal(r.json.url, env.JILL_URL);
+  assert.equal(r.sent[0].routing.status, "routed");
+});
+
+test("US lead from outside North America: the company's HQ picks the coast", async () => {
+  const fromVietnam = { ...form, country: "US", timezone: "Asia/Ho_Chi_Minh" };
+  const west = await run(fromVietnam, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", { ...fitOk, hq_region: "us_west" }), cf: { country: "VN" } });
+  assert.equal(west.json.url, env.JAMES_URL);
+  const east = await run(fromVietnam, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", { ...fitOk, hq_region: "us_east" }), cf: { country: "VN" } });
+  assert.equal(east.json.url, env.JILL_URL);
+  // A US state from the IP (VPN to California) beats the HQ guess.
+  const vpn = await run(fromVietnam, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", { ...fitOk, hq_region: "us_east" }), cf: { country: "US", regionCode: "CA" } });
+  assert.equal(vpn.json.url, env.JAMES_URL);
 });
 
 test("spam is decided before anything else: no Claude, no region", async () => {

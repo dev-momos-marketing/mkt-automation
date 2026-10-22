@@ -26,6 +26,9 @@ export type Instant = {
   status: "routed" | "follow_up" | "not_fit" | "spam";
   reason: string;
   region: Region;
+  // False when the form's country and time zone and the IP didn't pin the region down.
+  // The Worker then guesses it (guessRegion) once Claude's ICP check is back.
+  regionSure: boolean;
   ae: AEKey | null;
 };
 
@@ -93,31 +96,59 @@ function westFromIp(ip: IpLocation): Region | null {
 }
 
 export function regionFor(country = "", timezone = "", ip: IpLocation = {}): Region {
+  return locate(country, timezone, ip).region;
+}
+
+// The region from what the visitor told us, and whether those clues were enough to be sure.
+export function locate(country = "", timezone = "", ip: IpLocation = {}): { region: Region; sure: boolean } {
   const c = country.toUpperCase();
   if (NORTH_AMERICA.has(c)) {
-    if (isNorthAmericanZone(timezone)) return WEST_ZONES.has(timezone) ? "us_west" : "us_east";
-    return westFromIp(ip) ?? "us_east";
+    if (isNorthAmericanZone(timezone)) return { region: WEST_ZONES.has(timezone) ? "us_west" : "us_east", sure: true };
+    const fromIp = westFromIp(ip);
+    // North American, but the time zone and IP don't say which coast. East for now, to be guessed later.
+    return fromIp ? { region: fromIp, sure: true } : { region: "us_east", sure: false };
   }
-  if (EMEA.has(c)) return "emea";
-  if (APAC.has(c)) return "apac";
+  if (EMEA.has(c)) return { region: "emea", sure: true };
+  if (APAC.has(c)) return { region: "apac", sure: true };
   // "OTHER" or blank: the visitor's time zone is the best clue we have.
+  const fromZone = regionFromZone(timezone);
+  if (fromZone) return { region: fromZone, sure: true };
+  const fromIp = westFromIp(ip);
+  return fromIp ? { region: fromIp, sure: true } : { region: "unknown", sure: false };
+}
+
+function regionFromZone(timezone: string): Region | null {
   if (WEST_ZONES.has(timezone)) return "us_west";
   if (timezone.startsWith("America/")) return "us_east";
   if (MIDDLE_EAST_ZONES.has(timezone) || timezone.startsWith("Europe/") || timezone.startsWith("Africa/")) return "emea";
   if (timezone.startsWith("Asia/") || timezone.startsWith("Australia/") || timezone.startsWith("Pacific/")) return "apac";
-  return westFromIp(ip) ?? "unknown";
+  return null;
+}
+
+// Best guess when locate() wasn't sure, so a confident ICP fit is always routed.
+// Order: where the visitor's IP is, then where Claude thinks the company is based, then East (Jill).
+export function guessRegion(country = "", ip: IpLocation = {}, companyRegion: Region = "unknown"): Region {
+  const c = country.toUpperCase();
+  const ipCountry = (ip.country ?? "").toUpperCase();
+  const companyCoast = companyRegion === "us_west" || companyRegion === "us_east" ? companyRegion : null;
+  // They said North America: only the coast is in question.
+  if (NORTH_AMERICA.has(c)) return westFromIp(ip) ?? companyCoast ?? "us_east";
+  if (NORTH_AMERICA.has(ipCountry)) return westFromIp(ip) ?? companyCoast ?? "us_east";
+  if (EMEA.has(ipCountry)) return "emea";
+  if (APAC.has(ipCountry)) return "apac";
+  return companyRegion !== "unknown" ? companyRegion : "us_east";
 }
 
 // The checks that need no AI, in priority order: spam first, then the location-count part of
 // the ICP check. Claude's ICP check (index.ts) runs next, and the region decides the AE last.
 export function instantRoute(d: FormData, ip: IpLocation = {}): Instant {
   const spam = spamReason(d);
-  if (spam) return { status: "spam", reason: spam, region: "unknown", ae: null };
+  if (spam) return { status: "spam", reason: spam, region: "unknown", regionSure: false, ae: null };
 
   // The region is only used to name the AE: the one who gets the booking or does the follow-up.
-  const region = regionFor(String(d.country ?? ""), String(d.timezone ?? ""), ip);
-  if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, ae: ROUTES[region] };
-  return { status: "routed", reason: "ok", region, ae: ROUTES[region] };
+  const { region, sure: regionSure } = locate(String(d.country ?? ""), String(d.timezone ?? ""), ip);
+  if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, regionSure, ae: ROUTES[region] };
+  return { status: "routed", reason: "ok", region, regionSure, ae: ROUTES[region] };
 }
 
 // 1. Spam. No AI, no cost.

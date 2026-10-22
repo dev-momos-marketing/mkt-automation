@@ -101,8 +101,8 @@ Wait one minute and test again. In Cloudflare's logs these show as `reason: "rat
 2. Just forward the lead to the right person.
 3. If it keeps happening for one country, tell Vincent.
 
-### Problem 6b: Testing from outside the US and every US lead goes to Jill
-**This is expected.** For US, Canada and Mexico, the form decides East vs West from the **computer's time zone**. A VPN doesn't change that. From Vietnam, your time zone is Asia, so the system can't tell the coast and defaults to Jill.
+### Problem 6b: Testing from outside the US and US leads don't go where you expect
+**This is expected.** For US, Canada and Mexico, the form decides East vs West from the **computer's time zone**. A VPN doesn't change that. From Vietnam your time zone is Asia, so the system can't read the coast from you. It uses a US state from your IP if there is one (VPN to a US state), otherwise the coast where **the company is based** (In-N-Out → West → James; CAVA → East → Jill), otherwise Jill. To test a specific coast, use the `?tz=` trick below.
 
 To test like a real West Coast visitor, add **`?tz=America/Los_Angeles`** to the end of the page address, e.g. `momos.com/get-started-new?tz=America/Los_Angeles`.
 
