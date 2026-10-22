@@ -5,9 +5,10 @@ Framer form ──► Cloudflare Worker
                   ├─ spam check + region (instant)
                   ├─ Claude Haiku: ICP fit? (max 3s, spinner on the form)
                   │
-                  ├─ fit / maybe, Jill  ──► Jill's Google Calendar
-                  ├─ fit / maybe, James ──► James's Google Calendar
-                  └─ not fit / spam     ──► momos.com/thank-you
+                  ├─ confident fit, Jill  ──► Jill's Google Calendar
+                  ├─ confident fit, James ──► James's Google Calendar
+                  ├─ 1-5 locations / maybe / no answer ──► thank-you popup, AE follows up
+                  └─ not fit / spam       ──► thank-you popup
 
                   optional, after the redirect:
                   └─ Claude Opus + web search ──► JSON ──► Zapier ──► Salesforce + Slack
@@ -34,13 +35,13 @@ To change who gets which region, edit `ROUTES` in `worker/src/route.ts`.
 
 Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country and location count, and judges from what it already knows. There is no web search or website lookup here, so it stays fast (about 1 to 1.5 seconds).
 
-- `fit` or `maybe`: the visitor gets their AE's calendar.
-- `not_fit` with confidence 0.8 or more: the visitor goes to the not-fit page.
-- Claude takes over 3 seconds or fails: the visitor gets their AE's calendar. A real lead is never blocked.
+- `fit` with confidence 0.7 or more: the visitor gets their AE's calendar (`status: routed`).
+- `not_fit` with confidence 0.8 or more: thank-you popup, no follow-up (`status: not_fit`).
+- Anything else (`maybe`, unsure, Claude over 3 seconds or failing), and every 1–5 location lead: thank-you popup, and the region's AE follows up (`status: follow_up`, sent to Zapier with `ae` set).
 
 Obvious spam (filled honeypot, form filled in under 2 seconds, bad or throwaway email) never reaches Claude.
 
-What counts as ICP is the prompt in `worker/src/fit.ts`. The confidence bar is `NOT_FIT_MIN_CONFIDENCE` in the same file.
+What counts as ICP is the prompt in `worker/src/fit.ts`. The confidence bars are `FIT_MIN_CONFIDENCE` and `NOT_FIT_MIN_CONFIDENCE` in the same file.
 
 Every lead writes one line to the Worker's **Logs** tab: company, region, AE, Claude's verdict and confidence. Check it now and then to see who is being turned away.
 
@@ -88,7 +89,7 @@ Add a second secret, `ZAPIER_HOOK_URL`. Then, after each redirect, Claude Opus 5
 ```json
 {
   "lead": { "first_name": "", "last_name": "", "email": "", "company": "", "job_title": "", "country": "", "locations": "" },
-  "routing": { "status": "routed | not_fit | spam", "reason": "ok", "ae": "James", "region": "us_west", "redirect_url": "", "region_mismatch": false },
+  "routing": { "status": "routed | follow_up | not_fit | spam", "reason": "ok", "ae": "James", "region": "us_west", "redirect_url": "", "region_mismatch": false },
   "fit": { "icp_fit": "fit | maybe | not_fit | unavailable | skipped", "confidence": 0.9, "reason": "" },
   "verification": {
     "verdict": "verified | suspicious | spam",
@@ -113,7 +114,7 @@ Zapier setup:
 
 1. Trigger: **Webhooks by Zapier > Catch Hook** (not Raw). Copy its URL into the `ZAPIER_HOOK_URL` secret.
 2. **Salesforce Create Lead**: map `lead__*` and `utm__*` fields. Put `verification__summary` in the description.
-3. Optional **Filter**: only continue if `routing__status` is `routed`.
+3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`.
 4. **Slack** message:
 
 ```

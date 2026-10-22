@@ -4,7 +4,7 @@
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
 import { instantRoute, type FormData, type Instant, type IpLocation } from "./route.ts";
-import { checkFit, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
+import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 
 export interface Env {
@@ -45,18 +45,20 @@ function withTimeout<T>(p: Promise<T>, ms: number, message: string): Promise<T> 
 
 export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: string };
 
-// Asks Claude about fit and turns a confident not_fit into a not_fit route.
-// Any failure lets the lead through: a real lead is never blocked by a slow or broken check.
+// Only a confident ICP fit books a demo. A confident not_fit is turned away. Everything else,
+// including no answer in time, gets the popup and goes to Zapier for the AE to follow up.
 async function gate(form: FormData, instant: Instant, env: Env, timings: Timings): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
   try {
     const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS, timings), FIT_BUDGET_MS, "fit check took too long");
+    if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
     if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
       return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
     }
-    return { instant, fit };
+    return { instant: { ...instant, status: "follow_up", reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
   } catch (err) {
-    return { instant, fit: { icp_fit: "unavailable", error: err instanceof Error ? err.message : String(err) } };
+    const error = err instanceof Error ? err.message : String(err);
+    return { instant: { ...instant, status: "follow_up", reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
   }
 }
 
@@ -81,6 +83,7 @@ function testTimezone(pageUrl: unknown): string | null {
 }
 
 function urlFor(instant: Instant, env: Env): string {
+  if (instant.status !== "routed") return env.NOT_FIT_URL;
   if (instant.ae === "james") return env.JAMES_URL;
   if (instant.ae === "jill") return env.JILL_URL;
   return env.NOT_FIT_URL;
@@ -159,7 +162,7 @@ export default {
 
     if (await rateLimited(req, env)) {
       console.log(JSON.stringify({ status: "spam", reason: "rate limited" }));
-      return Response.json({ url: env.NOT_FIT_URL, ae: null, region: null }, { headers });
+      return Response.json({ url: env.NOT_FIT_URL, status: "spam", ae: null, region: null }, { headers });
     }
 
     let form: FormData;
@@ -193,6 +196,6 @@ export default {
     }));
     if (env.ZAPIER_HOOK_URL) ctx.waitUntil(verifyAndSend(form, instant, url, fit, env, env.ZAPIER_HOOK_URL));
     // ae and region are only for checking tests in the browser console. The form only uses url.
-    return Response.json({ url, ae: instant.ae, region: instant.region }, { headers });
+    return Response.json({ url, status: instant.status, ae: instant.status === "routed" ? instant.ae : null, region: instant.region }, { headers });
   },
 };

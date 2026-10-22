@@ -12,19 +12,23 @@ export const Fit = z.object({
 });
 export type Fit = z.infer<typeof Fit>;
 
-// Only a confident not_fit turns the visitor away. Everything else books a demo.
+// Only a confident fit books a demo. A confident not_fit is turned away. Everything in
+// between (maybe, unsure, no answer) gets the popup and the AE follows up.
+export const FIT_MIN_CONFIDENCE = 0.7;
 export const NOT_FIT_MIN_CONFIDENCE = 0.8;
 
 const SYSTEM = `You screen demo requests for Momos, a customer experience platform for restaurant and F&B brands (reviews, social, messaging, AI agents). Decide in one step whether this lead should get a sales demo.
 
+Only a fit books a demo straight away, so be strict. Anything else is followed up by a person later, so nothing is lost by answering maybe.
+
 ICP:
-- fit: a restaurant, cafe, bar, QSR, bakery, F&B franchise, food hall or hospitality group with 6+ locations, or a franchisor / brand HQ.
-- maybe: F&B with 1-5 locations, or F&B but the size is unclear, or you cannot tell what the company does.
+- fit: you are confident it is a restaurant, cafe, bar, QSR, bakery, F&B franchise, food hall or hospitality group with 6+ locations, or a franchisor / brand HQ, and the job title belongs to someone who could buy software for it (owner, founder, executive, marketing, operations, CX, digital, IT, franchise).
+- maybe: F&B but the size is unclear, a title that doesn't fit a buyer, or you cannot tell what the company does.
 - not_fit: clearly not F&B (agencies, consultancies, software vendors, investors, recruiters, schools), or the person is a job seeker, student, journalist or someone selling to Momos.
 - not_fit also covers companies that sell to restaurants rather than run them, even though they work in F&B: POS and payments (Toast, Square, Lightspeed), delivery and ordering (DoorDash, Uber Eats, Olo, ChowNow), reservations (OpenTable, SevenRooms, Resy), review and reputation software (Birdeye, Podium, Yext, Reputation, Ovation) and food distributors. They are vendors or competitors, not customers.
 - Exception: marketing or digital agencies that specialise in restaurants or hospitality are maybe, not not_fit. They often run Momos for several brands at once.
 
-You only have the form. Use what you know about the company and its email domain. Do not guess against the lead: if the evidence is thin, answer maybe. Answer not_fit with high confidence only when the evidence clearly says so.
+You only have the form. Use what you know about the company and its email domain. If the evidence is thin, answer maybe, not fit or not_fit. Answer not_fit with high confidence only when the evidence clearly says so.
 
 Answer straight away. Keep reason to 10 words or fewer.
 

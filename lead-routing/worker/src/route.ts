@@ -21,7 +21,9 @@ export type FormData = {
 };
 
 export type Instant = {
-  status: "routed" | "not_fit" | "spam";
+  // routed: books a demo now. follow_up: thank-you popup, and the region's AE follows up
+  // (still sent to Zapier with `ae` set). not_fit / spam: thank-you popup, no follow-up.
+  status: "routed" | "follow_up" | "not_fit" | "spam";
   reason: string;
   region: Region;
   ae: AEKey | null;
@@ -36,9 +38,9 @@ export const ROUTES: Record<Region, AEKey> = {
   unknown: "jill",
 };
 
-// Location answers that are never ICP, no matter what Claude says. Empty means
-// Claude decides. Add "1-5" here to always send small brands to NOT_FIT_URL.
-export const NOT_FIT_BUCKETS: string[] = [];
+// Location answers that never book a demo straight away. They get the thank-you popup and
+// the region's AE follows up later. Claude isn't asked, which also makes them faster.
+export const FOLLOW_UP_BUCKETS: string[] = ["1-5"];
 
 // Matches every country in the form. Latin America and the Caribbean aren't listed here,
 // so the visitor's time zone decides (Eastern-ish goes to Jill, Pacific/Mountain to James).
@@ -115,7 +117,7 @@ export function instantRoute(d: FormData, ip: IpLocation = {}): Instant {
   if (typeof d.elapsedMs === "number" && d.elapsedMs < 2000) return { status: "spam", reason: "form filled in under 2s", region, ae: null };
   if (!/^[^\s@]+@[^\s@]+\.[a-z]{2,}$/.test(email)) return { status: "spam", reason: "invalid email", region, ae: null };
   if (DISPOSABLE.has(domain)) return { status: "spam", reason: "throwaway email", region, ae: null };
-  if (NOT_FIT_BUCKETS.includes(String(d.locations ?? ""))) return { status: "not_fit", reason: `${d.locations} locations`, region, ae: null };
+  if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, ae: ROUTES[region] };
 
   return { status: "routed", reason: "ok", region, ae: ROUTES[region] };
 }

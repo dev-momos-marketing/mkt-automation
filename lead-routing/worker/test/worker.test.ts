@@ -76,7 +76,8 @@ test("instant routing", () => {
   assert.equal(instantRoute({ ...form, website: "http://spam" }).status, "spam");
   assert.equal(instantRoute({ ...form, elapsedMs: 900 }).status, "spam");
   assert.equal(instantRoute({ ...form, email: "x@mailinator.com" }).status, "spam");
-  assert.equal(instantRoute({ ...form, locations: "1-5" }).status, "routed");
+  assert.equal(instantRoute({ ...form, locations: "1-5" }).status, "follow_up");
+  assert.equal(instantRoute({ ...form, locations: "1-5" }).ae, "james");
 });
 
 test("instant routing is microseconds", () => {
@@ -240,11 +241,27 @@ test("confident not_fit goes to the not-fit page", async () => {
   assert.equal(sent[0].fit.reason, "Marketing agency, not F&B.");
 });
 
-test("unsure not_fit and maybe still get a calendar", async () => {
-  const unsure = { icp_fit: "not_fit", confidence: 0.6, reason: "Hard to tell." };
-  assert.equal((await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", unsure) })).json.url, env.JAMES_URL);
-  const maybe = { icp_fit: "maybe", confidence: 0.9, reason: "Single cafe." };
-  assert.equal((await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", maybe) })).json.url, env.JAMES_URL);
+test("anything short of a confident fit gets the popup and goes to Zapier for the AE to follow up", async () => {
+  for (const answer of [
+    { icp_fit: "maybe", confidence: 0.9, reason: "Size unclear." },
+    { icp_fit: "fit", confidence: 0.6, reason: "Probably a chain." },
+    { icp_fit: "not_fit", confidence: 0.6, reason: "Hard to tell." },
+  ]) {
+    const { json, sent } = await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", answer) });
+    assert.equal(json.url, env.NOT_FIT_URL, answer.reason);
+    assert.equal(sent[0].routing.status, "follow_up");
+    assert.equal(sent[0].routing.ae, "James", "the region's AE is named for the follow-up");
+    assert.equal(sent[0].verification.verdict, "verified", "follow-ups are still researched");
+  }
+});
+
+test("1-5 locations get the popup without asking Claude, and the AE follows up", async () => {
+  const { json, sent, fitCalls } = await run({ ...form, locations: "1-5" }, claudeOk);
+  assert.equal(json.url, env.NOT_FIT_URL);
+  assert.equal(fitCalls.length, 0);
+  assert.equal(sent[0].routing.status, "follow_up");
+  assert.equal(sent[0].routing.ae, "James");
+  assert.equal(sent[0].routing.reason, "1-5 locations");
 });
 
 test("?tz= on the page URL overrides the browser time zone (for testing)", async () => {
@@ -267,15 +284,16 @@ test("more than 5 submissions a minute from one IP get the popup, with no Claude
   assert.equal(sixth.fitCalls.length, 0);
 });
 
-test("fit check failure lets the lead through", async () => {
+test("fit check failure means follow-up, not a blind booking", async () => {
   const { json, sent } = await run(form, claudeOk, {
     fit: () => Response.json({ type: "error", error: { type: "overloaded_error", message: "busy" } }, { status: 529 }),
   });
-  assert.equal(json.url, env.JAMES_URL);
+  assert.equal(json.url, env.NOT_FIT_URL);
+  assert.equal(sent[0].routing.status, "follow_up");
   assert.equal(sent[0].fit.icp_fit, "unavailable");
 });
 
-test("slow fit check lets the lead through after 3 seconds", async () => {
+test("slow fit check gives up after 3 seconds and the AE follows up", async () => {
   const { json, ms } = await run(form, claudeOk, {
     fit: (req) =>
       new Promise((resolve, reject) => {
@@ -287,7 +305,7 @@ test("slow fit check lets the lead through after 3 seconds", async () => {
       }),
   });
   console.log(`slow check answered in ${ms.toFixed(0)} ms`);
-  assert.equal(json.url, env.JAMES_URL);
+  assert.equal(json.url, env.NOT_FIT_URL);
   assert.ok(ms < 3_500);
 });
 

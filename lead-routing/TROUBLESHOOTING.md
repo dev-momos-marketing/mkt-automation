@@ -63,18 +63,25 @@ Do this whenever something feels off, and after any change. Use a normal browser
 3. Click **Zap History**:
    - **Runs with errors** (red): click one. It usually says Slack or Salesforce needs reconnecting. Go to **Apps**, reconnect that app, then **Replay** the failed runs.
    - **No runs at all since it broke:** the routing service isn't sending to Zapier. Message Vincent (he'll check the `ZAPIER_HOOK_URL` setting in Cloudflare).
-4. **"Stopped by filter" runs are normal.** Those are not-fit and junk leads, which we don't send to Salesforce.
+4. **"Stopped by filter" runs are normal.** Those are clear not-fit and junk leads, which we don't send to Salesforce. Follow-up leads (status `follow_up`) do go through.
 
 ### Problem 4: Slack messages say ❔ "unavailable" on most leads
 **What it means:** the AI research isn't working. Usually that's the money running out.
 
 1. Log in to **console.anthropic.com** → **Billing**. Check there's credit left and the **monthly spend limit** hasn't been reached. Add credit or raise the limit. About $25 a month is plenty for us.
 2. Check **status.anthropic.com** for an outage.
-3. Leads still reach the calendars while this is broken. Only the summary is missing.
+3. If only the research is broken, leads still reach the calendars and only the summary is missing. If the fit check is broken too (spend limit hit or outage), every lead gets the popup and arrives in Slack as "follow_up", so AEs need to reach out by hand until it's fixed.
 4. One ❔ now and then is normal: the lookup took too long.
 
 ### Problem 5: A real restaurant brand got the "thanks" popup instead of a calendar
-**What it means:** the AI wrongly thought they weren't a fit. It's rare, because we only turn people away when the AI is very sure.
+**Usually this is on purpose.** Only leads the AI is confident are a good fit book a demo straight away. These get the popup and land in **Slack and Salesforce marked "follow_up"** for their AE to contact:
+- brands with **1–5 locations**
+- leads the AI wasn't sure about
+- leads that came in while the AI was slow or down
+
+Check Slack first. They should be there.
+
+If they're **not** in Slack, the AI decided they were "not fit":
 
 1. Find their details: **Zapier** → **Zap History** → the run around that time marked **"Stopped by filter"**. Click it to see their name, email and company.
 2. Reach out to them by hand. The popup also gave them **sales@momos.com**, so check that inbox too.

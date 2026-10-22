@@ -31,11 +31,11 @@ t "Guzman y Gomez, Sydney" JAMES '{"email":"t@gyg.com.au","company":"Guzman y Go
 t "Jollibee, Manila" JAMES '{"email":"t@jollibee.com.ph","company":"Jollibee Foods Corporation","title":"Customer Experience Lead","country":"PH","locations":"250+","timezone":"Asia/Manila","elapsedMs":8000}'
 t "Taco chain, Tijuana" JAMES '{"email":"t@tacoselgordo.com","company":"Tacos El Gordo","title":"Owner","country":"MX","locations":"6-49","timezone":"America/Tijuana","elapsedMs":8000}'
 
-echo "── Small or unclear (maybe) → still gets a calendar"
-t "One cafe, gmail, Chicago" JILL '{"email":"sunnysidecafe@gmail.com","company":"Sunny Side Cafe","title":"Owner","country":"US","locations":"1-5","timezone":"America/Chicago","elapsedMs":8000}'
-t "Small bakery, Seattle" JAMES '{"email":"hello@lunabakeshop.com","company":"Luna Bake Shop","title":"Founder","country":"US","locations":"1-5","timezone":"America/Los_Angeles","elapsedMs":8000}'
-t "Restaurant marketing agency" JILL '{"email":"hello@savorrestaurantmarketing.com","company":"Savor Restaurant Marketing","title":"Founder","country":"US","locations":"1-5","timezone":"America/New_York","elapsedMs":8000}'
-t "Unknown group, vague title" JILL '{"email":"ops@hgrouphq.com","company":"H Group","title":"Operations","country":"US","locations":"6-49","timezone":"America/New_York","elapsedMs":8000}'
+echo "── Small (1-5) or unclear (maybe) → thank-you, AE follows up"
+t "One cafe, gmail, Chicago" NOTFIT '{"email":"sunnysidecafe@gmail.com","company":"Sunny Side Cafe","title":"Owner","country":"US","locations":"1-5","timezone":"America/Chicago","elapsedMs":8000}'
+t "Small bakery, Seattle" NOTFIT '{"email":"hello@lunabakeshop.com","company":"Luna Bake Shop","title":"Founder","country":"US","locations":"1-5","timezone":"America/Los_Angeles","elapsedMs":8000}'
+t "Restaurant marketing agency" NOTFIT '{"email":"hello@savorrestaurantmarketing.com","company":"Savor Restaurant Marketing","title":"Founder","country":"US","locations":"1-5","timezone":"America/New_York","elapsedMs":8000}'
+t "Unknown group, vague title" NOTFIT '{"email":"ops@hgrouphq.com","company":"H Group","title":"Operations","country":"US","locations":"6-49","timezone":"America/New_York","elapsedMs":8000}'
 
 echo "── Not fit → thank-you"
 t "Marketing agency" NOTFIT '{"email":"t@wpromote.com","company":"Wpromote","title":"Account Executive","country":"US","locations":"1-5","timezone":"America/Los_Angeles","elapsedMs":8000}'
