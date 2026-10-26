@@ -1,0 +1,26 @@
+name = "momos-beacon"
+main = "src/index.ts"
+compatibility_date = "2026-10-01"
+
+# Every minute: read the Leads Salesforce got one minute earlier and post the legit ones.
+[triggers]
+crons = ["* * * * *"]
+
+# One log line per new lead: Worker > Observability > Logs.
+[observability]
+enabled = true
+
+[vars]
+SF_DOMAIN = "https://momos.my.salesforce.com"
+SLACK_CHANNEL_ID = "C0XXXXXXXXX" # #partner-deals. Right-click the channel > View channel details, ID at the bottom.
+# Leads with these Status values are never posted.
+SKIP_STATUSES = "Unqualified,Junk,Spam,Disqualified"
+# Our own people, never posted.
+INTERNAL_DOMAINS = "momos.com,momos.io"
+# More legit leads than this in one minute (an import): one summary message instead of a card each.
+BATCH_SIZE = "5"
+
+# Secrets (Worker > Settings > Variables and Secrets, never commit):
+#   SF_CLIENT_ID       Consumer Key of the Salesforce app
+#   SF_CLIENT_SECRET   Consumer Secret of the Salesforce app
+#   SLACK_BOT_TOKEN    Beacon's Bot User OAuth Token (xoxb-...)
