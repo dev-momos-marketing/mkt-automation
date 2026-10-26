@@ -1,5 +1,5 @@
 // Beacon: posts every new, legit Salesforce Lead to Slack.
-// Every minute (cron in wrangler.toml) it reads the Leads created in one past minute,
+// Every 30 minutes (cron in wrangler.toml) it reads the Leads created in the 30 minutes before,
 // drops spam, tests and our own people (legit.ts), and posts the rest as Beacon.
 // Any source works: Book-a-demo (via Zapier), conference and event leads typed in by hand, imports.
 import { notLegitReason, rulesFrom, type Lead } from "./legit.ts";
@@ -14,17 +14,20 @@ export interface Env {
   SLACK_CHANNEL_ID: string;
   SKIP_STATUSES?: string; // comma separated Lead Status values
   INTERNAL_DOMAINS?: string; // comma separated
-  BATCH_SIZE?: string; // more legit leads than this in one minute: one summary message
+  BATCH_SIZE?: string; // more legit leads than this in one run: one summary message
 }
 
 const MINUTE = 60_000;
+// How often Beacon runs. Keep in step with crons in wrangler.toml.
+export const EVERY_MINUTES = 30;
 
-// Each run reads the minute that ended one minute ago: [run - 2 min, run - 1 min).
+// Each run reads the 30 minutes that ended one minute ago, e.g. the 10:30 run reads 9:59 to 10:29.
 // The windows follow each other with no gap or overlap, so every lead is read exactly once
 // and nothing needs to be stored. The minute of delay lets slow Salesforce saves land first.
 export function windowFor(scheduledTime: number): { from: Date; to: Date } {
-  const minute = Math.floor(scheduledTime / MINUTE) * MINUTE;
-  return { from: new Date(minute - 2 * MINUTE), to: new Date(minute - MINUTE) };
+  const every = EVERY_MINUTES * MINUTE;
+  const run = Math.floor(scheduledTime / every) * every;
+  return { from: new Date(run - every - MINUTE), to: new Date(run - MINUTE) };
 }
 
 export async function notify(env: Env, from: Date, to: Date): Promise<{ posted: number; skipped: number }> {
@@ -40,7 +43,7 @@ export async function notify(env: Env, from: Date, to: Date): Promise<{ posted: 
     if (!reason) legit.push(lead);
   }
 
-  const batch = Number(env.BATCH_SIZE ?? "5") || 5;
+  const batch = Number(env.BATCH_SIZE ?? "10") || 10;
   if (legit.length > batch) {
     await post(env.SLACK_BOT_TOKEN, env.SLACK_CHANNEL_ID, batchSummary(legit, sf.instanceUrl));
   } else {

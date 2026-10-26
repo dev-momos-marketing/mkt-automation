@@ -12,7 +12,7 @@ const env: Env = {
   SLACK_CHANNEL_ID: "C123",
   SKIP_STATUSES: "Unqualified,Junk",
   INTERNAL_DOMAINS: "momos.com",
-  BATCH_SIZE: "5",
+  BATCH_SIZE: "5", // lower than the default so the import test stays small
 };
 
 const lead: Lead = {
@@ -54,14 +54,14 @@ test("not legit leads", () => {
 });
 
 test("windows follow each other with no gap or overlap", () => {
-  const t = Date.parse("2026-10-26T07:43:00.000Z");
+  const t = Date.parse("2026-10-26T10:30:00.000Z");
   const a = windowFor(t);
-  const b = windowFor(t + 60_000);
-  assert.equal(a.from.toISOString(), "2026-10-26T07:41:00.000Z");
-  assert.equal(a.to.toISOString(), "2026-10-26T07:42:00.000Z");
+  const b = windowFor(t + 30 * 60_000);
+  assert.equal(a.from.toISOString(), "2026-10-26T09:59:00.000Z");
+  assert.equal(a.to.toISOString(), "2026-10-26T10:29:00.000Z");
   assert.equal(b.from.getTime(), a.to.getTime());
-  // A late start still reads the same minute.
-  assert.equal(windowFor(t + 4_000).from.getTime(), a.from.getTime());
+  // A late start still reads the same 30 minutes.
+  assert.equal(windowFor(t + 40_000).from.getTime(), a.from.getTime());
 });
 
 test("SOQL query", () => {

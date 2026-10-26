@@ -2,9 +2,10 @@ name = "momos-beacon"
 main = "src/index.ts"
 compatibility_date = "2026-10-01"
 
-# Every minute: read the Leads Salesforce got one minute earlier and post the legit ones.
+# Every 30 minutes (:00 and :30): read the Leads Salesforce got in the 30 minutes before
+# and post the legit ones. Keep in step with EVERY_MINUTES in src/index.ts.
 [triggers]
-crons = ["* * * * *"]
+crons = ["0,30 * * * *"]
 
 # One log line per new lead: Worker > Observability > Logs.
 [observability]
@@ -18,8 +19,8 @@ SLACK_CHANNEL_ID = "C0XXXXXXXXX" # #partner-deals. Right-click the channel > Vie
 SKIP_STATUSES = "Unqualified,Junk,Spam,Disqualified"
 # Our own people, never posted.
 INTERNAL_DOMAINS = "momos.com,momos.io"
-# More legit leads than this in one minute (an import): one summary message instead of a card each.
-BATCH_SIZE = "5"
+# More legit leads than this in one run (an import): one summary message instead of a card each.
+BATCH_SIZE = "10"
 
 # Secrets (Worker > Settings > Variables and Secrets, never commit):
 #   SF_CLIENT_ID       Consumer Key of the Salesforce app
