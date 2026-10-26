@@ -11,7 +11,8 @@ crons = ["* * * * *"]
 enabled = true
 
 [vars]
-SF_DOMAIN = "https://momos.my.salesforce.com"
+# Momos org. Lightning is fun-ruby-7024.lightning.force.com, the API lives on my.salesforce.com.
+SF_DOMAIN = "https://fun-ruby-7024.my.salesforce.com"
 SLACK_CHANNEL_ID = "C0XXXXXXXXX" # #partner-deals. Right-click the channel > View channel details, ID at the bottom.
 # Leads with these Status values are never posted.
 SKIP_STATUSES = "Unqualified,Junk,Spam,Disqualified"

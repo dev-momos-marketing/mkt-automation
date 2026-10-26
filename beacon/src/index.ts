@@ -7,7 +7,7 @@ import { login, newLeads } from "./salesforce.ts";
 import { batchSummary, leadCard, post } from "./slack.ts";
 
 export interface Env {
-  SF_DOMAIN: string; // e.g. https://momos.my.salesforce.com
+  SF_DOMAIN: string; // e.g. https://fun-ruby-7024.my.salesforce.com
   SF_CLIENT_ID: string;
   SF_CLIENT_SECRET: string;
   SLACK_BOT_TOKEN: string; // Beacon's xoxb- token

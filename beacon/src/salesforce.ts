@@ -10,7 +10,7 @@ const FIELDS = [
 
 export type Session = { accessToken: string; instanceUrl: string };
 
-// domain: the org's My Domain, e.g. https://momos.my.salesforce.com
+// domain: the org's My Domain, e.g. https://fun-ruby-7024.my.salesforce.com
 export async function login(domain: string, clientId: string, clientSecret: string): Promise<Session> {
   const res = await fetch(`${domain.replace(/\/$/, "")}/services/oauth2/token`, {
     method: "POST",

@@ -57,7 +57,7 @@ A Salesforce admin does this once.
 3. Turn on **Enable Client Credentials Flow**.
 4. Under the app's **Policies**, set **Run As** to a user who can read all Leads. A dedicated integration user is best.
 5. Copy the **Consumer Key** and **Consumer Secret**.
-6. Setup → **My Domain**: check that `SF_DOMAIN` in `wrangler.toml` matches, e.g. `https://momos.my.salesforce.com`.
+6. `SF_DOMAIN` in `wrangler.toml` is Momos's org, `https://fun-ruby-7024.my.salesforce.com` (from the Lightning address `fun-ruby-7024.lightning.force.com`). Create the Beacon app in that same org.
 
 ### 3. Cloudflare Worker, deployed from GitHub
 
