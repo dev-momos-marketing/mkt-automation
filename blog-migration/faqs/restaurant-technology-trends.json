@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Technology Trends: FAQ",
+  "questions": [
+    {
+      "q": "What are the biggest restaurant technology trends?",
+      "a": "Key trends include QR code menus, online ordering through delivery apps and first-party channels, automated inventory management and kitchen display systems. Self-ordering kiosks, cloud kitchens, virtual brands and marketing automation have also grown. Digital loyalty programs and online reputation management round out the list."
+    },
+    {
+      "q": "Why did restaurants adopt QR code menus?",
+      "a": "QR code menus spread when guests wanted less physical contact during the pandemic. Guests scan the code with their phone camera to view the menu, order and often pay, without downloading an app. That frees staff to focus on more valuable conversations with guests."
+    },
+    {
+      "q": "What's the difference between a cloud kitchen and a virtual brand?",
+      "a": "A cloud kitchen takes only delivery and takeaway orders and has no dining room for guests. A virtual brand is a customer-facing brand that exists online and is cooked in an existing kitchen, so one kitchen can run several brands. Both let operators earn more from a single location with lower space and labor costs."
+    },
+    {
+      "q": "Are self-ordering kiosks worth it for restaurants?",
+      "a": "Kiosks can shorten queues at the counter and ease the workload on your team. Orders tend to be more accurate because guests enter them directly. Kiosks can also suggest combos and add-ons, which helps with upselling."
+    },
+    {
+      "q": "How should a restaurant choose which technology to invest in?",
+      "a": "Start with the problems that cost you most today, such as waste, slow service or scattered guest feedback, and look for tools that solve them. Make sure new tools work with your existing POS and other systems, so data flows between them. Choosing compatible providers lets you automate more across the whole operation."
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Reputation Management: FAQ",
+  "questions": [
+    {
+      "q": "What is restaurant reputation management?",
+      "a": "Restaurant reputation management is the process of monitoring, responding to and acting on guest feedback from reviews, surveys and other sources. It treats your reputation as a marketing engine as well as something to defend when a bad review shows up. Done well, it helps you win guests who are comparing you with nearby restaurants."
+    },
+    {
+      "q": "Which review platforms should a restaurant manage?",
+      "a": "Google Business Profile comes first for most restaurants, since it affects how often you appear in local search and Maps. Yelp, TripAdvisor, Facebook, OpenTable and delivery apps like DoorDash also matter, depending on your guests and location. Delivery ratings deserve extra attention because a low in-app rating can reduce your visibility in that app."
+    },
+    {
+      "q": "How should I respond to positive and negative restaurant reviews?",
+      "a": "For positive reviews, reply promptly, use the guest's name, mention something specific they enjoyed and invite them back. For negative reviews, respond quickly and calmly, acknowledge the problem and offer to make it right. If a positive review includes a small complaint, address that too, since it shows real care."
+    },
+    {
+      "q": "How do I measure my restaurant's reputation?",
+      "a": "Track your average star rating per platform and per location, review volume, response rate and average response time. Sentiment, NPS and your negative review rate show how guests really feel beyond the stars. Comparing your rating with nearby competitors tells you where you stand in your market."
+    },
+    {
+      "q": "How can reviews help improve restaurant operations?",
+      "a": "Tag every review by topic, such as food quality, wait times, order accuracy or cleanliness, then look for patterns by location and over time. A complaint that repeats across several guests points to a process problem worth investigating. Momos does this automatically, reading reviews across all your locations with AI and showing which stores are underperforming and why."
+    }
+  ]
+}

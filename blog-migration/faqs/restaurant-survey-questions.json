@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Survey Questions: FAQ",
+  "questions": [
+    {
+      "q": "What questions should I ask in a restaurant survey?",
+      "a": "Start with how the guest ordered, which location or app they used and an overall rating. Then ask them to rate key categories like food, service, ambiance and value, followed by a question about how likely they are to recommend you. Add questions on reservations or online ordering only for guests who used them."
+    },
+    {
+      "q": "How long should a restaurant survey be?",
+      "a": "Keep it as short as you can while still getting useful answers. Routing questions help a lot, because dine-in and delivery guests only see the questions that match their visit. Follow-up questions should appear only when a guest gives a low rating, so happy guests can finish in a few taps."
+    },
+    {
+      "q": "How do I get guests to fill out a restaurant survey?",
+      "a": "Tell guests up front why you're asking, how long it takes and that there's a reward at the end. Share the survey where they already are, through a QR code, a receipt link, a post-meal email or SMS. A coupon, discount or loyalty points on the thank-you screen gives them a reason to finish and come back."
+    },
+    {
+      "q": "What should I do with restaurant survey results?",
+      "a": "Segment responses by visit type, time of day and location, then focus on the complaints that come up most often. Share what you learn with front-of-house and kitchen teams, and follow up directly with unhappy guests. Track scores month over month so you can see whether your fixes are working."
+    },
+    {
+      "q": "Should a restaurant survey ask for personal details?",
+      "a": "Demographic questions like age range, visit frequency and dietary preferences are useful for segmenting responses, but they should stay optional. Place them near the end so they don't put guests off the main questions. Asking only what you'll actually use keeps the survey quick and respectful."
+    }
+  ]
+}
