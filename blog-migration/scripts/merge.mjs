@@ -48,10 +48,14 @@ export function sectionOf(place) {
     return m ? Number(m[1]) : null
 }
 
+// The blog template has frames for Section 1 to Section 20 only, so text in sections 21 and up has
+// never been on the site. It stays out, with a warning, unless BLOG_MAX_SECTION says otherwise.
+export const MAX_SECTION = Number(process.env.BLOG_MAX_SECTION) || 20
+
 // Builds one post's body in one language. `embeds` are the post's own, in template order. An embed
 // inside a section the post leaves empty is left out: Framer hides the empty section, embed and all,
 // so it isn't on the live page either.
-export function mergePost({ fieldData, sections, embeds = [], localeId = null }) {
+export function mergePost({ fieldData, sections, embeds = [], localeId = null, maxSection = MAX_SECTION }) {
     const byPlace = new Map()
     const unplaced = []
     for (const e of embeds) {
@@ -73,6 +77,11 @@ export function mergePost({ fieldData, sections, embeds = [], localeId = null })
         const body = bodyField ? localized(fieldData[bodyField.id], localeId) : null
         const titleBlock = title ? titleHtml(title.value, titleField.type) : ""
         const bodyBlock = body && !isEmptyHtml(body.value) ? body.value.trim() : ""
+        if (n > maxSection) {
+            if (titleBlock || bodyBlock) warnings.push(`Section ${n} has text, but the template only shows sections 1–${maxSection}, so it stays out (it isn't on the live page either)`)
+            for (const e of byPlace.get(n) ?? []) skipped.push(e.id)
+            continue
+        }
         if (titleBlock || bodyBlock) {
             filled++
             if ((!title || title.translated || !titleBlock) && (!body || body.translated || !bodyBlock)) translated++
