@@ -8,6 +8,7 @@
   "scripts": {
     "inventory": "node scripts/inventory.mjs",
     "embeds": "node scripts/embeds.mjs",
+    "dryrun": "node scripts/dryrun.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {

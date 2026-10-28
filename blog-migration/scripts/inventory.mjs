@@ -186,7 +186,7 @@ ${templateError ? `**The template wasn't read.** ${templateError}\n` : ""}- ${em
 - ${embedRows.filter(r => r.has_script).length} contain a <script>; ${embedRows.filter(r => r.mode === "url").length} load a URL
 - ${embedRows.filter(r => r.guessed_post.length).length} have a guessed post (its slug or title appears in the embed)
 
-Framer's API returns no property values for these embeds, so their code, posts and places come from the published site: see "Embeds on the live site" below and \`live/\`.
+Framer's API doesn't always return these embeds' code, and never says which post shows each one, so the migration takes their code, posts and places from the published site: see "Embeds on the live site" below and \`live/\`.
 `
 await write("summary.md", summary)
 console.log(summary)
