@@ -51,6 +51,7 @@ await write("embeds.json", `${JSON.stringify(embeds.map((e, i) => ({
     id: e.id,
     posts: rows[i].posts,
     rule: rows[i].rule,
+    ruleData: e.rule,
     place: e.place,
     file: rows[i].file,
     translations: Object.fromEntries(rows[i].translations.map(code => [code, `embeds/${e.id}.${code}.html`])),

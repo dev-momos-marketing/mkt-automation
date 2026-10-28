@@ -59,7 +59,7 @@ cd blog-migration && npm ci && npm run inventory && npm run embeds
 
 - 115 posts, every one translated into French, Spanish and Japanese, using up to 26 Section blocks.
 - **140 embeds, 792 KB of HTML, inside a 962 KB script that every blog post downloads**, with 3 translation files of the same size. A post shows 0 to 10 of them; 45 of 112 live posts show any.
-- Each embed is shown by a rule on the post's slug, so the embed-to-post mapping is read automatically: 139 belong to exactly one post, and one (`RnVRZQ7G9`) has an empty rule and shows nowhere.
+- Each embed is shown by a rule on a CMS field (`vhLy0TtfC`) that usually holds the post's slug, so the embed-to-post mapping is read automatically. Some posts hold another post's slug there (duplicated posts kept the original's value) or nothing, and show those embeds on the live site; the migration reads each post's own value, and the embeds report's post lists assume the slug: 139 belong to exactly one post, and one (`RnVRZQ7G9`) has an empty rule and shows nowhere.
 - Checked on six live posts: the embeds on each page are exactly the ones the script lists.
 
 ## Step 2: fields and components

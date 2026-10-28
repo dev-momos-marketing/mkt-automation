@@ -45,10 +45,19 @@ export function parseTemplate(source) {
     const sections = []
     const embeds = []
     const localeModules = {}
+    // Which CMS field each variable holds: `{ vhLy0TtfC: C = p.vhLy0TtfC ?? "" } = props`.
+    const fieldOf = new Map()
 
     ancestor(ast, {
         VariableDeclarator: n => collect(n),
         AssignmentExpression: n => collect(n),
+        ObjectPattern(node) {
+            for (const p of node.properties) {
+                const key = p.type === "Property" ? p.key?.name ?? p.key?.value : null
+                const target = p.value?.type === "AssignmentPattern" ? p.value.left : p.value
+                if (key && target?.type === "Identifier") fieldOf.set(target.name, key)
+            }
+        },
         ObjectExpression(node, _state, ancestors) {
             const name = stringOf(prop(node, "data-framer-name"))
             if (name && /^section\s*\d+$/i.test(name)) sections.push({ name, start: node.start, end: node.end })
@@ -89,6 +98,8 @@ export function parseTemplate(source) {
         const b = binding(node)
         if (!b) return
         const [name, value] = b
+        const member = value.type === "LogicalExpression" ? value.left : value
+        if (member?.type === "MemberExpression" && !member.computed && member.property?.name && !fieldOf.has(name)) fieldOf.set(name, member.property.name)
         if (value.type === "ArrowFunctionExpression" || value.type === "FunctionExpression") {
             const kind = ruleKind(source, value)
             if (kind) helpers.set(name, kind)
@@ -103,7 +114,7 @@ export function parseTemplate(source) {
     for (const b of bindings) {
         const kind = helpers.get(b.callee)
         if (!kind || b.value == null) continue
-        rules.set(b.name, rules.has(b.name) ? { ambiguous: true } : { kind, value: b.value, field: b.field })
+        rules.set(b.name, rules.has(b.name) ? { ambiguous: true } : { kind, value: b.value, field: b.field, fieldId: fieldOf.get(b.field) ?? null })
     }
 
     for (const e of embeds) {
@@ -160,15 +171,29 @@ export function guessLanguage(strings) {
     return null
 }
 
-// Whether a rule shows the embed on the post with this slug. Framer compares without case.
+// Whether a rule shows the embed for this value of the field it compares. Framer compares without
+// case.
 export function ruleMatches(rule, slug) {
     if (!rule) return true
     if (!rule.kind) return false
-    const a = slug.toLowerCase()
+    const a = String(slug ?? "").toLowerCase()
     const b = rule.value.toLowerCase()
     if (rule.kind === "equals") return a === b
     if (rule.kind === "contains") return a.includes(b)
     return a.startsWith(b)
+}
+
+// The value a rule compares for a post: the CMS field it names (for most posts that field holds the
+// post's slug, but a duplicated post can keep the original's value, or have it empty), else the slug.
+export function ruleValueFor(rule, item) {
+    if (rule?.fieldId && item.fieldData && rule.fieldId in item.fieldData) return String(item.fieldData[rule.fieldId]?.value ?? "")
+    return item.slug
+}
+
+// The embeds a post shows on the live site, by its own field values. Embeds without a rule (on
+// every post) belong to the template and aren't included.
+export function embedsForItem(embeds, item) {
+    return embeds.filter(e => e.rule?.kind && ruleMatches(e.rule, ruleValueFor(e.rule, item)))
 }
 
 export function describeRule(rule) {
