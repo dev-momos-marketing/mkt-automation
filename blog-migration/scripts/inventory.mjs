@@ -15,7 +15,7 @@
 // Usage: npm run inventory
 import { mkdir, rm, writeFile } from "node:fs/promises"
 import { isComponentInstanceNode, isFrameNode, isSVGNode, isTextNode } from "framer-api"
-import { COLLECTION, csv, embedInfo, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales, withProject } from "./lib.mjs"
+import { COLLECTION, TEMPLATE_PATH, csv, embedInfo, guessPosts, isEmbed, isFilled, findTemplatePages, isSectionName, numbered, preview, translatedLocales, withProject } from "./lib.mjs"
 
 const OUT = new URL("../out/", import.meta.url)
 await rm(OUT, { recursive: true, force: true })
@@ -50,10 +50,21 @@ const { collectionId, fields, posts, items, locales } = await withProject(async 
     return { collectionId: collection.id, fields, posts, items, locales }
 })
 
-// 2. The template page: its layer tree and every embed in it.
+// 2. The template page: its layer tree and every embed in it. If it can't be found, the collection
+// reports are still written, and the summary lists the CMS pages to choose from.
+let templateError = ""
 const { outline, embeds, templatePaths } = await withProject(async framer => {
-    const pages = (await framer.getNodesWithType("WebPageNode")).filter(p => p.collectionId === collectionId)
-    if (!pages.length) throw new Error(`No CMS page uses the "${COLLECTION}" collection.`)
+    const allPages = await framer.getNodesWithType("WebPageNode")
+    const pages = findTemplatePages(allPages, { collectionId, path: TEMPLATE_PATH })
+    if (!pages.length) {
+        const cmsPages = allPages.filter(p => p.path?.includes(":") || p.collectionId)
+        templateError = [
+            TEMPLATE_PATH ? `No page has the path \`${TEMPLATE_PATH}\`.` : `No CMS page is linked to the "${COLLECTION}" collection (id \`${collectionId}\`) or sits at \`/blog/:slug\`.`,
+            "Set the repo variable BLOG_TEMPLATE_PATH to the blog post template's path, one of these CMS pages:",
+            ...cmsPages.map(p => `- \`${p.path}\` (collection \`${p.collectionId ?? "none"}\`${p.draft ? ", draft" : ""})`),
+        ].join("\n")
+        return { outline: [], embeds: [], templatePaths: [] }
+    }
     const outline = []
     const embeds = []
 
@@ -148,7 +159,7 @@ for (const p of posts) sectionHistogram.set(p.highest_section, (sectionHistogram
 
 const summary = `# Blog inventory
 
-Collection **${COLLECTION}**, template ${templatePaths.map(p => `\`${p}\``).join(", ")}. Read on ${new Date().toISOString().slice(0, 10)}.
+Collection **${COLLECTION}**, template ${templatePaths.map(p => `\`${p}\``).join(", ") || "not found"}. Read on ${new Date().toISOString().slice(0, 10)}.
 
 ## Posts
 - ${posts.length} posts (${posts.filter(p => p.draft).length} drafts)
@@ -161,7 +172,7 @@ ${[...sectionHistogram].sort((a, b) => a[0] - b[0]).map(([n, count]) => `  - ${n
 - Never filled in: ${fieldRows.filter(f => !f.posts_filled).map(f => f.name).join(", ") || "none"}
 
 ## Embeds in the template
-- ${embedRows.length} embed layers, ${distinct.size} distinct (the rest are copies, mostly one per breakpoint)
+${templateError ? `**The template wasn't read.** ${templateError}\n` : ""}- ${embedRows.length} embed layers, ${distinct.size} distinct (the rest are copies, mostly one per breakpoint)
 - Per breakpoint: ${[...breakpoints].map(([b, n]) => `${b || "?"} ${n}`).join(", ")}
 - ${embedRows.filter(r => r.has_script).length} contain a <script>; ${embedRows.filter(r => r.mode === "url").length} load a URL
 - ${embedRows.filter(r => r.guessed_post.length).length} have a guessed post (its slug or title appears in the embed)
@@ -172,6 +183,7 @@ Fill in the \`post\` column of embeds.csv: in Framer, select the layer (its id i
 await write("summary.md", summary)
 console.log(summary)
 console.log(`Wrote the inventory to ${new URL(OUT).pathname}`)
+if (templateError) process.exitCode = 1
 
 // A node's readable attributes, without its methods.
 function plain(node) {
