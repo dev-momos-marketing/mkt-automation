@@ -8,7 +8,8 @@
 // "Embeds" property to the Embeds field. It shows nothing itself.
 //
 // - Embeds without scripts are in the page's HTML from the server, hidden, so Google reads them as
-//   it does today; in the browser each one moves to its marker line, which is then hidden.
+//   it does today; in the browser each one moves to its marker line, which is then hidden, inside a
+//   shadow root so the post's text styles don't reach it. Wide ones scroll sideways on small screens.
 // - Embeds with scripts run in a sandboxed frame at their marker that grows to fit, as Framer's
 //   Embed did, loading as they scroll near.
 // - A marker without matching code is hidden, so visitors never see it.
@@ -52,10 +53,19 @@ export default function BlogEmbeds({ embeds = "", spacing = 24 }: Props) {
                     box.style.cssText = `width:100%;margin:${spacing}px 0`
                     if (hasScript(html)) box.appendChild(frame(id, html))
                     else {
-                        // Move the server-rendered copy, so the HTML isn't parsed twice.
+                        // The box sits inside the post's text, so the text's styles (paragraph
+                        // spacing, heading sizes) would reach the embed's own tags. A shadow root
+                        // keeps them apart, as the embed's own frame did on the old layout. The
+                        // server-rendered copy is moved in, so the HTML isn't parsed twice.
+                        const root = box.shadowRoot ?? box.attachShadow({ mode: "open" })
+                        root.innerHTML = `<style>:host{all:initial;display:block;width:100%;max-width:100%;overflow-x:auto;font-family:inherit}</style>`
                         const source = sources.querySelector<HTMLElement>(`[data-embed-source="${id}"]`)
-                        if (source) while (source.firstChild) box.appendChild(source.firstChild)
-                        else box.innerHTML = html
+                        if (source?.firstChild) while (source.firstChild) root.appendChild(source.firstChild)
+                        else {
+                            const parsed = document.createElement("template")
+                            parsed.innerHTML = html
+                            root.appendChild(parsed.content)
+                        }
                     }
                     placed.set(id, box)
                 }
