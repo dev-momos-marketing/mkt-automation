@@ -46,5 +46,5 @@ jobs:
             echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
             exit 1
           fi
-          npm run setup -- ${{ inputs.apply && '--apply' || '' }} | tee setup.log
+          npm run -s setup -- ${{ inputs.apply && '--apply' || '' }} | tee setup.log
           { echo "## Blog setup (${{ inputs.apply && 'applied' || 'dry run' }})"; echo; sed 's/^/- /' setup.log; } >> "$GITHUB_STEP_SUMMARY"
