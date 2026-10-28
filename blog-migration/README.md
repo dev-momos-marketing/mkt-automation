@@ -4,7 +4,7 @@ Moving every momos.com blog post from the template's fixed blocks (`Section Titl
 
 | Step | What | Status |
 | --- | --- | --- |
-| 1 | **Inventory**: list the fields, posts and every embed in the template | this folder |
+| 1 | **Inventory**: list the fields, posts and every embed in the template | done |
 | 2 | Add an `HTML Embed` component, a `Content` field and a `Migrated` switch in Framer | component in `framer/`; fields next |
 | 3 | Test whether a script can place the embed component inside `Content` | |
 | 4 | Dry run: build every post's merged body and preview it, writing nothing | |
@@ -30,27 +30,34 @@ If the collection isn't called `Blog`, also add a variable `BLOG_COLLECTION` wit
 
 ### Run it
 
-**Actions → Blog inventory → Run workflow**. When it's done, the run page shows the summary, and **Artifacts → blog-inventory** has the files:
+**Actions → Blog inventory → Run workflow**. When it's done, the run page shows the summary, and **Artifacts → blog-inventory** has the files. It runs two scripts:
+
+- `npm run inventory` reads Framer through the API: the collection's fields and posts, and the template's layers.
+- `npm run embeds` reads every Embed in the template from the published site. Framer's API returns no property values for these embeds, but the template's compiled code on momos.com holds each one's HTML, its visibility rule (`slug is "seo-for-restaurants"`), its section and its translations. It needs no API key.
 
 | File | What's in it |
 | --- | --- |
-| `summary.md` | The headline numbers: posts, sections used, embeds, translations |
+| `summary.md` | The headline numbers: posts, sections used, embeds, translations, weight |
 | `fields.csv` | Every Blog field, its type and how many posts fill it in |
 | `posts.csv` | Every post: highest section used, other fields used, languages translated into |
-| `embeds.csv` | Every Embed layer: breakpoint, section, HTML or URL, a guessed post, and an empty `post` column |
-| `embeds/<hash>.html` | Each distinct embed's code |
 | `template-outline.txt` | The blog template's layer tree |
-| `blog-items.json`, `embed-nodes.json` | Raw data, for writing the migration in step 4 |
+| `live/embeds.csv` | Every embed: the post(s) that show it, its rule, its section, size, scripts, translations |
+| `live/posts.csv` | Every post with embeds: which ones, in order, and in which section |
+| `live/embeds/<id>.html` | Each embed's HTML; `<id>.<language>.html` for each translation |
+| `blog-items.json`, `embeds.csv`, `embed-nodes.json` | Raw data from the API, for writing the migration in step 4 |
 
-Or locally, with the two values set in your shell:
+Or locally (`embeds` alone needs no settings):
 
 ```bash
-cd blog-migration && npm ci && npm run inventory
+cd blog-migration && npm ci && npm run inventory && npm run embeds
 ```
 
-### The one manual part
+### What it found (October 28, 2026)
 
-Framer's API shows each Embed's code but not its visibility rule (which post it's shown on). Fill in the `post` column of `embeds.csv`: in Framer, select the layer and note the post its visibility is set for. One row per distinct `file` is enough, because the copies for each breakpoint share the same code. `guessed_post` already has a guess where the embed mentions the post's slug or title.
+- 115 posts, every one translated into French, Spanish and Japanese, using up to 26 Section blocks.
+- **140 embeds, 792 KB of HTML, inside a 962 KB script that every blog post downloads**, with 3 translation files of the same size. A post shows 0 to 10 of them; 45 of 112 live posts show any.
+- Each embed is shown by a rule on the post's slug, so the embed-to-post mapping is read automatically: 139 belong to exactly one post, and one (`RnVRZQ7G9`) has an empty rule and shows nowhere.
+- Checked on six live posts: the embeds on each page are exactly the ones the script lists.
 
 ## Step 2: the HTML Embed component
 

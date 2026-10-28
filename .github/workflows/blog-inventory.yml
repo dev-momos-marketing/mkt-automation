@@ -1,5 +1,6 @@
-# Blog migration, step 1: lists the Blog collection's fields and posts and every Embed in the blog
-# template, and attaches the result to the run. Only reads from Framer. See blog-migration/README.md.
+# Blog migration, step 1: lists the Blog collection's fields and posts, the blog template's layers,
+# and every Embed's code with the post it belongs to (read from the published site), and attaches the
+# result to the run. Only reads. See blog-migration/README.md.
 name: Blog inventory
 
 on:
@@ -55,6 +56,8 @@ jobs:
           # Show the summary and keep the files even when part of the inventory fails.
           status=0
           npm run inventory || status=$?
+          # Every embed's code, post and place, from the template code published on momos.com.
+          npm run embeds || status=$?
           if [ -f out/summary.md ]; then cat out/summary.md >> "$GITHUB_STEP_SUMMARY"; fi
           exit $status
       - uses: actions/upload-artifact@v4
