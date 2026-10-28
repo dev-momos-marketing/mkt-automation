@@ -186,8 +186,7 @@ ${templateError ? `**The template wasn't read.** ${templateError}\n` : ""}- ${em
 - ${embedRows.filter(r => r.has_script).length} contain a <script>; ${embedRows.filter(r => r.mode === "url").length} load a URL
 - ${embedRows.filter(r => r.guessed_post.length).length} have a guessed post (its slug or title appears in the embed)
 
-## Next
-Fill in the \`post\` column of embeds.csv: in Framer, select the layer (its id is in \`node_id\`) and note which post its visibility is set for. Framer's API doesn't expose that rule. One row per distinct \`file\` is enough; the breakpoint copies share it.
+Framer's API returns no property values for these embeds, so their code, posts and places come from the published site: see "Embeds on the live site" below and \`live/\`.
 `
 await write("summary.md", summary)
 console.log(summary)

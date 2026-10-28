@@ -7,9 +7,12 @@
   },
   "scripts": {
     "inventory": "node scripts/inventory.mjs",
+    "embeds": "node scripts/embeds.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
+    "acorn": "^8.14.0",
+    "acorn-walk": "^8.3.4",
     "framer-api": "5.1.0"
   }
 }
