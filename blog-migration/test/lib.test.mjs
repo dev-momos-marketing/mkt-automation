@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { controlShape, csv, embedInfo, findTemplatePages, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales } from "../scripts/lib.mjs"
+import { batchesBySize, controlShape, csv, embedInfo, findTemplatePages, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales } from "../scripts/lib.mjs"
 
 test("numbered splits a field name into its group and number", () => {
     assert.deepEqual(numbered("Section Title 12"), { group: "Section Title", n: 12 })
@@ -96,4 +96,14 @@ test("controlShape lists property names and value types", () => {
         controls: { html: "string", n: "number" },
         typedControls: { url: "string: object(id)" },
     })
+})
+
+test("batchesBySize keeps batches under a size and a count, in order", () => {
+    const item = n => ({ id: String(n), pad: "x".repeat(90) })
+    const items = [1, 2, 3, 4, 5].map(item)
+    const one = Buffer.byteLength(JSON.stringify(items[0]))
+    assert.deepEqual(batchesBySize(items, one * 2).map(b => b.map(i => i.id)), [["1", "2"], ["3", "4"], ["5"]])
+    assert.deepEqual(batchesBySize(items, 1e9, 3).map(b => b.length), [3, 2])
+    assert.deepEqual(batchesBySize([{ big: "y".repeat(500) }, item(9)], 100).map(b => b.length), [1, 1])
+    assert.deepEqual(batchesBySize([], 100), [])
 })

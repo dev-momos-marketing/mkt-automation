@@ -156,3 +156,23 @@ export function findTemplatePages(pages, { collectionId, path = "", route = "/bl
     if (linked.length) return linked
     return pages.filter(p => new RegExp(`^${route}/:[^/]+$`).test(p.path ?? ""))
 }
+
+// Splits items into batches of at most `maxBytes` of JSON and `maxItems` items, keeping their order.
+// An item bigger than maxBytes goes in a batch of its own.
+export function batchesBySize(items, maxBytes, maxItems = Infinity) {
+    const batches = []
+    let batch = []
+    let size = 0
+    for (const item of items) {
+        const bytes = Buffer.byteLength(JSON.stringify(item))
+        if (batch.length && (size + bytes > maxBytes || batch.length >= maxItems)) {
+            batches.push(batch)
+            batch = []
+            size = 0
+        }
+        batch.push(item)
+        size += bytes
+    }
+    if (batch.length) batches.push(batch)
+    return batches
+}
