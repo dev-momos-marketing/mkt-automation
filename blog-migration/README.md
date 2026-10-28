@@ -162,7 +162,15 @@ The pages get lighter in step 7, when the old Section blocks and their 140 Embed
 - Targets: published posts (not drafts or `-copy` duplicates) and every glossary term in the sitemap. Each gets anchor phrases from its slug and title (`best-restaurant-loyalty-software` → "restaurant loyalty software"); a phrase two posts share is dropped, and a glossary term wins over a post.
 - Rules (`scripts/linking.mjs`): at most **max** new links per post (default 4), one per paragraph, each page once, the first mention only; never in headings, embed lines or existing links, never to the post itself or to a page it already links to.
 - English text only. Translated anchor text differs per language, so translations are left as they are.
-- Running it again only adds links that aren't there yet. It never publishes.
+- Each run adds up to **max** more links per post, so run it on new posts only (name them in **posts**). It never publishes.
+
+## Rewriting a post
+
+A post's body can be written in this repo: `posts/<slug>.html`, from the first H2 on (the title stays in its own field), with `<p>⟦embed:ID⟧</p>` where each of its embeds goes. Use `<h2>`/`<h3>`, `<p>`, `<ul>`/`<ol>`/`<li>`, `<strong>`, `<em>` and `<a href="/blog/slug">` or `/glossary/slug`.
+
+**Actions → Blog write → Run workflow** with the slug. The dry run checks the HTML, that each embed line has code in the post's Embeds field and that every link goes to a page in the sitemap, and lists the word count before and after. Tick **apply** to save it to Content; the run reads it back to check the embed lines. The post's translations stay as they are and are marked **needs review** in Framer's localization. It never publishes.
+
+A post saved this way is overwritten from the file the next time it's written, so make later edits in the file. The Blog links run doesn't change the file: add links to it by hand.
 
 ## After publishing
 
