@@ -15,7 +15,7 @@
 // Usage: npm run inventory
 import { mkdir, rm, writeFile } from "node:fs/promises"
 import { isComponentInstanceNode, isFrameNode, isSVGNode, isTextNode } from "framer-api"
-import { COLLECTION, TEMPLATE_PATH, csv, embedInfo, guessPosts, isEmbed, isFilled, findTemplatePages, isSectionName, numbered, preview, translatedLocales, withProject } from "./lib.mjs"
+import { COLLECTION, TEMPLATE_PATH, controlShape, csv, embedInfo, guessPosts, isEmbed, isFilled, findTemplatePages, isSectionName, numbered, preview, translatedLocales, withProject } from "./lib.mjs"
 
 const OUT = new URL("../out/", import.meta.url)
 await rm(OUT, { recursive: true, force: true })
@@ -110,7 +110,7 @@ const { outline, embeds, templatePaths } = await withProject(async framer => {
 const embedRows = []
 const distinct = new Map()
 for (const e of embeds) {
-    const { mode, url, html, hash } = embedInfo(e.node.controls)
+    const { mode, url, html, bound, hash } = embedInfo(e.node.controls, e.node.typedControls)
     const content = mode === "url" ? url : html
     if (hash && !distinct.has(hash)) {
         distinct.set(hash, content)
@@ -124,6 +124,7 @@ for (const e of embeds) {
         hidden_on_canvas: e.node.visible === false ? "yes" : "",
         component: e.node.componentName ?? "",
         mode,
+        bound,
         url,
         html_chars: html.length,
         has_script: /<script\b/i.test(html) ? "yes" : "",
@@ -147,7 +148,7 @@ for (const f of fieldRows.filter(f => f.numbered_group)) groups.set(f.numbered_g
 
 await write("fields.csv", csv(fieldRows, ["name", "type", "numbered_group", "posts_filled", "id"]))
 await write("posts.csv", csv(posts, ["slug", "title", "draft", "highest_section", "numbered_fields_filled", "other_fields_filled", "translated_into"]))
-await write("embeds.csv", csv(embedRows, ["post", "guessed_post", "page", "breakpoint", "location", "layer", "hidden_on_canvas", "component", "mode", "url", "html_chars", "has_script", "preview", "file", "node_id"]))
+await write("embeds.csv", csv(embedRows, ["post", "guessed_post", "page", "breakpoint", "location", "layer", "hidden_on_canvas", "component", "mode", "bound", "url", "html_chars", "has_script", "preview", "file", "node_id"]))
 await write("template-outline.txt", `${outline.join("\n")}\n`)
 await write("blog-items.json", `${JSON.stringify({ fields, locales, items: items.map(i => ({ id: i.id, slug: i.slug, slugByLocale: i.slugByLocale, draft: i.draft, fieldData: i.fieldData })) }, null, 2)}\n`)
 await write("embed-nodes.json", `${JSON.stringify(embeds.map(e => ({ ...plain(e.node), page: e.page, breakpoint: e.breakpoint, location: e.location })), null, 2)}\n`)
@@ -156,6 +157,13 @@ const breakpoints = new Map()
 for (const r of embedRows) breakpoints.set(r.breakpoint, (breakpoints.get(r.breakpoint) ?? 0) + 1)
 const sectionHistogram = new Map()
 for (const p of posts) sectionHistogram.set(p.highest_section, (sectionHistogram.get(p.highest_section) ?? 0) + 1)
+
+// Where Framer keeps an embed's data, from the first few embeds: printed so it shows in the run log.
+const shapes = [...new Map(embeds.map(e => [JSON.stringify(controlShape(e.node.controls, e.node.typedControls)), e])).values()].slice(0, 3)
+for (const e of shapes) {
+    console.log(`Embed data shape (${e.path}, component ${e.node.componentName ?? "?"}, ${e.node.componentIdentifier ?? "?"}):`)
+    console.log(JSON.stringify({ ...controlShape(e.node.controls, e.node.typedControls), sample: truncate(JSON.stringify({ controls: e.node.controls, typedControls: e.node.typedControls }), 1500) }, null, 2))
+}
 
 const summary = `# Blog inventory
 
@@ -174,6 +182,7 @@ ${[...sectionHistogram].sort((a, b) => a[0] - b[0]).map(([n, count]) => `  - ${n
 ## Embeds in the template
 ${templateError ? `**The template wasn't read.** ${templateError}\n` : ""}- ${embedRows.length} embed layers, ${distinct.size} distinct (the rest are copies, mostly one per breakpoint)
 - Per breakpoint: ${[...breakpoints].map(([b, n]) => `${b || "?"} ${n}`).join(", ")}
+- ${embedRows.filter(r => r.bound).length} have their code linked to a variable (see \`bound\` in embeds.csv)
 - ${embedRows.filter(r => r.has_script).length} contain a <script>; ${embedRows.filter(r => r.mode === "url").length} load a URL
 - ${embedRows.filter(r => r.guessed_post.length).length} have a guessed post (its slug or title appears in the embed)
 
@@ -185,13 +194,17 @@ console.log(summary)
 console.log(`Wrote the inventory to ${new URL(OUT).pathname}`)
 if (templateError) process.exitCode = 1
 
+function truncate(text, length) {
+    return text.length > length ? `${text.slice(0, length)}…` : text
+}
+
 // A node's readable attributes, without its methods.
 function plain(node) {
     const out = {}
     for (const key of Object.keys(node)) {
         if (typeof node[key] !== "function") out[key] = node[key]
     }
-    for (const key of ["id", "name", "visible", "componentName", "componentIdentifier", "insertURL", "controls", "width", "height"]) {
+    for (const key of ["id", "name", "visible", "componentName", "componentIdentifier", "insertURL", "controls", "typedControls", "width", "height"]) {
         if (!(key in out) && node[key] !== undefined) out[key] = node[key]
     }
     return out

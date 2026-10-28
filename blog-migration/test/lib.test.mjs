@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { csv, embedInfo, findTemplatePages, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales } from "../scripts/lib.mjs"
+import { controlShape, csv, embedInfo, findTemplatePages, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales } from "../scripts/lib.mjs"
 
 test("numbered splits a field name into its group and number", () => {
     assert.deepEqual(numbered("Section Title 12"), { group: "Section Title", n: 12 })
@@ -75,4 +75,25 @@ test("findTemplatePages prefers the given path, then the collection link, then /
     assert.deepEqual(findTemplatePages(pages, { collectionId: "x" }).map(p => p.path), ["/blog/:slug"])
     assert.deepEqual(findTemplatePages(pages, { collectionId: "b", path: "/guides/:slug" }).map(p => p.path), ["/guides/:slug"])
     assert.deepEqual(findTemplatePages(pages, { collectionId: "x", path: "/nope" }), [])
+})
+
+test("embedInfo reads typedControls, reports variable links and finds unknown property names", () => {
+    const typed = embedInfo({}, { type: { type: "enum", value: "html" }, html: { type: "string", value: "<div>Calc</div>" } })
+    assert.equal(typed.mode, "html")
+    assert.equal(typed.html, "<div>Calc</div>")
+    const bound = embedInfo({ html: { type: "string", name: "Embed code" } }, {})
+    assert.equal(bound.html, "")
+    assert.equal(bound.bound, 'html → string "Embed code"')
+    const other = embedInfo({ code: '<iframe src="https://x.com"></iframe>' }, {})
+    assert.equal(other.mode, "html")
+    assert.ok(other.hash)
+    const link = embedInfo({}, { src: { type: "string", value: "https://forms.example.com/a" } })
+    assert.equal(link.mode, "url")
+})
+
+test("controlShape lists property names and value types", () => {
+    assert.deepEqual(controlShape({ html: "<p>", n: 1 }, { url: { type: "string", value: { id: "v1" } } }), {
+        controls: { html: "string", n: "number" },
+        typedControls: { url: "string: object(id)" },
+    })
 })
