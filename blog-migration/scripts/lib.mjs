@@ -44,12 +44,54 @@ export function isEmbed({ name, componentName, controls }) {
     return typeof controls?.html === "string"
 }
 
-export function embedInfo(controls = {}) {
-    const html = typeof controls.html === "string" ? controls.html : ""
-    const url = typeof controls.url === "string" ? controls.url : ""
-    const mode = typeof controls.type === "string" ? controls.type : html ? "html" : url ? "url" : "unknown"
-    const content = mode === "url" ? url : html
-    return { mode, url, html, hash: content ? hash(content) : "" }
+// An embed's code. Framer can keep a property in `controls` or, with its type, in `typedControls`,
+// and its value can be typed in or linked to a variable. A link is reported in `bound`.
+export function embedInfo(controls = {}, typedControls = {}) {
+    const read = key => {
+        const typed = typedControls?.[key]?.value
+        for (const value of [controls?.[key], typed]) {
+            if (typeof value === "string") return { value }
+        }
+        for (const value of [controls?.[key], typed]) {
+            if (value && typeof value === "object") return { value: "", bound: describeBinding(key, value) }
+        }
+        return { value: "" }
+    }
+    let html = read("html")
+    let url = read("url")
+    // Unknown property names: take the first text property that looks like HTML or a link.
+    if (!html.value && !url.value && !html.bound && !url.bound) {
+        for (const [key, value] of Object.entries({ ...controls, ...Object.fromEntries(Object.entries(typedControls ?? {}).map(([k, c]) => [k, c?.value])) })) {
+            if (typeof value !== "string") continue
+            if (/<[a-z!][^>]*>/i.test(value)) { html = { value, key }; break }
+            if (/^https?:\/\//.test(value.trim())) { url = { value, key }; break }
+        }
+    }
+    const type = typedControls?.type?.value ?? controls?.type
+    const mode = typeof type === "string" && ["html", "url"].includes(type) ? type : html.value ? "html" : url.value ? "url" : "unknown"
+    const content = mode === "url" ? url.value : html.value
+    return {
+        mode,
+        url: url.value,
+        html: html.value,
+        bound: [html.bound, url.bound].filter(Boolean).join("; "),
+        hash: content ? hash(content) : "",
+    }
+}
+
+function describeBinding(key, value) {
+    const kind = value.type ?? value.__class ?? "value"
+    const name = value.name ?? value.id ?? ""
+    return `${key} → ${kind}${name ? ` "${name}"` : ""}`
+}
+
+// The property names and value types of a component, for working out where Framer keeps its data.
+export function controlShape(controls = {}, typedControls = {}) {
+    const typeOf = v => (v === null ? "null" : Array.isArray(v) ? "array" : typeof v === "object" ? `object(${Object.keys(v).slice(0, 6).join(",")})` : typeof v)
+    return {
+        controls: Object.fromEntries(Object.entries(controls ?? {}).map(([k, v]) => [k, typeOf(v)])),
+        typedControls: Object.fromEntries(Object.entries(typedControls ?? {}).map(([k, c]) => [k, `${c?.type ?? "?"}: ${typeOf(c?.value)}`])),
+    }
 }
 
 export function hash(text) {
