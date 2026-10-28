@@ -1,0 +1,59 @@
+# Blog write: saves the posts written in blog-migration/posts/<slug>.html to their Content field in
+# Framer (English; translations are marked for review). A dry run unless "apply" is ticked. Never
+# publishes. See blog-migration/README.md.
+name: Blog write
+
+on:
+  workflow_dispatch:
+    inputs:
+      posts:
+        description: Post slugs, separated by commas (each needs blog-migration/posts/<slug>.html)
+        type: string
+        default: restaurant-intelligence
+        required: true
+      apply:
+        description: Save the posts (leave unticked for a dry run)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-framer-writes
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: blog-migration
+
+jobs:
+  write:
+    runs-on: ubuntu-latest
+    env:
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
+      FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
+      BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+      BLOG_CONTENT_FIELD: ${{ vars.BLOG_CONTENT_FIELD }}
+      BLOG_EMBEDS_FIELD: ${{ vars.BLOG_EMBEDS_FIELD }}
+      POSTS: ${{ inputs.posts }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - name: Save the posts
+        run: |
+          set -o pipefail
+          if [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
+            exit 1
+          fi
+          status=0
+          npm run -s write -- --posts "$(echo "$POSTS" | tr -d ' ')" ${{ inputs.apply && '--apply' || '' }} 2>&1 | tee write.log || status=$?
+          { echo "## Blog write (${{ inputs.apply && 'applied' || 'dry run' }})"; echo; sed 's/^/- /' write.log; } >> "$GITHUB_STEP_SUMMARY"
+          exit $status

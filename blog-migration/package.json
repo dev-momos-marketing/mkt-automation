@@ -12,6 +12,7 @@
     "setup": "node scripts/setup.mjs",
     "migrate": "node scripts/migrate.mjs",
     "links": "node scripts/links.mjs",
+    "write": "node scripts/write.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
