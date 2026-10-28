@@ -2,8 +2,8 @@
 // embeds where the template showed them. Pure functions, used by the dry run and, later, the migration.
 import { numbered } from "./lib.mjs"
 
-// Until it's known whether a script can put the HtmlEmbed component inside the text (step 3), each
-// embed is a marker paragraph that a person or a later script swaps for the component.
+// Each embed is a line in the text that the BlogEmbeds component on the template replaces with the
+// embed (Framer's API can't put a component inside rich text).
 export const marker = id => `<p>⟦embed:${id}⟧</p>`
 export const MARKER = /<p>⟦embed:([A-Za-z0-9_-]+)⟧<\/p>/g
 
@@ -103,4 +103,45 @@ export function wordCount(html) {
     // Japanese has no spaces: count its characters instead of words.
     const cjk = (text.match(/[぀-ヿ一-龯]/g) ?? []).length
     return cjk > text.length / 4 ? cjk : text.split(/\s+/).length
+}
+
+// The Embeds field: each embed's code, in the post's language, as a block the BlogEmbeds component
+// on the template reads. A <template> keeps the code inert until the component places it.
+export function embedsField(entries) {
+    return entries.map(({ id, html }) => {
+        if (/<\/template\b/i.test(html)) throw new Error(`Embed ${id} contains </template>, which would end its block early.`)
+        return `<template data-embed="${id}">\n${html.trim()}\n</template>`
+    }).join("\n")
+}
+
+// The reverse, as the BlogEmbeds component does it.
+export function parseEmbedsField(text) {
+    const out = new Map()
+    for (const m of String(text ?? "").matchAll(/<template data-embed="([A-Za-z0-9_-]+)">\n?([\s\S]*?)\n?<\/template>/g)) out.set(m[1], m[2])
+    return out
+}
+
+// Everything the migration writes to one post: Content and Embeds in English, with each translation
+// where every section of the post is translated (otherwise that language keeps showing English, as
+// Framer does for a missing translation), and Migrated switched on.
+// `embeds` are the post's own, each with its code by language: { id, place, code: { en, "fr-CA" } }.
+export function buildPost({ fieldData, sections, embeds, locales }) {
+    const codeIn = (e, lang) => e.code[lang] ?? e.code[lang.split("-")[0]] ?? e.code.en
+    const english = mergePost({ fieldData, sections, embeds })
+    const placed = embeds.filter(e => english.embeds.includes(e.id))
+    const content = { value: english.html, valueByLocale: {} }
+    const embedCode = { value: embedsField(placed.map(e => ({ id: e.id, html: e.code.en }))), valueByLocale: {} }
+    const languages = []
+    const untranslated = []
+    for (const { id, code } of locales) {
+        const merged = mergePost({ fieldData, sections, embeds, localeId: id })
+        if (merged.sections && merged.translatedSections < merged.sections) {
+            untranslated.push(`${code} (${merged.translatedSections}/${merged.sections} sections)`)
+            continue
+        }
+        content.valueByLocale[id] = { action: "set", value: merged.html }
+        embedCode.valueByLocale[id] = { action: "set", value: embedsField(placed.map(e => ({ id: e.id, html: codeIn(e, code) }))) }
+        languages.push(code)
+    }
+    return { content, embeds: embedCode, english, languages, untranslated }
 }

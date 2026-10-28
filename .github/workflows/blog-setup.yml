@@ -1,5 +1,5 @@
-# Blog migration, step 2: adds the Content and Migrated fields to the Blog collection and syncs the
-# HtmlEmbed code component. A dry run unless "apply" is ticked. Never publishes. See
+# Blog migration, step 2: adds the Content, Embeds and Migrated fields to the Blog collection and syncs
+# the BlogEmbeds and HtmlEmbed code components. A dry run unless "apply" is ticked. Never publishes. See
 # blog-migration/README.md.
 name: Blog setup
 
@@ -30,6 +30,7 @@ jobs:
       FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
       BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
       BLOG_CONTENT_FIELD: ${{ vars.BLOG_CONTENT_FIELD }}
+      BLOG_EMBEDS_FIELD: ${{ vars.BLOG_EMBEDS_FIELD }}
       BLOG_MIGRATED_FIELD: ${{ vars.BLOG_MIGRATED_FIELD }}
     steps:
       - uses: actions/checkout@v4
@@ -42,9 +43,12 @@ jobs:
       - run: npm test
       - name: Set up the Blog collection and HtmlEmbed
         run: |
+          set -o pipefail
           if [ -z "$FRAMER_API_KEY" ]; then
             echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
             exit 1
           fi
-          npm run -s setup -- ${{ inputs.apply && '--apply' || '' }} | tee setup.log
+          status=0
+          npm run -s setup -- ${{ inputs.apply && '--apply' || '' }} 2>&1 | tee setup.log || status=$?
           { echo "## Blog setup (${{ inputs.apply && 'applied' || 'dry run' }})"; echo; sed 's/^/- /' setup.log; } >> "$GITHUB_STEP_SUMMARY"
+          exit $status
