@@ -1,0 +1,25 @@
+{
+  "heading": "AI in Southeast Asia: FAQ",
+  "questions": [
+    {
+      "q": "Which industries are adopting AI fastest in Southeast Asia?",
+      "a": "Financial services, retail and QSRs, logistics and government services are leading the way. Banks use AI for underwriting and fraud detection, while restaurants and retailers use it for personalization, voice ordering and customer feedback automation. Logistics firms apply it to routing and warehouse robotics."
+    },
+    {
+      "q": "How will AI affect jobs in Southeast Asia?",
+      "a": "AI is likely to shrink some entry-level roles, such as call center work in the Philippines' BPO sector, while raising demand for people who combine tech and operations skills. Repetitive, rules-based tasks are the most exposed. Whether workers benefit depends on how quickly vocational training, digital literacy and upskilling keep up."
+    },
+    {
+      "q": "How is AI regulated in Southeast Asia?",
+      "a": "Most countries take a lighter, innovation-friendly approach than China or the EU. Singapore leads with AI Verify, a voluntary risk assessment framework, while Indonesia is folding AI guidance into data protection rules and Malaysia and Thailand are exploring sector sandboxes. ASEAN members have also started early talks on shared AI ethics and data standards."
+    },
+    {
+      "q": "What makes AI built in Southeast Asia different?",
+      "a": "It has to work across many languages, often mixed with English in the same sentence, and in low-bandwidth, fragmented device environments. That pushes local teams toward resource-efficient, context-sensitive models built to solve immediate problems. Startups in Indonesia and Vietnam are building purpose-built models for local logistics, customer engagement and education."
+    },
+    {
+      "q": "What should businesses in Southeast Asia do to prepare for AI?",
+      "a": "Start investing in workforce transformation now, since the mix of roles you need will shift. Put an AI governance playbook in place, because frameworks that are voluntary today may become mandatory. Make sure your AI products handle local languages and nuance, and don't assume the region will follow Western timelines."
+    }
+  ]
+}

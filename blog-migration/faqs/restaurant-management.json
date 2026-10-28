@@ -1,0 +1,29 @@
+{
+  "heading": "Restaurant Management: FAQ",
+  "questions": [
+    {
+      "q": "What is restaurant management?",
+      "a": "Restaurant management is the day-to-day oversight and long-term stewardship of everything that makes a restaurant work, from the food and the team to the finances and the guest experience. It comes down to people, product and profit. Good management keeps all three in balance so the business can last."
+    },
+    {
+      "q": "What does a restaurant manager do?",
+      "a": "A restaurant manager oversees end-to-end operations, including staffing, training, service, inventory, costs and guest experience. Above all, the job comes down to two skills: managing systems so the restaurant runs consistently, and developing people so the team can work within those systems. A good manager also leads by example on the floor."
+    },
+    {
+      "q": "Which numbers should a restaurant manager track?",
+      "a": "Food cost, labor cost and daily sales are the three to watch most closely. Food cost shows how much of your revenue goes to ingredients, and labor cost shows whether you're overstaffing slow shifts or understaffing busy ones. Knowing what a good sales day looks like helps you spot a bad one early."
+    },
+    {
+      "q": "How do you manage multiple restaurant locations?",
+      "a": "Standardize recipes, systems and processes so every location delivers the same experience. Hire and develop strong general managers who share your values and can make decisions on their own. Then use technology like POS, scheduling, inventory and multi-location guest experience software to see problems and opportunities without being on site."
+    },
+    {
+      "q": "What software do restaurant managers use?",
+      "a": "Most restaurants run on a POS system, with online ordering, a kitchen display system and inventory software connected to it. Reputation and guest experience tools bring reviews into one place, while CRM and loyalty platforms help you bring guests back. Back-office tools handle scheduling, payroll, accounting and HR."
+    },
+    {
+      "q": "How do I become a restaurant manager?",
+      "a": "Most restaurant managers work their way up through several roles in the building. Entry-level jobs teach how the kitchen, front of house and guest experience fit together. Mid-level roles like bar or service manager add scheduling and team leadership, which prepares you for general manager or operations roles."
+    }
+  ]
+}

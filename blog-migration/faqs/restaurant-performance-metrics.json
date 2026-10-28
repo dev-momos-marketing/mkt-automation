@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Performance Metrics: FAQ",
+  "questions": [
+    {
+      "q": "What are restaurant performance metrics?",
+      "a": "Restaurant performance metrics are the numbers that show how your business is doing, from money and daily operations to how guests feel about you. Tracking them tells you where you stand and where to push next. Restaurants that track the right numbers are better placed to survive tight margins and fierce competition."
+    },
+    {
+      "q": "What are the main types of restaurant metrics?",
+      "a": "Most metrics fall into four groups: financial, operational, efficiency and customer. Financial metrics follow money in and out, operational metrics show how well daily systems run, and efficiency metrics show how well you turn capacity, menu and channels into sales. Customer metrics measure how guests feel about you and whether they return."
+    },
+    {
+      "q": "Which restaurant metrics should I track first?",
+      "a": "Start with a few from each category so you get a balanced view of the business. Revenue, profit margin, cost of goods sold and labor spend cover the money side, while table turnover and order accuracy show how operations are running. Satisfaction scores, repeat visits and online reviews tell you whether guests are happy enough to come back."
+    },
+    {
+      "q": "Why should restaurants track customer metrics alongside financial ones?",
+      "a": "Financial numbers show results, while customer metrics help explain them. Satisfaction scores, repeat visit rates, online reviews and loyalty indicators show how guests feel and whether they'll return. A slip in those numbers is a warning that sales could follow, so you can act before it reaches the bottom line."
+    },
+    {
+      "q": "What's the difference between operational and efficiency metrics?",
+      "a": "Operational metrics ask whether the kitchen and floor are running smoothly, using measures like table turnover, order accuracy and kitchen throughput. Efficiency metrics sit one level above and ask whether you're growing and getting the most revenue from what you have. Together they show both how well you work and how well that work pays off."
+    }
+  ]
+}

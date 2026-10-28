@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Guest Experience: FAQ",
+  "questions": [
+    {
+      "q": "What is guest experience in a restaurant?",
+      "a": "Guest experience is the sum of how someone feels at every point of interacting with your restaurant. It has two parts: the product experience, meaning the food itself, and the human experience, which covers service, atmosphere, timing and comfort. A great experience needs both, since good food alone won't make up for a poor setting."
+    },
+    {
+      "q": "Why does guest experience matter for restaurant revenue?",
+      "a": "Guests who have better experiences tend to spend more, come back more often and recommend you to others. Good experiences also lead to better reviews, which shape whether new guests choose you. Over time, a strong reputation for hospitality can reduce how much you need to spend on advertising."
+    },
+    {
+      "q": "How can I improve guest experience at my restaurant?",
+      "a": "Start by reading your reviews, since they show what guests love and what frustrates them. Bring reviews from every platform into one place, look for complaints that keep repeating and turn them into actions. Reply to every review quickly in your brand's voice, and look after your staff, because a happy team creates happier guests."
+    },
+    {
+      "q": "How do I measure restaurant guest experience?",
+      "a": "Short post-visit surveys are one of the easiest ways, shared through a QR code on the receipt or table or built into the online ordering flow. Keep them to a few clicks and use conditional questions that dig into the reason when a guest gives a low rating. Tracking review sentiment and recurring themes adds a second view of how guests feel."
+    },
+    {
+      "q": "Should restaurants use AI to respond to reviews?",
+      "a": "AI is a practical way to reply to guests at scale, as long as you keep a human touch. A hybrid approach works well: let AI draft and handle repetitive replies, and bring in your team when a situation needs empathy. Momos, for example, unifies reviews across locations and helps you reply to each guest in a consistent brand voice."
+    }
+  ]
+}

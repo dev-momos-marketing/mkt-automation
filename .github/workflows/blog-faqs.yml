@@ -1,0 +1,59 @@
+# Blog FAQs: adds the FAQ in blog-migration/faqs/<slug>.json to the end of each post that has none
+# (English; translations are marked for review). A dry run unless "apply" is ticked. Never
+# publishes. See blog-migration/README.md.
+name: Blog FAQs
+
+on:
+  workflow_dispatch:
+    inputs:
+      posts:
+        description: Post slugs, separated by commas (or "all": every file in blog-migration/faqs)
+        type: string
+        default: all
+        required: true
+      apply:
+        description: Add the FAQs (leave unticked for a dry run)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-framer-writes
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: blog-migration
+
+jobs:
+  faqs:
+    runs-on: ubuntu-latest
+    env:
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
+      FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
+      BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+      BLOG_CONTENT_FIELD: ${{ vars.BLOG_CONTENT_FIELD }}
+      POSTS: ${{ inputs.posts }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - name: Add the FAQs
+        run: |
+          set -o pipefail
+          if [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
+            exit 1
+          fi
+          status=0
+          if [ "$(echo "$POSTS" | tr -d ' ')" = "all" ]; then target=(--all); else target=(--posts "$(echo "$POSTS" | tr -d ' ')"); fi
+          npm run -s faqs -- "${target[@]}" ${{ inputs.apply && '--apply' || '' }} 2>&1 | tee faqs.log || status=$?
+          { echo "## Blog FAQs (${{ inputs.apply && 'applied' || 'dry run' }})"; echo; sed 's/^/- /' faqs.log; } >> "$GITHUB_STEP_SUMMARY"
+          exit $status

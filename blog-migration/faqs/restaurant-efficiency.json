@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Efficiency: FAQ",
+  "questions": [
+    {
+      "q": "What does restaurant efficiency mean?",
+      "a": "Restaurant efficiency is how well you turn time, labor, ingredients and space into consistent service and profit. At its core, it comes down to standardizing everything and removing the variables. The fewer things each location has to figure out on its own, the faster and more reliable it becomes."
+    },
+    {
+      "q": "How can I make my restaurant more efficient?",
+      "a": "Start with detailed SOPs for every core task, then review your menu so it's built for speed, consistency and margin. Tighten inventory management to cut food waste, keep a close eye on food and labor costs, and connect your data in one system. Small, repeatable improvements in each area add up quickly."
+    },
+    {
+      "q": "How does menu engineering improve efficiency?",
+      "a": "Menu engineering maps each item by profitability and popularity, which sorts it into stars, plow horses, puzzles or dogs. You then feature your stars, adjust pricing or portions on plow horses, promote puzzles and remove or redesign dogs. A tighter menu also cuts decision time for guests and complexity in the kitchen."
+    },
+    {
+      "q": "What should a restaurant SOP include?",
+      "a": "A useful SOP has a title, its purpose, when to use it and which role is responsible. It then lays out numbered, step-by-step actions, a checklist version for use during service, and photos or videos. Visual examples matter a lot in restaurants, because they show the standard more clearly than words."
+    },
+    {
+      "q": "How do multi-location restaurants stay efficient as they grow?",
+      "a": "They centralize decisions like menu, suppliers, pricing and marketing at headquarters, while each location focuses on execution and local staffing. A single source of truth for sales, inventory, labor and guest feedback makes it easy to compare locations. New ideas get piloted in a few test sites before they roll out across the network."
+    }
+  ]
+}

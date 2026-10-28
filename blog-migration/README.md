@@ -174,6 +174,15 @@ New interactive embeds (calculators and the like) go in `posts/<slug>.embeds/<id
 
 A post saved this way is overwritten from the file the next time it's written, so make later edits in the file. The Blog links run doesn't change the file: add links to it by hand.
 
+## FAQs
+
+`faqs/<slug>.json` holds a post's FAQ: a heading ("Restaurant Guest Experience: FAQ") and 4–6 questions with answers of 2–4 sentences. **Actions → Blog FAQs** (posts `all`, or slugs) adds each one to the end of its post's English Content, as an H2 with the questions as H3s. Leave **apply** unticked first: the run page lists every post and its questions.
+
+- A post that already has an FAQ heading is skipped, so running it again never adds a second FAQ. A post written from `posts/<slug>.html` is skipped too: its FAQ goes in that file.
+- Before saving, it checks the house style (`scripts/faq.mjs`): 4–6 questions, 2–4 sentences per answer, no "X, not Y", no hype words, and no number that isn't already in the post. `npm test` checks the files' form.
+- A heading left empty at the very end of a post ("5. Build local backlinks", "v": leftovers from the old section layout) is removed first, and the dry run names it.
+- Translations are kept and marked **needs review**. It never publishes.
+
 ## After publishing
 
 The migration is done: each post's Embeds field now holds its embeds' code, and is the copy to edit. `npm run embeds` and `npm run migrate` read the old template from the live site, so they stop working once the old Section frames are deleted from it.

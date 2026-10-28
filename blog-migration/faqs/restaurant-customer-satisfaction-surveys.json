@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Customer Satisfaction Surveys: FAQ",
+  "questions": [
+    {
+      "q": "Why should a restaurant run customer satisfaction surveys?",
+      "a": "Surveys let you hear concerns privately before they turn into public reviews, and they give you a direct line to guests. They also help grow your customer database and show how you're performing by location, shift and channel. A short call to action at the end can invite happy guests to leave a Google or Yelp review."
+    },
+    {
+      "q": "What should a restaurant satisfaction survey include?",
+      "a": "A good survey opens with a screen that explains why you're asking and how long it takes, then asks whether the guest dined in or ordered delivery. From there it covers which branch or app they used, an overall rating, category ratings for food, service, ambience and value, and an NPS question. It ends with a thank-you screen and a reward."
+    },
+    {
+      "q": "How do I get more guests to complete my restaurant survey?",
+      "a": "Keep the survey short and relevant, and tell guests up front that there's a reward at the end. Routing dine-in and delivery guests to different questions keeps every question about their actual visit. You can reach guests through a QR code, a receipt link, a post-meal email or SMS."
+    },
+    {
+      "q": "What should I do with negative survey responses?",
+      "a": "Treat a low score as a chance to recover the guest before they post a public review. A conditional follow-up that appears for low category scores can ask for comments and photos, so you know exactly what went wrong. Promise a follow-up on the thank-you screen, then reach out so unhappy guests feel heard."
+    },
+    {
+      "q": "Can Momos help me run restaurant surveys?",
+      "a": "Yes, Momos offers fully customizable restaurant surveys with conditional questions, sent by SMS or email. Positive responses can be boosted to Google reviews, and negative feedback goes into an automated customer recovery workflow. AI then turns responses into location-level insights, so you can see what's working at every store."
+    }
+  ]
+}

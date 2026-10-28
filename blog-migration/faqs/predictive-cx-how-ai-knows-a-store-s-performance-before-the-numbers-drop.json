@@ -1,0 +1,25 @@
+{
+  "heading": "Predictive CX: FAQ",
+  "questions": [
+    {
+      "q": "What is predictive customer experience?",
+      "a": "Predictive customer experience uses AI to spot early warning signs that a location is starting to slip, before the problem shows up in sales, ratings or loyalty. Instead of summarizing what already happened, it looks for patterns in feedback and operations and flags stores that need attention. That gives you time to fix the issue while it's still small."
+    },
+    {
+      "q": "Why aren't NPS and sales reports enough to catch problems early?",
+      "a": "They're lagging indicators, so they report damage after it's done. NPS tends to drop after guests have already had poor experiences, and a sales decline can show up weeks after service issues begin. By the time negative reviews pile up, guests may already be choosing somewhere else."
+    },
+    {
+      "q": "What signals does a predictive CX tool look at?",
+      "a": "It watches review sentiment trends beyond the star rating, sudden drops in survey completion or satisfaction, shifts in common complaints and keywords, and operational response times that can hint at staffing gaps. A store can keep the same rating while mentions of slow service or cold food quietly rise. The tool catches that change and points you to the location and the issue."
+    },
+    {
+      "q": "How do I set up predictive CX for my restaurants?",
+      "a": "You don't need a full analytics team to get started. Most platforms connect to your review sites, survey and NPS tools, help desk or case management systems, and operational data feeds like fulfillment speed. Once connected, the AI learns what normal looks like for each store, so it can flag one that starts to drift."
+    },
+    {
+      "q": "What should I do when a store gets flagged?",
+      "a": "Look at the specific complaints behind the flag and act at the store level quickly. In the post's example, a regional manager adjusted staffing patterns and shift leads got coaching on order handoff, which resolved the issue before reviews turned visibly negative. Then keep watching the same signals to confirm the fix is holding."
+    }
+  ]
+}
