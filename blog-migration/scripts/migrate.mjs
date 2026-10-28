@@ -37,17 +37,35 @@ const say = text => console.log(`${apply ? "" : "[dry run] "}${text}`)
 await rm(OUT, { recursive: true, force: true })
 await mkdir(OUT, { recursive: true })
 
+// Framer's project session can close on its own (it does on long runs and after a big read), and
+// may report it outside any call. That's noted here instead of stopping the run; the next call to
+// Framer then fails and is retried over a fresh connection.
+process.on("unhandledRejection", error => {
+    if (!error?.retryable) throw error
+    console.log(`Framer's session closed (${error.code ?? error.message}); the next step reconnects.`)
+})
+
+// The embeds come from the published site, read before connecting to Framer so the connection
+// never sits idle. Their translations are labelled by language (fr, es, ja), which buildPost matches
+// to the project's locales (fr-CA, es-ES, ja-JP).
+const live = undo ? null : await readLive()
+
 const targetsById = new Map()
 let framer = await openProject()
 try {
-    const collection = (await framer.getCollections()).find(c => c.name === COLLECTION)
-    if (!collection) throw new Error(`No "${COLLECTION}" collection in Framer. Set BLOG_COLLECTION to its name.`)
-    const fields = await collection.getFields()
+    const { fields, items, locales } = await retrying("reading the posts", async () => {
+        const collection = await blogCollection()
+        if (!collection) throw new Error(`No "${COLLECTION}" collection in Framer. Set BLOG_COLLECTION to its name.`)
+        return {
+            fields: await collection.getFields(),
+            items: await collection.getItems(),
+            locales: (await framer.getLocales()).map(l => ({ id: l.id, code: l.code })),
+        }
+    })
     const field = name => fields.find(f => f.name === name) ?? (() => { throw new Error(`"${COLLECTION}" has no "${name}" field. Run the Blog setup workflow first.`) })()
     const content = field(FIELD_NAMES.content)
     const embedsField = field(FIELD_NAMES.embeds)
     const migrated = field(FIELD_NAMES.migrated)
-    const items = await collection.getItems()
     const unknown = chosen.filter(slug => !items.some(i => i.slug === slug))
     if (unknown.length) throw new Error(`No post with the slug ${unknown.join(", ")}.`)
     const targets = all ? items : chosen.map(slug => items.find(i => i.slug === slug))
@@ -58,8 +76,6 @@ try {
         if (apply) await save(updates)
         say(`${apply ? "Switched" : "Would switch"} Migrated off for ${targets.map(i => i.slug).join(", ")}: the template shows their old layout again. Content and Embeds are kept.`)
     } else {
-        const locales = (await framer.getLocales()).map(l => ({ id: l.id, code: l.code }))
-        const live = await readLive({ localeNames: new Map(locales.map(l => [l.id, l.code])) })
         const sections = sectionFields(fields)
         const updates = []
         for (const item of targets) {
@@ -104,7 +120,7 @@ try {
         }
         if (apply && updates.length) {
             await save(updates)
-            await verify(await blogCollection(), content, updates)
+            await verify(content, updates)
         }
         say(`${updates.length} of ${targets.length} posts ${apply ? "written" : "would be written"}. Their old Section fields are unchanged.`)
     }
@@ -137,11 +153,28 @@ async function save(updates) {
             const halves = batch.length > 1 ? [batch.slice(0, Math.ceil(batch.length / 2)), batch.slice(Math.ceil(batch.length / 2))] : [batch]
             console.log(`Framer closed the connection (${error.code ?? error.message}) while saving ${batch.length} post${batch.length > 1 ? "s" : ""}; reconnecting and trying again${batch.length > 1 ? " in smaller batches" : ""}...`)
             pending.unshift(...halves)
-            await new Promise(resolve => setTimeout(resolve, Math.min(failures, 3) * 3000))
-            await framer.disconnect().catch(() => {})
-            framer = await openProject()
+            await reconnect(failures)
         }
     }
+}
+
+// Runs a read, reconnecting and trying again (up to 3 more times) if Framer's session closes.
+async function retrying(what, read) {
+    for (let attempt = 1; ; attempt++) {
+        try {
+            return await read()
+        } catch (error) {
+            if (!error?.retryable || attempt === 4) throw error
+            console.log(`Framer's session closed while ${what} (${error.code ?? error.message}); reconnecting (attempt ${attempt + 1} of 4)...`)
+            await reconnect(attempt)
+        }
+    }
+}
+
+async function reconnect(attempt) {
+    await new Promise(resolve => setTimeout(resolve, Math.min(attempt, 3) * 5000))
+    await framer.disconnect().catch(() => {})
+    framer = await openProject()
 }
 
 async function blogCollection() {
@@ -153,8 +186,8 @@ function embedLines(html) {
 }
 
 // Reads the posts back and checks that Content kept every embed line.
-async function verify(collection, content, updates) {
-    const after = new Map((await collection.getItems()).map(i => [i.id, i]))
+async function verify(content, updates) {
+    const after = new Map((await retrying("checking the posts", async () => (await blogCollection()).getItems())).map(i => [i.id, i]))
     const problems = []
     for (const u of updates) {
         const wanted = [...u.fieldData[content.id].value.matchAll(MARKER)].length
