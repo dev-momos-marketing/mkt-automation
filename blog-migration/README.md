@@ -22,8 +22,9 @@ GitHub → **mkt-automation → Settings → Secrets and variables → Actions**
 
 | Kind | Name | Value |
 | --- | --- | --- |
-| Secret | `FRAMER_API_KEY` | a Framer API key (Framer → Site Settings → General → API keys). The glossary's key works |
-| Variable | `FRAMER_PROJECT_URL` | `https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu` |
+| Repository secret | `FRAMER_API_KEY` | a Framer API key (Framer → Site Settings → General → API keys). The glossary's key works |
+
+Add it as a **repository** secret, not an environment secret, and in this repo, not the glossary one. The project link defaults to Momos-Website-2025; set a `FRAMER_PROJECT_URL` variable only to point it elsewhere.
 
 If the collection isn't called `Blog`, also add a variable `BLOG_COLLECTION` with its name.
 
