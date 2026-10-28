@@ -5,7 +5,7 @@ Moving every momos.com blog post from the template's fixed blocks (`Section Titl
 | Step | What | Status |
 | --- | --- | --- |
 | 1 | **Inventory**: list the fields, posts and every embed in the template | done |
-| 2 | Add an `HTML Embed` component, a `Content` field and a `Migrated` switch in Framer | component in `framer/`; fields next |
+| 2 | Add an `HTML Embed` component, a `Content` field and a `Migrated` switch in Framer | **Blog setup** workflow |
 | 3 | Test whether a script can place the embed component inside `Content` | |
 | 4 | Dry run: build every post's merged body and preview it, writing nothing | `npm run dryrun` |
 | 5 | Migrate 3 posts, publish, compare speed and translations | |
@@ -60,6 +60,37 @@ cd blog-migration && npm ci && npm run inventory && npm run embeds
 - Each embed is shown by a rule on the post's slug, so the embed-to-post mapping is read automatically: 139 belong to exactly one post, and one (`RnVRZQ7G9`) has an empty rule and shows nowhere.
 - Checked on six live posts: the embeds on each page are exactly the ones the script lists.
 
+## Step 2: the HTML Embed component
+
+`framer/HtmlEmbed.tsx` is the one embed blog posts will use, in place of the Embed layers in the template. Paste HTML (with its own `<style>` and `<script>`) or a URL.
+
+- **Loads on scroll.** Nothing loads until the embed is about 600px from the screen, and a post only ever loads the embeds it contains.
+- **Sandboxed by default.** The HTML runs in its own frame: its CSS and scripts can't break the page or read visitors' cookies. The frame resizes to fit its content as it changes. Links such as `/blog/...` open in the main window. Poppins is loaded inside, so text matches the site.
+- **Inline mode**, for trusted HTML that has to reach the page itself (the same way the glossary renders its HTML). Its text is in the page's HTML from the start, so Google reads it; its scripts run on scroll.
+- A URL embed keeps its **Min height**, because a page from another site can't report its height.
+
+| Property | What it does |
+| --- | --- |
+| Mode | Sandboxed (default) or Inline |
+| HTML | The code to embed |
+| URL | A page to embed instead, if HTML is empty (sandboxed only) |
+| Title | Read out by screen readers |
+| Min height | Space kept before it loads; also a URL embed's height |
+| Load | On scroll (default) or at once |
+
+### Add the fields and the component: the Blog setup workflow
+
+**Actions → Blog setup → Run workflow.** Leave **apply** unticked the first time: it's a dry run and lists what it would do. Read that on the run page, then run it again with **apply** ticked. It:
+
+- adds a **Content** field (formatted text), where the migration puts each post's merged body, and a **Migrated** field (on/off), which decides which posts the template shows in the new layout;
+- creates the **HtmlEmbed** code component from `framer/HtmlEmbed.tsx`, or updates it if the copy in Framer differs, and puts it back as it was if Framer finds a type error.
+
+It never removes or changes an existing field, touches no other collection or code file, and never publishes. Running it again changes nothing that's already in place. It stops without changing anything if the Blog collection already has a field with one of those names that's the wrong type, or a Content field that posts already use (the migration would overwrite it); add a repo variable `BLOG_CONTENT_FIELD` or `BLOG_MIGRATED_FIELD` with another name in that case.
+
+From here on, `framer/HtmlEmbed.tsx` in this repo is the master copy: edits made to the component in Framer are overwritten by the next setup run. If you already added HtmlEmbed by hand, the setup replaces it with this repo's version.
+
+Or locally: `cd blog-migration && npm run setup` (dry run), then `npm run setup -- --apply`.
+
 ## Step 4: dry run
 
 `npm run dryrun` builds every post's single body, in English and each translation, from the inventory's data, and writes nothing to Framer. It runs in the same **Blog inventory** workflow; the files are in the `dryrun/` folder of its download.
@@ -80,25 +111,3 @@ How a post is merged (`scripts/merge.mjs`):
 | `dryrun/report.csv` | The index as a spreadsheet |
 
 Unzip the download and open `dryrun/index.html` in a browser.
-
-## Step 2: the HTML Embed component
-
-`framer/HtmlEmbed.tsx` is the one embed blog posts will use, in place of the Embed layers in the template. Paste HTML (with its own `<style>` and `<script>`) or a URL.
-
-- **Loads on scroll.** Nothing loads until the embed is about 600px from the screen, and a post only ever loads the embeds it contains.
-- **Sandboxed by default.** The HTML runs in its own frame: its CSS and scripts can't break the page or read visitors' cookies. The frame resizes to fit its content as it changes. Links such as `/blog/...` open in the main window. Poppins is loaded inside, so text matches the site.
-- **Inline mode**, for trusted HTML that has to reach the page itself (the same way the glossary renders its HTML). Its text is in the page's HTML from the start, so Google reads it; its scripts run on scroll.
-- A URL embed keeps its **Min height**, because a page from another site can't report its height.
-
-| Property | What it does |
-| --- | --- |
-| Mode | Sandboxed (default) or Inline |
-| HTML | The code to embed |
-| URL | A page to embed instead, if HTML is empty (sandboxed only) |
-| Title | Read out by screen readers |
-| Min height | Space kept before it loads; also a URL embed's height |
-| Load | On scroll (default) or at once |
-
-### Add it to Framer (once)
-
-**Assets → Code → New file** (Code component), name it `HtmlEmbed`, replace its contents with `framer/HtmlEmbed.tsx`, and save. A later step's script will keep it in sync from this repo, the way the glossary syncs its components; until then, edits here have to be pasted again.
