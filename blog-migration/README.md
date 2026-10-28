@@ -7,7 +7,7 @@ Moving every momos.com blog post from the template's fixed blocks (`Section Titl
 | 1 | **Inventory**: list the fields, posts and every embed in the template | done |
 | 2 | Add an `HTML Embed` component, a `Content` field and a `Migrated` switch in Framer | component in `framer/`; fields next |
 | 3 | Test whether a script can place the embed component inside `Content` | |
-| 4 | Dry run: build every post's merged body and preview it, writing nothing | |
+| 4 | Dry run: build every post's merged body and preview it, writing nothing | `npm run dryrun` |
 | 5 | Migrate 3 posts, publish, compare speed and translations | |
 | 6 | Migrate the rest | |
 | 7 | Delete the old Section blocks, Embed layers and fields | |
@@ -33,7 +33,8 @@ If the collection isn't called `Blog`, also add a variable `BLOG_COLLECTION` wit
 **Actions → Blog inventory → Run workflow**. When it's done, the run page shows the summary, and **Artifacts → blog-inventory** has the files. It runs two scripts:
 
 - `npm run inventory` reads Framer through the API: the collection's fields and posts, and the template's layers.
-- `npm run embeds` reads every Embed in the template from the published site. Framer's API returns no property values for these embeds, but the template's compiled code on momos.com holds each one's HTML, its visibility rule (`slug is "seo-for-restaurants"`), its section and its translations. It needs no API key.
+- `npm run dryrun` merges every post into one body (step 4, below).
+- `npm run embeds` reads every Embed in the template from the published site. Framer's API doesn't always return these embeds' code and never says which post shows each one, but the template's compiled code on momos.com holds each one's HTML, its visibility rule (`slug is "seo-for-restaurants"`), its section and its translations. It needs no API key.
 
 | File | What's in it |
 | --- | --- |
@@ -58,6 +59,27 @@ cd blog-migration && npm ci && npm run inventory && npm run embeds
 - **140 embeds, 792 KB of HTML, inside a 962 KB script that every blog post downloads**, with 3 translation files of the same size. A post shows 0 to 10 of them; 45 of 112 live posts show any.
 - Each embed is shown by a rule on the post's slug, so the embed-to-post mapping is read automatically: 139 belong to exactly one post, and one (`RnVRZQ7G9`) has an empty rule and shows nowhere.
 - Checked on six live posts: the embeds on each page are exactly the ones the script lists.
+
+## Step 4: dry run
+
+`npm run dryrun` builds every post's single body, in English and each translation, from the inventory's data, and writes nothing to Framer. It runs in the same **Blog inventory** workflow; the files are in the `dryrun/` folder of its download.
+
+How a post is merged (`scripts/merge.mjs`):
+
+- Its `Section Title N` / `Section N` pairs, in number order, each title as an `<h2>` and each body as it is. Empty sections are skipped.
+- Its own embeds where the template showed them: after the text of their section, in template order. Each is a marker paragraph, `⟦embed:Eo0D3eGLd⟧`, until step 3 shows whether a script can place the HtmlEmbed component in the text itself.
+- An embed inside a section the post leaves empty is left out, with a warning: Framer hides the empty section, embed and all, so the live page doesn't show it either. Embeds between sections ("after Section 7") are kept.
+- Translations: each section in the post's translation, falling back to English where a translation is missing, as the site does today. Embeds use their own translations.
+- Embeds without a rule (the sidebar) stay part of the template.
+
+| File | What's in it |
+| --- | --- |
+| `dryrun/index.html` | Every post: sections, embeds, words, size, how much is translated, warnings, links to its previews |
+| `dryrun/preview/<slug>.<lang>.html` | The merged post as it would read, with each embed shown in place (outlined in red), and a link to the live page |
+| `dryrun/content/<slug>.<lang>.html` | The exact value the migration would write into the `Content` field |
+| `dryrun/report.csv` | The index as a spreadsheet |
+
+Unzip the download and open `dryrun/index.html` in a browser.
 
 ## Step 2: the HTML Embed component
 

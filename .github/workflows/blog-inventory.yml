@@ -1,6 +1,6 @@
 # Blog migration, step 1: lists the Blog collection's fields and posts, the blog template's layers,
-# and every Embed's code with the post it belongs to (read from the published site), and attaches the
-# result to the run. Only reads. See blog-migration/README.md.
+# every Embed's code with the post it belongs to (read from the published site), and a dry run of the
+# merge with previews, and attaches the result to the run. Only reads. See blog-migration/README.md.
 name: Blog inventory
 
 on:
@@ -58,6 +58,8 @@ jobs:
           npm run inventory || status=$?
           # Every embed's code, post and place, from the template code published on momos.com.
           npm run embeds || status=$?
+          # Every post merged into one body, in every language, with previews. Writes nothing to Framer.
+          if [ -f out/blog-items.json ] && [ -f out/live/embeds.json ]; then npm run dryrun || status=$?; fi
           if [ -f out/summary.md ]; then cat out/summary.md >> "$GITHUB_STEP_SUMMARY"; fi
           exit $status
       - uses: actions/upload-artifact@v4

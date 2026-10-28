@@ -5,6 +5,7 @@
 //
 // Writes to out/live/:
 //   embeds.csv           one row per embed: the posts that show it, its rule, section, size, file
+//   embeds.json          the same, for the dry run
 //   posts.csv            one row per post with embeds: which embeds, in order, and where
 //   embeds/<id>.html     each embed's HTML; <id>.<locale>.html for each translation
 //   summary.md           the headline numbers (also appended to out/summary.md)
@@ -70,6 +71,14 @@ for (const e of embeds) {
         layer_path: e.names.join(" / "),
     })
 }
+await write("embeds.json", `${JSON.stringify(embeds.map((e, i) => ({
+    id: e.id,
+    posts: rows[i].posts,
+    rule: rows[i].rule,
+    place: e.place,
+    file: rows[i].file,
+    translations: Object.fromEntries(rows[i].translations.map(code => [code, `embeds/${e.id}.${code}.html`])),
+})), null, 2)}\n`)
 await write("embeds.csv", csv(rows, ["embed", "posts", "rule", "place", "html_kb", "has_script", "translations", "file", "layer_path"]))
 const postRows = [...byPost].filter(([, list]) => list.length).map(([slug, list]) => ({
     slug,
