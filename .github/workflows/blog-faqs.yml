@@ -7,7 +7,7 @@ on:
   workflow_dispatch:
     inputs:
       posts:
-        description: Post slugs, separated by commas (or "all": every file in blog-migration/faqs)
+        description: Post slugs, separated by commas, or "all" for every file in blog-migration/faqs
         type: string
         default: all
         required: true
