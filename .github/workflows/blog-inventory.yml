@@ -1,0 +1,58 @@
+# Blog migration, step 1: lists the Blog collection's fields and posts and every Embed in the blog
+# template, and attaches the result to the run. Only reads from Framer. See blog-migration/README.md.
+name: Blog inventory
+
+on:
+  workflow_dispatch:
+  pull_request:
+    paths: [blog-migration/**, .github/workflows/blog-inventory.yml]
+
+permissions:
+  contents: read
+
+defaults:
+  run:
+    working-directory: blog-migration
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - run: npm test
+
+  inventory:
+    needs: test
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL }}
+      FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
+      BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - name: Read the blog from Framer
+        run: |
+          if [ -z "$FRAMER_PROJECT_URL" ] || [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::Add FRAMER_PROJECT_URL (variable) and FRAMER_API_KEY (secret) in the repo settings. See blog-migration/README.md."
+            exit 1
+          fi
+          npm run inventory
+          cat out/summary.md >> "$GITHUB_STEP_SUMMARY"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: blog-inventory
+          path: blog-migration/out/
+          retention-days: 30
