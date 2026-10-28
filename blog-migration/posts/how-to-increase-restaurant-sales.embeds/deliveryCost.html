@@ -1,0 +1,47 @@
+<div id="delivery-cost">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+#delivery-cost,#delivery-cost *{box-sizing:border-box;margin:0}
+#delivery-cost{font-family:'Poppins',sans-serif;color:#15181E;background:#FDF7F6;border-radius:16px;padding:24px;max-width:760px}
+#delivery-cost .t{font-size:12px;font-weight:600;color:#D73E33;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+#delivery-cost .h{font-size:20px;font-weight:600;margin-bottom:16px}
+#delivery-cost .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px}
+#delivery-cost label{display:block;font-size:13px;color:#353D4D;margin-bottom:4px;white-space:nowrap}
+#delivery-cost input{width:100%;font:inherit;font-size:16px;padding:8px 10px;border:1px solid #E3DCDA;border-radius:8px;background:#fff;color:#15181E}
+#delivery-cost .r{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;background:#fff;border-radius:12px;padding:16px}
+#delivery-cost .k{font-size:13px;color:#353D4D}
+#delivery-cost .v{font-size:22px;font-weight:600}
+#delivery-cost .v.up{color:#D73E33}
+#delivery-cost .n{font-size:13px;color:#353D4D;margin-top:12px;line-height:1.6}
+</style>
+<div class="t">Calculator</div>
+<div class="h">What do delivery apps cost you, and what could direct ordering save?</div>
+<div class="g">
+<div><label for="dc-orders">Orders per month</label><input id="dc-orders" type="number" min="0" value="600"></div>
+<div><label for="dc-aov">Order value ($)</label><input id="dc-aov" type="number" min="0" step="0.5" value="32"></div>
+<div><label for="dc-comm">Commission (%)</label><input id="dc-comm" type="number" min="0" max="100" step="0.5" value="25"></div>
+<div><label for="dc-shift">Moved to direct (%)</label><input id="dc-shift" type="number" min="0" max="100" value="20"></div>
+<div><label for="dc-direct">Direct order cost (%)</label><input id="dc-direct" type="number" min="0" max="100" step="0.5" value="5"></div>
+</div>
+<div class="r">
+<div><div class="k">Commission per month</div><div class="v" id="dc-month">$4,800</div></div>
+<div><div class="k">Commission per year</div><div class="v" id="dc-year">$57,600</div></div>
+<div><div class="k">Saved per year with direct ordering</div><div class="v up" id="dc-save">$9,216</div></div>
+</div>
+<p class="n">Commission = orders × order value × commission rate. "Direct order cost" covers what you still pay on your own channel, such as card processing or a delivery fee. For reference, DoorDash lists marketplace delivery commissions of 15%, 25% and 30% on its Basic, Plus and Premier plans.</p>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var money=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+function run(){
+var o=+$('dc-orders').value||0,v=+$('dc-aov').value||0,c=+$('dc-comm').value||0,s=+$('dc-shift').value||0,d=+$('dc-direct').value||0;
+var month=o*v*c/100,save=o*s/100*v*(c-d)/100*12;
+$('dc-month').textContent=money(month);
+$('dc-year').textContent=money(month*12);
+$('dc-save').textContent=(save<0?'−':'')+money(Math.abs(save));
+}
+['dc-orders','dc-aov','dc-comm','dc-shift','dc-direct'].forEach(function(id){$(id).addEventListener('input',run)});
+run();
+})();
+</script>
+</div>

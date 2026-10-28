@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { readFile } from "node:fs/promises"
+import { readFile, readdir } from "node:fs/promises"
 import { checkPost, embedLines } from "../scripts/posts.mjs"
 
 const paths = new Set(["/blog/a", "/glossary/b", "/rockie"])
@@ -23,7 +23,10 @@ test("checkPost reports broken tags, unknown embeds and bad links", () => {
 })
 
 test("every post in posts/ is well-formed", async () => {
-    const html = await readFile(new URL("../posts/restaurant-intelligence.html", import.meta.url), "utf8")
-    const problems = checkPost(html, { embeds: new Map(embedLines(html).map(id => [id, ""])), paths: { has: () => true } })
-    assert.deepEqual(problems, [])
+    const dir = new URL("../posts/", import.meta.url)
+    for (const file of (await readdir(dir)).filter(f => f.endsWith(".html"))) {
+        const html = await readFile(new URL(file, dir), "utf8")
+        const problems = checkPost(html, { embeds: new Map(embedLines(html).map(id => [id, ""])), paths: { has: () => true } })
+        assert.deepEqual(problems, [], file)
+    }
 })
