@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { csv, embedInfo, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales } from "../scripts/lib.mjs"
+import { csv, embedInfo, findTemplatePages, guessPosts, isEmbed, isFilled, isSectionName, numbered, preview, translatedLocales } from "../scripts/lib.mjs"
 
 test("numbered splits a field name into its group and number", () => {
     assert.deepEqual(numbered("Section Title 12"), { group: "Section Title", n: 12 })
@@ -62,4 +62,17 @@ test("guessPosts matches slugs and titles in embed content", () => {
     assert.deepEqual(guessPosts('<a href="/blog/restaurant-reputation-software">', posts), ["restaurant-reputation-software"])
     assert.deepEqual(guessPosts("nps", posts), [])
     assert.deepEqual(guessPosts("", posts), [])
+})
+
+test("findTemplatePages prefers the given path, then the collection link, then /blog/:slug", () => {
+    const pages = [
+        { path: "/blog", collectionId: null },
+        { path: "/blog/:slug", collectionId: null },
+        { path: "/guides/:slug", collectionId: "g" },
+        { path: "/archive/:slug", collectionId: "b" },
+    ]
+    assert.deepEqual(findTemplatePages(pages, { collectionId: "b" }).map(p => p.path), ["/archive/:slug"])
+    assert.deepEqual(findTemplatePages(pages, { collectionId: "x" }).map(p => p.path), ["/blog/:slug"])
+    assert.deepEqual(findTemplatePages(pages, { collectionId: "b", path: "/guides/:slug" }).map(p => p.path), ["/guides/:slug"])
+    assert.deepEqual(findTemplatePages(pages, { collectionId: "x", path: "/nope" }), [])
 })

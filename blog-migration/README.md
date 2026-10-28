@@ -26,7 +26,7 @@ GitHub → **mkt-automation → Settings → Secrets and variables → Actions**
 
 Add it as a **repository** secret, not an environment secret, and in this repo, not the glossary one. The project link defaults to Momos-Website-2025; set a `FRAMER_PROJECT_URL` variable only to point it elsewhere.
 
-If the collection isn't called `Blog`, also add a variable `BLOG_COLLECTION` with its name.
+If the collection isn't called `Blog`, also add a variable `BLOG_COLLECTION` with its name. The blog post template is found by its link to the collection, or else at `/blog/:slug`; if the summary says it wasn't found, add a variable `BLOG_TEMPLATE_PATH` with one of the paths it lists.
 
 ### Run it
 

@@ -1,6 +1,8 @@
 import { createHash } from "node:crypto"
 
 export const COLLECTION = process.env.BLOG_COLLECTION || "Blog"
+// The blog post template's path in Framer, if it can't be found on its own (e.g. "/blog/:slug").
+export const TEMPLATE_PATH = process.env.BLOG_TEMPLATE_PATH || ""
 
 export async function openProject() {
     const projectUrl = process.env.FRAMER_PROJECT_URL
@@ -96,4 +98,13 @@ export function guessPosts(content, posts) {
     return posts
         .filter(p => (p.slug.length > 6 && text.includes(p.slug.toLowerCase())) || (p.title.length > 12 && text.includes(p.title.toLowerCase())))
         .map(p => p.slug)
+}
+
+// The CMS page(s) that show the blog's posts: the path given, else pages linked to the collection,
+// else the CMS page under the blog's own route ("/blog/:slug").
+export function findTemplatePages(pages, { collectionId, path = "", route = "/blog" }) {
+    if (path) return pages.filter(p => p.path === path)
+    const linked = pages.filter(p => collectionId && p.collectionId === collectionId)
+    if (linked.length) return linked
+    return pages.filter(p => new RegExp(`^${route}/:[^/]+$`).test(p.path ?? ""))
 }

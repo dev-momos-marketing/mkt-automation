@@ -36,6 +36,7 @@ jobs:
       FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
       FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
       BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+      BLOG_TEMPLATE_PATH: ${{ vars.BLOG_TEMPLATE_PATH }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -51,9 +52,13 @@ jobs:
             exit 1
           fi
           echo "Framer project: $FRAMER_PROJECT_URL"
-          npm run inventory
-          cat out/summary.md >> "$GITHUB_STEP_SUMMARY"
+          # Show the summary and keep the files even when part of the inventory fails.
+          status=0
+          npm run inventory || status=$?
+          if [ -f out/summary.md ]; then cat out/summary.md >> "$GITHUB_STEP_SUMMARY"; fi
+          exit $status
       - uses: actions/upload-artifact@v4
+        if: always()
         with:
           name: blog-inventory
           path: blog-migration/out/
