@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { describeRule, guessLanguage, parseTemplate, parseTranslations, ruleMatches } from "../scripts/template.mjs"
+import { describeRule, embedsForItem, guessLanguage, parseTemplate, parseTranslations, ruleMatches, ruleValueFor } from "../scripts/template.mjs"
 
 // A miniature of the code Framer publishes for the blog post template: minified helper names, a
 // rule per post, embeds nested in Section frames, and translations looked up by key.
@@ -12,7 +12,7 @@ W=(e,t)=>typeof e==\`string\`&&typeof t==\`string\`?e.toLowerCase().includes(t.t
 vn=(e,t)=>typeof e==\`string\`&&e.toLowerCase().startsWith(t.toLowerCase());
 N={AAA:new w(()=>import(\`./tpl-0.mjs\`)),BBB:new w(()=>import(\`./tpl-1.mjs\`))};
 function Page(p){
-  let C=p.slug??\`\`,u=p.locale;
+  let {vhLy0TtfC:C=p.vhLy0TtfC??\`\`,locale:u}=p;
   Z=U(C,\`seo-for-restaurants\`),X=W(C,\`loyalty\`),Y=vn(C,\`best-\`),Q=U(C,\`\`);
   return s(tn,{"data-framer-name":\`Body\`,children:[
     s(tn,{"data-framer-name":\`Section 1\`,children:[
@@ -42,8 +42,8 @@ test("parseTemplate finds every embed with its HTML, rule, place and translation
     assert.equal(calc.translationKey, "v4")
     assert.equal(calc.nodeId, "node1")
     assert.equal(calc.place, "Section 1")
-    assert.deepEqual(calc.rule, { kind: "equals", value: "seo-for-restaurants", field: "C" })
-    assert.deepEqual(table.rule, { kind: "contains", value: "loyalty", field: "C" })
+    assert.deepEqual(calc.rule, { kind: "equals", value: "seo-for-restaurants", field: "C", fieldId: "vhLy0TtfC" })
+    assert.deepEqual(table.rule, { kind: "contains", value: "loyalty", field: "C", fieldId: "vhLy0TtfC" })
     assert.equal(table.translationKey, null)
     assert.equal(between.place, "after Section 1")
     assert.equal(between.section, null)
@@ -80,4 +80,20 @@ test("guessLanguage tells Japanese, French and Spanish apart", () => {
     assert.equal(guessLanguage(["Publicado por: "]), "es")
     assert.equal(guessLanguage(["Published by"]), null)
     assert.equal(guessLanguage(["Publié par : ", `<table>${"x".repeat(100)}東京</table>`]), "fr")
+})
+
+test("embedsForItem follows the field the rules compare, which isn't always the slug", () => {
+    const { embeds } = parseTemplate(TEMPLATE)
+    const ids = item => embedsForItem(embeds, item).map(e => e.id)
+    // The usual case: the field holds the post's own slug.
+    assert.deepEqual(ids({ slug: "seo-for-restaurants", fieldData: { vhLy0TtfC: { value: "seo-for-restaurants" } } }), ["emb1"])
+    // A duplicated post that kept the original's value shows the original's embeds, as on the live site.
+    assert.deepEqual(ids({ slug: "seo-for-restaurants-copy", fieldData: { vhLy0TtfC: { value: "seo-for-restaurants" } } }), ["emb1"])
+    // A post whose field is empty matches the rule "equals empty", and nothing named.
+    assert.deepEqual(ids({ slug: "best-x-guide", fieldData: { vhLy0TtfC: { value: "" } } }), ["emb4"])
+    // Without the field (an older export), the slug stands in.
+    assert.deepEqual(ids({ slug: "best-loyalty-apps", fieldData: {} }), ["emb2", "emb3"])
+    assert.equal(ruleValueFor(embeds[0].rule, { slug: "a", fieldData: { vhLy0TtfC: { value: null } } }), "")
+    // The rule-less embed (on every post) is part of the template, never a post's.
+    assert.ok(!ids({ slug: "anything", fieldData: { vhLy0TtfC: { value: "anything" } } }).includes("emb5"))
 })

@@ -17,6 +17,7 @@
 import { mkdir, rm, writeFile } from "node:fs/promises"
 import { COLLECTION, FIELD_NAMES, batchesBySize, isFilled, openProject } from "./lib.mjs"
 import { readLive } from "./live.mjs"
+import { embedsForItem, ruleValueFor } from "./template.mjs"
 import { MARKER, buildPost, sectionFields } from "./merge.mjs"
 
 const args = process.argv.slice(2)
@@ -63,12 +64,28 @@ try {
         const updates = []
         for (const item of targets) {
             const existing = item.fieldData[content.id]
-            const post = buildPost({ fieldData: item.fieldData, sections, embeds: live.embeds.filter(e => e.posts.includes(item.slug)), locales })
+            const own = embedsForItem(live.embeds, item)
+            const post = buildPost({ fieldData: item.fieldData, sections, embeds: own, locales })
+            // The rules compare a CMS field that usually holds the post's slug. Where it doesn't, say so.
+            const ruleField = live.embeds.find(e => e.rule?.fieldId)?.rule
+            const fieldValue = ruleField ? ruleValueFor(ruleField, item) : item.slug
+            if (fieldValue !== item.slug) {
+                const name = fields.find(f => f.id === ruleField.fieldId)?.name ?? ruleField.fieldId
+                say(`Note: ${item.slug} has "${fieldValue}" in its ${name} field, which decides its embeds (${own.map(e => e.id).join(", ") || "none"}), as on the live site.`)
+            }
             if (isFilled(existing) && !overwrite && existing.value !== post.content.value) {
                 // Written by an earlier run (Framer tidies the HTML it saves, so it never matches exactly).
-                if (item.fieldData[migrated.id]?.value === true) say(`Already migrated: ${item.slug}.`)
-                else say(`Skipped ${item.slug}: its Content already has something in it (add --overwrite to replace it).`)
-                continue
+                // It's written again only if its embeds have changed, e.g. after a fix to which embeds
+                // a post shows.
+                const before = embedLines(existing.value)
+                const now = embedLines(post.content.value)
+                if (item.fieldData[migrated.id]?.value === true && before.join() !== now.join()) {
+                    say(`Updating ${item.slug}: its embeds were ${before.join(", ") || "none"}, and are now ${now.join(", ") || "none"}, as on the live site.`)
+                } else {
+                    if (item.fieldData[migrated.id]?.value === true) say(`Already migrated: ${item.slug}.`)
+                    else say(`Skipped ${item.slug}: its Content already has something in it (add --overwrite to replace it).`)
+                    continue
+                }
             }
             const markers = [...post.content.value.matchAll(MARKER)].length
             await writeFile(new URL(`${item.slug}.content.html`, OUT), `${post.content.value}\n`)
@@ -129,6 +146,10 @@ async function save(updates) {
 
 async function blogCollection() {
     return (await framer.getCollections()).find(c => c.name === COLLECTION)
+}
+
+function embedLines(html) {
+    return [...String(html ?? "").matchAll(/⟦embed:([A-Za-z0-9_-]+)⟧/g)].map(m => m[1])
 }
 
 // Reads the posts back and checks that Content kept every embed line.

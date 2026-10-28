@@ -14,6 +14,7 @@
 import { mkdir, readFile, rm, writeFile } from "node:fs/promises"
 import { csv } from "./lib.mjs"
 import { MARKER, mergePost, sectionFields, wordCount } from "./merge.mjs"
+import { embedsForItem } from "./template.mjs"
 
 const OUT = new URL("../out/", import.meta.url)
 const DRY = new URL("dryrun/", OUT)
@@ -57,13 +58,14 @@ function embedCode(id, lang) {
     const base = lang.split("-")[0]
     return byLang[lang] ?? byLang[base] ?? Object.entries(byLang).find(([k]) => k.split("-")[0] === base)?.[1] ?? byLang.en
 }
-const postEmbeds = slug => embeds.filter(e => e.posts.includes(slug))
+// The embeds a post shows, by the CMS field its rules compare (usually, but not always, its slug).
+const postEmbeds = item => embedsForItem(embeds.map(e => ({ ...e, rule: e.ruleData })), item)
 const templateEmbeds = embeds.filter(e => e.posts.includes("(every post)"))
 
 const rows = []
 for (const item of items.items) {
     const title = String(item.fieldData[titleField?.id]?.value ?? item.slug)
-    const own = postEmbeds(item.slug)
+    const own = postEmbeds(item)
     const row = { slug: item.slug, title, draft: item.draft ? "yes" : "", warnings: [] }
     for (const lang of languages) {
         const result = mergePost({ fieldData: item.fieldData, sections, embeds: own, localeId: lang.id })
