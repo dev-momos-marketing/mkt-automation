@@ -158,6 +158,16 @@ for (const r of embedRows) breakpoints.set(r.breakpoint, (breakpoints.get(r.brea
 const sectionHistogram = new Map()
 for (const p of posts) sectionHistogram.set(p.highest_section, (sectionHistogram.get(p.highest_section) ?? 0) + 1)
 
+// Posts whose Content field (added by the setup) already has something in it, printed raw: this shows
+// how Framer stores a component inserted into formatted text, which decides how the migration places
+// embeds (step 3).
+const contentField = fields.find(f => f.name === (process.env.BLOG_CONTENT_FIELD || "Content"))
+const contentFilled = contentField ? items.filter(i => isFilled(i.fieldData[contentField.id]) || /<[a-z-]+[^>]*>/i.test(i.fieldData[contentField.id]?.value ?? "")) : []
+for (const item of contentFilled.slice(0, 5)) {
+    const value = String(item.fieldData[contentField.id].value)
+    console.log(`Content of "${item.slug}" (${value.length} characters), as Framer stores it:\n${truncate(value, 6000)}\n`)
+}
+
 // Where Framer keeps an embed's data, from the first few embeds: printed so it shows in the run log.
 const shapes = [...new Map(embeds.map(e => [JSON.stringify(controlShape(e.node.controls, e.node.typedControls)), e])).values()].slice(0, 3)
 for (const e of shapes) {
@@ -178,6 +188,9 @@ ${[...sectionHistogram].sort((a, b) => a[0] - b[0]).map(([n, count]) => `  - ${n
 ## Fields
 - ${fields.length} fields. Numbered groups: ${[...groups].map(([g, n]) => `"${g}" ×${n}`).join(", ") || "none"}
 - Never filled in: ${fieldRows.filter(f => !f.posts_filled).map(f => f.name).join(", ") || "none"}
+
+## Content field
+${contentField ? `- ${contentFilled.length} posts have something in "${contentField.name}"${contentFilled.length ? `: ${contentFilled.slice(0, 5).map(i => i.slug).join(", ")} (printed raw in the run log)` : ""}` : "- Not added yet (run the Blog setup workflow)"}
 
 ## Embeds in the template
 ${templateError ? `**The template wasn't read.** ${templateError}\n` : ""}- ${embedRows.length} embed layers, ${distinct.size} distinct (the rest are copies, mostly one per breakpoint)
