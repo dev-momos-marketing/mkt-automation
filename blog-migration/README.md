@@ -170,6 +170,8 @@ A post's body can be written in this repo: `posts/<slug>.html`, from the first H
 
 **Actions → Blog write → Run workflow** with the slug. The dry run checks the HTML, that each embed line has code in the post's Embeds field and that every link goes to a page in the sitemap, and lists the word count before and after. Tick **apply** to save it to Content; the run reads it back to check the embed lines. The post's translations stay as they are and are marked **needs review** in Framer's localization. It never publishes.
 
+New interactive embeds (calculators and the like) go in `posts/<slug>.embeds/<id>.html`, with a `<p>⟦embed:<id>⟧</p>` line in the post. The run adds each one to the post's Embeds field, or replaces the embed with that id, and keeps the others. An embed with a `<script>` runs in a sandboxed frame that grows to fit, so scope its CSS to an element id, load Poppins in it, and put the initial result in the HTML.
+
 A post saved this way is overwritten from the file the next time it's written, so make later edits in the file. The Blog links run doesn't change the file: add links to it by hand.
 
 ## After publishing

@@ -1,0 +1,47 @@
+<div id="rev-levers">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+#rev-levers,#rev-levers *{box-sizing:border-box;margin:0}
+#rev-levers{font-family:'Poppins',sans-serif;color:#15181E;background:#FDF7F6;border-radius:16px;padding:24px;max-width:760px}
+#rev-levers .t{font-size:12px;font-weight:600;color:#D73E33;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+#rev-levers .h{font-size:20px;font-weight:600;margin-bottom:16px}
+#rev-levers .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:12px;margin-bottom:16px}
+#rev-levers label{display:block;font-size:13px;color:#353D4D;margin-bottom:4px;white-space:nowrap}
+#rev-levers input{width:100%;font:inherit;font-size:16px;padding:8px 10px;border:1px solid #E3DCDA;border-radius:8px;background:#fff;color:#15181E}
+#rev-levers .r{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;background:#fff;border-radius:12px;padding:16px}
+#rev-levers .k{font-size:13px;color:#353D4D}
+#rev-levers .v{font-size:22px;font-weight:600}
+#rev-levers .v.up{color:#D73E33}
+#rev-levers .n{font-size:13px;color:#353D4D;margin-top:12px;line-height:1.6}
+</style>
+<div class="t">Calculator</div>
+<div class="h">How much would small gains add to your sales?</div>
+<div class="g">
+<div><label for="rl-covers">Guests per day</label><input id="rl-covers" type="number" min="0" value="200"></div>
+<div><label for="rl-check">Spend per guest ($)</label><input id="rl-check" type="number" min="0" step="0.5" value="25"></div>
+<div><label for="rl-days">Days open per year</label><input id="rl-days" type="number" min="0" max="366" value="360"></div>
+<div><label for="rl-more">More guests (%)</label><input id="rl-more" type="number" step="0.5" value="5"></div>
+<div><label for="rl-higher">Higher spend (%)</label><input id="rl-higher" type="number" step="0.5" value="5"></div>
+</div>
+<div class="r">
+<div><div class="k">Sales today</div><div class="v" id="rl-base">$1,800,000</div></div>
+<div><div class="k">Sales with both gains</div><div class="v" id="rl-new">$1,984,500</div></div>
+<div><div class="k">Extra sales per year</div><div class="v up" id="rl-lift">+$184,500 (10.3%)</div></div>
+</div>
+<p class="n">Sales = guests × average spend × days open. Gains in guests and spend multiply, so two 5% improvements add 10.25%, slightly more than their sum.</p>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var money=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+function run(){
+var c=+$('rl-covers').value||0,a=+$('rl-check').value||0,d=+$('rl-days').value||0,m=+$('rl-more').value||0,h=+$('rl-higher').value||0;
+var base=c*a*d,next=c*(1+m/100)*a*(1+h/100)*d,lift=next-base;
+$('rl-base').textContent=money(base);
+$('rl-new').textContent=money(next);
+$('rl-lift').textContent=(lift<0?'−':'+')+money(Math.abs(lift))+(base?' ('+(lift/base*100).toFixed(1)+'%)':'');
+}
+['rl-covers','rl-check','rl-days','rl-more','rl-higher'].forEach(function(id){$(id).addEventListener('input',run)});
+run();
+})();
+</script>
+</div>

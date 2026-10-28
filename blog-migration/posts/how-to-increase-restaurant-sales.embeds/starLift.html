@@ -1,0 +1,47 @@
+<div id="star-lift">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+#star-lift,#star-lift *{box-sizing:border-box;margin:0}
+#star-lift{font-family:'Poppins',sans-serif;color:#15181E;background:#FDF7F6;border-radius:16px;padding:24px;max-width:760px}
+#star-lift .t{font-size:12px;font-weight:600;color:#D73E33;text-transform:uppercase;letter-spacing:1.2px;margin-bottom:6px}
+#star-lift .h{font-size:20px;font-weight:600;margin-bottom:16px}
+#star-lift .g{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:16px}
+#star-lift label{display:block;font-size:13px;color:#353D4D;margin-bottom:4px}
+#star-lift input{width:100%;font:inherit;font-size:16px;padding:8px 10px;border:1px solid #E3DCDA;border-radius:8px;background:#fff;color:#15181E}
+#star-lift .r{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;background:#fff;border-radius:12px;padding:16px}
+#star-lift .k{font-size:13px;color:#353D4D}
+#star-lift .v{font-size:22px;font-weight:600}
+#star-lift .v.up{color:#D73E33}
+#star-lift .n{font-size:13px;color:#353D4D;margin-top:12px;line-height:1.6}
+</style>
+<div class="t">Calculator</div>
+<div class="h">What could a higher rating be worth?</div>
+<div class="g">
+<div><label for="sl-rev">Annual sales per location ($)</label><input id="sl-rev" type="number" min="0" step="10000" value="1000000"></div>
+<div><label for="sl-now">Current rating</label><input id="sl-now" type="number" min="1" max="5" step="0.1" value="4.0"></div>
+<div><label for="sl-goal">Target rating</label><input id="sl-goal" type="number" min="1" max="5" step="0.1" value="4.5"></div>
+</div>
+<div class="r">
+<div><div class="k">Rating gain</div><div class="v" id="sl-gain">+0.5 stars</div></div>
+<div><div class="k">Estimated sales lift</div><div class="v" id="sl-pct">2.5% to 4.5%</div></div>
+<div><div class="k">Extra sales per year</div><div class="v up" id="sl-lift">$25,000 to $45,000</div></div>
+</div>
+<p class="n">Based on Michael Luca's Harvard Business School study of Yelp, which found that a one-star increase was associated with a 5% to 9% increase in revenue for independent restaurants in Seattle. Treat the result as a rough estimate: chains, other platforms and other markets can differ.</p>
+<script>
+(function(){
+var $=function(id){return document.getElementById(id)};
+var money=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+function run(){
+var rev=+$('sl-rev').value||0,now=+$('sl-now').value||0,goal=+$('sl-goal').value||0;
+var gain=Math.round((goal-now)*10)/10;
+$('sl-gain').textContent=(gain>=0?'+':'−')+Math.abs(gain).toFixed(1)+' stars';
+if(gain<=0){$('sl-pct').textContent='—';$('sl-lift').textContent='Set a target above your current rating';return}
+var lo=gain*5,hi=gain*9;
+$('sl-pct').textContent=+lo.toFixed(1)+'% to '+(+hi.toFixed(1))+'%';
+$('sl-lift').textContent=money(rev*lo/100)+' to '+money(rev*hi/100);
+}
+['sl-rev','sl-now','sl-goal'].forEach(function(id){$(id).addEventListener('input',run)});
+run();
+})();
+</script>
+</div>
