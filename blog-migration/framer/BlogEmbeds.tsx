@@ -30,7 +30,7 @@ type Props = { embeds: string; spacing: number; h2: number; h3: number }
  * @framerSupportedLayoutWidth any
  * @framerSupportedLayoutHeight auto
  */
-export default function BlogEmbeds({ embeds = "", spacing = 24, h2 = 28, h3 = 22 }: Props) {
+export default function BlogEmbeds({ embeds = "", spacing = 24, h2 = 36, h3 = 28 }: Props) {
     const ref = useRef<HTMLDivElement>(null)
     const entries = parse(embeds)
     const onCanvas = RenderTarget.current() === RenderTarget.canvas
@@ -139,8 +139,8 @@ function headingCss(h2: number, h3: number) {
     return (
         fit +
         sizes(h2, h3) +
-        `@media (max-width:1199px){${sizes(Math.round(h2 * 0.86), Math.round(h3 * 0.9))}}` +
-        `@media (max-width:809px){${sizes(Math.round(h2 * 0.79), Math.round(h3 * 0.82))}}`
+        `@media (max-width:1199px){${sizes(Math.round(h2 * 0.89), Math.round(h3 * 0.89))}}` +
+        `@media (max-width:809px){${sizes(Math.round(h2 * 0.72), Math.round(h3 * 0.78))}}`
     )
 }
 
@@ -191,6 +191,6 @@ addPropertyControls(BlogEmbeds, {
         description: "Connect to the post's Embeds field.",
     },
     spacing: { type: ControlType.Number, title: "Spacing", defaultValue: 24, min: 0, max: 120, step: 4, unit: "px" },
-    h2: { type: ControlType.Number, title: "H2 size", defaultValue: 28, min: 16, max: 64, step: 1, unit: "px", description: "Desktop size of the post's H2 headings; smaller on tablets and phones." },
-    h3: { type: ControlType.Number, title: "H3 size", defaultValue: 22, min: 14, max: 48, step: 1, unit: "px" },
+    h2: { type: ControlType.Number, title: "H2 size", defaultValue: 36, min: 16, max: 64, step: 1, unit: "px", description: "Desktop size of the post's H2 headings; smaller on tablets and phones." },
+    h3: { type: ControlType.Number, title: "H3 size", defaultValue: 28, min: 14, max: 48, step: 1, unit: "px" },
 })
