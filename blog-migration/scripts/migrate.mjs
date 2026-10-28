@@ -15,7 +15,7 @@
 //        npm run migrate -- --all [--apply]                  every post
 //        npm run migrate -- --posts slug-a --undo [--apply]  switch Migrated off again (keeps Content)
 import { mkdir, rm, writeFile } from "node:fs/promises"
-import { COLLECTION, FIELD_NAMES, isFilled, openProject } from "./lib.mjs"
+import { COLLECTION, FIELD_NAMES, batchesBySize, isFilled, openProject } from "./lib.mjs"
 import { readLive } from "./live.mjs"
 import { MARKER, buildPost, sectionFields } from "./merge.mjs"
 
@@ -27,12 +27,16 @@ const all = args.includes("--all")
 const chosen = (args[args.indexOf("--posts") + 1] ?? "").split(/[,\s]+/).filter(s => s && args.includes("--posts"))
 if (!all && !chosen.length) throw new Error("Name the posts: --posts slug-a,slug-b (or --all).")
 const BATCH = 20
+// Framer closes the connection on a message that's too big (each post carries its Content and
+// Embeds in every language, often 100–250 KB), so saves stay under this size.
+const MAX_BATCH_BYTES = Number(process.env.BLOG_MAX_BATCH_BYTES) || 400_000
 const OUT = new URL("../out/migrate/", import.meta.url)
 const say = text => console.log(`${apply ? "" : "[dry run] "}${text}`)
 
 await rm(OUT, { recursive: true, force: true })
 await mkdir(OUT, { recursive: true })
 
+const targetsById = new Map()
 let framer = await openProject()
 try {
     const collection = (await framer.getCollections()).find(c => c.name === COLLECTION)
@@ -46,6 +50,7 @@ try {
     const unknown = chosen.filter(slug => !items.some(i => i.slug === slug))
     if (unknown.length) throw new Error(`No post with the slug ${unknown.join(", ")}.`)
     const targets = all ? items : chosen.map(slug => items.find(i => i.slug === slug))
+    for (const t of targets) targetsById.set(t.id, t.slug)
 
     if (undo) {
         const updates = targets.map(i => ({ id: i.id, fieldData: { [migrated.id]: { type: "boolean", value: false } } }))
@@ -91,21 +96,33 @@ try {
 }
 say(apply ? "Nothing was published." : "Nothing was changed. Add --apply (or tick \"apply\" in the workflow) to write these posts.")
 
-// Saves the posts in batches. Framer sometimes closes the connection on long runs; then it
-// reconnects and carries on from the batch that didn't go through (saving a post again is harmless).
+// Saves the posts in batches small enough for Framer. If Framer still closes the connection, it
+// reconnects and tries again with the batch split in half, down to one post; a single post that
+// keeps failing stops the run with its name. Saving a post again is harmless.
 async function save(updates) {
-    for (let i = 0; i < updates.length; i += BATCH) {
-        for (let attempt = 1; ; attempt++) {
-            try {
-                await (await blogCollection()).addItems(updates.slice(i, i + BATCH))
-                break
-            } catch (error) {
-                if (!error?.retryable || attempt === 4) throw error
-                console.log(`Framer closed the connection (${error.code ?? error.message}); reconnecting to save posts ${i + 1}–${Math.min(i + BATCH, updates.length)} again (attempt ${attempt + 1} of 4)...`)
-                await new Promise(resolve => setTimeout(resolve, attempt * 5000))
-                await framer.disconnect().catch(() => {})
-                framer = await openProject()
+    const slug = id => targetsById.get(id) ?? id
+    let saved = 0
+    const pending = batchesBySize(updates, MAX_BATCH_BYTES, BATCH)
+    let failures = 0
+    while (pending.length) {
+        const batch = pending.shift()
+        try {
+            await (await blogCollection()).addItems(batch)
+            saved += batch.length
+            failures = 0
+            console.log(`Saved ${saved} of ${updates.length} posts.`)
+        } catch (error) {
+            if (!error?.retryable) throw error
+            failures++
+            if (batch.length === 1 && failures >= 3) {
+                throw new Error(`Framer keeps closing the connection while saving ${slug(batch[0].id)} (${error.code ?? error.message}). ${saved} posts were saved; run again to continue.`)
             }
+            const halves = batch.length > 1 ? [batch.slice(0, Math.ceil(batch.length / 2)), batch.slice(Math.ceil(batch.length / 2))] : [batch]
+            console.log(`Framer closed the connection (${error.code ?? error.message}) while saving ${batch.length} post${batch.length > 1 ? "s" : ""}; reconnecting and trying again${batch.length > 1 ? " in smaller batches" : ""}...`)
+            pending.unshift(...halves)
+            await new Promise(resolve => setTimeout(resolve, Math.min(failures, 3) * 3000))
+            await framer.disconnect().catch(() => {})
+            framer = await openProject()
         }
     }
 }
