@@ -1,16 +1,18 @@
 # Blog migration
 
-Moving every momos.com blog post from the template's fixed blocks (`Section Title 1` / `Section 1` … `Section 20`, each with its own Embed layers) to **one field per post**, with each post's own embeds moved in with it. Today every post carries every other post's embeds, hidden, which makes the pages heavy.
+Moving every momos.com blog post from the template's fixed blocks (`Section Title 1` / `Section 1` … `Section 26`, with 140 Embed layers between them) to **one rich-text field per post**, with each post's own embeds moved in with it. Today every post downloads every embed (a 962 KB script), which makes the pages heavy.
 
-| Step | What | Status |
+**How embeds work after the move.** Framer's API leaves components out of rich-text fields (checked: a Blog Embed inserted by hand comes back as nothing), so a script can't place them there. Instead, each post's **Content** has a line like `⟦embed:Eo0D3eGLd⟧` where an embed goes, its **Embeds** field holds that embed's code, and the **BlogEmbeds** component on the template puts each embed at its line. Embeds without scripts are in the server's HTML, so Google reads them as it does today.
+
+| Step | What | How |
 | --- | --- | --- |
-| 1 | **Inventory**: list the fields, posts and every embed in the template | done |
-| 2 | Add an `HTML Embed` component, a `Content` field and a `Migrated` switch in Framer | **Blog setup** workflow |
-| 3 | Test whether a script can place the embed component inside `Content` | |
-| 4 | Dry run: build every post's merged body and preview it, writing nothing | `npm run dryrun` |
-| 5 | Migrate 3 posts, publish, compare speed and translations | |
-| 6 | Migrate the rest | |
-| 7 | Delete the old Section blocks, Embed layers and fields | |
+| 1 | **Inventory**: the fields, posts and every embed with its post and place | **Blog inventory** workflow (done) |
+| 2 | Add the **Content**, **Embeds** and **Migrated** fields and the **BlogEmbeds** / **HtmlEmbed** components | **Blog setup** workflow |
+| 3 | Can a script put a component in rich text? No: embeds use `⟦embed:…⟧` lines and BlogEmbeds | (done) |
+| 4 | Dry run: every post merged, with previews, writing nothing | **Blog inventory** workflow (done) |
+| 5 | Set up the template (by hand, once), then migrate 3 posts and check them | below, then **Blog migrate** |
+| 6 | Migrate the rest | **Blog migrate** with `all` |
+| 7 | Delete the old Section blocks, the 140 Embed layers and the old fields: **this is what makes pages light** | by hand in Framer |
 
 The scripts never publish and never delete. A person does both in Framer.
 
@@ -60,7 +62,7 @@ cd blog-migration && npm ci && npm run inventory && npm run embeds
 - Each embed is shown by a rule on the post's slug, so the embed-to-post mapping is read automatically: 139 belong to exactly one post, and one (`RnVRZQ7G9`) has an empty rule and shows nowhere.
 - Checked on six live posts: the embeds on each page are exactly the ones the script lists.
 
-## Step 2: the HTML Embed component
+## Step 2: fields and components
 
 `framer/HtmlEmbed.tsx` is the one embed blog posts will use, in place of the Embed layers in the template. Paste HTML (with its own `<style>` and `<script>`) or a URL.
 
@@ -82,12 +84,12 @@ cd blog-migration && npm ci && npm run inventory && npm run embeds
 
 **Actions → Blog setup → Run workflow.** Leave **apply** unticked the first time: it's a dry run and lists what it would do. Read that on the run page, then run it again with **apply** ticked. It:
 
-- adds a **Content** field (formatted text), where the migration puts each post's merged body, and a **Migrated** field (on/off), which decides which posts the template shows in the new layout;
-- creates the **HtmlEmbed** code component from `framer/HtmlEmbed.tsx`, or updates it if the copy in Framer differs, and puts it back as it was if Framer finds a type error.
+- adds a **Content** field (formatted text) for each post's merged body, an **Embeds** field (plain text) for its embeds' code, and a **Migrated** field (on/off), which decides which posts the template shows in the new layout;
+- creates the **BlogEmbeds** and **HtmlEmbed** code components from `framer/`, or updates them if the copies in Framer differ, and puts one back as it was if Framer finds a type error.
 
-It never removes or changes an existing field, touches no other collection or code file, and never publishes. Running it again changes nothing that's already in place. It stops without changing anything if the Blog collection already has a field with one of those names that's the wrong type, or a Content field that posts already use (the migration would overwrite it); add a repo variable `BLOG_CONTENT_FIELD` or `BLOG_MIGRATED_FIELD` with another name in that case.
+It never removes or changes an existing field, touches no other collection or code file, and never publishes. Running it again changes nothing that's already in place. It stops without changing anything if the Blog collection already has a field with one of those names that's the wrong type, or a Content field that posts already use (the migration would overwrite it); add a repo variable `BLOG_CONTENT_FIELD`, `BLOG_EMBEDS_FIELD` or `BLOG_MIGRATED_FIELD` with another name in that case. (Fields from an earlier setup run, recognised by Migrated being there, are reused as they are.)
 
-From here on, `framer/HtmlEmbed.tsx` in this repo is the master copy: edits made to the component in Framer are overwritten by the next setup run. If you already added HtmlEmbed by hand, the setup replaces it with this repo's version.
+From here on, `framer/` in this repo has the master copies: edits made to the component in Framer are overwritten by the next setup run. If you already added HtmlEmbed by hand, the setup replaces it with this repo's version.
 
 Or locally: `cd blog-migration && npm run setup` (dry run), then `npm run setup -- --apply`.
 
@@ -98,7 +100,7 @@ Or locally: `cd blog-migration && npm run setup` (dry run), then `npm run setup 
 How a post is merged (`scripts/merge.mjs`):
 
 - Its `Section Title N` / `Section N` pairs, in number order, each title as an `<h2>` and each body as it is. Empty sections are skipped.
-- Its own embeds where the template showed them: after the text of their section, in template order. Each is a marker paragraph, `⟦embed:Eo0D3eGLd⟧`, until step 3 shows whether a script can place the HtmlEmbed component in the text itself.
+- Its own embeds where the template showed them: after the text of their section, in template order. Each is a line `⟦embed:Eo0D3eGLd⟧`, which the BlogEmbeds component replaces with the embed (step 5).
 - An embed inside a section the post leaves empty is left out, with a warning: Framer hides the empty section, embed and all, so the live page doesn't show it either. Embeds between sections ("after Section 7") are kept.
 - Translations: each section in the post's translation, falling back to English where a translation is missing, as the site does today. Embeds use their own translations.
 - Embeds without a rule (the sidebar) stay part of the template.
@@ -111,3 +113,43 @@ How a post is merged (`scripts/merge.mjs`):
 | `dryrun/report.csv` | The index as a spreadsheet |
 
 Unzip the download and open `dryrun/index.html` in a browser.
+
+## Step 5: template and migration
+
+### The template (by hand in Framer, once)
+
+On the blog post template (`/blog/:slug`), inside **Blog content → Body**:
+
+1. **The new body**: add a frame next to the Section frames, say **New body**, with a vertical stack. Inside it:
+   - a text layer connected to **Content**. The quickest way to get the right styles is to duplicate the text layer inside **Section 2** (the one connected to Section 2), move the copy into New body, and connect it to Content instead;
+   - below it, the **BlogEmbeds** component (Assets → Code), width Fill, with its **Embeds** property connected to the **Embeds** field.
+2. **Show one or the other**: set New body's visibility to show when **Migrated** is on, and the old Section frames (or the frame that holds them) to show when Migrated is off.
+3. Preview a migrated post and an unmigrated one. Don't publish until both look right.
+
+### Migrate
+
+**Actions → Blog migrate → Run workflow**, with the post slugs (comma-separated) or `all`:
+
+- leave **apply** unticked first: the run page lists what each post would get (sections, embeds, languages, embeds left out and why), and the **blog-migrate** download has each post's Content and Embeds;
+- tick **apply** to write them. It reads the posts back and checks every embed line was kept;
+- **undo** switches Migrated off for those posts, so they show the old layout again (Content and Embeds are kept);
+- a post whose Content already has something in it (someone edited it) is skipped unless **overwrite** is ticked.
+
+A language is written only where every section of the post is translated; otherwise that language keeps showing English, as Framer does today. It never changes the old Section fields and never publishes.
+
+### Adding an embed to a post later
+
+In the post's **Content**, add a line with `⟦embed:any-name⟧` where it should go, and add its code to the post's **Embeds** field:
+
+```html
+<template data-embed="any-name">
+<div>…your HTML, <style> and <script>…</div>
+</template>
+```
+
+Embeds with a `<script>` run in a sandboxed frame; others are part of the page. Translate the Embeds field like any other field.
+
+### Speed
+
+The pages get lighter in step 7, when the old Section blocks and their 140 Embed layers are deleted from the template: until then every post still downloads them. Cleanup can go post by post: once a migrated post is checked, the embeds that belong only to it (`live/embeds.csv` says which) can be deleted.
+

@@ -10,6 +10,7 @@
     "embeds": "node scripts/embeds.mjs",
     "dryrun": "node scripts/dryrun.mjs",
     "setup": "node scripts/setup.mjs",
+    "migrate": "node scripts/migrate.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {

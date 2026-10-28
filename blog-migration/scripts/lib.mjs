@@ -1,6 +1,12 @@
 import { createHash } from "node:crypto"
 
 export const COLLECTION = process.env.BLOG_COLLECTION || "Blog"
+// The fields the setup adds and the migration fills in.
+export const FIELD_NAMES = {
+    content: process.env.BLOG_CONTENT_FIELD || "Content",
+    embeds: process.env.BLOG_EMBEDS_FIELD || "Embeds",
+    migrated: process.env.BLOG_MIGRATED_FIELD || "Migrated",
+}
 // The blog post template's path in Framer, if it can't be found on its own (e.g. "/blog/:slug").
 export const TEMPLATE_PATH = process.env.BLOG_TEMPLATE_PATH || ""
 

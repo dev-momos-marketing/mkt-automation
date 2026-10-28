@@ -1,6 +1,6 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
-import { isEmptyHtml, localized, marker, mergePost, sectionFields, sectionOf, titleHtml, wordCount } from "../scripts/merge.mjs"
+import { buildPost, embedsField, isEmptyHtml, localized, marker, parseEmbedsField, mergePost, sectionFields, sectionOf, titleHtml, wordCount } from "../scripts/merge.mjs"
 
 const FIELDS = [
     { id: "t", name: "Title", type: "string" },
@@ -90,4 +90,31 @@ test("wordCount skips markers and counts Japanese by character", () => {
     assert.equal(wordCount(`<h2>Two words</h2>${marker("x")}<p>and three more</p>`), 5)
     assert.equal(wordCount("<p>レビュー管理</p>"), 6)
     assert.equal(wordCount(""), 0)
+})
+
+test("embedsField and parseEmbedsField round-trip each embed's code", () => {
+    const entries = [{ id: "a1", html: "<style>.x{}</style>\n<div class=\"x\">A</div>" }, { id: "b_2", html: "<script>go()</script>" }]
+    const field = embedsField(entries)
+    assert.match(field, /^<template data-embed="a1">\n<style>/)
+    assert.deepEqual([...parseEmbedsField(field)], [["a1", entries[0].html], ["b_2", entries[1].html]])
+    assert.throws(() => embedsField([{ id: "c", html: "<template></template>" }]), /contains <\/template>/)
+    assert.equal(parseEmbedsField("").size, 0)
+})
+
+test("buildPost writes English plus each fully translated language, with the embeds' own translations", () => {
+    const fields = [{ id: "b1", name: "Section 1", type: "formattedText" }, { id: "t2", name: "Section Title 2", type: "string" }, { id: "b2", name: "Section 2", type: "formattedText" }]
+    const fieldData = {
+        b1: { value: "<p>Intro</p>", valueByLocale: { FR: { value: "<p>Intro FR</p>" }, JA: { value: null } } },
+        t2: { value: "Two", valueByLocale: { FR: { value: "Deux" }, JA: { value: "二" } } },
+        b2: { value: "<p>Body</p>", valueByLocale: { FR: { value: "<p>Corps</p>" }, JA: { value: "<p>本文</p>" } } },
+    }
+    const embeds = [{ id: "e1", place: "Section 2", code: { en: "<table>en</table>", fr: "<table>fr</table>" } }]
+    const out = buildPost({ fieldData, sections: sectionFields(fields), embeds, locales: [{ id: "FR", code: "fr-CA" }, { id: "JA", code: "ja-JP" }] })
+    assert.equal(out.content.value, ["<p>Intro</p>", "<h2>Two</h2>", "<p>Body</p>", marker("e1")].join("\n"))
+    assert.deepEqual(out.languages, ["fr-CA"])
+    assert.deepEqual(out.untranslated, ["ja-JP (1/2 sections)"])
+    assert.match(out.content.valueByLocale.FR.value, /<p>Intro FR<\/p>\n<h2>Deux<\/h2>\n<p>Corps<\/p>/)
+    assert.equal(out.content.valueByLocale.JA, undefined)
+    assert.deepEqual([...parseEmbedsField(out.embeds.value)], [["e1", "<table>en</table>"]])
+    assert.deepEqual([...parseEmbedsField(out.embeds.valueByLocale.FR.value)], [["e1", "<table>fr</table>"]])
 })
