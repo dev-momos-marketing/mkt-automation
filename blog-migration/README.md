@@ -5,7 +5,7 @@ Moving every momos.com blog post from the template's fixed blocks (`Section Titl
 | Step | What | Status |
 | --- | --- | --- |
 | 1 | **Inventory**: list the fields, posts and every embed in the template | this folder |
-| 2 | Add a `Content` field, a `Migrated` switch and an `HTML Embed` component in Framer | next |
+| 2 | Add an `HTML Embed` component, a `Content` field and a `Migrated` switch in Framer | component in `framer/`; fields next |
 | 3 | Test whether a script can place the embed component inside `Content` | |
 | 4 | Dry run: build every post's merged body and preview it, writing nothing | |
 | 5 | Migrate 3 posts, publish, compare speed and translations | |
@@ -50,3 +50,25 @@ cd blog-migration && npm ci && npm run inventory
 ### The one manual part
 
 Framer's API shows each Embed's code but not its visibility rule (which post it's shown on). Fill in the `post` column of `embeds.csv`: in Framer, select the layer and note the post its visibility is set for. One row per distinct `file` is enough, because the copies for each breakpoint share the same code. `guessed_post` already has a guess where the embed mentions the post's slug or title.
+
+## Step 2: the HTML Embed component
+
+`framer/HtmlEmbed.tsx` is the one embed blog posts will use, in place of the Embed layers in the template. Paste HTML (with its own `<style>` and `<script>`) or a URL.
+
+- **Loads on scroll.** Nothing loads until the embed is about 600px from the screen, and a post only ever loads the embeds it contains.
+- **Sandboxed by default.** The HTML runs in its own frame: its CSS and scripts can't break the page or read visitors' cookies. The frame resizes to fit its content as it changes. Links such as `/blog/...` open in the main window. Poppins is loaded inside, so text matches the site.
+- **Inline mode**, for trusted HTML that has to reach the page itself (the same way the glossary renders its HTML). Its text is in the page's HTML from the start, so Google reads it; its scripts run on scroll.
+- A URL embed keeps its **Min height**, because a page from another site can't report its height.
+
+| Property | What it does |
+| --- | --- |
+| Mode | Sandboxed (default) or Inline |
+| HTML | The code to embed |
+| URL | A page to embed instead, if HTML is empty (sandboxed only) |
+| Title | Read out by screen readers |
+| Min height | Space kept before it loads; also a URL embed's height |
+| Load | On scroll (default) or at once |
+
+### Add it to Framer (once)
+
+**Assets → Code → New file** (Code component), name it `HtmlEmbed`, replace its contents with `framer/HtmlEmbed.tsx`, and save. A later step's script will keep it in sync from this repo, the way the glossary syncs its components; until then, edits here have to be pasted again.
