@@ -1,4 +1,5 @@
-// From github.com/dev-momos-marketing/mkt-automation (blog-migration/framer/HtmlEmbed.tsx).
+// Synced from github.com/dev-momos-marketing/mkt-automation (blog-migration/framer/HtmlEmbed.tsx) by
+// npm run setup. Edit it there: changes made in Framer are overwritten by the next setup run.
 //
 // One embed for blog posts: paste HTML (with its own <style> and <script>) or a URL. It loads only
 // when it scrolls near the screen, so a post with several embeds stays light, and only the embeds a

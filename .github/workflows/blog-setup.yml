@@ -1,0 +1,50 @@
+# Blog migration, step 2: adds the Content and Migrated fields to the Blog collection and syncs the
+# HtmlEmbed code component. A dry run unless "apply" is ticked. Never publishes. See
+# blog-migration/README.md.
+name: Blog setup
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Make the changes (leave unticked for a dry run)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-framer-writes
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: blog-migration
+
+jobs:
+  setup:
+    runs-on: ubuntu-latest
+    env:
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
+      FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
+      BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+      BLOG_CONTENT_FIELD: ${{ vars.BLOG_CONTENT_FIELD }}
+      BLOG_MIGRATED_FIELD: ${{ vars.BLOG_MIGRATED_FIELD }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - name: Set up the Blog collection and HtmlEmbed
+        run: |
+          if [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
+            exit 1
+          fi
+          npm run setup -- ${{ inputs.apply && '--apply' || '' }} | tee setup.log
+          { echo "## Blog setup (${{ inputs.apply && 'applied' || 'dry run' }})"; echo; sed 's/^/- /' setup.log; } >> "$GITHUB_STEP_SUMMARY"

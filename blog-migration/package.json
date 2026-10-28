@@ -9,6 +9,7 @@
     "inventory": "node scripts/inventory.mjs",
     "embeds": "node scripts/embeds.mjs",
     "dryrun": "node scripts/dryrun.mjs",
+    "setup": "node scripts/setup.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
