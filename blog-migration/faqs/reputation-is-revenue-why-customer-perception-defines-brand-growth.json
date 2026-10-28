@@ -1,0 +1,25 @@
+{
+  "heading": "Restaurant Reputation and Revenue: FAQ",
+  "questions": [
+    {
+      "q": "How does online reputation affect restaurant revenue?",
+      "a": "Your reputation shapes every step of a guest's decision, from discovering you to ordering, coming back and recommending you. Your rating and what people say about you is often the first and last thing a guest sees before choosing. A stronger reputation brings more visits, and a weaker one quietly sends guests elsewhere."
+    },
+    {
+      "q": "Why is reputation harder to manage across many locations?",
+      "a": "Each location has different managers, different service levels and different review volumes, so ratings can vary widely across the brand. When people search for your brand, they see all of it, including your weakest stores. Managing reputation at scale means tracking each location and fixing the ones that pull the group down."
+    },
+    {
+      "q": "Why do guests leave bad reviews even when the food was fine?",
+      "a": "Guests review how they felt about the visit as well as what happened. A perfect meal delivered on time can still earn a poor review if nobody greeted the guest or the app was clunky. That's why perception depends on moments like how fast you respond to a bad review and whether someone follows up after a complaint."
+    },
+    {
+      "q": "How can AI help with restaurant reputation management?",
+      "a": "AI lets you manage reputation without a full-time team in every store. It can reply to positive and neutral reviews with on-brand messages, send negative reviews to the right manager right away, and surface location-level issues from feedback in real time. You can then track the impact by location, region and brand."
+    },
+    {
+      "q": "Does Momos help multi-location brands manage their reputation?",
+      "a": "Yes, Momos is an AI guest experience platform built for multi-location brands. Its AI Review Manager replies to reviews around the clock in a Unified Inbox, and its review insights help you spot problems at specific locations. That turns guest feedback into something your operations and marketing teams can act on."
+    }
+  ]
+}

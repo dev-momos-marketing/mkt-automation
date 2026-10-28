@@ -1,0 +1,29 @@
+{
+  "heading": "Restaurant Data Analytics: FAQ",
+  "questions": [
+    {
+      "q": "What is restaurant data analytics?",
+      "a": "Restaurant data analytics is the process of collecting and analyzing your restaurant's data so it turns into practical insights. It covers reporting too, such as comparing customer frequency, staffing and profit between two periods. Done well, your numbers tell a clear story of how each location runs."
+    },
+    {
+      "q": "Where does restaurant data come from?",
+      "a": "Most of it comes from the tools you already use to take orders and payments: POS systems, kiosks, order-and-pay apps, QR codes and tableside tablets. These record order history, visit frequency, reservation types and popular dishes. You'll get the most from them when they integrate with each other, so sales, rostering and table turnover data can be read together."
+    },
+    {
+      "q": "How can data analytics increase restaurant revenue?",
+      "a": "Analytics helps you understand who your guests are, what they order and when, so you can personalize offers and reward loyal regulars. Sales forecasts based on historical data let you plan promotions, coupons and staffing ahead of time. Item-level sales data also shows which dishes to keep, bring back or promote."
+    },
+    {
+      "q": "Can analytics help reduce restaurant labor and food costs?",
+      "a": "Yes, it's one of the most practical uses. Historical sales show your slower shifts and busiest days, so you can schedule the right mix of staff for each. Predictive analytics on past and present inventory helps you order the quantities you actually need, which cuts food waste."
+    },
+    {
+      "q": "How can data reduce empty tables and no-shows?",
+      "a": "Start by tracking your no-show rate and when empty tables tend to happen. If no-shows are frequent, reservation deposits can discourage them. For quieter periods, you can run special offers or discounts aimed at filling those specific slots."
+    },
+    {
+      "q": "Do I need a big budget to use restaurant data analytics?",
+      "a": "You can start with the data your POS and ordering tools already collect and a simple dashboard that tracks sales, popular items and reviews across channels. The key is choosing tools that connect to each other, so you see one complete picture. As you grow, real-time alerts and item-level reports across outlets and sales channels make the data easier to act on."
+    }
+  ]
+}

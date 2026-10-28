@@ -1,0 +1,25 @@
+{
+  "heading": "Location Page SEO: FAQ",
+  "questions": [
+    {
+      "q": "Why are my location pages not ranking on Google?",
+      "a": "Most location pages fail for four reasons: thin or duplicate content, missing schema markup, unclear URLs and weak internal linking. When every page reads the same apart from the city name, Google sees little reason to rank it. Pages that aren't linked from the rest of your site can also stay buried."
+    },
+    {
+      "q": "What should a restaurant location page include?",
+      "a": "A strong location page has a unique H1 and meta title, consistent name, address and phone number, opening hours and an embedded Google Map. Add local photos, reviews and neighborhood details so the page feels specific to that store. Finish with clear calls to action like order now, book a table or get directions."
+    },
+    {
+      "q": "What schema markup should I use for location pages?",
+      "a": "Use LocalBusiness or Store structured data with the address, telephone, geo-coordinates and opening hours filled in, plus services if relevant. Schema helps Google connect those details to the right store. Google's Structured Data Markup Helper is a good place to start if you're adding it for the first time."
+    },
+    {
+      "q": "How do I create location pages for hundreds of stores?",
+      "a": "Build a reusable template with dynamic fields for the location name, a custom intro, store-specific reviews, a map and local services. Use your CMS to insert title tags, meta descriptions and LocalBusiness schema from your location database automatically. Keep details in sync with your Google Business Profiles, and link every page from your homepage and store directory."
+    },
+    {
+      "q": "How do I measure whether my location pages are working?",
+      "a": "Track organic traffic, impressions for near-me and brand-plus-location searches, and average position in Google Search Console. Watch engagement too, such as clicks on get directions and click-to-call. Then look at business impact, like store-level revenue, orders from Google Maps and local keyword rankings over time."
+    }
+  ]
+}

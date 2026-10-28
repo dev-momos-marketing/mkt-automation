@@ -1,0 +1,25 @@
+{
+  "heading": "AI and Labor Markets in Asia: FAQ",
+  "questions": [
+    {
+      "q": "Will AI replace jobs in Asia?",
+      "a": "AI is already automating some tasks, especially repetitive ones in manufacturing, customer support, logistics and retail. The effect differs by country: in aging economies like South Korea, Japan and Singapore, AI helps cover labor shortages, while in younger, labor-intensive markets like Vietnam, Indonesia and the Philippines it risks displacing low-skilled jobs before safety nets are in place. In many places, both happen at once."
+    },
+    {
+      "q": "Which workers are most at risk from AI automation?",
+      "a": "The most vulnerable workers are in roles with highly repeatable tasks, low digital literacy and limited access to upskilling. Examples in Asia include factory work, Tier 1 customer support in BPO centers, warehousing and cashier roles. Workers who can move into roles that supervise or work alongside AI tools are better placed."
+    },
+    {
+      "q": "Why is reskilling struggling to keep pace with AI?",
+      "a": "Training programs take time to design and run, and AI tools keep changing in the meantime. Governments across the region have launched programs, such as Singapore's SkillsFuture AI literacy courses, but they're small compared with the speed of AI adoption. By the time a cohort finishes training, the tools may already look different."
+    },
+    {
+      "q": "How can businesses roll out AI without hurting their workforce?",
+      "a": "Build workforce adaptation into your AI roadmap from the start. Cross-training between AI tools and staff, human-in-the-loop models that keep people in decision flows, and internal learning that treats AI literacy as core skills all help. Skipping this tends to bring lower morale, higher attrition and new tools that go unused."
+    },
+    {
+      "q": "What is a hybrid AI-human work model?",
+      "a": "In a hybrid model, AI handles the routine part of a job and people handle judgment and personal service. South Korea is a strong example: AI manages retail inventory while staff serve customers, and AI triages patients while doctors make the final call. The approach treats AI as an amplifier for workers."
+    }
+  ]
+}

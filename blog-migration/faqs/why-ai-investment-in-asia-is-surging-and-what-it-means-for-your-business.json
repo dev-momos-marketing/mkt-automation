@@ -1,0 +1,21 @@
+{
+  "heading": "AI Investment in Asia: FAQ",
+  "questions": [
+    {
+      "q": "Why is AI investment growing so fast in Asia?",
+      "a": "Governments are actively driving it with national strategies, tax incentives and R&D grants in countries like China, Singapore and South Korea. Venture capital is following, especially into generative AI, vision AI and automation startups. Mobile-first consumer markets, abundant local data and competitive developer talent make cities like Bangalore, Shenzhen and Jakarta attractive hubs."
+    },
+    {
+      "q": "Which Asian countries are investing the most in AI?",
+      "a": "China, Japan, South Korea and Singapore stand out, each backing AI through government programs and public-private partnerships. Singapore funds AI and digital economy readiness under its RIE2025 plan. Emerging markets like Vietnam and Indonesia are also benefiting from ASEAN cooperation on data ethics, talent sharing and joint research."
+    },
+    {
+      "q": "What does Asia's AI boom mean for my business?",
+      "a": "You can now build or buy world-class AI without being in Silicon Valley. Affordable cloud AI platforms, local developers and data scientists, and innovation grants or sandbox programs are increasingly available across the region. At the same time, competitors in Asia are getting the same access, so standing still carries more risk."
+    },
+    {
+      "q": "How should a business prepare to use AI in Asian markets?",
+      "a": "Start by auditing your AI readiness across your tech stack, compliance and internal skills. Keep track of country-specific AI and data governance rules, since they vary widely across the region. Localize models with native languages and regional context, and consider pilot programs or local partners to test ideas before scaling."
+    }
+  ]
+}
