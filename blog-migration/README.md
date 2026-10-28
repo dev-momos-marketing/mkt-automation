@@ -100,6 +100,7 @@ Or locally: `cd blog-migration && npm run setup` (dry run), then `npm run setup 
 How a post is merged (`scripts/merge.mjs`):
 
 - Its `Section Title N` / `Section N` pairs, in number order, each title as an `<h2>` and each body as it is. Empty sections are skipped.
+- Only sections 1–20: the template has no frames for 21–26, so text there has never been on the site, and it stays out with a warning (3 posts have some). To include it, add a repo variable `BLOG_MAX_SECTION` set to `26`.
 - Its own embeds where the template showed them: after the text of their section, in template order. Each is a line `⟦embed:Eo0D3eGLd⟧`, which the BlogEmbeds component replaces with the embed (step 5).
 - An embed inside a section the post leaves empty is left out, with a warning: Framer hides the empty section, embed and all, so the live page doesn't show it either. Embeds between sections ("after Section 7") are kept.
 - Translations: each section in the post's translation, falling back to English where a translation is missing, as the site does today. Embeds use their own translations.

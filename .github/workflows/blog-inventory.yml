@@ -37,6 +37,7 @@ jobs:
       FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
       FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
       BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+      BLOG_MAX_SECTION: ${{ vars.BLOG_MAX_SECTION }}
       BLOG_TEMPLATE_PATH: ${{ vars.BLOG_TEMPLATE_PATH }}
     steps:
       - uses: actions/checkout@v4

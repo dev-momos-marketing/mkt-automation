@@ -118,3 +118,13 @@ test("buildPost writes English plus each fully translated language, with the emb
     assert.deepEqual([...parseEmbedsField(out.embeds.value)], [["e1", "<table>en</table>"]])
     assert.deepEqual([...parseEmbedsField(out.embeds.valueByLocale.FR.value)], [["e1", "<table>fr</table>"]])
 })
+
+test("mergePost leaves out sections beyond the template's last one, as the live site does", () => {
+    const fields = [{ id: "b1", name: "Section 1", type: "formattedText" }, { id: "b21", name: "Section 21", type: "formattedText" }]
+    const fieldData = { b1: { value: "<p>Shown</p>" }, b21: { value: "<p>Never shown</p>" } }
+    const out = mergePost({ fieldData, sections: sectionFields(fields), embeds: [{ id: "late", place: "Section 21" }], maxSection: 20 })
+    assert.equal(out.html, "<p>Shown</p>")
+    assert.deepEqual(out.skipped, ["late"])
+    assert.match(out.warnings[0], /Section 21 has text, but the template only shows sections 1–20/)
+    assert.match(mergePost({ fieldData, sections: sectionFields(fields), maxSection: 99 }).html, /Never shown/)
+})
