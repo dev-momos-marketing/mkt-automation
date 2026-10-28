@@ -1,0 +1,99 @@
+import { createHash } from "node:crypto"
+
+export const COLLECTION = process.env.BLOG_COLLECTION || "Blog"
+
+export async function openProject() {
+    const projectUrl = process.env.FRAMER_PROJECT_URL
+    if (!projectUrl) {
+        throw new Error("Set FRAMER_PROJECT_URL to the project's URL (https://framer.com/projects/...).")
+    }
+    if (!process.env.FRAMER_API_KEY) {
+        throw new Error("Set FRAMER_API_KEY (Framer → Site Settings → General → API keys).")
+    }
+    const { connect } = await import("framer-api")
+    return connect(projectUrl)
+}
+
+// Opens a connection, runs fn with it and always disconnects. Reading the page tree and the
+// collection over one connection can crash it, so each part gets its own.
+export async function withProject(fn) {
+    const framer = await openProject()
+    try {
+        return await fn(framer)
+    } finally {
+        await framer.disconnect()
+    }
+}
+
+// "Section Title 12" → { group: "Section Title", n: 12 }. Fields without a trailing number → null.
+export function numbered(name) {
+    const m = String(name ?? "").trim().match(/^(.*?)[\s_-]*(\d+)$/)
+    return m ? { group: m[1].trim() || "#", n: Number(m[2]) } : null
+}
+
+// The layer names the template uses for its blocks: "Section 8".
+export function isSectionName(name) {
+    return /^section\s*\d+$/i.test(String(name ?? "").trim())
+}
+
+// Framer's built-in Embed, or any component that takes HTML or a URL to embed.
+export function isEmbed({ name, componentName, controls }) {
+    if (/embed/i.test(componentName ?? "") || /embed/i.test(name ?? "")) return true
+    return typeof controls?.html === "string"
+}
+
+export function embedInfo(controls = {}) {
+    const html = typeof controls.html === "string" ? controls.html : ""
+    const url = typeof controls.url === "string" ? controls.url : ""
+    const mode = typeof controls.type === "string" ? controls.type : html ? "html" : url ? "url" : "unknown"
+    const content = mode === "url" ? url : html
+    return { mode, url, html, hash: content ? hash(content) : "" }
+}
+
+export function hash(text) {
+    return createHash("sha256").update(text).digest("hex").slice(0, 10)
+}
+
+// A one-line, human-readable hint of what an embed or a field holds.
+export function preview(html, length = 90) {
+    const text = String(html ?? "")
+        .replace(/<(script|style)[\s\S]*?<\/\1>/gi, " ")
+        .replace(/<[^>]+>/g, " ")
+        .replace(/&nbsp;/g, " ")
+        .replace(/\s+/g, " ")
+        .trim()
+    return text.length > length ? `${text.slice(0, length - 1)}…` : text
+}
+
+// Whether a CMS field value counts as filled in.
+export function isFilled(entry) {
+    const value = entry?.value
+    if (value == null || value === false) return false
+    if (typeof value === "string") return preview(value, 1e9) !== "" || /<(img|iframe|video|figure)\b/i.test(value)
+    if (Array.isArray(value)) return value.length > 0
+    return true
+}
+
+// Locales with a translation in this field entry.
+export function translatedLocales(entry, localeCodes) {
+    return Object.entries(entry?.valueByLocale ?? {})
+        .filter(([, v]) => v && v.status !== "new")
+        .map(([id]) => localeCodes.get(id) ?? id)
+}
+
+export function csv(rows, columns) {
+    const cell = v => {
+        const s = Array.isArray(v) ? v.join(", ") : String(v ?? "")
+        return /[",\n\r]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s
+    }
+    return `${[columns, ...rows.map(r => columns.map(c => r[c]))].map(r => r.map(cell).join(",")).join("\n")}\n`
+}
+
+// Posts whose slug or title appears in an embed's HTML or URL: a hint for who it belongs to.
+export function guessPosts(content, posts) {
+    const text = String(content ?? "").toLowerCase()
+    if (!text) return []
+    return posts
+        .filter(p => (p.slug.length > 6 && text.includes(p.slug.toLowerCase())) || (p.title.length > 12 && text.includes(p.title.toLowerCase())))
+        .map(p => p.slug)
+}
