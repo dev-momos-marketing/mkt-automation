@@ -33,7 +33,7 @@ const say = text => console.log(`${apply ? "" : "[dry run] "}${text}`)
 await rm(OUT, { recursive: true, force: true })
 await mkdir(OUT, { recursive: true })
 
-const framer = await openProject()
+let framer = await openProject()
 try {
     const collection = (await framer.getCollections()).find(c => c.name === COLLECTION)
     if (!collection) throw new Error(`No "${COLLECTION}" collection in Framer. Set BLOG_COLLECTION to its name.`)
@@ -49,7 +49,7 @@ try {
 
     if (undo) {
         const updates = targets.map(i => ({ id: i.id, fieldData: { [migrated.id]: { type: "boolean", value: false } } }))
-        if (apply) for (let i = 0; i < updates.length; i += BATCH) await collection.addItems(updates.slice(i, i + BATCH))
+        if (apply) await save(updates)
         say(`${apply ? "Switched" : "Would switch"} Migrated off for ${targets.map(i => i.slug).join(", ")}: the template shows their old layout again. Content and Embeds are kept.`)
     } else {
         const locales = (await framer.getLocales()).map(l => ({ id: l.id, code: l.code }))
@@ -60,7 +60,9 @@ try {
             const existing = item.fieldData[content.id]
             const post = buildPost({ fieldData: item.fieldData, sections, embeds: live.embeds.filter(e => e.posts.includes(item.slug)), locales })
             if (isFilled(existing) && !overwrite && existing.value !== post.content.value) {
-                say(`Skipped ${item.slug}: its Content already has something in it (add --overwrite to replace it).`)
+                // Written by an earlier run (Framer tidies the HTML it saves, so it never matches exactly).
+                if (item.fieldData[migrated.id]?.value === true) say(`Already migrated: ${item.slug}.`)
+                else say(`Skipped ${item.slug}: its Content already has something in it (add --overwrite to replace it).`)
                 continue
             }
             const markers = [...post.content.value.matchAll(MARKER)].length
@@ -79,8 +81,8 @@ try {
                 `${post.english.warnings.length ? `; ${post.english.warnings.join("; ")}` : ""}.`)
         }
         if (apply && updates.length) {
-            for (let i = 0; i < updates.length; i += BATCH) await collection.addItems(updates.slice(i, i + BATCH))
-            await verify(collection, content, updates)
+            await save(updates)
+            await verify(await blogCollection(), content, updates)
         }
         say(`${updates.length} of ${targets.length} posts ${apply ? "written" : "would be written"}. Their old Section fields are unchanged.`)
     }
@@ -88,6 +90,29 @@ try {
     await framer.disconnect()
 }
 say(apply ? "Nothing was published." : "Nothing was changed. Add --apply (or tick \"apply\" in the workflow) to write these posts.")
+
+// Saves the posts in batches. Framer sometimes closes the connection on long runs; then it
+// reconnects and carries on from the batch that didn't go through (saving a post again is harmless).
+async function save(updates) {
+    for (let i = 0; i < updates.length; i += BATCH) {
+        for (let attempt = 1; ; attempt++) {
+            try {
+                await (await blogCollection()).addItems(updates.slice(i, i + BATCH))
+                break
+            } catch (error) {
+                if (!error?.retryable || attempt === 4) throw error
+                console.log(`Framer closed the connection (${error.code ?? error.message}); reconnecting to save posts ${i + 1}–${Math.min(i + BATCH, updates.length)} again (attempt ${attempt + 1} of 4)...`)
+                await new Promise(resolve => setTimeout(resolve, attempt * 5000))
+                await framer.disconnect().catch(() => {})
+                framer = await openProject()
+            }
+        }
+    }
+}
+
+async function blogCollection() {
+    return (await framer.getCollections()).find(c => c.name === COLLECTION)
+}
 
 // Reads the posts back and checks that Content kept every embed line.
 async function verify(collection, content, updates) {
