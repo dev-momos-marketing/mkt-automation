@@ -32,7 +32,8 @@ jobs:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     env:
-      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL }}
+      # The project link isn't secret; the repo setting (variable or secret) overrides this default.
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
       FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
       BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
     steps:
@@ -45,10 +46,11 @@ jobs:
       - run: npm ci
       - name: Read the blog from Framer
         run: |
-          if [ -z "$FRAMER_PROJECT_URL" ] || [ -z "$FRAMER_API_KEY" ]; then
-            echo "::error::Add FRAMER_PROJECT_URL (variable) and FRAMER_API_KEY (secret) in the repo settings. See blog-migration/README.md."
+          if [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::The FRAMER_API_KEY secret isn't reaching this run. Add it under mkt-automation → Settings → Secrets and variables → Actions → Secrets → Repository secrets (not Environment secrets, not the glossary repo), named exactly FRAMER_API_KEY. See blog-migration/README.md."
             exit 1
           fi
+          echo "Framer project: $FRAMER_PROJECT_URL"
           npm run inventory
           cat out/summary.md >> "$GITHUB_STEP_SUMMARY"
       - uses: actions/upload-artifact@v4
