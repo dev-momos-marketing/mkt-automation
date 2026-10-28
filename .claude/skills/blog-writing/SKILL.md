@@ -161,6 +161,10 @@ cd blog-migration && npm test
 5. **Commit and open a PR** on the session's branch. After it's merged, the person runs **Actions → Blog write** with the slug, first as a dry run (it lists words before and after, embeds, links, and any problem), then with **apply**. It saves the English Content (and new embeds), reads it back, and marks existing translations "needs review" in Framer's localization.
 6. **A person publishes in Framer.** Scripts never publish.
 
+## FAQs for existing posts
+
+A post that isn't written from `posts/` gets its FAQ from `blog-migration/faqs/<slug>.json` (`{"heading": "Topic: FAQ", "questions": [{"q", "a"}]}`), which the **Blog FAQs** workflow appends to its Content. Read the live post first, ground every answer in it, and use no number the post doesn't contain (the workflow refuses one). Plain text only, 4–6 questions, 2–4 sentences each.
+
 ## Checklist before you commit
 
 1. The title's promise is met, and any number in the title matches the numbered sections.
