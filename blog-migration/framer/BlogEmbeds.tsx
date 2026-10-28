@@ -13,6 +13,10 @@
 // - Embeds with scripts run in a sandboxed frame at their marker that grows to fit, as Framer's
 //   Embed did, loading as they scroll near.
 // - A marker without matching code is hidden, so visitors never see it.
+// - It also sets the size of the post's H2 and H3 headings (the "Headings" properties): the text
+//   styles the template's text uses are shared with the rest of the site and are too big for an
+//   article. The CSS is in the server's HTML, so the headings never jump. It also keeps the text
+//   (and the frame around it) within the screen's width on tablets and phones.
 import { useEffect, useRef } from "react"
 import { addPropertyControls, ControlType, RenderTarget } from "framer"
 
@@ -20,13 +24,13 @@ const MARKER = /^\s*⟦embed:([A-Za-z0-9_-]+)⟧\s*$/
 const BLOCK = /<template data-embed="([A-Za-z0-9_-]+)">\n?([\s\S]*?)\n?<\/template>/g
 const MESSAGE = "momos-blog-embed:height"
 
-type Props = { embeds: string; spacing: number }
+type Props = { embeds: string; spacing: number; h2: number; h3: number }
 
 /**
  * @framerSupportedLayoutWidth any
  * @framerSupportedLayoutHeight auto
  */
-export default function BlogEmbeds({ embeds = "", spacing = 24 }: Props) {
+export default function BlogEmbeds({ embeds = "", spacing = 24, h2 = 28, h3 = 22 }: Props) {
     const ref = useRef<HTMLDivElement>(null)
     const entries = parse(embeds)
     const onCanvas = RenderTarget.current() === RenderTarget.canvas
@@ -111,13 +115,32 @@ export default function BlogEmbeds({ embeds = "", spacing = 24 }: Props) {
 
     // Embeds without scripts, in the server's HTML for search engines, hidden until placed.
     return (
-        <div ref={ref} hidden aria-hidden="true">
+        <div ref={ref} hidden aria-hidden="true" data-blog-embeds="">
+            <style dangerouslySetInnerHTML={{ __html: headingCss(h2, h3) }} />
             {Array.from(entries)
                 .filter(([, html]) => !hasScript(html))
                 .map(([id, html]) => (
                     <div key={id} data-embed-source={id} dangerouslySetInnerHTML={{ __html: html }} />
                 ))}
         </div>
+    )
+}
+
+// Heading sizes for the post's text: the rich text placed before this component. Smaller on tablets
+// and phones, at the site's breakpoints (Tablet below 1200px, Phone below 810px).
+function headingCss(h2: number, h3: number) {
+    const rich = `[data-framer-component-type="RichTextContainer"]`
+    const text = `${rich}:has(~ * [data-blog-embeds])`
+    // The text's frame and the one around it have a fixed width that's wider than a phone.
+    const fit = `*:has(> ${rich} ~ * [data-blog-embeds]),*:has(> * > ${rich} ~ * [data-blog-embeds]){max-width:100%!important}`
+    const sizes = (a: number, b: number) =>
+        `${text} h2{--framer-font-size:${a}px!important;--framer-line-height:1.35!important}` +
+        `${text} h3{--framer-font-size:${b}px!important;--framer-line-height:1.4!important}`
+    return (
+        fit +
+        sizes(h2, h3) +
+        `@media (max-width:1199px){${sizes(Math.round(h2 * 0.86), Math.round(h3 * 0.9))}}` +
+        `@media (max-width:809px){${sizes(Math.round(h2 * 0.79), Math.round(h3 * 0.82))}}`
     )
 }
 
@@ -168,4 +191,6 @@ addPropertyControls(BlogEmbeds, {
         description: "Connect to the post's Embeds field.",
     },
     spacing: { type: ControlType.Number, title: "Spacing", defaultValue: 24, min: 0, max: 120, step: 4, unit: "px" },
+    h2: { type: ControlType.Number, title: "H2 size", defaultValue: 28, min: 16, max: 64, step: 1, unit: "px", description: "Desktop size of the post's H2 headings; smaller on tablets and phones." },
+    h3: { type: ControlType.Number, title: "H3 size", defaultValue: 22, min: 14, max: 48, step: 1, unit: "px" },
 })
