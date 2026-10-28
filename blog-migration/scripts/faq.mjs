@@ -9,6 +9,18 @@ const escape = text => String(text).replace(/&/g, "&amp;").replace(/</g, "&lt;")
 // A heading that marks a post's FAQ section ("…: FAQ", "Frequently asked questions").
 export const FAQ_HEADING = /<h[2-4]\b[^>]*>[^<]*(\bFAQs?\b|frequently asked|common questions)/i
 
+// Headings left at the very end of a post with nothing under them (e.g. "5. Build local backlinks",
+// left over from the old section layout). They go before the FAQ is added, or it would sit under them.
+export function dropTrailingHeadings(html) {
+    const removed = []
+    let out = String(html).trimEnd()
+    for (let m; (m = out.match(/<h([2-4])\b[^>]*>((?:(?!<h[1-6]\b)[\s\S])*?)<\/h\1>\s*$/i)); ) {
+        removed.push(m[2].replace(/<[^>]+>/g, "").trim())
+        out = out.slice(0, m.index).trimEnd()
+    }
+    return { html: out, removed }
+}
+
 export function faqHtml({ heading, questions }) {
     return [`<h2>${escape(heading)}</h2>`, ...questions.flatMap(({ q, a }) => [`<h3>${escape(q)}</h3>`, `<p>${escape(a)}</p>`])].join("")
 }

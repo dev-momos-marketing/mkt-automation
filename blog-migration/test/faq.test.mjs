@@ -1,7 +1,7 @@
 import { test } from "node:test"
 import assert from "node:assert/strict"
 import { readFile, readdir } from "node:fs/promises"
-import { FAQ_HEADING, checkFaq, faqHtml } from "../scripts/faq.mjs"
+import { FAQ_HEADING, checkFaq, dropTrailingHeadings, faqHtml } from "../scripts/faq.mjs"
 
 const good = {
     heading: "Restaurant Surveys: FAQ",
@@ -40,4 +40,9 @@ test("every file in faqs/ follows the house style", async () => {
         const problems = checkFaq(faq, "").filter(p => !p.includes("isn't in the post"))
         assert.deepEqual(problems, [], file)
     }
+})
+
+test("dropTrailingHeadings removes only empty headings at the very end", () => {
+    assert.deepEqual(dropTrailingHeadings('<p>A</p><h2 dir="auto">5. Build local backlinks</h2><h3>v</h3> '), { html: "<p>A</p>", removed: ["v", "5. Build local backlinks"] })
+    assert.deepEqual(dropTrailingHeadings("<h2>T</h2><p>A</p>"), { html: "<h2>T</h2><p>A</p>", removed: [] })
 })

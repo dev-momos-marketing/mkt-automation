@@ -1,13 +1,14 @@
 // Adds an FAQ section to the end of blog posts that don't have one: faqs/<slug>.json, written in
 // this repo (see scripts/faq.mjs), goes after the post's English Content in Framer. A post that already
 // has an FAQ heading is skipped, and so is a post written from posts/<slug>.html (add its FAQ to the
-// file). Translations are kept and marked "needs review". A dry run unless --apply; never publishes.
+// file). An empty heading left at the very end of a post is removed first. Translations are kept and
+// marked "needs review". A dry run unless --apply; never publishes.
 //
 // Usage: npm run faqs -- --all [--apply]
 //        npm run faqs -- --posts slug-a,slug-b [--apply]
 import { readFile, readdir } from "node:fs/promises"
 import { COLLECTION, FIELD_NAMES } from "./lib.mjs"
-import { FAQ_HEADING, checkFaq, faqHtml } from "./faq.mjs"
+import { FAQ_HEADING, checkFaq, dropTrailingHeadings, faqHtml } from "./faq.mjs"
 import { openBlogSession } from "./session.mjs"
 
 const args = process.argv.slice(2)
@@ -41,15 +42,17 @@ try {
         const faq = JSON.parse(await readFile(new URL(`${slug}.json`, dir), "utf8"))
         const found = checkFaq(faq, html.replace(/<[^>]+>/g, " "))
         if (found.length) { problems.push(...found.map(p => `${slug}: ${p}`)); continue }
+        const { html: body, removed } = dropTrailingHeadings(html)
         const translated = Object.entries(item.fieldData[content.id]?.valueByLocale ?? {}).filter(([, v]) => v && v.status !== "new").map(([id]) => id)
         updates.push({
             id: item.id, slug,
             fieldData: { [content.id]: {
-                type: "formattedText", value: html + faqHtml(faq), contentType: "html",
+                type: "formattedText", value: body + faqHtml(faq), contentType: "html",
                 valueByLocale: Object.fromEntries(translated.map(id => [id, { action: "ignore", needsReview: true }])),
             } },
         })
         say(`${apply ? "Adding" : "Would add"} to ${slug}: "${faq.heading}" with ${faq.questions.length} questions: ${faq.questions.map(q => q.q).join(" | ")}` +
+            `${removed.length ? `; removes the empty heading${removed.length > 1 ? "s" : ""} at the end: ${removed.map(r => `"${r}"`).join(", ")}` : ""}` +
             `${translated.length ? ` (translations marked for review: ${translated.map(id => locales.find(l => l.id === id)?.code ?? id).join(", ")})` : ""}`)
     }
     if (problems.length) throw new Error(`Fix these first, nothing was written:\n- ${problems.join("\n- ")}`)

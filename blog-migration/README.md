@@ -180,6 +180,7 @@ A post saved this way is overwritten from the file the next time it's written, s
 
 - A post that already has an FAQ heading is skipped, so running it again never adds a second FAQ. A post written from `posts/<slug>.html` is skipped too: its FAQ goes in that file.
 - Before saving, it checks the house style (`scripts/faq.mjs`): 4–6 questions, 2–4 sentences per answer, no "X, not Y", no hype words, and no number that isn't already in the post. `npm test` checks the files' form.
+- A heading left empty at the very end of a post ("5. Build local backlinks", "v": leftovers from the old section layout) is removed first, and the dry run names it.
 - Translations are kept and marked **needs review**. It never publishes.
 
 ## After publishing
