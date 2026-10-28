@@ -154,3 +154,16 @@ Embeds with a `<script>` run in a sandboxed frame; others are part of the page. 
 
 The pages get lighter in step 7, when the old Section blocks and their 140 Embed layers are deleted from the template: until then every post still downloads them. Cleanup can go post by post: once a migrated post is checked, the embeds that belong only to it (`live/embeds.csv` says which) can be deleted.
 
+
+## Internal links
+
+**Actions → Blog links → Run workflow** adds a few links to each post's Content: to other blog posts and to glossary terms, where their topic is mentioned in the text. Leave **apply** unticked first: the run page lists every link, and the **blog-links** download has `report.csv` with the sentence each link sits in. Tick **apply** to add them.
+
+- Targets: published posts (not drafts or `-copy` duplicates) and every glossary term in the sitemap. Each gets anchor phrases from its slug and title (`best-restaurant-loyalty-software` → "restaurant loyalty software"); a phrase two posts share is dropped, and a glossary term wins over a post.
+- Rules (`scripts/linking.mjs`): at most **max** new links per post (default 4), one per paragraph, each page once, the first mention only; never in headings, embed lines or existing links, never to the post itself or to a page it already links to.
+- English text only. Translated anchor text differs per language, so translations are left as they are.
+- Running it again only adds links that aren't there yet. It never publishes.
+
+## After publishing
+
+The migration is done: each post's Embeds field now holds its embeds' code, and is the copy to edit. `npm run embeds` and `npm run migrate` read the old template from the live site, so they stop working once the old Section frames are deleted from it.
