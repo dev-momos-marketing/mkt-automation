@@ -14,6 +14,7 @@
     "links": "node scripts/links.mjs",
     "write": "node scripts/write.mjs",
     "faqs": "node scripts/faqs.mjs",
+    "takeaways": "node scripts/add-takeaways.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {
