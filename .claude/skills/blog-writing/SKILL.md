@@ -78,6 +78,7 @@ Keep the number in the title. The title lives in its own CMS field and isn't cha
 
 | Part | What goes in it |
 | --- | --- |
+| Key takeaways box | 3–5 one-sentence takeaways at the very top (see "Key takeaways box"). |
 | Introduction (no heading) | Two or three short paragraphs on the problem and why it matters, then "In this guide, you'll find:" with 4–5 bullets. |
 | Data section | "X in 2026: What the Data Says": 3–4 sourced figures and what they mean for the reader. |
 | Body | Numbered H2s for list posts, or "What is / How it works / How to" H2s for guides. Each section explains why, then gives steps as a list with **bold lead-ins**. |
@@ -164,6 +165,10 @@ cd blog-migration && npm test
 ## FAQs for existing posts
 
 A post that isn't written from `posts/` gets its FAQ from `blog-migration/faqs/<slug>.json` (`{"heading": "Topic: FAQ", "questions": [{"q", "a"}]}`), which the **Blog FAQs** workflow appends to its Content. Read the live post first, ground every answer in it, and use no number the post doesn't contain (the workflow refuses one). Plain text only, 4–6 questions, 2–4 sentences each.
+
+## Key takeaways box
+
+Every post opens with a "Key takeaways" box: 3–5 one-sentence takeaways (at most 35 words each) that answer the title and give the key steps. It's the `keyTakeaways` embed built by `scripts/takeaways.mjs`, so the look stays the same on every post. For a post in Framer, write `blog-migration/takeaways/<slug>.json` and run **Blog takeaways**. For a post written from `posts/`, put `<p>⟦embed:keyTakeaways⟧</p>` first in the file and generate `posts/<slug>.embeds/keyTakeaways.html` with `takeawaysEmbed()`.
 
 ## Checklist before you commit
 

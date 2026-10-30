@@ -183,6 +183,15 @@ A post saved this way is overwritten from the file the next time it's written, s
 - A heading left empty at the very end of a post ("5. Build local backlinks", "v": leftovers from the old section layout) is removed first, and the dry run names it.
 - Translations are kept and marked **needs review**. It never publishes.
 
+## Key takeaways
+
+`takeaways/<slug>.json` holds a post's 3–5 key takeaways (`{"items": ["…"]}`). **Actions → Blog takeaways** (posts `all`, or slugs) shows them in a box at the top of the post: the box is the post's `keyTakeaways` embed, without scripts (so it's in the page's HTML for search engines), and a `⟦embed:keyTakeaways⟧` line goes first in its Content.
+
+- Running it again updates each box from its file and never adds a second line; posts whose box is unchanged are skipped.
+- A post written from `posts/<slug>.html` is skipped: its box is in that file (the line, and `posts/<slug>.embeds/keyTakeaways.html`).
+- It checks the house style (`scripts/takeaways.mjs`): 3–5 takeaways of one or two sentences, no "X, not Y", no hype words, no number the post doesn't contain.
+- Translated pages don't show the box until their text gets the line; their Content is marked **needs review**. It never publishes.
+
 ## After publishing
 
 The migration is done: each post's Embeds field now holds its embeds' code, and is the copy to edit. `npm run embeds` and `npm run migrate` read the old template from the live site, so they stop working once the old Section frames are deleted from it.
