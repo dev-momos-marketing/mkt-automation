@@ -15,8 +15,9 @@
 // - A marker without matching code is hidden, so visitors never see it.
 // - It also sets the size of the post's H2 and H3 headings (the "Headings" properties): the text
 //   styles the template's text uses are shared with the rest of the site and are too big for an
-//   article. The CSS is in the server's HTML, so the headings never jump. It also keeps the text
-//   (and the frame around it) within the screen's width on tablets and phones.
+//   article. The CSS is in the server's HTML, so the headings never jump. The same CSS gives
+//   numbered lists small, light number circles and keeps the text (and the frame around it)
+//   within the screen's width on tablets and phones.
 import { useEffect, useRef } from "react"
 import { addPropertyControls, ControlType, RenderTarget } from "framer"
 
@@ -133,11 +134,19 @@ function headingCss(h2: number, h3: number) {
     const text = `${rich}:has(~ * [data-blog-embeds])`
     // The text's frame and the one around it have a fixed width that's wider than a phone.
     const fit = `*:has(> ${rich} ~ * [data-blog-embeds]),*:has(> * > ${rich} ~ * [data-blog-embeds]){max-width:100%!important}`
+    // Numbered lists: the site's custom code draws a big solid red circle for each number; in an
+    // article a small, light one reads better.
+    const li = `${text} ol.framer-text > li.framer-text:not(:has(h1,h2,h3,h4,h5,h6))`
+    const lists =
+        `${text} ol.framer-text{gap:14px}` +
+        `${li}{padding-left:38px!important;min-height:0}` +
+        `${li}::before{width:24px;height:24px;top:4px;background:#FBE8E6;color:#D73E33;font-size:13px;font-weight:600;line-height:1}`
     const sizes = (a: number, b: number) =>
         `${text} h2{--framer-font-size:${a}px!important;--framer-line-height:1.35!important}` +
         `${text} h3{--framer-font-size:${b}px!important;--framer-line-height:1.4!important}`
     return (
         fit +
+        lists +
         sizes(h2, h3) +
         `@media (max-width:1199px){${sizes(Math.round(h2 * 0.89), Math.round(h3 * 0.89))}}` +
         `@media (max-width:809px){${sizes(Math.round(h2 * 0.72), Math.round(h3 * 0.78))}}`
