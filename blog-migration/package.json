@@ -15,6 +15,7 @@
     "write": "node scripts/write.mjs",
     "faqs": "node scripts/faqs.mjs",
     "takeaways": "node scripts/add-takeaways.mjs",
+    "replace-embeds": "node scripts/replace-embeds.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {

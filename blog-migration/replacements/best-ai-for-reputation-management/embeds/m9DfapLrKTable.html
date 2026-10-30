@@ -1,0 +1,119 @@
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    font-family: "Poppins", sans-serif;
+    background: transparent;
+    -webkit-font-smoothing: antialiased;
+  }
+  .list-wrap {
+    width: 100%;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .list-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: 100%;
+  }
+  .num-circle {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #df4940;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .list-item span {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 32.4px;
+    color: #15181e;
+  }
+</style>
+<table style="width:100%; border-collapse:collapse; font-family:'Poppins',sans-serif; font-size:16px; margin:0; border:1px solid #E5E7EB; border-radius:12px; overflow:hidden;">
+  <thead>
+    <tr style="background:#D73E33;">
+      <th style="text-align:left; padding:14px 20px; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#fff; width:56px;">#</th>
+      <th style="text-align:left; padding:14px 20px; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#fff;">Software</th>
+      <th style="text-align:left; padding:14px 20px; font-size:13px; font-weight:600; letter-spacing:0.06em; text-transform:uppercase; color:#fff;">Best For</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr style="background:#FEF2F2; border-bottom:1px solid #FECACA;">
+      <td style="padding:16px 20px; font-size:15px; font-weight:700; color:#D73E33;">01</td>
+      <td style="padding:16px 20px; white-space:nowrap;">
+        <a href="#th-2" style="font-weight:600; color:#D73E33; text-decoration:underline; text-underline-offset:2px;">Momos</a>
+        <span style="background:#D73E33; color:#fff; font-size:10px; font-weight:600; padding:2px 8px; border-radius:4px; text-transform:uppercase; letter-spacing:0.05em; margin-left:8px;">Top Pick</span>
+      </td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Best AI-powered reputation management across all locations, on auto-pilot</td>
+    </tr>
+    <tr style="background:#fff; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">02</td>
+      <td style="padding:16px 20px;"><a href="#th-3" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Birdeye</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">All-in-one reputation and customer experience platform for multi-location businesses</td>
+    </tr>
+    <tr style="background:#FAFAFA; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">03</td>
+      <td style="padding:16px 20px;"><a href="#th-4" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Podium</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Messaging-first reputation management with SMS review requests and lead capture</td>
+    </tr>
+    <tr style="background:#fff; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">04</td>
+      <td style="padding:16px 20px;"><a href="#th-5" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Reputation.com</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Enterprise-grade reputation management with deep analytics and competitive benchmarking</td>
+    </tr>
+    <tr style="background:#FAFAFA; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">05</td>
+      <td style="padding:16px 20px;"><a href="#th-6" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Brand24</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Real-time brand monitoring and sentiment tracking across social and review platforms</td>
+    </tr>
+    <tr style="background:#fff; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">06</td>
+      <td style="padding:16px 20px;"><a href="#th-7" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">ReviewTrackers</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Review aggregation and response management with strong location-level reporting</td>
+    </tr>
+    <tr style="background:#FAFAFA; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">07</td>
+      <td style="padding:16px 20px;"><a href="#th-8" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Yext</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Local search and listings management with integrated review response tools</td>
+    </tr>
+    <tr style="background:#fff; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">08</td>
+      <td style="padding:16px 20px;"><a href="#th-9" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Chatmeter</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Local SEO and reputation management built specifically for multi-location brands</td>
+    </tr>
+    <tr style="background:#FAFAFA; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">09</td>
+      <td style="padding:16px 20px;"><a href="#th-10" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Sprout Social</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Social media management with reputation monitoring and engagement tools</td>
+    </tr>
+    <tr style="background:#fff; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">10</td>
+      <td style="padding:16px 20px;"><a href="#th-11" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">Qualtrics</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Enterprise experience management with advanced survey and feedback analytics</td>
+    </tr>
+    <tr style="background:#FAFAFA; border-bottom:1px solid #F3F4F6;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">11</td>
+      <td style="padding:16px 20px;"><a href="#th-12" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">SOCi</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Social and reputation management scaled for franchise and multi-location operators</td>
+    </tr>
+    <tr style="background:#fff;">
+      <td style="padding:16px 20px; font-weight:600; color:#D73E33;">12</td>
+      <td style="padding:16px 20px;"><a href="#th-13" style="color:#D73E33; text-decoration:underline; text-underline-offset:2px; font-weight:500;">NiceJob</a></td>
+      <td style="padding:16px 20px; font-size:16px; color:#15181E;">Automated review generation and referral marketing for service-based businesses</td>
+    </tr>
+  </tbody>
+</table>

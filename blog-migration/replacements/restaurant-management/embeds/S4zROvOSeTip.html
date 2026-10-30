@@ -1,0 +1,119 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+  
+  .mms-content, .mms-content * {
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif !important;
+  }
+  
+  .mms-content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Numbered list */
+  .mms-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+    width: 100%;
+  }
+  .mms-num {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #D73E33;
+    color: #FFFFFF !important;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  .mms-text {
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.8;
+    color: #15181D;
+  }
+  
+  /* Rockie tip block */
+  .mms-tip {
+    display: grid !important;
+    grid-template-columns: 96px 1fr;
+    column-gap: 20px;
+    align-items: center;
+    background: #FFFFFF;
+    border: 1.5px solid #F5C5C3;
+    border-radius: 16px;
+    padding: 20px 24px;
+    width: 100%;
+  }
+  .mms-tip-img {
+    width: 96px;
+    height: 96px;
+    object-fit: cover;
+    border-radius: 50%;
+    display: block;
+  }
+  .mms-tip-label {
+    display: block;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: #D73E33 !important;
+    margin: 0 0 4px;
+  }
+  .mms-tip-text {
+    display: block;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.7;
+    color: #14181D !important;
+    margin: 0 0 16px;
+  }
+  .mms-tip-text a {
+    color: #D73E33 !important;
+    font-weight: 500;
+    text-decoration: none !important;
+  }
+  
+  /* Shared button — used by both CTAs */
+  .mms-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #D73E33;
+    color: #FFFFFF !important;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 24px;
+    border-radius: 10px;
+    text-decoration: none !important;
+    width: fit-content;
+  }
+</style>
+
+<div class="mms-content">
+
+  <div class="mms-tip">
+    <img class="mms-tip-img" src="https://framerusercontent.com/images/k3GSxqwPzKBBZz6pjxHlhdHno.webp?scale-down-to=1024&amp;width=2048&amp;height=2110" alt="Rockie by Momos">
+    <div>
+      <span class="mms-tip-label">Rockie tip</span>
+      <span class="mms-tip-text"><b>Let Rockie surface what your data is trying to tell you.</b> <a href="https://www.momos.com/rockie" target="_blank" rel="noopener noreferrer">Rockie is Momos' AI intelligence agent</a> that monitors every location, identifies root causes, and tells your team exactly what to do next. No SQL, no BI tools, no data team required.</span>
+      <a class="mms-btn" href="https://www.momos.com/rockie" target="_blank" rel="noopener noreferrer">Meet Rockie</a>
+    </div>
+  </div>
+
+  <a class="mms-btn" href="https://www.momos.com/get-started" target="_blank" rel="noopener">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    Book a demo
+  </a>
+</div></div>
