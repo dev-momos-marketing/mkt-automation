@@ -136,6 +136,7 @@ A post can't hold a component, so an interactive module is an embed: its code li
 
 The body is HTML from the first H2-level content on: `<h2>`, `<h3>`, `<p>`, `<ul>`, `<ol>`, `<li>`, `<strong>`, `<em>`, `<a>`, `<blockquote>`, `<br>`, `<img>`, and `<p>⟦embed:ID⟧</p>` lines. No `<div>`, classes or inline styles: anything visual goes in an embed.
 
+- **Lists are always native** `<ol>`/`<ul>`: BlogEmbeds styles their numbers to match the blog. Never draw a numbered list inside an embed; an embed is for what text can't do (calculators, tables, visuals). Older posts' list embeds are converted with **Blog replace embeds** (`blog-migration/replacements/`).
 - **Images**: keep the post's existing images that still fit (their framerusercontent.com URLs are in the live page). Write them as `<img src="https://framerusercontent.com/images/….png" alt="What it shows, in words" width="…" height="…">`, placed after the paragraph they illustrate.
 - **Links**: internal ones as paths (`/blog/slug`, `/glossary/slug`, `/product/…`); external ones as full URLs with `target="_blank" rel="noopener"`.
 

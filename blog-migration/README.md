@@ -192,6 +192,14 @@ A post saved this way is overwritten from the file the next time it's written, s
 - It checks the house style (`scripts/takeaways.mjs`): 3–5 takeaways of one or two sentences, no "X, not Y", no hype words, no number the post doesn't contain.
 - Translated pages don't show the box until their text gets the line; their Content is marked **needs review**. It never publishes.
 
+## Replacing embeds with text
+
+Some older posts draw plain content, such as a numbered list, inside an embed. That's heavier than text, and the list's headings and words sit outside the post's own text. `replacements/<slug>/<ID>.html` holds the native HTML that takes the place of the post's `⟦embed:ID⟧` line, and `replacements/<slug>/embeds/<NEW>.html` any smaller embed it still needs, such as the table that followed a list. **Actions → Blog replace embeds** (posts `all`, or slugs) makes the swap.
+
+- The old embed's code is removed from the Embeds field, unless a translation still shows it: then it stays until that translation is updated, and the run says so.
+- A line that's already replaced is skipped, so running it again changes nothing. A post written from `posts/` is skipped: change its file.
+- It checks the new HTML and its links, reads the posts back, marks Content translations **needs review**, and never publishes.
+
 ## After publishing
 
 The migration is done: each post's Embeds field now holds its embeds' code, and is the copy to edit. `npm run embeds` and `npm run migrate` read the old template from the live site, so they stop working once the old Section frames are deleted from it.

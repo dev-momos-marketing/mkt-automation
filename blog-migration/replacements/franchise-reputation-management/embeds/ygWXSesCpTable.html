@@ -1,0 +1,89 @@
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; font-family: "Poppins", sans-serif; background: transparent; -webkit-font-smoothing: antialiased; }
+.list-wrap { width: 100%; display: flex; flex-direction: column; align-items: flex-start; gap: 16px; }
+.list-item { display: flex; align-items: center; gap: 16px; width: 100%; }
+.num-circle { width: 36px; height: 36px; border-radius: 50%; background: #df4940; color: #fff; font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.list-item span { font-size: 18px; font-weight: 400; line-height: 32.4px; color: #15181e; }
+.bridge { font-family: "Poppins", sans-serif; font-size: 18px; font-weight: 400; line-height: 1.6; color: #15181e; width: 100%; margin: 32px 0; }
+table { width: 100%; border-collapse: collapse; font-family: "Poppins", sans-serif; font-size: 14px; }
+thead tr { border-bottom: 2px solid #D73E33; }
+th { text-align: left; padding: 0 12px 12px; font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #4D4D4D; }
+.col-factor { width: 25%; }
+.col-stat { width: 20%; }
+.col-insight { width: 35%; }
+.col-source { width: 20%; }
+td { padding: 14px 12px; }
+.td-factor { color: #14181D; font-weight: 600; font-size: 14px; }
+.td-stat { color: #D73E33; font-weight: 700; font-size: 18px; }
+.td-insight { color: #15181E; }
+.row-alt { background: #F9F9F9; }
+tbody tr { border-bottom: 0.5px solid #E0E0E0; }
+.source-tag { font-size: 11px; font-weight: 500; background: #FFEBEB; color: #AD281F; border: 0.5px solid #FF787A; border-radius: 4px; padding: 2px 7px; text-decoration: none; }
+</style>
+<table>
+  <thead>
+    <tr>
+      <th class="col-factor">Factor</th>
+      <th class="col-stat">Stat</th>
+      <th class="col-insight">Insight</th>
+      <th class="col-source">Source</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td class="td-factor">Food quality</td>
+      <td class="td-stat">80% of diners</td>
+      <td class="td-insight">more likely to visit a restaurant with positive food quality reviews</td>
+      <td><a href="https://totalfood.com/hungerrush-study-restaurant-review-impact-customers/" target="_blank" rel="nofollow noopener" class="source-tag">HungerRush</a></td>
+    </tr>
+    <tr class="row-alt">
+      <td class="td-factor">Wait time</td>
+      <td class="td-stat">20–30% of guests</td>
+      <td class="td-insight">abandon during peak times, costing a typical restaurant ~$46,800/year in lost revenue</td>
+      <td><a href="https://scanqueue.com/blog/state-of-customer-waiting-2026" target="_blank" rel="nofollow noopener" class="source-tag">ScanQueue</a></td>
+    </tr>
+    <tr>
+      <td class="td-factor">Order accuracy</td>
+      <td class="td-stat">26% of negative reviews</td>
+      <td class="td-insight">cite incorrect orders, the third most common complaint after service and food quality</td>
+      <td><a href="https://totalfood.com/hungerrush-study-restaurant-review-impact-customers/" target="_blank" rel="nofollow noopener" class="source-tag">HungerRush</a></td>
+    </tr>
+    <tr class="row-alt">
+      <td class="td-factor">Staff attitude</td>
+      <td class="td-stat">57% of negative reviews</td>
+      <td class="td-insight">are triggered by poor service, making staff attitude the single biggest driver of bad reviews</td>
+      <td><a href="https://totalfood.com/hungerrush-study-restaurant-review-impact-customers/" target="_blank" rel="nofollow noopener" class="source-tag">HungerRush</a></td>
+    </tr>
+    <tr>
+      <td class="td-factor">Cleanliness</td>
+      <td class="td-stat">75% of consumers</td>
+      <td class="td-insight">will not visit a restaurant after reading negative reviews about its cleanliness</td>
+      <td><a href="https://bloomintelligence.com/blog/the-importance-of-restaurant-customer-satisfaction/" target="_blank" rel="nofollow noopener" class="source-tag">Harris Poll / Cintas</a></td>
+    </tr>
+    <tr class="row-alt">
+      <td class="td-factor">Handling complaints</td>
+      <td class="td-stat">61% of unhappy guests</td>
+      <td class="td-insight">will return if their issue is resolved quickly and publicly</td>
+      <td><a href="https://www.semrush.com/blog/customer-retention-stats/" target="_blank" rel="nofollow noopener" class="source-tag">Semrush</a></td>
+    </tr>
+    <tr>
+      <td class="td-factor">Listing accuracy</td>
+      <td class="td-stat">Affects local SEO</td>
+      <td class="td-insight">inaccurate name, address, or hours signal low credibility to Google, hurting search ranking across all locations</td>
+      <td><a href="https://birdeye.com/blog/restaurant-review-sites-that-will-bring-you-more-customers/" target="_blank" rel="nofollow noopener" class="source-tag">Birdeye</a></td>
+    </tr>
+    <tr class="row-alt">
+      <td class="td-factor">Review recency and volume</td>
+      <td class="td-stat">73% of consumers</td>
+      <td class="td-insight">only trust reviews written in the last month — a newer review set can outrank higher-volume competitors</td>
+      <td><a href="https://wiserreview.com/blog/google-review-statistics/" target="_blank" rel="nofollow noopener" class="source-tag">WiserReview</a></td>
+    </tr>
+    <tr>
+      <td class="td-factor">Delivery platform ratings</td>
+      <td class="td-stat">Affects order visibility</td>
+      <td class="td-insight">low ratings on Uber Eats or DoorDash push your listing down in search, reducing orders regardless of in-store reputation</td>
+      <td><a href="https://orders.co/blog/best-review-listing-sites-for-restaurants/" target="_blank" rel="nofollow noopener" class="source-tag">Orders.co</a></td>
+    </tr>
+  </tbody>
+</table>
