@@ -34,7 +34,7 @@ try {
     const page = await (await fetch(`${SITE}/blog/${post.slug}`, { headers: { "user-agent": "Mozilla/5.0 momos-blog-migration" } })).text()
     const modules = [...new Set(page.match(/https:\/\/framerusercontent\.com\/sites\/[^"'\s]+\.mjs/g) ?? [])]
     if (!modules.length) throw new Error(`Couldn't read the published template's code from ${SITE}/blog/${post.slug}; nothing was removed.`)
-    const code = (await Promise.all(modules.map(async u => (await fetch(u)).text()))).join("\n")
+    const code = await Promise.all(modules.map(async u => (await fetch(u)).text()))
     const stillUsed = idsUsedIn(code, old.map(f => f.id)).map(id => old.find(f => f.id === id).name)
     if (stillUsed.length) throw new Error(`The published blog template still uses ${stillUsed.join(", ")}. Delete those layers in Framer and publish first; nothing was removed.`)
     say(`Checked: the published template (${modules.length} scripts) uses none of them.`)
