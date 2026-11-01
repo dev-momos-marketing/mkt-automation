@@ -9,7 +9,13 @@ export function oldSectionFields(fields) {
     })
 }
 
-// The field ids that a piece of published code still refers to.
-export function idsUsedIn(code, ids) {
-    return ids.filter(id => new RegExp(`(^|[^A-Za-z0-9_])${id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}($|[^A-Za-z0-9_])`).test(code))
+// The field ids that published code still uses. Framer ships each CMS collection's definition with
+// the page (`id:{defaultValue:…,title:"Section 1",…}` plus its schema), so a field shows up
+// there whether or not the template uses it: a module that defines a field is skipped for that
+// field, and any mention in another module counts as a use.
+export function idsUsedIn(modules, ids) {
+    const esc = id => id.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")
+    return ids.filter(id => modules.some(code =>
+        !new RegExp(`(^|[^A-Za-z0-9_])${esc(id)}:\\{defaultValue:`).test(code) &&
+        new RegExp(`(^|[^A-Za-z0-9_])${esc(id)}($|[^A-Za-z0-9_])`).test(code)))
 }
