@@ -200,6 +200,14 @@ Some older posts draw plain content, such as a numbered list, inside an embed. T
 - A line that's already replaced is skipped, so running it again changes nothing. A post written from `posts/` is skipped: change its file.
 - It checks the new HTML and its links, reads the posts back, marks Content translations **needs review**, and never publishes.
 
+## Removing the old fields
+
+Once the blog template has no old Section layers left (and is published), **Actions → Blog remove old fields** removes the **Section Title N** and **Section N** fields from the Blog collection. Leave **apply** unticked first: the run lists the fields and how many posts fill each, checks that the published template's code no longer refers to any of them, and writes every value (translations included) to the **blog-old-fields** download, kept 90 days. Then tick **apply** and type `DELETE`.
+
+- It refuses if the published template still uses any of the fields, and never touches other fields (Content, Embeds, Migrated, title, slug, image…).
+- Removing fields can't be undone in Framer. The backup is the way back. It never publishes.
+- After this, `npm run migrate` and the dry run have nothing to read: they were for the move to Content.
+
 ## After publishing
 
 The migration is done: each post's Embeds field now holds its embeds' code, and is the copy to edit. `npm run embeds` and `npm run migrate` read the old template from the live site, so they stop working once the old Section frames are deleted from it.
