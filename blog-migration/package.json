@@ -16,6 +16,7 @@
     "faqs": "node scripts/faqs.mjs",
     "takeaways": "node scripts/add-takeaways.mjs",
     "replace-embeds": "node scripts/replace-embeds.mjs",
+    "remove-old-fields": "node scripts/remove-old-fields.mjs",
     "test": "node --test test/*.test.mjs"
   },
   "dependencies": {

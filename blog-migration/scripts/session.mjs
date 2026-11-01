@@ -85,5 +85,12 @@ export async function openBlogSession() {
         return new Map((await retrying("checking the posts", async () => (await collection()).getItems())).map(i => [i.id, i]))
     }
 
-    return { read, save, readBack, disconnect: () => framer.disconnect().catch(() => {}) }
+    // Removes fields from the collection, then returns the fields left. Used only by the
+    // remove-old-fields script, after its checks and backup.
+    async function removeFields(ids) {
+        await (await collection()).removeFields(ids)
+        return retrying("checking the fields", async () => (await collection()).getFields())
+    }
+
+    return { read, save, readBack, removeFields, disconnect: () => framer.disconnect().catch(() => {}) }
 }

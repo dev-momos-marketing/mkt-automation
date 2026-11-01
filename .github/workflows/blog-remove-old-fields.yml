@@ -1,0 +1,73 @@
+# Blog remove old fields: removes the old layout's Section Title N / Section N fields from the Blog
+# collection, after checking the published template no longer uses them and backing up every value
+# (the blog-old-fields download). Removes nothing unless "apply" is ticked and DELETE is typed.
+# Never publishes. See blog-migration/README.md.
+name: Blog remove old fields
+
+on:
+  workflow_dispatch:
+    inputs:
+      apply:
+        description: Remove the fields (leave unticked for a dry run with a backup)
+        type: boolean
+        default: false
+      confirm:
+        description: Type DELETE to confirm removing the fields
+        type: string
+        default: ""
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-framer-writes
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: blog-migration
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+    env:
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
+      FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
+      BLOG_COLLECTION: ${{ vars.BLOG_COLLECTION }}
+      APPLY: ${{ inputs.apply }}
+      CONFIRM: ${{ inputs.confirm }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - name: Remove the old fields
+        run: |
+          set -o pipefail
+          if [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
+            exit 1
+          fi
+          flags=()
+          if [ "$APPLY" = "true" ]; then
+            if [ "$(echo "$CONFIRM" | tr -d ' ')" != "DELETE" ]; then
+              echo "::error::Type DELETE in the confirm box to remove the fields. Nothing was removed."
+              exit 1
+            fi
+            flags=(--apply --yes-delete)
+          fi
+          status=0
+          npm run -s remove-old-fields -- "${flags[@]}" 2>&1 | tee remove.log || status=$?
+          { echo "## Blog remove old fields (${{ inputs.apply && 'applied' || 'dry run' }})"; echo; sed 's/^/- /' remove.log; } >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: blog-old-fields
+          path: blog-migration/out/old-fields/
+          retention-days: 90
+          if-no-files-found: ignore
