@@ -171,6 +171,10 @@ A post that isn't written from `posts/` gets its FAQ from `blog-migration/faqs/<
 
 Every post opens with a "Key takeaways" box: 3–5 one-sentence takeaways (at most 35 words each) that answer the title and give the key steps. It's the `keyTakeaways` embed built by `scripts/takeaways.mjs`, so the look stays the same on every post. For a post in Framer, write `blog-migration/takeaways/<slug>.json` and run **Blog takeaways**. For a post written from `posts/`, put `<p>⟦embed:keyTakeaways⟧</p>` first in the file and generate `posts/<slug>.embeds/keyTakeaways.html` with `takeawaysEmbed()`.
 
+## Tool reviews in best-software posts
+
+Each review keeps its post's structure and adds two lines before the features: **Notable customers:** (named by the vendor or press, with sources) and **What's new:** (dated 2025–2026 updates). Features are a 4–6 item list with bold lead-ins. Facts come from the tool's fact sheet in `blog-migration/tools/`, researched once and shared; write each post's review from that post's angle so no two reviews share a sentence. Prices only when the vendor publishes them; otherwise "custom pricing". See the README's "Rewriting tool reviews".
+
 ## Checklist before you commit
 
 1. The title's promise is met, and any number in the title matches the numbered sections.

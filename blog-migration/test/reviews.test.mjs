@@ -28,7 +28,8 @@ test("sections splits a post at its H2 headings and numbers the reviews", () => 
     assert.equal(s.map(x => x.html).join(""), "<p>Intro</p><h2>1. Momos</h2><p>a</p><h2>2. Zendesk</h2><p>b</p><h2>FAQ</h2>")
 })
 
-test("labels reads the review's labels in order", () => {
+test("labels reads the review's labels in order, including tool names with a colon", () => {
+    assert.deepEqual(labels("<p><strong>What you can do with Re:amaze:</strong></p><p><strong>Why Re:amaze stands out:</strong> x</p>"), ["What you can do with", "Why … stands out"])
     assert.deepEqual(labels(original), ["What you can do with", "Why … stands out", "It's best for", "Pricing", "Website"])
 })
 

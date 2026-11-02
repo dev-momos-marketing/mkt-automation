@@ -19,7 +19,7 @@ export function sections(html) {
 
 // The labels a review uses, in order ("What you can do with X:" counts as "What you can do with").
 export function labels(html) {
-    return [...String(html).matchAll(/<strong>([^<:]{2,60}):?<\/strong>:?/g)].map(m => m[1].trim())
+    return [...String(html).matchAll(/<strong>([^<]{2,60}?):?<\/strong>:?/g)].map(m => m[1].trim())
         .map(l => l.replace(/^(What you can do with|Why) .*?( stands out)?$/, (_, a, b) => a + (b ? " … stands out" : "")))
         .filter(l => /^(Notable customers|What's new|What you can do with|Why … stands out|It's best for|Pricing|Website|Category|Key features)$/.test(l))
 }

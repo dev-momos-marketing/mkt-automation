@@ -1,0 +1,24 @@
+{"name": "Re:amaze",
+ "website": "https://www.reamaze.com/",
+ "oneLiner": "Helpdesk and AI customer service platform for ecommerce and online businesses, with a shared inbox, live chat, bots and multi-brand support (sold as Re:amaze by GoDaddy).",
+ "bestFor": "Online stores and brands, including food and beverage brands selling online, that run several storefronts on Shopify, BigCommerce or WooCommerce.",
+ "customers": [
+  {"name": "Built Bar", "source": "https://www.shopify.in/ph/plus/partners/re-amaze"},
+  {"name": "Todd Snyder", "source": "https://www.shopify.in/ph/plus/partners/re-amaze"},
+  {"name": "Beer Cartel", "source": "https://www.casestudies.com/company/reamaze-by-godaddy/case-study/australias-award-winning-online-beer-retail-shop-beer-cartel-implements-reamaze-across-multiple-businesses-for-better-customer-service"}
+ ],
+ "updates": [
+  {"date": "2025-08", "text": "Intents, which sort incoming messages, now run on AI and need no extra training data.", "source": "https://www.reamaze.com/blog/reamaze-ai-intents/"},
+  {"date": "2025-09", "text": "The AI context used for generated replies and FAQs now also powers response templates, quick replies, appointment and shopper bots, suggested responses and the AI FAQ bot.", "source": "https://www.reamaze.com/blog/ai-customer-support-tools/"}
+ ],
+ "features": [
+  "Shared inbox for email, live chat, social media, SMS and voice",
+  "AI Agent (beta) trained on your help content, extended from chat to email and SMS",
+  "Order details from Shopify, BigCommerce and WooCommerce inside conversations",
+  "Chatbots and Cues (proactive, trigger-based chat messages)",
+  "Multiple brands with separate inboxes, help centers and branding in one account",
+  "AI-powered Intents for sorting messages",
+  "FAQ / help center"
+ ],
+ "pricing": {"text": "Per-user plans: Basic $29, Pro $49 and Plus $69 per user/month; a Starter plan is $59/month flat for up to 500 responded conversations. Annual billing is discounted. Free trial available.", "source": "https://www.reamaze.com/pricing", "checked": "2026-11"},
+ "notes": "reamaze.com could not be fetched; prices come from a May 2026 snapshot of the pricing page quoted in third-party guides and should be confirmed on reamaze.com/pricing. Built Bar and Todd Snyder appear as testimonials on Shopify's Re:amaze partner page; the Built Bar '5.6x faster' figure comes only from a third-party listing and was not used. Original's '$29/month for 3 team members' was replaced (pricing is now per user). The AI Agent email/SMS expansion appears to be from 2026 but I couldn't confirm the month, so it isn't dated."}
