@@ -1,0 +1,22 @@
+{"name": "Zendesk", "website": "https://www.zendesk.com/",
+ "oneLiner": "Customer service platform (the Zendesk Resolution Platform) combining ticketing, messaging, voice, a help center and AI agents.",
+ "bestFor": "Mid-size to large businesses, including multi-location restaurant and hospitality brands, that handle high contact volume across many channels.",
+ "customers": [
+  {"name": "Grubhub", "source": "https://www.zendesk.com/customer/grubhub/"},
+  {"name": "Grill'd", "source": "https://www.zendesk.com/sg/customer/grilld/"},
+  {"name": "Impossible Foods", "source": "https://www.zendesk.com/customer/impossible-foods/"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Announced (March 11) and completed (March 26) the acquisition of Forethought, an AI agent company; Forethought AI Agents by Zendesk cover chat, email and voice and add self-improving agents to the Resolution Platform.", "source": "https://www.zendesk.com/newsroom/press-releases/zendesk-advances-resolution-platform-with-self-improving-ai-agents-from-proposed-forethought-acquisition"}
+ ],
+ "features": [
+  "Single agent workspace for email, messaging, live chat, social and voice",
+  "AI agents that answer common questions across chat, email and voice",
+  "Copilot add-on that suggests replies and next steps for human agents",
+  "Omnichannel routing and automated ticket triggers",
+  "Help center and knowledge base for self-service",
+  "Reporting and analytics dashboards",
+  "Large app marketplace and integrations"
+ ],
+ "pricing": {"text": "Support Team from $19 per agent per month billed annually ($25 monthly); Suite Team $55 per agent per month billed annually ($69 monthly); Suite Professional $115 billed annually; Copilot is an add-on.", "source": "https://www.zendesk.com/pricing/", "checked": "2026-11"},
+ "notes": "zendesk.com could not be fetched from this session; prices come from search snippets of zendesk.com/pricing and agree with several 2026 third-party guides. Zendesk's own claim that its AI agents resolve over 80% of interactions was left out as a vendor claim. Original's 'hundreds of integrations' and 'millions of tickets' dropped."}

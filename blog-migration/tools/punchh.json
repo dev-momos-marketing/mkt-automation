@@ -1,0 +1,24 @@
+{"name": "PAR Punchh",
+ "website": "https://punchh.com/",
+ "oneLiner": "Enterprise loyalty, offers and guest engagement platform for restaurant chains, owned by PAR Technology and part of its PAR Engagement cloud.",
+ "bestFor": "Multi-unit and enterprise restaurant brands that want loyalty tied into POS, ordering and guest data.",
+ "customers": [
+  {"name": "Krystal (Club Krystal)", "source": "https://www.businesswire.com/news/home/20251022909455/en"},
+  {"name": "Torchy's Tacos", "source": "https://www.businesswire.com/news/home/20250205822523/en/Torchys-Tacos-Lights-Up-Customer-Experience-with-New-Loyalty-Program-Powered-by-PAR-Technologys-PAR-Punchh-Platform"},
+  {"name": "Church's Texas Chicken", "source": "https://www.nasdaq.com/press-release/churchs-texas-chickenr-selected-par-punchhr-revolutionize-customer-engagement-and"},
+  {"name": "Salsarita's Fresh Mexican Grill", "source": "https://www.businesswire.com/news/home/20251211022380/en/PAR-Technology-Unveils-Smart-Passes-The-Next-Era-of-Loyalty-Engagement"}
+ ],
+ "updates": [
+  {"date": "2025-06", "text": "PAR launched PAR Engagement, a unified guest engagement cloud combining Punchh loyalty, marketing and offers, rebuilt PAR Ordering and guest data; the release added membership tiers and AI-driven rule activation.", "source": "https://www.businesswire.com/news/home/20250610356934/en/PAR-Technology-Launches-PAR%C2%AE-Engagement-A-Unified-Guest-Engagement-Cloud-Purpose-Built-for-Enterprise-Restaurants"},
+  {"date": "2025-12", "text": "PAR unveiled Smart Passes, wallet-native loyalty in Apple Wallet and Google Wallet with one-tap enrollment and real-time points and offers, synced with Punchh campaigns.", "source": "https://www.businesswire.com/news/home/20251211022380/en/PAR-Technology-Unveils-Smart-Passes-The-Next-Era-of-Loyalty-Engagement"}
+ ],
+ "features": [
+  "Points, visit and tiered membership programs",
+  "Offers and campaign engine with segmentation and AI-driven rule activation",
+  "Smart Passes: loyalty cards in Apple Wallet and Google Wallet without an app",
+  "PAR Games: gamified loyalty experiences natively integrated with Punchh",
+  "Integrations with POS, online ordering, mobile apps and kiosks",
+  "Guest data and reporting across channels as part of PAR Engagement"
+ ],
+ "pricing": {"text": "Custom pricing; not published.", "source": null, "checked": "2026-11"},
+ "notes": "Punchh was acquired by PAR Technology (reported $500M, 2021) and is sold as PAR Punchh within PAR Engagement. Dropped original claims: 'over 40% of top 100 US restaurant brands', 'up to 6.5x frequency lift' from Punchh Wallet, '100%+ net dollar retention', Yum!/TGI Friday's/Casey's as customers (not re-verified). Brand count varies by source (200+ vs 275+), so left out. PAR Games launch date not confirmed. punchh.com and businesswire.com could not be fetched; facts come from search results of the releases."}
