@@ -47,6 +47,7 @@ test("checkReview reports missing assets, wrong labels, a missing list, unsource
     assert.doesNotMatch(checkReview(label, { original: original.replace("What you can do with Zendesk:", "What you can do with Salesforce Service Cloud:"), facts: "2026", others: ["What you can do with Salesforce Service Cloud: route cases"] }).join(), /runs of 8 words/)
     assert.match(checkReview(good.replace(/<ul>[\s\S]*<\/ul>/, ""), { original, facts: "2026" }).join(), /features should be a <ul>/)
     assert.match(checkReview(good.replace('href="https://www.zendesk.com/"', 'href="https://x.com"'), { original, facts: "2026" }).join(), /link https:\/\/www.zendesk.com\/ is missing/)
+    assert.doesNotMatch(checkReview(good, { original: original.replace('href="https://www.zendesk.com/"', 'href="zendesk.com"'), facts: "2026" }).join(), /link/)
 })
 
 test("every review in reviews/ is well-formed HTML", async () => {
