@@ -1,0 +1,22 @@
+{"name": "SpotOn", "website": "https://www.spoton.com/solutions/loyalty/",
+ "oneLiner": "Restaurant POS and software company whose SpotOn Loyalty program runs inside the SpotOn POS, online ordering and the GoTo Place guest app.",
+ "bestFor": "Independent restaurants and small multi-unit groups already running on, or moving to, SpotOn POS.",
+ "customers": [
+  {"name": "Smashin' Good Time", "source": "https://www.spoton.com/success-stories/smashin-good-time"},
+  {"name": "Gui Steakhouse", "source": "https://www.spoton.com/blog/q1-2026-highlights/"},
+  {"name": "Big Dave's Bagels & Deli", "source": "https://www.casestudies.com/company/spoton/case-study/big-daves-bagels-and-deli-boosts-sales-8-with-spoton"}
+ ],
+ "updates": [
+  {"date": "2026-07", "text": "Added SMS text messaging to its marketing suite, working alongside SpotOn Loyalty trigger-based deals and the campaign creator; guests opt in through loyalty, reservations or online ordering. Same quarter: Mobile Pay & Review, a two-way OpenTable integration, and Profit AI (general availability planned by year-end 2026).", "source": "https://www.spoton.com/blog/q2-2026-proactive-ai-faster-cash/"}
+ ],
+ "features": [
+  "Points earned per visit or per dollar spent, applied automatically at checkout",
+  "Guest enrollment and check-in at the POS, online ordering and the GoTo Place app",
+  "Automated birthday rewards and other trigger-based deals",
+  "Email and SMS campaigns from the SpotOn Dashboard",
+  "Guest data and reporting in the same dashboard as POS sales",
+  "Rewards redeemable in store, online and in the app",
+  "Integration with SpotOn POS, SpotOn Order and reservations"
+ ],
+ "pricing": {"text": "SpotOn Loyalty is $65 per month when added to SpotOn POS, per SpotOn's loyalty page; POS plans priced separately.", "source": "https://www.spoton.com/solutions/loyalty/", "checked": "2026-11"},
+ "notes": "spoton.com could not be fetched from this session; pricing and features come from search snippets of spoton.com pages. Original's '$0 to $135+/month' POS tiers dropped (current pricing page shows different plans). Win-back automation is mentioned only by third parties, so it was left out. Sweet Chick, Francie and Terzo appear as July 2026 customers only in an aggregator profile, so they were not used."}

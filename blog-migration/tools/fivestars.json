@@ -1,0 +1,24 @@
+{"name": "Fivestars by SumUp (SumUp Connect)", "website": "https://www.sumup.com/en-us/loyalty-program/",
+ "oneLiner": "Loyalty and automated marketing platform for local US businesses, acquired by SumUp in 2021 and now sold in the US as SumUp Connect, with the consumer app branded Fivestars by SumUp.",
+ "bestFor": "Independent cafes, quick-service restaurants and other local businesses that want phone-number loyalty and automated texts with little daily effort.",
+ "customers": [
+  {"name": "Gong cha", "source": "https://www.sumup.com/en-us/business-guide/enterprise/gong-cha-increases-sales-with-fivestars/"},
+  {"name": "Hwy 55 Burgers, Shakes & Fries", "source": "https://retailtouchpoints.com/features/news-briefs/hwy-55-burgers-shakes-fries-launches-loyalty-and-gift-card-program-from-fivestars"},
+  {"name": "My Pie (Reno)", "source": "https://try.sumup.com/loyalty-aw-2026/"}
+ ],
+ "updates": [
+  {"date": "2026-04", "text": "SumUp expanded its US product lineup (April 28, 2026) with the SumUp Terminal and new reporting and business-insight tools in the SumUp app, with loyalty offered alongside SumUp POS.", "source": "https://www.globenewswire.com/news-release/2026/04/28/3282762/0/en/sumup-expands-its-core-product-ecosystem-to-empower-millions-of-u-s-small-businesses.html"},
+  {"date": "2026-04", "text": "SumUp launched SumUp Loyalty (April 21, 2026) in the UK, France, Germany, Ireland, Spain and Italy: card-linked points or stamps through the SumUp Local app, with an Autopilot feature for inactive customers. Not a US launch.", "source": "https://www.finextra.com/pressarticle/109528/sumup-releases-loyalty-tools"}
+ ],
+ "features": [
+  "Phone-number check-in on a customer-facing Fivestars/SumUp Connect device at checkout",
+  "Points-based loyalty with rewards redeemed at the register",
+  "AutoPilot automated SMS campaigns: welcome, birthday and win-back messages",
+  "Standard promotions sent to the customer list (2 per month on Connect Plus)",
+  "Customer directory with visit and spend history",
+  "Fivestars by SumUp consumer app where members track points",
+  "Works with SumUp POS and with many third-party POS systems",
+  "Reporting on campaign results"
+ ],
+ "pricing": {"text": "SumUp publishes Connect pricing: Connect Plus $269/month and Connect Pro $349/month. SumUp's 2024 launch release said packages start at $49/month.", "source": "https://www.sumup.com/en-us/loyalty-program/pricing/", "checked": "2026-11"},
+ "notes": "SumUp acquired Fivestars in October 2021 (reported at $317M). SumUp Connect launched in the US in May 2024 (https://www.sumup.com/en-us/press/connect-launch/) and is the current product name; fsweb.fivestars.com is the legacy site. The original review's '70 million consumers and 12,000+ merchants' are 2021 acquisition-era figures, dropped. The 5STARS text-to-join keyword and the user-review criticism were not re-verified and were dropped. The $49 Connect Lite tier appears in the launch release and on FitGap but not on the current pricing page in search results; review wrote only the Plus and Pro prices. Gong cha story is on SumUp's site; Hwy 55 is an older press item; My Pie testimonial is on a SumUp landing page. 2026 updates are SumUp-wide, not Fivestars-specific; the April 2026 SumUp Loyalty launch is Europe-only. sumup.com and globenewswire.com could not be fetched; facts come from search results."}

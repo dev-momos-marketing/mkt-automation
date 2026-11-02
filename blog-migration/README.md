@@ -208,6 +208,12 @@ Once the blog template has no old Section layers left (and is published), **Acti
 - Removing fields can't be undone in Framer. The backup is the way back. It never publishes.
 - After this, `npm run migrate` and the dry run have nothing to read: they were for the move to Content.
 
+## Rewriting tool reviews
+
+The "best software" posts' tool reviews are rewritten from researched fact sheets. `tools/<tool>.json` holds one tool's facts (what it is, notable customers and dated updates with source URLs, key features, published pricing), shared by every post that reviews it. `reviews/<slug>/<NN>-<tool>.html` is the new review that replaces the post's section from its "NN. Tool" heading to the next heading; `meta.json` holds exact text fixes for fields and the rest of the post (e.g. "24 Best" → "18 Best"); `embeds/<ID>.html` replaces an embed's code.
+
+**Actions → Blog reviews** with the post slugs. Before saving, every review must keep its section's heading, images, embeds and links and the label order (with **Notable customers** and **What's new** before the features), list its features as a 4–6 item list, use no number missing from its fact sheet, and share no 8-word run with any other review on the blog. It reads the posts back, marks translations **needs review**, and never publishes.
+
 ## After publishing
 
 The migration is done: each post's Embeds field now holds its embeds' code, and is the copy to edit. `npm run embeds` and `npm run migrate` read the old template from the live site, so they stop working once the old Section frames are deleted from it.

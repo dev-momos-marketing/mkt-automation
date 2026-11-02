@@ -1,0 +1,25 @@
+{"name": "Lightspeed Loyalty",
+ "website": "https://www.lightspeedhq.com/uk/pos/restaurant/loyalty/",
+ "oneLiner": "Loyalty and marketing tools that run inside Lightspeed Restaurant POS, so points and rewards are tracked on the same system that takes orders and payments.",
+ "bestFor": "Restaurants, cafes and bars already on Lightspeed Restaurant that want loyalty without a separate vendor.",
+ "customers": [
+  {"name": "Miriam / 6R Hospitality Group (New York) - Lightspeed Restaurant customer", "source": "https://www.lightspeedhq.com/customers/miriam/"},
+  {"name": "DOC Group (Melbourne) - Lightspeed Restaurant customer", "source": "https://www.lightspeedhq.com/au/customers/doc-group/"},
+  {"name": "Gemelli Group (Queensland) - Lightspeed Restaurant customer", "source": "https://www.lightspeedhq.com/au/customers/gemelli-group/"}
+ ],
+ "updates": [
+  {"date": "2026-01", "text": "Launched Lightspeed AI, conversational assistants inside Lightspeed Restaurant (and Retail), with more features promised through 2026.", "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-launches-lightspeed-ai-a-new-ai-powered-intelligence-layer-for-retail-and-hospitality/"},
+  {"date": "2026-01", "text": "Q3 product release added Tempo (service pacing from kitchen display data) and Tasks (digital opening and closing checklists) to Lightspeed Restaurant.", "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-unveils-q3-product-innovations-designed-to-help-merchants-run-smarter-and-serve-better/"}
+ ],
+ "features": [
+  "Points earned on purchases, redeemed at the POS or online",
+  "Birthday campaign with a yearly one-time reward",
+  "Time Away campaign giving bonus points to guests who haven't visited in 30 days",
+  "Customer segments by spend and visit frequency",
+  "Email and SMS campaigns with a drag-and-drop builder (Advanced Marketing)",
+  "Automated flows for first purchase, birthdays and lapsed guests",
+  "Tiered programs with higher earn rates for VIP groups",
+  "Loyalty app / web sign-up for guests"
+ ],
+ "pricing": {"text": "Lightspeed's US restaurant loyalty pricing page lists Essential at $189/month and Premium at $399/month; prices vary by region (for example AUD pricing in Australia).", "source": "https://www.lightspeedhq.com/pos/restaurant/loyalty/pricing/", "checked": "2026-11"},
+ "notes": "lightspeedhq.com could not be fetched; facts come from search snippets of Lightspeed pages and release notes. Dropped from the original: 'loyalty included in all plans' (sources conflict; the UK page says loyalty can be bought as an add-on), the $69 Starter plan (third-party sources say it was dropped), the retail Core $149 plan, and the Toast $185/month comparison. Merchant Maverick reports the original L-Series Loyalty is no longer sold to new customers, who get Advanced Loyalty and Marketing (powered by Marsello) instead; I couldn't confirm this on a Lightspeed page. The three customers are Lightspeed Restaurant POS customers; their stories don't confirm they use the loyalty module, so the review calls them Lightspeed Restaurant customers."}

@@ -1,0 +1,24 @@
+{"name": "Intercom (by Fin, a Salesforce company)", "website": "https://www.intercom.com/",
+ "oneLiner": "AI-first customer service platform: the Fin AI agent plus the Intercom helpdesk (shared inbox, tickets, help center, phone). The company renamed itself Fin in May 2026 and was acquired by Salesforce in September 2026.",
+ "bestFor": "Businesses that want an AI agent to answer most routine questions across chat, email, phone and messaging, with a helpdesk for the rest.",
+ "customers": [
+  {"name": "Anthropic", "source": "https://aws.amazon.com/solutions/case-studies/intercom-anthropic/"},
+  {"name": "Lightspeed", "source": "https://intercom.com/customers"},
+  {"name": "Synthesia", "source": "https://intercom.com/customers/synthesia"}
+ ],
+ "updates": [
+  {"date": "2026-05", "text": "Intercom renamed the company Fin (announced May 12, 2026); the helpdesk keeps the Intercom name.", "source": "https://www.intercom.com/blog/today-intercom-becomes-fin"},
+  {"date": "2026-09", "text": "Salesforce completed its acquisition of Fin, formerly Intercom (September 10, 2026), after signing the deal on June 15, 2026. Fin continues to serve its customers as part of Salesforce AI Labs.", "source": "https://investor.salesforce.com/news/news-details/2026/Salesforce-Completes-Acquisition-of-Fin/default.aspx"}
+ ],
+ "features": [
+  "Fin AI agent answering customers from your help content across chat, email, phone, WhatsApp, SMS and social",
+  "Fin Voice for AI phone answering",
+  "Shared inbox and ticketing for human agents",
+  "Copilot AI assistant that drafts answers for agents",
+  "Help center (knowledge base) customers can search",
+  "Proactive and outbound messages triggered by customer behavior",
+  "Phone with supervisor tools to join live calls",
+  "Reporting on AI and team performance"
+ ],
+ "pricing": {"text": "Seats from $29/seat/month (Essential, billed annually); Advanced $85 and Expert $132 per seat/month annually. Fin AI agent billed separately at $0.99 per outcome (resolution).", "source": "https://www.intercom.com/pricing", "checked": "2026-11"},
+ "notes": "Company is now Fin, owned by Salesforce (deal closed September 10, 2026; reported at about $3.6 billion, not stated in the closing release). Pricing trackers show Intercom intermittently offering Essential at $19/seat for new customers during June-October 2026; review uses the $29 list price. Lightspeed's '65% resolution' and other vendor metrics were not used. intercom.com could not be fetched; pricing confirmed via several third-party pages."}

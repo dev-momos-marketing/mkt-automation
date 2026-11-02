@@ -1,0 +1,24 @@
+{"name": "Stamp Me",
+ "website": "https://www.stampme.com/",
+ "oneLiner": "Digital stamp card app for small businesses: customers collect stamps and redeem rewards on their phone, with no POS integration required.",
+ "bestFor": "Independent cafes, coffee shops and small hospitality businesses that want a simple digital punch card.",
+ "customers": [
+  {"name": "Merriment Cafe", "source": "https://www.stampme.com/case-studies/merriment-cafe"},
+  {"name": "Batch Espresso", "source": "https://stampme.com/case-studies/batch-espresso"},
+  {"name": "Pine Scone Cafe", "source": "https://www.stampme.com/case-studies/pine-scone-cafe"},
+  {"name": "Le Roi Cafe", "source": "https://www.stampme.com/case-studies/le-roi-cafe"}
+ ],
+ "updates": [
+  {"date": "2026-08", "text": "Stamp Me's blog (dated August 2026) describes Apple Wallet and Google Wallet support: members save a Member Code to their phone wallet, which staff scan with the Stamp Business merchant app (currently in a Merchant App beta).", "source": "https://www.stampme.com/blog/does-stamp-me-work-with-apple-google-wallet"}
+ ],
+ "features": [
+  "Digital stamp cards customers join by QR code or the Stamp Me app",
+  "Several stamping methods, including the StampPod tap device, QR codes, stamp codes and Stamp Tags",
+  "Stamp Business merchant app: staff scan a member's code to stamp or redeem (beta)",
+  "Member Code in Apple Wallet or Google Wallet",
+  "Push notifications and SMS messaging to members",
+  "Automated birthday rewards and Scratch & Win games",
+  "Zapier connection to email and CRM tools"
+ ],
+ "pricing": {"text": "Three plans (Lite, Pro, Elite), each with a 30-day free trial, no setup fees and no cap on members. Prices are on Stamp Me's pricing page, which could not be opened; third-party sites disagree ($29 vs $49 starting), so no figure is given.", "source": "https://help.stampme.com/en/articles/6204313-how-much-does-stamp-me-cost", "checked": "2026-11"},
+ "notes": "stampme.com and help.stampme.com could not be fetched; facts come from search snippets of vendor pages. Dropped the original '$29/month' starting price (unverified; CostBench says $49). Launch date of Stamp Business and wallet support not confirmed; August 2026 is the blog post date. Case studies are vendor-published. Dropped 'six methods' count and Zapier detail on data fields."}

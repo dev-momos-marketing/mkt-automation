@@ -1,0 +1,25 @@
+{"name": "Sprinklr Service", "website": "https://www.sprinklr.com/",
+ "oneLiner": "Sprinklr's AI-native contact center platform that brings voice, social, messaging and digital channels (30+ by Sprinklr's count) into one agent console, with AI agents, copilots and quality tools.",
+ "bestFor": "Large, multi-country brands running big contact centers across voice, social and messaging channels.",
+ "customers": [
+  {"name": "Deutsche Telekom", "source": "https://www.sprinklr.com/stories/deutsche-telekom/"},
+  {"name": "3M", "source": "https://www.sprinklr.com/stories/3m-pioneers-exceptional-customer-experiences/"},
+  {"name": "Telefonica", "source": "https://www.sprinklr.com/stories/telefonica/"},
+  {"name": "Gulf Bank", "source": "https://www.sprinklr.com/stories/gulf-bank/"}
+ ],
+ "updates": [
+  {"date": "2026-04", "text": "Spring '26 (26.4) release: Autonomous Evaluation in AI+ Studio runs simulated scenarios against AI agents before launch and keeps scoring them live; Agent Copilot gives proactive real-time nudges to human agents.", "source": "https://www.businesswire.com/news/home/20260407515870/en"},
+  {"date": "2026-10", "text": "Voice AI Agents for spoken interactions announced alongside a beta of six Marketing AI Agents.", "source": "https://ppc.land/sprinklr-opens-beta-of-six-ai-agents-that-turn-briefs-into-campaigns/"}
+ ],
+ "features": [
+  "One console for voice, social, messaging (WhatsApp, LINE, WeChat), email, chat, SMS and review sites",
+  "Unified routing by skills, capacity, intent and sentiment",
+  "Customer-facing AI agents and voice bots",
+  "Agent Copilot with real-time suggestions",
+  "AI+ Studio to build, test and evaluate AI agents",
+  "Sentiment analysis and voice-of-customer insights",
+  "Workforce management and quality management",
+  "Contact center analytics"
+ ],
+ "pricing": {"text": "Custom enterprise pricing on request.", "source": null, "checked": "2026-11"},
+ "notes": "sprinklr.com pages not fetched directly; facts from search results of sprinklr.com and press. '30+ channels' is Sprinklr's own marketing figure; its 10-K uses different breakdowns. Customer metrics are vendor-reported and not used in the review."}

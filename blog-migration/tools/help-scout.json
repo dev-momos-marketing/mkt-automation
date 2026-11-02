@@ -1,0 +1,24 @@
+{"name": "Help Scout", "website": "https://www.helpscout.com/",
+ "oneLiner": "Shared-inbox help desk for small and mid-size teams, with live chat (Beacon), a knowledge base (Docs), an AI agent (AI Answers) and channels including WhatsApp and SMS.",
+ "bestFor": "Small and mid-size teams that want an easy shared inbox with chat, a help center and optional AI answers.",
+ "customers": [
+  {"name": "OnePageCRM", "source": "https://www.helpscout.com/customers/"},
+  {"name": "Litmus", "source": "https://www.casestudies.com/company/help-scout"},
+  {"name": "Mabel's Labels", "source": "https://www.casestudies.com/company/help-scout"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Winter 2026 seasonal release added WhatsApp as a channel (available from the Plus plan), conversation routing, availability status and an Aircall integration, and previewed SLAs, SMS, configurable AI agents and AI Answers for email.", "source": "https://updates.helpscout.com/releases/2026-winter/"},
+  {"date": "2026-07", "text": "Native two-way SMS: teams connect their own Twilio number and handle texts in the shared inbox, available for all paid plans.", "source": "https://articles.helpscout.com/blog/introducing-native-sms-in-help-scout/"}
+ ],
+ "features": [
+  "Shared inbox with collision detection, assignments and internal notes",
+  "Beacon live chat and help widget for your website",
+  "Docs knowledge base sites",
+  "AI Answers / Scout AI agent replying from your knowledge base",
+  "AI drafts and summaries for agents (Plus plan and up)",
+  "WhatsApp, SMS (via your Twilio number) and social channels",
+  "Workflows and automatic reassignment when teammates are away",
+  "Customer profiles and reports"
+ ],
+ "pricing": {"text": "Free plan for up to 5 users; Standard $25, Plus $45 and Pro $75 per user per month billed annually. AI Answers billed at $0.75 per resolution.", "source": "https://www.helpscout.com/pricing", "checked": "2026-11"},
+ "notes": "Help Scout briefly billed by contacts helped (late 2024) and returned to per-user pricing. WhatsApp date (March 2026) comes from a pricing tracker (pricingsaas.com/companies/helpscout/diffs/2026W11); the SMS month (July 2026) comes from a search snippet of updates.helpscout.com, the blog post itself is undated in search results; please confirm. Litmus and Mabel's Labels come from a case-study aggregator listing Help Scout stories; OnePageCRM is on helpscout.com/customers. Help Scout's '73% resolution' homepage claim not used. helpscout.com could not be fetched."}

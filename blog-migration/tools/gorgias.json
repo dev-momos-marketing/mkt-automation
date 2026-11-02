@@ -1,0 +1,23 @@
+{"name": "Gorgias", "website": "https://www.gorgias.com/",
+ "oneLiner": "Ecommerce helpdesk and AI Agent platform built around Shopify order data, covering email, chat, social, SMS and voice.",
+ "bestFor": "Online stores and DTC brands on Shopify, including food and beverage brands that sell online.",
+ "customers": [
+  {"name": "BrüMate", "source": "https://www.gorgias.com/customers/brumate"},
+  {"name": "Tommy John", "source": "https://www.gorgias.com/customers/tommy-john"},
+  {"name": "Try The World", "source": "https://www.gorgias.com/customers/try-the-world"}
+ ],
+ "updates": [
+  {"date": "2025-04", "text": "Introduced Shopping Assistant, an AI pre-sales feature that recommends products, suggests upsells and can offer discounts inside chat (labeled beta at launch).", "source": "https://sacra.com/research/gorgias"},
+  {"date": "2026", "text": "Public roadmap calls 2026 the year of AI Agent maturity: stronger knowledge control, deterministic variables and faster responses on a new architecture.", "source": "https://gorgias.com/roadmap"}
+ ],
+ "features": [
+  "Shared inbox for email, chat, social, SMS and voice",
+  "Order view and actions (edit, refund, cancel) inside the ticket via Shopify",
+  "AI Agent that resolves common questions such as order status and returns",
+  "Shopping Assistant for product recommendations in chat",
+  "Macros and rules for automated replies and routing",
+  "Gorgias Voice with IVR, routing and AI call summaries",
+  "Revenue statistics tying support conversations to sales"
+ ],
+ "pricing": {"text": "Starter plan $10 per month for 50 billable tickets; AI Agent billed per resolved conversation, $0.90 on most plans with annual billing ($1.00 on monthly billing).", "source": "https://www.gorgias.com/llm-info", "checked": "2026-11"},
+ "notes": "gorgias.com could not be fetched from this session; details come from search snippets of gorgias.com pages. Shopping Assistant launch month (April 2025) comes from Sacra; other sources say 'Spring 2025'. A September 2026 WhatsApp AI Agent beta appears only in an investor tear sheet, so it was left out. Original's BigCommerce/Magento integration claim not re-checked and dropped."}

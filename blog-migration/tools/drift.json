@@ -1,0 +1,23 @@
+{"name": "Drift", "website": "https://www.drift.com/",
+ "oneLiner": "Conversational marketing and sales chat platform owned by Clari + Salesloft, which announced its gradual sunset in March 2026 and refers existing clients to 1mind.",
+ "bestFor": "Current Drift customers on the Clari + Salesloft platform planning their move to a successor.",
+ "customers": [
+  {"name": "1Password", "source": "https://www.salesloft.com/resources/case-studies/1password"},
+  {"name": "RapidMiner", "source": "https://www.drift.com/case_studies/rapidminer/"},
+  {"name": "Park Place Technologies", "source": "https://v2.iotone.com/case-study/park-place-technologies-transforming-customer-engagement-with-iot-chatbot/c2599"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Clari + Salesloft announced the gradual sunset of Drift and named 1mind its exclusive AI successor; existing Drift clients are referred to 1mind.", "source": "https://www.1mind.com/announcements/clari-salesloft-names-1mind-as-exclusive-ai-successor-to-drift"},
+  {"date": "2025-12", "text": "Clari and Salesloft completed their merger; Drift became part of Clari + Salesloft.", "source": "https://www.salesloft.com/company/newsroom/1-mind-partnership"},
+  {"date": "2025-08", "text": "Attackers used compromised OAuth tokens from the Salesloft Drift app to reach some customers' Salesforce data; Drift was taken offline and brought back on September 16, 2025.", "source": "https://www.featurebase.app/blog/drift-bot-review"}
+ ],
+ "features": [
+  "AI chatbots that greet and qualify website visitors",
+  "Meeting booking straight into reps' calendars",
+  "Routing of high-intent visitors to the right rep or live agent",
+  "Account-based targeting for visitors from named accounts",
+  "Answers to common questions with handoff to a person",
+  "Salesforce and HubSpot sync"
+ ],
+ "pricing": {"text": "No public pricing. Drift was sold on annual quotes; with the sunset, new purchases are unclear and existing clients are being referred to 1mind.", "source": null, "checked": "2026-11"},
+ "notes": "IMPORTANT: Drift is being sunset (announced March 6, 2026; no published end date). drift.com reportedly redirects to salesloft.com/platform/drift, which says 'We've transitioned from Drift to 1mind'. Reviewer may want to replace this entry in the post. Dropped the original $2,500/month price (third-party estimates only). Salesforce disabled the Drift connection after the August 2025 breach; the breach is not mentioned in the review. Merger date (December 3, 2025) from search summaries; Salesloft newsroom could not be fetched."}

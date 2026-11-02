@@ -1,0 +1,26 @@
+{"name": "Front",
+ "website": "https://front.com/",
+ "oneLiner": "Customer operations platform that combines shared inboxes for email, chat, SMS and social with helpdesk ticketing, automation and AI agents.",
+ "bestFor": "Teams that handle a lot of customer email and messaging and want helpdesk structure without leaving an email-style workflow.",
+ "customers": [
+  {"name": "sennder", "source": "https://front.com/customer-stories/sennder"},
+  {"name": "Hootsuite", "source": "https://front.com/customer-stories/hootsuite"},
+  {"name": "Cisco Meraki", "source": "https://front.com/customer-stories/cisco-meraki"},
+  {"name": "Lydia", "source": "https://front.com/customer-stories/lydia"}
+ ],
+ "updates": [
+  {"date": "2025-09", "text": "Front launched Autopilot, an omnichannel AI agent that resolves customer conversations under admin-set controls, sold as an add-on at $0.89 per resolution with a 14-day free trial.", "source": "https://community.front.com/product-updates/meet-autopilot-the-ai-agent-built-for-control-not-chaos-3085"},
+  {"date": "2026-06", "text": "Front opened a beta that lets external AI agents work inside Front as teammates, with assigned conversations, their own identity and handoffs to humans.", "source": "https://community.front.com/api-news-updates-40/bring-your-own-ai-agent-to-front-join-the-beta-3858"}
+ ],
+ "features": [
+  "Shared inboxes for email, SMS, live chat (Front Chat) and social messages",
+  "Assignment, internal comments and @mentions on conversations",
+  "Ticketing with statuses and SLAs",
+  "Rules and workflows for routing, follow-ups and escalation",
+  "Autopilot AI agent and Copilot AI drafting for agents",
+  "Knowledge base",
+  "Analytics on response times, SLA adherence and workload",
+  "Integrations such as Salesforce, Slack and Aircall"
+ ],
+ "pricing": {"text": "Starter $25/seat/month (up to 10 seats), Professional $65/seat/month (up to 50 seats), Enterprise $105/seat/month, billed annually. Autopilot add-on $0.89 per resolution.", "source": "https://front.com/pricing", "checked": "2026-11"},
+ "notes": "Front's domain is now front.com (original review links front.app; kept as required). front.com could not be fetched; pricing from search snippets of front.com/pricing and Front's 2026 blog posts (one Front article says $27, so worth re-checking). Old $19/seat Starter price (2023 tiers) is outdated. Copilot add-on price ($20/seat per third party) not verified, left out of review."}

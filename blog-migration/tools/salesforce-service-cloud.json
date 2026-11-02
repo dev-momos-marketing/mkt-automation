@@ -1,0 +1,26 @@
+{"name": "Salesforce Service Cloud (Agentforce Service)",
+ "website": "https://www.salesforce.com/products/service-cloud",
+ "oneLiner": "Salesforce's customer service platform, now branded Agentforce Service, combining case management across channels with CRM data and AI agents.",
+ "bestFor": "Large, multi-location or enterprise brands that already run Salesforce and need a configurable, CRM-connected service desk with AI agents.",
+ "customers": [
+  {"name": "OpenTable", "source": "https://www.salesforce.com/news/stories/opentable-agentforce-service-cloud-customer-service/"},
+  {"name": "NightOwl Entertainment", "source": "https://www.salesforce.com/au/customer-stories/nightowl-entertainment/?bc=OTH"},
+  {"name": "Finnair", "source": "https://www.salesforce.com/eu/customer-success-stories/"},
+  {"name": "Pandora", "source": "https://www.salesforce.com/eu/customer-success-stories/"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Salesforce launched Agentforce Contact Center at Enterprise Connect 2026: a native contact center add-on for Agentforce Service (formerly Service Cloud) combining voice, digital channels, CRM data and AI agents, generally available in the US and Canada.", "source": "https://www.salesforce.com/mx/news/press-releases/2026/03/10/salesforce-presenta-el-contact-center-agentic/"},
+  {"date": "2025-10", "text": "Winter '26 release added new Agentforce features across service products.", "source": "https://www.cio.com/article/4053913/salesforce-winter-26-release-adds-new-features-to-agentforce.html"}
+ ],
+ "features": [
+  "Agent console with case management across phone, email, chat, messaging and social",
+  "Agentforce AI agents that answer customers around the clock and hand off to people",
+  "AI assistance for agents: reply drafting, case summaries and classification",
+  "Native contact center and voice (Agentforce Contact Center add-on)",
+  "Self-service help center and knowledge base",
+  "Entitlements and SLA management, routing and omni-channel queues",
+  "Field service add-on",
+  "Reporting and dashboards on service performance"
+ ],
+ "pricing": {"text": "Starter Suite from $25/user/month (billed annually); higher editions and the Agentforce for Service add-on ($125/user/month, billed annually) or per-conversation pricing from $2 cost more.", "source": "https://www.salesforce.com/service/pricing/", "checked": "2026-11"},
+ "notes": "Service Cloud has been rebranded Agentforce Service (third-party and Salesforce press reporting; Salesforce says SKUs and functionality are unchanged). salesforce.com could not be fetched; pricing from search snippets of the pricing page. Third-party edition prices (Pro $100, Enterprise $175, Unlimited $350) not verified on salesforce.com, so left out. Finnair and Pandora come from Salesforce's customer stories hub snippets."}

@@ -1,0 +1,27 @@
+{
+ "name": "Ada",
+ "website": "https://www.ada.cx/",
+ "oneLiner": "AI customer service agent platform that automates conversations across chat, messaging, email and voice.",
+ "bestFor": "Brands with high support volume that want an AI agent to resolve routine questions across channels before a person steps in.",
+ "customers": [
+  {"name": "Betsson", "source": "https://www.ada.cx"},
+  {"name": "Cebu Pacific", "source": "https://www.ada.cx"},
+  {"name": "monday.com", "source": "https://www.ada.cx"},
+  {"name": "Malaysia Airlines", "source": "https://www.ada.cx/media-center/"}
+ ],
+ "updates": [
+  {"date": "2026-02", "text": "Unified Reasoning Engine: one intelligence layer for Ada's agents across voice, chat, messaging and email; Playbooks (structured workflows) available on voice as well as chat and messaging.", "source": "https://www.ada.cx/blog/category/product-updates-and-ada-news/"},
+  {"date": "2026-07", "text": "Builder update: native AI generation in 60 languages, images in automated conversations, enterprise audit logging, and APIs for extending Ada.", "source": "https://www.ada.cx/blog/agentic-ai-customer-service-updates-july-2026/"}
+ ],
+ "features": [
+  "One AI agent across chat, messaging, email and voice, powered by the Unified Reasoning Engine.",
+  "Playbooks: structured workflows the agent follows for multi-step requests.",
+  "Native AI generation in 60 languages.",
+  "Images in automated conversations.",
+  "APIs to connect the agent to business systems and extend it into any customer experience.",
+  "Integrations with helpdesks such as Dixa for handoff to human agents.",
+  "Enterprise audit logging."
+ ],
+ "pricing": {"text": "No published prices; custom quotes from Ada's sales team, mainly priced by conversations.", "source": null, "checked": "2026-11"},
+ "notes": "Replaces Drift (sunset announced March 2026) in best-customer-support-software. Customer outcome figures on ada.cx are vendor-reported and not used. Third-party per-resolution prices are unsourced estimates and not used."
+}
