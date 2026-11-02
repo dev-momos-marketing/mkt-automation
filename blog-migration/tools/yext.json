@@ -1,0 +1,57 @@
+{
+ "name": "Yext",
+ "website": "https://www.yext.com/",
+ "oneLiner": "Publicly traded (NYSE: YEXT) digital presence platform for multi-location brands: listings, local pages, reviews and AI search visibility managed from one knowledge base.",
+ "bestFor": "Multi-location and franchise restaurant brands whose main need is accurate listings and local search visibility across many locations, with review management alongside.",
+ "customers": [
+  {
+   "name": "Taco Bell",
+   "source": "https://yext.com/customers/taco-bell"
+  },
+  {
+   "name": "Arby's",
+   "source": "https://www.yext.com/blog/heard-onward-arbys-finds-success-yext"
+  },
+  {
+   "name": "Bojangles",
+   "source": "https://www.yext.com/customers/bojangles"
+  },
+  {
+   "name": "Marston's",
+   "source": "https://www.yext.com/customers/marstons"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-02",
+   "text": "Acquired Places Scout, a local search intelligence provider, to add competitive benchmarking.",
+   "source": "https://martechedge.com/news/yext-acquires-places-scout-to-boost-local-seo-and-ai-powered-insights"
+  },
+  {
+   "date": "2025-03",
+   "text": "Launched Yext Scout, an AI search and competitive intelligence agent that tracks brand visibility and sentiment across Google, Bing and AI assistants such as ChatGPT, Gemini and Perplexity.",
+   "source": "https://investors.yext.com/news-events/press-releases/detail/365/introducing-yext-scout-an-ai-search-competitive"
+  },
+  {
+   "date": "2026-04",
+   "text": "Popmenu expanded its partnership with Yext so restaurants can sync menus and listings and respond to reviews across 70+ platforms.",
+   "source": "https://restauranttechnologynews.com/2026/04/popmenu-expands-partnership-with-yext-to-help-restaurants-manage-online-reputation-across-70-platforms/"
+  }
+ ],
+ "features": [
+  "Central knowledge base (Knowledge Graph) that holds each location's hours, menus and details",
+  "Listings sync to Google, Apple Maps, Bing, Facebook and other directories and apps",
+  "Review monitoring and response across review sites, with AI-drafted replies",
+  "AI review generation campaigns, extended to third-party review sites in 2024",
+  "Scout: visibility and sentiment tracking in traditional and AI search, with competitor benchmarks",
+  "Location landing pages (Yext Pages) for local SEO",
+  "Permissions and approval workflows for large teams and franchise networks"
+ ],
+ "pricing": {
+  "text": "Custom pricing for multi-location and enterprise brands. Third-party sites list self-serve tiers but disagree on the amounts, and yext.com's pricing could not be checked from this session.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from the current review: the weekly prices ($4/$9/$10/$19 per week), which do not match any current source; '200+ direct integration partners' (not re-confirmed; SocialPilot says 80+ review platforms, Popmenu release says 70+). Corporate: CEO Michael Walrath's August 2025 $9/share take-private proposal was withdrawn on 2026-02-02 (financing not obtained) and replaced by a $150M Dutch-auction tender (https://www.businesswire.com/news/home/20260202956818/en); Yext stays public. Hearsay Systems acquired August 2024. Arby's and Taco Bell stories are older vendor case studies."
+}

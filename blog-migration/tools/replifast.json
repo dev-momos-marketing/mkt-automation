@@ -1,0 +1,17 @@
+{"name": "RepliFast", "website": "https://www.replifast.com/",
+ "oneLiner": "Low-cost AI tool that drafts and posts replies to Google Business Profile reviews for small businesses, with an autopilot mode on its Pro plan.",
+ "bestFor": "Independent restaurants and small teams that mainly need fast, consistent replies to Google reviews and don't need multi-platform review management, surveys or analytics suites.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Connects to Google Business Profile and checks for new reviews daily",
+  "AI-drafted replies in the business's own tone",
+  "Batch generation to clear a backlog of unanswered reviews in one go",
+  "Autopilot posting on the Pro plan, replying within minutes of a new review",
+  "Star-rating rules, for example auto-posting 4- and 5-star replies while holding 1- to 3-star reviews for approval",
+  "Sentiment and recurring-theme analytics on reviews",
+  "Free Google review reply generator on its website, no signup required"
+ ],
+ "pricing": {"text": "Free plan with 5 AI replies a month. Starter: $15/month, or $12/month billed annually (you approve and post each reply). Pro: $29/month, or $19/month billed annually (adds autopilot). Free Pro trial for 14 days or 15 posted replies, whichever comes first.", "source": "https://www.replifast.com/support/pricing-plans", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Facts come from search results of replifast.com pages (home, pricing, support) and Capterra; the site could not be fetched directly. Pricing conflicts across sources: RepliFast's support page gives the figures above, Capterra lists $12 and $19, and an October 2026 third-party review (toolsurf.com) lists Starter at $17/month and Pro at $29/month; recheck replifast.com/pricing before publishing. The current review's 'around $12 per month billed annually, or $15 billed monthly' matches the Starter plan only. No named customers, owner/founder or dated 2025-2026 product updates could be found, and Capterra shows no user reviews yet. It handles Google reviews only, which fits the AI review response post but makes it narrower than the other picks."}

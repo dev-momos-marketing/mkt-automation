@@ -1,0 +1,25 @@
+{"name": "ReviewTrackers", "website": "https://www.reviewtrackers.com/",
+ "oneLiner": "Review management and reputation analytics platform for multi-location businesses, owned by InMoment (now part of Press Ganey Forsta): review monitoring and response, review requests, competitor tracking and feedback analytics.",
+ "bestFor": "Multi-location and franchise brands that want centralized review monitoring, brand-approved responses and reputation reporting across many locations, especially those already using InMoment or Press Ganey Forsta for customer experience.",
+ "customers": [
+  {"name": "Ted's Montana Grill", "source": "https://reviewtrackers.com/case-studies/teds-montana-grill"},
+  {"name": "PACK & SEND", "source": "https://www.reviewtrackers.com/case-studies/pack-and-send/"},
+  {"name": "Chem-Dry", "source": "https://www.reviewtrackers.com/case-studies/chem-dry-carpet-cleaning/"}
+ ],
+ "updates": [
+  {"date": "2025-05", "text": "Press Ganey Forsta acquired InMoment, ReviewTrackers' parent company since 2022, so ReviewTrackers is now part of the Press Ganey Forsta group.", "source": "https://www.research-live.com/article/news/press-ganey-forsta-acquires-inmoment/id/5138993"},
+  {"date": "2025-07", "text": "InMoment launched AI Auto Responding in its Reputation Management solution: generative AI writes personalized, on-brand review replies from saved prompts, available on the Locations Starter and Locations Essential plans.", "source": "https://www.businesswire.com/news/home/20250730587816/en/InMoment-a-Press-Ganey-Forsta-Company-Launches-Industry-First-AI-Auto-Responding-for-Enterprise-Reviews-Management"}
+ ],
+ "features": [
+  "One dashboard for reviews from Google, Facebook, TripAdvisor and other review sites, with alerts for new reviews",
+  "Brand-approved response templates (Smart Response) so local managers can reply in a few clicks",
+  "AI-generated review replies (AI Auto Responding) based on saved brand prompts",
+  "Automated review requests to customers by email and text",
+  "Competitor tracking to compare ratings and review data against nearby rivals",
+  "Sentiment and topic analytics to spot recurring issues in feedback",
+  "Location-level reporting and role-based access that can mirror a franchise structure",
+  "Review data available inside InMoment's wider customer experience platform"
+ ],
+ "pricing": {"text": "Custom pricing, priced per location; the plans page asks you to book a meeting for a quote.", "source": "https://reviewtrackers.com/plans", "checked": "2026-11"},
+ "status": "acquired",
+ "notes": "Acquired by InMoment in June 2022 (https://www.businesswire.com/news/home/20220616005180/en); InMoment was acquired by Press Ganey Forsta in May 2025. The ReviewTrackers brand, site and plans page are still live and it is still listed (\"ReviewTrackers, by InMoment\") on Capterra in 2026; no shutdown found. It is unclear how much product news is now branded InMoment rather than ReviewTrackers; the July 2025 AI Auto Responding launch is InMoment Reputation Management, whose 'Locations Starter/Essential' plans match ReviewTrackers' tier names, but the release does not name ReviewTrackers. Dropped from the current review: 'founded in 2012' and 'over 100 third-party sites' (not confirmed in sources found), and 'integrations with Hootsuite, Zapier and CRM platforms' (not confirmed). Third-party price figures ($49-$119 per location) conflict and are not used. Vendor case-study metrics are self-reported. WebFetch blocked; facts from search results."}

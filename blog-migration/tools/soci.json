@@ -1,0 +1,26 @@
+{"name": "SOCi", "website": "https://www.soci.ai/",
+ "oneLiner": "Localized marketing platform for multi-location and franchise brands that runs reviews, listings, local search and social through brand-trained AI agents (Genius Agents) with central control.",
+ "bestFor": "Franchise and multi-location brands with hundreds or thousands of locations that want corporate control of local reviews, listings and social, executed largely by AI agents.",
+ "customers": [
+  {"name": "On The Border Mexican Grill & Cantina", "source": "https://www.soci.ai/insights/on-the-border-mexican-grill-cantina-partners-with-soci-to-elevate-digital-visibility-and-customer-engagement/"},
+  {"name": "WOWorks (six restaurant brands)", "source": "https://www.verdictfoodservice.com/news/woworks-socis-cloud-restaurant/"},
+  {"name": "Lee's Famous Recipe Chicken", "source": "https://www.meetsoci.com/?p=23517"},
+  {"name": "Sport Clips Haircuts", "source": "https://chainstoreage.com/sport-clips-deploys-agentic-ai-localize-customer-engagement"}
+ ],
+ "updates": [
+  {"date": "2026-05", "text": "SOCi said it had passed 300,000 deployed Genius Agents, AI agents trained on each brand's guidelines that handle local marketing tasks such as review replies and listings.", "source": "https://www.soci.ai/news/soci-surpasses-300000-agents-establishing-the-largest-deployed-agentic-workforce-for-localized-marketing-at-enterprise-scale/"},
+  {"date": "2026-06", "text": "Sport Clips deployed more than 3,400 SOCi Genius Agents for review management and local search across nearly 1,800 locations, with store owners keeping oversight and sensitive reviews escalated to people.", "source": "https://chainstoreage.com/sport-clips-deploys-agentic-ai-localize-customer-engagement"},
+  {"date": "2026-09", "text": "SOCi reported more than 412,000 deployed agents carrying out over 27 million localized marketing tasks a year.", "source": "https://martechedge.com/news/soci-surpasses-412000-agents-for-localized-marketing"}
+ ],
+ "features": [
+  "Genius Reviews: AI review replies that follow brand guidelines, with escalation of sensitive reviews to staff",
+  "Review monitoring and sentiment reporting across locations",
+  "Listings management and local search optimization (Google, Yelp, Bing and other directories)",
+  "Central social publishing with location-level customization and an AI social agent",
+  "Local pages and localized paid social campaigns",
+  "Surveys to collect first-party guest feedback",
+  "Role-based controls so corporate sets rules and local managers act within them"
+ ],
+ "pricing": {"text": "Custom pricing; SOCi does not publish prices. Quotes depend on location count and products.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "The company rebranded and moved its website from meetsoci.com to soci.ai (the current review links meetsoci.com; use soci.ai). Agent counts and results (e.g. Sport Clips 80% of AI replies accepted, 18% higher weekly sales) are vendor-reported; one outlet dates the Sport Clips news to July 2026 rather than June. Dropped from the current review: 'Genius Reviews uses GPT-4' (not confirmed), 'chatbots on Google Business Messages' (Google shut down Business Messages in 2024), and the unattributed 'one user saved 25% on monthly expenses' quote. WebFetch blocked; facts from search results."}

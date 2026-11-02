@@ -1,0 +1,25 @@
+{"name": "Marqii", "website": "https://www.marqii.com/",
+ "oneLiner": "Digital operations platform for restaurants that keeps menus, listings, reviews and social posts up to date from one dashboard, with POS menu sync, AI-suggested review replies and review generation.",
+ "bestFor": "Multi-location restaurant brands and franchisees that want menu and listing accuracy plus review response handled in one restaurant-specific tool, with published per-location pricing.",
+ "customers": [
+  {"name": "Romulus Restaurant Group (IHOP franchisee)", "source": "https://marqii.com/case-studies/romulus-restaurant-group"},
+  {"name": "Uccello's Hospitality Group", "source": "https://marqii.com/case-studies/uccellos"},
+  {"name": "California Tortilla", "source": "https://www.financialcontent.com/article/accwirecq-2026-7-21-marqii-launches-review-generation-in-partnership-with-thanx"}
+ ],
+ "updates": [
+  {"date": "2025-05", "text": "Launched Social Management for scheduling posts to Facebook and Google Business Profile from Marqii, with more channels and features planned.", "source": "https://www.marqii.com/press/marqii-launches-social-management"},
+  {"date": "2025-11", "text": "Launched First Party Reviews: branded review forms shared by link, QR code or website embed, with results included in Marqii's review insights.", "source": "https://marqii.com/press/marqii-launches-first-party-reviews"},
+  {"date": "2026-07", "text": "Launched Review Generation with Thanx: after a purchase, Marqii sends guests a text inviting them to review the restaurant on Google, Facebook or TripAdvisor.", "source": "https://www.financialcontent.com/article/accwirecq-2026-7-21-marqii-launches-review-generation-in-partnership-with-thanx"}
+ ],
+ "features": [
+  "Menu management that syncs POS menu changes to Google, Yelp and other sites",
+  "Listings management for hours, photos, offers and contact details",
+  "Review inbox for Google, Yelp, Facebook, OpenTable, Uber Eats, Grubhub, ezCater and more",
+  "AI-suggested review replies, plus a managed review response service for high-volume brands",
+  "First-party review forms and SMS review requests after a purchase",
+  "Social post scheduling for Facebook and Google Business Profile",
+  "Multi-location dashboard and review insights"
+ ],
+ "pricing": {"text": "Published per location per month on an annual contract: Base (menus and location data) $74.99, Pro (adds reviews) $119.99, Kitchen Sync (adds advanced reviews) $149.99. Add-ons: AI-suggested review responses $15 and social management $20 per location per month. Custom pricing for large multi-unit accounts.", "source": "https://marqii.com/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing figures come from search-result snippets of marqii.com/pricing (WebFetch blocked); confirm before publishing. Marqii claims 15,000+ restaurants on its homepage (an older page says 12,000); vendor figure, not used. Case-study metrics (e.g. Romulus 94% response rate) are vendor-reported. Nothing in the current review was found to be wrong; the review spells the name 'Marquii' once, which should be 'Marqii'."}

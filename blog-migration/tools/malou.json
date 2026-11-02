@@ -1,0 +1,23 @@
+{"name": "Malou", "website": "https://www.malou.io/",
+ "oneLiner": "Paris-based AI marketing platform for restaurant groups that combines review management, local SEO and listings, social media and visibility in AI search, available self-serve (MalouApp) or with a dedicated marketing expert (Copilot).",
+ "bestFor": "Restaurant groups with three or more locations that want review replies, local SEO and social handled in one restaurant-specific platform, optionally with hands-on expert support.",
+ "customers": [
+  {"name": "Krispy Kreme", "source": "https://www.malou.io/en-us/demo"},
+  {"name": "Tudor Steak House NYC", "source": "https://www.malou.io/en-us/demo"},
+  {"name": "Riviera Dining Group", "source": "https://www.malou.io/en-us/demo"},
+  {"name": "MELT Oberkampf", "source": "https://malou.io/en/role/group-owner"}
+ ],
+ "updates": [],
+ "features": [
+  "AI review replies adapted to tone and sentiment, built from the brand's own voice guidelines",
+  "Reply quality score with tips based on Google's best practices",
+  "Alerts for sensitive review topics such as hygiene or discrimination",
+  "Semantic review analysis that surfaces recurring themes",
+  "Local SEO and listings management across Google and other platforms",
+  "Store locator and local pages optimized for search and AI search",
+  "Social media content creation and scheduling",
+  "Multi-location dashboard, in English, French, Italian and Spanish"
+ ],
+ "pricing": {"text": "Custom pricing; Malou does not publish a price list. Contact sales for a quote.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "No dated 2025-2026 product update could be confirmed. A tendancehotellerie.fr page dated July 2026 headlines a EUR 10M raise for US expansion, but its text and all other coverage point to the November 2023 Series A (henQ, Bleu Capital), so it is not listed as an update. A co-founder's LinkedIn post about a 'Malou MCP' was undated and unconfirmed. Malou's blog quotes MalouApp at about $500-$3k/month; this is not an official pricing page, so not used. Customer counts (2,000 restaurants vs '3,500+ hospitality groups') and results (+160% organic traffic) are vendor claims, not used. Tin Building and Bagatelle were mentioned as clients in one summary but no source could be confirmed, so left out. WebFetch blocked; facts from search results."}

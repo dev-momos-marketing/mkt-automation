@@ -1,0 +1,39 @@
+{
+ "name": "NiceJob",
+ "website": "https://get.nicejob.com/",
+ "oneLiner": "Reputation marketing software for small service businesses that automates review requests, review widgets, referrals and repeat-customer campaigns from connected job and invoicing tools.",
+ "bestFor": "Small home-service and local service businesses (cleaners, movers, trades) that want hands-off review collection; restaurants are not a stated focus.",
+ "customers": [
+  {
+   "name": "Evergreen Cleaning",
+   "source": "https://www.casestudies.com/company/nicejob/case-study/evergreen-cleaning-increases-monthly-revenue-by-20k-with-nicejob"
+  },
+  {
+   "name": "You Move Me",
+   "source": "https://www.casestudies.com/company/nicejob/case-study/how-nicejob-helped-you-move-me-get-the-reputation-it-deserves"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-10",
+   "text": "Partnered with SendJim so home-service businesses can print verified NiceJob 5-star reviews on direct-mail postcards.",
+   "source": "https://markets.financialcontent.com/dptribune/article/accwirecq-2025-10-21-sendjim-and-nicejob-partner-to-deliver-best-in-class-direct-mail-and-review-marketing-for-home-service-businesses"
+  }
+ ],
+ "features": [
+  "Automatic review requests by email and SMS with follow-up reminders",
+  "Integrations with job and invoicing tools such as Jobber, Housecall Pro and QuickBooks, plus Zapier",
+  "AI review replies with adjustable tone, length and rules, including optional auto-reply (Pro)",
+  "Review widgets and social proof for your website",
+  "Referral campaigns that turn happy customers into referrers (Pro)",
+  "Repeat and rebooking campaigns plus marketing broadcasts (Pro)",
+  "Optional managed website (NiceJob Sites)"
+ ],
+ "pricing": {
+  "text": "Grow plan from $75/month for up to 2,500 customers a year ($95/month for 2,501–5,000); Pro plan from $125/month adds referrals, repeat campaigns, broadcasts and AI review replies. 14-day free trial, no contracts.",
+  "source": "https://get.nicejob.com/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Owned by Paystone since October 2021 (https://www.businesswire.com/news/home/20211013005280/en/). Current site is get.nicejob.com (the review links nicejob.com). Dropped: 'trusted by over 7,000 businesses' (NiceJob now claims 50,000+ locations on its own pages, unverified); the 'Reviews' plan name at $75 (now 'Grow'); the review funnel routing negative reviewers away from public sites (not confirmed in current materials, and review gating breaks Google's policies); 'Stories' feature and the NiceJob Sites '10% more website sales' guarantee (not confirmed). Pro $125 comes from NiceJob's LLM info page (May 2026). No restaurant customers found; NiceJob is built for home services, so it is a weak fit for a restaurant-reader post."
+}

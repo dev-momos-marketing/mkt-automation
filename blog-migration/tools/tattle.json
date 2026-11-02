@@ -1,0 +1,58 @@
+{
+ "name": "Tattle",
+ "website": "https://get.tattleapp.com/",
+ "oneLiner": "Guest feedback and customer experience (CXI) platform built for restaurants that collects post-order surveys through ordering, loyalty and POS integrations, tracks reviews, and uses AI to point each location at the fixes with the most impact.",
+ "bestFor": "Multi-unit restaurant brands and franchisees, especially QSR, fast casual and casual dining, that want structured guest feedback tied to operations at each location.",
+ "customers": [
+  {
+   "name": "Hooters",
+   "source": "https://www.fsrmagazine.com/industry-news/hooters-deploys-tattle-feedback-platform/"
+  },
+  {
+   "name": "Red Robin",
+   "source": "https://www.fsrmagazine.com/industry-news/red-robin-taps-tattle-to-help-measure-guest-sentiment"
+  },
+  {
+   "name": "Brinker International (Chili's)",
+   "source": "https://www.fsrmagazine.com/content/brinker-international-taps-tattle-optimize-guest-feedback"
+  },
+  {
+   "name": "Kung Fu Tea",
+   "source": "https://www.qsrmagazine.com/news/kung-fu-tea-announces-partnership-with-tattle/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-08",
+   "text": "Tattle raised $5 million to expand its AI-driven customer experience tools for restaurants.",
+   "source": "https://restauranttechnologynews.com/2025/08/tattle-raises-5-million-to-expand-ai-driven-customer-experience-tools-for-restaurants/"
+  },
+  {
+   "date": "2026-01",
+   "text": "Kung Fu Tea announced a partnership with Tattle to track guest sentiment across channels.",
+   "source": "https://www.qsrmagazine.com/news/kung-fu-tea-announces-partnership-with-tattle/"
+  },
+  {
+   "date": "undated",
+   "text": "Tattle launched a mobile app (iOS and Android) for GMs and franchisees with a unified inbox for surveys and reviews, push alerts for critical incidents, live metrics and AI Coach action items, included for existing subscribers. Launch month not confirmed (likely late 2025 or 2026).",
+   "source": "https://www.fsrmagazine.com/industry-news/tattle-launches-mobile-app-to-bring-real-time-guest-feedback-to-restaurant-operators-fingertips/"
+  }
+ ],
+ "features": [
+  "Automated post-transaction guest surveys sent through ordering, loyalty and POS systems",
+  "Integrations with restaurant tech such as Toast, Olo, Punchh, Paytronix, Thanx and Square",
+  "Feedback tied to operational areas such as speed, accuracy, food quality and hospitality",
+  "AI recommendations that rank the highest-impact improvement for each location",
+  "Review monitoring for sites such as Google and Yelp alongside survey feedback",
+  "Location comparison and trend dashboards, including metrics like top box score and recovery rate",
+  "Service recovery workflows for unhappy guests",
+  "Mobile app with alerts and AI action items for managers"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Tattle does not publish prices. Contact the company for a quote.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "No acquisition or shutdown found; Tattle remains independent (founder/CEO Alex Beltrani in earlier releases). Tattle says it serves 250+ restaurant brands, but its own figures vary (220+ brands / 11,000+ locations; 15k+ locations) so no count is given. The current review's description is broadly accurate; its emphasis on replying to reviews from the dashboard is not confirmed (Tattle's core is surveys plus review monitoring), so treat review replies as unverified. Hooters rollout date not confirmed."
+}

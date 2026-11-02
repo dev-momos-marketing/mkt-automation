@@ -1,0 +1,26 @@
+{"name": "Caliber", "website": "https://www.groupcaliber.com/",
+ "oneLiner": "Stakeholder intelligence platform from Copenhagen-based Caliber (founded 2016) that runs continuous surveys to measure how customers, employees, investors and other audiences perceive a company, built around its Trust & Like Score.",
+ "bestFor": "Corporate communications, brand and reputation teams at large companies that need survey-based perception tracking across stakeholder groups and markets. It does not manage online reviews or guest feedback, so it is a poor fit for most restaurant operators.",
+ "customers": [
+  {"name": "Airbus", "source": "https://www.groupcaliber.com/caliber-launches-us-expert-advisory-council/"},
+  {"name": "BASF", "source": "https://www.groupcaliber.com/caliber-launches-us-expert-advisory-council/"},
+  {"name": "Novo Nordisk", "source": "https://www.groupcaliber.com/caliber-launches-us-expert-advisory-council/"}
+ ],
+ "updates": [
+  {"date": "2026-02", "text": "Released its first Stakeholder Intelligence Report, based on nearly one million responses from more than 360,000 people in 37 countries collected January to October 2025.", "source": "https://businesswire.com/news/home/20260216673900/en/Caliber-Releases-Inaugural-Stakeholder-Intelligence-Report"},
+  {"date": "2026-03", "text": "Launched a U.S. Expert Advisory Council to expand its U.S. presence, citing 800% growth in the U.S. (company figure).", "source": "https://www.groupcaliber.com/caliber-launches-us-expert-advisory-council/"},
+  {"date": "2026-03", "text": "Published its annual U.S. Trust & Like brand ranking (Costco ranked first).", "source": "https://www.groupcaliber.com/2026/03/30"}
+ ],
+ "features": [
+  "Continuous, real-time survey tracking of stakeholder perception instead of periodic polls",
+  "Trust & Like Score: headline metric averaging how much respondents trust and like a company",
+  "Brand and reputation attribute scores that show what drives or drags perception",
+  "Segments for customers, employees, investors, talent, policymakers and opinion leaders",
+  "Benchmarking against sector peers, industries and markets",
+  "AI Assistant (also called Ask Sherlock) for querying scores, board prep and campaign planning",
+  "AI Search Overview tracking how generative AI platforms represent a brand",
+  "Crisis communications monitoring and event impact measurement"
+ ],
+ "pricing": {"text": "Custom pricing; Caliber does not publish prices. Contact the company for a quote.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Facts come from groupcaliber.com pages and Business Wire search results. Dropped from the current review: the 'R²=0.84' correlation for the Trust and Like Score (vendor claim, not found) and the 'annual subscription tailored to markets and segments' pricing detail (not confirmed). Airbus, BASF and Novo Nordisk are named by Caliber as companies it advises, not as published case studies. The AI Assistant/Ask Sherlock launch date could not be confirmed. Fit: Caliber is a corporate reputation research tool with no review response or guest feedback features; it is a weak fit for a list read by restaurant operators."}

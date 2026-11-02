@@ -1,0 +1,22 @@
+{"name": "Eat App Review Management", "website": "https://eatapp.co/",
+ "oneLiner": "Review management add-on inside Eat App, a Dubai-based restaurant reservation, table management and guest CRM platform; it gathers reviews into one view, lets staff reply in the app and asks guests for reviews after their visit.",
+ "bestFor": "Restaurants already using (or choosing) Eat App for reservations and guest CRM that want basic review monitoring and replies in the same system, rather than a standalone reputation platform.",
+ "customers": [
+  {"name": "Emaar Hospitality Group", "source": "https://restaurant.eatapp.co/blog/eat-app-launches-reservation-technology-emaar-hospitality-group"},
+  {"name": "The Maine Group", "source": "https://www.zawya.com/en/press-release/eat-app-launches-unique-restaurant-reservation-technology-for-emaar-hospitality-group-s05wozho"}
+ ],
+ "updates": [
+  {"date": "2025-06", "text": "Acquired ReserveGo, an Indian table reservation platform serving more than 1,000 restaurants (acquisition dated June 2025 by PitchBook; announced publicly in January 2026).", "source": "https://restaurant.eatapp.co/blog/eat-app-acquires-reservego"},
+  {"date": "2026-01", "text": "Raised a $10M Series B extension led by PSG Equity through its portfolio company Zenchef, and announced a Swiggy partnership in India selling Eat App's growth suite as GroMax.", "source": "https://restaurant.eatapp.co/blog/eat-app-accelerates-global-growth-with-swiggy-partnership-reservego-acquisition-and-10m-funding-round"}
+ ],
+ "features": [
+  "Reviews from Google, Bing and Facebook collected in one dashboard",
+  "Reply to reviews from inside Eat App",
+  "Post-visit guest feedback requests that route happy guests to leave a public review",
+  "Review analytics to understand guest sentiment by venue",
+  "Built on Eat App's reservations, table management and guest CRM, so feedback sits next to guest profiles",
+  "Online bookings from partner channels (e.g. Mozrest, Tripadvisor) flow into the same system"
+ ],
+ "pricing": {"text": "Eat App lists a free plan and paid tiers on its pricing page, with review management sold as an add-on; exact figures vary by region and could not be confirmed on the vendor page (third-party listings show review management at about $15/month).", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Review management is an add-on to the reservation platform, not a standalone product, as the current review already says. PSG/Zenchef led the January 2026 round; this is an investment, not an acquisition, as far as sources show (CB Insights dates the investment July 2025). Dropped from the current review: 'Free plan for 30 guests/month', 'reputation management from $15/month', 'smart reporting from $39/month' and 'email marketing from $39/month' (vendor page not confirmed; third-party sources conflict on plan prices and free-plan limits). Caution for the writer: Eat App describes sending only high-rating guests to Google (review gating), which Google's policies discourage. Customer names come from 2021 Eat App press materials. WebFetch blocked; facts from search results."}

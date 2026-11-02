@@ -1,0 +1,20 @@
+{"name": "Connexup", "website": "https://www.connexup.ai/",
+ "oneLiner": "Restaurant growth platform combining commission-free online ordering, kiosk and QR ordering, loyalty, delivery app integration and AI review management.",
+ "bestFor": "Independent and small restaurants, especially on Square POS, that want direct online ordering, loyalty and AI review replies from one vendor on a month-to-month plan.",
+ "customers": [],
+ "updates": [
+  {"date": "2025-10", "text": "Released online ordering, followed by a self-ordering kiosk app (November 2025) and QR code ordering (December 2025), per its Product Hunt launch history.", "source": "https://www.producthunt.com/products/connexup-own-your-ordering-platform/launches/connexup-2"}
+ ],
+ "features": [
+  "AI replies to Google and Yelp reviews, with an option to auto-publish a reply when a review has gone unanswered for 72 hours",
+  "Post-visit review requests to grow review volume",
+  "Branded online ordering website without third-party commissions",
+  "Self-ordering kiosk and QR code table ordering",
+  "Loyalty program and personalized promotions",
+  "DoorDash and Uber Eats integration",
+  "Menu optimization with upsell and cross-sell suggestions",
+  "Native Square POS integration"
+ ],
+ "pricing": {"text": "Starter Suite from $149 per month with a 30-day free trial, month-to-month with no setup fee; Advanced and Custom plans priced by features. Its pages disagree on whether a 2.5% per-order commission applies.", "source": "https://www.connexup.ai/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "No named customers, press coverage or case studies found; G2 has only 3 reviews. The current review calls it a 'standalone reputation platform that works alongside whatever POS'; that is inaccurate: it is a broader restaurant ordering/growth platform and natively integrates only with Square (other POS on request). The current review's 'custom plans, contact sales' pricing is out of date: a $149/month Starter Suite is published. Dropped: Tripadvisor response support and 'SEO keywords and return-visit prompts' in replies (only Google and Yelp replies confirmed on the vendor's page). A separate site, connex-up.com, also describes a Connexup restaurant platform; relation unconfirmed."}

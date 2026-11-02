@@ -1,0 +1,50 @@
+{
+ "name": "Sprout Social",
+ "website": "https://sproutsocial.com/",
+ "oneLiner": "Social media management platform from Sprout Social (Nasdaq: SPT) covering publishing, a unified Smart Inbox, review management, social listening, analytics and the Trellis AI agent.",
+ "bestFor": "Restaurant groups and multi-location brands with a dedicated social or marketing team that want social publishing, engagement and review replies in one tool, and can accept per-seat pricing.",
+ "customers": [
+  {
+   "name": "Papa Johns",
+   "source": "https://sproutsocial.com/insights/case-studies/papa-johns/"
+  },
+  {
+   "name": "Lettuce Entertain You Enterprises",
+   "source": "https://sproutsocial.com/insights/case-studies/lettuce-entertain-you-enterprises/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-07",
+   "text": "Acquired NewsWhip, a media and news monitoring company, extending its listening into news and earned media.",
+   "source": "https://globalscopepartners.com/all-transactions/acquisition-of-newswhip-media-ltd-by-sprout-social-inc/"
+  },
+  {
+   "date": "2026-02",
+   "text": "Expanded its Reddit partnership and launched Recruit, an AI creator-management tool, plus a Trellis Monitoring Agent for NewsWhip.",
+   "source": "https://www.globenewswire.com/news-release/2026/02/18/3240258/0/en/sprout-social-launches-ai-powered-solutions-and-expanded-reddit-partnership-to-help-brands-navigate-the-next-era-of-discovery.html"
+  },
+  {
+   "date": "2026-05",
+   "text": "Unveiled its AI-powered social intelligence platform, expanding the Trellis AI agent beyond listening into a conversational layer across the product and introducing Trellis Studio for custom AI workflows.",
+   "source": "https://sproutsocial.com/insights/press/sprout-social-unveils-its-ai-powered-social-intelligence-platform-and-the-expansion-of-its-proprietary-ai-agent-trellis/"
+  }
+ ],
+ "features": [
+  "Smart Inbox that pulls messages, comments, mentions and reviews from connected networks into one feed",
+  "Reviews tab covering Google Business Profile, Facebook, Yelp, Tripadvisor, Trustpilot and others, with direct replies on Google and Facebook (Tripadvisor replies happen on Tripadvisor)",
+  "Publishing and scheduling across major networks, including TikTok, Threads and Bluesky",
+  "Social listening with sentiment and trend analysis, extended to news through NewsWhip",
+  "Trellis AI agent and AI Assist for drafting replies and posts, summarizing data and suggesting tags",
+  "Analytics and exportable reports, including competitor comparisons",
+  "Team workflows: approvals, message routing, task assignment and role-based permissions",
+  "Enterprise admin such as SCIM user provisioning for Okta and Microsoft Entra ID"
+ ],
+ "pricing": {
+  "text": "Per seat per month, billed annually: Standard $199, Professional $299, Advanced $399 (month-to-month billing costs more); Enterprise is custom. 30-day free trial.",
+  "source": "https://sproutsocial.com/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Pricing comes from search results quoting sproutsocial.com/pricing; the page itself could not be fetched, so recheck before publishing (some third-party sites list $249/$399/$499, which appear to be monthly-billing rates). The current review's claim that listening and advanced sentiment are only on higher tiers was not re-verified; leave it out or check the pricing page. Dropped from the current review: '5,700+ G2 reviews' and '#1 in 40 G2 Winter 2026 categories' (unverified, fast-changing). No 2026 sale or take-private found; 2024 reports of a founder-led take-private bid did not lead to a deal. Named a Visionary in the 2026 Gartner Magic Quadrant for Social Media Management and Listening (July 2026, per search results). Tripadvisor reviews sync once a day and cannot be replied to from Sprout."
+}

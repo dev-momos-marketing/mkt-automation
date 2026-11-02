@@ -1,0 +1,18 @@
+{"name": "Praising.ai", "website": "https://praising.ai/",
+ "oneLiner": "Low-cost AI review management tool for local businesses, with review requests, AI-drafted replies and rating tracking, plus a restaurant version of its marketing.",
+ "bestFor": "Independent restaurants and small local businesses that want simple review collection and AI reply drafting at a low monthly price.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Review requests by email and text after a visit, with automatic reminders for customers who haven't clicked",
+  "Review links and QR codes for receipts, table tents and posters, plus a kiosk mode for a counter tablet",
+  "AI-drafted replies that the owner approves before posting",
+  "One inbox for reviews from Google, Yelp, Facebook, Tripadvisor and other sites",
+  "Tracking of review volume, rating trends and reply rates, with multi-location support",
+  "Review page in Spanish, French and other languages",
+  "Visibility section with Maps ranking and AI ranking",
+  "API and webhooks for connecting other systems"
+ ],
+ "pricing": {"text": "Core $19 per location per month, Growth $29, Pro $49; a free trial and no annual contract. Vendor pages disagree on trial length (7 or 14 days) and whether a card is needed.", "source": "https://praising.ai/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Only vendor sources found; no named customers, press coverage or third-party reviews. Changelog (praising.ai/changelog) lists recent features (text requests, reminders, languages, kiosk mode, Visibility, API/webhooks) but has no dates, so no dated updates were recorded. The current review calls it 'built specifically for restaurants'; most of its site describes a general local-business tool with restaurant landing pages, so that framing should be softened. Its pages say it does not connect directly to OpenTable, Resy, Toast or Square. Dropped 'auto-publish for reviews above a rating you choose' (vendor pages say nothing is posted until you approve; not confirmed). Pages disagree on whether low ratings are routed to a private form, so that was left out."}

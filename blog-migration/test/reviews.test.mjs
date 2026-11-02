@@ -29,6 +29,7 @@ test("sections splits a post at its H2 headings and numbers the reviews", () => 
 })
 
 test("labels reads the review's labels in order, including tool names with a colon", () => {
+    assert.deepEqual(labels("<li><strong>What you can do: </strong>x</li><li><strong>Why businesses choose Tattle:</strong> y</li><li><strong>Best for:</strong> z</li><p><strong>It’s best for:</strong></p><p><strong>Pricing: </strong>q</p>"), ["What you can do with", "Why … stands out", "It's best for", "It's best for", "Pricing"])
     assert.deepEqual(labels("<p><strong>What you can do with Re:amaze:</strong></p><p><strong>Why Re:amaze stands out:</strong> x</p>"), ["What you can do with", "Why … stands out"])
     assert.deepEqual(labels(original), ["What you can do with", "Why … stands out", "It's best for", "Pricing", "Website"])
 })

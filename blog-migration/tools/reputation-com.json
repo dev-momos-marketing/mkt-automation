@@ -1,0 +1,50 @@
+{
+ "name": "Reputation",
+ "website": "https://reputation.com/",
+ "oneLiner": "Enterprise reputation and customer experience platform (formerly Reputation.com) that combines reviews, listings, surveys, social and AI search visibility for multi-location brands.",
+ "bestFor": "Multi-location restaurant, hospitality, automotive and healthcare brands that need reviews, surveys and listings managed centrally with enterprise reporting.",
+ "customers": [
+  {
+   "name": "Tortilla",
+   "source": "https://reputation.com/resources/customer-stories/tortilla"
+  },
+  {
+   "name": "Mitchells & Butlers",
+   "source": "https://www.reputation.com/wp-content/uploads/2018/03/CaseStudy-Mitchells-And-Butlers-UK.pdf"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-01",
+   "text": "Expanded the platform with deeper customer insights features.",
+   "source": "https://www.businesswire.com/news/home/20250122508271/en/Reputation-Expands-Platform-to-Deliver-Deeper-Customer-Insights-and-Greater-Business-Impact"
+  },
+  {
+   "date": "2025-09",
+   "text": "Unveiled new AI-powered products and features for brand intelligence.",
+   "source": "https://businesswire.com/news/home/20250908114714/en/Reputation-Unveils-New-AI-Powered-Products-and-Features-for-Next-Level-Brand-Intelligence"
+  },
+  {
+   "date": "2026-05",
+   "text": "Launched Reputation IQ (plain-English questions across your data), an expanded AI Reputation Manager (how ChatGPT, Gemini and Perplexity present your brand) and AI Location Presence Insights.",
+   "source": "https://www.businesswire.com/news/home/20260504133971/en/Reputation-Launches-AI-Platform-That-Puts-Enterprise-Brands-in-Control-of-AI-Search-Representation"
+  }
+ ],
+ "features": [
+  "Review monitoring and response across Google, Yelp, Facebook, Tripadvisor and other sites from one inbox",
+  "Review requests by SMS, email and QR code, triggered by dine-in, delivery or POS events",
+  "Surveys and customer feedback alongside public reviews",
+  "Sentiment and text analytics that group feedback into themes such as service or cleanliness",
+  "Listings management for multi-location brands",
+  "Social listening and publishing",
+  "AI search visibility tools: AI Reputation Manager and AI Location Presence Insights",
+  "Reputation IQ for asking questions of your feedback data in plain English"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Reputation does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "renamed",
+ "notes": "Rebranded from Reputation.com to Reputation; still uses the reputation.com domain, HQ San Ramon, CA; marked its 20th year in March 2026. No acquisition of the company found. A CostBench page claims public plans of $80–$150/month and a February 2026 price cut; not confirmed on reputation.com and inconsistent with its enterprise sales model, so left out. Mitchells & Butlers case study dates from 2018. Dropped from the current review: the claim that its portfolio is 'primarily healthcare' (it also targets hospitality, automotive and others; not re-checked). Also copied to reputation-com.json."
+}

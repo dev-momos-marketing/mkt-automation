@@ -1,0 +1,49 @@
+{
+ "name": "Brand24",
+ "website": "https://brand24.com/",
+ "oneLiner": "AI social listening and media monitoring tool that tracks brand mentions across social media, news, blogs, forums, podcasts, video and review sites, with sentiment analysis and AI-visibility tracking.",
+ "bestFor": "Marketing teams and multi-location brands that want to catch online conversations and PR spikes early; it monitors mentions but is not a review-response tool.",
+ "customers": [
+  {
+   "name": "Pasibus (Polish fast-casual restaurant chain)",
+   "source": "https://brand24.com/case-study/pasibus/"
+  },
+  {
+   "name": "Satoria Group (hotels)",
+   "source": "https://brand24.com/blog/es/estudio-de-caso-el-grupo-satoria-monitoriza-sus-hoteles-en-las-redes-sociales/"
+  },
+  {
+   "name": "Uber",
+   "source": "https://brand24.com/case-study/uber-technologies/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-12",
+   "text": "Brand24 added an LLM Monitoring tab to its panel, integrating its Chatbeat tool to show how ChatGPT, Gemini and Claude describe and rank a brand (Brand Score, median position, AI share of voice, citing sources). Changelog entry is marked 'Dec' without a year; the LLM Listening blog post was updated January 13, 2026.",
+   "source": "https://updates.brand24.com/new-tab-llm-monitoring-monitor-your-ai-position-directly-in-the-brand24-panel-328678"
+  },
+  {
+   "date": "2026",
+   "text": "Brand24 launched an official ChatGPT app and an MCP server so users can query their mentions, sentiment, influencers and competitor data from ChatGPT, Claude and other AI assistants (exact launch month not confirmed).",
+   "source": "https://brand24.com/blog/brand24-chatgpt-app/"
+  }
+ ],
+ "features": [
+  "Mention tracking across social media, news sites, blogs, forums, podcasts, newsletters, video and review sites",
+  "AI sentiment analysis of mentions (positive, negative, neutral) and emotion analysis",
+  "Discussion volume and reach charts with alerts to spot spikes and potential PR crises early",
+  "Competitor comparison and share-of-voice analysis",
+  "Brand Assistant: a chat interface for asking questions about your mention data",
+  "AI visibility / LLM monitoring of how AI assistants mention and rank your brand (add-on on most plans)",
+  "Influencer identification from mention data",
+  "ChatGPT app and MCP server for querying data from AI assistants"
+ ],
+ "pricing": {
+  "text": "Five published plans: Individual $249/month ($199/month billed annually), Team $349 ($299), Pro $499 ($399), Business $699 ($599), Enterprise from $1,499/month billed annually. 14-day free trial; no free plan. Individual updates about every 12 hours; Pro and above update in real time.",
+  "source": "https://brand24.com/prices/",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Prices come from search snippets of brand24.com/prices (site not fetchable from this session). Dropped from the current review: old prices (Individual $79, Team $149, Pro $199, Enterprise $399 and the four-tier structure), '4,000 customers' (Brand24's own pages give inconsistent counts: 2400+, 4000+, 'thousands'), and Samsung, Wondery and Stanford as named customers (Samsung appears only as a monitored brand in a public Brand24 tool; Wondery/Stanford not confirmed). 'Proprietary Presence Score' not re-verified. AI Visibility is an add-on except on Enterprise, per a third-party pricing tracker. Founded 2011 in Poland not re-verified. Still fits as a listening tool, but it is not a review management platform."
+}
