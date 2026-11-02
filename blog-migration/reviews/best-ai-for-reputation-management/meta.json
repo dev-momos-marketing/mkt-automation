@@ -1,8 +1,18 @@
 {
  "fields": {
   "Description": [
-   ["The 16 best AI-powered reputation management software", "The 12 best AI-powered reputation management software"],
-   ["includes Momos, Marqii, ReviewTrackers, Birdeye, OvationUp, Podium, and many more", "includes Momos, Birdeye, Podium, ReviewTrackers, Yext, Chatmeter, and many more"]
+   [
+    "The 16 best AI-powered reputation management software",
+    "The 12 best AI-powered reputation management software"
+   ],
+   [
+    "includes Momos, Marqii, ReviewTrackers, Birdeye, OvationUp, Podium, and many more",
+    "includes Momos, Birdeye, ReviewTrackers, Yext, OvationUp, Malou, and many more"
+   ]
   ]
+ },
+ "swap": {
+  "3": "OvationUp",
+  "12": "Malou"
  }
 }
