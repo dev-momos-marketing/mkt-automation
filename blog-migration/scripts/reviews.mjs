@@ -51,7 +51,9 @@ export function checkReview(html, { original, facts = "", others = [], swap = ""
     }
     for (const m of String(original).matchAll(/⟦embed:([\w-]+)⟧/g)) if (!html.includes(m[0])) problems.push(`the embed ${m[1]} is missing`)
     // Framer stores links to the site as relative paths ("../blog/x"), so compare them as paths.
-    const norm = href => href.replace(/^https?:\/\/(www\.)?momos\.com/, "").replace(/^\.\.\//, "/").replace(/^\.\//, "/blog/").replace(/\/$/, "")
+    // External links may be stored without "https://" or "www." ("reputation.com"), so compare those
+    // without them too.
+    const norm = href => href.replace(/^https?:\/\/(www\.)?momos\.com/, "").replace(/^\.\.\//, "/").replace(/^\.\//, "/blog/").replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "")
     const mineLinks = new Set([...String(html).matchAll(/href="([^"]+)"/g)].map(m => norm(m[1])))
     if (!swap) for (const m of String(original).matchAll(/href="([^"]+)"/g)) if (!mineLinks.has(norm(m[1]))) problems.push(`the link ${m[1]} is missing`)
 
