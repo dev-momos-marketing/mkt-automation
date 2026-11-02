@@ -1,0 +1,26 @@
+{"name": "Kustomer", "website": "https://www.kustomer.com/",
+ "oneLiner": "AI-native customer service platform and CRM that organizes every conversation into one customer timeline, with AI Agents for customers, reps and leaders. Independent again after Meta divested it in 2023.",
+ "bestFor": "Consumer brands with high contact volumes and order-related questions that want AI and agents working from the full customer history.",
+ "customers": [
+  {"name": "Everlane", "source": "https://www.kustomer.com/customers/everlane/"},
+  {"name": "Jerome's Furniture", "source": "https://www.kustomer.com/customers/jeromes-furniture/"},
+  {"name": "Daily Harvest", "source": "https://www.kustomer.com/customers/"},
+  {"name": "HexClad", "source": "https://www.kustomer.com/customers/"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Launched Kustomer AI, a standalone enterprise AI platform that sits on top of existing helpdesks, starting with Zendesk.", "source": "https://www.globenewswire.com/news-release/2026/03/10/3252923/0/en/Kustomer-Launches-Standalone-Enterprise-AI-Platform-to-Modernize-Existing-Helpdesks.html"},
+  {"date": "2025-12", "text": "Added AI Assistants, including a generally available automation assistant and an observability assistant in early access.", "source": "https://www.kustomer.com/resources/blog/winter-2025-product-releases/"},
+  {"date": "2025-08", "text": "Raised a $30M Series B led by Norwest to build out its AI-native platform.", "source": "https://markets.financialcontent.com/lightport.lightport5/article/bizwire-2025-8-7-kustomer-raises-30m-to-lead-the-ai-native-future-of-customer-experience"}
+ ],
+ "features": [
+  "Unified customer timeline with orders and past conversations",
+  "Email, chat, voice, SMS and social messaging in one workspace",
+  "AI Agents for customers: automated answers and actions around the clock",
+  "AI for reps: suggested replies, summaries and next steps",
+  "AI Voice for phone support",
+  "Workflow builder and AI-based routing and prioritization",
+  "Data connections to commerce and order systems",
+  "Analytics and AI observability for leaders"
+ ],
+ "pricing": {"text": "Custom pricing. Kustomer quotes per seat or per conversation; third-party guides disagree on whether older list prices still apply.", "source": null, "checked": "2026-11"},
+ "notes": "kustomer.com could not be fetched; facts from search results. Dropped the original $89/user/month price (third-party only, July 2026 guide says quote-based). Daily Harvest and HexClad appear on the Kustomer customers page; their metrics were not verified and are not used. Unverified blog claim about an April 2026 AI agent relaunch dropped."}

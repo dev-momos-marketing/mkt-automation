@@ -1,0 +1,26 @@
+{"name": "Thanx", "website": "https://www.thanx.com/",
+ "oneLiner": "Guest engagement platform for restaurant brands: card-linked and app-based loyalty, CRM, marketing automation, first-party web and app ordering, and AI agents (ThanxAI, SegmentAI, RecoveryAI).",
+ "bestFor": "Emerging and mid-sized multi-unit restaurant brands that want a flexible loyalty program, owned ordering and automated guest marketing.",
+ "customers": [
+  {"name": "Velvet Taco", "source": "https://www.thanx.com/customers/velvet-taco"},
+  {"name": "Taco Bueno", "source": "https://thanx.com/case-studies/taco-bueno"},
+  {"name": "Salt & Straw", "source": "https://www.thanx.com/case-studies/salt-and-straw"},
+  {"name": "The Big Greek Cafe", "source": "https://restauranttechnologynews.com/2026/09/the-big-greek-cafe-taps-deliverect-and-thanx-to-power-digital-ordering-and-loyalty-across-u-s-locations/"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Thanx and Deliverect announced a partnership for integrated first-party ordering and loyalty, with Deliverect supplying order management and Thanx the loyalty, marketing and ordering front end.", "source": "https://www.deliverect.com/press/deliverect-thanx-partnership"},
+  {"date": "2026-06", "text": "Integration with Kea, an AI phone-ordering system, so guests who order by phone can enroll in loyalty and earn points.", "source": "https://www.01net.it/thanx-and-kea-bring-guest-recognition-to-the-phone-channel/"},
+  {"date": "2026-07", "text": "Launched RecoveryAI, an AI agent that wins back guests after a bad digital ordering experience, priced on performance (brands pay when a guest returns). Its second AI product after SegmentAI, a natural-language segment builder.", "source": "https://techintelpro.com/news/marketing/customer-engagement/thanx-launches-recoveryai-to-boost-restaurant-guest-retention"}
+ ],
+ "features": [
+  "Card-linked loyalty that recognizes guests by payment card in store and online",
+  "Points, tiers and non-discount rewards (Access Pass: experiences, secret menu items, early access)",
+  "Self-serve program changes and offer management",
+  "Automated lifecycle campaigns, including winback of lapsed guests",
+  "SegmentAI: build guest segments by describing them in plain language",
+  "RecoveryAI: AI agent that follows up after a poor digital order",
+  "Branded app and Thanx Web first-party ordering",
+  "POS and ordering integrations (Toast, Deliverect, Kea phone ordering)"
+ ],
+ "pricing": {"text": "Custom pricing; Thanx does not publish prices. Quotes depend on number of locations, unit volume and modules.", "source": null, "checked": "2026-11"},
+ "notes": "thanx.com could not be fetched from this session; facts come from search results of thanx.com pages, Deliverect, and trade press. Dropped original claims: Velvet Taco 'close to 40% of revenue' through loyalty and 'average client around 20%' (could not verify), and 'multi-year contracts with separate support fees' (unverified). The SegmentAI/RecoveryAI order comes from the RecoveryAI release. Deliverect press dated March 2-3, 2026. ThanxAI agentic marketing was announced in the September 2025 product update for Q4 2025 launch."}

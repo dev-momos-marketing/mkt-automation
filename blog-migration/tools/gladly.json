@@ -1,0 +1,23 @@
+{"name": "Gladly", "website": "https://www.gladly.com/",
+ "oneLiner": "People-centered customer service platform, now positioned as an agentic commerce platform, that keeps one lifelong conversation per customer across channels and adds Gladly AI.",
+ "bestFor": "Mid-market and enterprise consumer brands, including hospitality, that run high-touch service across voice and digital channels.",
+ "customers": [
+  {"name": "JOANN", "source": "https://www.gladly.com/customers/joann/"},
+  {"name": "Rothy's", "source": "https://gladly.com/customer-spotlight"},
+  {"name": "Ulta Beauty", "source": "https://gladly.com/blog/how-top-2023-customer-service-brands-use-gladly"}
+ ],
+ "updates": [
+  {"date": "2026-05", "text": "Announced agentic commerce capabilities at its Gladly Connect Live conference: one AI system that handles sales questions (such as sizing) and service requests (such as exchanges) from pre-purchase discovery to post-sale retention.", "source": "https://pr.portlandtribune.com/article/Gladly-Announces-Agentic-Commerce-Capabilities-at-Gladly-Connect-Live/69fb7b71d56b553ce63b3e7b"},
+  {"date": "2026-06", "text": "Blog post describing the next version of the platform, where AI handles conversations, assists agents and resolves requests across channels.", "source": "https://www.gladly.ai/blog/the-power-of-and/"}
+ ],
+ "features": [
+  "One lifelong conversation thread per customer across voice, email, chat, SMS and social",
+  "Customer profile with full history and order data visible to agents",
+  "Gladly AI that answers and resolves customer requests across channels",
+  "AI assistance for human agents during conversations",
+  "Self-service help center content used by the AI",
+  "People-based routing and queues",
+  "Reporting on team performance and customer satisfaction"
+ ],
+ "pricing": {"text": "Custom pricing; Gladly does not publish prices (third-party sites estimate per-user packages, unverified).", "source": null, "checked": "2026-11"},
+ "notes": "Gladly's site and blog now also live at gladly.ai; the original Website link (gladly.com) was kept. Third-party price estimates (about $180-$210 per user per month, AI billed per resolved conversation) were not used because Gladly does not publish them. A third-party guide says Gladly AI hands off non-English conversations by default; not used. Vendor-reported case-study metrics left out."}

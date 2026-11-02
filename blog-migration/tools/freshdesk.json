@@ -1,0 +1,25 @@
+{"name": "Freshdesk", "website": "https://freshdesk.com/",
+ "oneLiner": "Freshworks' AI-powered helpdesk for ticketing across email, chat, phone and social, with Freddy AI agents, copilot and insights. Freshdesk Omni is the omnichannel edition.",
+ "bestFor": "Small and mid-size teams that want an affordable multichannel helpdesk with AI self-service they can grow into.",
+ "customers": [
+  {"name": "Decathlon", "source": "https://www.freshworks.com/freshdesk/resources/case-study/decathlon/"},
+  {"name": "Bridgestone", "source": "https://www.freshworks.com/customers/stories/bridgestone/"},
+  {"name": "Body & Fit", "source": "https://www.freshworks.com/customers/stories/body-fit/"},
+  {"name": "Dineout", "source": "https://iotone.com/case-study/dineout-enhances-customer-service-experience-with-freshworks/c2438"}
+ ],
+ "updates": [
+  {"date": "2025-11", "text": "At Refresh, Freshworks launched the Freshdesk Command Center (one workspace for multichannel conversations with Freddy AI Copilot built in), Vertical AI Agents for ecommerce, fintech, travel and logistics with 50+ prebuilt workflows in Freddy AI Agent Studio, and Freddy AI Insights.", "source": "https://siliconangle.com/2025/11/13/freshworks-adds-new-ai-upgrades-freshservice-freshdesk-cut-service-complexity/"},
+  {"date": "2025-06", "text": "Freddy AI Agent Studio, a no-code tool to build, test and monitor AI agents.", "source": "https://itbrief.co.uk/story/freshworks-launches-freddy-ai-agent-studio-for-autonomous-support"}
+ ],
+ "features": [
+  "Ticketing from email, chat, phone and social in one inbox",
+  "Freddy AI Agent for automated answers on chat and email, built in AI Agent Studio",
+  "Freddy AI Copilot: summaries, suggested replies and next actions (add-on on Pro and Enterprise)",
+  "Freddy AI Insights for trends and anomaly alerts",
+  "Automations for assignment, SLAs and follow-ups",
+  "Self-service portal and knowledge base",
+  "Team collaboration with private notes, shared ownership and parent-child tickets",
+  "Integrations such as Shopify, Stripe and FedEx for order lookups"
+ ],
+ "pricing": {"text": "Growth $19, Pro $55 and Enterprise $89 per agent per month, billed annually. Freddy AI Copilot is an add-on; AI Agent sessions are sold in packs.", "source": "https://www.freshworks.com/freshdesk/pricing/", "checked": "2026-11"},
+ "notes": "freshworks.com could not be fetched from this session; prices come from a search of the official pricing page (snippet) and match several 2026 third-party guides, which say prices rose in 2026 from $15/$49/$79. The free plan (original said up to 10 agents) is no longer clearly offered; sources conflict, so it is left out. Dineout case study is hosted on third-party sites (iotone), not freshworks.com. Original 'reducing manual workload significantly' dropped."}

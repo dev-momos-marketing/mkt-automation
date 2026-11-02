@@ -1,0 +1,23 @@
+{"name": "Tidio", "website": "https://www.tidio.com/",
+ "oneLiner": "Customer service platform for small and midsize businesses combining live chat, the Lyro AI agent, Flows automation and a help desk.",
+ "bestFor": "Small and midsize businesses, including restaurants, that want a website chat widget with an AI agent and no coding.",
+ "customers": [
+  {"name": "Suitor", "source": "https://www.tidio.com/blog/suitor-case-study/"},
+  {"name": "Gecko Hospitality", "source": "https://www.tidio.com/blog/gecko-hospitality-case-study/"},
+  {"name": "Pastreez", "source": "https://www.tidio.com/blog/pastreez-case-study/"}
+ ],
+ "updates": [
+  {"date": "2026-10", "text": "Tidio reported that Lyro ranked first in the default view of G2's AI CX Agent Evaluations (as of October 7, 2026), with the highest policy-compliance score among the agents evaluated.", "source": "https://www.tidio.com/blog/lyro-ai-cx-agent-g2-evaluations/"},
+  {"date": "undated", "text": "Lyro extended to email ticketing (Tidio product news; no date confirmed, not used in review).", "source": "https://www.tidio.com/blog/category/product-news/"}
+ ],
+ "features": [
+  "Live chat widget for websites with mobile and desktop apps for agents",
+  "Lyro AI agent that answers questions from your knowledge base and website",
+  "Lyro handoff to a human agent",
+  "Flows: visual no-code automation for greetings, lead capture and FAQs",
+  "Help desk ticketing for email, with Lyro on email tickets",
+  "Integrations with Instagram, Messenger and WhatsApp",
+  "Analytics on conversations and AI resolutions"
+ ],
+ "pricing": {"text": "Free plan available; Starter $24.17 per month billed annually ($29 monthly); Growth from $49.17 per month billed annually; Plus custom; Lyro AI agent sold as an add-on based on AI conversations.", "source": "https://www.tidio.com/pricing/", "checked": "2026-11"},
+ "notes": "tidio.com could not be fetched from this session; prices come from search snippets of tidio.com/pricing and 2026 pricing guides. Original's '$24/month' updated to $24.17 annually. The G2 ranking is reported by Tidio itself. Messaging integrations (Instagram, Messenger, WhatsApp) not re-verified and kept out of the review."}

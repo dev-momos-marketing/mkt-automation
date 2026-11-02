@@ -1,0 +1,24 @@
+{"name": "LiveAgent",
+ "website": "https://www.liveagent.com/",
+ "oneLiner": "All-in-one help desk from Quality Unit with live chat, ticketing, a built-in call center, social channels and an AI chatbot.",
+ "bestFor": "Small and mid-size teams that want chat, email, phone and social support plus AI in one affordable help desk.",
+ "customers": [
+  {"name": "Huawei", "source": "https://www.liveagent.com/success-stories/liveagent-huawei/"},
+  {"name": "Slido", "source": "https://www.liveagent.com/customers"},
+  {"name": "FrëschKëscht", "source": "https://www.casestudies.com/company/liveagent/case-study/freschkescht-customer-case-study"}
+ ],
+ "updates": [
+  {"date": "2025-03", "text": "LiveAgent rolled out its AI Chatbot (powered by FlowHunt, also built by Quality Unit) in Q1 2025; it runs from the existing chat button with no separate widget.", "source": "https://liveagent.com/blog/liveagent-monthly-updates-march-edition-2025"},
+  {"date": "2025-08", "text": "LiveAgent announced an AI Answer Generator in its August 2025 monthly update.", "source": "https://cdn.liveagent.com/blog/liveagent-2025-wrap-up/"}
+ ],
+ "features": [
+  "Universal inbox for email, live chat, phone and social messages",
+  "Built-in call center with IVR, call routing and call recording",
+  "AI Chatbot that answers from your content and detects the customer's language",
+  "AI Answer Improver writing assistant for agents",
+  "Knowledge base and customer portal",
+  "Automation rules, ticket distribution and SLAs",
+  "Real-time reports on agent performance"
+ ],
+ "pricing": {"text": "Starter from $15/agent/month billed annually (promotional $11 until November 22, 2026); Team $29, Business $49 per agent/month regular annual prices; Enterprise flat $3,199/month billed annually for 80 agents. Free trial; no free plan per third-party sources.", "source": "https://www.liveagent.com/pricing/", "checked": "2026-11"},
+ "notes": "liveagent.com could not be fetched; pricing from search snippets of the pricing page (tier names changed from Small/Medium/Large to Starter/Team/Business). Original said 'Free plan available' — CostBench says no free plan as of August 2026, so dropped. Dropped 'fastest live chat widget' claim (unverifiable). AI Answer Generator date is from the 2025 wrap-up summary of the August 2025 update."}
