@@ -1,0 +1,24 @@
+{"name": "Zoho Desk",
+ "website": "https://www.zoho.com/desk",
+ "oneLiner": "Multichannel help desk in the Zoho suite with ticketing, self-service portals, automation and the Zia AI assistant.",
+ "bestFor": "Budget-conscious support teams, especially those already using Zoho CRM or other Zoho apps.",
+ "customers": [
+  {"name": "Summerfield Resources", "source": "https://www.zoho.com/desk/customers/summerfield.html"},
+  {"name": "RJG Inc.", "source": "https://www.zoho.com/sites/zweb/images/desk/rjg_inc-zoho_desk_case_study-customer-f_1.pdf"},
+  {"name": "Mercedes-Benz India", "source": "https://www.casestudies.com/company/zoho-desk"}
+ ],
+ "updates": [
+  {"date": "2025-07", "text": "Zoho launched its own Zia LLM plus Zia Agents, a no-code Agent Studio, an agent marketplace and an MCP server across its apps.", "source": "https://secure.businesswire.com/news/home/20250717118204/en/Zoho-Launches-Zia-LLM-and-Deepens-AI-Portfolio-with-Prebuilt-Agents-Custom-Agent-Builder-MCP-and-Marketplace"},
+  {"date": "2026-07", "text": "From 7 July 2026 Zia AI features such as sentiment analysis, auto tags and Zia notifications were extended to all paid Zoho Desk editions (Standard and above).", "source": "https://help.zoho.com/portal/en/community/topic/more-zia-ai-capabilities-are-included-across-additional-zoho-desk-editions"}
+ ],
+ "features": [
+  "Tickets from email, phone, live chat, social media and web forms in one view",
+  "Zia AI: sentiment analysis, auto tags, reply suggestions, anomaly alerts",
+  "Answer Bot and self-service help center / portal",
+  "Assignment rules, SLAs, escalations and Blueprint workflows",
+  "CSAT surveys and agent performance reports",
+  "Integration with Zoho CRM, Zoho Analytics and other Zoho apps",
+  "Mobile apps for agents"
+ ],
+ "pricing": {"text": "Free plan for up to 3 agents. Paid plans start at $7/agent/month (Express, up to 5 agents), with Standard at $14/agent/month, billed annually.", "source": "https://www.zoho.com/desk/pricing.html", "checked": "2026-11"},
+ "notes": "zoho.com could not be fetched; prices are the consensus of several 2026 third-party pricing guides that describe Zoho's published page, so a reviewer should confirm on zoho.com/desk/pricing.html (prices vary by region). Mercedes-Benz India is listed on casestudies.com's Zoho Desk page; I couldn't open Zoho's own story. The Zia LLM launch was suite-wide; Desk-specific availability of Zia Agents wasn't confirmed, so the review describes it as a Zoho-wide launch."}

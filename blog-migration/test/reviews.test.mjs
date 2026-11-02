@@ -41,6 +41,8 @@ test("checkReview reports missing assets, wrong labels, a missing list, unsource
     const problems = checkReview(bad, { original, facts: "2026", others: ["zendesk is a service suite used by many teams around the globe"] }).join("\n")
     for (const part of ["image", "labels should be Notable customers", "$49"]) assert.ok(problems.includes(part), part)
     assert.equal(sharedRuns("<p>one two three four five six seven eight nine</p>", ["x one two three four five six seven eight y"]).length, 1)
+    const label = good.replace("What you can do with Zendesk:", "What you can do with Salesforce Service Cloud:")
+    assert.doesNotMatch(checkReview(label, { original: original.replace("What you can do with Zendesk:", "What you can do with Salesforce Service Cloud:"), facts: "2026", others: ["What you can do with Salesforce Service Cloud: route cases"] }).join(), /runs of 8 words/)
     assert.match(checkReview(good.replace(/<ul>[\s\S]*<\/ul>/, ""), { original, facts: "2026" }).join(), /features should be a <ul>/)
     assert.match(checkReview(good.replace('href="https://www.zendesk.com/"', 'href="https://x.com"'), { original, facts: "2026" }).join(), /link https:\/\/www.zendesk.com\/ is missing/)
 })

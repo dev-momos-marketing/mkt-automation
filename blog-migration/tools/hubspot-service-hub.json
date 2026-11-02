@@ -1,0 +1,24 @@
+{"name": "HubSpot Service Hub",
+ "website": "https://www.hubspot.com/products/service",
+ "oneLiner": "Customer service software on the HubSpot CRM: help desk, tickets, knowledge base, customer portal, feedback surveys and the Breeze Customer Agent AI.",
+ "bestFor": "Teams that already use HubSpot for marketing or sales and want support conversations on the same customer record.",
+ "customers": [
+  {"name": "Twelve (ordering and payments app; partner case study)", "source": "https://www.webs.nl/en/case-study/twelve"},
+  {"name": "Sesame HR", "source": "https://www.cxtoday.com/ai-automation-in-cx/hubspot-ai-agents-customer-agent-data-agent-cx-results/"},
+  {"name": "Unific", "source": "https://blog.hubspot.com/customers/unific-customer-happiness-service-hub"}
+ ],
+ "updates": [
+  {"date": "2025-06", "text": "Breeze Customer Agent made available to all Pro and Enterprise customers across hubs through HubSpot Credits, covering the whole buyer journey; HubSpot said it helped customers resolve over 50% of support tickets.", "source": "https://www.hubspot.com/company-news/customer-agent-expansion"},
+  {"date": "2026-06", "text": "Help desk gained assignment-workflow routing (e.g. VIP or language-based routing, conditional Customer Agent handoffs) and a Coaching Opportunities page for Customer Agent.", "source": "https://community.hubspot.com/t/june-2026-product-updates/151744"}
+ ],
+ "features": [
+  "Help desk workspace for email, chat, WhatsApp, Facebook Messenger and calling channels",
+  "Breeze Customer Agent AI that answers from your knowledge base and hands off to people",
+  "Knowledge base and customer portal for self-service",
+  "Ticket routing, SLAs and automation workflows",
+  "NPS, CSAT and CES feedback surveys",
+  "Every conversation logged on the shared HubSpot CRM record",
+  "Reporting dashboards for support teams"
+ ],
+ "pricing": {"text": "Free tools available. Paid plans are per seat: HubSpot's pricing page lists Professional at $90/seat/month and Enterprise at $150/seat/month; the Starter rate changes with promotions, so check the page. AI agent usage draws on HubSpot Credits.", "source": "https://www.hubspot.com/pricing/service", "checked": "2026-11"},
+ "notes": "hubspot.com could not be fetched; prices come from search snippets of the official page. Starter price conflicts across sources ($7, $15, $20 per seat), so the review doesn't quote it. The original's $15/seat Starter price was dropped. Calling channel requires Professional or Enterprise. Twelve is a partner-written (Webs) case study."}

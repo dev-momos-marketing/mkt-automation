@@ -71,7 +71,9 @@ export function checkReview(html, { original, facts = "", others = [] }) {
         if (/^\d{1,2}$/.test(bare) && Number(bare) <= 20) continue
         if (!facts.includes(bare.replace(/^\$/, "")) && !facts.includes(bare)) problems.push(`"${bare}" isn't in the fact sheet`)
     }
-    const shared = sharedRuns(html, others)
+    // Labels are the same in every review ("What you can do with Salesforce Service Cloud:"), so
+    // they don't count toward the uniqueness check.
+    const shared = sharedRuns(String(html).replace(/<strong>[^<]{2,80}:<\/strong>|<strong>[^<]{2,80}<\/strong>:/g, " "), others)
     if (shared.length) problems.push(`${shared.length} runs of 8 words appear in other reviews, e.g. "${shared[0]}"`)
     problems.push(...checkPost(html.replace(/<p>\s*<br>\s*<\/p>/g, ""), { embeds: new Map([...html.matchAll(/⟦embed:([\w-]+)⟧/g)].map(m => [m[1], ""])), paths: { has: () => true } }))
     return [...new Set(problems)]
