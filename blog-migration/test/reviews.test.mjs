@@ -58,3 +58,9 @@ test("every review in reviews/ is well-formed HTML", async () => {
         }
     }
 })
+
+test("checkReview lets a different tool take a slot with swap, keeping the label order", () => {
+    const ada = good.replace("2. Zendesk", "2. Ada").replace(/<img[^>]*>\n/, "").replace('href="https://www.zendesk.com/">Zendesk', 'href="https://www.ada.cx/">Ada').replaceAll("Zendesk", "Ada")
+    assert.match(checkReview(ada, { original, facts: "2026" }).join(), /heading should be "2. Zendesk"/)
+    assert.deepEqual(checkReview(ada, { original, facts: "2026", swap: "2. Ada" }), [])
+})

@@ -34,18 +34,21 @@ export function sharedRuns(html, others, n = 8) {
 
 // Everything that breaks the rules for a rewritten review. `original` is the section it replaces,
 // `facts` the tool's fact sheet (a number must appear in it), `others` other reviews' text.
-export function checkReview(html, { original, facts = "", others = [] }) {
+// `swap` is the heading of a different tool taking this slot ("13. Ada"): the old tool's image and
+// links don't carry over, but the slot keeps its number and the post's label order.
+export function checkReview(html, { original, facts = "", others = [], swap = "" }) {
     const problems = []
     const [orig] = sections(original), [mine] = sections(html)
-    if (!orig || mine.heading !== orig.heading) problems.push(`the heading should stay "${orig?.heading}", it's "${mine?.heading}"`)
-    for (const src of String(original).match(/<img\b[^>]*\bsrc="([^"?]+)/g)?.map(s => s.match(/src="([^"?]+)/)[1]) ?? []) {
+    const heading = swap || orig?.heading
+    if (!orig || mine.heading !== heading) problems.push(`the heading should be "${heading}", it's "${mine?.heading}"`)
+    for (const src of swap ? [] : String(original).match(/<img\b[^>]*\bsrc="([^"?]+)/g)?.map(s => s.match(/src="([^"?]+)/)[1]) ?? []) {
         if (!html.includes(src)) problems.push(`the image ${src} is missing`)
     }
     for (const m of String(original).matchAll(/⟦embed:([\w-]+)⟧/g)) if (!html.includes(m[0])) problems.push(`the embed ${m[1]} is missing`)
     // Framer stores links to the site as relative paths ("../blog/x"), so compare them as paths.
     const norm = href => href.replace(/^https?:\/\/(www\.)?momos\.com/, "").replace(/^\.\.\//, "/").replace(/^\.\//, "/blog/").replace(/\/$/, "")
     const mineLinks = new Set([...String(html).matchAll(/href="([^"]+)"/g)].map(m => norm(m[1])))
-    for (const m of String(original).matchAll(/href="([^"]+)"/g)) if (!mineLinks.has(norm(m[1]))) problems.push(`the link ${m[1]} is missing`)
+    if (!swap) for (const m of String(original).matchAll(/href="([^"]+)"/g)) if (!mineLinks.has(norm(m[1]))) problems.push(`the link ${m[1]} is missing`)
 
     const want = labels(original).filter(l => !["Notable customers", "What's new"].includes(l))
     const at = want.indexOf("What you can do with") >= 0 ? want.indexOf("What you can do with") : want.indexOf("Key features")

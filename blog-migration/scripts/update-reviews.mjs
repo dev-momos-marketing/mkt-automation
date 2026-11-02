@@ -1,8 +1,9 @@
 // Rewrites tool reviews in "best software" posts (see scripts/reviews.mjs). For each post folder in
 // reviews/:
 //   <NN>-<tool>.html  replaces the section from the "NN. Tool" heading to the next heading
-//   meta.json         {"fields": {"Title": [[from, to]]}, "text": [[from, to]]}: exact text fixes in
-//                     string fields and in the rest of the post (e.g. "24 Best" → "18 Best")
+//   meta.json         {"fields": {"Title": [[from, to]]}, "text": [[from, to]], "swap": {"13": "Ada"}}:
+//                     exact text fixes in string fields and in the rest of the post (e.g. "24 Best" →
+//                     "18 Best"), and slots where a different tool replaces the reviewed one
 //   embeds/<ID>.html  replaces that embed's code in the Embeds field
 // Each review is checked first: same heading, images, embeds and links as the section it replaces,
 // the label order, a features list, numbers found in tools/<tool>.json, and no 8-word run shared with
@@ -60,7 +61,8 @@ try {
             if (!facts) { problems.push(`${slug}: no tools/${review.tool}.json for ${review.file}`); continue }
             const others = allReviews.filter(r => !(r.slug === slug && r.n === review.n)).map(r => r.text)
                 .concat([...plans.values()].flatMap(p => p.reviews).filter(r => r !== review).map(r => flat(r.html)))
-            const found = checkReview(review.html, { original: parts[at].html, facts, others })
+            const swap = plan.meta.swap?.[String(review.n)] ? `${review.n}. ${plan.meta.swap[String(review.n)]}` : ""
+            const found = checkReview(review.html, { original: parts[at].html, facts, others, swap })
             if (found.length) { problems.push(...found.map(p => `${slug}/${review.file}: ${p}`)); continue }
             parts[at] = { ...parts[at], html: review.html.trim().replace(/>\s*\n\s*</g, "><") }
             changed.push(review.file)
