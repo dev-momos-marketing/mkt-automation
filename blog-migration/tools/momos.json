@@ -1,0 +1,26 @@
+{
+ "name": "Momos",
+ "website": "https://www.momos.com",
+ "oneLiner": "AI guest experience platform for multi-location restaurant brands: AI agents, review management, a Unified Inbox, surveys, recovery and insights.",
+ "bestFor": "Multi-location restaurant brands that want guest support, reviews and recovery handled across every location from one place.",
+ "customers": [
+  {"name": "Papa Murphy's", "source": "https://www.momos.com/case-studies/papa-murphys-turns-guest-feedback-into-2m-in-recovered-revenue"},
+  {"name": "Potbelly", "source": "https://www.momos.com/case-studies/potbelly"},
+  {"name": "Condado Tacos", "source": "https://www.momos.com/case-studies/condado-tacos"},
+  {"name": "Caribou Coffee", "source": "https://www.momos.com/case-studies/caribou-coffee-achieves-61-more-google-reviews-and-boosts-revenue-across-57-locations"}
+ ],
+ "updates": [
+  {"date": "2025-12", "text": "2025 releases included AI copilots, AI ticket summaries, AI brand guidelines, mobile-first reports, and integrations with Paytronix, Square and Otter.", "source": "https://www.momos.com/blog/momos-guest-ai-2025-year-in-review"},
+  {"date": "2025", "text": "Potbelly partnered with Momos in 2025 to bring reviews, cases and guest messages across 472 locations into one view.", "source": "https://www.momos.com/case-studies/potbelly"}
+ ],
+ "features": [
+  "Alfie, the Experience Agent, replies to guests in minutes, remembers visit history and preferences, and is trained on the brand voice.",
+  "Alfie issues points, coupons and offers directly from the loyalty platform.",
+  "Works across website chat, in-app support, surveys, delivery apps and inbound enquiries, with escalation to the team when needed.",
+  "Unified Inbox centralizes Google reviews, App Store feedback, social DMs and POS data, with AI triage and smart routing.",
+  "Real-time translation and localized responses.",
+  "Papa Murphy's: $2M+ in recovered revenue via offers and 97.7% automation of review replies, across 1,000+ locations."
+ ],
+ "pricing": {"text": "Custom pricing; book a demo.", "source": "https://www.momos.com/book-a-demo", "checked": "2026-11"},
+ "notes": "Dropped the old claim about Burger King, Shake Shack and 30,000+ locations: not on momos.com. momos.com says 20,000+ locations and 600+ brands."
+}

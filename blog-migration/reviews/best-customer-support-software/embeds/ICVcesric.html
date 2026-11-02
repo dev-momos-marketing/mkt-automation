@@ -1,0 +1,154 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Poppins',sans-serif}
+.wrap{font-family:'Poppins',sans-serif;font-size:15px;color:#222}
+.filter-bar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px;align-items:flex-end}
+.filter-group{display:flex;flex-direction:column;gap:4px;flex:1;min-width:160px}
+.filter-group label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.07em;color:#888}
+.filter-group select{font-family:'Poppins',sans-serif;font-size:13px;padding:8px 12px;border:1px solid #E0E0E0;border-radius:6px;background:#fff;color:#222;cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px}
+.filter-group select:focus{outline:none;border-color:#D73E33}
+.reset-btn{font-family:'Poppins',sans-serif;font-size:12px;font-weight:600;padding:8px 14px;background:#fff;border:1px solid #D73E33;color:#D73E33;border-radius:6px;cursor:pointer;white-space:nowrap;align-self:flex-end}
+.reset-btn:hover{background:#FDF2F2}
+.count-bar{font-size:12px;color:#888;margin-bottom:10px}
+.count-bar span{font-weight:600;color:#D73E33}
+table{width:100%;border-collapse:collapse;border:1px solid #E0E0E0;border-radius:12px;overflow:hidden;box-shadow:0px 4px 15px rgba(0,0,0,0.08)}
+thead tr{background:#D73E33}
+th{text-align:left;padding:13px 16px;font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:rgba(255,255,255,0.85)}
+th:not(:first-child){border-left:1px solid rgba(255,255,255,0.15)}
+.th-num{width:48px;text-align:center}
+tbody tr:nth-child(odd){background:#FAFAFA}
+tbody tr:nth-child(even){background:#fff}
+tbody tr:hover{background:#FDF2F2}
+tbody tr{border-bottom:1px solid #EFEFEF}
+tbody tr.momos-row{background:#FDF2F2 !important}
+tbody tr.momos-row:hover{background:#fce8e8 !important}
+td{padding:13px 16px;vertical-align:top}
+td:not(:first-child){border-left:1px solid #EFEFEF}
+.num-cell{text-align:center;font-size:12px;font-weight:700;color:#bbb}
+.momos-row .num-cell{color:#D73E33}
+.name-cell{display:flex;align-items:center;gap:7px;flex-wrap:wrap}
+.soft-link{font-weight:600;color:#D73E33;text-decoration:underline;text-underline-offset:3px;font-size:14px}
+.badge{display:inline-flex;align-items:center;gap:3px;font-size:9px;font-weight:700;padding:2px 7px;border-radius:4px;text-transform:uppercase;letter-spacing:0.06em;white-space:nowrap}
+.badge-top{background:#D73E33;color:#fff}
+.cell-desc{font-size:13px;color:#222;line-height:1.45;font-weight:500}
+.tag{display:inline-block;font-size:10px;font-weight:500;padding:2px 7px;border-radius:4px;margin:2px 2px 0 0;background:#F5F5F5;color:#555;border:1px solid #E8E8E8}
+.no-results{text-align:center;padding:40px;color:#888;font-size:14px}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+<div class="wrap">
+<div class="filter-bar">
+  <div class="filter-group">
+    <label>Industry Served</label>
+    <select id="f-industry">
+      <option value="">All industries</option>
+      <option value="restaurant">Restaurant / Hospitality</option>
+      <option value="ecommerce">E-commerce / Retail</option>
+      <option value="saas">SaaS / Tech</option>
+      <option value="healthcare">Healthcare</option>
+      <option value="finance">Finance / Fintech</option>
+      <option value="enterprise">Enterprise / All industries</option>
+    </select>
+  </div>
+  <div class="filter-group">
+    <label>Key Feature</label>
+    <select id="f-feature">
+      <option value="">All features</option>
+      <option value="live-chat">Live chat</option>
+      <option value="ticketing">Ticketing system</option>
+      <option value="ai">AI / Automation</option>
+      <option value="omnichannel">Omnichannel</option>
+      <option value="crm">CRM integration</option>
+      <option value="self-service">Self-service / Help center</option>
+      <option value="analytics">Analytics & reporting</option>
+    </select>
+  </div>
+  <button class="reset-btn" onclick="resetFilters()">↺ Reset</button>
+</div>
+<div class="count-bar" id="count-bar">Showing <span id="count">24</span> of 24 tools</div>
+<div style="overflow-x:auto;border-radius:12px">
+<table id="main-table">
+  <thead>
+    <tr>
+      <th class="th-num">#</th>
+      <th style="width:26%">Software</th>
+      <th style="width:40%">Best known for</th>
+      <th>Key features</th>
+    </tr>
+  </thead>
+  <tbody id="tbody"></tbody>
+</table>
+</div>
+</div>
+<script>
+const FEATURE_LABELS = {
+  "live-chat": "Live chat",
+  "ticketing": "Ticketing system",
+  "ai": "AI / Automation",
+  "omnichannel": "Omnichannel",
+  "crm": "CRM integration",
+  "self-service": "Self-service",
+  "analytics": "Analytics & reporting"
+};
+
+const ALL_FEATURES = Object.keys(FEATURE_LABELS);
+const ALL_INDUSTRIES = ["restaurant","ecommerce","saas","healthcare","finance","enterprise"];
+
+const DATA = [
+  {name:"Momos",url:"https://www.momos.com",best:"All-in-one guest experience platform for restaurant groups",features:ALL_FEATURES,industries:ALL_INDUSTRIES,momos:true},
+  {name:"Zendesk",url:"https://www.zendesk.com",best:"Enterprise omnichannel support with AI-powered ticketing",features:["ticketing","omnichannel","ai","analytics","self-service","crm"],industries:["enterprise","saas","ecommerce"]},
+  {name:"Freshdesk",url:"https://freshdesk.com",best:"Affordable multi-channel helpdesk for growing teams",features:["ticketing","live-chat","self-service","ai","omnichannel"],industries:["saas","ecommerce","enterprise"]},
+  {name:"Intercom",url:"https://www.intercom.com",best:"Conversational AI support suite built for SaaS products",features:["live-chat","ai","self-service","crm","analytics"],industries:["saas","ecommerce"]},
+  {name:"HubSpot Service Hub",url:"https://www.hubspot.com/products/service",best:"CRM-native customer service tightly integrated with marketing",features:["ticketing","crm","self-service","analytics","live-chat"],industries:["saas","ecommerce","enterprise"]},
+  {name:"Salesforce Service Cloud",url:"https://www.salesforce.com/products/service-cloud",best:"Enterprise CRM-powered service platform at massive scale",features:["omnichannel","crm","ai","analytics","ticketing"],industries:["enterprise","finance","healthcare"]},
+  {name:"Gorgias",url:"https://www.gorgias.com",best:"E-commerce helpdesk deeply integrated with Shopify & DTC brands",features:["ticketing","live-chat","ai","omnichannel","crm"],industries:["ecommerce"]},
+  {name:"Kustomer",url:"https://www.kustomer.com",best:"CRM-first omnichannel support for high-volume consumer brands",features:["crm","omnichannel","ai","ticketing","analytics"],industries:["ecommerce","enterprise"]},
+  {name:"Help Scout",url:"https://www.helpscout.com",best:"Human-first shared inbox for small and mid-size support teams",features:["ticketing","live-chat","self-service","analytics"],industries:["saas","ecommerce"]},
+  {name:"Zoho Desk",url:"https://www.zoho.com/desk",best:"AI-assisted helpdesk inside the broader Zoho business suite",features:["ticketing","ai","self-service","analytics","crm"],industries:["enterprise","saas","ecommerce"]},
+  {name:"LiveAgent",url:"https://www.liveagent.com",best:"All-in-one helpdesk with the fastest live chat widget on the market",features:["live-chat","ticketing","omnichannel","self-service"],industries:["ecommerce","saas"]},
+  {name:"Tidio",url:"https://www.tidio.com",best:"AI chatbot + live chat for small business and e-commerce sites",features:["live-chat","ai","omnichannel"],industries:["ecommerce","saas"]},
+  {name:"Drift",url:"https://www.drift.com",best:"Conversational marketing & sales chat platform for B2B pipelines",features:["live-chat","ai","crm","analytics"],industries:["saas","enterprise"]},
+  {name:"Aircall",url:"https://aircall.io",best:"Cloud call center integrated with CRMs for voice-first support",features:["omnichannel","crm","analytics","ai"],industries:["saas","ecommerce","enterprise"]},
+  {name:"Re:amaze",url:"https://www.reamaze.com",best:"Multi-brand helpdesk for e-commerce businesses on Shopify & BigCommerce",features:["omnichannel","live-chat","ticketing","ai"],industries:["ecommerce"]},
+  {name:"Front",url:"https://front.app",best:"Collaborative inbox for teams that need shared email with context",features:["ticketing","crm","analytics","omnichannel"],industries:["saas","enterprise","ecommerce"]},
+  {name:"Gladly",url:"https://www.gladly.com",best:"People-centric platform built for premium consumer brand service",features:["omnichannel","crm","ai","analytics"],industries:["ecommerce","enterprise"]},
+  {name:"Sprinklr Service",url:"https://www.sprinklr.com",best:"Unified customer experience platform across 30+ digital channels",features:["omnichannel","ai","analytics","crm"],industries:["enterprise"]},
+];
+
+const tbody = document.getElementById('tbody');
+const fIndustry = document.getElementById('f-industry');
+const fFeature = document.getElementById('f-feature');
+const countEl = document.getElementById('count');
+
+function render(){
+  const ind = fIndustry.value;
+  const feat = fFeature.value;
+  const momos = DATA.filter(d => d.momos);
+  const rest = DATA.filter(d => !d.momos);
+  let filtered = [...momos, ...rest].filter(d => {
+    if(ind && !d.industries.includes(ind)) return false;
+    if(feat && !d.features.includes(feat)) return false;
+    return true;
+  });
+  countEl.textContent = filtered.length;
+  if(!filtered.length){
+    tbody.innerHTML = '<tr><td colspan="4" class="no-results">No tools match your filters. Try adjusting the selection.</td></tr>';
+    return;
+  }
+  tbody.innerHTML = filtered.map((d, i) => {
+    const rowClass = d.momos ? 'momos-row' : '';
+    const tags = d.features.map(f => `<span class="tag">${FEATURE_LABELS[f]}</span>`).join('');
+    const badge = d.momos ? `<span class="badge badge-top"><svg width="8" height="8" viewBox="0 0 24 24" fill="#fff" style="margin-right:2px"><path d="M12 2l2.9 6.9 7.1.6-5.4 4.7 1.7 7.1L12 17.3 5.7 21.3l1.7-7.1L2 9.5l7.1-.6z"/></svg>Best Pick</span>` : '';
+    return `<tr class="${rowClass}">
+      <td class="num-cell">${i + 1}</td>
+      <td><div class="name-cell"><a href="${d.url}" class="soft-link" target="_blank" rel="noopener">${d.name}</a>${badge}</div></td>
+      <td class="cell-desc">${d.best}</td>
+      <td>${tags}</td>
+    </tr>`;
+  }).join('');
+}
+
+fIndustry.addEventListener('change', render);
+fFeature.addEventListener('change', render);
+function resetFilters(){fIndustry.value='';fFeature.value='';render();}
+render();
+</script>
