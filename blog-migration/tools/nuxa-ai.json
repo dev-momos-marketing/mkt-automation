@@ -1,0 +1,25 @@
+{
+ "name": "Nuxa",
+ "website": "https://www.nuxa.ai/",
+ "oneLiner": "AI operating system for restaurants that runs a set of AI agents for reviews, local visibility, social, phone answering and revenue monitoring.",
+ "bestFor": "Independent restaurants and small groups that want review replies handled inside a broader AI marketing and operations system.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Grace, a review agent that replies to Google reviews in the restaurant's voice",
+  "Positive reviews can be auto-replied; complaints and low ratings are drafted for owner approval",
+  "Review themes surfaced as operational feedback",
+  "Scout, an agent that audits listings and visibility against local competitors, including AI search",
+  "Dash, an agent that connects to POS data and flags revenue and item-mix changes",
+  "Social agent that posts and measures campaigns",
+  "AI phone answering and ordering chatbot with POS sync",
+  "Integrations with Toast, Square, Clover and Fleksa"
+ ],
+ "pricing": {
+  "text": "No published pricing for the full platform; contact Nuxa. Its AI phone answering product lists Pro plans from $49/month.",
+  "source": "https://nuxa.ai/solutions/voice",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Thin evidence: all details come from search snippets of nuxa.ai's own pages (nuxa.ai cannot be reached from this session). Owner, founders and launch date not found; Fleksa (German restaurant platform) lists Nuxa AI as an integration. No named customers or dated product news found; the homepage dashboard ('Ninth & Pine') is labelled sample data. A Nuxa blog post cites an A/B test of 4,000 replies across 80 restaurants; not verified, leave out. Current review's 'custom plans' wording kept as no platform price was found."
+}

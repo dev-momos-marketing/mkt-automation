@@ -1,0 +1,24 @@
+{"name": "Superorder", "website": "https://www.superorder.com/",
+ "oneLiner": "AI agent platform for restaurant chains (formerly Forward Kitchens) covering review management, surveys and guest feedback, delivery profitability, scorecards and alerts.",
+ "bestFor": "Multi-unit restaurant brands with significant delivery and takeout volume that want AI-written review replies across Google, Yelp and delivery apps, plus feedback flows that win back unhappy guests.",
+ "customers": [
+  {"name": "Tasty Restaurant Group", "source": "https://www.superorder.com/case-studies/tasty-restaurant-group-wins-back-21-percent-of-unhappy-customers-with-superorder"},
+  {"name": "L&L Hawaiian Barbecue", "source": "https://www.superorder.com/press"},
+  {"name": "Wow Bao", "source": "https://www.ycombinator.com/companies/superorder"},
+  {"name": "Marco's Pizza", "source": "https://www.ycombinator.com/companies/superorder"}
+ ],
+ "updates": [
+  {"date": "2025-07", "text": "L&L Hawaiian Barbecue partnered with Superorder to improve guest engagement and feedback collection across its 230+ locations.", "source": "https://www.superorder.com/press"}
+ ],
+ "features": [
+  "Review Management Agent that pulls reviews from Google, Yelp and delivery platforms into one dashboard",
+  "AI-written review replies personalized with the guest's order details",
+  "Surveys & Feedback Agent that collects private feedback after orders",
+  "Automated recovery offers sent to dissatisfied guests",
+  "Delivery profitability agents for third-party delivery operations",
+  "AI scorecards comparing performance across locations",
+  "Insights and real-time alerts on guest issues"
+ ],
+ "pricing": {"text": "Custom pricing; Superorder does not publish prices. Contact the company for a quote.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Renamed from Forward Kitchens in 2023, when it raised a $10M Series A led by Foundation Capital (TechCrunch, Sep 2023). It has since moved from a delivery/takeout operating system and virtual storefronts to AI agents for reputation and delivery profitability. The current review's mention of 'online ordering' as part of the platform reflects the older positioning; the current product pages emphasize review, feedback and delivery-profitability agents, so leave online ordering out. The L&L partnership appears on superorder.com/press; the July 2025 date comes from a third-party company profile (yespress.io/superorder) and could not be confirmed on the press page itself. Wow Bao and Marco's Pizza are listed as restaurant partners on Superorder's Y Combinator profile, not in published case studies. Dropped vendor stats: 'won back 21% of unhappy customers' (Tasty Restaurant Group case study headline, vendor claim) and 'revisit rates up 20%' (third-party listing). No 2026 product announcements found."}

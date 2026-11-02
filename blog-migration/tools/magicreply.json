@@ -1,0 +1,35 @@
+{
+ "name": "MagicReply",
+ "website": "https://magicreply.ai/",
+ "oneLiner": "AI tool that drafts and posts replies to Google Business Profile reviews in a business's own voice, with auto-reply rules and a Chrome extension.",
+ "bestFor": "Independent restaurants, cafes and small groups that mainly need fast, on-brand replies to Google reviews at a low monthly price.",
+ "customers": [],
+ "updates": [
+  {
+   "date": "2026-03",
+   "text": "Voice profiles became per location (March 14, 2026), so each storefront can reply in its own voice; review request emails with a direct Google review link per location were added March 12, 2026.",
+   "source": "https://magicreply.ai/changelog"
+  },
+  {
+   "date": "2026",
+   "text": "Chrome Extension 2.0 inserts AI replies directly into Google's review box, with tone and length selectors (month not confirmed).",
+   "source": "https://magicreply.ai/changelog"
+  }
+ ],
+ "features": [
+  "AI-drafted replies to Google Business Profile reviews that you can edit or regenerate before posting",
+  "Voice profile learned from your past replies (greeting, sign-off, vocabulary), set per location",
+  "Auto-reply rules by star rating, keywords or sentiment",
+  "Restaurant reply templates covering food quality, service, wait times and value",
+  "Chrome extension that inserts replies into Google's review interface",
+  "Review request emails and a shareable Google review link for each location",
+  "Team approval workflows and review analytics"
+ ],
+ "pricing": {
+  "text": "Free plan (limited AI replies and Google posts per month for 1 location); Pro $19.99/month; Business $49.99/month with unlimited locations; 7-day trial on paid plans.",
+  "source": "https://magicreply.ai/faq",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Small product from Somnus Labs Inc. (per its terms); no named customers or press coverage found, so customers is empty. Free-plan limits conflict between the FAQ (15 AI replies, 5 posts to Google per month) and the changelog (3 to 5 AI replies), so the review should not state exact free limits. Google-only: no Yelp, TripAdvisor or delivery-app reviews confirmed. 'Dish-aware' replies are the vendor's restaurant positioning; homepage testimonials are self-published and unverified. Prices from search snippets of magicreply.ai (site not fetchable)."
+}

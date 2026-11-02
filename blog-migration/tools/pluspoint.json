@@ -1,0 +1,44 @@
+{
+ "name": "Pluspoint",
+ "website": "https://www.pluspoint.io/",
+ "oneLiner": "London-based reputation and local marketing platform for multi-location businesses: review collection and replies, listings management, surveys, messaging campaigns and social posting, priced per location.",
+ "bestFor": "Multi-location restaurant groups and franchises, including in Europe, that want reviews, listings and local SEO in one tool at a published per-location price.",
+ "customers": [
+  {
+   "name": "Starfoods Group (Portugal, 60+ restaurants)",
+   "source": "https://www.pluspoint.io/blog/pluspoint-case-starfoods"
+  },
+  {
+   "name": "Paprica Burger",
+   "source": "https://www.pluspoint.io/industries/restaurant-cafe"
+  },
+  {
+   "name": "SushiCafé Group",
+   "source": "https://www.pluspoint.io/blog-tag/case-studies"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-05",
+   "text": "Pluspoint made its MCP connector generally available, letting Claude, ChatGPT, Gemini and other assistants read reviews, audit listings and queue review requests (month estimated from the post's age; social posting via MCP announced as coming soon).",
+   "source": "https://www.pluspoint.io/blog/pluspoint-mcp-is-live-put-your-locations-reviews-and-review-requests-inside-claude-chatgpt-and-gemini"
+  }
+ ],
+ "features": [
+  "Review requests by SMS, email, WhatsApp and QR codes",
+  "Central inbox for reviews from Google, Facebook and other sites with AI reply suggestions",
+  "Real-time alerts for negative feedback",
+  "Listings management for Google and Facebook, with an add-on to sync to 200+ directories such as Apple Maps, Bing, Yelp and TripAdvisor",
+  "NPS and customer satisfaction surveys",
+  "Messaging campaigns and AI-generated social posts for Google, Facebook and Instagram",
+  "Per-location analytics, sentiment and keyword analysis",
+  "MCP connector for working with reviews and listings from AI assistants"
+ ],
+ "pricing": {
+  "text": "$29 per location per month with every feature included (about $24.17 billed annually); minimum 3 locations; 3 users and 50 AI credits included (extra users $19, extra credits $0.49); Listings Sync add-on $39 per location per month; 14-day free trial; custom plan above 30 locations or users.",
+  "source": "https://www.pluspoint.io/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "The current review says 'Custom pricing'; Pluspoint now publishes $29/location (older blog posts list $39 Starter / $69 Professional, now outdated). Founded 2021 by Ukrainian founders, HQ London, $400K seed in September 2023 (Pragmatech Ventures); no later funding found. Case-study results (e.g. Starfoods rating 2.8 to 4.8) are vendor-published. The current review's 'users highlight measurable revenue' line is unverified (very few third-party reviews). Prices from search snippets of pluspoint.io/pricing (site not fetchable); what Listings Sync covers at no cost conflicts slightly between pages."
+}

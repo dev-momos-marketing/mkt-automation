@@ -1,0 +1,45 @@
+{
+ "name": "Qualtrics",
+ "website": "https://www.qualtrics.com/",
+ "oneLiner": "Enterprise experience management (XM) platform for customer, employee and brand research, with location CX dashboards, an online reputation management module and AI Experience Agents.",
+ "bestFor": "Large, multi-unit restaurant and hospitality brands with dedicated CX or insights teams that want surveys, reviews and operational feedback in one enterprise program.",
+ "customers": [
+  {
+   "name": "KFC",
+   "source": "https://www.qualtrics.com/articles/customer-experience/kfcs-winning-recipe-for-cx/"
+  },
+  {
+   "name": "Shake Shack",
+   "source": "https://www.qualtrics.com/customers/shake-shack/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-03",
+   "text": "At X4 2026 (Seattle, March 17-19), new CEO Jason Maynard's first X4, Qualtrics said its AI Experience Agents are live with paying customers and announced real-time service recovery agents and omnichannel connectors for Genesys, NICE and Salesforce.",
+   "source": "https://diginomica.com/qualtrics-x4-new-ceo-jason-maynard-declares-insight-gap-closed-and-sets-sights-driving-outcomes"
+  },
+  {
+   "date": "2026-05",
+   "text": "Qualtrics completed its $6.75 billion acquisition of Press Ganey Forsta (announced October 2025), adding healthcare patient-experience data and the InMoment business Press Ganey had bought in 2025.",
+   "source": "https://itbrief.co.uk/story/qualtrics-completes-gbp-6-75-billion-press-ganey-deal"
+  }
+ ],
+ "features": [
+  "Omnichannel feedback collection: post-transaction surveys by email, SMS, web, app, QR and chat",
+  "Online reputation management that pulls public reviews from sites such as Google alongside survey data",
+  "Location CX dashboards with role-based views for restaurant managers, market managers and executives",
+  "AI text and sentiment analytics that group open-ended comments and reviews into themes",
+  "Experience Agents: AI agents that act on feedback, for example real-time service recovery",
+  "Predictive analytics on drivers of satisfaction and churn risk",
+  "Brand research (BrandXM) and employee experience programs on the same platform",
+  "Connectors to contact-center and CRM systems such as Genesys, NICE and Salesforce"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Qualtrics does not publish prices for its CX suite. Contact sales for a quote.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from the current review: 'starts at approximately $50,000-$100,000+ per year' and 'pricing based on customer interactions' (not published by Qualtrics). 'Government institutions' and ServiceNow as customers not re-verified; Shake Shack confirmed. KFC figures (300% more feedback, ~30-32K restaurants) are vendor-published. The Press Ganey deal is mainly healthcare; it does not change the restaurant offering. Qualtrics is privately held (taken private by Silver Lake in 2023). X4 2026 details come from press coverage, not a Qualtrics release."
+}

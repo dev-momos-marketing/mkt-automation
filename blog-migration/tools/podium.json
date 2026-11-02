@@ -1,0 +1,27 @@
+{"name": "Podium", "website": "https://www.podium.com/",
+ "oneLiner": "AI-powered customer communication platform for local businesses, built around texting, reviews, payments and an AI Employee that answers leads and books appointments; now sold mainly as vertical 'AI operating systems'.",
+ "bestFor": "Local service businesses such as auto dealers and repair shops, home services, medspas and retail that sell through calls and texts; less of a fit for restaurants, which are not one of Podium's focus industries.",
+ "customers": [
+  {"name": "Mattress Firm", "source": "https://www.podium.com/customer-stories/mattress-firm"},
+  {"name": "Jackson Hewitt", "source": "https://www.podium.com/customer-stories/jackson-hewitt"},
+  {"name": "Ashley Furniture HomeStore", "source": "https://www.podium.com/customer-stories/ashley-furniture-homestore"},
+  {"name": "Mountaineer Heating & Cooling", "source": "https://www.podium.com/customer-stories/mountaineer-hvac"}
+ ],
+ "updates": [
+  {"date": "2025-12", "text": "Launched Jerry 2.0, a customizable AI employee built on OpenAI models for automotive, HVAC and medspa businesses.", "source": "https://www.prnewswire.com/news-releases/openai-case-study-validates-podiums-ai-impact-as-company-launches-jerry-2-0-for-automotive-hvac-and-medspa-302640582.html"},
+  {"date": "2026-01", "text": "Launched an AI operating system for aesthetic practices combining EMR, patient messaging, marketing and an AI agent for lead response and booking; a home services version was announced in August 2026.", "source": "https://www.prnewswire.com/news-releases/podium-launches-industrys-first-ai-operating-system-for-aesthetic-practices-302664034.html"},
+  {"date": "2026-10", "text": "Said its AI agent business passed $150 million in annual recurring revenue about two and a half years after launch (company-reported).", "source": "https://www.prnewswire.com/news-releases/podium-surpasses-150m-in-ai-agent-arr-in-2-5-years-302917303.html"}
+ ],
+ "features": [
+  "AI Employee that replies to leads by text, phone, email and social, answers questions and books appointments after hours",
+  "Voice AI agent that answers phone calls",
+  "Review invitations by text that send customers to Google and other review sites",
+  "Shared inbox for texts, webchat, Google and social messages",
+  "Text-to-pay links and payments inside a conversation",
+  "Bulk text campaigns for promotions and re-engagement",
+  "Review and conversation reporting across locations",
+  "Industry-specific AI operating systems for automotive, home services and aesthetics"
+ ],
+ "pricing": {"text": "Not published; plans (Core, Pro, Signature) are quoted by sales. AI Employee is sold as an add-on to any base plan.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "podium.com could not be fetched; details from search snippets of podium.com and PR Newswire releases. Dropped: third-party price estimates (~$399/month Core, ~$599/month Pro); a pricing tracker says Podium removed prices from its site in Q4 2025. Dropped the 'engages leads within 2 minutes' and '24+ review sites' claims (not confirmed on a current Podium page; the 2-minute figure appears only in the aesthetics release). Dropped 'does not integrate with Yelp' (not re-checked). Customer stories found are older (several dated 2020-2021) and none are restaurants. Fit warning: Podium's 2025-2026 launches all target automotive, home services and medspas; consider whether it still belongs in a restaurant-focused list."}

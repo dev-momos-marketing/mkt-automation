@@ -1,0 +1,34 @@
+{
+ "name": "Cloutly",
+ "website": "https://cloutly.com/",
+ "oneLiner": "Review management platform for multi-location businesses that collects reviews by SMS, email and QR code, monitors review sites in one inbox and shows reviews on your website.",
+ "bestFor": "Small multi-location service and hospitality businesses that want simple, per-location review campaigns and a shared review inbox.",
+ "customers": [
+  {
+   "name": "Swimart",
+   "source": "https://cloutly.com/"
+  },
+  {
+   "name": "Swyftx",
+   "source": "https://cloutly.com/"
+  }
+ ],
+ "updates": [],
+ "features": [
+  "Automated review request campaigns by SMS and email, with no login needed to leave a review",
+  "QR codes to collect reviews from walk-in customers",
+  "One inbox for Google, Facebook and 40+ other review sites (other sites on Growth and up)",
+  "Draft with AI (Magic Response) replies based on what each review says, posted back to the site",
+  "Review widgets for your website",
+  "Competitor tracking on higher plans",
+  "White-label option for agencies and resellers",
+  "Integrations including Mindbody and HubSpot"
+ ],
+ "pricing": {
+  "text": "Per location, month to month with a 14-day free trial: Starter $27/month (Google and Facebook only), Growth $63–69/month, Power $73–79/month depending on billing, and Custom for 15+ locations.",
+  "source": "https://cloutly.com/plans",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Plan prices come from search snippets of cloutly.com/plans and partner listings (G2, Mindbody), which disagree slightly (monthly vs annual), so they are given as ranges; check before quoting. No dated 2025–2026 product news found. Customers are testimonials on cloutly.com (Swimart is a pool-supply chain, Swyftx a crypto exchange); no named restaurant customer found. Original price '$27 to $63/month' updated."
+}

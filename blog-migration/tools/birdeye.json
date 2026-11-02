@@ -1,0 +1,25 @@
+{"name": "Birdeye", "website": "https://birdeye.com/",
+ "oneLiner": "Agentic marketing and reputation platform for multi-location brands, covering reviews, listings, messaging, social, surveys and AI search visibility, with AI agents and 'AI Coworkers' that carry out the work.",
+ "bestFor": "Multi-location brands and franchise groups, including restaurant chains, that want reviews, listings, messaging and social in one platform with AI agents doing much of the execution.",
+ "customers": [
+  {"name": "The Saxton Group (McAlister's Deli franchisee)", "source": "https://birdeye.com/resources/case-studies/the-saxton-group/"},
+  {"name": "Black Bear Diner", "source": "https://birdeye.com/au/resources/case-studies/black-bear-diner/"}
+ ],
+ "updates": [
+  {"date": "2025-01", "text": "Launched a restaurant-specific AI marketing platform built on proprietary LLMs trained for the restaurant industry, including Yelp review monitoring through a Yelp partnership.", "source": "https://birdeye.com/au/press/birdeye-launches-custom-ai-marketing-platform-for-restaurants/"},
+  {"date": "2025-09", "text": "Unveiled its Agentic Marketing Platform at View 2025, with more than 10 AI agents automating work across reviews, listings, social media and surveys.", "source": "https://birdeye.com/press/birdeye-unveils-the-industry-first-agentic-marketing-platform/"},
+  {"date": "2026-09", "text": "Launched AI Coworkers at View 2026: Jay (marketing), Myna (operations) and Robin (customer experience), built on its library of AI agents. Later that month it announced a SkyTab POS integration that syncs restaurant menu details to listings.", "source": "https://birdeye.com/press/birdeye-launches-ai-coworkers-for-multi-location-brands/"}
+ ],
+ "features": [
+  "Review monitoring across Google, Yelp, Facebook and industry sites, with alerts and ticketing that routes negative reviews to the right location manager",
+  "Review requests by SMS and email to grow review volume",
+  "AI-drafted and agent-handled review responses in the brand's voice",
+  "Listings management that keeps business details and menus accurate across directories, including a SkyTab menu sync for restaurants",
+  "Unified inbox for SMS, webchat, social messages and email",
+  "Surveys and Insights AI sentiment analysis with location, district and region reporting",
+  "Competitor benchmarking",
+  "Search AI for tracking and improving visibility in AI answer engines"
+ ],
+ "pricing": {"text": "Custom pricing; Birdeye does not publish prices and quotes after a demo.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "birdeye.com could not be fetched; details come from search snippets of birdeye.com press, case-study and update pages. Dropped from the current review: '150,000 businesses', '3,600 G2 reviews', '#1 enterprise ranking across 12 categories in G2 Spring 2026' (Birdeye's own release for Summer 2026 says 14 categories; re-check before citing), '150+ platforms', '50+ directories' and the ~$299/month Standard plan price (third-party estimate only; third parties list Starter $299, Growth $349, Dominate $449 per location, none published by Birdeye). A German report says 27 agents are live across the AI Coworkers; not independently confirmed, so left out of the update text."}
