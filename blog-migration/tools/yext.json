@@ -41,17 +41,63 @@
  "features": [
   "Central knowledge base (Knowledge Graph) that holds each location's hours, menus and details",
   "Listings sync to Google, Apple Maps, Bing, Facebook and other directories and apps",
-  "Review monitoring and response across review sites, with AI-drafted replies",
-  "AI review generation campaigns, extended to third-party review sites in 2024",
+  "Review monitoring for Google, Facebook, Yelp and 80+ industry sites in one dashboard, with smart filters and alerts",
+  "AI-drafted review replies that you approve, or replies that post automatically under rules you set",
+  "Review requests sent by email, text or QR code, with a balancing algorithm that routes them to the sites that most affect search visibility",
   "Scout: visibility and sentiment tracking in traditional and AI search, with competitor benchmarks",
   "Location landing pages (Yext Pages) for local SEO",
-  "Permissions and approval workflows for large teams and franchise networks"
+  "Role-based access, audit trails and approval workflows for large teams and franchise networks"
  ],
  "pricing": {
-  "text": "Custom pricing for multi-location and enterprise brands. Third-party sites list self-serve tiers but disagree on the amounts, and yext.com's pricing could not be checked from this session.",
-  "source": null,
+  "text": "Custom pricing; Yext publishes no price list. Price depends on location count and the solution chosen, billing is typically annual, multi-year terms get a better rate than one-year terms, and there is no free tier or standard free trial (evaluation is through a demo). Smaller businesses are pointed to reseller partners.",
+  "source": "https://www.yext.com/knowledge-center/yext-faq",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Dropped from the current review: the weekly prices ($4/$9/$10/$19 per week), which do not match any current source; '200+ direct integration partners' (not re-confirmed; SocialPilot says 80+ review platforms, Popmenu release says 70+). Corporate: CEO Michael Walrath's August 2025 $9/share take-private proposal was withdrawn on 2026-02-02 (financing not obtained) and replaced by a $150M Dutch-auction tender (https://www.businesswire.com/news/home/20260202956818/en); Yext stays public. Hearsay Systems acquired August 2024. Arby's and Taco Bell stories are older vendor case studies."
+ "notes": "Dropped from the current review: the weekly prices ($4/$9/$10/$19 per week), which do not match any current source; '200+ direct integration partners' (not re-confirmed; SocialPilot says 80+ review platforms, Popmenu release says 70+). Corporate: CEO Michael Walrath's August 2025 $9/share take-private proposal was withdrawn on 2026-02-02 (financing not obtained) and replaced by a $150M Dutch-auction tender (https://www.businesswire.com/news/home/20260202956818/en); Yext stays public. Hearsay Systems acquired August 2024. Arby's and Taco Bell stories are older vendor case studies. 2026-11: yext.com/pricing returns 404; the Yext FAQ (knowledge center) confirms custom pricing, annual billing, no free trial and reseller route for small businesses. '80+ industry sites' and the review features come from yext.com/platform/reviews. G2 rating seen only in search snippets of g2.com (4.4; review count varies between 1,008 and 1,126 across G2 pages), so reviews cite the score only.",
+ "featuresSource": "https://www.yext.com/platform/reviews",
+ "pros": [
+  "One knowledge base feeds listings, local pages and reviews, so a change to hours or menus is made once",
+  "Review monitoring across Google, Facebook, Yelp and 80+ industry sites, with AI-drafted replies you approve",
+  "Scout tracks visibility and sentiment in Google, Bing and AI assistants such as ChatGPT, Gemini and Perplexity, against competitors",
+  "Role-based access, audit trails and approval workflows built for franchise networks",
+  "Restaurant customers include Taco Bell, Arby's, Bojangles and Marston's",
+  "4.4/5 on G2"
+ ],
+ "cons": [
+  {
+   "text": "No published prices: pricing is custom, set by location count and solution, and typically billed annually",
+   "source": "https://www.yext.com/knowledge-center/yext-faq"
+  },
+  {
+   "text": "No free tier and no standard free trial; you evaluate it through a demo",
+   "source": "https://www.yext.com/knowledge-center/yext-faq"
+  },
+  {
+   "text": "A one-year term costs more than a multi-year term",
+   "source": "https://www.yext.com/knowledge-center/yext-faq"
+  },
+  {
+   "text": "Smaller businesses are directed to reseller partners instead of buying from Yext directly",
+   "source": "https://www.yext.com/knowledge-center/yext-faq"
+  },
+  {
+   "text": "Listings and local search come first, with reviews alongside, so brands that mainly want post-visit guest surveys or support may need another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "custom quote by location count and solution, typically billed annually",
+  "list": [],
+  "source": "https://www.yext.com/knowledge-center/yext-faq",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 1126,
+  "source": "https://www.g2.com/products/yext/reviews",
+  "checked": "2026-11"
+ }
 }

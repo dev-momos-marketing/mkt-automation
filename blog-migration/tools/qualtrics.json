@@ -27,7 +27,8 @@
  ],
  "features": [
   "Omnichannel feedback collection: post-transaction surveys by email, SMS, web, app, QR and chat",
-  "Online reputation management that pulls public reviews from sites such as Google alongside survey data",
+  "Online reputation management that aggregates reviews from sites such as Google, Yelp, Facebook and TripAdvisor alongside survey data",
+  "AI response suggestions that match the brand's voice, with replies sent from Qualtrics dashboards (Google Places and Facebook connections)",
   "Location CX dashboards with role-based views for restaurant managers, market managers and executives",
   "AI text and sentiment analytics that group open-ended comments and reviews into themes",
   "Experience Agents: AI agents that act on feedback, for example real-time service recovery",
@@ -36,10 +37,55 @@
   "Connectors to contact-center and CRM systems such as Genesys, NICE and Salesforce"
  ],
  "pricing": {
-  "text": "Custom pricing; Qualtrics does not publish prices for its CX suite. Contact sales for a quote.",
-  "source": null,
+  "text": "Custom pricing. The pricing page lists CX plans, including one for location-based industries such as restaurants, hotels and retail, each with 'Request Pricing' and no price. CX pricing is based on interactions (data records collected or processed by Qualtrics). No free trial or free plan is listed; the page leads to a demo.",
+  "source": "https://www.qualtrics.com/pricing/",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Dropped from the current review: 'starts at approximately $50,000-$100,000+ per year' and 'pricing based on customer interactions' (not published by Qualtrics). 'Government institutions' and ServiceNow as customers not re-verified; Shake Shack confirmed. KFC figures (300% more feedback, ~30-32K restaurants) are vendor-published. The Press Ganey deal is mainly healthcare; it does not change the restaurant offering. Qualtrics is privately held (taken private by Silver Lake in 2023). X4 2026 details come from press coverage, not a Qualtrics release."
+ "notes": "Dropped from the current review: 'starts at approximately $50,000-$100,000+ per year' and 'pricing based on customer interactions' (not published by Qualtrics). 'Government institutions' and ServiceNow as customers not re-verified; Shake Shack confirmed. KFC figures (300% more feedback, ~30-32K restaurants) are vendor-published. The Press Ganey deal is mainly healthcare; it does not change the restaurant offering. Qualtrics is privately held (taken private by Silver Lake in 2023). X4 2026 details come from press coverage, not a Qualtrics release. 2026-11: the pricing page (qualtrics.com/pricing) was opened: no prices, 'Request Pricing' on every CX plan, CX priced by interactions, no free trial listed. The ORM product page (qualtrics.com/customer-experience/reputation-management/) says it 'generates response suggestions that match your brand voice' and lets users reply from dashboards; the support page limits dashboard replies to Google Places and Facebook connections. G2 rating (4.3, 751 reviews) is from G2 search result snippets; g2.com returned 403.",
+ "pros": [
+  "Surveys, public reviews, brand research and employee programs on one platform",
+  "AI response suggestions in the brand's voice, with replies sent from Qualtrics dashboards",
+  "Location dashboards scoped by role, from restaurant manager to executive",
+  "Experience Agents that act on feedback, including real-time service recovery",
+  "Predictive analytics on what drives satisfaction and churn",
+  "Large restaurant references: KFC and Shake Shack",
+  "Rated 4.3/5 on G2 (Qualtrics Customer Experience, 751 reviews)"
+ ],
+ "cons": [
+  {
+   "text": "No published prices: every CX plan says 'Request Pricing', and CX pricing is based on interactions",
+   "source": "https://www.qualtrics.com/pricing/"
+  },
+  {
+   "text": "No free trial or free plan listed; buying starts with a demo request",
+   "source": "https://www.qualtrics.com/pricing/"
+  },
+  {
+   "text": "Built for enterprise programs run by CX or insights teams, so a small restaurant group may pay for more platform than it uses",
+   "source": "scope"
+  },
+  {
+   "text": "Replying from dashboards works for reviews connected through Google Places or Facebook, and only for users with read and reply access to the project",
+   "source": "https://www.qualtrics.com/support/integrations/online-reputation-management/getting-started-with-online-reviews-qualtrics/"
+  },
+  {
+   "text": "Reviews are one module of a broad research suite; review-reply volume and speed are not its main focus",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "custom quote; CX pricing is based on interactions",
+  "list": [],
+  "source": "https://www.qualtrics.com/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.3",
+  "reviews": 751,
+  "source": "https://www.g2.com/products/qualtrics-customer-experience/reviews",
+  "checked": "2026-11"
+ }
 }

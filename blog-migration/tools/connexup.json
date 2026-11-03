@@ -1,20 +1,112 @@
-{"name": "Connexup", "website": "https://www.connexup.ai/",
+{
+ "name": "Connexup",
+ "website": "https://www.connexup.ai/",
  "oneLiner": "Restaurant growth platform combining commission-free online ordering, kiosk and QR ordering, loyalty, delivery app integration and AI review management.",
  "bestFor": "Independent and small restaurants, especially on Square POS, that want direct online ordering, loyalty and AI review replies from one vendor on a month-to-month plan.",
- "customers": [],
+ "customers": [
+  {
+   "name": "Buffettopia",
+   "source": "https://connexup.ai/products/reviews-management"
+  }
+ ],
  "updates": [
-  {"date": "2025-10", "text": "Released online ordering, followed by a self-ordering kiosk app (November 2025) and QR code ordering (December 2025), per its Product Hunt launch history.", "source": "https://www.producthunt.com/products/connexup-own-your-ordering-platform/launches/connexup-2"}
+  {
+   "date": "2025-10",
+   "text": "Released online ordering, followed by a self-ordering kiosk app (November 2025) and QR code ordering (December 2025), per its Product Hunt launch history.",
+   "source": "https://www.producthunt.com/products/connexup-own-your-ordering-platform/launches/connexup-2"
+  }
  ],
  "features": [
-  "AI replies to Google and Yelp reviews, with an option to auto-publish a reply when a review has gone unanswered for 72 hours",
-  "Post-visit review requests to grow review volume",
-  "Branded online ordering website without third-party commissions",
-  "Self-ordering kiosk and QR code table ordering",
-  "Loyalty program and personalized promotions",
-  "DoorDash and Uber Eats integration",
-  "Menu optimization with upsell and cross-sell suggestions",
+  "AI review replies trained on the restaurant's profile, menu and policies, with adjustable tone and replies in English, Spanish, Chinese and more",
+  "Manual review mode (AI drafts, staff publish) or fully automated mode; if a review goes unanswered for 72 hours, AI generates a reply and can auto-publish it",
+  "Review replies currently on Google, with Yelp and TripAdvisor listed as coming soon",
+  "Receipts (online or in-store) turned into review prompts that link to Google and Yelp",
+  "Sentiment analysis and rating trend reports, with reviews linked to specific orders to show which dish or staff member was mentioned",
+  "Branded online ordering website, self-ordering kiosk and QR code ordering without marketplace commissions",
+  "Loyalty program with points earned and redeemed online and in-store, plus personalized promotions",
+  "Grubhub, DoorDash and Uber Eats orders organized in one place",
+  "AI menu optimizer with upsell and cross-sell suggestions",
   "Native Square POS integration"
  ],
- "pricing": {"text": "Starter Suite from $149 per month with a 30-day free trial, month-to-month with no setup fee; Advanced and Custom plans priced by features. Its pages disagree on whether a 2.5% per-order commission applies.", "source": "https://www.connexup.ai/pricing", "checked": "2026-11"},
+ "pricing": {
+  "text": "Published: Reviews Management Only $39 per Google Business Profile per month; Web Ordering Only and Kiosk App Only $49 per location per month; Mobile App Only $99 per location per month; Starter Suite $149 per month plus 2.5% per order (web, kiosk and QR ordering, Location Hub, Square POS integration, limited menu optimizer; unlimited locations); Advanced & Custom Suite (mobile app, brand website, loyalty, personalized promotions) custom pricing. 30-day free trial with no credit card on the Starter Suite and standalone products; billed monthly, prorated, cancel anytime; no setup fees; hardware not included.",
+  "source": "https://www.connexup.ai/pricing",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "No named customers, press coverage or case studies found; G2 has only 3 reviews. The current review calls it a 'standalone reputation platform that works alongside whatever POS'; that is inaccurate: it is a broader restaurant ordering/growth platform and natively integrates only with Square (other POS on request). The current review's 'custom plans, contact sales' pricing is out of date: a $149/month Starter Suite is published. Dropped: Tripadvisor response support and 'SEO keywords and return-visit prompts' in replies (only Google and Yelp replies confirmed on the vendor's page). A separate site, connex-up.com, also describes a Connexup restaurant platform; relation unconfirmed."}
+ "notes": "November 2026: pricing and the Reviews Management page read with curl. The reviews FAQ says replies currently support Google, with Yelp and TripAdvisor coming soon (the page's intro mentions Google and Yelp, and receipts link to both), so the review says Google. The pricing FAQ now states the Starter Suite's 2.5% per-order fee clearly; standalone products have no per-order fee. Loyalty is in the quoted Advanced & Custom Suite, not the Starter Suite. Customers: the homepage lists small restaurants (UMe, Mr KEKE, Buffetopia and others) by name only; Buffettopia has a testimonial on the reviews page. No case studies or press found. No G2 listing found for Connexup (a G2 page for 'RestaurantConnect' is a different product), so no rating. A separate site, connex-up.com, also describes a Connexup restaurant platform; relation unconfirmed. Dropped: Tripadvisor response support today.",
+ "pros": [
+  "Review replies sold on their own at $39 per Google Business Profile per month, month to month",
+  "30-day free trial with no credit card, no contract and no setup fee",
+  "Choice of manual approval or fully automated publishing",
+  "Multilingual replies in English, Spanish, Chinese and more",
+  "Reviews linked to specific orders, dishes and staff",
+  "Ordering, kiosk, loyalty and review replies from one vendor"
+ ],
+ "cons": [
+  {
+   "text": "Review replies cover Google only for now; Yelp and TripAdvisor are listed as coming soon",
+   "source": "https://connexup.ai/products/reviews-management"
+  },
+  {
+   "text": "The Starter Suite adds a 2.5% fee on each order on top of $149 per month",
+   "source": "https://www.connexup.ai/pricing"
+  },
+  {
+   "text": "Loyalty, the branded app and promotions sit in the Advanced & Custom Suite, which is quoted",
+   "source": "https://www.connexup.ai/pricing"
+  },
+  {
+   "text": "Square is the only native POS integration",
+   "source": "https://www.connexup.ai/pricing"
+  },
+  {
+   "text": "Hardware for kiosks and tablets isn't included",
+   "source": "https://www.connexup.ai/pricing"
+  }
+ ],
+ "plans": {
+  "trial": "30-day free trial, no credit card",
+  "billing": "monthly, prorated, cancel anytime",
+  "list": [
+   {
+    "name": "Reviews Management Only",
+    "price": "$39",
+    "unit": "per Google Business Profile per month",
+    "note": "AI replies, tone, multilingual, sentiment and rating reports"
+   },
+   {
+    "name": "Web Ordering Only",
+    "price": "$49",
+    "unit": "per location per month",
+    "note": ""
+   },
+   {
+    "name": "Kiosk App Only",
+    "price": "$49",
+    "unit": "per location per month",
+    "note": ""
+   },
+   {
+    "name": "Mobile App Only",
+    "price": "$99",
+    "unit": "per location per month",
+    "note": ""
+   },
+   {
+    "name": "Starter Suite",
+    "price": "$149",
+    "unit": "per month plus 2.5% per order",
+    "note": "Web, kiosk and QR ordering, Location Hub, Square POS integration; unlimited locations"
+   },
+   {
+    "name": "Advanced & Custom Suite",
+    "price": "Custom",
+    "unit": "quote",
+    "note": "Mobile app, brand website, loyalty program, personalized promotions"
+   }
+  ],
+  "source": "https://www.connexup.ai/pricing",
+  "checked": "2026-11"
+ }
+}

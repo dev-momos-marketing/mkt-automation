@@ -1,25 +1,90 @@
-{"name": "ReviewTrackers", "website": "https://www.reviewtrackers.com/",
+{
+ "name": "ReviewTrackers",
+ "website": "https://www.reviewtrackers.com/",
  "oneLiner": "Review management and reputation analytics platform for multi-location businesses, owned by InMoment (now part of Press Ganey Forsta): review monitoring and response, review requests, competitor tracking and feedback analytics.",
  "bestFor": "Multi-location and franchise brands that want centralized review monitoring, brand-approved responses and reputation reporting across many locations, especially those already using InMoment or Press Ganey Forsta for customer experience.",
  "customers": [
-  {"name": "Ted's Montana Grill", "source": "https://reviewtrackers.com/case-studies/teds-montana-grill"},
-  {"name": "PACK & SEND", "source": "https://www.reviewtrackers.com/case-studies/pack-and-send/"},
-  {"name": "Chem-Dry", "source": "https://www.reviewtrackers.com/case-studies/chem-dry-carpet-cleaning/"}
+  {
+   "name": "Ted's Montana Grill",
+   "source": "https://reviewtrackers.com/case-studies/teds-montana-grill"
+  },
+  {
+   "name": "PACK & SEND",
+   "source": "https://www.reviewtrackers.com/case-studies/pack-and-send/"
+  },
+  {
+   "name": "Chem-Dry",
+   "source": "https://www.reviewtrackers.com/case-studies/chem-dry-carpet-cleaning/"
+  }
  ],
  "updates": [
-  {"date": "2025-05", "text": "Press Ganey Forsta acquired InMoment, ReviewTrackers' parent company since 2022, so ReviewTrackers is now part of the Press Ganey Forsta group.", "source": "https://www.research-live.com/article/news/press-ganey-forsta-acquires-inmoment/id/5138993"},
-  {"date": "2025-07", "text": "InMoment launched AI Auto Responding in its Reputation Management solution: generative AI writes personalized, on-brand review replies from saved prompts, available on the Locations Starter and Locations Essential plans.", "source": "https://www.businesswire.com/news/home/20250730587816/en/InMoment-a-Press-Ganey-Forsta-Company-Launches-Industry-First-AI-Auto-Responding-for-Enterprise-Reviews-Management"}
+  {
+   "date": "2025-05",
+   "text": "Press Ganey Forsta acquired InMoment, ReviewTrackers' parent company since 2022, so ReviewTrackers is now part of the Press Ganey Forsta group.",
+   "source": "https://www.research-live.com/article/news/press-ganey-forsta-acquires-inmoment/id/5138993"
+  },
+  {
+   "date": "2025-07",
+   "text": "InMoment launched AI Auto Responding in its Reputation Management solution: generative AI writes personalized, on-brand review replies from saved prompts, available on the Locations Starter and Locations Essential plans.",
+   "source": "https://www.businesswire.com/news/home/20250730587816/en/InMoment-a-Press-Ganey-Forsta-Company-Launches-Industry-First-AI-Auto-Responding-for-Enterprise-Reviews-Management"
+  }
  ],
  "features": [
-  "One dashboard for reviews from Google, Facebook, TripAdvisor and other review sites, with alerts for new reviews",
+  "One dashboard for review data from 100+ sources, including Google, Facebook and TripAdvisor, with alerts for new reviews",
   "Brand-approved response templates (Smart Response) so local managers can reply in a few clicks",
   "AI-generated review replies (AI Auto Responding) based on saved brand prompts",
   "Automated review requests to customers by email and text",
-  "Competitor tracking to compare ratings and review data against nearby rivals",
-  "Sentiment and topic analytics to spot recurring issues in feedback",
+  "Competitor tracking (competitor insights, Essential plan) to compare ratings and review data against nearby rivals",
+  "Sentiment and topic analytics (experience analysis, Essential plan) to spot recurring issues in feedback",
   "Location-level reporting and role-based access that can mirror a franchise structure",
   "Review data available inside InMoment's wider customer experience platform"
  ],
- "pricing": {"text": "Custom pricing, priced per location; the plans page asks you to book a meeting for a quote.", "source": "https://reviewtrackers.com/plans", "checked": "2026-11"},
+ "pricing": {
+  "text": "Custom pricing: plans are priced per location per month, paid annually, and the plans page asks you to book time for a quote. Three plans (Data Only, Starter, Essential) and six add-ons; no prices shown.",
+  "source": "https://reviewtrackers.com/plans",
+  "checked": "2026-11"
+ },
  "status": "acquired",
- "notes": "Acquired by InMoment in June 2022 (https://www.businesswire.com/news/home/20220616005180/en); InMoment was acquired by Press Ganey Forsta in May 2025. The ReviewTrackers brand, site and plans page are still live and it is still listed (\"ReviewTrackers, by InMoment\") on Capterra in 2026; no shutdown found. It is unclear how much product news is now branded InMoment rather than ReviewTrackers; the July 2025 AI Auto Responding launch is InMoment Reputation Management, whose 'Locations Starter/Essential' plans match ReviewTrackers' tier names, but the release does not name ReviewTrackers. Dropped from the current review: 'founded in 2012' and 'over 100 third-party sites' (not confirmed in sources found), and 'integrations with Hootsuite, Zapier and CRM platforms' (not confirmed). Third-party price figures ($49-$119 per location) conflict and are not used. Vendor case-study metrics are self-reported. WebFetch blocked; facts from search results."}
+ "notes": "Acquired by InMoment in June 2022 (https://www.businesswire.com/news/home/20220616005180/en); InMoment was acquired by Press Ganey Forsta in May 2025. The ReviewTrackers brand, site and plans page are still live and it is still listed (\"ReviewTrackers, by InMoment\") on Capterra in 2026; no shutdown found. It is unclear how much product news is now branded InMoment rather than ReviewTrackers; the July 2025 AI Auto Responding launch is InMoment Reputation Management, whose 'Locations Starter/Essential' plans match ReviewTrackers' tier names, but the release does not name ReviewTrackers. Dropped from the current review: 'founded in 2012' (not confirmed). '100+ sources' is now confirmed on the plans page (Data Only plan), and 'integrations with Hootsuite, Zapier and CRM platforms' (not confirmed). Third-party price figures ($49-$119 per location) conflict and are not used. Vendor case-study metrics are self-reported. Plans page fetched 2026-11. G2 rating from a G2 comparison page snippet (g2.com product page returns 403 to fetches).",
+ "pros": [
+  "Built for multi-location brands: per-location reporting and role-based access that can mirror a franchise structure",
+  "Unlimited users on the Starter plan, so every location manager can log in",
+  "Brand-approved Smart Response templates plus AI-generated replies from saved brand prompts",
+  "Review data from 100+ sources in one dashboard",
+  "Rated 4.6/5 on G2 from 161 reviews",
+  "Review data can sit inside InMoment's wider customer experience platform, next to survey feedback"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; plans are quoted per location per month, paid annually, after a meeting with sales",
+   "source": "https://reviewtrackers.com/plans"
+  },
+  {
+   "text": "Experience analysis and competitor insights are only in the Essential plan; Starter covers alerts, dashboards, review and feedback requests and review responding",
+   "source": "https://reviewtrackers.com/plans"
+  },
+  {
+   "text": "Local listings management, local search rank and managed services are add-ons on top of a plan",
+   "source": "https://reviewtrackers.com/plans"
+  },
+  {
+   "text": "AI Auto Responding was announced by InMoment for its Locations Starter and Locations Essential plans without naming ReviewTrackers, so availability should be confirmed with sales",
+   "source": "https://www.businesswire.com/news/home/20250730587816/en/InMoment-a-Press-Ganey-Forsta-Company-Launches-Industry-First-AI-Auto-Responding-for-Enterprise-Reviews-Management"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "per location per month, paid annually",
+  "list": [],
+  "note": "Data Only (review data from 100+ sources for your own tools), Starter (unlimited users, alerts, dashboards, review and feedback requests, review responding) and Essential (Starter plus experience analysis and competitor insights). Add-ons: local listings management, local search rank, managed services, white label, employer brand package, App Store package.",
+  "source": "https://reviewtrackers.com/plans",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.6",
+  "reviews": 161,
+  "source": "https://www.g2.com/compare/reputation-vs-reviewtrackers",
+  "checked": "2026-11"
+ }
+}

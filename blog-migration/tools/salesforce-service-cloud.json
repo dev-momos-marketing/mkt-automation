@@ -1,16 +1,37 @@
-{"name": "Salesforce Service Cloud (Agentforce Service)",
+{
+ "name": "Salesforce Service Cloud (Agentforce Service)",
  "website": "https://www.salesforce.com/products/service-cloud",
  "oneLiner": "Salesforce's customer service platform, now branded Agentforce Service, combining case management across channels with CRM data and AI agents.",
  "bestFor": "Large, multi-location or enterprise brands that already run Salesforce and need a configurable, CRM-connected service desk with AI agents.",
  "customers": [
-  {"name": "OpenTable", "source": "https://www.salesforce.com/news/stories/opentable-agentforce-service-cloud-customer-service/"},
-  {"name": "NightOwl Entertainment", "source": "https://www.salesforce.com/au/customer-stories/nightowl-entertainment/?bc=OTH"},
-  {"name": "Finnair", "source": "https://www.salesforce.com/eu/customer-success-stories/"},
-  {"name": "Pandora", "source": "https://www.salesforce.com/eu/customer-success-stories/"}
+  {
+   "name": "OpenTable",
+   "source": "https://www.salesforce.com/news/stories/opentable-agentforce-service-cloud-customer-service/"
+  },
+  {
+   "name": "NightOwl Entertainment",
+   "source": "https://www.salesforce.com/au/customer-stories/nightowl-entertainment/?bc=OTH"
+  },
+  {
+   "name": "Finnair",
+   "source": "https://www.salesforce.com/eu/customer-success-stories/"
+  },
+  {
+   "name": "Pandora",
+   "source": "https://www.salesforce.com/eu/customer-success-stories/"
+  }
  ],
  "updates": [
-  {"date": "2026-03", "text": "Salesforce launched Agentforce Contact Center at Enterprise Connect 2026: a native contact center add-on for Agentforce Service (formerly Service Cloud) combining voice, digital channels, CRM data and AI agents, generally available in the US and Canada.", "source": "https://www.salesforce.com/mx/news/press-releases/2026/03/10/salesforce-presenta-el-contact-center-agentic/"},
-  {"date": "2025-10", "text": "Winter '26 release added new Agentforce features across service products.", "source": "https://www.cio.com/article/4053913/salesforce-winter-26-release-adds-new-features-to-agentforce.html"}
+  {
+   "date": "2026-03",
+   "text": "Salesforce launched Agentforce Contact Center at Enterprise Connect 2026: a native contact center add-on for Agentforce Service (formerly Service Cloud) combining voice, digital channels, CRM data and AI agents, generally available in the US and Canada.",
+   "source": "https://www.salesforce.com/mx/news/press-releases/2026/03/10/salesforce-presenta-el-contact-center-agentic/"
+  },
+  {
+   "date": "2025-10",
+   "text": "Winter '26 release added new Agentforce features across service products.",
+   "source": "https://www.cio.com/article/4053913/salesforce-winter-26-release-adds-new-features-to-agentforce.html"
+  }
  ],
  "features": [
   "Agent console with case management across phone, email, chat, messaging and social",
@@ -22,5 +43,86 @@
   "Field service add-on",
   "Reporting and dashboards on service performance"
  ],
- "pricing": {"text": "Starter Suite from $25/user/month (billed annually); higher editions and the Agentforce for Service add-on ($125/user/month, billed annually) or per-conversation pricing from $2 cost more.", "source": "https://www.salesforce.com/service/pricing/", "checked": "2026-11"},
- "notes": "Service Cloud has been rebranded Agentforce Service (third-party and Salesforce press reporting; Salesforce says SKUs and functionality are unchanged). salesforce.com could not be fetched; pricing from search snippets of the pricing page. Third-party edition prices (Pro $100, Enterprise $175, Unlimited $350) not verified on salesforce.com, so left out. Finnair and Pandora come from Salesforce's customer stories hub snippets."}
+ "pricing": {
+  "text": "Per user per month: Starter Suite $25 (billed monthly or annually; transaction fees apply), Pro Suite $100 (billed annually, contract required), Core $195, Advanced $395 and Max $550 (billed annually). Core includes case management, a self-service help center and 500K Flex Credits per org; Advanced adds an AI agent for customer service and 1 million Flex Credits; Max adds the full Agentforce for Service suite, contact center digital channels and 2.75M Flex Credits per org per year. Agentforce for Service, Contact Center and Field Service are also sold as add-ons. 30-day free trial, no credit card.",
+  "source": "https://www.salesforce.com/service/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "Service Cloud has been rebranded Agentforce Service (third-party and Salesforce press reporting; Salesforce says SKUs and functionality are unchanged). salesforce.com could not be fetched; pricing from search snippets of the pricing page. Third-party edition prices (Pro $100, Enterprise $175, Unlimited $350) not verified on salesforce.com, so left out. Finnair and Pandora come from Salesforce's customer stories hub snippets. 2026-11: salesforce.com/service/pricing/ fetched directly; the editions are now Starter Suite, Pro Suite, Core, Advanced and Max, and the page no longer shows the $125 Agentforce add-on price or per-conversation pricing, so both were dropped. salesforce.com still calls the product Service Cloud; G2 lists it as Agentforce Service (formerly Salesforce Service Cloud). G2 rating from search snippets (4.4; review count 7,358 to 8,462 across pages), so reviews cite the score only.",
+ "pros": [
+  "Service cases sit on the same Salesforce CRM record that sales and marketing teams use",
+  "One agent console for phone, email, chat, messaging and social",
+  "AI agents that answer customers around the clock and AI help for reps (reply drafts, case summaries, classification)",
+  "Deep configuration: entitlements, SLAs, routing and omni-channel queues",
+  "30-day free trial with no credit card",
+  "4.4/5 on G2"
+ ],
+ "cons": [
+  {
+   "text": "The AI agent for customer service starts with the Advanced edition at $395 per user per month, billed annually, or as a paid add-on",
+   "source": "https://www.salesforce.com/service/pricing/"
+  },
+  {
+   "text": "AI use is metered in Flex Credits (500K per org on Core, 1 million on Advanced); more credits cost extra",
+   "source": "https://www.salesforce.com/service/pricing/"
+  },
+  {
+   "text": "Pro Suite and the higher editions are billed annually, and Pro Suite requires a contract",
+   "source": "https://www.salesforce.com/service/pricing/"
+  },
+  {
+   "text": "Contact Center and Field Service are add-ons with their own pricing",
+   "source": "https://www.salesforce.com/service/pricing/"
+  },
+  {
+   "text": "Built for brands already on Salesforce; a small restaurant team without it takes on a large platform to configure",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "30-day free trial, no credit card",
+  "billing": "per user per month",
+  "list": [
+   {
+    "name": "Starter Suite",
+    "price": "$25",
+    "unit": "per user per month, billed monthly or annually",
+    "note": "starting price; transaction fees apply"
+   },
+   {
+    "name": "Pro Suite",
+    "price": "$100",
+    "unit": "per user per month, billed annually",
+    "note": "contract required"
+   },
+   {
+    "name": "Core",
+    "price": "$195",
+    "unit": "per user per month, billed annually",
+    "note": "case management, self-service help center"
+   },
+   {
+    "name": "Advanced",
+    "price": "$395",
+    "unit": "per user per month, billed annually",
+    "note": "adds an AI agent for customer service"
+   },
+   {
+    "name": "Max",
+    "price": "$550",
+    "unit": "per user per month, billed annually",
+    "note": "full Agentforce for Service suite and contact center digital channels"
+   }
+  ],
+  "source": "https://www.salesforce.com/service/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 8462,
+  "product": "Agentforce Service (formerly Salesforce Service Cloud)",
+  "source": "https://www.g2.com/products/agentforce-service-formerly-salesforce-service-cloud/reviews",
+  "checked": "2026-11"
+ }
+}

@@ -1,14 +1,33 @@
-{"name": "Intercom (by Fin, a Salesforce company)", "website": "https://www.intercom.com/",
+{
+ "name": "Intercom (by Fin, a Salesforce company)",
+ "website": "https://www.intercom.com/",
  "oneLiner": "AI-first customer service platform: the Fin AI agent plus the Intercom helpdesk (shared inbox, tickets, help center, phone). The company renamed itself Fin in May 2026 and was acquired by Salesforce in September 2026.",
  "bestFor": "Businesses that want an AI agent to answer most routine questions across chat, email, phone and messaging, with a helpdesk for the rest.",
  "customers": [
-  {"name": "Anthropic", "source": "https://aws.amazon.com/solutions/case-studies/intercom-anthropic/"},
-  {"name": "Lightspeed", "source": "https://intercom.com/customers"},
-  {"name": "Synthesia", "source": "https://intercom.com/customers/synthesia"}
+  {
+   "name": "Anthropic",
+   "source": "https://aws.amazon.com/solutions/case-studies/intercom-anthropic/"
+  },
+  {
+   "name": "Lightspeed",
+   "source": "https://intercom.com/customers"
+  },
+  {
+   "name": "Synthesia",
+   "source": "https://intercom.com/customers/synthesia"
+  }
  ],
  "updates": [
-  {"date": "2026-05", "text": "Intercom renamed the company Fin (announced May 12, 2026); the helpdesk keeps the Intercom name.", "source": "https://www.intercom.com/blog/today-intercom-becomes-fin"},
-  {"date": "2026-09", "text": "Salesforce completed its acquisition of Fin, formerly Intercom (September 10, 2026), after signing the deal on June 15, 2026. Fin continues to serve its customers as part of Salesforce AI Labs.", "source": "https://investor.salesforce.com/news/news-details/2026/Salesforce-Completes-Acquisition-of-Fin/default.aspx"}
+  {
+   "date": "2026-05",
+   "text": "Intercom renamed the company Fin (announced May 12, 2026); the helpdesk keeps the Intercom name.",
+   "source": "https://www.intercom.com/blog/today-intercom-becomes-fin"
+  },
+  {
+   "date": "2026-09",
+   "text": "Salesforce completed its acquisition of Fin, formerly Intercom (September 10, 2026), after signing the deal on June 15, 2026. Fin continues to serve its customers as part of Salesforce AI Labs.",
+   "source": "https://investor.salesforce.com/news/news-details/2026/Salesforce-Completes-Acquisition-of-Fin/default.aspx"
+  }
  ],
  "features": [
   "Fin AI agent answering customers from your help content across chat, email, phone, WhatsApp, SMS and social",
@@ -20,5 +39,75 @@
   "Phone with supervisor tools to join live calls",
   "Reporting on AI and team performance"
  ],
- "pricing": {"text": "Seats from $29/seat/month (Essential, billed annually); Advanced $85 and Expert $132 per seat/month annually. Fin AI agent billed separately at $0.99 per outcome (resolution).", "source": "https://www.intercom.com/pricing", "checked": "2026-11"},
- "notes": "Company is now Fin, owned by Salesforce (deal closed September 10, 2026; reported at about $3.6 billion, not stated in the closing release). Pricing trackers show Intercom intermittently offering Essential at $19/seat for new customers during June-October 2026; review uses the $29 list price. Lightspeed's '65% resolution' and other vendor metrics were not used. intercom.com could not be fetched; pricing confirmed via several third-party pages."}
+ "pricing": {
+  "text": "Seats: Essential $29, Advanced $85 and Expert $132 per seat per month, billed annually (new customers currently see Essential at $19, 'New customers save 35%'). Fin AI agent: $0.99 per outcome, charged once per conversation; used with another helpdesk, a minimum monthly commitment applies (e.g. 50 outcomes). Add-ons: Copilot $29 per agent per month billed annually or $35 billed monthly; Proactive Support Plus $99 per month (500 messages); Pro from $100 per month. 14-day free trial, no credit card required; 1 Full seat minimum.",
+  "source": "https://www.intercom.com/pricing",
+  "checked": "2026-11"
+ },
+ "notes": "Company is now Fin, owned by Salesforce (deal closed September 10, 2026; reported at about $3.6 billion, not stated in the closing release). Pricing trackers show Intercom intermittently offering Essential at $19/seat for new customers during June-October 2026; review uses the $29 list price. Lightspeed's '65% resolution' and other vendor metrics were not used. intercom.com could not be fetched; pricing confirmed via several third-party pages. November 2026: intercom.com/pricing opened. It shows Essential at $19 struck through from $29 ('New customers save 35%'); the page's toggle doesn't label which billing each price follows, and the annual basis comes from the earlier check and third-party pages. G2 shows 4.5 out of 5 for Fin by Intercom; the review count differs by page (about 3,850 to 3,950), so none is cited.",
+ "pros": [
+  "AI agent, shared inbox, help center and phone in one product, so the conversation history carries over when Fin hands off to a person",
+  "Fin answers across chat, email, phone, WhatsApp, SMS and social",
+  "Published prices and a 14-day free trial with no credit card",
+  "Fin is charged per outcome, once per conversation",
+  "Rated 4.5 out of 5 on G2 (Fin by Intercom)"
+ ],
+ "cons": [
+  {
+   "text": "Two-part bill: seats plus $0.99 per Fin outcome, so the cost rises with conversation volume",
+   "source": "https://www.intercom.com/pricing"
+  },
+  {
+   "text": "Copilot for human agents is an add-on: $29 per agent per month billed annually, $35 billed monthly",
+   "source": "https://www.intercom.com/pricing"
+  },
+  {
+   "text": "Using Fin with another helpdesk carries a minimum monthly commitment (e.g. 50 outcomes)",
+   "source": "https://www.intercom.com/pricing"
+  },
+  {
+   "text": "A general customer service platform, so restaurant-specific work such as replying to Google or Yelp reviews needs another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial, no credit card required",
+  "billing": "per seat per month, billed annually; Fin AI agent billed per outcome",
+  "list": [
+   {
+    "name": "Essential",
+    "price": "$29",
+    "unit": "per seat per month, billed annually",
+    "note": "new customers currently see $19 (35% off)"
+   },
+   {
+    "name": "Advanced",
+    "price": "$85",
+    "unit": "per seat per month, billed annually",
+    "note": ""
+   },
+   {
+    "name": "Expert",
+    "price": "$132",
+    "unit": "per seat per month, billed annually",
+    "note": ""
+   },
+   {
+    "name": "Fin AI agent",
+    "price": "$0.99",
+    "unit": "per outcome",
+    "note": "no seats required; minimum monthly commitment with another helpdesk"
+   }
+  ],
+  "source": "https://www.intercom.com/pricing",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "product": "Fin by Intercom",
+  "score": "4.5",
+  "reviews": null,
+  "source": "https://www.g2.com/products/fin-by-intercom/reviews",
+  "checked": "2026-11"
+ }
+}

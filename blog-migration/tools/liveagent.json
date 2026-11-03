@@ -1,15 +1,33 @@
-{"name": "LiveAgent",
+{
+ "name": "LiveAgent",
  "website": "https://www.liveagent.com/",
  "oneLiner": "All-in-one help desk from Quality Unit with live chat, ticketing, a built-in call center, social channels and an AI chatbot.",
  "bestFor": "Small and mid-size teams that want chat, email, phone and social support plus AI in one affordable help desk.",
  "customers": [
-  {"name": "Huawei", "source": "https://www.liveagent.com/success-stories/liveagent-huawei/"},
-  {"name": "Slido", "source": "https://www.liveagent.com/customers"},
-  {"name": "FrëschKëscht", "source": "https://www.casestudies.com/company/liveagent/case-study/freschkescht-customer-case-study"}
+  {
+   "name": "Huawei",
+   "source": "https://www.liveagent.com/success-stories/liveagent-huawei/"
+  },
+  {
+   "name": "Slido",
+   "source": "https://www.liveagent.com/customers"
+  },
+  {
+   "name": "FrëschKëscht",
+   "source": "https://www.casestudies.com/company/liveagent/case-study/freschkescht-customer-case-study"
+  }
  ],
  "updates": [
-  {"date": "2025-03", "text": "LiveAgent rolled out its AI Chatbot (powered by FlowHunt, also built by Quality Unit) in Q1 2025; it runs from the existing chat button with no separate widget.", "source": "https://liveagent.com/blog/liveagent-monthly-updates-march-edition-2025"},
-  {"date": "2025-08", "text": "LiveAgent announced an AI Answer Generator in its August 2025 monthly update.", "source": "https://cdn.liveagent.com/blog/liveagent-2025-wrap-up/"}
+  {
+   "date": "2025-03",
+   "text": "LiveAgent rolled out its AI Chatbot (powered by FlowHunt, also built by Quality Unit) in Q1 2025; it runs from the existing chat button with no separate widget.",
+   "source": "https://liveagent.com/blog/liveagent-monthly-updates-march-edition-2025"
+  },
+  {
+   "date": "2025-08",
+   "text": "LiveAgent announced an AI Answer Generator in its August 2025 monthly update.",
+   "source": "https://cdn.liveagent.com/blog/liveagent-2025-wrap-up/"
+  }
  ],
  "features": [
   "Universal inbox for email, live chat, phone and social messages",
@@ -18,7 +36,84 @@
   "AI Answer Improver writing assistant for agents",
   "Knowledge base and customer portal",
   "Automation rules, ticket distribution and SLAs",
-  "Real-time reports on agent performance"
+  "Real-time reports on agent performance",
+  "AI on every plan: AI chatbot, AI Answer Assistant drafts, AI autoresponder, AI ticket summaries and an AI spam filter, running on your own AI provider account (OpenAI, Anthropic, Google Gemini or FlowHunt)",
+  "Social channels (Facebook, Instagram, X, Viber, WhatsApp, Telegram), calls, reports, SLA rules and CSAT surveys from the Team plan",
+  "Free setup and migration from Zendesk, Freshdesk or Help Scout; data centers in the EU, US or Singapore"
  ],
- "pricing": {"text": "Starter from $15/agent/month billed annually (promotional $11 until November 22, 2026); Team $29, Business $49 per agent/month regular annual prices; Enterprise flat $3,199/month billed annually for 80 agents. Free trial; no free plan per third-party sources.", "source": "https://www.liveagent.com/pricing/", "checked": "2026-11"},
- "notes": "liveagent.com could not be fetched; pricing from search snippets of the pricing page (tier names changed from Small/Medium/Large to Starter/Team/Business). Original said 'Free plan available' — CostBench says no free plan as of August 2026, so dropped. Dropped 'fastest live chat widget' claim (unverifiable). AI Answer Generator date is from the 2025 wrap-up summary of the August 2025 update."}
+ "pricing": {
+  "text": "Per agent per month, regular prices: Starter $15 billed annually ($19 monthly, up to 5 agents), Team $29 annually ($35 monthly, up to 15 agents), Business $49 annually ($59 monthly); Enterprise flat $3,199/month billed annually ($3,999 monthly) with 80 agents included. Special offer prices ($11, $22, $38 annually) for trials or quotes started by November 22, 2026, locked while you keep the plan. 30-day free trial, no credit card. No LiveAgent fee for AI: you pay your AI provider (about 2-4 cents a chat by LiveAgent's estimate). Phone numbers and minutes are billed by your phone provider.",
+  "source": "https://www.liveagent.com/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "liveagent.com/pricing was read directly in November 2026 (tier names changed from Small/Medium/Large to Starter/Team/Business). Original said 'Free plan available' — the pricing page lists only paid plans and a 30-day trial, so dropped. Dropped 'fastest live chat widget' claim (unverifiable). AI Answer Generator date is from the 2025 wrap-up summary of the August 2025 update. G2 rating from G2 search snippets and the badge on LiveAgent's pricing page (g2.com returns 403 to fetches).",
+ "pros": [
+  "Low entry price for a full help desk, with published per-agent plans",
+  "Built-in call center with IVR and call routing on Team and higher, so phone lines sit in the same inbox as chat and email",
+  "AI chatbot and AI reply drafts on every plan with no LiveAgent fee for AI",
+  "30-day free trial with no credit card, and free migration from Zendesk, Freshdesk or Help Scout",
+  "Rated 4.5 out of 5 on G2 from more than 1,500 reviews"
+ ],
+ "cons": [
+  {
+   "text": "No free plan; a 30-day trial, then a paid plan",
+   "source": "https://www.liveagent.com/pricing/"
+  },
+  {
+   "text": "Starter has no social channels, call center or reporting; those start on Team",
+   "source": "https://www.liveagent.com/pricing/"
+  },
+  {
+   "text": "AI runs on your own AI provider account, so AI usage is a second bill from OpenAI, Anthropic, Google Gemini or FlowHunt",
+   "source": "https://www.liveagent.com/pricing/"
+  },
+  {
+   "text": "Phone numbers and call minutes are billed by your phone provider",
+   "source": "https://www.liveagent.com/pricing/"
+  },
+  {
+   "text": "A general help desk with no restaurant-specific tools such as review replies or loyalty offers",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "30-day free trial, no credit card",
+  "billing": "per agent per month (Enterprise is a flat monthly fee); annual billing saves up to 27%",
+  "list": [
+   {
+    "name": "Starter",
+    "price": "$15",
+    "unit": "per agent per month, billed annually",
+    "note": "$19 monthly; up to 5 agents; offer price $11 until November 22, 2026"
+   },
+   {
+    "name": "Team",
+    "price": "$29",
+    "unit": "per agent per month, billed annually",
+    "note": "$35 monthly; up to 15 agents; offer price $22"
+   },
+   {
+    "name": "Business",
+    "price": "$49",
+    "unit": "per agent per month, billed annually",
+    "note": "$59 monthly; any team size; offer price $38"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$3,199",
+    "unit": "per month, billed annually, 80 agents included",
+    "note": "$3,999 billed monthly; extra agents $39 annually or $49 monthly"
+   }
+  ],
+  "source": "https://www.liveagent.com/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.5",
+  "reviews": 1538,
+  "text": "4.5 out of 5 from more than 1,500 reviews (1,538 on LiveAgent's pricing page, checked Nov 1, 2026; G2 comparison pages show 1,531 to 1,538)",
+  "source": "https://www.g2.com/products/liveagent/reviews",
+  "checked": "2026-11"
+ }
+}

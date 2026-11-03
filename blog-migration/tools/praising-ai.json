@@ -1,18 +1,104 @@
-{"name": "Praising.ai", "website": "https://praising.ai/",
- "oneLiner": "Low-cost AI review management tool for local businesses, with review requests, AI-drafted replies and rating tracking, plus a restaurant version of its marketing.",
- "bestFor": "Independent restaurants and small local businesses that want simple review collection and AI reply drafting at a low monthly price.",
+{
+ "name": "Praising.ai",
+ "website": "https://praising.ai/",
+ "oneLiner": "Low-cost AI review management tool for local businesses, with a free plan, email and text review requests, AI-drafted replies you approve, and rating tracking, plus a restaurant version of its marketing.",
+ "bestFor": "Independent restaurants and small local businesses (up to 10 locations) that mainly care about Google reviews and want simple review collection and AI reply drafting at a low monthly price.",
  "customers": [],
- "updates": [],
- "features": [
-  "Review requests by email and text after a visit, with automatic reminders for customers who haven't clicked",
-  "Review links and QR codes for receipts, table tents and posters, plus a kiosk mode for a counter tablet",
-  "AI-drafted replies that the owner approves before posting",
-  "One inbox for reviews from Google, Yelp, Facebook, Tripadvisor and other sites",
-  "Tracking of review volume, rating trends and reply rates, with multi-location support",
-  "Review page in Spanish, French and other languages",
-  "Visibility section with Maps ranking and AI ranking",
-  "API and webhooks for connecting other systems"
+ "updates": [
+  {
+   "date": "2026-07",
+   "text": "July 2026: API and webhooks (July 1), Trustpilot reviews imported alongside Google (July 3), Draft with AI replies (July 17), a Visibility section with Maps Ranking and AI Ranking (July 20), a Social Agent that drafts posts from 5-star reviews (July 28) and text-message review requests from the Send page (July 29).",
+   "source": "https://praising.ai/changelog"
+  },
+  {
+   "date": "2026-10",
+   "text": "October 3, 2026 update: automatic email reminders for customers who haven't clicked, a review page in Spanish, French, Portuguese, German, Italian, Chinese, Vietnamese, Korean, Tagalog or Japanese, a kiosk mode for a counter tablet, and an AI agent that drafts replies to new Google reviews for approval.",
+   "source": "https://praising.ai/changelog"
+  },
+  {
+   "date": "2026-11",
+   "text": "November 1, 2026 update: a Google profile checklist, printable analytics reports, reviews credited to the staff member a customer names with a leaderboard, and reply drafts written in the review's language with a Translate button.",
+   "source": "https://praising.ai/changelog"
+  }
  ],
- "pricing": {"text": "Core $19 per location per month, Growth $29, Pro $49; a free trial and no annual contract. Vendor pages disagree on trial length (7 or 14 days) and whether a card is needed.", "source": "https://praising.ai/pricing", "checked": "2026-11"},
+ "features": [
+  "Automated email review requests after a visit, with automatic reminders for customers who haven't clicked; texts sent by hand from the Send page on paid plans (50, 200 or 500 a month)",
+  "Review page where a customer leaves a public review or sends a private message to the owner, shared by link, QR code, NFC tag, poster or a kiosk mode for a counter tablet",
+  "AI Agent drafts a reply to every new Google and Trustpilot review around the clock; nothing posts until you approve it; warm, professional or apologetic tone, with separate tone and instructions for 1-3 star reviews",
+  "Imports Google and Trustpilot reviews into one inbox and links Yelp, Tripadvisor, OpenTable, Facebook and 15 more sites from the dashboard",
+  "Tracking of response rate and average rating, analytics with date ranges and printable reports, multi-location switching",
+  "Review page in ten languages, and reply drafts in the language of the review",
+  "Visibility section with Maps Ranking and AI Ranking, and a Google Business Profile checklist",
+  "Review widgets (carousel, grid, badge, floating), a Social Agent that drafts posts from 5-star reviews, and a review-powered website builder",
+  "API and webhooks on paid plans, so a POS or reservation system can trigger review requests; contacts can also be uploaded by CSV"
+ ],
+ "pricing": {
+  "text": "Forever Free $0 (1 location, manual replies, up to 5 imported reviews, 50 emails a month, no SMS); Core $19/month (1 location); Growth $29/month (up to 3 locations); Pro $49/month (up to 10 locations, no Praising badge). Annual: $190, $290, $490 (save 17%). Paid plans have a 14-day free trial that starts with a card; no contracts or setup fees.",
+  "source": "https://praising.ai/pricing",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "Only vendor sources found; no named customers, press coverage or third-party reviews. Changelog (praising.ai/changelog) lists recent features (text requests, reminders, languages, kiosk mode, Visibility, API/webhooks) but has no dates, so no dated updates were recorded. The current review calls it 'built specifically for restaurants'; most of its site describes a general local-business tool with restaurant landing pages, so that framing should be softened. Its pages say it does not connect directly to OpenTable, Resy, Toast or Square. Dropped 'auto-publish for reviews above a rating you choose' (vendor pages say nothing is posted until you approve; not confirmed). Pages disagree on whether low ratings are routed to a private form, so that was left out."}
+ "notes": "Only vendor sources found; no named customers (the restaurant page quotes an owner of 'Rossi's Italian Kitchen', not used), no press coverage, and no G2 listing (Trustpilot only), so no rating. Pricing changed since the last check: plans now cover 1, up to 3 and up to 10 locations rather than per location, and there is a Forever Free plan. Its pages now say it imports only Google and Trustpilot reviews and links the other sites, and that texts are sent by hand; the earlier claim of one inbox for Yelp, Facebook and Tripadvisor reviews was dropped. The changelog now carries dates. The current review calls it 'built specifically for restaurants'; most of its site describes a general local-business tool with restaurant landing pages. Vendor ROI figures (5-10 hours saved, 2-3x more reviews, 68% open rate) left out.",
+ "pros": [
+  "Forever Free plan, and paid plans from $19 to $49 a month with no contract",
+  "One subscription covers up to 3 locations on Growth and up to 10 on Pro",
+  "AI drafts wait for your approval, with tone settings and separate instructions for 1-3 star reviews",
+  "Review page with a private-message option, QR codes, NFC and a kiosk mode for walk-in guests",
+  "Maps Ranking and AI Ranking show local search visibility",
+  "Frequent updates: the changelog lists new features most months in 2026"
+ ],
+ "cons": [
+  {
+   "text": "Imports only Google and Trustpilot reviews; Yelp, Tripadvisor, OpenTable, Facebook and the other linked sites are not monitored",
+   "source": "https://praising.ai/integrations"
+  },
+  {
+   "text": "Doesn't connect delivery apps such as DoorDash, Uber Eats or Grubhub",
+   "source": "https://praising.ai/industries/restaurants"
+  },
+  {
+   "text": "Automated requests are email; texts are sent by hand on paid plans, and POS or reservation systems connect through the API and webhooks",
+   "source": "https://praising.ai/features"
+  },
+  {
+   "text": "Pro covers at most 10 locations; larger groups have to email support",
+   "source": "https://praising.ai/pricing"
+  },
+  {
+   "text": "Young product: AI reply drafts, text requests and the API all arrived in July 2026",
+   "source": "https://praising.ai/changelog"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial on paid plans (starts with a card); Forever Free plan with no card",
+  "billing": "per month for the business (one plan covers its locations), or yearly at a 17% saving",
+  "list": [
+   {
+    "name": "Forever Free",
+    "price": "$0",
+    "unit": "per month",
+    "note": "1 location; manual replies, up to 5 imported reviews, 50 emails a month, no SMS"
+   },
+   {
+    "name": "Core",
+    "price": "$19",
+    "unit": "per month ($190 a year)",
+    "note": "1 location; AI Agent and AI suggestions, 500 emails and 50 SMS a month"
+   },
+   {
+    "name": "Growth",
+    "price": "$29",
+    "unit": "per month ($290 a year)",
+    "note": "up to 3 locations; 2,000 emails and 200 SMS a month"
+   },
+   {
+    "name": "Pro",
+    "price": "$49",
+    "unit": "per month ($490 a year)",
+    "note": "up to 10 locations; 10,000 emails and 500 SMS a month; no Praising badge"
+   }
+  ],
+  "source": "https://praising.ai/pricing",
+  "checked": "2026-11"
+ }
+}

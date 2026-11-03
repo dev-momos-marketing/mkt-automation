@@ -1,16 +1,37 @@
-{"name": "PAR Punchh",
+{
+ "name": "PAR Punchh",
  "website": "https://punchh.com/",
  "oneLiner": "Enterprise loyalty, offers and guest engagement platform for restaurant chains, owned by PAR Technology and part of its PAR Engagement cloud.",
  "bestFor": "Multi-unit and enterprise restaurant brands that want loyalty tied into POS, ordering and guest data.",
  "customers": [
-  {"name": "Krystal (Club Krystal)", "source": "https://www.businesswire.com/news/home/20251022909455/en"},
-  {"name": "Torchy's Tacos", "source": "https://www.businesswire.com/news/home/20250205822523/en/Torchys-Tacos-Lights-Up-Customer-Experience-with-New-Loyalty-Program-Powered-by-PAR-Technologys-PAR-Punchh-Platform"},
-  {"name": "Church's Texas Chicken", "source": "https://www.nasdaq.com/press-release/churchs-texas-chickenr-selected-par-punchhr-revolutionize-customer-engagement-and"},
-  {"name": "Salsarita's Fresh Mexican Grill", "source": "https://www.businesswire.com/news/home/20251211022380/en/PAR-Technology-Unveils-Smart-Passes-The-Next-Era-of-Loyalty-Engagement"}
+  {
+   "name": "Krystal (Club Krystal)",
+   "source": "https://www.businesswire.com/news/home/20251022909455/en"
+  },
+  {
+   "name": "Torchy's Tacos",
+   "source": "https://www.businesswire.com/news/home/20250205822523/en/Torchys-Tacos-Lights-Up-Customer-Experience-with-New-Loyalty-Program-Powered-by-PAR-Technologys-PAR-Punchh-Platform"
+  },
+  {
+   "name": "Church's Texas Chicken",
+   "source": "https://www.nasdaq.com/press-release/churchs-texas-chickenr-selected-par-punchhr-revolutionize-customer-engagement-and"
+  },
+  {
+   "name": "Salsarita's Fresh Mexican Grill",
+   "source": "https://www.businesswire.com/news/home/20251211022380/en/PAR-Technology-Unveils-Smart-Passes-The-Next-Era-of-Loyalty-Engagement"
+  }
  ],
  "updates": [
-  {"date": "2025-06", "text": "PAR launched PAR Engagement, a unified guest engagement cloud combining Punchh loyalty, marketing and offers, rebuilt PAR Ordering and guest data; the release added membership tiers and AI-driven rule activation.", "source": "https://www.businesswire.com/news/home/20250610356934/en/PAR-Technology-Launches-PAR%C2%AE-Engagement-A-Unified-Guest-Engagement-Cloud-Purpose-Built-for-Enterprise-Restaurants"},
-  {"date": "2025-12", "text": "PAR unveiled Smart Passes, wallet-native loyalty in Apple Wallet and Google Wallet with one-tap enrollment and real-time points and offers, synced with Punchh campaigns.", "source": "https://www.businesswire.com/news/home/20251211022380/en/PAR-Technology-Unveils-Smart-Passes-The-Next-Era-of-Loyalty-Engagement"}
+  {
+   "date": "2025-06",
+   "text": "PAR launched PAR Engagement, a unified guest engagement cloud combining Punchh loyalty, marketing and offers, rebuilt PAR Ordering and guest data; the release added membership tiers and AI-driven rule activation.",
+   "source": "https://www.businesswire.com/news/home/20250610356934/en/PAR-Technology-Launches-PAR%C2%AE-Engagement-A-Unified-Guest-Engagement-Cloud-Purpose-Built-for-Enterprise-Restaurants"
+  },
+  {
+   "date": "2025-12",
+   "text": "PAR unveiled Smart Passes, wallet-native loyalty in Apple Wallet and Google Wallet with one-tap enrollment and real-time points and offers, synced with Punchh campaigns.",
+   "source": "https://www.businesswire.com/news/home/20251211022380/en/PAR-Technology-Unveils-Smart-Passes-The-Next-Era-of-Loyalty-Engagement"
+  }
  ],
  "features": [
   "Points, visit and tiered membership programs",
@@ -20,5 +41,42 @@
   "Integrations with POS, online ordering, mobile apps and kiosks",
   "Guest data and reporting across channels as part of PAR Engagement"
  ],
- "pricing": {"text": "Custom pricing; not published.", "source": null, "checked": "2026-11"},
- "notes": "Punchh was acquired by PAR Technology (reported $500M, 2021) and is sold as PAR Punchh within PAR Engagement. Dropped original claims: 'over 40% of top 100 US restaurant brands', 'up to 6.5x frequency lift' from Punchh Wallet, '100%+ net dollar retention', Yum!/TGI Friday's/Casey's as customers (not re-verified). Brand count varies by source (200+ vs 275+), so left out. PAR Games launch date not confirmed. punchh.com and businesswire.com could not be fetched; facts come from search results of the releases."}
+ "pricing": {
+  "text": "Custom pricing; not published.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "notes": "Punchh was acquired by PAR Technology (reported $500M, 2021) and is sold as PAR Punchh within PAR Engagement. Dropped original claims: 'over 40% of top 100 US restaurant brands', 'up to 6.5x frequency lift' from Punchh Wallet, '100%+ net dollar retention', Yum!/TGI Friday's/Casey's as customers (not re-verified). Brand count varies by source (200+ vs 275+), so left out. PAR Games launch date not confirmed. punchh.com and businesswire.com could not be fetched; facts come from search results of the releases. November 2026: punchh.com now opens as PAR Engagement ('PAR Punchh is now part of PAR Engagement'), lists no prices and offers demos; it claims 'Trusted by over 275 global brands' and '34/100 Top Restaurant Brands'. G2 rating from search snippets of g2.com/products/par-punchh/reviews: 2.6 from only 10 reviews, several from 2018 to 2020, so a thin and dated sample.",
+ "pros": [
+  "Built for restaurant chains: loyalty, offers and guest data tied into POS, online ordering, apps and kiosks",
+  "Flexible program types: points, visits and membership tiers",
+  "Wallet loyalty without an app: Smart Passes in Apple Wallet and Google Wallet",
+  "One vendor for loyalty, marketing, ordering and guest data through PAR Engagement",
+  "Scale: punchh.com says it is trusted by over 275 global brands"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; you talk to PAR's team for a quote",
+   "source": "https://punchh.com/"
+  },
+  {
+   "text": "Built for multi-unit and enterprise brands, so a single-location restaurant may not need its depth",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": null,
+  "list": [],
+  "source": "https://punchh.com/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "2.6",
+  "reviews": 10,
+  "source": "https://www.g2.com/products/par-punchh/reviews",
+  "checked": "2026-11",
+  "note": "Only 10 reviews, several from 2018 to 2020; too thin to cite in a review."
+ }
+}

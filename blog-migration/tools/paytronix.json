@@ -1,16 +1,38 @@
-{"name": "Paytronix",
+{
+ "name": "Paytronix",
  "website": "https://www.paytronix.com/",
  "oneLiner": "Guest engagement suite for restaurants and convenience stores (loyalty, online ordering, gift cards, branded apps, messaging), part of The Access Group since its acquisition announced in November 2024.",
  "bestFor": "Multi-location restaurant chains and c-store brands that want loyalty, ordering, gift cards and campaigns on one guest database.",
  "customers": [
-  {"name": "Peet's Coffee (Peetnik Rewards)", "source": "https://www.paytronix.com/resources/case-studies/peet-s-coffee-brews-up-350-increase-in-members-with-relaunch-of-peetnik-rewards-on-paytronix-platform/"},
-  {"name": "Las Palapas (LP Club app, 25 locations, February 2026)", "source": "https://thewisemarketer.com/las-palapas-kicks-off-2026-with-new-loyalty-mobile-ordering-more-from-paytronix"},
-  {"name": "Bruster's Real Ice Cream (Sweet Rewards)", "source": "https://www.qsrmagazine.com/news/bruster-s-franchise-rolls-out-paytronix-powered-loyalty-program-app/"}
+  {
+   "name": "Peet's Coffee (Peetnik Rewards)",
+   "source": "https://www.paytronix.com/resources/case-studies/peet-s-coffee-brews-up-350-increase-in-members-with-relaunch-of-peetnik-rewards-on-paytronix-platform/"
+  },
+  {
+   "name": "Las Palapas (LP Club app, 25 locations, February 2026)",
+   "source": "https://thewisemarketer.com/las-palapas-kicks-off-2026-with-new-loyalty-mobile-ordering-more-from-paytronix"
+  },
+  {
+   "name": "Bruster's Real Ice Cream (Sweet Rewards)",
+   "source": "https://www.qsrmagazine.com/news/bruster-s-franchise-rolls-out-paytronix-powered-loyalty-program-app/"
+  }
  ],
  "updates": [
-  {"date": "2025-10", "text": "Launched Journey Builder, an AI-powered, no-code campaign automation tool for multi-step guest journeys, available to all Paytronix clients in Campaign Center.", "source": "https://thewisemarketer.com/paytronix-releases-journey-builder-to-enable-self-service-ultra-personalized-messaging-campaigns/"},
-  {"date": "2026-04", "text": "Released Rewards Hub for loyalty customers on Access Identity, letting marketers set up rewards, change earning ratios and launch promotions themselves; tiers, clubs and point multipliers to follow later in 2026.", "source": "https://thewisemarketer.com/paytronix-releases-rewards-hub-innovative-revamp-of-platform-delivers-greater-agility-visibility/"},
-  {"date": "2026-09", "text": "Brought Advanced Messaging with Journey Builder natively into Access Evo.", "source": "https://www.destinationcrm.com/Articles/CRM-News/CRM-Across-the-Wire/Paytronix-Brings-Messaging-to-Access-Evo-176596.aspx"}
+  {
+   "date": "2025-10",
+   "text": "Launched Journey Builder, an AI-powered, no-code campaign automation tool for multi-step guest journeys, available to all Paytronix clients in Campaign Center.",
+   "source": "https://thewisemarketer.com/paytronix-releases-journey-builder-to-enable-self-service-ultra-personalized-messaging-campaigns/"
+  },
+  {
+   "date": "2026-04",
+   "text": "Released Rewards Hub for loyalty customers on Access Identity, letting marketers set up rewards, change earning ratios and launch promotions themselves; tiers, clubs and point multipliers to follow later in 2026.",
+   "source": "https://thewisemarketer.com/paytronix-releases-rewards-hub-innovative-revamp-of-platform-delivers-greater-agility-visibility/"
+  },
+  {
+   "date": "2026-09",
+   "text": "Brought Advanced Messaging with Journey Builder natively into Access Evo.",
+   "source": "https://www.destinationcrm.com/Articles/CRM-News/CRM-Across-the-Wire/Paytronix-Brings-Messaging-to-Access-Evo-176596.aspx"
+  }
  ],
  "features": [
   "Points, visit and tiered loyalty programs with comps and promotions",
@@ -19,8 +41,41 @@
   "Branded mobile app and online ordering",
   "Native stored-value gift cards and e-gift cards redeemable with loyalty",
   "Guest segmentation and insights",
-  "POS and ordering integrations (Qu, Revel and many others)",
+  "POS and ordering integrations: more than 450 existing integrations, including 30+ native POS integrations (Qu, Revel and others)",
   "Subscription programs"
  ],
- "pricing": {"text": "Custom pricing; Paytronix does not publish prices.", "source": null, "checked": "2026-11"},
- "notes": "Acquired by The Access Group (announced November 2024; https://www.restaurantdive.com/news/paytronix-acquired-by-the-access-group/731733/); keeps the Paytronix name and describes itself as 'an Access company'. Dropped from the original: the 400-500% message-effectiveness claim, 50-70% participation claim, 450+ integrations count, Smashburger customer reference, and the $1,500-$5,000/month price range (unsourced). Current integration count is quoted as 500+ in search snippets but I couldn't open the page, so I left counts out. paytronix.com could not be fetched; facts come from search results and trade press. Rewards Hub currently supports the Bankable Points program type only."}
+ "pricing": {
+  "text": "Custom pricing; Paytronix does not publish prices. Its own comparison guide (May 2026) says 'Contact for pricing. Custom-quoted based on brand size, product modules selected, and location count.'",
+  "source": "https://www.paytronix.com/blog/best-restaurant-loyalty-software-comparison-guide",
+  "checked": "2026-11"
+ },
+ "notes": "Acquired by The Access Group (announced November 2024; https://www.restaurantdive.com/news/paytronix-acquired-by-the-access-group/731733/); keeps the Paytronix name and describes itself as 'an Access company'. Dropped from the original: the 400-500% message-effectiveness claim, 50-70% participation claim, Smashburger customer reference, and the $1,500-$5,000/month price range (unsourced). November 2026: paytronix.com/loyalty says 'more than 450 existing integrations' and that it helps restaurant groups from 1-9 units; Paytronix's May 2026 comparison guide gives '450+ integrations including 30+ native POS integrations', the pricing basis and its limitations. It also claims 1,800+ brands across 50,000 locations (vendor claim, not used). No G2 rating cited: G2's Paytronix CXP listing has only 3 reviews and G2 says that isn't enough for buying insight. Rewards Hub currently supports the Bankable Points program type only.",
+ "pros": [
+  "Loyalty, online ordering, gift cards, branded apps and messaging on one guest database",
+  "Flexible programs: points, visits, tiers, subscriptions, comps and promotions",
+  "Marketers change rewards and earning ratios themselves in Rewards Hub (2026)",
+  "Journey Builder automates multi-step campaigns across email, SMS and push",
+  "More than 450 integrations, including 30+ native POS integrations"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; quotes depend on brand size, modules and location count",
+   "source": "https://www.paytronix.com/blog/best-restaurant-loyalty-software-comparison-guide"
+  },
+  {
+   "text": "Paytronix's own guide says it suits operators with the budget for enterprise-tier platforms, and the smallest single-location operators may find it more extensive than needed",
+   "source": "https://www.paytronix.com/blog/best-restaurant-loyalty-software-comparison-guide"
+  },
+  {
+   "text": "Rewards Hub supports only the Bankable Points program type at launch; tiers, clubs and point multipliers are due later in 2026",
+   "source": "https://thewisemarketer.com/paytronix-releases-rewards-hub-innovative-revamp-of-platform-delivers-greater-agility-visibility/"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "custom quote based on brand size, modules selected and location count",
+  "list": [],
+  "source": "https://www.paytronix.com/blog/best-restaurant-loyalty-software-comparison-guide",
+  "checked": "2026-11"
+ }
+}

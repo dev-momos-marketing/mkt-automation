@@ -1,24 +1,85 @@
-{"name": "Superorder", "website": "https://www.superorder.com/",
+{
+ "name": "Superorder",
+ "website": "https://www.superorder.com/",
  "oneLiner": "AI agent platform for restaurant chains (formerly Forward Kitchens) covering review management, surveys and guest feedback, delivery profitability, scorecards and alerts.",
  "bestFor": "Multi-unit restaurant brands with significant delivery and takeout volume that want AI-written review replies across Google, Yelp and delivery apps, plus feedback flows that win back unhappy guests.",
  "customers": [
-  {"name": "Tasty Restaurant Group", "source": "https://www.superorder.com/case-studies/tasty-restaurant-group-wins-back-21-percent-of-unhappy-customers-with-superorder"},
-  {"name": "L&L Hawaiian Barbecue", "source": "https://www.superorder.com/press"},
-  {"name": "Wow Bao", "source": "https://www.ycombinator.com/companies/superorder"},
-  {"name": "Marco's Pizza", "source": "https://www.ycombinator.com/companies/superorder"}
+  {
+   "name": "Tasty Restaurant Group",
+   "source": "https://www.superorder.com/case-studies/tasty-restaurant-group-wins-back-21-percent-of-unhappy-customers-with-superorder"
+  },
+  {
+   "name": "L&L Hawaiian Barbecue",
+   "source": "https://www.superorder.com/press"
+  },
+  {
+   "name": "Wow Bao",
+   "source": "https://www.ycombinator.com/companies/superorder"
+  },
+  {
+   "name": "Marco's Pizza",
+   "source": "https://www.ycombinator.com/companies/superorder"
+  },
+  {
+   "name": "Turning Point Restaurants",
+   "source": "https://foodondemand.com/06092025/turning-point-restaurants-partners-with-superorder-for-guest-experience/"
+  }
  ],
  "updates": [
-  {"date": "2025-07", "text": "L&L Hawaiian Barbecue partnered with Superorder to improve guest engagement and feedback collection across its 230+ locations.", "source": "https://www.superorder.com/press"}
+  {
+   "date": "2025-06",
+   "text": "Turning Point Restaurants, with 32 locations on the East Coast, partnered with Superorder to gather post-order feedback, manage reviews across channels and flag friction points.",
+   "source": "https://foodondemand.com/06092025/turning-point-restaurants-partners-with-superorder-for-guest-experience/"
+  },
+  {
+   "date": "2025-07",
+   "text": "L&L Hawaiian Barbecue partnered with Superorder to improve guest engagement and feedback collection across its 230+ locations.",
+   "source": "https://www.superorder.com/press"
+  }
  ],
  "features": [
-  "Review Management Agent that pulls reviews from Google, Yelp and delivery platforms into one dashboard",
-  "AI-written review replies personalized with the guest's order details",
-  "Surveys & Feedback Agent that collects private feedback after orders",
-  "Automated recovery offers sent to dissatisfied guests",
-  "Delivery profitability agents for third-party delivery operations",
+  "Review Management Agent that answers reviews on Google, Yelp and delivery platforms from one dashboard",
+  "AI-written review replies personalized with the guest's order details (items, delivery time, errors, order history), varied by star rating and by customer segment (loyalty, average order value, order frequency)",
+  "Surveys & Feedback Agent that sends AI-driven surveys after orders to surface issues before they become public reviews",
+  "Automated recovery offers (tailored compensation) sent to dissatisfied guests",
+  "Delivery profitability agents for third-party delivery: real-time alerts, consolidated reporting, financial reconciliation and downtime tracking",
   "AI scorecards comparing performance across locations",
-  "Insights and real-time alerts on guest issues"
+  "Insights and real-time alerts on guest issues, trends and sentiment"
  ],
- "pricing": {"text": "Custom pricing; Superorder does not publish prices. Contact the company for a quote.", "source": null, "checked": "2026-11"},
+ "pricing": {
+  "text": "Custom pricing: one Enterprise Plan, quoted after a demo ('store-based pricing'), billed monthly on the first of the month. No free trial; a 30-day money-back guarantee instead. The plan lists unlimited users, a dedicated account manager, 1:1 onboarding, a 24-hour support response SLA, role-based access control and advanced reporting.",
+  "source": "https://www.superorder.com/pricing",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "Renamed from Forward Kitchens in 2023, when it raised a $10M Series A led by Foundation Capital (TechCrunch, Sep 2023). It has since moved from a delivery/takeout operating system and virtual storefronts to AI agents for reputation and delivery profitability. The current review's mention of 'online ordering' as part of the platform reflects the older positioning; the current product pages emphasize review, feedback and delivery-profitability agents, so leave online ordering out. The L&L partnership appears on superorder.com/press; the July 2025 date comes from a third-party company profile (yespress.io/superorder) and could not be confirmed on the press page itself. Wow Bao and Marco's Pizza are listed as restaurant partners on Superorder's Y Combinator profile, not in published case studies. Dropped vendor stats: 'won back 21% of unhappy customers' (Tasty Restaurant Group case study headline, vendor claim) and 'revisit rates up 20%' (third-party listing). No 2026 product announcements found."}
+ "notes": "Renamed from Forward Kitchens in 2023, when it raised a $10M Series A led by Foundation Capital (TechCrunch, Sep 2023). It has since moved from a delivery/takeout operating system and virtual storefronts to AI agents for reputation and delivery profitability. The current review's mention of 'online ordering' as part of the platform reflects the older positioning; the current product pages emphasize review, feedback and delivery-profitability agents, so leave online ordering out. The L&L partnership appears on superorder.com/press; the July 2025 date comes from a third-party company profile (yespress.io/superorder) and could not be confirmed on the press page itself. Wow Bao and Marco's Pizza are listed as restaurant partners on Superorder's Y Combinator profile, not in published case studies. Dropped vendor stats: 'won back 21% of unhappy customers' (Tasty Restaurant Group case study headline, vendor claim) and 'revisit rates up 20%' (third-party listing). No 2026 product announcements found. November 2026: pricing page read (Enterprise Plan only, quote after demo, 30-day money-back guarantee). The homepage shows logos of large chains (Pizza Hut, Wendy's, Applebee's and others) without stories; not used as customers. Homepage claims ('6M+ annual reviews processed', '11%+ survey response rates', '7x retention') are vendor claims, not used. No G2 listing found, so no rating.",
+ "pros": [
+  "Replies draw on the guest's order details, so each response refers to the actual meal or delivery",
+  "Covers delivery-app reviews and third-party delivery profitability with one vendor",
+  "Post-order surveys and automated recovery offers catch unhappy guests before they post publicly",
+  "Enterprise plan includes unlimited users, a dedicated account manager and a 24-hour support response SLA",
+  "30-day money-back guarantee"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; a quote comes after a demo",
+   "source": "https://www.superorder.com/pricing"
+  },
+  {
+   "text": "No free trial; a 30-day money-back guarantee instead",
+   "source": "https://www.superorder.com/pricing"
+  },
+  {
+   "text": "Built around delivery and takeout for multi-unit chains, so a dine-in independent may pay for agents it won't use",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "store-based pricing, billed monthly",
+  "list": [],
+  "note": "One Enterprise Plan with custom pricing; 30-day money-back guarantee",
+  "source": "https://www.superorder.com/pricing",
+  "checked": "2026-11"
+ }
+}

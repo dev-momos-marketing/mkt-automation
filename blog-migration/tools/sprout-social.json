@@ -38,13 +38,90 @@
   "Trellis AI agent and AI Assist for drafting replies and posts, summarizing data and suggesting tags",
   "Analytics and exportable reports, including competitor comparisons",
   "Team workflows: approvals, message routing, task assignment and role-based permissions",
-  "Enterprise admin such as SCIM user provisioning for Okta and Microsoft Entra ID"
+  "Enterprise admin such as SCIM user provisioning for Okta and Microsoft Entra ID",
+  "Reviews Reporting to compare review scores across locations and networks, with sorting, filtering and custom views",
+  "AI Assist: Enhance Post from the Professional plan and Enhance Reply on Advanced (per the pricing page)"
  ],
  "pricing": {
-  "text": "Per seat per month, billed annually: Standard $199, Professional $299, Advanced $399 (month-to-month billing costs more); Enterprise is custom. 30-day free trial.",
-  "source": "https://sproutsocial.com/pricing",
+  "text": "Per seat per month: Essentials $79 billed annually ($99 billed monthly); Standard $199, Professional $299 and Advanced $399 on annual billing; Enterprise is custom. 30-day free trial, no credit card required. Trellis AI is included on every plan with 100 credits per seat per month; Trellis Plus adds 1,000 credits for $28 per seat per month billed annually ($35 monthly). Listening, Premium Analytics, Employee Advocacy and NewsWhip are add-ons priced after a demo.",
+  "source": "https://sproutsocial.com/pricing/",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Pricing comes from search results quoting sproutsocial.com/pricing; the page itself could not be fetched, so recheck before publishing (some third-party sites list $249/$399/$499, which appear to be monthly-billing rates). The current review's claim that listening and advanced sentiment are only on higher tiers was not re-verified; leave it out or check the pricing page. Dropped from the current review: '5,700+ G2 reviews' and '#1 in 40 G2 Winter 2026 categories' (unverified, fast-changing). No 2026 sale or take-private found; 2024 reports of a founder-led take-private bid did not lead to a deal. Named a Visionary in the 2026 Gartner Magic Quadrant for Social Media Management and Listening (July 2026, per search results). Tripadvisor reviews sync once a day and cannot be replied to from Sprout."
+ "notes": "Pricing comes from search results quoting sproutsocial.com/pricing; the page itself could not be fetched, so recheck before publishing (some third-party sites list $249/$399/$499, which appear to be monthly-billing rates). The current review's claim that listening and advanced sentiment are only on higher tiers was not re-verified; leave it out or check the pricing page. Dropped from the current review: '5,700+ G2 reviews' and '#1 in 40 G2 Winter 2026 categories' (unverified, fast-changing). No 2026 sale or take-private found; 2024 reports of a founder-led take-private bid did not lead to a deal. Named a Visionary in the 2026 Gartner Magic Quadrant for Social Media Management and Listening (July 2026, per search results). Tripadvisor reviews sync once a day and cannot be replied to from Sprout. 2026-11 update: pricing page fetched directly. New Essentials plan ($79 annual, $99 monthly, 5 profiles). The page shows only the Essentials monthly rate; Standard/Professional/Advanced are shown under 'Annual billing'. Standard adds 'Review management'; Advanced lists review management with sentiment; Listening is an add-on on Standard and up. G2 rating 4.4 from G2 search snippets (review count varies from about 5,700 to 7,430 between G2 pages, so it's left out). Tripadvisor reply support is unclear (an older press release says replies work; the fact sheet's earlier note says they don't), so reviews don't claim either.",
+ "pros": [
+  "Social publishing, engagement and review replies in one Smart Inbox, so one team can handle both",
+  "Reviews from Google Business Profile, Facebook, Yelp, Tripadvisor and Trustpilot next to social messages",
+  "Team workflows: approvals, message routing, task assignment and role-based permissions",
+  "Trellis AI included on every plan with 100 credits per seat per month",
+  "30-day free trial with no credit card",
+  "Rated 4.4 out of 5 on G2"
+ ],
+ "cons": [
+  {
+   "text": "Priced per seat: Standard is $199 per seat per month on annual billing, so the bill grows with every manager who needs access",
+   "source": "https://sproutsocial.com/pricing/"
+  },
+  {
+   "text": "Review management is listed from the Standard plan; the entry Essentials plan ($79) doesn't list it",
+   "source": "https://sproutsocial.com/pricing/"
+  },
+  {
+   "text": "Social listening is an add-on, priced after a demo",
+   "source": "https://sproutsocial.com/pricing/"
+  },
+  {
+   "text": "Trellis Chat and Skills use credits; more than 100 per seat a month needs Trellis Plus at $28 per seat per month (annual)",
+   "source": "https://sproutsocial.com/pricing/"
+  },
+  {
+   "text": "Built for social media teams, so reviews are one tab inside a social suite; listings management and review requests aren't part of it",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "30-day free trial, no credit card required",
+  "billing": "per seat per month, billed annually (monthly billing costs more)",
+  "list": [
+   {
+    "name": "Essentials",
+    "price": "$79",
+    "unit": "per seat per month, billed annually",
+    "note": "$99 billed monthly; review management not listed"
+   },
+   {
+    "name": "Standard",
+    "price": "$199",
+    "unit": "per seat per month, billed annually",
+    "note": "adds review management"
+   },
+   {
+    "name": "Professional",
+    "price": "$299",
+    "unit": "per seat per month, billed annually",
+    "note": ""
+   },
+   {
+    "name": "Advanced",
+    "price": "$399",
+    "unit": "per seat per month, billed annually",
+    "note": "review management with sentiment"
+   },
+   {
+    "name": "Enterprise",
+    "price": "Custom",
+    "unit": "",
+    "note": "demo required"
+   }
+  ],
+  "source": "https://sproutsocial.com/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": null,
+  "source": "https://www.g2.com/products/sprout-social/reviews",
+  "checked": "2026-11"
+ }
 }

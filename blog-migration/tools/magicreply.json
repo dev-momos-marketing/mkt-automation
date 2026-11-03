@@ -7,29 +7,84 @@
  "updates": [
   {
    "date": "2026-03",
-   "text": "Voice profiles became per location (March 14, 2026), so each storefront can reply in its own voice; review request emails with a direct Google review link per location were added March 12, 2026.",
+   "text": "Voice profiles became per location and can be auto-extracted from 10+ replied reviews (March 14, 2026); review request emails with your branding and a direct Google review link per location were added March 10, 2026; Collections and website review widgets March 12, 2026.",
    "source": "https://magicreply.ai/changelog"
   },
   {
-   "date": "2026",
-   "text": "Chrome Extension 2.0 inserts AI replies directly into Google's review box, with tone and length selectors (month not confirmed).",
+   "date": "2026-03",
+   "text": "Chrome Extension 2.0 (March 15, 2026) fills AI replies into Google's review box, with tone and length controls.",
    "source": "https://magicreply.ai/changelog"
   }
  ],
  "features": [
   "AI-drafted replies to Google Business Profile reviews that you can edit or regenerate before posting",
-  "Voice profile learned from your past replies (greeting, sign-off, vocabulary), set per location",
-  "Auto-reply rules by star rating, keywords or sentiment",
-  "Restaurant reply templates covering food quality, service, wait times and value",
-  "Chrome extension that inserts replies into Google's review interface",
-  "Review request emails and a shareable Google review link for each location",
-  "Team approval workflows and review analytics"
+  "Voice profile learned from your past replies (greeting, sign-off, vocabulary), extracted from 10+ replied reviews and set per location",
+  "Auto-reply rules by star rating, keywords or sentiment, with delays and approvals (Pro and Business)",
+  "Free reply templates on its site, including restaurant and cafe templates for great food and service, food quality complaints and wait times (https://magicreply.ai/templates)",
+  "Restaurant page says replies address specific dishes, service speed, ambiance and dining experience (vendor positioning, https://magicreply.ai/use-cases/restaurants)",
+  "Chrome extension that inserts replies into Google's review interface, with tone and length controls",
+  "Review request emails and a direct Google review link for each location",
+  "Role-based team permissions with manager approval before replies go live, and an analytics dashboard for response rates and sentiment trends",
+  "Bulk reply generation and website review widgets"
  ],
  "pricing": {
-  "text": "Free plan (limited AI replies and Google posts per month for 1 location); Pro $19.99/month; Business $49.99/month with unlimited locations; 7-day trial on paid plans.",
-  "source": "https://magicreply.ai/faq",
+  "text": "Free plan ($0, 1 Google location, a limited total of AI replies and Google posts that does not renew monthly); Pro $19.99/month (1 location, unlimited AI replies, auto-reply, voice profile, analytics); Business $49.99/month (unlimited locations, team collaboration). 7-day trial on paid plans, card required, charged automatically after the trial unless cancelled. Custom enterprise plans for 10+ locations.",
+  "source": "https://magicreply.ai/pricing",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Small product from Somnus Labs Inc. (per its terms); no named customers or press coverage found, so customers is empty. Free-plan limits conflict between the FAQ (15 AI replies, 5 posts to Google per month) and the changelog (3 to 5 AI replies), so the review should not state exact free limits. Google-only: no Yelp, TripAdvisor or delivery-app reviews confirmed. 'Dish-aware' replies are the vendor's restaurant positioning; homepage testimonials are self-published and unverified. Prices from search snippets of magicreply.ai (site not fetchable)."
+ "notes": "Small product from Somnus Labs Inc. (per its terms); no named customers or press coverage found, so customers is empty. Free-plan limits conflict between the pricing page and FAQ (up to 15 AI replies and 5 Google posts in total, not monthly) and the changelog (free plan raised from 3 to 5 AI replies, March 5, 2026), so the review should not state exact free limits. Google-only: no Yelp, TripAdvisor or delivery-app reviews confirmed. 'Dish-aware' replies are the vendor's restaurant positioning; the restaurant templates cover food and service, food quality and wait times (value is not covered); homepage testimonials are self-published and unverified. Pricing, FAQ, changelog, templates and restaurant pages fetched 2026-11. The homepage and FAQ footers name only 'MagicReply'. No G2 listing found, so no rating.",
+ "pros": [
+  "Low price: Pro $19.99 a month; Business $49.99 a month for unlimited locations",
+  "Free plan for one location",
+  "Auto-reply rules by star rating, keywords or sentiment, with delays and approvals",
+  "Voice profile per location, learned from past replies",
+  "Chrome extension fills replies into Google's own review box",
+  "Free restaurant reply templates for food quality complaints and wait times"
+ ],
+ "cons": [
+  {
+   "text": "Supports Google Business Profile reviews only; Yelp, TripAdvisor, Facebook and delivery apps are not listed",
+   "source": "https://magicreply.ai/faq"
+  },
+  {
+   "text": "The free plan's AI replies and Google posts are a total allowance that does not renew each month",
+   "source": "https://magicreply.ai/pricing"
+  },
+  {
+   "text": "Pro covers one Google location; more locations need the Business plan",
+   "source": "https://magicreply.ai/pricing"
+  },
+  {
+   "text": "The 7-day trial on paid plans needs a card and charges automatically unless you cancel",
+   "source": "https://magicreply.ai/pricing"
+  }
+ ],
+ "plans": {
+  "trial": "7-day free trial on Pro and Business (card required)",
+  "billing": "per month",
+  "list": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "unit": "",
+    "note": "1 Google location; limited AI replies and Google posts in total"
+   },
+   {
+    "name": "Pro",
+    "price": "$19.99",
+    "unit": "per month",
+    "note": "1 location, unlimited AI replies, auto-reply, voice profile, analytics"
+   },
+   {
+    "name": "Business",
+    "price": "$49.99",
+    "unit": "per month",
+    "note": "unlimited locations, team collaboration"
+   }
+  ],
+  "note": "Custom enterprise plans for 10+ locations.",
+  "source": "https://magicreply.ai/pricing",
+  "checked": "2026-11"
+ }
 }

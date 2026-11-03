@@ -1,13 +1,28 @@
-{"name": "Zendesk", "website": "https://www.zendesk.com/",
+{
+ "name": "Zendesk",
+ "website": "https://www.zendesk.com/",
  "oneLiner": "Customer service platform (the Zendesk Resolution Platform) combining ticketing, messaging, voice, a help center and AI agents.",
  "bestFor": "Mid-size to large businesses, including multi-location restaurant and hospitality brands, that handle high contact volume across many channels.",
  "customers": [
-  {"name": "Grubhub", "source": "https://www.zendesk.com/customer/grubhub/"},
-  {"name": "Grill'd", "source": "https://www.zendesk.com/sg/customer/grilld/"},
-  {"name": "Impossible Foods", "source": "https://www.zendesk.com/customer/impossible-foods/"}
+  {
+   "name": "Grubhub",
+   "source": "https://www.zendesk.com/customer/grubhub/"
+  },
+  {
+   "name": "Grill'd",
+   "source": "https://www.zendesk.com/sg/customer/grilld/"
+  },
+  {
+   "name": "Impossible Foods",
+   "source": "https://www.zendesk.com/customer/impossible-foods/"
+  }
  ],
  "updates": [
-  {"date": "2026-03", "text": "Announced (March 11) and completed (March 26) the acquisition of Forethought, an AI agent company; Forethought AI Agents by Zendesk cover chat, email and voice and add self-improving agents to the Resolution Platform.", "source": "https://www.zendesk.com/newsroom/press-releases/zendesk-advances-resolution-platform-with-self-improving-ai-agents-from-proposed-forethought-acquisition"}
+  {
+   "date": "2026-03",
+   "text": "Announced (March 11) and completed (March 26) the acquisition of Forethought, an AI agent company; Forethought AI Agents by Zendesk cover chat, email and voice and add self-improving agents to the Resolution Platform.",
+   "source": "https://www.zendesk.com/newsroom/press-releases/zendesk-advances-resolution-platform-with-self-improving-ai-agents-from-proposed-forethought-acquisition"
+  }
  ],
  "features": [
   "Single agent workspace for email, messaging, live chat, social and voice",
@@ -16,7 +31,84 @@
   "Omnichannel routing and automated ticket triggers",
   "Help center and knowledge base for self-service",
   "Reporting and analytics dashboards",
-  "Large app marketplace and integrations"
+  "Large app marketplace and integrations",
+  "Automated resolutions: AI agents are billed per request they resolve without escalation; Suite and Support plans include 5 per agent per month (10 on Suite Professional)",
+  "Suite Professional adds skills-based routing, an IVR phone tree, writing tools and Admin Copilot; Enterprise adds intelligent triage, Auto Assist and generative AI for voice"
  ],
- "pricing": {"text": "Support Team from $19 per agent per month billed annually ($25 monthly); Suite Team $55 per agent per month billed annually ($69 monthly); Suite Professional $115 billed annually; Copilot is an add-on.", "source": "https://www.zendesk.com/pricing/", "checked": "2026-11"},
- "notes": "zendesk.com could not be fetched from this session; prices come from search snippets of zendesk.com/pricing and agree with several 2026 third-party guides. Zendesk's own claim that its AI agents resolve over 80% of interactions was left out as a vendor claim. Original's 'hundreds of integrations' and 'millions of tickets' dropped."}
+ "pricing": {
+  "text": "Support Team $19 per agent per month billed annually ($25 monthly); Suite Team $55 ($69 monthly); Suite Professional $115 ($149 monthly); Suite Enterprise + Copilot: talk to sales. 14-day free trial of Suite Professional. Copilot add-on $50 per agent per month (annual), for Professional and higher. Extra automated resolutions $1.50 committed or $2.00 pay-as-you-go.",
+  "source": "https://www.zendesk.com/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "zendesk.com/pricing was read directly in November 2026 (earlier prices came from search snippets). Zendesk's own claim that its AI agents resolve over 80% of interactions was left out as a vendor claim. Original's 'hundreds of integrations' and 'millions of tickets' dropped. G2 rating from search snippets of the G2 product page (g2.com returns 403 to fetches).",
+ "pros": [
+  "One agent workspace for email, messaging, live chat, social and voice",
+  "AI agents across chat, email and voice, extended in 2026 by the Forethought acquisition",
+  "Large app marketplace and integrations",
+  "Published per-agent prices and a 14-day trial of Suite Professional",
+  "Rated 4.3 out of 5 on G2 from more than 7,000 reviews",
+  "Food brands such as Grubhub, Grill'd and Impossible Foods run support on it"
+ ],
+ "cons": [
+  {
+   "text": "Copilot, the agent assistant, is a paid add-on ($50 per agent per month billed annually) for Professional and higher plans",
+   "source": "https://www.zendesk.com/pricing/"
+  },
+  {
+   "text": "AI agents are billed per automated resolution beyond the plan's allowance of 5 or 10 per agent per month, at $1.50 committed or $2.00 pay-as-you-go",
+   "source": "https://www.zendesk.com/pricing/"
+  },
+  {
+   "text": "Support Team covers email and ticketing; AI agents, omnichannel routing and telephony start at Suite Team",
+   "source": "https://www.zendesk.com/pricing/"
+  },
+  {
+   "text": "Suite Enterprise pricing isn't published; you talk to sales",
+   "source": "https://www.zendesk.com/pricing/"
+  },
+  {
+   "text": "Built for customer service teams in every industry, so restaurant-specific work such as public review replies or loyalty offers may need another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial of Suite Professional",
+  "billing": "per agent per month, billed annually (monthly billing costs more)",
+  "list": [
+   {
+    "name": "Support Team",
+    "price": "$19",
+    "unit": "per agent per month, billed annually",
+    "note": "$25 billed monthly; email and ticketing"
+   },
+   {
+    "name": "Suite Team",
+    "price": "$55",
+    "unit": "per agent per month, billed annually",
+    "note": "$69 billed monthly; adds AI agents, omnichannel routing, telephony"
+   },
+   {
+    "name": "Suite Professional",
+    "price": "$115",
+    "unit": "per agent per month, billed annually",
+    "note": "$149 billed monthly"
+   },
+   {
+    "name": "Suite Enterprise + Copilot",
+    "price": null,
+    "unit": "talk to sales",
+    "note": ""
+   }
+  ],
+  "source": "https://www.zendesk.com/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.3",
+  "reviews": 7001,
+  "text": "4.3 out of 5 from more than 7,000 reviews (Zendesk for Customer Service, formerly Zendesk Support Suite; snapshots show 7,001 to 7,119)",
+  "source": "https://www.g2.com/products/zendesk-for-customer-service-ac/reviews",
+  "checked": "2026-11"
+ }
+}

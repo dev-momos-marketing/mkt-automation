@@ -1,15 +1,38 @@
-{"name": "Lightspeed Loyalty",
+{
+ "name": "Lightspeed Loyalty",
  "website": "https://www.lightspeedhq.com/uk/pos/restaurant/loyalty/",
- "oneLiner": "Loyalty and marketing tools that run inside Lightspeed Restaurant POS, so points and rewards are tracked on the same system that takes orders and payments.",
- "bestFor": "Restaurants, cafes and bars already on Lightspeed Restaurant that want loyalty without a separate vendor.",
+ "oneLiner": "Loyalty add-on for Lightspeed Restaurant POS. The points-based Lightspeed Loyalty (L-Series) adds rewards with email, SMS and push campaigns; a newer card-linked Lightspeed Loyalty, released in Australia in February 2026, tallies spend from repeat card payments inside Lightspeed POS and Payments.",
+ "bestFor": "Restaurants, cafes and bars already on Lightspeed Restaurant that want loyalty from their POS vendor without a separate loyalty provider.",
  "customers": [
-  {"name": "Miriam / 6R Hospitality Group (New York) - Lightspeed Restaurant customer", "source": "https://www.lightspeedhq.com/customers/miriam/"},
-  {"name": "DOC Group (Melbourne) - Lightspeed Restaurant customer", "source": "https://www.lightspeedhq.com/au/customers/doc-group/"},
-  {"name": "Gemelli Group (Queensland) - Lightspeed Restaurant customer", "source": "https://www.lightspeedhq.com/au/customers/gemelli-group/"}
+  {
+   "name": "Miriam / 6R Hospitality Group (New York) - Lightspeed Restaurant customer",
+   "source": "https://www.lightspeedhq.com/customers/miriam/"
+  },
+  {
+   "name": "DOC Group (Melbourne) - Lightspeed Restaurant customer",
+   "source": "https://www.lightspeedhq.com/au/customers/doc-group/"
+  },
+  {
+   "name": "Gemelli Group (Queensland) - Lightspeed Restaurant customer",
+   "source": "https://www.lightspeedhq.com/au/customers/gemelli-group/"
+  }
  ],
  "updates": [
-  {"date": "2026-01", "text": "Launched Lightspeed AI, conversational assistants inside Lightspeed Restaurant (and Retail), with more features promised through 2026.", "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-launches-lightspeed-ai-a-new-ai-powered-intelligence-layer-for-retail-and-hospitality/"},
-  {"date": "2026-01", "text": "Q3 product release added Tempo (service pacing from kitchen display data) and Tasks (digital opening and closing checklists) to Lightspeed Restaurant.", "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-unveils-q3-product-innovations-designed-to-help-merchants-run-smarter-and-serve-better/"}
+  {
+   "date": "2026-01",
+   "text": "Launched Lightspeed AI, conversational assistants inside Lightspeed Restaurant (and Retail), with more features promised through 2026.",
+   "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-launches-lightspeed-ai-a-new-ai-powered-intelligence-layer-for-retail-and-hospitality/"
+  },
+  {
+   "date": "2026-01",
+   "text": "Q3 product release added Tempo (service pacing from kitchen display data) and Tasks (digital opening and closing checklists) to Lightspeed Restaurant.",
+   "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-unveils-q3-product-innovations-designed-to-help-merchants-run-smarter-and-serve-better/"
+  },
+  {
+   "date": "2026-02",
+   "text": "Released a card-linked Lightspeed Loyalty that tallies eligible spend from repeat card payments, so guests need no loyalty card or app; staff are prompted to enroll guests and apply rewards, and it works across a company's locations. Available in Australia for sites using Lightspeed Payments.",
+   "source": "https://updates.kounta.com/156173-reward-regulars-with-lightspeed-loyalty"
+  }
  ],
  "features": [
   "Points earned on purchases, redeemed at the POS or online",
@@ -19,7 +42,60 @@
   "Email and SMS campaigns with a drag-and-drop builder (Advanced Marketing)",
   "Automated flows for first purchase, birthdays and lapsed guests",
   "Tiered programs with higher earn rates for VIP groups",
-  "Loyalty app / web sign-up for guests"
+  "Loyalty app / web sign-up for guests",
+  "White-labeled points-based rewards, with a Loyalty manager to add and remove points and credit (L-Series)",
+  "Promotional SMS, email and push notifications, and campaigns to create VIPs and recapture inactive customers (L-Series)",
+  "Card-linked version (Australia): spend tracked through a tokenized card ID, POS prompts to enroll guests by name and mobile number, QR sign-up, Apple and Google Wallet passes, Kiosk and customer display",
+  "Free one-on-one onboarding and 24/7 support (per the UK loyalty page)"
  ],
- "pricing": {"text": "Lightspeed's US restaurant loyalty pricing page lists Essential at $189/month and Premium at $399/month; prices vary by region (for example AUD pricing in Australia).", "source": "https://www.lightspeedhq.com/pos/restaurant/loyalty/pricing/", "checked": "2026-11"},
- "notes": "lightspeedhq.com could not be fetched; facts come from search snippets of Lightspeed pages and release notes. Dropped from the original: 'loyalty included in all plans' (sources conflict; the UK page says loyalty can be bought as an add-on), the $69 Starter plan (third-party sources say it was dropped), the retail Core $149 plan, and the Toast $185/month comparison. Merchant Maverick reports the original L-Series Loyalty is no longer sold to new customers, who get Advanced Loyalty and Marketing (powered by Marsello) instead; I couldn't confirm this on a Lightspeed page. The three customers are Lightspeed Restaurant POS customers; their stories don't confirm they use the loyalty module, so the review calls them Lightspeed Restaurant customers."}
+ "pricing": {
+  "text": "Sold as an add-on to a Lightspeed Restaurant subscription; price varies by country. Lightspeed's Australian pricing page lists Lightspeed Loyalty from $39/month (AUD); the UK loyalty pricing page's description says prices start at £49 a month. The US site lists no loyalty price: its loyalty pages redirect to the Lightspeed Restaurant pages, whose POS plans are Starter 69 USD, Essential 189 USD and Premium 399 USD.",
+  "source": "https://www.lightspeedhq.com/au/pos/restaurant/pricing-o/",
+  "checked": "2026-11"
+ },
+ "notes": "lightspeedhq.com could not be fetched; facts come from search snippets of Lightspeed pages and release notes. Dropped from the original: 'loyalty included in all plans' (sources conflict; the UK page says loyalty can be bought as an add-on), the $69 Starter plan (third-party sources say it was dropped), the retail Core $149 plan, and the Toast $185/month comparison. Merchant Maverick reports the original L-Series Loyalty is no longer sold to new customers, who get Advanced Loyalty and Marketing (powered by Marsello) instead; I couldn't confirm this on a Lightspeed page. The three customers are Lightspeed Restaurant POS customers; their stories don't confirm they use the loyalty module, so the review calls them Lightspeed Restaurant customers. 2026-11 update: lightspeedhq.com pages fetched directly with curl. The US loyalty page (/pos/restaurant/loyalty/) now redirects to /pos/restaurant/ and the US loyalty pricing page redirects to the POS pricing page, which lists Starter 69, Essential 189 and Premium 399 USD with no loyalty line, so the earlier '$189/$399 loyalty' reading was dropped from the review. UK loyalty page: 'Compatible with Restaurant (L Series) only', add-on to an existing Lightspeed subscription, free onboarding, unlimited 24/7 support. UK loyalty pricing page body is empty; its meta description says 'Prices starting at £49 a month'. AU O-Series pricing lists 'Lightspeed Loyalty From $39/month' (AUD site). G2 has Lightspeed Restaurant (POS) at 4.3 from 55 reviews but no Lightspeed Loyalty listing, so no rating is given.",
+ "pros": [
+  "Points and rewards run in the same POS that takes orders and payments, so staff don't switch systems",
+  "One vendor and one support team for POS and loyalty, with free onboarding and 24/7 support (UK page)",
+  "Points-based version adds segments, email, SMS and push campaigns, and automated flows for birthdays and lapsed guests",
+  "Card-linked version (Australia, 2026) needs no app or loyalty card, and rewards work across locations"
+ ],
+ "cons": [
+  {
+   "text": "Works only with Lightspeed Restaurant; the UK page says the points-based Lightspeed Loyalty is compatible with Restaurant (L-Series) only",
+   "source": "https://www.lightspeedhq.com/uk/pos/restaurant/loyalty/"
+  },
+  {
+   "text": "The card-linked version is available only in Australia, for sites using Lightspeed Payments",
+   "source": "https://updates.kounta.com/156173-reward-regulars-with-lightspeed-loyalty"
+  },
+  {
+   "text": "The card-linked version is deliberately simple: earn and redeem without campaigns, segments or marketing tools",
+   "source": "https://www.lightspeedhq.com/au/pos/restaurant/loyalty/"
+  },
+  {
+   "text": "No published US loyalty price; the US loyalty pages redirect to the main Lightspeed Restaurant pages",
+   "source": "https://www.lightspeedhq.com/pos/restaurant/pricing/"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "monthly add-on to a Lightspeed Restaurant subscription; varies by country",
+  "list": [
+   {
+    "name": "Lightspeed Loyalty (Australia)",
+    "price": "$39",
+    "unit": "per month, AUD, starting price",
+    "note": "card-linked module on Lightspeed Restaurant O-Series"
+   },
+   {
+    "name": "Lightspeed Loyalty (UK)",
+    "price": "£49",
+    "unit": "per month, starting price",
+    "note": "from the UK loyalty pricing page's description; the page shows no plan table"
+   }
+  ],
+  "source": "https://www.lightspeedhq.com/au/pos/restaurant/pricing-o/",
+  "checked": "2026-11"
+ }
+}

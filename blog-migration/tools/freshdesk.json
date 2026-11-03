@@ -1,15 +1,37 @@
-{"name": "Freshdesk", "website": "https://freshdesk.com/",
+{
+ "name": "Freshdesk",
+ "website": "https://freshdesk.com/",
  "oneLiner": "Freshworks' AI-powered helpdesk for ticketing across email, chat, phone and social, with Freddy AI agents, copilot and insights. Freshdesk Omni is the omnichannel edition.",
  "bestFor": "Small and mid-size teams that want an affordable multichannel helpdesk with AI self-service they can grow into.",
  "customers": [
-  {"name": "Decathlon", "source": "https://www.freshworks.com/freshdesk/resources/case-study/decathlon/"},
-  {"name": "Bridgestone", "source": "https://www.freshworks.com/customers/stories/bridgestone/"},
-  {"name": "Body & Fit", "source": "https://www.freshworks.com/customers/stories/body-fit/"},
-  {"name": "Dineout", "source": "https://iotone.com/case-study/dineout-enhances-customer-service-experience-with-freshworks/c2438"}
+  {
+   "name": "Decathlon",
+   "source": "https://www.freshworks.com/freshdesk/resources/case-study/decathlon/"
+  },
+  {
+   "name": "Bridgestone",
+   "source": "https://www.freshworks.com/customers/stories/bridgestone/"
+  },
+  {
+   "name": "Body & Fit",
+   "source": "https://www.freshworks.com/customers/stories/body-fit/"
+  },
+  {
+   "name": "Dineout",
+   "source": "https://iotone.com/case-study/dineout-enhances-customer-service-experience-with-freshworks/c2438"
+  }
  ],
  "updates": [
-  {"date": "2025-11", "text": "At Refresh, Freshworks launched the Freshdesk Command Center (one workspace for multichannel conversations with Freddy AI Copilot built in), Vertical AI Agents for ecommerce, fintech, travel and logistics with 50+ prebuilt workflows in Freddy AI Agent Studio, and Freddy AI Insights.", "source": "https://siliconangle.com/2025/11/13/freshworks-adds-new-ai-upgrades-freshservice-freshdesk-cut-service-complexity/"},
-  {"date": "2025-06", "text": "Freddy AI Agent Studio, a no-code tool to build, test and monitor AI agents.", "source": "https://itbrief.co.uk/story/freshworks-launches-freddy-ai-agent-studio-for-autonomous-support"}
+  {
+   "date": "2025-11",
+   "text": "At Refresh, Freshworks launched the Freshdesk Command Center (one workspace for multichannel conversations with Freddy AI Copilot built in), Vertical AI Agents for ecommerce, fintech, travel and logistics with 50+ prebuilt workflows in Freddy AI Agent Studio, and Freddy AI Insights.",
+   "source": "https://siliconangle.com/2025/11/13/freshworks-adds-new-ai-upgrades-freshservice-freshdesk-cut-service-complexity/"
+  },
+  {
+   "date": "2025-06",
+   "text": "Freddy AI Agent Studio, a no-code tool to build, test and monitor AI agents.",
+   "source": "https://itbrief.co.uk/story/freshworks-launches-freddy-ai-agent-studio-for-autonomous-support"
+  }
  ],
  "features": [
   "Ticketing from email, chat, phone and social in one inbox",
@@ -21,5 +43,68 @@
   "Team collaboration with private notes, shared ownership and parent-child tickets",
   "Integrations such as Shopify, Stripe and FedEx for order lookups"
  ],
- "pricing": {"text": "Growth $19, Pro $55 and Enterprise $89 per agent per month, billed annually. Freddy AI Copilot is an add-on; AI Agent sessions are sold in packs.", "source": "https://www.freshworks.com/freshdesk/pricing/", "checked": "2026-11"},
- "notes": "freshworks.com could not be fetched from this session; prices come from a search of the official pricing page (snippet) and match several 2026 third-party guides, which say prices rose in 2026 from $15/$49/$79. The free plan (original said up to 10 agents) is no longer clearly offered; sources conflict, so it is left out. Dineout case study is hosted on third-party sites (iotone), not freshworks.com. Original 'reducing manual workload significantly' dropped."}
+ "pricing": {
+  "text": "Growth $19, Pro $55 and Enterprise $89 per agent per month, billed annually (the page says annual billing saves 20%). No free plan is listed; new accounts get a 14-day trial of the Enterprise plan, and the account is suspended if you don't continue. Each paid plan includes 500 Freddy AI Agent sessions once per account; more cost $49 per 100 sessions. Freddy AI Copilot is $29 per agent per month on Pro and Enterprise.",
+  "source": "https://www.freshworks.com/freshdesk/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "freshworks.com could not be fetched from this session; prices come from a search of the official pricing page (snippet) and match several 2026 third-party guides, which say prices rose in 2026 from $15/$49/$79. The free plan (original said up to 10 agents) is no longer clearly offered; sources conflict, so it is left out. Dineout case study is hosted on third-party sites (iotone), not freshworks.com. Original 'reducing manual workload significantly' dropped. 2026-11: the Freshdesk pricing page was opened directly; prices, the 14-day Enterprise trial, the 500 included AI Agent sessions, $49 per 100 extra sessions and the $29 Copilot add-on come from it, and it lists no free plan. G2 rating (4.4, 3,754 reviews) from G2 search result snippets; g2.com returned 403.",
+ "pros": [
+  "Entry price of $19 per agent per month (Growth, billed annually)",
+  "Email, chat, phone and social tickets in one inbox",
+  "500 Freddy AI Agent sessions included on paid plans (once per account)",
+  "No-code Freddy AI Agent Studio to build, test and monitor AI agents",
+  "Rated 4.4/5 on G2 from 3,754 reviews"
+ ],
+ "cons": [
+  {
+   "text": "No free plan on the pricing page; a 14-day Enterprise trial, then the account is suspended unless you pay",
+   "source": "https://www.freshworks.com/freshdesk/pricing/"
+  },
+  {
+   "text": "Freddy AI Copilot is a $29 per agent per month add-on, offered on Pro and Enterprise only",
+   "source": "https://www.freshworks.com/freshdesk/pricing/"
+  },
+  {
+   "text": "AI Agent sessions beyond the included 500 cost $49 per 100",
+   "source": "https://www.freshworks.com/freshdesk/pricing/"
+  },
+  {
+   "text": "A general-purpose helpdesk, so restaurant review replies and guest surveys need another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial of the Enterprise plan",
+  "billing": "per agent per month, billed annually",
+  "list": [
+   {
+    "name": "Growth",
+    "price": "$19",
+    "unit": "per agent per month, billed annually",
+    "note": null
+   },
+   {
+    "name": "Pro",
+    "price": "$55",
+    "unit": "per agent per month, billed annually",
+    "note": "Freddy AI Copilot add-on $29 per agent per month"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$89",
+    "unit": "per agent per month, billed annually",
+    "note": "Freddy AI Copilot add-on $29 per agent per month"
+   }
+  ],
+  "source": "https://www.freshworks.com/freshdesk/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 3754,
+  "source": "https://www.g2.com/products/freshdesk/reviews",
+  "checked": "2026-11"
+ }
+}

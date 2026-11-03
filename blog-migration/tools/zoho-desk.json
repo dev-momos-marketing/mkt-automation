@@ -1,24 +1,120 @@
-{"name": "Zoho Desk",
+{
+ "name": "Zoho Desk",
  "website": "https://www.zoho.com/desk",
  "oneLiner": "Multichannel help desk in the Zoho suite with ticketing, self-service portals, automation and the Zia AI assistant.",
  "bestFor": "Budget-conscious support teams, especially those already using Zoho CRM or other Zoho apps.",
  "customers": [
-  {"name": "Summerfield Resources", "source": "https://www.zoho.com/desk/customers/summerfield.html"},
-  {"name": "RJG Inc.", "source": "https://www.zoho.com/sites/zweb/images/desk/rjg_inc-zoho_desk_case_study-customer-f_1.pdf"},
-  {"name": "Mercedes-Benz India", "source": "https://www.casestudies.com/company/zoho-desk"}
+  {
+   "name": "Summerfield Resources",
+   "source": "https://www.zoho.com/desk/customers/summerfield.html"
+  },
+  {
+   "name": "RJG Inc.",
+   "source": "https://www.zoho.com/sites/zweb/images/desk/rjg_inc-zoho_desk_case_study-customer-f_1.pdf"
+  },
+  {
+   "name": "Mercedes-Benz India",
+   "source": "https://www.casestudies.com/company/zoho-desk"
+  }
  ],
  "updates": [
-  {"date": "2025-07", "text": "Zoho launched its own Zia LLM plus Zia Agents, a no-code Agent Studio, an agent marketplace and an MCP server across its apps.", "source": "https://secure.businesswire.com/news/home/20250717118204/en/Zoho-Launches-Zia-LLM-and-Deepens-AI-Portfolio-with-Prebuilt-Agents-Custom-Agent-Builder-MCP-and-Marketplace"},
-  {"date": "2026-07", "text": "From 7 July 2026 Zia AI features such as sentiment analysis, auto tags and Zia notifications were extended to all paid Zoho Desk editions (Standard and above).", "source": "https://help.zoho.com/portal/en/community/topic/more-zia-ai-capabilities-are-included-across-additional-zoho-desk-editions"}
+  {
+   "date": "2025-07",
+   "text": "Zoho launched its own Zia LLM plus Zia Agents, a no-code Agent Studio, an agent marketplace and an MCP server across its apps.",
+   "source": "https://secure.businesswire.com/news/home/20250717118204/en/Zoho-Launches-Zia-LLM-and-Deepens-AI-Portfolio-with-Prebuilt-Agents-Custom-Agent-Builder-MCP-and-Marketplace"
+  },
+  {
+   "date": "2026-07",
+   "text": "From 7 July 2026 Zia AI features such as sentiment analysis, auto tags and Zia notifications were extended to all paid Zoho Desk editions (Standard and above).",
+   "source": "https://help.zoho.com/portal/en/community/topic/more-zia-ai-capabilities-are-included-across-additional-zoho-desk-editions"
+  }
  ],
  "features": [
-  "Tickets from email, phone, live chat, social media and web forms in one view",
-  "Zia AI: sentiment analysis, auto tags, reply suggestions, anomaly alerts",
-  "Answer Bot and self-service help center / portal",
-  "Assignment rules, SLAs, escalations and Blueprint workflows",
-  "CSAT surveys and agent performance reports",
+  "Tickets from email, social media (Instagram, Facebook, X), web forms, phone and live chat in one view",
+  "Instant messaging channels: WhatsApp, Instagram, Facebook Messenger, Telegram, WeChat and Line (Standard and up)",
+  "Zia AI: sentiment analysis, auto tags, reply suggestions, anomaly alerts (full Zia on Professional and up; sentiment, auto tags and notifications on Standard since July 2026)",
+  "AI Agents built with your own LLM key or Zoho's LLM, with pre-built agents and up to 30M free tokens a month",
+  "Answer Bot, knowledge base, community forum and self-service help center (Standard and up); multilingual help center in 40+ languages (Professional)",
+  "Assignment rules, SLAs, multi-level escalations, workflows and Blueprint process automation (Blueprints on Professional and up)",
+  "Customer happiness ratings (CSAT) and custom reports and dashboards",
+  "Telephony integration (Professional and up) and multi-department support",
   "Integration with Zoho CRM, Zoho Analytics and other Zoho apps",
   "Mobile apps for agents"
  ],
- "pricing": {"text": "Free plan for up to 3 agents. Paid plans start at $7/agent/month (Express, up to 5 agents), with Standard at $14/agent/month, billed annually.", "source": "https://www.zoho.com/desk/pricing.html", "checked": "2026-11"},
- "notes": "zoho.com could not be fetched; prices are the consensus of several 2026 third-party pricing guides that describe Zoho's published page, so a reviewer should confirm on zoho.com/desk/pricing.html (prices vary by region). Mercedes-Benz India is listed on casestudies.com's Zoho Desk page; I couldn't open Zoho's own story. The Zia LLM launch was suite-wide; Desk-specific availability of Zia Agents wasn't confirmed, so the review describes it as a Zoho-wide launch."}
+ "pricing": {
+  "text": "Free plan with 3 users. Paid plans per user per month, billed annually: Express $7, Standard $14, Professional $23, Enterprise $40; billed monthly: Express $9, Standard $20, Professional $35, Enterprise $50. 15-day free trial of any paid plan, after which the account drops to the free plan. Light agents $6 per month on Professional and Enterprise (Enterprise includes 50 free light users).",
+  "source": "https://www.zoho.com/desk/pricing.html",
+  "checked": "2026-11"
+ },
+ "notes": "November 2026: zoho.com/desk/pricing.html shows prices in the visitor's currency; the USD figures come from the page's own price file (zoho.com/sites/zweb/json/pricing/desk-pricing-val.json), and they match the earlier third-party consensus. The page doesn't state an agent cap for Express (its FAQ mentions a 5-user limit for Standard, which may be out of date), so the review gives no cap. G2 rating from a search-result snippet of the G2 reviews page (4.4 from 7,820 reviews, August 2026); counts vary slightly by page. Mercedes-Benz India is listed on casestudies.com's Zoho Desk page; I couldn't open Zoho's own story. The Zia LLM launch was suite-wide; Desk-specific availability of Zia Agents wasn't confirmed, so the review describes it as a Zoho-wide launch.",
+ "pros": [
+  "Free plan for 3 users and paid plans from $7 per user per month, billed annually",
+  "4.4 out of 5 on G2",
+  "Close links to Zoho CRM, Zoho Analytics and other Zoho apps",
+  "Email, social, web forms, phone, live chat and messaging apps such as WhatsApp and Instagram in one ticket view",
+  "Self-service through a knowledge base, community forum and Answer Bot (Standard and up)"
+ ],
+ "cons": [
+  {
+   "text": "The free plan covers 3 users with limited capabilities (email ticketing)",
+   "source": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "text": "Blueprints, telephony, multi-department support and the full Zia AI set start on Professional ($23 per user per month, billed annually)",
+   "source": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "text": "Monthly billing costs more: Standard is $20 per user per month billed monthly versus $14 billed annually",
+   "source": "https://www.zoho.com/desk/pricing.html"
+  },
+  {
+   "text": "A general help desk, so restaurant-specific work such as replying to reviews across locations needs another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "15-day free trial, then the free plan",
+  "billing": "per user per month, billed annually (monthly billing costs more)",
+  "list": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "unit": "up to 3 users",
+    "note": "Email ticketing"
+   },
+   {
+    "name": "Express",
+    "price": "$7",
+    "unit": "per user per month, billed annually",
+    "note": "$9 billed monthly"
+   },
+   {
+    "name": "Standard",
+    "price": "$14",
+    "unit": "per user per month, billed annually",
+    "note": "$20 billed monthly"
+   },
+   {
+    "name": "Professional",
+    "price": "$23",
+    "unit": "per user per month, billed annually",
+    "note": "$35 billed monthly"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$40",
+    "unit": "per user per month, billed annually",
+    "note": "$50 billed monthly"
+   }
+  ],
+  "source": "https://www.zoho.com/desk/pricing.html",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 7820,
+  "source": "https://www.g2.com/products/zoho-desk/reviews",
+  "checked": "2026-11"
+ }
+}

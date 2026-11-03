@@ -1,15 +1,38 @@
-{"name": "HubSpot Service Hub",
+{
+ "name": "HubSpot Service Hub",
  "website": "https://www.hubspot.com/products/service",
  "oneLiner": "Customer service software on the HubSpot CRM: help desk, tickets, knowledge base, customer portal, feedback surveys and the Breeze Customer Agent AI.",
  "bestFor": "Teams that already use HubSpot for marketing or sales and want support conversations on the same customer record.",
  "customers": [
-  {"name": "Twelve (ordering and payments app; partner case study)", "source": "https://www.webs.nl/en/case-study/twelve"},
-  {"name": "Sesame HR", "source": "https://www.cxtoday.com/ai-automation-in-cx/hubspot-ai-agents-customer-agent-data-agent-cx-results/"},
-  {"name": "Unific", "source": "https://blog.hubspot.com/customers/unific-customer-happiness-service-hub"}
+  {
+   "name": "Twelve (ordering and payments app; partner case study)",
+   "source": "https://www.webs.nl/en/case-study/twelve"
+  },
+  {
+   "name": "Sesame HR",
+   "source": "https://www.cxtoday.com/ai-automation-in-cx/hubspot-ai-agents-customer-agent-data-agent-cx-results/"
+  },
+  {
+   "name": "Unific",
+   "source": "https://blog.hubspot.com/customers/unific-customer-happiness-service-hub"
+  }
  ],
  "updates": [
-  {"date": "2025-06", "text": "Breeze Customer Agent made available to all Pro and Enterprise customers across hubs through HubSpot Credits, covering the whole buyer journey; HubSpot said it helped customers resolve over 50% of support tickets.", "source": "https://www.hubspot.com/company-news/customer-agent-expansion"},
-  {"date": "2026-06", "text": "Help desk gained assignment-workflow routing (e.g. VIP or language-based routing, conditional Customer Agent handoffs) and a Coaching Opportunities page for Customer Agent.", "source": "https://community.hubspot.com/t/june-2026-product-updates/151744"}
+  {
+   "date": "2025-06",
+   "text": "Breeze Customer Agent made available to all Pro and Enterprise customers across hubs through HubSpot Credits, covering the whole buyer journey; HubSpot said it helped customers resolve over 50% of support tickets.",
+   "source": "https://www.hubspot.com/company-news/customer-agent-expansion"
+  },
+  {
+   "date": "2026-06",
+   "text": "Help desk gained assignment-workflow routing (e.g. VIP or language-based routing, conditional Customer Agent handoffs) and a Coaching Opportunities page for Customer Agent.",
+   "source": "https://community.hubspot.com/t/june-2026-product-updates/151744"
+  },
+  {
+   "date": "2026-04",
+   "text": "From April 14, 2026, Breeze Customer Agent moved to outcome-based pricing: $0.50 per resolved conversation (was $1.00 per conversation). HubSpot said it resolves 65% of conversations across more than 8,000 customers who activated it; available to Pro and Enterprise customers.",
+   "source": "https://www.hubspot.com/company-news/hubspots-customer-agent-and-prospecting-agent-now-you-pay-when-the-task-is-complete"
+  }
  ],
  "features": [
   "Help desk workspace for email, chat, WhatsApp, Facebook Messenger and calling channels",
@@ -20,5 +43,79 @@
   "Every conversation logged on the shared HubSpot CRM record",
   "Reporting dashboards for support teams"
  ],
- "pricing": {"text": "Free tools available. Paid plans are per seat: HubSpot's pricing page lists Professional at $90/seat/month and Enterprise at $150/seat/month; the Starter rate changes with promotions, so check the page. AI agent usage draws on HubSpot Credits.", "source": "https://www.hubspot.com/pricing/service", "checked": "2026-11"},
- "notes": "hubspot.com could not be fetched; prices come from search snippets of the official page. Starter price conflicts across sources ($7, $15, $20 per seat), so the review doesn't quote it. The original's $15/seat Starter price was dropped. Calling channel requires Professional or Enterprise. Twelve is a partner-written (Webs) case study."}
+ "pricing": {
+  "text": "Free tools for up to 2 users. Paid plans per seat per month: Starter lists at $20/seat/month (HubSpot's catalog), with new-customer promotions (the pricing page showed $7/seat/month on an annual commitment); Professional $90/seat/month billed annually ($100 paid monthly) plus a required one-time $1,500 onboarding fee; Enterprise from $150/seat/month plus a required one-time $3,500 onboarding fee. 14-day free trial. Included HubSpot Credits: 500 (Starter), 3,000 (Professional), 5,000 (Enterprise); extra credits $0.010 each.",
+  "source": "https://www.hubspot.com/pricing/service",
+  "checked": "2026-11"
+ },
+ "notes": "hubspot.com could not be fetched; prices come from search snippets of the official page. Starter price conflicts across sources ($7, $15, $20 per seat), so the review doesn't quote it. The original's $15/seat Starter price was dropped. Calling channel requires Professional or Enterprise. Twelve is a partner-written (Webs) case study. November 2026: hubspot.com/pricing/service fetched directly; it shows Starter at $7 and $20, Professional at $90 and $100, with 'Discounts available for new customers only'. HubSpot's search snippet maps $7 to a promotional annual price against a normal $20, and the Products & Services Catalog lists Starter from $20 per Core Seat, so the review quotes $20. Knowledge base is Professional and Enterprise only (hubspot.com/products/service/knowledge-base). G2 rating from a search snippet of the G2 reviews page (4.4 from 3,016; the G2 pricing page showed 2,917).",
+ "pros": [
+  "Shared CRM record: support conversations sit on the same HubSpot record as marketing and sales activity",
+  "Free tools for up to 2 users and a 14-day free trial of paid plans",
+  "Breeze Customer Agent answers from your knowledge base; HubSpot says it resolves 65% of conversations (April 2026)",
+  "Many channels in one help desk: email, chat, WhatsApp, Facebook Messenger and calling",
+  "Built-in NPS, CSAT and CES surveys",
+  "Rated 4.4/5 on G2 from 3,016 reviews"
+ ],
+ "cons": [
+  {
+   "text": "Required one-time onboarding fees: $1,500 for Professional and $3,500 for Enterprise",
+   "source": "https://www.hubspot.com/pricing/service"
+  },
+  {
+   "text": "The knowledge base isn't in Free or Starter; it needs Professional or Enterprise",
+   "source": "https://www.hubspot.com/products/service/knowledge-base"
+  },
+  {
+   "text": "Customer Agent needs Professional or Enterprise and is billed per resolved conversation ($0.50) through HubSpot Credits",
+   "source": "https://www.hubspot.com/company-news/hubspots-customer-agent-and-prospecting-agent-now-you-pay-when-the-task-is-complete"
+  },
+  {
+   "text": "Built around the HubSpot CRM, so teams whose customer data lives in another CRM get less from the shared record",
+   "source": "scope"
+  },
+  {
+   "text": "A general customer service help desk: replying to public reviews on Google or Yelp needs another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial",
+  "billing": "per seat per month",
+  "list": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "unit": "for up to 2 users",
+    "note": "Live chat, ticketing, team email"
+   },
+   {
+    "name": "Starter",
+    "price": "$20",
+    "unit": "per seat per month",
+    "note": "List price in HubSpot's catalog; new customers may see a promotional rate on the pricing page"
+   },
+   {
+    "name": "Professional",
+    "price": "$90",
+    "unit": "per seat per month, billed annually",
+    "note": "$100 paid monthly; required one-time $1,500 onboarding fee"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$150",
+    "unit": "per seat per month",
+    "note": "Required one-time $3,500 onboarding fee"
+   }
+  ],
+  "source": "https://www.hubspot.com/pricing/service",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 3016,
+  "source": "https://www.g2.com/products/hubspot-service-hub/reviews",
+  "checked": "2026-11"
+ }
+}

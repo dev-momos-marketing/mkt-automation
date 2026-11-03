@@ -1,14 +1,33 @@
-{"name": "Toast Loyalty", "website": "https://pos.toasttab.com/products/loyalty",
+{
+ "name": "Toast Loyalty",
+ "website": "https://pos.toasttab.com/products/loyalty",
  "oneLiner": "Points-based loyalty program built into the Toast restaurant POS, sold within Toast's Marketing Essentials package.",
  "bestFor": "Restaurants already running on Toast POS that want loyalty, guest marketing and payments in one system.",
  "customers": [
-  {"name": "Captain Parker's Pub", "source": "https://pos.toasttab.com/blog/captain-parkers-pub"},
-  {"name": "Craft Lounge", "source": "https://pos.toasttab.com/blog/on-the-line/toast-customer-loyalty-analytics"},
-  {"name": "Kaldi's Coffee", "source": "https://pos.toasttab.com/blog/on-the-line/toast-customer-loyalty-analytics"}
+  {
+   "name": "Captain Parker's Pub",
+   "source": "https://pos.toasttab.com/blog/captain-parkers-pub"
+  },
+  {
+   "name": "Craft Lounge",
+   "source": "https://pos.toasttab.com/blog/on-the-line/toast-customer-loyalty-analytics"
+  },
+  {
+   "name": "Kaldi's Coffee",
+   "source": "https://pos.toasttab.com/blog/on-the-line/toast-customer-loyalty-analytics"
+  }
  ],
  "updates": [
-  {"date": "2026-05", "text": "Spring 2026 release relaunched the Toast Local guest app with loyalty built in: guests see their points balance, find ways to earn and redeem rewards, and operators can push targeted rewards. The app also shows reservations through Resy and Toast Tables.", "source": "https://support.toasttab.com/en/article/Everything-Toast-announced-in-our-Spring-26-Release"},
-  {"date": "2026-05", "text": "Toast launched Toast IQ Grow (May 5, 2026), a premium package with an AI Marketing Agent, a Marketing Success Manager and Marketing Essentials (email and SMS marketing, loyalty, gift cards, social).", "source": "https://pos.toasttab.com/news/toast-debuts-toast-iq-grow-spring-release-2026"}
+  {
+   "date": "2026-05",
+   "text": "Spring 2026 release relaunched the Toast Local guest app with loyalty built in: guests see their points balance, find ways to earn and redeem rewards, and operators can push targeted rewards. The app also shows reservations through Resy and Toast Tables.",
+   "source": "https://support.toasttab.com/en/article/Everything-Toast-announced-in-our-Spring-26-Release"
+  },
+  {
+   "date": "2026-05",
+   "text": "Toast launched Toast IQ Grow (May 5, 2026), a premium package with an AI Marketing Agent, a Marketing Success Manager and Marketing Essentials (email and SMS marketing, loyalty, gift cards, social).",
+   "source": "https://pos.toasttab.com/news/toast-debuts-toast-iq-grow-spring-release-2026"
+  }
  ],
  "features": [
   "Guest enrollment by phone number, email or linked payment card; linked cards earn points automatically",
@@ -17,7 +36,47 @@
   "Earning and redemption across Toast POS, online ordering, kiosk, Toast Go handhelds and the Toast Local app",
   "Email and SMS campaigns to loyalty members through Toast Marketing",
   "Loyalty and guest analytics in the Toast dashboard",
-  "Points balance and reward redemption in the relaunched Toast Local app"
+  "Points balance and reward redemption in the relaunched Toast Local app",
+  "Visit-based or amount-based programs with up to five cash-discount or item rewards",
+  "Shared program across locations in a Gift/Rewards Card Group",
+  "No cap on points per transaction or on a guest's balance"
  ],
- "pricing": {"text": "Toast does not publish a standalone price for Loyalty. It is part of the Marketing Essentials package added to a Toast POS plan; pricing is quoted by Toast sales.", "source": null, "checked": "2026-11"},
- "notes": "The original review's '$185/month Marketing Essentials' price only appears on third-party sites (loop.fans, StampMe); not confirmed on toasttab.com, so dropped. Toast's '63% more sales' and '39% more spend' claims are vendor data and were not used. Toast Local is the renamed Toast Takeout app. Customer stories (Captain Parker's Pub, Craft Lounge, Kaldi's Coffee) are on Toast's blog; Captain Parker's dates from the COVID-19 period. pos.toasttab.com could not be fetched from this session; facts come from search results."}
+ "pricing": {
+  "text": "Toast does not publish a standalone price for Loyalty. You buy it in the Marketing Essentials bundle from Toast Shop, or ask Toast Care to add the standalone Toast Loyalty subscription; pricing is quoted by Toast.",
+  "source": "https://support.toasttab.com/en/article/Getting-Started-Toast-Loyalty",
+  "checked": "2026-11"
+ },
+ "notes": "The original review's '$185/month Marketing Essentials' price only appears on third-party sites (loop.fans, StampMe); not confirmed on toasttab.com, so dropped. Toast's '63% more sales' and '39% more spend' claims are vendor data and were not used. Toast Local is the renamed Toast Takeout app. Customer stories (Captain Parker's Pub, Craft Lounge, Kaldi's Coffee) are on Toast's blog; Captain Parker's dates from the COVID-19 period. pos.toasttab.com could not be fetched from this session; facts come from search results. 2026-11: the Toast support article 'Get Started With Toast Loyalty' was opened directly (purchase routes, program types, up to five rewards, one program at a time, no earning on DoorDash, Grubhub or Uber Eats orders, no points cap). No G2 rating: G2 has no Toast Loyalty listing (Toast's 4.2 covers the whole POS).",
+ "pros": [
+  "Built into the Toast POS, so loyalty shares the guest record with orders and payments",
+  "Guests join by phone, email or linked card; linked cards earn automatically",
+  "Points earn and redeem across the POS, online ordering, kiosk and the Toast Local app",
+  "Locations in a Gift/Rewards Card Group share one program",
+  "No cap on points per transaction or on a guest's balance"
+ ],
+ "cons": [
+  {
+   "text": "Works only for restaurants on Toast POS",
+   "source": "scope"
+  },
+  {
+   "text": "No published price; it comes in the Marketing Essentials bundle or as a standalone subscription added by Toast Care",
+   "source": "https://support.toasttab.com/en/article/Getting-Started-Toast-Loyalty"
+  },
+  {
+   "text": "Orders through DoorDash, Grubhub and Uber Eats don't earn or redeem points",
+   "source": "https://support.toasttab.com/en/article/Getting-Started-Toast-Loyalty"
+  },
+  {
+   "text": "One rewards program at a time, with up to five rewards",
+   "source": "https://support.toasttab.com/en/article/Getting-Started-Toast-Loyalty"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": null,
+  "list": [],
+  "source": "https://support.toasttab.com/en/article/Getting-Started-Toast-Loyalty",
+  "checked": "2026-11"
+ }
+}

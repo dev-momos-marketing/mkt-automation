@@ -1,26 +1,124 @@
-{"name": "Kustomer", "website": "https://www.kustomer.com/",
+{
+ "name": "Kustomer",
+ "website": "https://www.kustomer.com/",
  "oneLiner": "AI-native customer service platform and CRM that organizes every conversation into one customer timeline, with AI Agents for customers, reps and leaders. Independent again after Meta divested it in 2023.",
  "bestFor": "Consumer brands with high contact volumes and order-related questions that want AI and agents working from the full customer history.",
  "customers": [
-  {"name": "Everlane", "source": "https://www.kustomer.com/customers/everlane/"},
-  {"name": "Jerome's Furniture", "source": "https://www.kustomer.com/customers/jeromes-furniture/"},
-  {"name": "Daily Harvest", "source": "https://www.kustomer.com/customers/"},
-  {"name": "HexClad", "source": "https://www.kustomer.com/customers/"}
+  {
+   "name": "Everlane",
+   "source": "https://www.kustomer.com/customers/everlane/"
+  },
+  {
+   "name": "Jerome's Furniture",
+   "source": "https://www.kustomer.com/customers/jeromes-furniture/"
+  },
+  {
+   "name": "Daily Harvest",
+   "source": "https://www.kustomer.com/customers/"
+  },
+  {
+   "name": "HexClad",
+   "source": "https://www.kustomer.com/customers/"
+  },
+  {
+   "name": "sweetgreen",
+   "source": "https://www.kustomer.com/"
+  }
  ],
  "updates": [
-  {"date": "2026-03", "text": "Launched Kustomer AI, a standalone enterprise AI platform that sits on top of existing helpdesks, starting with Zendesk.", "source": "https://www.globenewswire.com/news-release/2026/03/10/3252923/0/en/Kustomer-Launches-Standalone-Enterprise-AI-Platform-to-Modernize-Existing-Helpdesks.html"},
-  {"date": "2025-12", "text": "Added AI Assistants, including a generally available automation assistant and an observability assistant in early access.", "source": "https://www.kustomer.com/resources/blog/winter-2025-product-releases/"},
-  {"date": "2025-08", "text": "Raised a $30M Series B led by Norwest to build out its AI-native platform.", "source": "https://markets.financialcontent.com/lightport.lightport5/article/bizwire-2025-8-7-kustomer-raises-30m-to-lead-the-ai-native-future-of-customer-experience"}
+  {
+   "date": "2026-03",
+   "text": "Launched Kustomer AI, a standalone enterprise AI platform that sits on top of existing helpdesks, starting with Zendesk.",
+   "source": "https://www.globenewswire.com/news-release/2026/03/10/3252923/0/en/Kustomer-Launches-Standalone-Enterprise-AI-Platform-to-Modernize-Existing-Helpdesks.html"
+  },
+  {
+   "date": "2025-12",
+   "text": "Added AI Assistants, including a generally available automation assistant and an observability assistant in early access.",
+   "source": "https://www.kustomer.com/resources/blog/winter-2025-product-releases/"
+  },
+  {
+   "date": "2025-08",
+   "text": "Raised a $30M Series B led by Norwest to build out its AI-native platform.",
+   "source": "https://markets.financialcontent.com/lightport.lightport5/article/bizwire-2025-8-7-kustomer-raises-30m-to-lead-the-ai-native-future-of-customer-experience"
+  }
  ],
  "features": [
   "Unified customer timeline with orders and past conversations",
-  "Email, chat, voice, SMS and social messaging in one workspace",
-  "AI Agents for customers: automated answers and actions around the clock",
-  "AI for reps: suggested replies, summaries and next steps",
-  "AI Voice for phone support",
+  "Email, chat, voice, SMS, WhatsApp and social messaging in one workspace",
+  "Concierge (formerly AI for Customers): customer-facing AI agent that resolves requests across channels using customer context",
+  "Envoy (AI Agents for Reps): surfaces order history, open issues and sentiment, and suggests replies and next steps",
+  "Architect: builds, deploys, analyzes and improves AI agents and workflows",
+  "Kustomer Voice for phone support (talk, SMS and transcription)",
   "Workflow builder and AI-based routing and prioritization",
   "Data connections to commerce and order systems",
   "Analytics and AI observability for leaders"
  ],
- "pricing": {"text": "Custom pricing. Kustomer quotes per seat or per conversation; third-party guides disagree on whether older list prices still apply.", "source": null, "checked": "2026-11"},
- "notes": "kustomer.com could not be fetched; facts from search results. Dropped the original $89/user/month price (third-party only, July 2026 guide says quote-based). Daily Harvest and HexClad appear on the Kustomer customers page; their metrics were not verified and are not used. Unverified blog claim about an April 2026 AI agent relaunch dropped."}
+ "pricing": {
+  "text": "No published plan prices: the current Enterprise and Ultimate plans both show 'Talk to Sales'. Add-ons on the pricing details page (last updated October 12, 2026): Concierge $0.75 per engaged conversation; Envoy $50 per user / month; Kustomer Voice starting at $0.02 / minute; HIPAA Compliance $25 per user / month; WhatsApp usage fees; some configurations need a statement of work and an implementation fee.",
+  "source": "https://www.kustomer.com/comprehensive-pricing-details/",
+  "checked": "2026-11"
+ },
+ "notes": "Homepage, pricing and comprehensive pricing pages fetched 2026-11; earlier facts from search results. Dropped the original $89/user/month price (third-party only, July 2026 guide says quote-based). Daily Harvest and HexClad appear on the Kustomer customers page; their metrics were not verified and are not used. Unverified blog claim about an April 2026 AI agent relaunch dropped. A third-party tracker reported a Concierge/Envoy price change in late October 2026; the vendor page (updated October 12, 2026) is used. Vendor-reported customer metrics on the homepage are not used. G2 count from a search snippet of the G2 product page (July 2026).",
+ "pros": [
+  "One timeline per customer with orders and past conversations, shared by agents and AI",
+  "Kustomer AI can run on top of an existing Zendesk helpdesk",
+  "AI for customers (Concierge), reps (Envoy) and builders (Architect) in one platform",
+  "Rated 4.4/5 on G2 from 558 reviews (the homepage shows 4.4 from 500+ reviews)",
+  "Customers include sweetgreen, Everlane and HexClad"
+ ],
+ "cons": [
+  {
+   "text": "No published plan prices: Enterprise and Ultimate both show 'Talk to Sales'",
+   "source": "https://www.kustomer.com/comprehensive-pricing-details/"
+  },
+  {
+   "text": "AI is an add-on: Concierge costs $0.75 per engaged conversation and Envoy $50 per user per month",
+   "source": "https://www.kustomer.com/comprehensive-pricing-details/"
+  },
+  {
+   "text": "Some configurations need a statement of work and an implementation fee",
+   "source": "https://www.kustomer.com/comprehensive-pricing-details/"
+  },
+  {
+   "text": "Built for consumer brands with high contact volumes, so a single restaurant or small group may not need its depth",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "quoted by sales; add-ons per user per month or per use",
+  "list": [],
+  "addons": [
+   {
+    "name": "Concierge (AI agent for customers)",
+    "price": "$0.75",
+    "unit": "per engaged conversation"
+   },
+   {
+    "name": "Envoy (AI for reps)",
+    "price": "$50",
+    "unit": "per user per month"
+   },
+   {
+    "name": "Kustomer Voice",
+    "price": "from $0.02",
+    "unit": "per minute"
+   },
+   {
+    "name": "HIPAA Compliance",
+    "price": "$25",
+    "unit": "per user per month"
+   }
+  ],
+  "note": "Current plans Enterprise and Ultimate, both 'Talk to Sales'; Professional, Business and the usage-based AI plans are legacy.",
+  "source": "https://www.kustomer.com/comprehensive-pricing-details/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 558,
+  "source": "https://www.g2.com/products/kustomer/reviews",
+  "checked": "2026-11"
+ }
+}

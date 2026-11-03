@@ -1,11 +1,25 @@
-{"name": "Malou", "website": "https://www.malou.io/",
+{
+ "name": "Malou",
+ "website": "https://www.malou.io/",
  "oneLiner": "Paris-based AI marketing platform for restaurant groups that combines review management, local SEO and listings, social media and visibility in AI search, available self-serve (MalouApp) or with a dedicated marketing expert (Copilot).",
  "bestFor": "Restaurant groups with three or more locations that want review replies, local SEO and social handled in one restaurant-specific platform, optionally with hands-on expert support.",
  "customers": [
-  {"name": "Krispy Kreme", "source": "https://www.malou.io/en-us/demo"},
-  {"name": "Tudor Steak House NYC", "source": "https://www.malou.io/en-us/demo"},
-  {"name": "Riviera Dining Group", "source": "https://www.malou.io/en-us/demo"},
-  {"name": "MELT Oberkampf", "source": "https://malou.io/en/role/group-owner"}
+  {
+   "name": "Krispy Kreme",
+   "source": "https://www.malou.io/en-us/demo"
+  },
+  {
+   "name": "Tudor Steak House NYC",
+   "source": "https://www.malou.io/en-us/demo"
+  },
+  {
+   "name": "Riviera Dining Group",
+   "source": "https://www.malou.io/en-us/demo"
+  },
+  {
+   "name": "MELT Oberkampf",
+   "source": "https://malou.io/en/role/group-owner"
+  }
  ],
  "updates": [],
  "features": [
@@ -16,8 +30,66 @@
   "Local SEO and listings management across Google and other platforms",
   "Store locator and local pages optimized for search and AI search",
   "Social media content creation and scheduling",
-  "Multi-location dashboard, in English, French, Italian and Spanish"
+  "Multi-location dashboard, in English, French, Italian and Spanish",
+  "Presence management across Google and 5 key local platforms (Essential) or 50+ platforms (Growth and Full)",
+  "Menu sync and publishing on Google (Full plan)",
+  "MCP access (Growth and Full plans)"
  ],
- "pricing": {"text": "Custom pricing; Malou does not publish a price list. Contact sales for a quote.", "source": null, "checked": "2026-11"},
+ "pricing": {
+  "text": "Custom pricing; Malou does not publish prices. Three plans (Essential, Growth, Full) priced by the number of locations you manage (bands of 1-2, 3-14, 15-99 and 100+); new locations are prorated for the rest of the billing period. Store Locator and Boosters are add-ons. Get a quote from sales.",
+  "source": "https://www.malou.io/en-us/pricing",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "No dated 2025-2026 product update could be confirmed. A tendancehotellerie.fr page dated July 2026 headlines a EUR 10M raise for US expansion, but its text and all other coverage point to the November 2023 Series A (henQ, Bleu Capital), so it is not listed as an update. A co-founder's LinkedIn post about a 'Malou MCP' was undated and unconfirmed. Malou's blog quotes MalouApp at about $500-$3k/month; this is not an official pricing page, so not used. Customer counts (2,000 restaurants vs '3,500+ hospitality groups') and results (+160% organic traffic) are vendor claims, not used. Tin Building and Bagatelle were mentioned as clients in one summary but no source could be confirmed, so left out. WebFetch blocked; facts from search results."}
+ "notes": "No dated 2025-2026 product update could be confirmed. A tendancehotellerie.fr page dated July 2026 headlines a EUR 10M raise for US expansion, but its text and all other coverage point to the November 2023 Series A (henQ, Bleu Capital), so it is not listed as an update. A co-founder's LinkedIn post about a 'Malou MCP' was undated and unconfirmed. Malou's blog quotes MalouApp at about $500-$3k/month; this is not an official pricing page, so not used. Customer counts (2,000 restaurants vs '3,500+ hospitality groups') and results (+160% organic traffic) are vendor claims, not used. Tin Building and Bagatelle were mentioned as clients in one summary but no source could be confirmed, so left out. WebFetch blocked; facts from search results. Pricing page opened November 2026: plan names and inclusions, no prices. G2 has one MalouApp review (G2 says there aren't enough reviews to give buying insight), so no rating is cited.",
+ "pros": [
+  "Built only for restaurants: review replies, local SEO, listings and social in one tool",
+  "Choice of self-serve (MalouApp) or a dedicated marketing expert (Copilot) who handles SEO strategy, social content and monthly recommendations",
+  "Reply quality score and alerts for sensitive review topics such as hygiene or discrimination",
+  "Semantic analysis of recurring review themes",
+  "Works in English, French, Italian and Spanish"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; plans are quoted by the number of locations",
+   "source": "https://www.malou.io/en-us/pricing"
+  },
+  {
+   "text": "Social media management and Google menu sync are only in the top plan (Full)",
+   "source": "https://www.malou.io/en-us/pricing"
+  },
+  {
+   "text": "Store Locator and Boosters are sold as add-ons",
+   "source": "https://www.malou.io/en-us/pricing"
+  },
+  {
+   "text": "Little independent feedback: MalouApp has a single review on G2, too few for G2 to rate it",
+   "source": "https://www.g2.com/products/malou-malouapp/reviews"
+  },
+  {
+   "text": "Built for restaurants, so a brand that also runs other kinds of locations would need a second tool for those",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "custom quote based on the number of locations (bands of 1-2, 3-14, 15-99 and 100+)",
+  "list": [],
+  "tiers": [
+   {
+    "name": "Essential",
+    "includes": "Presence management on Google and 5 key local platforms, local SEO, AI review management, customer insights, dedicated customer success"
+   },
+   {
+    "name": "Growth",
+    "includes": "Essential plus presence management on 50+ platforms, advanced review management, AI content creation, advanced performance insights, MCP access"
+   },
+   {
+    "name": "Full",
+    "includes": "Growth plus social media management, menu sync and publishing on Google, multi-location governance, strategic guidance, custom setup"
+   }
+  ],
+  "source": "https://www.malou.io/en-us/pricing",
+  "checked": "2026-11"
+ }
+}

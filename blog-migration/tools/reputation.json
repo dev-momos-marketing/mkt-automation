@@ -41,10 +41,83 @@
   "Reputation IQ for asking questions of your feedback data in plain English"
  ],
  "pricing": {
-  "text": "Custom pricing; Reputation does not publish prices.",
-  "source": null,
+  "text": "Published plans, per location per month: Rep Core $80 (review management with AI responding, listings and SEO), Rep Core + Pulse $115 (adds Rep Score, AI Reputation Manager, Pulse analytics, one basic survey template), Rep Core + Surveys $150 (six advanced survey templates, email survey requests, outreach campaigns). Enterprise is custom for 125+ locations. Add-ons (Competitive Insights, Actions & Ticketing, Social Suite, Premium Sources, Premium Integrations, managed services) are priced on request. No free trial; demo on request.",
+  "source": "https://reputation.com/pricing",
   "checked": "2026-11"
  },
  "status": "renamed",
- "notes": "Rebranded from Reputation.com to Reputation; still uses the reputation.com domain, HQ San Ramon, CA; marked its 20th year in March 2026. No acquisition of the company found. A CostBench page claims public plans of $80–$150/month and a February 2026 price cut; not confirmed on reputation.com and inconsistent with its enterprise sales model, so left out. Mitchells & Butlers case study dates from 2018. Dropped from the current review: the claim that its portfolio is 'primarily healthcare' (it also targets hospitality, automotive and others; not re-checked). Also copied to reputation-com.json."
+ "notes": "Rebranded from Reputation.com to Reputation; still uses the reputation.com domain, HQ San Ramon, CA; marked its 20th year in March 2026. No acquisition of the company found. reputation.com/pricing now publishes per-location plans ($80, $115, $150 per location per month; Enterprise custom for 125+ locations), checked November 2026; the page doesn't say whether billing is annual or monthly. Mitchells & Butlers case study dates from 2018. Dropped from the current review: the claim that its portfolio is 'primarily healthcare' (it also targets hospitality, automotive and others; not re-checked). Also copied to reputation-com.json. G2 rating from search snippets of g2.com/products/reputation/reviews (4.5 from 2,470; other G2 pages show 4.6 or 2,520 reviews). reputation-com.json (another tool's sheet) still says custom pricing and wasn't edited here.",
+ "pros": [
+  "Wide scope: reviews, listings, surveys, social and AI search visibility in one platform",
+  "Published per-location prices, from $80 per location per month",
+  "Review requests by SMS, email or QR code, triggered by dine-in, delivery or POS events",
+  "AI search tools (AI Reputation Manager, AI Location Presence Insights) show how ChatGPT, Gemini and Perplexity present a brand",
+  "Reputation IQ answers plain-English questions about feedback data",
+  "Rated 4.5/5 on G2 from 2,470 reviews"
+ ],
+ "cons": [
+  {
+   "text": "Per-location pricing adds up for large groups: $80 to $150 per location per month on the published plans",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Surveys depend on the plan: Rep Core has none, Rep Core + Pulse has one basic template, and full surveys need Rep Core + Surveys at $150",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Social suite, actions and ticketing, competitive insights and premium integrations are add-ons with no published price",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "No free trial on the pricing page; you request a demo",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Enterprise plan (custom pricing) is for 125+ locations",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Serves many industries (healthcare, automotive, real estate, financial services, retail as well as food and beverage), so it is less restaurant-specific than tools built only for restaurants",
+   "source": "https://reputation.com/"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "per location per month",
+  "list": [
+   {
+    "name": "Rep Core",
+    "price": "$80",
+    "unit": "per location per month",
+    "note": "Review management (collection, requests, AI responding), business listings and SEO"
+   },
+   {
+    "name": "Rep Core + Pulse",
+    "price": "$115",
+    "unit": "per location per month",
+    "note": "Adds Rep Score and journey insights, AI Reputation Manager, Pulse analytics, one basic survey template"
+   },
+   {
+    "name": "Rep Core + Surveys",
+    "price": "$150",
+    "unit": "per location per month",
+    "note": "Adds six advanced survey templates, email survey requests, targeted outreach campaigns"
+   },
+   {
+    "name": "Enterprise",
+    "price": "Custom",
+    "unit": "quoted",
+    "note": "For 125+ locations, dedicated infrastructure and a customer success manager"
+   }
+  ],
+  "source": "https://reputation.com/pricing",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.5",
+  "reviews": 2470,
+  "source": "https://www.g2.com/products/reputation/reviews",
+  "checked": "2026-11"
+ }
 }

@@ -1,25 +1,86 @@
 {
- "name": "Nuxa",
- "website": "https://www.nuxa.ai/",
- "oneLiner": "AI operating system for restaurants that runs a set of AI agents for reviews, local visibility, social, phone answering and revenue monitoring.",
- "bestFor": "Independent restaurants and small groups that want review replies handled inside a broader AI marketing and operations system.",
+ "name": "Nuxa (now Semperi)",
+ "website": "https://semperi.com/",
+ "oneLiner": "Semperi, sold by Nuxa, Inc. (the team behind Fleksa), is an AI marketing team for local businesses: it builds the website, writes social posts, drafts Google review replies, takes orders and bookings, sends email and texts, and reports weekly. nuxa.ai now redirects to semperi.com.",
+ "bestFor": "Independent restaurants and other single-location local businesses that want review replies handled together with their website, posts and online orders, with the owner approving everything.",
  "customers": [],
- "updates": [],
+ "updates": [
+  {
+   "date": "2026-11",
+   "text": "nuxa.ai now redirects to semperi.com. The product is sold as Semperi, made by the team behind Fleksa, for 38 kinds of local business; the footer reads Nuxa, Inc. The date of the change isn't published.",
+   "source": "https://www.semperi.com/about"
+  }
+ ],
  "features": [
-  "Grace, a review agent that replies to Google reviews in the restaurant's voice",
-  "Positive reviews can be auto-replied; complaints and low ratings are drafted for owner approval",
-  "Review themes surfaced as operational feedback",
-  "Scout, an agent that audits listings and visibility against local competitors, including AI search",
-  "Dash, an agent that connects to POS data and flags revenue and item-mix changes",
-  "Social agent that posts and measures campaigns",
-  "AI phone answering and ordering chatbot with POS sync",
-  "Integrations with Toast, Square, Clover and Fleksa"
+  "Drafts a reply in the owner's voice to every new Google review; low ratings come to the owner first, and nothing posts without approval",
+  "Checks the Google Business Profile for new reviews every day (Google reviews only)",
+  "Reply tone can be changed in chat ('shorter', 'warmer') and is kept for next time",
+  "Builds a website from the existing site, Google profile and menu, with online ordering and table bookings",
+  "Instagram and Facebook posts made from your real photos and prices, approved before they go out",
+  "DoorDash, Uber Eats and Grubhub orders land in the same list through KitchenHub",
+  "Email and text campaigns to bring guests back on slow days",
+  "Weekly report on orders, sales, reviews, posts and bookings, with one next step",
+  "Integrations: Google Business Profile, Search Console, Analytics, Gmail, Calendar, Stripe; Facebook, Instagram and TikTok posting through Zernio"
  ],
  "pricing": {
-  "text": "No published pricing for the full platform; contact Nuxa. Its AI phone answering product lists Pro plans from $49/month.",
-  "source": "https://nuxa.ai/solutions/voice",
+  "text": "Free scan, then $1 a month for the first 3 months on any plan; after that Site $99, Starter $299 or Growth $499 a month per location (USD).",
+  "source": "https://www.semperi.com/pricing",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Thin evidence: all details come from search snippets of nuxa.ai's own pages (nuxa.ai cannot be reached from this session). Owner, founders and launch date not found; Fleksa (German restaurant platform) lists Nuxa AI as an integration. No named customers or dated product news found; the homepage dashboard ('Ninth & Pine') is labelled sample data. A Nuxa blog post cites an A/B test of 4,000 replies across 80 restaurants; not verified, leave out. Current review's 'custom plans' wording kept as no platform price was found."
+ "notes": "2026-11 rewrite: nuxa.ai (and every nuxa.ai path, including /solutions/voice and /pricing) returns 301 to semperi.com. Semperi's footer reads '© 2026 Nuxa, Inc.'; its About page says it's made by the team behind Fleksa and that 4,200+ restaurants run on the platform behind Semperi (vendor figure). The named agents (Grace, Scout, Dash), AI phone answering, the $49 voice plan and the Toast/Square/Clover integrations from the earlier sheet no longer appear on the site and were dropped. Review replies are drafts for approval only (the earlier auto-reply for positive reviews isn't offered now). Plan contents aren't listed. Website kept as nuxa.ai because the live post links it and it redirects to semperi.com; consider switching to https://www.semperi.com/. No G2 listing found.",
+ "pros": [
+  "Every reply waits for the owner's approval, and low ratings reach the owner first",
+  "Review replies sit with the website, posts, orders and weekly report in one service",
+  "Published per-location prices, with $1 a month for the first 3 months",
+  "Made by the team behind Fleksa; 4,200+ restaurants run on the platform behind Semperi (vendor figure)"
+ ],
+ "cons": [
+  {
+   "text": "Covers Google reviews only",
+   "source": "https://www.semperi.com/reviews"
+  },
+  {
+   "text": "No automatic posting: every reply waits for the owner's approval, so replies go out only as fast as someone approves them",
+   "source": "https://www.semperi.com/reviews"
+  },
+  {
+   "text": "The pricing page doesn't say which plan includes review replies",
+   "source": "https://www.semperi.com/pricing"
+  },
+  {
+   "text": "Built for single local businesses across 38 categories and priced per location, so a restaurant group may need another tool for reporting across sites",
+   "source": "scope"
+  },
+  {
+   "text": "Renamed from Nuxa to Semperi, with no named customers or dated product news",
+   "source": "https://www.semperi.com/"
+  }
+ ],
+ "plans": {
+  "trial": "Free scan, then $1 a month for the first 3 months",
+  "billing": "per location per month, USD",
+  "list": [
+   {
+    "name": "Site",
+    "price": "$99",
+    "unit": "per location per month",
+    "note": "after the first 3 months"
+   },
+   {
+    "name": "Starter",
+    "price": "$299",
+    "unit": "per location per month",
+    "note": "after the first 3 months"
+   },
+   {
+    "name": "Growth",
+    "price": "$499",
+    "unit": "per location per month",
+    "note": "after the first 3 months"
+   }
+  ],
+  "source": "https://www.semperi.com/pricing",
+  "checked": "2026-11"
+ }
 }

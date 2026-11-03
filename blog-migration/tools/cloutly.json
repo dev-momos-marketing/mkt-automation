@@ -1,34 +1,110 @@
 {
  "name": "Cloutly",
  "website": "https://cloutly.com/",
- "oneLiner": "Review management platform for multi-location businesses that collects reviews by SMS, email and QR code, monitors review sites in one inbox and shows reviews on your website.",
- "bestFor": "Small multi-location service and hospitality businesses that want simple, per-location review campaigns and a shared review inbox.",
+ "oneLiner": "Review and customer-messaging platform for multi-location service businesses: it asks customers for reviews by text and email, gathers reviews and messages in one inbox with AI reply drafts, and turns reviews into location-level insight, priced per location.",
+ "bestFor": "Multi-location service and hospitality businesses that want review requests triggered by their POS or booking system and a shared review inbox at a published per-location price.",
  "customers": [
   {
    "name": "Swimart",
+   "source": "https://cloutly.com/",
+   "note": "pool-supply chain, 70+ stores (testimonial)"
+  },
+  {
+   "name": "Just Cuts Franchising",
+   "source": "https://cloutly.com/",
+   "note": "230+ salon locations (testimonial)"
+  },
+  {
+   "name": "Bishops Cuts / Color",
    "source": "https://cloutly.com/"
   },
   {
-   "name": "Swyftx",
+   "name": "Dovida",
    "source": "https://cloutly.com/"
+  },
+  {
+   "name": "Merivale, Sorsi e Morsi and Francesca's",
+   "source": "https://cloutly.com/solutions/hospitality",
+   "note": "named as restaurants that manage their reviews in Cloutly"
   }
  ],
  "updates": [],
  "features": [
-  "Automated review request campaigns by SMS and email, with no login needed to leave a review",
-  "QR codes to collect reviews from walk-in customers",
-  "One inbox for Google, Facebook and 40+ other review sites (other sites on Growth and up)",
-  "Draft with AI (Magic Response) replies based on what each review says, posted back to the site",
-  "Review widgets for your website",
-  "Competitor tracking on higher plans",
-  "White-label option for agencies and resellers",
-  "Integrations including Mindbody and HubSpot"
+  "Review request campaigns by text and email, triggered when a bill closes in Square or Clover (or by Mindbody, Zenoti, HubSpot, Klaviyo, Mailchimp, Xero and Zapier); follow-ups stop once the review lands and recent reviewers are skipped",
+  "Review QR codes and links for walk-in guests, and video testimonials (Essentials and up)",
+  "One inbox for reviews from Google and Facebook, and 39 review sites from Essentials, alongside Facebook Messenger, Instagram DMs, texts and email, filterable by location",
+  "Draft with AI writes a reply from the review itself in a Friendly, Professional or Playful tone; nothing goes out until you send it",
+  "Ask (Growth): plain-English questions over your reviews, answered with exact counts and the reviews behind them, plus a location scorecard",
+  "Signals for hospitality: negative mentions counted against ten hospitality themes per restaurant, switched on by the Cloutly team",
+  "Growth plan: competitor analysis, staff leaderboard, listings management (hours, phone and address published to Google and Facebook) and AI search visibility in ChatGPT and Gemini",
+  "Website review widgets and auto-sharing to social media; REST API on every plan; white-label option for agencies"
  ],
  "pricing": {
-  "text": "Per location, month to month with a 14-day free trial: Starter $27/month (Google and Facebook only), Growth $63–69/month, Power $73–79/month depending on billing, and Custom for 15+ locations.",
+  "text": "Per location per month, billed monthly in USD: Starter $39 (Google and Facebook only, 50 SMS credits), Essentials $55 (39 review sites, 100 SMS credits), Growth $69 (200 SMS credits, competitor tracking, listings, Ask). Yearly billing is paid upfront with a month free. Enterprise is priced after a pilot; ten or more locations go through a rollout call. 14-day free trial, no credit card. Prices exclude tax.",
   "source": "https://cloutly.com/plans",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Plan prices come from search snippets of cloutly.com/plans and partner listings (G2, Mindbody), which disagree slightly (monthly vs annual), so they are given as ranges; check before quoting. No dated 2025–2026 product news found. Customers are testimonials on cloutly.com (Swimart is a pool-supply chain, Swyftx a crypto exchange); no named restaurant customer found. Original price '$27 to $63/month' updated."
+ "notes": "Plans changed since the last check (Starter, Essentials, Growth, Enterprise; old prices $27/$63-69/$73-79 replaced): USD prices come from the schema.org offers in the cloutly.com/plans page source (AUD 49/69/89, GBP 29/39/49), as the visible price fields load by script. No dated 2025-2026 product news found. Swyftx is no longer on cloutly.com and was dropped. G2 shows a 5.0 from a single review, so no rating is used. Magic Response is now called Draft with AI. The site says 39 review sites (earlier '40+').",
+ "pros": [
+  "Published per-location prices and a 14-day trial with no credit card",
+  "Requests go out automatically when a bill closes in Square or Clover, and each review is tied to the location the guest visited",
+  "Reviews, texts and social DMs share one inbox, with AI reply drafts in three tones",
+  "Ask and Signals turn reviews into counts by theme and location",
+  "REST API on every plan, plus integrations with Square, Clover, Mindbody, HubSpot and Klaviyo"
+ ],
+ "cons": [
+  {
+   "text": "Starter covers only Google and Facebook reviews; the other review sites start on Essentials",
+   "source": "https://cloutly.com/plans"
+  },
+  {
+   "text": "Competitor tracking, listings management, Ask and AI search visibility are only on Growth",
+   "source": "https://cloutly.com/plans"
+  },
+  {
+   "text": "Texts draw on a monthly SMS allowance per location (50, 100 or 200); more needs a pay-as-you-go pack",
+   "source": "https://cloutly.com/plans"
+  },
+  {
+   "text": "Ten or more locations go through a rollout call and a custom price",
+   "source": "https://cloutly.com/plans"
+  },
+  {
+   "text": "Built for service businesses in many industries; restaurant themes (Signals) are switched on by the Cloutly team on request",
+   "source": "https://cloutly.com/solutions/hospitality"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial, no credit card",
+  "billing": "per location per month, billed monthly; yearly billing paid upfront with a month free",
+  "list": [
+   {
+    "name": "Starter",
+    "price": "$39",
+    "unit": "per location per month, billed monthly",
+    "note": "Google and Facebook reviews, 50 SMS credits"
+   },
+   {
+    "name": "Essentials",
+    "price": "$55",
+    "unit": "per location per month, billed monthly",
+    "note": "39 review sites, two-way SMS, 100 SMS credits"
+   },
+   {
+    "name": "Growth",
+    "price": "$69",
+    "unit": "per location per month, billed monthly",
+    "note": "competitor tracking, listings, Ask, 200 SMS credits"
+   },
+   {
+    "name": "Enterprise",
+    "price": null,
+    "unit": "priced after a pilot",
+    "note": "for networks; ten or more locations book a rollout call"
+   }
+  ],
+  "source": "https://cloutly.com/plans",
+  "checked": "2026-11"
+ }
 }

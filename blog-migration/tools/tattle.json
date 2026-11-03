@@ -39,20 +39,92 @@
   }
  ],
  "features": [
-  "Automated post-transaction guest surveys sent through ordering, loyalty and POS systems",
-  "Integrations with restaurant tech such as Toast, Olo, Punchh, Paytronix, Thanx and Square",
-  "Feedback tied to operational areas such as speed, accuracy, food quality and hospitality",
-  "AI recommendations that rank the highest-impact improvement for each location",
-  "Review monitoring for sites such as Google and Yelp alongside survey feedback",
+  "Automated post-transaction guest surveys sent through ordering, loyalty and POS systems, plus SMS, email and QR code surveys",
+  "Integrations with restaurant tech such as Toast, Olo, Punchh, Paytronix, Thanx, Square, Revel and Lunchbox",
+  "Feedback tied to operational areas such as speed, accuracy, food quality and hospitality, plus item-level feedback on menu items",
+  "AI recommendations (AI Coach) that rank the highest-impact improvement for each location, with monthly goals",
+  "Review monitoring for Google, Yelp, Facebook and TripAdvisor, with replies from the app; full Reputation Management is a paid add-on",
   "Location comparison and trend dashboards, including metrics like top box score and recovery rate",
   "Service recovery workflows for unhappy guests",
   "Mobile app with alerts and AI action items for managers"
  ],
  "pricing": {
-  "text": "Custom pricing; Tattle does not publish prices. Contact the company for a quote.",
-  "source": null,
+  "text": "Published per-location pricing, per month, by number of units: 5-10 units $125, 11-20 units $100, 21-50 units $85, 51-200 units $65, 201+ units custom. Every plan has the same features and white-glove onboarding; Reputation Management is a separate add-on with no listed price. Removing locations takes 30 days' notice. No free trial is mentioned; Get Started goes to sales.",
+  "source": "https://get.tattleapp.com/pricing",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "No acquisition or shutdown found; Tattle remains independent (founder/CEO Alex Beltrani in earlier releases). Tattle says it serves 250+ restaurant brands, but its own figures vary (220+ brands / 11,000+ locations; 15k+ locations) so no count is given. The current review's description is broadly accurate; its emphasis on replying to reviews from the dashboard is not confirmed (Tattle's core is surveys plus review monitoring), so treat review replies as unverified. Hooters rollout date not confirmed."
+ "notes": "No acquisition or shutdown found; Tattle remains independent (founder/CEO Alex Beltrani in earlier releases). Tattle says it serves 250+ restaurant brands, but its own figures vary (220+ brands / 11,000+ locations; 15k+ locations) so no count is given. The current review's description is broadly accurate; its emphasis on replying to reviews from the dashboard is not confirmed (Tattle's core is surveys plus review monitoring), so treat review replies as unverified. Hooters rollout date not confirmed. 2026-11: Tattle now publishes per-location prices (get.tattleapp.com/pricing) and its homepage says 250+ brands. Review replies are confirmed: the iOS app (seller GetTattle Inc.) monitors Google, Yelp, Facebook and TripAdvisor and lets managers respond, and the pricing page sells Reputation Management as an add-on. The pricing FAQ's '12% improvement in satisfaction scores within 90 days' is a vendor average and was not used. G2 shows 5/5 from only 4 reviews, too few to cite, so no rating is given.",
+ "featuresSource": [
+  "https://get.tattleapp.com/",
+  "https://get.tattleapp.com/pricing",
+  "https://apps.apple.com/us/app/tattle/id6757370989"
+ ],
+ "pros": [
+  "Built only for restaurants, with integrations to ordering, loyalty and POS systems such as Toast, Olo, Punchh, Paytronix, Thanx and Square",
+  "Surveys go out automatically after each order, so feedback doesn't depend on staff handing out a link",
+  "Feedback is sorted by operational area and menu item, and AI Coach ranks the fix with the most impact at each location",
+  "Published per-location prices, with the same features on every plan",
+  "White-glove onboarding on every plan: setup specialist, custom survey design, integration setup and team training",
+  "Mobile app for GMs and franchisees with alerts, review replies and AI Coach, included for subscribers"
+ ],
+ "cons": [
+  {
+   "text": "Reputation Management (monitoring and replying across review platforms) is a separate add-on with no listed price",
+   "source": "https://get.tattleapp.com/pricing"
+  },
+  {
+   "text": "Published tiers start at 5 units, so single-location restaurants fall below the lowest tier",
+   "source": "https://get.tattleapp.com/pricing"
+  },
+  {
+   "text": "No free trial is mentioned; every plan's Get Started button goes to sales",
+   "source": "https://get.tattleapp.com/pricing"
+  },
+  {
+   "text": "Survey-first and restaurant-only: brands that mainly want listings management or AI guest messaging may need another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "per location per month, tiered by number of units",
+  "list": [
+   {
+    "name": "5-10 units",
+    "price": "$125",
+    "unit": "per location per month"
+   },
+   {
+    "name": "11-20 units",
+    "price": "$100",
+    "unit": "per location per month"
+   },
+   {
+    "name": "21-50 units",
+    "price": "$85",
+    "unit": "per location per month"
+   },
+   {
+    "name": "51-200 units",
+    "price": "$65",
+    "unit": "per location per month"
+   },
+   {
+    "name": "201+ units",
+    "price": "Custom",
+    "unit": null,
+    "note": "custom enterprise pricing; the FAQ says custom packages for brands with 250+ locations"
+   }
+  ],
+  "addOns": [
+   {
+    "name": "Reputation Management",
+    "price": null,
+    "note": "monitor, respond to and boost reviews across platforms; price not listed"
+   }
+  ],
+  "source": "https://get.tattleapp.com/pricing",
+  "checked": "2026-11"
+ }
 }

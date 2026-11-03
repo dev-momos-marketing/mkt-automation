@@ -1,24 +1,99 @@
-{"name": "Stamp Me",
+{
+ "name": "Stamp Me",
  "website": "https://www.stampme.com/",
  "oneLiner": "Digital stamp card app for small businesses: customers collect stamps and redeem rewards on their phone, with no POS integration required.",
  "bestFor": "Independent cafes, coffee shops and small hospitality businesses that want a simple digital punch card.",
  "customers": [
-  {"name": "Merriment Cafe", "source": "https://www.stampme.com/case-studies/merriment-cafe"},
-  {"name": "Batch Espresso", "source": "https://stampme.com/case-studies/batch-espresso"},
-  {"name": "Pine Scone Cafe", "source": "https://www.stampme.com/case-studies/pine-scone-cafe"},
-  {"name": "Le Roi Cafe", "source": "https://www.stampme.com/case-studies/le-roi-cafe"}
+  {
+   "name": "Merriment Cafe",
+   "source": "https://www.stampme.com/case-studies/merriment-cafe"
+  },
+  {
+   "name": "Batch Espresso",
+   "source": "https://stampme.com/case-studies/batch-espresso"
+  },
+  {
+   "name": "Pine Scone Cafe",
+   "source": "https://www.stampme.com/case-studies/pine-scone-cafe"
+  },
+  {
+   "name": "Le Roi Cafe",
+   "source": "https://www.stampme.com/case-studies/le-roi-cafe"
+  }
  ],
  "updates": [
-  {"date": "2026-08", "text": "Stamp Me's blog (dated August 2026) describes Apple Wallet and Google Wallet support: members save a Member Code to their phone wallet, which staff scan with the Stamp Business merchant app (currently in a Merchant App beta).", "source": "https://www.stampme.com/blog/does-stamp-me-work-with-apple-google-wallet"}
+  {
+   "date": "2026-08",
+   "text": "Stamp Me's blog (dated August 2026) describes Apple Wallet and Google Wallet support: members save a Member Code to their phone wallet, which staff scan with the Stamp Business merchant app (currently in a Merchant App beta).",
+   "source": "https://www.stampme.com/blog/does-stamp-me-work-with-apple-google-wallet"
+  }
  ],
  "features": [
-  "Digital stamp cards customers join by QR code or the Stamp Me app",
-  "Several stamping methods, including the StampPod tap device, QR codes, stamp codes and Stamp Tags",
+  "Digital stamp cards customers join by QR code or the Stamp Me app; up to 2 published stamp card programs per account",
+  "Stamping methods: StampTag, OneStamps and Stamp Code on every plan; the StampPod tap device on Pro and Elite (one free per location, extra pods $59 each)",
   "Stamp Business merchant app: staff scan a member's code to stamp or redeem (beta)",
   "Member Code in Apple Wallet or Google Wallet",
-  "Push notifications and SMS messaging to members",
-  "Automated birthday rewards and Scratch & Win games",
-  "Zapier connection to email and CRM tools"
+  "Unlimited push notifications and SMS messaging (SMS fees apply) on Pro and Elite",
+  "Birthday Club, Lapsed Customer messaging and Scratch & Win games on Pro and Elite",
+  "Zapier integrations that push member data to email and CRM tools (Pro and Elite)",
+  "Activity insights and member data in a web-based Loyalty Portal",
+  "No POS integration needed (Stamp Me doesn't integrate with POS systems)"
  ],
- "pricing": {"text": "Three plans (Lite, Pro, Elite), each with a 30-day free trial, no setup fees and no cap on members. Prices are on Stamp Me's pricing page, which could not be opened; third-party sites disagree ($29 vs $49 starting), so no figure is given.", "source": "https://help.stampme.com/en/articles/6204313-how-much-does-stamp-me-cost", "checked": "2026-11"},
- "notes": "stampme.com and help.stampme.com could not be fetched; facts come from search snippets of vendor pages. Dropped the original '$29/month' starting price (unverified; CostBench says $49). Launch date of Stamp Business and wallet support not confirmed; August 2026 is the blog post date. Case studies are vendor-published. Dropped 'six methods' count and Zapier detail on data fields."}
+ "pricing": {
+  "text": "Published in USD per month: Lite $49, Pro $79, Elite $199, monthly pay-as-you-go with no lock-in contract and no setup costs (annual plans with discounted pricing on request). 30-day free trial that starts when you publish your first stamp card, no credit card required. Each plan covers one location; additional locations cost an extra monthly fee. Up to 2 published stamp card programs included; more cost a one-time $15 each.",
+  "source": "https://www.stampme.com/pricing",
+  "checked": "2026-11"
+ },
+ "notes": "November 2026: stampme.com/pricing and help.stampme.com articles read with curl. USD prices $49/$79/$199 per month (the page also shows AUD, GBP, EUR and CAD prices; a hidden $100 Elite offer price is not displayed, so it isn't used). The trial length (30 days) is from the pricing page FAQ. Plan inclusions from the help center (September 2026). G2 lists Stamp Me with a single review, too few for a rating, so none is cited. Launch date of Stamp Business and wallet support not confirmed; August 2026 is the blog post date. Case studies are vendor-published. The homepage claims 15+ years and 50+ countries; vendor figures, not used.",
+ "pros": [
+  "Runs without POS integration or extra software; Stamp Me says a simple card takes around 5 minutes to set up",
+  "Published monthly prices with no lock-in contract and no setup costs",
+  "30-day free trial with no credit card",
+  "No cap on members and no fees per customer",
+  "Several stamping methods, from codes to the StampPod tap device, plus Apple Wallet and Google Wallet member codes"
+ ],
+ "cons": [
+  {
+   "text": "Doesn't integrate with POS systems, so stamps aren't tied to transactions",
+   "source": "https://help.stampme.com/en/articles/6219955-does-stamp-me-integrate-with-pos-systems"
+  },
+  {
+   "text": "Lite has no campaigns, messaging or StampPod; those start on Pro ($79 per month)",
+   "source": "https://help.stampme.com/en/articles/11536837-what-are-the-different-plan-inclusions"
+  },
+  {
+   "text": "Each plan covers one location; more locations cost an additional monthly fee",
+   "source": "https://help.stampme.com/en/articles/11536837-what-are-the-different-plan-inclusions"
+  },
+  {
+   "text": "SMS messages carry extra fees",
+   "source": "https://help.stampme.com/en/articles/11536837-what-are-the-different-plan-inclusions"
+  }
+ ],
+ "plans": {
+  "trial": "30-day free trial, starts when the first card is published, no credit card",
+  "billing": "per month (USD), pay as you go, no lock-in contract",
+  "list": [
+   {
+    "name": "Lite",
+    "price": "$49",
+    "unit": "per month, one location",
+    "note": "App, loyalty portal, two stamp cards, basic stamp methods and data; no campaigns or messaging"
+   },
+   {
+    "name": "Pro",
+    "price": "$79",
+    "unit": "per month, one location",
+    "note": "Adds StampPod, push and SMS (fees apply), Scratch & Win, Birthday Club, Lapsed Customers, integrations"
+   },
+   {
+    "name": "Elite",
+    "price": "$199",
+    "unit": "per month, one location",
+    "note": "Adds custom marketing materials, a dedicated account manager and advanced support"
+   }
+  ],
+  "source": "https://www.stampme.com/pricing",
+  "checked": "2026-11"
+ }
+}

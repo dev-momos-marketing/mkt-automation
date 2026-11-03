@@ -1,17 +1,120 @@
-{"name": "RepliFast", "website": "https://www.replifast.com/",
+{
+ "name": "RepliFast",
+ "website": "https://www.replifast.com/",
  "oneLiner": "Low-cost AI tool that drafts and posts replies to Google Business Profile reviews for small businesses, with an autopilot mode on its Pro plan.",
  "bestFor": "Independent restaurants and small teams that mainly need fast, consistent replies to Google reviews and don't need multi-platform review management, surveys or analytics suites.",
- "customers": [],
- "updates": [],
+ "customers": [
+  {
+   "name": "Jah Shaka Surf Shop",
+   "source": "https://www.replifast.com/"
+  },
+  {
+   "name": "Quiksilver & Roxy Shop",
+   "source": "https://www.replifast.com/"
+  },
+  {
+   "name": "Müller Installateur",
+   "source": "https://www.replifast.com/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-03",
+   "text": "AI-powered review insights: topic extraction with sentiment and recommendations.",
+   "source": "https://www.replifast.com/changelog"
+  },
+  {
+   "date": "2026-06",
+   "text": "Google Business Profile visibility tools: a 0 to 100 Visibility Score plus AI-drafted Google Posts and profile updates (beta).",
+   "source": "https://www.replifast.com/changelog"
+  },
+  {
+   "date": "2026-07",
+   "text": "Backlog handoff: the review agent works through a pile of old reviews, posts the clearly fine ones and holds the rest for the owner.",
+   "source": "https://www.replifast.com/changelog"
+  },
+  {
+   "date": "2026-08",
+   "text": "Locations priced per unit on Starter and Pro; the Visibility workspace left beta and is included on every paid plan.",
+   "source": "https://www.replifast.com/changelog"
+  }
+ ],
  "features": [
-  "Connects to Google Business Profile and checks for new reviews daily",
-  "AI-drafted replies in the business's own tone",
+  "Connects to Google Business Profile through Google's official API; new reviews appear within minutes on paid plans, with a daily sweep as backstop",
+  "AI-drafted replies in the business's own tone, in the review's own language (50+ languages)",
+  "Brand tone, signature and house rules you can fine-tune",
   "Batch generation to clear a backlog of unanswered reviews in one go",
   "Autopilot posting on the Pro plan, replying within minutes of a new review",
-  "Star-rating rules, for example auto-posting 4- and 5-star replies while holding 1- to 3-star reviews for approval",
-  "Sentiment and recurring-theme analytics on reviews",
+  "Star-rating rules, for example auto-posting 4- and 5-star replies while holding 1- to 3-star reviews for approval; 1- and 2-star replies always wait for the owner",
+  "Context check: when a critical review names a staff member or describes an incident, it pauses the reply and asks the owner for one line",
+  "Sentiment and recurring-theme analytics on reviews (weekly insights on Pro)",
+  "Visibility Pack (Pro): Google Posts and services drafted from your reviews and website",
   "Free Google review reply generator on its website, no signup required"
  ],
- "pricing": {"text": "Free plan with 5 AI replies a month. Starter: $15/month, or $12/month billed annually (you approve and post each reply). Pro: $29/month, or $19/month billed annually (adds autopilot). Free Pro trial for 14 days or 15 posted replies, whichever comes first.", "source": "https://www.replifast.com/support/pricing-plans", "checked": "2026-11"},
+ "pricing": {
+  "text": "Free plan with 5 AI replies a month for 1 location. Starter: $15/month, or $12/month billed annually ($144 a year); up to 200 AI replies per location per month, you approve and post each reply. Pro: $29/month, or $19/month billed annually ($228 a year); unlimited replies, autopilot, weekly insights, Visibility Pack. Extra locations cost more on both plans (Pro: $12/month each for locations 2 to 5). Free Pro trial for 14 days or 15 posted replies per location, whichever comes first, no credit card. 14-day money-back guarantee.",
+  "source": "https://www.replifast.com/pricing",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "Facts come from search results of replifast.com pages (home, pricing, support) and Capterra; the site could not be fetched directly. Pricing conflicts across sources: RepliFast's support page gives the figures above, Capterra lists $12 and $19, and an October 2026 third-party review (toolsurf.com) lists Starter at $17/month and Pro at $29/month; recheck replifast.com/pricing before publishing. The current review's 'around $12 per month billed annually, or $15 billed monthly' matches the Starter plan only. No named customers, owner/founder or dated 2025-2026 product updates could be found, and Capterra shows no user reviews yet. It handles Google reviews only, which fits the AI review response post but makes it narrower than the other picks."}
+ "notes": "November 2026: replifast.com, /pricing, /changelog and /llms.txt fetched directly; pricing confirmed on the vendor's page (pricing last updated 2026-10-04 per the page). The older third-party figures (toolsurf.com $17 Starter) are superseded. Named customers are testimonials on the home page (a surf shop, a surf retailer and a plumbing business), none of them restaurants. No G2 listing found, so no rating.",
+ "company": {
+  "text": "Founded in 2025 by Kevin Hofmann; a product of SOULRISE LLC; describes itself as early-stage SaaS",
+  "source": "https://www.replifast.com/llms.txt"
+ },
+ "pros": [
+  "Low price: from $12 a month billed annually, with a free plan",
+  "Free Pro trial with no credit card",
+  "Low-star replies always wait for the owner, and critical reviews with specific details pause for input",
+  "Replies in the review's own language, 50+ languages",
+  "Priced per location with no location cap"
+ ],
+ "cons": [
+  {
+   "text": "Google reviews only; reviews from other sites aren't included",
+   "source": "https://www.replifast.com/llms.txt"
+  },
+  {
+   "text": "No team seats",
+   "source": "https://www.replifast.com/llms.txt"
+  },
+  {
+   "text": "Autopilot and weekly insights are Pro-only; on Starter you approve and post every reply",
+   "source": "https://www.replifast.com/pricing"
+  },
+  {
+   "text": "Starter caps AI replies at 200 per location per month",
+   "source": "https://www.replifast.com/pricing"
+  },
+  {
+   "text": "Young company: founded in 2025 and describes itself as early-stage",
+   "source": "https://www.replifast.com/llms.txt"
+  }
+ ],
+ "plans": {
+  "trial": "14 days of Pro or 15 posted replies per location (up to 3 locations), whichever comes first; no credit card",
+  "billing": "per location, monthly or annual",
+  "list": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "unit": "per month",
+    "note": "5 AI replies a month, 1 location, you post each one"
+   },
+   {
+    "name": "Starter",
+    "price": "$15",
+    "unit": "per month, or $12 per month billed annually",
+    "note": "Up to 200 AI replies per location per month; you approve each reply"
+   },
+   {
+    "name": "Pro",
+    "price": "$29",
+    "unit": "per month, or $19 per month billed annually",
+    "note": "Unlimited replies, autopilot, weekly insights, Visibility Pack"
+   }
+  ],
+  "source": "https://www.replifast.com/pricing",
+  "checked": "2026-11"
+ }
+}
