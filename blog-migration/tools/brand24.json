@@ -40,10 +40,85 @@
   "ChatGPT app and MCP server for querying data from AI assistants"
  ],
  "pricing": {
-  "text": "Five published plans: Individual $249/month ($199/month billed annually), Team $349 ($299), Pro $499 ($399), Business $699 ($599), Enterprise from $1,499/month billed annually. 14-day free trial; no free plan. Individual updates about every 12 hours; Pro and above update in real time.",
+  "text": "Five published plans: Individual $249/month ($199/month billed annually; 1 user, 3 keywords, 2K mentions a month, updates every 12 hours), Team $349 ($299; 7 keywords, 10K mentions, hourly updates), Pro $499 ($399; 12 keywords, 40K mentions, real time), Business $699 ($599; 25 keywords, 100K mentions, real time), Enterprise from $1,499/month billed annually. 14-day free trial, no credit card; no free plan. API access $149 extra; AI Visibility marked as an add-on except on Enterprise; mentions over the limit incur overage fees.",
   "source": "https://brand24.com/prices/",
   "checked": "2026-11"
  },
  "status": "active",
- "notes": "Prices come from search snippets of brand24.com/prices (site not fetchable from this session). Dropped from the current review: old prices (Individual $79, Team $149, Pro $199, Enterprise $399 and the four-tier structure), '4,000 customers' (Brand24's own pages give inconsistent counts: 2400+, 4000+, 'thousands'), and Samsung, Wondery and Stanford as named customers (Samsung appears only as a monitored brand in a public Brand24 tool; Wondery/Stanford not confirmed). 'Proprietary Presence Score' not re-verified. AI Visibility is an add-on except on Enterprise, per a third-party pricing tracker. Founded 2011 in Poland not re-verified. Still fits as a listening tool, but it is not a review management platform."
+ "notes": "Prices confirmed on brand24.com/prices (fetched 2026-11). Dropped from the current review: old prices (Individual $79, Team $149, Pro $199, Enterprise $399 and the four-tier structure), '4,000 customers' (Brand24's own pages give inconsistent counts: 2400+, 4000+, 'thousands'), and Samsung, Wondery and Stanford as named customers (Samsung appears only as a monitored brand in a public Brand24 tool; Wondery/Stanford not confirmed). 'Proprietary Presence Score' not re-verified. AI Visibility is marked as an add-on in the vendor's feature table and included in the Enterprise plan list (the page is not fully consistent). G2 review count varies between G2 pages (about 330 to 355); 332 is the profile figure. Founded 2011 in Poland not re-verified. Still fits as a listening tool, but it is not a review management platform.",
+ "pros": [
+  "Covers social media, news, blogs, forums, podcasts, newsletters, video and review sites in one feed",
+  "AI sentiment and emotion analysis on every mention",
+  "Real-time updates on Pro, Business and Enterprise; hourly on Team",
+  "LLM Monitoring shows how ChatGPT, Gemini and Claude describe and rank a brand",
+  "Rated 4.6/5 on G2 from 332 reviews",
+  "14-day free trial with no credit card"
+ ],
+ "cons": [
+  {
+   "text": "No free plan; after the 14-day trial, plans start at $199 per month billed annually ($249 billed monthly)",
+   "source": "https://brand24.com/prices/"
+  },
+  {
+   "text": "The Individual plan has 1 user and 3 keywords and updates about every 12 hours",
+   "source": "https://brand24.com/prices/"
+  },
+  {
+   "text": "The AI Visibility module is marked as an add-on except on Enterprise, and API access costs $149 extra",
+   "source": "https://brand24.com/prices/"
+  },
+  {
+   "text": "Monitors mentions but has no review-response workflow, so restaurants need a separate tool to reply to reviews",
+   "source": "scope"
+  },
+  {
+   "text": "Mentions over a plan's monthly limit incur overage fees",
+   "source": "https://brand24.com/prices/"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial, no credit card",
+  "billing": "per month; annual billing lowers the monthly rate",
+  "list": [
+   {
+    "name": "Individual",
+    "price": "$249",
+    "unit": "per month, or $199 per month billed annually",
+    "note": "1 user, 3 keywords, 2K mentions a month, updates every 12 hours"
+   },
+   {
+    "name": "Team",
+    "price": "$349",
+    "unit": "per month, or $299 per month billed annually",
+    "note": "unlimited users, 7 keywords, 10K mentions, hourly updates"
+   },
+   {
+    "name": "Pro",
+    "price": "$499",
+    "unit": "per month, or $399 per month billed annually",
+    "note": "12 keywords, 40K mentions, real-time updates"
+   },
+   {
+    "name": "Business",
+    "price": "$699",
+    "unit": "per month, or $599 per month billed annually",
+    "note": "25 keywords, 100K mentions, real-time updates"
+   },
+   {
+    "name": "Enterprise",
+    "price": "from $1,499",
+    "unit": "per month, billed annually",
+    "note": "custom limits; AI Visibility included"
+   }
+  ],
+  "source": "https://brand24.com/prices/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.6",
+  "reviews": 332,
+  "source": "https://www.g2.com/products/brand24/reviews",
+  "checked": "2026-11"
+ }
 }

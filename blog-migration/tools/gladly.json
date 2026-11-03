@@ -1,23 +1,95 @@
-{"name": "Gladly", "website": "https://www.gladly.com/",
- "oneLiner": "People-centered customer service platform, now positioned as an agentic commerce platform, that keeps one lifelong conversation per customer across channels and adds Gladly AI.",
+{
+ "name": "Gladly",
+ "website": "https://www.gladly.com/",
+ "oneLiner": "Customer service platform, now positioned as an agentic commerce platform ('Commerce AI for every customer moment'), that keeps one lifelong conversation per customer across channels and adds Gladly AI.",
  "bestFor": "Mid-market and enterprise consumer brands, including hospitality, that run high-touch service across voice and digital channels.",
  "customers": [
-  {"name": "JOANN", "source": "https://www.gladly.com/customers/joann/"},
-  {"name": "Rothy's", "source": "https://gladly.com/customer-spotlight"},
-  {"name": "Ulta Beauty", "source": "https://gladly.com/blog/how-top-2023-customer-service-brands-use-gladly"}
+  {
+   "name": "JOANN",
+   "source": "https://www.gladly.com/customers/joann/"
+  },
+  {
+   "name": "Rothy's",
+   "source": "https://gladly.com/customer-spotlight"
+  },
+  {
+   "name": "Ulta Beauty",
+   "source": "https://gladly.com/blog/how-top-2023-customer-service-brands-use-gladly"
+  },
+  {
+   "name": "Breeze Airways",
+   "source": "https://www.gladly.ai/industries/hospitality-travel-cx/"
+  },
+  {
+   "name": "Nordstrom",
+   "source": "https://www.gladly.ai/"
+  }
  ],
  "updates": [
-  {"date": "2026-05", "text": "Announced agentic commerce capabilities at its Gladly Connect Live conference: one AI system that handles sales questions (such as sizing) and service requests (such as exchanges) from pre-purchase discovery to post-sale retention.", "source": "https://pr.portlandtribune.com/article/Gladly-Announces-Agentic-Commerce-Capabilities-at-Gladly-Connect-Live/69fb7b71d56b553ce63b3e7b"},
-  {"date": "2026-06", "text": "Blog post describing the next version of the platform, where AI handles conversations, assists agents and resolves requests across channels.", "source": "https://www.gladly.ai/blog/the-power-of-and/"}
+  {
+   "date": "2026-05",
+   "text": "Announced agentic commerce capabilities at its Gladly Connect Live conference: one AI system that handles sales questions (such as sizing) and service requests (such as exchanges) from pre-purchase discovery to post-sale retention.",
+   "source": "https://pr.portlandtribune.com/article/Gladly-Announces-Agentic-Commerce-Capabilities-at-Gladly-Connect-Live/69fb7b71d56b553ce63b3e7b"
+  },
+  {
+   "date": "2026-06",
+   "text": "Blog post describing the next version of the platform, where AI handles conversations, assists agents and resolves requests across channels.",
+   "source": "https://www.gladly.ai/blog/the-power-of-and/"
+  }
  ],
  "features": [
   "One lifelong conversation thread per customer across voice, email, chat, SMS and social",
   "Customer profile with full history and order data visible to agents",
-  "Gladly AI that answers and resolves customer requests across channels",
-  "AI assistance for human agents during conversations",
+  "Gladly AI that answers and resolves customer requests across channels and hands off to staff with context",
+  "Team Assist: AI assistance for human agents during conversations",
+  "Voice AI for phone conversations",
   "Self-service help center content used by the AI",
   "People-based routing and queues",
-  "Reporting on team performance and customer satisfaction"
+  "Reporting on team performance and customer satisfaction",
+  "Travel and hospitality use cases: booking changes, cancellations, FAQs and service informed by loyalty status (https://www.gladly.ai/industries/hospitality-travel-cx/)"
  ],
- "pricing": {"text": "Custom pricing; Gladly does not publish prices (third-party sites estimate per-user packages, unverified).", "source": null, "checked": "2026-11"},
- "notes": "Gladly's site and blog now also live at gladly.ai; the original Website link (gladly.com) was kept. Third-party price estimates (about $180-$210 per user per month, AI billed per resolved conversation) were not used because Gladly does not publish them. A third-party guide says Gladly AI hands off non-English conversations by default; not used. Vendor-reported case-study metrics left out."}
+ "pricing": {
+  "text": "Custom pricing; the pricing page (gladly.com/pricing redirects to gladly.ai/pricing) publishes no prices or trial and leads to 'Get a Demo' and 'Contact sales'.",
+  "source": "https://www.gladly.ai/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "Gladly's site and blog now also live at gladly.ai; the original Website link (gladly.com) was kept. Third-party price estimates (about $180-$210 per user per month, AI billed per resolved conversation) were not used because Gladly does not publish them. A third-party guide says Gladly AI hands off non-English conversations by default; not used. Vendor-reported case-study metrics left out. Homepage, pricing and hospitality pages fetched at gladly.ai 2026-11. JOANN is not used in reviews: the current homepage no longer lists it. G2 rating from a search snippet of the G2 product page (count varies between G2 pages).",
+ "pros": [
+  "One conversation per customer across voice, email, chat, SMS and social, so context carries over",
+  "Gladly AI and human agents work from the same customer history",
+  "Rated 4.7/5 on G2 from 1,113 reviews",
+  "Travel and hospitality offering covers booking changes, cancellations and service by loyalty status"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; the pricing page leads to a demo and sales",
+   "source": "https://www.gladly.ai/pricing/"
+  },
+  {
+   "text": "No free trial listed; the pricing page offers a demo",
+   "source": "https://www.gladly.ai/pricing/"
+  },
+  {
+   "text": "Positioned as a 'retail-trained AI Commerce solution', and its hospitality page names no restaurants",
+   "source": "https://www.gladly.ai/"
+  },
+  {
+   "text": "Built for mid-market and enterprise consumer brands, so a small restaurant group may need less",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": null,
+  "list": [],
+  "source": "https://www.gladly.ai/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.7",
+  "reviews": 1113,
+  "source": "https://www.g2.com/products/gladly/reviews",
+  "checked": "2026-11"
+ }
+}
