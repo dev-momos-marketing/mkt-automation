@@ -1,0 +1,27 @@
+{"name": "SoundHound AI", "website": "https://www.soundhound.com/",
+ "oneLiner": "Nasdaq-listed voice AI company whose restaurant products answer phone orders, take drive-thru orders and power kiosks, now built on its OASYS agentic AI platform.",
+ "bestFor": "High-volume QSR and casual-dining chains that want to automate phone ordering and drive-thru order taking across many locations, with POS integration and enterprise rollout support.",
+ "customers": [
+  {"name": "Five Guys", "source": "https://www.globenewswire.com/de/news-release/2026/01/28/3227704/0/en/five-guys-extends-partnership-with-soundhound-ai.html"},
+  {"name": "Chipotle", "source": "https://www.sec.gov/Archives/edgar/data/1840856/000162828025038931/soun-20250807ex991earnings.htm"},
+  {"name": "Red Lobster and Applebee's / IHOP", "source": "https://www.sec.gov/Archives/edgar/data/1840856/000162828025038931/soun-20250807ex991earnings.htm"},
+  {"name": "Church's Texas Chicken", "source": "https://www.qsrweb.com/news/churchs-chicken-partners-with-soundhound-to-power-voice-ai/"}
+ ],
+ "updates": [
+  {"date": "2025-08", "text": "Q2 2025 results named new restaurant deals with Red Lobster, Peter Piper Pizza and Applebee's / IHOP and expansion with Chipotle; later in 2025 it bought Interactions, a customer-service virtual assistant company.", "source": "https://www.sec.gov/Archives/edgar/data/1840856/000162828025038931/soun-20250807ex991earnings.htm"},
+  {"date": "2026-01", "text": "Five Guys extended its partnership after more than one million AI phone ordering interactions, letting franchisees add the phone ordering agent at their own locations.", "source": "https://www.globenewswire.com/de/news-release/2026/01/28/3227704/0/en/five-guys-extends-partnership-with-soundhound-ai.html"},
+  {"date": "2026-05", "text": "Launched OASYS (Orchestrated Agent System), a self-learning agentic AI platform for building agents that run across phones, drive-thrus, kiosks, web chat and vehicles.", "source": "https://soundhound.gcs-web.com/news-releases/news-release-details/soundhound-ai-introduces-oasys-worlds-first-self-learning"}
+ ],
+ "features": [
+  "AI phone ordering that answers calls, takes orders and handles menu, hours and allergen questions",
+  "Drive-thru voice ordering, including with Acrelec drive-thru hardware",
+  "Kiosk and in-car voice ordering channels",
+  "POS integration so orders go straight to the kitchen",
+  "Upselling and promotion prompts during orders",
+  "Multilingual voice understanding",
+  "Voice Insights that turn drive-thru conversations into operational data",
+  "OASYS platform for building agents once and deploying them across channels"
+ ],
+ "pricing": {"text": "Custom pricing; not published.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Public company (Nasdaq: SOUN). It acquired Amelia (2024), SYNQ3 Restaurant Solutions (2024) and Interactions (2025); a LivePerson acquisition was reported as planned in 2026 (not verified in detail). Kept from current review: Chipotle and Church's Texas Chicken (confirmed). White Castle is a confirmed earlier (2023) drive-thru partner (qsrweb.com) but not shown in recent filings; Jersey Mike's is reported by Zacks as a growing location count in 2026 but not confirmed by a primary source here, so both left out of customers. Dropped from current review: 'no human in the loop' / 'no human agents' framing (not verified as a vendor claim) and 'one of the most widely deployed' (vendor reports voice AI in 10,000+ restaurant locations per its 2025 Acrelec release; vendor-reported). Text and scan-to-order not re-confirmed."}

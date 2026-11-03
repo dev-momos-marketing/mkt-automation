@@ -1,0 +1,25 @@
+{"name": "TouchBistro", "website": "https://www.touchbistro.com/",
+ "oneLiner": "iPad-based restaurant POS and management system with built-in sales reporting and analytics plus add-ons for payments, online ordering, reservations, inventory and labor; owned by Harris (Constellation Software) since July 2026.",
+ "bestFor": "Independent full-service restaurants and small multi-location groups that want sales, menu and staff reporting built into their POS instead of a separate BI tool.",
+ "customers": [
+  {"name": "Café Crêpe (multi-location group with central commissary)", "source": "https://www.touchbistro.com/blog/cafe-crepe-case-study/"},
+  {"name": "Uncle Tetsu (multi-unit QSR, North America)", "source": "https://www.touchbistro.com/blog/how-touchbistro-helps-an-international-multi-location-qsr-thrive/"},
+  {"name": "Koyo (sushi, Queens NY)", "source": "https://www.touchbistro.com/blog/koyo-case-study/"},
+  {"name": "Masseria", "source": "https://www.touchbistro.com/blog/customer-spotlight-masseria/"}
+ ],
+ "updates": [
+  {"date": "2026-07", "text": "Harris, an operating group of Constellation Software, acquired TouchBistro and said it plans to keep investing in the product; the TouchBistro team joined Harris. Terms were not disclosed (The Globe and Mail reported about $100 million).", "source": "https://www.harriscomputer.com/news/harris-acquires-touchbistro"}
+ ],
+ "features": [
+  "Real-time sales reports by time period, menu item and staff member, viewable from the cloud",
+  "Menu mix and item performance analysis",
+  "Server and shift performance reporting",
+  "Discount, void and refund tracking",
+  "Table management and iPad-based order taking for full-service restaurants",
+  "Integrated payments",
+  "Add-ons for online ordering, reservations, kitchen display, loyalty and marketing",
+  "Inventory and labor management modules"
+ ],
+ "pricing": {"text": "Point of Sale software from $69/month per location (hardware sold separately); Essentials bundle with payments and hardware listed from $119/month on the pricing page (the homepage has shown $99/month). Add-ons such as online ordering and kitchen display cost extra; enterprise is quoted.", "source": "https://www.touchbistro.com/pricing/", "checked": "2026-11"},
+ "status": "acquired",
+ "notes": "Acquisition: Harris (Constellation Software) announced it acquired TouchBistro on July 7, 2026; product continues to be sold under the TouchBistro name. Harris says it powers 16,000+ restaurants in 100+ countries (vendor figure). Pricing comes from search snippets of touchbistro.com (not fetched); $119 vs $99 for the Essentials bundle conflicts between pages, so re-check. Dropped from current review: 'POS software typically starts in the low hundreds per month per location' (published entry price is $69/month). No 2025 product launch confirmed; no AI reporting feature confirmed, so it fits an 'AI agents' list only loosely as a POS reporting option. Customer case studies are vendor-published; their percentages (e.g. Café Crêpe 85% less inventory time, Uncle Tetsu 11% less waste) are vendor-reported."}

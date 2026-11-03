@@ -1,0 +1,26 @@
+{"name": "SynergySuite", "website": "https://www.synergysuite.com/",
+ "oneLiner": "Modular, cloud-based back-of-house platform for multi-unit restaurant chains, covering inventory, purchasing, recipe costing, labor, food safety and reporting, with AI forecasting and ordering.",
+ "bestFor": "Mid-sized to enterprise restaurant chains and franchise groups that want to standardize food and labor cost control across many locations.",
+ "customers": [
+  {"name": "Playa Bowls", "source": "https://www.fastcasual.com/press-releases/playa-bowls-taps-synergysuite-to-power-next-phase-of-growth/"},
+  {"name": "Church's Chicken", "source": "https://www.casestudies.com/company/synergysuite/case-study/churchs-chicken-saves-2-on-food-with-synergysuite"},
+  {"name": "Friendly's Restaurants", "source": "https://www.casestudies.com/company/synergysuite/case-study/how-friendlys-modernized-operations-with-synergysuite"},
+  {"name": "Shipley Do-Nuts", "source": "https://www.fastcasual.com/resources/shipley-do-nuts-synergysuite-case-study/"}
+ ],
+ "updates": [
+  {"date": "2025-08", "text": "Raised $12 million to expand its AI-powered back-of-house platform for restaurant chains and franchise groups.", "source": "https://restauranttechnologynews.com/2025/08/synergysuite-raises-12-million-to-expand-ai-powered-back-of-house-platform/"},
+  {"date": "2025-09", "text": "Playa Bowls (200+ locations) chose SynergySuite to manage food and labor and automate inventory and purchasing.", "source": "https://www.fastcasual.com/press-releases/playa-bowls-taps-synergysuite-to-power-next-phase-of-growth/"}
+ ],
+ "features": [
+  "Inventory counts and live stock tracking across locations",
+  "AI demand forecasting and suggested (dynamic) ordering",
+  "Purchasing, supplier management and invoice handling",
+  "Recipe costing and theoretical vs. actual food cost",
+  "AI-assisted labor scheduling with time and attendance",
+  "Food safety checklists and compliance tracking",
+  "Cash management with void and refund controls",
+  "Multi-location reporting and POS integrations (including Toast and PAR Brink)"
+ ],
+ "pricing": {"text": "Custom pricing; contact SynergySuite for a quote.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "No rename or acquisition found; still independent and sold. The current review's pricing detail (per location per month by module, location-count discounts, one-time implementation fee) is not published by the vendor and could not be confirmed; reduce to 'custom pricing'. Vendor claim of '2-8% savings on food and labor' and Church's '2% food cost savings' are vendor-reported; attribute or omit. One aggregator dated the $12M raise October 2026; it is most likely the August 2025 round re-reported. The vendor also names Costa Vida, Zao Asian Cafe and Fatcats as clients (Utah 100 release, Oct 2025). HR modules mentioned in the current review were not confirmed."}

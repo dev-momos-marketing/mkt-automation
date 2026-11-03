@@ -1,0 +1,24 @@
+{"name": "SurveySparrow", "website": "https://surveysparrow.com/",
+ "oneLiner": "Survey and experience management platform known for chat-style conversational surveys, with NPS/CSAT tracking, AI text analysis, reputation management and closed-loop ticketing.",
+ "bestFor": "Restaurants and hospitality groups that want friendly, mobile-first guest surveys sent by QR code, SMS, email or WhatsApp, recurring NPS or CSAT tracking and AI analysis of comments without an enterprise CX budget.",
+ "customers": [
+  {"name": "Pechanga Resort Casino", "source": "https://www.surveysparrow.com/customers/pechanga"},
+  {"name": "Paragon Casino Resort", "source": "https://surveysparrow.com/customers/paragon-casino"},
+  {"name": "OneTable", "source": "https://surveysparrow.com/customers/onetable"}
+ ],
+ "updates": [
+  {"date": "2025-10", "text": "Launched SparrowDesk, a separate AI-first customer support helpdesk that auto-resolves repetitive tickets and gives human agents an AI copilot.", "source": "https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/surveysparrow-launches-sparrowdesk-the-ai-first-customer-support-1084323"}
+ ],
+ "features": [
+  "Conversational, chat-like survey format alongside classic forms",
+  "Distribution by link, email, SMS, WhatsApp, QR code, web and in-app widgets, and offline kiosk apps",
+  "NPS, CSAT and CES surveys with recurring, automated sends",
+  "CogniVue AI text analysis that groups open-ended comments by theme and sentiment",
+  "AI survey creation and AI-assisted reporting",
+  "Reputation management for public reviews alongside survey feedback",
+  "Closed-loop workflows and tickets to follow up on unhappy responses",
+  "Integrations with Salesforce, HubSpot, Zendesk, Slack, Intercom and Zapier"
+ ],
+ "pricing": {"text": "Free plan with a small response limit. Paid survey plans billed annually are commonly listed as Basic $19/month, Starter $39/month, Business $79/month and Professional $249/month; Enterprise and the CX and 360 suites are quoted separately. 14-day free trial. Some 2026 sources list different tiers (Essentials $49, Business $99, Professional $499), so check the live pricing page.", "source": "https://pricingsaas.com/companies/surveysparrow", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing could not be confirmed on surveysparrow.com/pricing; figures come from third-party trackers and SurveySparrow's own blog, which conflict, so re-check before publishing. Dropped from current review: 'serving over 100,000 customers across 149 countries' and 'founded 2017, headquartered in Palo Alto' (not re-verified here), and the stray review-management glossary link listed as the website. CogniVue and AI Wings date from 2024 launches, not 2025-2026. A January 2026 partner webinar mentioned a new agentic AI module, but no press release was found, so it is left out of updates. No restaurant-only case study found; customers are casino resorts and a hospitality-adjacent nonprofit. Customer outcome figures (e.g. Pechanga +40% responses) are vendor-published."}

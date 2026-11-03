@@ -1,0 +1,27 @@
+{"name": "Jotform", "website": "https://www.jotform.com/",
+ "oneLiner": "No-code online form and survey builder with templates, QR codes, payments, tables, apps, e-signatures and, since 2025-2026, AI agents and conversational AI form building.",
+ "bestFor": "Restaurants that want an affordable, flexible tool for guest feedback surveys, catering and event inquiries, job applications and internal checklists in one place, and don't need built-in NPS benchmarking or location comparisons.",
+ "customers": [
+  {"name": "Burger King New Zealand", "source": "https://www.jotform.com/customer-stories/burger-king/"},
+  {"name": "ATFC, Ltd. (UK hospitality group, 20+ restaurants)", "source": "https://www.jotform.com/customer-stories/atfc-ltd/"},
+  {"name": "CoverManager", "source": "https://www.jotform.com/customer-stories/covermanager/"},
+  {"name": "Cups and Cakes Bakery", "source": "https://www.jotform.com/customer-stories/cups-and-cakes-bakery/"}
+ ],
+ "updates": [
+  {"date": "2025-02", "text": "Launched Jotform AI Agents, no-code AI agents that answer questions and help fill forms across web chat, phone and messaging channels.", "source": "https://www.cmswire.com/the-wire/jotform-announces-ai-agents-to-transform-customer-service/"},
+  {"date": "2026-03", "text": "Launched Jotform AI, which builds, designs and edits forms from written or spoken prompts, followed a week later by a Jotform app in ChatGPT for creating forms and querying responses.", "source": "https://www.jotform.com/newsletters/announcing-jotform-ai-2/"},
+  {"date": "2026-06", "text": "Announced AI App Builder for creating complete apps from natural-language prompts.", "source": null}
+ ],
+ "features": [
+  "Drag-and-drop form and survey builder with thousands of templates, including restaurant feedback surveys",
+  "QR codes and links for receipts, menus and table tents so guests answer on their phones",
+  "Conditional logic that shows or hides questions based on earlier answers",
+  "Report Builder and Jotform Tables to turn responses into charts and spreadsheet views",
+  "Payments through Stripe, PayPal, Square and others for deposits and orders",
+  "Jotform AI to create forms from a prompt, and AI Agents to answer guest questions",
+  "Jotform Apps, Workflows approvals and Sign for e-signatures",
+  "Integrations with Google Sheets, Salesforce, HubSpot, Mailchimp, Slack and Zapier"
+ ],
+ "pricing": {"text": "Free Starter plan: 5 forms, 100 submissions per month. Paid plans per month billed annually: Bronze $34, Silver $39, Gold $99 ($39 / $49 / $129 billed monthly). Enterprise is quoted. 50% off for nonprofits and education.", "source": "https://www.jotform.com/pricing/", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing page could not be fetched; figures come from 2026 third-party guides (jetadmin.io, Sep 2026; zite.com; usercall.co) and match each other; the pricing URL is Jotform's standard page but its contents were not seen directly. Dropped from current review: 'Gold at $49/month' (outdated; Gold is now about $99 annually / $129 monthly), 'founded 2006, headquartered in San Francisco' and 'over 25 million users' (not re-verified here), and 'up to 50% discount' wording kept only as 50% for Bronze-Gold. AI App Builder (Jun 23, 2026) seen only via search summary; no URL captured, so source null. 'Watch out' caveat in the current review (no native NPS benchmarking, location comparisons or sentiment analysis) was not contradicted by research."}

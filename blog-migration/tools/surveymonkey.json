@@ -1,0 +1,31 @@
+{
+ "name": "SurveyMonkey",
+ "website": "https://www.surveymonkey.com/",
+ "oneLiner": "General-purpose online survey platform with AI survey building and analysis, templates (including restaurant feedback), multichannel distribution and a paid respondent panel.",
+ "bestFor": "Independent restaurants and small groups that want a familiar, low-cost way to run guest satisfaction, NPS, menu or staff surveys without a restaurant-specific platform (no POS integration or location benchmarking out of the box).",
+ "customers": [
+  {"name": "Hornblower (dining and sightseeing cruises)", "source": "https://www.surveymonkey.com/customers/hornblower/"},
+  {"name": "Holiday Extras", "source": "https://www.surveymonkey.com/mp/holiday-extras-hospitality-customer-experience-case-study/"}
+ ],
+ "updates": [
+  {"date": "2026-09", "text": "Relaunched as 'Today's SurveyMonkey', with a conversational AI survey builder that drafts and refines surveys from plain-language requests, automated analysis, and HRIS integrations with Workday and BambooHR.", "source": "https://www.destinationcrm.com/Articles/CRM-News/CRM-Across-the-Wire/SurveyMonkey-Launches-Todays-SurveyMonkey-176404.aspx"},
+  {"date": "2026-08", "text": "Launched a SurveyMonkey plugin in ChatGPT for creating surveys and analyzing responses inside AI workflows, following a Claude connector.", "source": "https://www.cmswire.com/the-wire/surveymonkey-launches-plugin-in-chatgpt-to-bring-real-human-feedback-into-ai-workflows/"},
+  {"date": "2026-02", "text": "Opened a free tools hub where anyone can generate an AI-built survey and use research and analysis tools without signing up.", "source": "https://www.surveymonkey.com/newsroom/surveymonkey-launches-free-tools-hub/"}
+ ],
+ "features": [
+  "SurveyMonkey AI: build a survey from a plain-language prompt and refine it conversationally",
+  "Large template library, including restaurant feedback, NPS and CSAT surveys",
+  "Skip logic, branching, piping and A/B testing on paid plans",
+  "Distribution by web link, email, QR code, website embed, SMS and social",
+  "Real-time dashboards, filters, cross-tabs and AI-assisted analysis of open-ended answers",
+  "Integrations such as Salesforce, Microsoft Power BI and Slack for alerts and reporting",
+  "SurveyMonkey Audience paid panel for market research with targeted respondents"
+ ],
+ "pricing": {
+  "text": "Published plans: a free Basic plan (limited responses), individual paid plans (monthly or annual) and Team plans billed per user annually with a minimum of 3 seats; Enterprise is custom-quoted. Prices vary by region and billing, so check the pricing page.",
+  "source": "https://www.surveymonkey.com/pricing/",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "COMPANY NAME: the 'Momentive' parent name was dropped. Momentive was taken private by a Symphony Technology Group-led consortium for about $1.5B (closed May 31, 2023: https://www.surveymonkey.com/newsroom/stg-completes-acquisition-of-momentive-global/) and in June 2023 the company returned to the SurveyMonkey name under CEO Eric Johnson (https://www.surveymonkey.com/newsroom/momentive-eric-johnson-ceo-return-to-surveymonkey/). Fix the current review's 'now operating under the parent brand Momentive'. Founded 1999 and headquartered in San Mateo per the current review; not re-verified. Dropped/not re-verified: '25+ question types', '400+ templates', 'Audience panel of 335 million+ respondents across 130+ countries'. SurveyMonkey AI is limited to US data center accounts in English per SurveyMonkey help (July 2026). Exact US prices differ across third-party trackers (e.g. Team Advantage ~$30/user/month, Team Premier $75-92/user/month), so none are quoted. No restaurant-specific customer story found."
+}
