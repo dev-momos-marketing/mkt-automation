@@ -84,9 +84,11 @@ export function checkReview(html, { original, facts = "", others = [], swap = ""
     else if (website && norm(intro[1].match(/href="([^"]+)"/)[1]) !== norm(website)) problems.push(`the tool's name should link to ${website}`)
     // The old website link (a "Website:" line, or a link opening the old intro) is replaced by the
     // name's link, which may point to a newer domain (meetsoci.com → soci.ai); every other link stays.
-    const oldIntro = [...String(original).replace(/^[\s\S]*?<\/h2>/, "").matchAll(/<p>([\s\S]*?)<\/p>/g)].find(m => text(m[1]))
-    const websiteLine = new Set([...String(original).matchAll(/<strong>\s*Website:?\s*<\/strong>:?[^<]*<a href="([^"]+)"/g)].map(m => norm(m[1]))
-        .concat(oldIntro?.[1].match(/^\s*<a href="([^"]+)"/) ? [norm(oldIntro[1].match(/^\s*<a href="([^"]+)"/)[1])] : []))
+    // Framer stores paragraphs and links with attributes (<p dir="auto">, <a target="_blank" href>).
+    const oldIntro = [...String(original).replace(/^[\s\S]*?<\/h2>/, "").matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)].find(m => text(m[1]))
+    const leading = oldIntro?.[1].match(/^\s*(?:<(?:strong|em|span)\b[^>]*>\s*)*<a\b[^>]*?\bhref="([^"]+)"/)
+    const websiteLine = new Set([...String(original).matchAll(/<strong\b[^>]*>\s*Website:?\s*<\/strong>:?[^<]*(?:<[^a/][^>]*>\s*)*<a\b[^>]*?\bhref="([^"]+)"/g)].map(m => norm(m[1]))
+        .concat(leading ? [norm(leading[1])] : []))
     if (!swap) for (const m of String(original).matchAll(/href="([^"]+)"/g)) {
         if (mineLinks.has(norm(m[1])) || (linksName && websiteLine.has(norm(m[1])))) continue
         problems.push(`the link ${m[1]} is missing`)

@@ -65,6 +65,11 @@ test("checkReview reports missing assets, wrong labels, a missing list, unsource
     assert.match(checkReview(good, { original: moved + '<p>See <a href="/glossary/csat">CSAT</a>.</p>', facts }).join(), /link \/glossary\/csat is missing/)
     const linkedIntro = '<h2>2. Zendesk</h2><img src="https://framerusercontent.com/images/abc.png"><p><a href="https://zendesk.com/?utm_source=x">Zendesk</a> is a suite.</p>'
     assert.deepEqual(checkReview(good, { original: linkedIntro, facts }), [])
+    // As Framer stores it: attributes on the paragraph and the link, a bold name inside the link.
+    const framerIntro = '<h2 dir="auto">2. Zendesk</h2><p dir="auto"><br></p><img src="https://framerusercontent.com/images/abc.png"><p dir="auto"><a target="_blank" rel="" href="https://zendesk.com/?utm_source=x"><strong>Zendesk</strong></a> is a suite.</p>'
+    assert.deepEqual(checkReview(good, { original: framerIntro, facts }), [])
+    const framerWebsite = '<h2 dir="auto">2. Zendesk</h2><img src="https://framerusercontent.com/images/abc.png"><p dir="auto">A suite.</p><p dir="auto"><strong>Website: </strong><a href="https://old.zendesk.com/" target="_blank" rel="noopener">Zendesk</a></p>'
+    assert.deepEqual(checkReview(good, { original: framerWebsite, facts }), [])
 })
 
 test("checkReview doesn't count lead-ins or the price and plans toward copied text", () => {
