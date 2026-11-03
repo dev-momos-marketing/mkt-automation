@@ -1,14 +1,33 @@
-{"name": "Gorgias", "website": "https://www.gorgias.com/",
+{
+ "name": "Gorgias",
+ "website": "https://www.gorgias.com/",
  "oneLiner": "Ecommerce helpdesk and AI Agent platform built around Shopify order data, covering email, chat, social, SMS and voice.",
  "bestFor": "Online stores and DTC brands on Shopify, including food and beverage brands that sell online.",
  "customers": [
-  {"name": "BrüMate", "source": "https://www.gorgias.com/customers/brumate"},
-  {"name": "Tommy John", "source": "https://www.gorgias.com/customers/tommy-john"},
-  {"name": "Try The World", "source": "https://www.gorgias.com/customers/try-the-world"}
+  {
+   "name": "BrüMate",
+   "source": "https://www.gorgias.com/customers/brumate"
+  },
+  {
+   "name": "Tommy John",
+   "source": "https://www.gorgias.com/customers/tommy-john"
+  },
+  {
+   "name": "Try The World",
+   "source": "https://www.gorgias.com/customers/try-the-world"
+  }
  ],
  "updates": [
-  {"date": "2025-04", "text": "Introduced Shopping Assistant, an AI pre-sales feature that recommends products, suggests upsells and can offer discounts inside chat (labeled beta at launch).", "source": "https://sacra.com/research/gorgias"},
-  {"date": "2026", "text": "Public roadmap calls 2026 the year of AI Agent maturity: stronger knowledge control, deterministic variables and faster responses on a new architecture.", "source": "https://gorgias.com/roadmap"}
+  {
+   "date": "2025-04",
+   "text": "Introduced Shopping Assistant, an AI pre-sales feature that recommends products, suggests upsells and can offer discounts inside chat (labeled beta at launch).",
+   "source": "https://sacra.com/research/gorgias"
+  },
+  {
+   "date": "2026",
+   "text": "Public roadmap calls 2026 the year of AI Agent maturity: stronger knowledge control, deterministic variables and faster responses on a new architecture.",
+   "source": "https://gorgias.com/roadmap"
+  }
  ],
  "features": [
   "Shared inbox for email, chat, social, SMS and voice",
@@ -19,5 +38,85 @@
   "Gorgias Voice with IVR, routing and AI call summaries",
   "Revenue statistics tying support conversations to sales"
  ],
- "pricing": {"text": "Starter plan $10 per month for 50 billable tickets; AI Agent billed per resolved conversation, $0.90 on most plans with annual billing ($1.00 on monthly billing).", "source": "https://www.gorgias.com/llm-info", "checked": "2026-11"},
- "notes": "gorgias.com could not be fetched from this session; details come from search snippets of gorgias.com pages. Shopping Assistant launch month (April 2025) comes from Sacra; other sources say 'Spring 2025'. A September 2026 WhatsApp AI Agent beta appears only in an investor tear sheet, so it was left out. Original's BigCommerce/Magento integration claim not re-checked and dropped."}
+ "pricing": {
+  "text": "Helpdesk plans by ticket volume, never priced per agent: Starter $10 per month (monthly billing only, 50 tickets, 3 user seats); Basic $50 per month billed annually or $60 monthly (300 tickets); Pro $300 billed annually or $360 monthly (2,000 tickets); Advanced $750 billed annually or $900 monthly (5,000 tickets); custom plans above 5,000 conversations a month. Overage $0.40 per ticket on Starter and Basic, $0.36 on Pro and Advanced. AI Agent $0.90 per automated interaction on annual plans, $1.00 on monthly plans, and each one also counts as a helpdesk ticket. Voice and SMS are add-ons priced by volume. 7-day free trial, no credit card.",
+  "source": "https://www.gorgias.com/pricing",
+  "checked": "2026-11"
+ },
+ "notes": "gorgias.com could not be fetched from this session; details come from search snippets of gorgias.com pages. Shopping Assistant launch month (April 2025) comes from Sacra; other sources say 'Spring 2025'. A September 2026 WhatsApp AI Agent beta appears only in an investor tear sheet, so it was left out. Original's BigCommerce/Magento integration claim not re-checked and dropped. November 2026: gorgias.com/pricing fetched directly with curl; plan prices, overages, AI Agent pricing (FAQ), 7-day trial (FAQ) and the feature table confirmed there. The feature table lists $0.85 per AI interaction on Advanced, while the FAQ gives $0.90 on annual plans; the review uses the FAQ figure. G2 rating (4.6, 565 reviews) from G2 search result snippets; G2 blocked fetching.",
+ "pros": [
+  "Shopify order actions (edit, refund, cancel) inside the ticket",
+  "Priced by ticket volume, never per agent; Basic and above include up to 500 user seats",
+  "Low entry price: Starter at $10 per month",
+  "AI Agent is billed only when it resolves a conversation",
+  "7-day free trial without a credit card",
+  "G2 rating of 4.6 out of 5"
+ ],
+ "cons": [
+  {
+   "text": "Built for ecommerce and Shopify stores, so a restaurant without an online shop uses little of the order tooling",
+   "source": "scope"
+  },
+  {
+   "text": "Ticket-based billing with overages: $0.40 per extra ticket on Starter and Basic, $0.36 on Pro and Advanced",
+   "source": "https://www.gorgias.com/pricing"
+  },
+  {
+   "text": "AI Agent costs $0.90 to $1.00 per automated interaction, and each one also counts as a billable helpdesk ticket",
+   "source": "https://www.gorgias.com/pricing"
+  },
+  {
+   "text": "Revenue attribution is only on Pro and Advanced",
+   "source": "https://www.gorgias.com/pricing"
+  },
+  {
+   "text": "Voice and SMS are paid add-ons, and Starter doesn't offer them",
+   "source": "https://www.gorgias.com/pricing"
+  }
+ ],
+ "plans": {
+  "trial": "7-day free trial, no credit card",
+  "billing": "per month by ticket volume, monthly or billed annually",
+  "list": [
+   {
+    "name": "Starter",
+    "price": "$10",
+    "unit": "per month, monthly billing only",
+    "note": "50 tickets a month, 3 user seats"
+   },
+   {
+    "name": "Basic",
+    "price": "$50",
+    "unit": "per month billed annually ($60 monthly)",
+    "note": "300 tickets a month"
+   },
+   {
+    "name": "Pro",
+    "price": "$300",
+    "unit": "per month billed annually ($360 monthly)",
+    "note": "2,000 tickets a month, revenue attribution"
+   },
+   {
+    "name": "Advanced",
+    "price": "$750",
+    "unit": "per month billed annually ($900 monthly)",
+    "note": "5,000 tickets a month"
+   },
+   {
+    "name": "AI Agent",
+    "price": "$0.90",
+    "unit": "per automated interaction on annual plans ($1.00 on monthly plans)",
+    "note": "Each interaction also counts as a helpdesk ticket"
+   }
+  ],
+  "source": "https://www.gorgias.com/pricing",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.6",
+  "reviews": 565,
+  "source": "https://www.g2.com/products/gorgias/reviews",
+  "checked": "2026-11"
+ }
+}

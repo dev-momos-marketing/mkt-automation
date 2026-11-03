@@ -11,6 +11,10 @@
   {
    "name": "Mitchells & Butlers",
    "source": "https://www.reputation.com/wp-content/uploads/2018/03/CaseStudy-Mitchells-And-Butlers-UK.pdf"
+  },
+  {
+   "name": "Stonegate Group",
+   "source": "https://reputation.com/solutions/industries/food-beverage"
   }
  ],
  "updates": [
@@ -38,13 +42,98 @@
   "Listings management for multi-location brands",
   "Social listening and publishing",
   "AI search visibility tools: AI Reputation Manager and AI Location Presence Insights",
-  "Reputation IQ for asking questions of your feedback data in plain English"
+  "Reputation IQ for asking questions of your feedback data in plain English",
+  "RepScore: an AI-driven score for each location and region",
+  "Competitive Insights: benchmark ratings, themes and response times against nearby restaurants (add-on)",
+  "Actions and ticketing to route issues to the right team (add-on)",
+  "Food and beverage page: AI Reputation Manager structures menus, hours, photos and attributes so locations show up in AI recommendations and 'near me' discovery",
+  "Reviews + Surveys: feedback collected by SMS, QR code or email, capturing item-level and service feedback",
+  "Listings + Local SEO: menus, hours and specials kept current across Google, Yelp and AI overviews"
  ],
  "pricing": {
-  "text": "Custom pricing; Reputation does not publish prices.",
-  "source": null,
+  "text": "Published per-location prices: Rep Core $80 per location per month (reviews management with AI responding, listings and SEO); Rep Core + Pulse $115 (adds Rep Score, Journey Insights, AI Reputation Manager, Pulse analytics, 1 basic survey template); Rep Core + Surveys $150 (6 custom survey templates, email survey requests, outreach campaigns); Enterprise custom for 125+ locations. Add-ons priced on request: Competitive Insights, Actions & Ticketing, Social Suite, Premium Sources (Yelp, Tripadvisor and others), Premium Integrations, managed services.",
+  "source": "https://reputation.com/pricing",
   "checked": "2026-11"
  },
  "status": "renamed",
- "notes": "Rebranded from Reputation.com to Reputation; still uses the reputation.com domain, HQ San Ramon, CA; marked its 20th year in March 2026. No acquisition of the company found. A CostBench page claims public plans of $80–$150/month and a February 2026 price cut; not confirmed on reputation.com and inconsistent with its enterprise sales model, so left out. Mitchells & Butlers case study dates from 2018. Dropped from the current review: the claim that its portfolio is 'primarily healthcare' (it also targets hospitality, automotive and others; not re-checked). Also copied to reputation-com.json."
+ "notes": "Rebranded from Reputation.com to Reputation; still uses the reputation.com domain, HQ San Ramon, CA; marked its 20th year in March 2026. No acquisition of the company found. A CostBench page claims public plans of $80–$150/month and a February 2026 price cut; not confirmed on reputation.com and inconsistent with its enterprise sales model, so left out. Mitchells & Butlers case study dates from 2018. Dropped from the current review: the claim that its portfolio is 'primarily healthcare' (it also targets hospitality, automotive and others; not re-checked). Also copied to reputation-com.json. November 2026: reputation.com/pricing now publishes per-location prices ($80, $115, $150 and custom Enterprise), so the earlier 'custom pricing only' line is replaced; no trial or billing term is stated. Restaurant results from reputation.com/solutions/industries/food-beverage (vendor-reported). G2 rating (4.5, 2,468 reviews) from G2 search result snippets; G2 blocked fetching.",
+ "results": [
+  {
+   "text": "Mitchells & Butlers: star rating across the group up from 3.7 to 4.2, guest feedback unified across 1,600+ locations and 15+ brands, 93% of inbound feedback answered",
+   "source": "https://reputation.com/solutions/industries/food-beverage"
+  },
+  {
+   "text": "Tortilla: +38% views; became the UK's highest-rated burrito chain",
+   "source": "https://reputation.com/solutions/industries/food-beverage"
+  }
+ ],
+ "pros": [
+  "Built for multi-location restaurant groups, corporate or franchised",
+  "AI review responding is included from the entry plan",
+  "Surveys, reviews, listings and AI search visibility in one platform",
+  "Published per-location prices for the core plans",
+  "Restaurant results such as Mitchells & Butlers (3.7 to 4.2 stars across the group)",
+  "G2 rating of 4.5 out of 5"
+ ],
+ "cons": [
+  {
+   "text": "Yelp, Tripadvisor and other industry sites are Premium Sources, an add-on",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Social Suite, Actions & Ticketing and Competitive Insights are paid add-ons",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Priced per location per month, so cost grows with every location; custom plans for 125+ locations",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "Surveys are limited to 1 basic template below the $150 Rep Core + Surveys plan",
+   "source": "https://reputation.com/pricing"
+  },
+  {
+   "text": "No self-serve signup; every plan goes through a sales call",
+   "source": "https://reputation.com/pricing"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "per location per month",
+  "list": [
+   {
+    "name": "Rep Core",
+    "price": "$80",
+    "unit": "per location per month",
+    "note": "Reviews management (collection, requesting, AI responding), business listings and SEO"
+   },
+   {
+    "name": "Rep Core + Pulse",
+    "price": "$115",
+    "unit": "per location per month",
+    "note": "Adds Reputation Insights (Rep Score, Journey Insights), AI Reputation Manager, Pulse analytics and 1 basic survey template"
+   },
+   {
+    "name": "Rep Core + Surveys",
+    "price": "$150",
+    "unit": "per location per month",
+    "note": "Adds 6 custom survey templates, email survey requests and targeted outreach campaigns"
+   },
+   {
+    "name": "Enterprise",
+    "price": "Custom",
+    "unit": "custom quote",
+    "note": "For 125+ locations"
+   }
+  ],
+  "source": "https://reputation.com/pricing",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.5",
+  "reviews": 2468,
+  "source": "https://www.g2.com/products/reputation-com/reviews",
+  "checked": "2026-11"
+ }
 }

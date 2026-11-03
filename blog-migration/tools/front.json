@@ -1,16 +1,37 @@
-{"name": "Front",
+{
+ "name": "Front",
  "website": "https://front.com/",
  "oneLiner": "Customer operations platform that combines shared inboxes for email, chat, SMS and social with helpdesk ticketing, automation and AI agents.",
  "bestFor": "Teams that handle a lot of customer email and messaging and want helpdesk structure without leaving an email-style workflow.",
  "customers": [
-  {"name": "sennder", "source": "https://front.com/customer-stories/sennder"},
-  {"name": "Hootsuite", "source": "https://front.com/customer-stories/hootsuite"},
-  {"name": "Cisco Meraki", "source": "https://front.com/customer-stories/cisco-meraki"},
-  {"name": "Lydia", "source": "https://front.com/customer-stories/lydia"}
+  {
+   "name": "sennder",
+   "source": "https://front.com/customer-stories/sennder"
+  },
+  {
+   "name": "Hootsuite",
+   "source": "https://front.com/customer-stories/hootsuite"
+  },
+  {
+   "name": "Cisco Meraki",
+   "source": "https://front.com/customer-stories/cisco-meraki"
+  },
+  {
+   "name": "Lydia",
+   "source": "https://front.com/customer-stories/lydia"
+  }
  ],
  "updates": [
-  {"date": "2025-09", "text": "Front launched Autopilot, an omnichannel AI agent that resolves customer conversations under admin-set controls, sold as an add-on at $0.89 per resolution with a 14-day free trial.", "source": "https://community.front.com/product-updates/meet-autopilot-the-ai-agent-built-for-control-not-chaos-3085"},
-  {"date": "2026-06", "text": "Front opened a beta that lets external AI agents work inside Front as teammates, with assigned conversations, their own identity and handoffs to humans.", "source": "https://community.front.com/api-news-updates-40/bring-your-own-ai-agent-to-front-join-the-beta-3858"}
+  {
+   "date": "2025-09",
+   "text": "Front launched Autopilot, an omnichannel AI agent that resolves customer conversations under admin-set controls, sold as an add-on at $0.89 per resolution with a 14-day free trial.",
+   "source": "https://community.front.com/product-updates/meet-autopilot-the-ai-agent-built-for-control-not-chaos-3085"
+  },
+  {
+   "date": "2026-06",
+   "text": "Front opened a beta that lets external AI agents work inside Front as teammates, with assigned conversations, their own identity and handoffs to humans.",
+   "source": "https://community.front.com/api-news-updates-40/bring-your-own-ai-agent-to-front-join-the-beta-3858"
+  }
  ],
  "features": [
   "Shared inboxes for email, SMS, live chat (Front Chat) and social messages",
@@ -20,7 +41,84 @@
   "Autopilot AI agent and Copilot AI drafting for agents",
   "Knowledge base",
   "Analytics on response times, SLA adherence and workload",
-  "Integrations such as Salesforce, Slack and Aircall"
+  "Integrations such as Salesforce, Slack and Aircall",
+  "AI Topics: the most common reasons customers get in touch",
+  "Smart QA and Smart CSAT: AI scorecards and satisfaction scores inferred without surveys",
+  "External AI agents (built with Claude, Codex, Sierra and others) can work in Front alongside the team"
  ],
- "pricing": {"text": "Starter $25/seat/month (up to 10 seats), Professional $65/seat/month (up to 50 seats), Enterprise $105/seat/month, billed annually. Autopilot add-on $0.89 per resolution.", "source": "https://front.com/pricing", "checked": "2026-11"},
- "notes": "Front's domain is now front.com (original review links front.app; kept as required). front.com could not be fetched; pricing from search snippets of front.com/pricing and Front's 2026 blog posts (one Front article says $27, so worth re-checking). Old $19/seat Starter price (2023 tiers) is outdated. Copilot add-on price ($20/seat per third party) not verified, left out of review."}
+ "pricing": {
+  "text": "Billed annually (save 24%): Starter $25/seat/month (up to 10 seats, single channel type, up to 10 automation rules); Professional $65/seat/month (up to 50 seats, omnichannel, up to 20 rules); Enterprise $105/seat/month (unlimited rules, AI Copilot, QA and CSAT included). Add-ons: Autopilot AI agent from $0.05 per conversation (talk to sales); Copilot $20/seat/month on Starter and Professional. 14-day free trial of Professional features, no credit card. An onboarding package is required for contracts over $25k.",
+  "source": "https://front.com/pricing",
+  "checked": "2026-11"
+ },
+ "notes": "Front's domain is now front.com (original review links front.app; kept as required). front.com could not be fetched; pricing from search snippets of front.com/pricing and Front's 2026 blog posts (one Front article says $27, so worth re-checking). Old $19/seat Starter price (2023 tiers) is outdated. Copilot add-on price ($20/seat per third party) not verified, left out of review. November 2026: front.com/pricing fetched directly with curl. Autopilot is now listed 'Starting at $0.05 /conversation' with 'Talk to sales' (the $0.89 per resolution in the 2025-09 update was the launch price). Monthly-billing prices aren't shown. front.app redirects to front.com. G2 rating (4.7, 2,499 reviews) from G2 search result snippets; G2 blocked fetching.",
+ "pros": [
+  "Email-style workflow with helpdesk structure: assignment, comments, SLAs",
+  "Omnichannel on Professional and Enterprise: email, SMS, social, WhatsApp and chat in one place",
+  "Choice of AI: Autopilot, Copilot and external AI agents",
+  "Knowledge base on every plan",
+  "14-day free trial without a credit card",
+  "G2 rating of 4.7 out of 5"
+ ],
+ "cons": [
+  {
+   "text": "Starter is limited to a single channel type; omnichannel starts on Professional at $65 per seat",
+   "source": "https://front.com/pricing"
+  },
+  {
+   "text": "Priced per seat, so cost grows with the team",
+   "source": "https://front.com/pricing"
+  },
+  {
+   "text": "AI costs extra below Enterprise: Copilot is $20 per seat per month, Autopilot is billed per conversation",
+   "source": "https://front.com/pricing"
+  },
+  {
+   "text": "An onboarding package is required for contracts over $25k",
+   "source": "https://front.com/pricing"
+  },
+  {
+   "text": "No free plan, only a 14-day trial",
+   "source": "https://front.com/pricing"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial of Professional features, no credit card",
+  "billing": "per seat per month, billed annually",
+  "list": [
+   {
+    "name": "Starter",
+    "price": "$25",
+    "unit": "per seat per month, billed annually",
+    "note": "Up to 10 seats, single channel type"
+   },
+   {
+    "name": "Professional",
+    "price": "$65",
+    "unit": "per seat per month, billed annually",
+    "note": "Up to 50 seats, omnichannel"
+   },
+   {
+    "name": "Enterprise",
+    "price": "$105",
+    "unit": "per seat per month, billed annually",
+    "note": "AI Copilot, QA and CSAT included"
+   },
+   {
+    "name": "Autopilot",
+    "price": "from $0.05",
+    "unit": "per conversation",
+    "note": "Add-on, talk to sales"
+   }
+  ],
+  "source": "https://front.com/pricing",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.7",
+  "reviews": 2499,
+  "source": "https://www.g2.com/products/front/reviews",
+  "checked": "2026-11"
+ }
+}
