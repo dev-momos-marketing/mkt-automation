@@ -1,0 +1,25 @@
+{
+ "name": "Mapchise",
+ "website": "https://mapchise.com/",
+ "oneLiner": "Restaurant data analytics platform that combines POS, loyalty, marketing, pricing, competitor and mobility data for customer insights, attribution and site selection.",
+ "bestFor": "Multi-unit restaurant groups and franchisors that want customer and location analytics (trade areas, white space, menu and pricing) built on their own POS and loyalty data.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Customer data platform that unifies POS, online ordering and loyalty data into guest profiles",
+  "Customer Explorer and customer maps showing where guests come from",
+  "Mobility (foot traffic) data on diner movement and demand trends",
+  "White-space analysis and site selection, including radius exclusion zones for franchise territories",
+  "Competitor product and pricing intelligence",
+  "Menu analytics, for example spotting combos that cannibalize higher-margin items",
+  "Marketing attribution and campaign analysis",
+  "Built to handle multi-group and franchisor ownership structures"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Mapchise does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Only Mapchise's own pages surfaced; no independent reviews, press coverage, named customers or dated 2025/2026 updates found. Its case studies are anonymous (a pizza brand, a regional sandwich shop, a restaurant group). The current review frames it as a 'guest data & revenue attribution' platform; Mapchise's site leans more toward location intelligence, site selection and market analytics, with the CDP as one module. Feature sources: https://mapchise.com/unified-data/, https://mapchise.com/solutions/customer-explorer/, https://mapchise.com/solutions/mobility-data/, https://mapchise.com/solutions/white-space-analysis/, https://mapchise.com/case-study/smarter-menu-optimization-with-mapchise/. Dropped: 'precise revenue attribution' wording (unverified). Thin evidence overall: consider replacing in the list."
+}

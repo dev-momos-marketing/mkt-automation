@@ -1,0 +1,23 @@
+{"name": "Forsta (Press Ganey Forsta, now part of Qualtrics)", "website": "https://www.forsta.com/",
+ "oneLiner": "Enterprise survey, market research and customer experience platform (the HX Platform), formed from Confirmit and FocusVision, owned by Press Ganey since 2022 and by Qualtrics since May 2026.",
+ "bestFor": "Large enterprises that run research-grade CX and market research programs; a weak fit for most restaurant operators, especially now that it is being folded into Qualtrics.",
+ "customers": [
+  {"name": "Tecan", "source": "https://www.pressganey.com/forsta-legacy/?p=1260"},
+  {"name": "Amadeus", "source": "https://forsta.com/solutions/elevate-customer-experience/"}
+ ],
+ "updates": [
+  {"date": "2025-01", "text": "Added new Forsta AI capabilities to the HX Platform and AI agents in Research HX.", "source": "https://www.businesswire.com/news/home/20250116975900/en/Forsta-AI%E2%80%99s-New-Capabilities-Help-Organizations-Gain-Deeper-Insights-Anticipate-Needs-and-Act-Decisively"},
+  {"date": "2025-05", "text": "Press Ganey Forsta acquired InMoment, a CX and review-management company.", "source": "https://www.businesswire.com/news/home/20250514662998/en/Press-Ganey-Forsta-Acquires-InMoment-Accelerating-AI-Innovation-in-Customer-Experience-and-Expanding-Cross-Industry-Expertise"},
+  {"date": "2026-05", "text": "Qualtrics completed its $6.75 billion acquisition of Press Ganey Forsta, agreed in October 2025.", "source": "https://www.research-live.com/article/news/qualtrics-completes-press-ganey-forsta-acquisition/id/5149413"}
+ ],
+ "features": [
+  "Advanced survey design with complex logic, quotas and multilingual surveys",
+  "Feedback collection across email, SMS, web, QR code and other channels",
+  "AI text analytics that groups open-ended answers into themes",
+  "Configurable role-based dashboards and reporting",
+  "Transactional and relationship CX programs alongside market research in one platform",
+  "Qualitative research tools (focus groups, interviews) integrated into the HX Platform"
+ ],
+ "pricing": {"text": "Custom pricing; not published.", "source": null, "checked": "2026-11"},
+ "status": "acquired",
+ "notes": "Ownership chain: Confirmit + FocusVision formed Forsta (2021); Press Ganey acquired Forsta (2022, renamed Press Ganey Forsta / PG Forsta); Qualtrics agreed to acquire PG Forsta on Oct 6 2025 (https://qualtrics.com/news/qualtrics-to-invest-6-75-billion-in-press-ganey-forsta-acquisition-to-advance-ai-powered-experience-management) and closed around May 19 2026. Forrester expects Qualtrics to fold PG Forsta and InMoment components into its platform over time, so the Forsta brand's future is uncertain; forsta.com content now partly lives under pressganey.com/forsta-legacy. No named restaurant customer found (Forsta says it serves restaurant clients in general). Tecan (life sciences) and Amadeus (travel) are the only named customers with sources. PG Forsta was a Leader in the 2025 Gartner Magic Quadrant for VoC Platforms. Consider replacing this pick or pointing to the Qualtrics entry (qualtrics-xm.json / qualtrics.json exist)."}

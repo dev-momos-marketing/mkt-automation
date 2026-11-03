@@ -1,0 +1,25 @@
+{"name": "Landbot", "website": "https://landbot.io/",
+ "oneLiner": "No-code chatbot builder for websites, WhatsApp and Messenger, with a visual flow editor and an AI Agent block for open-ended questions.",
+ "bestFor": "Independent restaurants and small groups (especially in WhatsApp-heavy markets) that want to build their own reservation, FAQ, ordering or feedback bots without developers.",
+ "customers": [
+  {"name": "FASTA", "source": "https://landbot.io/case-studies/fasta"},
+  {"name": "Choices", "source": "https://landbot.io/case-studies/choices"},
+  {"name": "CASFID", "source": "https://landbot.io/case-studies/casfid"},
+  {"name": "Convosight", "source": "https://landbot.io/case-studies/convosight"}
+ ],
+ "updates": [
+  {"date": "2025-12", "text": "Landbot 4 added an AI Agent block, an AI Copilot for building bots, Hybrid AI components (buttons and selectors inside AI conversations) and a two-way n8n integration; the OpenAI block was renamed AI Task.", "source": "https://www.eesel.ai/blog/landbot-review"}
+ ],
+ "features": [
+  "Visual drag-and-drop flow builder, no code needed",
+  "Bots for web, WhatsApp Business and Facebook Messenger",
+  "AI Agent that answers open-ended questions from your content (paid plans)",
+  "Hybrid AI: buttons, selectors and autocomplete inside AI conversations",
+  "Ready-made templates, including a WhatsApp restaurant table reservation bot",
+  "WhatsApp broadcast campaigns",
+  "Integrations with Google Sheets, Zapier, Make, n8n, webhooks and CRMs",
+  "Conversational forms and surveys for feedback collection"
+ ],
+ "pricing": {"text": "Published plans: free Sandbox (100 chats/month), Starter about €40/month and Pro about €100/month; WhatsApp plans are priced separately (WhatsApp Pro reported at about €200/month) and Business from about €400/month. AI chats and extra chats are metered. Sources disagree on WhatsApp tiers; confirm on landbot.io/pricing.", "source": "https://landbot.io/blog/landbot-pricing-plans", "checked": "2026-11"},
+ "status": "active",
+ "notes": "landbot.io could not be fetched; pricing figures come from Landbot's own pricing blog post and 2026 third-party reviews, which conflict on WhatsApp plan prices (€80 vs €160/€200). No restaurant or hospitality customer story found; named customers are from other industries (finance, real estate, events, communities). The restaurant reservation template is real (https://landbot.io/chabot-templates/restaurant-reservation). The current review's claim that restaurants 'take orders' and run the full guest journey on WhatsApp is a capability description, not a verified customer example. Reviewers note Landbot is closer to rule-based flows than fully conversational AI. Funding ~$10.2M per Owler; no 2026 corporate news found."}

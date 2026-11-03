@@ -1,0 +1,27 @@
+{"name": "Ovation", "website": "https://ovationup.com/",
+ "oneLiner": "AI-first guest experience platform built for multi-unit restaurants: two-question SMS surveys, real-time guest recovery, review and listings management, and AI insights from guest feedback.",
+ "bestFor": "Multi-unit and enterprise restaurant brands that want to catch and fix bad experiences quickly through text-based feedback, and reply to public reviews from the same dashboard.",
+ "customers": [
+  {"name": "Dave's Hot Chicken", "source": "https://ovationup.com/case-study/daves-hot-chicken/"},
+  {"name": "Curry Up Now", "source": "https://ovationup.com/case-study/curry-up-now/"},
+  {"name": "Bareburger", "source": "https://ovationup.com/case-study/bareburger/"},
+  {"name": "Taziki's Mediterranean Cafe", "source": "https://www.qsrweb.com/resources/how-tazikis-mediterranean-cafe-skyrocketed-survey-volume-ovation-case-study"}
+ ],
+ "updates": [
+  {"date": "2025-10", "text": "Fall 2025 release added reputation management: reviews from Google, Yelp, Facebook and others, listings across 50+ directories and social in one place, with AI-suggested review replies or templates.", "source": "https://ovationup.com/fall-2025-release/"},
+  {"date": "2026-02", "text": "Raised $3 million from nearly a dozen of its own restaurant customers, bringing total funding to $12 million, to expand AI-driven insights and product development.", "source": "https://ovationup.com/3-million-round/"},
+  {"date": "2026-05", "text": "Spring 2026 release added Brand Voice, tone instructions applied across winback messages, automated responses and review replies, plus a Menu Item Performance Report linking guest sentiment to order data.", "source": "https://ovationup.com/spring-2026-release/"}
+ ],
+ "features": [
+  "Two-question SMS surveys sent automatically after orders, through POS and ordering integrations or table QR codes",
+  "Real-time alerts on negative feedback so managers can reach out and recover the guest",
+  "AI-suggested replies to guest feedback and public reviews, editable before sending, shaped by Brand Voice settings",
+  "Review inbox across Google, Yelp, Facebook and more, filterable by platform, rating and location",
+  "Listings management across 50+ directories and social posting",
+  "AI categorization of written feedback into restaurant-specific themes such as food quality, speed and cleanliness",
+  "Competitive Pulse benchmarking against up to five competitors per location",
+  "Reports linking guest sentiment to menu items and order data"
+ ],
+ "pricing": {"text": "Custom pricing; Ovation quotes per account (physical locations and ghost kitchens, with volume discounts) and does not publish prices.", "source": "https://ovationup.com/?p=25", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Product is marketed as Ovation at ovationup.com (company sometimes called Ovation Up); founder and CEO Zack Oates. Other 2025 releases: Spring 2025 (April, ROI and long-form survey tools) and Summer 2025 (July, Competitive Pulse and Review Response Visibility), per restaurantnews.com. The Fall 2025 release date (October 15, 2025) comes from search results. Third-party sites (Capterra, GetApp) list a $99/user starting price that does not match Ovation's own custom-quote page; not used. Other brands with case studies on ovationup.com: PDQ Chicken, Earthbar, Big Chicken, VIA 313, Sticky's Finger Joint, Righteous Slice. Nothing in the current review needed dropping; its description matches current positioning."}

@@ -1,0 +1,26 @@
+{"name": "Deliverect", "website": "https://www.deliverect.com/",
+ "oneLiner": "Order management platform that connects delivery marketplaces, a restaurant's own online ordering, POS and kitchen systems, now with AI agents for menus and order monitoring.",
+ "bestFor": "Multi-location restaurants, franchises and virtual brands juggling several delivery and online ordering channels that want orders and menus synced to the POS automatically.",
+ "customers": [
+  {"name": "Papa Johns", "source": "https://www.nrn.com/supplier-news/papa-johns-selects-deliverect-to-modernize-delivery-operations-across-u-s-restaurants"},
+  {"name": "KFC (Iberia)", "source": "https://www.deliverect.com/customers/kfc"},
+  {"name": "TGI Fridays", "source": "https://www.deliverect.com/en/case-study"},
+  {"name": "Taco Bell", "source": "https://www.deliverect.com/en/case-study"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Papa Johns selected Deliverect's Smart Dispatch & Delivery Management platform, with rollout across its U.S. restaurants planned by the end of 2027.", "source": "https://www.nrn.com/supplier-news/papa-johns-selects-deliverect-to-modernize-delivery-operations-across-u-s-restaurants"},
+  {"date": "2026-04", "text": "Launched Deliverect AI, autonomous agents that reorder menus from live order data and watch digital orders for errors, plus smart assistants that update menu imagery and descriptions; UK first, other markets to follow.", "source": "https://restauranttechnologynews.com/2026/04/deliverect-launches-ai-agents-and-smart-assistants-to-boost-restaurant-sales-and-protect-digital-revenue/"}
+ ],
+ "features": [
+  "Sends orders from delivery apps and web ordering straight into the POS, with no tablet re-keying",
+  "Central menu management that pushes menus, prices and item availability to every channel",
+  "Branded online ordering, including social media ordering",
+  "Dispatch and delivery management for in-house drivers and third-party couriers",
+  "Kitchen display and order routing",
+  "Cross-channel, cross-location sales reporting in one dashboard",
+  "AI agents that optimize menus and flag ordering errors (rolling out by market)",
+  "Integrations with major POS systems, including the Toast partner ecosystem"
+ ],
+ "pricing": {"text": "Per-location monthly subscription, billed annually; the pricing page estimates a price from monthly order volume and number of locations, and groups of more than 50 locations get a quote.", "source": "https://www.deliverect.com/en-us/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Deliverect site could not be fetched; details from search snippets and trade press. Dropped from current review: customers McDonald's, Chipotle, Five Guys and Pret A Manger (not confirmed in this research). TGI Fridays and Taco Bell are listed as customer stories on the case-study index; I did not find their individual page URLs. Vendor-reported claims not used: '43,000 businesses', KFC 'more than doubled online sales', and a KFC promotion run by an AI agent with '118% sales increase'. Third-party price figures (from £69/€79 per month; $79/$99/$149 order-volume tiers from 2022) dropped as unconfirmed or old. Other 2026 items seen only in secondary listings: Asda rollout (grocery), partnerships with ConverseNow, DataCandy and SoundHound for voice ordering and loyalty."}

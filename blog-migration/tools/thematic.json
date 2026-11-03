@@ -1,0 +1,25 @@
+{"name": "Thematic", "website": "https://getthematic.com/",
+ "oneLiner": "AI feedback analytics platform that sits on top of your surveys, reviews and support data and groups open-ended comments into themes and sentiment, with a generative AI Q&A tool (Answers).",
+ "bestFor": "Larger restaurant brands with insights or CX teams that already collect thousands of open-text comments and need them analyzed at scale; less suited to single locations given enterprise pricing.",
+ "customers": [
+  {"name": "DoorDash", "source": "https://getthematic.com/case-studies"},
+  {"name": "Greyhound", "source": "https://getthematic.com/assets/downloads/Thematic_Greyhound_Case_Study.pdf"},
+  {"name": "Sky TV", "source": "https://getthematic.com/assets/downloads/SkyTV.pdf"},
+  {"name": "Melodics", "source": "https://getthematic.com/case-studies/melodics"}
+ ],
+ "updates": [
+  {"date": "2025-01", "text": "Released AI tools using the Model Context Protocol (MCP) that bring Thematic insights into Claude, ChatGPT and Microsoft Copilot.", "source": "https://yespress.io/thematic.md"}
+ ],
+ "features": [
+  "Connects surveys, reviews, support tickets, chat and social comments in one place",
+  "Automatic theme and sub-theme discovery without manual tagging, editable by your team",
+  "Sentiment per theme and tracking of how themes change over time",
+  "Detection of emerging or rising themes",
+  "Answers: ask questions in plain language and get summaries with charts and verbatim quotes",
+  "Filters by location, segment, period or channel, and impact on NPS/CSAT",
+  "Dashboards and shareable reports",
+  "Integrations with survey platforms (e.g. Qualtrics, QuestionPro) and SOC 2 security"
+ ],
+ "pricing": {"text": "Custom pricing; Thematic does not publish prices on its site. Third-party listings cite entry prices around $2,000/month or $25,000/year, priced by feedback volume and datasets.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "getthematic.com could not be fetched; search budget ran out before 2026 announcements could be checked, so only one 2025 update (from a secondary source) is included. Answers launched January 2024; QuestionPro integration November 2024; Nielsen Connect partner network membership (date not confirmed). No restaurant brand customer found; DoorDash is the closest food-related customer. Vendor-reported results (e.g. Atom Bank 69% fewer calls, 543% ROI study) are not independently verified. Third-party pricing figures conflict and are not from Thematic."}

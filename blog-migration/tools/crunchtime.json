@@ -1,0 +1,58 @@
+{
+ "name": "Crunchtime",
+ "website": "https://www.crunchtime.com/",
+ "oneLiner": "Enterprise restaurant operations suite covering inventory and food cost, labor scheduling, ops execution and food safety (formerly Zenput), and, since its 2025 merger with QSR Automations, kitchen display and host systems.",
+ "bestFor": "Multi-unit and franchise restaurant brands that need central control of food cost, labor and store execution across many locations.",
+ "customers": [
+  {
+   "name": "P.F. Chang's",
+   "source": "https://www.crunchtime.com/press/crunchtime-announces-finalists-for-ops-excellence-awards"
+  },
+  {
+   "name": "Gong cha",
+   "source": "https://www.crunchtime.com/press/crunchtime-announces-finalists-for-ops-excellence-awards"
+  },
+  {
+   "name": "Panini Kabob Grill",
+   "source": "https://www.crunchtime.com/press/crunchtime-announces-finalists-for-ops-excellence-awards"
+  },
+  {
+   "name": "Smoothie King",
+   "source": "https://www.crunchtime.com/blog/what-are-restaurant-execs-prioritizing-next-find-out-from-smoothie-king-daves-hot-chicken-and-freddys-at-ops-summit-2026"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-04",
+   "text": "Introduced four new AI capabilities across the suite, including voice-based inventory counting that uses speech-to-text so managers can count stock faster.",
+   "source": "https://www.prnewswire.com/news-releases/crunchtime-introduces-four-new-ai-capabilities-to-elevate-operations-management-lifecycle-302747787.html"
+  },
+  {
+   "date": "2026-09",
+   "text": "Launched a connected kitchen and operations suite linking Crunchtime's back-office products with the kitchen display and host products from its 2025 merger with QSR Automations.",
+   "source": "http://www.prnewswire.com/news-releases/crunchtime-delivers-the-first-truly-connected-kitchen-simplifying-restaurant-workflows-and-improving-profitability-in-a-unified-suite-302879745.html"
+  },
+  {
+   "date": "2026-01",
+   "text": "QSR Automations products were renamed Crunchtime Kitchen (kitchen display) and Crunchtime Host (waitlist and table management).",
+   "source": "https://es.qsrautomations.com/blog/news/2025-wrapped-2/"
+  }
+ ],
+ "features": [
+  "Inventory counts, ordering and recipe-level food cost tracking with variance alerts",
+  "Voice-based inventory counting",
+  "Sales forecasting that drives labor schedules and replenishment",
+  "Labor scheduling with labor law compliance",
+  "Ops execution: checklists, audits, task management and food safety (formerly Zenput)",
+  "Kitchen display system (Crunchtime Kitchen) and host/waitlist tools (Crunchtime Host)",
+  "Learning and training content for store teams",
+  "Multi-location reporting and analytics for above-store leaders"
+ ],
+ "pricing": {
+  "text": "Not published; custom enterprise pricing.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Customers: P.F. Chang's, Gong cha and Panini Kabob Grill were finalists for Crunchtime's 2026 Ops Excellence Awards (Alamo Drafthouse, a cinema chain, won); Smoothie King spoke at Ops Summit 2026 and has a 'Smoothie King Selects Crunchtime' release (date not confirmed). Crunchtime says 850+ brands and 150,000+ locations (vendor figure, not used). Dropped from current review: '100,000 locations across 100+ countries' (outdated/unverified) and the client list Chipotle, Culver's, Domino's, Dunkin', Five Guys, Jersey Mike's, Shake Shack, sweetgreen (not re-confirmed in this research). Zenput is now 'Crunchtime Ops Execution'. May 2026: Nani McDonnell named Chief Customer Officer."
+}

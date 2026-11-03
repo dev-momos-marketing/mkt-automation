@@ -1,0 +1,49 @@
+{
+ "name": "Como",
+ "website": "https://www.como.com/",
+ "oneLiner": "Loyalty, CRM and guest engagement platform (Como Sense) for restaurant and retail chains, owned by Global Payments since 2023.",
+ "bestFor": "Multi-unit restaurant and QSR chains, especially those on POS systems Como integrates with, that want a branded loyalty program, guest profiles and automated marketing in one tool.",
+ "customers": [
+  {
+   "name": "Villa Italian Kitchen",
+   "source": "https://www.qsrmagazine.com/news/villa-italian-kitchen-partners-como/"
+  },
+  {
+   "name": "Rush Bowls",
+   "source": "https://www.verdictfoodservice.com/newsletters/rush-bowls-partners-como"
+  },
+  {
+   "name": "Creams Cafe",
+   "source": "https://www.retaildive.com/press-release/20171003-fastest-growing-uk-dessert-chain-creams-cafe-partners-with-como-to-launch-a"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-03",
+   "text": "Quantic POS announced an integration with Como Sense.",
+   "source": "https://yespress.io/como.md"
+  },
+  {
+   "date": "2026-09",
+   "text": "Release added AI-generated campaign summaries (beta, UK, US and Australia) and a redesigned member import tool.",
+   "source": "https://yespress.io/como.md"
+  }
+ ],
+ "features": [
+  "Unified guest profiles that link POS purchases to individual members",
+  "Configurable loyalty programs: points, rewards and member benefits",
+  "Branded mobile app and digital membership",
+  "Segmentation and automated marketing campaigns across email, SMS and app",
+  "Program and campaign analytics, with AI campaign summaries in beta",
+  "Member import tools for brands moving from an older club or list",
+  "Wide POS integration network (Revel, Oracle MICROS, PAR, Quantic and others)",
+  "Entry-level POS-integrated version (Como Sense Express) for smaller operators"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Como does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "acquired",
+ "notes": "Como was acquired by Global Payments in 2023 (April 2023 per startupim.com) and now trades as 'Como, a Global Payments company' (https://www.restaurantonline.co.uk/Suppliers/como-a-global-payments-company/); the product is still sold. Both 2026 updates come from a third-party company profile (yespress.io, updated Oct 2026), not a Como press release; verify on como.com if possible. Customer announcements are older: Creams Cafe 2017, Rush Bowls Nov 2023 (47 US locations), Villa Italian Kitchen rollout to 200+ US locations (date not confirmed). Older 2017 release also named Burger King and Quiznos; left out as dated. No 2025 or 2026 restaurant customer announcement found. Dropped: RevoltTek's 'up to 34% higher retention' claim and a Tarka testimonial (40,000 members) that could not be tied to a Como source. Current review's 'CDP' framing is fair as guest profiles + loyalty, but Como is primarily a loyalty/CRM product."
+}

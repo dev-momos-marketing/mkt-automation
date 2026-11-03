@@ -1,0 +1,50 @@
+{
+ "name": "Legion",
+ "website": "https://legion.co/",
+ "oneLiner": "AI-native workforce management platform for hourly teams that forecasts demand, auto-builds compliant schedules and handles time, attendance and employee communication.",
+ "bestFor": "Large multi-unit operators (retail, convenience, quick-service and fast casual) with big hourly workforces and predictive-scheduling rules to comply with.",
+ "customers": [
+  {
+   "name": "Wilson James",
+   "source": "https://www.businesswire.com/news/home/20260310263722/en/Wilson-James-Selects-Legions-AI-Powered-Workforce-Management-Platform-to-Transform-Workforce-Operations"
+  },
+  {
+   "name": "Unnamed fast-casual chain (60+ restaurants, 6,000+ employees)",
+   "source": "https://legion.co/resources/case-studies/fast-casual-restaurant-ai-workforce-management/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-01",
+   "text": "Released more than 90 new features, including a new generation of AI assistants aimed at automating scheduling decisions.",
+   "source": "https://legion.co/company/press-releases/2026/01/12/legion-ai-workforce-management-innovations/"
+  },
+  {
+   "date": "2026-07",
+   "text": "Spring 2026 release made generally available, adding an AI Upper Field Schedule Assistant for district and area managers alongside existing schedule, forecast and shift assistants.",
+   "source": "https://legion.co/company/press-releases/2026/07/14/spring-2026-workforce-management-release/"
+  },
+  {
+   "date": "2026-08",
+   "text": "Published a Forrester Total Economic Impact study of Legion WFM (commissioned by Legion, based on four retail and hospitality customers).",
+   "source": "https://legion.co/company/press-releases/2026/08/04/forrester-tei-legion-workforce-management-roi/"
+  }
+ ],
+ "features": [
+  "AI demand forecasting from sales and traffic data",
+  "Automatic schedule generation within labor budgets",
+  "Fair Workweek and predictive-scheduling compliance tracking, including premium pay",
+  "Time and attendance",
+  "Employee mobile app for shift swaps, open shifts and availability",
+  "Team messaging and announcements",
+  "AI assistants that build, explain and translate schedules",
+  "Multi-store views for district and area managers"
+ ],
+ "pricing": {
+  "text": "Not published; custom enterprise pricing.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "No named restaurant customer found; Legion's restaurant case study is an unnamed Chicago-rooted fast-casual chain. 2026 customer announcements are Wilson James (UK security/facilities services) and Wolt (delivery platform, Feb 2026, 20 EMEA countries; no primary URL captured). Dropped from current review: Blink Fitness, SoulCycle and Suitsupply as customers (not re-confirmed), '7-8 hours a week saved' and '96% of the time' claims (vendor stats), and '1,000+ employees' minimum (not confirmed). Forrester '1,340% ROI' is vendor-commissioned, not used. Fit: Legion's 2026 marketing leans heavily toward retail; still offers a restaurant WFM product."
+}

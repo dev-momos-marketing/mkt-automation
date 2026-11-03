@@ -1,0 +1,41 @@
+{
+ "name": "Avero",
+ "website": "https://averoinc.com/",
+ "oneLiner": "Hospitality analytics software that turns POS and operational data into sales, labor and server-performance reporting for restaurant groups.",
+ "bestFor": "Full-service and fine-dining restaurant groups that want shift-, server- and manager-level sales accountability across several venues.",
+ "customers": [
+  {
+   "name": "Wolfgang Puck Worldwide",
+   "source": "https://averoinc.com/avero-announces-new-partnership-with-wolfgang-puck/"
+  },
+  {
+   "name": "Patina Restaurant Group",
+   "source": "https://averoinc.com/patina-restaurant-group-saves-time-money-with-avero/"
+  },
+  {
+   "name": "Crafted Hospitality (Tom Colicchio)",
+   "source": "https://averoinc.com/products-page/"
+  },
+  {
+   "name": "Four Seasons",
+   "source": "https://averoinc.com/products-page/"
+  }
+ ],
+ "updates": [],
+ "features": [
+  "Pulls POS and operational data into one reporting layer for multi-venue groups",
+  "Sales reporting broken down by shift, manager and server",
+  "Server performance scorecards and benchmarking to coach front-of-house staff",
+  "Revenue and guest count trend analysis across locations",
+  "Discount, comp and promotion tracking",
+  "Mobile app for managers to check performance away from the office",
+  "POS integrations, including Toast (Avero joined the Toast partner ecosystem in 2018)"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Avero does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Company appears active: Doug Hsieh is CEO (Restaurant Strategy podcast, Feb 2025, https://podcasts.apple.com/us/podcast/the-power-of-data-with-avero-ceo-doug-hsieh/id1457379809?i=1000691797537; Tracxn 2026 profile). No 2025 or 2026 product news, launches or customer wins found; Avero's own news pages surfaced in search date from 2017-2021, so the product looks low-activity. Customers come from older Avero pages (Wolfgang Puck rollout across ~30 restaurants; Crafted Hospitality and Four Seasons are testimonial quotes on the products page), so treat them as historical. CB Insights lists Avero as 'Acquired' in a generic template; no acquisition confirmed. Product name 'Avero Revenue Intelligence' from the current review not confirmed. Features are partly carried over from the current review and match Avero's long-standing positioning, but could not be checked against a current product page (WebFetch blocked; search budget ran out). Toast partner source: https://pos.toasttab.com/news/toast-introduces-avero-goparrot-and-rooam-to-toast-partner-ecosystem. Mobile app source: https://finance.yahoo.com/news/avero-llc-launches-revolutionary-mobile-160000199.html (older release, also claims 17,000 users in 38 countries; dropped as dated). Consider whether a low-activity vendor still belongs in a 2026 list."
+}

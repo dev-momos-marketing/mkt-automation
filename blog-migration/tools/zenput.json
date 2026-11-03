@@ -1,0 +1,25 @@
+{"name": "Crunchtime Ops Execution (formerly Zenput)", "website": "https://www.crunchtime.com/operations-execution",
+ "oneLiner": "Operations execution software for multi-unit restaurants, part of the Crunchtime platform: digital checklists, audits, food safety and temperature monitoring, corrective actions and rollout tracking across locations. Renamed from Zenput in February 2026.",
+ "bestFor": "Multi-unit restaurant brands and franchise systems (also convenience stores and grocers) that need every location to follow the same procedures, audits and food safety checks.",
+ "customers": [
+  {"name": "Chipotle", "source": "https://www.crunchtime.com/operations-execution"},
+  {"name": "Domino's", "source": "https://www.crunchtime.com/operations-execution"},
+  {"name": "Freddy's Frozen Custard & Steakburgers", "source": "https://www.crunchtime.com/operations-execution"}
+ ],
+ "updates": [
+  {"date": "2026-02", "text": "Zenput was renamed Crunchtime Ops Execution to bring it fully into the Crunchtime suite (Crunchtime acquired Zenput in 2022).", "source": "https://www.crunchtime.com/blog/zenput-is-now-named-crunchtime-ops-execution"},
+  {"date": "2026-07", "text": "Crunchtime introduced new AI capabilities across inventory, operations execution and analytics.", "source": "https://restauranttechnologynews.com/2026/07/crunchtime-connects-ai-kitchen-automation-and-restaurant-operations-management-at-scale/"}
+ ],
+ "features": [
+  "Digital checklists and task management pushed to every store",
+  "Brand standards audits and inspections, including field visits",
+  "Food safety logs with automated temperature monitoring",
+  "Corrective action workflows that follow up on failed items",
+  "Rollout tracking for new initiatives across locations",
+  "Real-time dashboards and multi-location reporting",
+  "Mobile-first app for store teams and area managers",
+  "Connects with Crunchtime inventory, labor and learning products"
+ ],
+ "pricing": {"text": "Custom pricing; Crunchtime does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "renamed",
+ "notes": "Zenput is now Crunchtime Ops Execution (blog post dated Feb 9, 2026); zenput.com still resolves and carries a 'Zenput is now Crunchtime Ops Execution' banner. Use the new name and the crunchtime.com link. Dropped from the current review: '50,000 locations in 40+ countries' (Crunchtime/Zenput now claims 125,000+ locations in 100+ countries for the Crunchtime platform), G2/Capterra 4.7/5 (G2 currently shows about 4.6 from 142 reviews), the 20% audit-score, 24% compliance and 5 hours/week stats (unverified), and named customers Taco Bell franchisee Tacala, Gong cha and P.F. Chang's (not re-verified). Crunchtime published a TravelCenters of America case study (June 2025; 54% better task performance, vendor-reported). Temperature monitoring and food labeling are reported as add-ons; not re-verified."}

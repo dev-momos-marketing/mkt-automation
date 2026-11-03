@@ -1,0 +1,17 @@
+{"name": "BuyerGenomics", "website": "https://buyergenomics.com/",
+ "oneLiner": "Predictive customer data platform and marketing automation tool that unifies POS, Olo, loyalty and website data and predicts when each guest is likely to spend again.",
+ "bestFor": "Multi-unit restaurant brands, especially Olo users, that want predictive segments and automated triggered campaigns without building their own data stack.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Native integration with Olo, plus connections to most POS, ordering and reservation systems",
+  "Unified guest profiles combining transaction, loyalty, website, mobile and demographic data",
+  "Machine-learning predictions of when each guest is likely to buy again",
+  "Automatic separation of guests into types and value segments, plus custom segment building",
+  "Predictive behavioral triggers such as browse and cart-abandonment follow-ups",
+  "Drag-and-drop builder for automated, targeted campaigns",
+  "Reporting on campaign and incremental revenue impact"
+ ],
+ "pricing": {"text": "Not published; custom pricing. The vendor advertises a free trial.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Low-confidence entry. The website and an Olo partner listing (https://www.olo.com/partners/buyergenomics) are live, but I found no 2025 or 2026 news, no product updates and no named restaurant customer; the most recent G2 review seen was from October 2023. The only named case study found was Dylan's Candy Bar (a candy retailer, not a restaurant), and I could not pin its exact URL, so it is left out. Vendor claims not used: '5x ROI guaranteed' (Olo listing) and '96.7% of users drive material incremental sales'. Kept the current review's 'custom pricing' but dropped 'based on data volume and use' (not confirmed). Consider whether the product is still actively developed before keeping it in the list."}

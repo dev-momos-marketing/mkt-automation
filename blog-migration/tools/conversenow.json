@@ -1,0 +1,22 @@
+{"name": "ConverseNow", "website": "https://www.conversenow.ai/",
+ "oneLiner": "Voice AI for restaurant phone and drive-thru ordering: virtual assistants take orders in natural conversation, upsell, and send orders straight into the POS.",
+ "bestFor": "Pizza, wings and other QSR or fast-casual chains with heavy phone or drive-thru order volume that want to automate order taking across many locations.",
+ "customers": [
+  {"name": "Anthony's Coal Fired Pizza & Wings", "source": "https://www.fsrmagazine.com/content/anthonys-coal-fired-pizza-rolls-out-ai-phone-system"},
+  {"name": "Wingstop (pilot at select locations)", "source": "https://salestechstar.com/partner-management-channel-enablement/conversenows-voice-ai-soars-to-new-heights-with-wingstop-partnership/"}
+ ],
+ "updates": [
+  {"date": "2026-04", "text": "Partnership and integration with Deliverect, so restaurants can plug ConverseNow's voice AI ordering for phone and drive-thru into Deliverect's order and menu management.", "source": "https://www.prnewswire.com/news-releases/conversenow-and-deliverect-announce-partnership-to-bring-voice-ai-ordering-into-unified-restaurant-order--menu-management-302743431.html"}
+ ],
+ "features": [
+  "AI voice assistant that answers restaurant phone lines and takes full orders",
+  "Drive-thru voice ordering (strengthened by the 2024 Valyant AI acquisition)",
+  "Orders sent directly into the POS, with no re-keying by staff",
+  "Consistent, automatic upsell suggestions on every order",
+  "Generative AI (large language model) conversation for natural back-and-forth",
+  "Hand-off option to a human agent through call-center partner OrderSolutions",
+  "Integration with Deliverect order and menu management"
+ ],
+ "pricing": {"text": "Custom pricing; ConverseNow does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "conversenow.ai could not be fetched and the session's search budget ran out before customer sources for Domino's, Fazoli's and Blake's Lotaburger (named in the current review) could be re-checked; they are dropped until verified. The Wingstop item was an evaluation/pilot agreement (date not confirmed). The current review's English/Spanish support and 'measurably lifted guest satisfaction scores' claims were not verified and should be dropped or re-checked. Older items: Valyant AI acquisition July 2024 (https://www.nrn.com/restaurant-automation/conversenow-acquires-valyant-ai-as-two-major-voice-ai-companies-combine-forces); OrderSolutions partnership (https://www.qsrmagazine.com/news/ordersolutions-and-conversenow-partner-restaurant-solution, date unconfirmed); ChatGPT/Bard LLMs added to its assistants (2023, voicebot.ai). No 2025 dated update found."}

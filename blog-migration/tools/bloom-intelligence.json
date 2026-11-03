@@ -1,0 +1,42 @@
+{
+ "name": "Bloom Intelligence",
+ "website": "https://bloomintelligence.com/",
+ "oneLiner": "Restaurant guest data and marketing platform that builds one guest profile from WiFi, POS, online ordering, reservations, reviews, surveys and ad data, and uses it for automated marketing, review responses and lapsed-guest recovery.",
+ "bestFor": "Independent restaurants and multi-unit groups in the US that want guest data, automated email/SMS marketing and review management in one restaurant-specific tool.",
+ "customers": [
+  {
+   "name": "Roka Akor",
+   "source": "https://bloomintelligence.com/roka-akor-case-study/"
+  },
+  {
+   "name": "Corky's Kitchen & Bakery",
+   "source": "https://bloomintelligence.com/corkys-case-study/"
+  },
+  {
+   "name": "Beachside Hospitality Group",
+   "source": "https://bloomintelligence.com/how-bhg-saves-15-20-hours-a-week-on-review-management-drives-revenue-growth/"
+  },
+  {
+   "name": "Divieto Ristorante",
+   "source": "https://bloomintelligence.com/divieto-case-study/"
+  }
+ ],
+ "updates": [],
+ "features": [
+  "Unified guest profiles combining WiFi, POS, online ordering, reservations, website, reviews, surveys and Google/Meta ads data",
+  "Integrations with restaurant platforms including Toast, Olo, OpenTable and Cisco Meraki",
+  "Automated campaigns that win back lapsed or at-risk guests",
+  "Guest segmentation and lifetime value tracking",
+  "AI-written review responses across Google, Yelp, TripAdvisor and Facebook",
+  "Bloom AI assistant that answers questions about your guest data in plain language",
+  "Ad attribution that matches paid ads to completed POS checks",
+  "Multi-location reporting on campaigns and guest trends"
+ ],
+ "pricing": {
+  "text": "Not published; custom pricing from Bloom Intelligence sales.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Facts from search snippets of bloomintelligence.com (site not fetched). The company now positions itself as a 'Revenue Operating System' for restaurants moving toward agentic AI. No dated 2025-2026 release or press coverage found, so updates is empty; Bloom AI launch date not confirmed (last dated release note found is Fall 2024). Not used: vendor claims of 108M+ guest records, 1,000+ locations, 'up to 43%' lifetime value lift and '37% of churning customers return' (vendor figures, inconsistent across pages). Case-study results are vendor-published. Search budget ran out before further checks."
+}

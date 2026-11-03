@@ -1,0 +1,22 @@
+{"name": "Lumiform", "website": "https://lumiformapp.com/",
+ "oneLiner": "Mobile inspection, audit and checklist platform for frontline teams, with AI form building, corrective actions and multi-site reporting.",
+ "bestFor": "Multi-location restaurant and food businesses, especially in Europe, that need digital HACCP checks, brand audits and corrective-action tracking.",
+ "customers": [
+  {"name": "Sausalitos", "source": "https://lumiformapp.com/success-stories/sausalitos-success-story"},
+  {"name": "EDEKA Nord", "source": "https://lumiformapp.com/app-uses/food-receiving-inspections-app"},
+  {"name": "AmRest", "source": "https://join.com/companies/lumiform"}
+ ],
+ "updates": [],
+ "features": [
+  "Customizable inspection, audit and checklist forms with conditional logic",
+  "AI form builder that creates templates from a prompt or converts uploaded files",
+  "Automatic translation of forms into 60+ languages",
+  "AI image validation that checks uploaded photos",
+  "Corrective actions assigned from findings, with photo or document proof of completion",
+  "Offline mobile app with photo and signature capture",
+  "Real-time reporting across sites and automated alerts",
+  "Learning Paths for structured staff training"
+ ],
+ "pricing": {"text": "Free Starter plan; Professional plan licensed per user (Lumiform's pricing FAQ uses an example of EUR 20 per user per month; third-party listings show EUR 16-20 per user per month); Enterprise is custom. 14-day free trial of Professional.", "source": "https://lumiformapp.com/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Sausalitos (about 48 restaurants in Germany) has used Lumiform since 2019 for cleaning and HACCP, later audits. EDEKA Nord case study is linked from Lumiform's food receiving page. AmRest is named only in a Lumiform job listing on JOIN as a company relying on the platform. No dated 2025-2026 update could be confirmed; the AI features and Learning Paths appear on lumiformapp.com and in App Store release notes without dates. Dropped from original review: 'over 1,000 companies across 70+ countries', '95% of companies see productivity increase', 'audits up to 50% faster', '10,000+ template library', founding year, Familie Wiesner Gastronomie (not re-verified), and Power BI/ERP integrations (not re-verified). Lumiform pricing figures conflict across sources; check the pricing page before quoting a number."}

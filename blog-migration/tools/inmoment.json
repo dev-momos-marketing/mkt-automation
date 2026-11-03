@@ -1,0 +1,25 @@
+{"name": "InMoment", "website": "https://inmoment.com/",
+ "oneLiner": "Enterprise customer experience platform combining surveys, online review and reputation management, social listening and AI text and conversation analytics; part of PG Forsta since 2025.",
+ "bestFor": "Large multi-location restaurant brands and franchise systems that want guest surveys, reviews and contact-center feedback analyzed together, with location-level reporting.",
+ "customers": [
+  {"name": "Jack in the Box", "source": "https://inmoment.com/customer-stories/jack-in-the-box-elevates-digital-strategy-with-advanced-ai-accelerating-business-decision-making/"},
+  {"name": "The Melting Pot", "source": "https://inmoment.com/resource/melting-pot-improves-guest-experience-person-online/"},
+  {"name": "The Coffee Club", "source": "https://inmoment.com/resource/the-coffee-club-brewing-a-better-experience/"}
+ ],
+ "updates": [
+  {"date": "2025-05", "text": "Acquired by Press Ganey Forsta (PG Forsta); terms not disclosed. InMoment continues as a brand, 'InMoment, a PG Forsta company'.", "source": "https://www.businesswire.com/news/home/20250514662998/en/Press-Ganey-Forsta-Acquires-InMoment-Accelerating-AI-Innovation-in-Customer-Experience-and-Expanding-Cross-Industry-Expertise"},
+  {"date": "2025-07", "text": "Launched AI Auto Responding for reviews, which writes replies from each review's sentiment and the brand's guidelines and can post them directly or queue them for approval.", "source": "https://www.businesswire.com/news/home/20250730587816/en/InMoment-a-Press-Ganey-Forsta-Company-Launches-Industry-First-AI-Auto-Responding-for-Enterprise-Reviews-Management"}
+ ],
+ "features": [
+  "Post-visit surveys by email, SMS, web and app, triggered after a guest interaction",
+  "Review monitoring and response across Google and other review sites from one dashboard",
+  "AI-written review replies, posted automatically or sent for approval",
+  "AI text analytics that surface themes, sentiment and intent across all feedback",
+  "Conversation analytics for contact-center calls and chats",
+  "Location, region and brand dashboards for comparing guest scores",
+  "Frontline reporting that shows each location's top positive and negative drivers",
+  "Social listening alongside survey and review data"
+ ],
+ "pricing": {"text": "Not published; custom pricing.", "source": null, "checked": "2026-11"},
+ "status": "acquired",
+ "notes": "Acquired by PG Forsta in May 2025; the product is still sold under the InMoment name. No 2026 product announcement found. Customer stories are vendor-published and some are older (Jack in the Box expanded its use of InMoment's AI analytics in June 2023). Other restaurant stories found but not checked in detail: McDonald's Australia, Pizza Hut, Solotel Group, Betty's Burgers. Vendor figures not used (e.g. 43,000 clients, Melting Pot '47% speed-of-service' increase). Current review's positioning holds; nothing specific to drop beyond adding the acquisition."}

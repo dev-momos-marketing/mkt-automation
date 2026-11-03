@@ -1,0 +1,24 @@
+{"name": "Freshchat (Freshworks)", "website": "https://www.freshworks.com/live-chat-software/",
+ "oneLiner": "Freshworks' messaging and chatbot product: one shared inbox for web chat, in-app, WhatsApp, Instagram, Facebook Messenger, SMS and more, with Freddy AI Agent answering questions automatically. Also sold as part of the Freshdesk Omni suite.",
+ "bestFor": "Restaurant groups that want omnichannel guest messaging with an AI agent inside a general-purpose support platform, especially those already on Freshdesk or other Freshworks products.",
+ "customers": [
+  {"name": "Orderin (food ordering and delivery)", "source": "https://freshworks.com/live-chat-software/resources/orderin"},
+  {"name": "Fantastic Services", "source": "https://v2.iotone.com/case-study/fantastic-services-doubles-chat-roi-with-freshchat-implementation/c2449"},
+  {"name": "FinAccel", "source": "https://m.iotone.com/case-study/finaccel-s-journey-to-achieving-98-csat-with-freshchat/c2451"}
+ ],
+ "updates": [
+  {"date": "2025-11", "text": "Freshworks' November 2025 product launch rebuilt Freshdesk Omni (which includes Freshchat) around a Command Center workspace, alongside its agentic Freddy AI platform.", "source": "https://www.freshworks.com/whats-new"}
+ ],
+ "features": [
+  "Shared inbox for web chat, in-app, email, SMS, WhatsApp, Instagram and Facebook Messenger",
+  "Freddy AI Agent trained on your knowledge base to answer guest questions across channels",
+  "Freddy AI Agent Studio for building no-code AI agents and workflows",
+  "Automatic routing and assignment of conversations to the right team member",
+  "Proactive and outbound campaigns over WhatsApp and web chat",
+  "Freddy AI Copilot for staff (paid add-on)",
+  "Analytics on bot and team performance",
+  "Works with Freshdesk and Freshsales as part of Freshdesk Omni"
+ ],
+ "pricing": {"text": "Free plan for up to 10 agents; Growth $19, Pro $49 and Enterprise $79 per agent per month, billed annually. Freddy AI Agent is billed separately per session (reported at $49 per 100 sessions) and Freddy AI Copilot is an add-on. Figures as reported from the Freshchat pricing page by third parties; confirm on freshworks.com before publishing.", "source": "https://eesel.ai/blog/freddy-ai-pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "freshworks.com could not be fetched; pricing comes from third-party summaries of the Freshchat pricing page (a tracker cites the page as of 5 October 2026). Third parties report workspaces created before 14 May 2026 stay on legacy per-message AI pricing, and conflicting reports about 500 free AI sessions; not included. The current review's $19 starting price matches. Google Business Messages in the current review should be dropped (Google shut that channel down in 2024). Freddy AI Agent Studio launched in 2025 (month not confirmed). No restaurant-specific Freshchat customer found beyond Orderin; Dineout (India) has a Freshworks case study but it may not be Freshchat. Freshchat is a general support tool, not restaurant-specific."}

@@ -1,0 +1,27 @@
+{"name": "Bikky", "website": "https://www.bikky.com/",
+ "oneLiner": "Customer data platform built for multi-unit restaurant brands: it unifies POS, online ordering, payment and loyalty data into de-duplicated guest profiles and adds guest analytics, campaign measurement and an AI analyst (Data Assistant).",
+ "bestFor": "Multi-unit restaurant brands (regional chains to several hundred locations) that want one clean view of guest behavior across channels and a way to measure marketing and menu decisions.",
+ "customers": [
+  {"name": "Mellow Mushroom", "source": "https://www.globenewswire.com/news-release/2025/09/02/3142606/0/en/Mellow-Mushroom-powers-data-driven-marketing-and-expansion-with-Bikky.html"},
+  {"name": "Bubbakoo's Burritos", "source": "https://bikky.com/press-release/bubbakoos-burritos-powers-personalization-and-data-driven-growth-with-bikky"},
+  {"name": "Condado Tacos", "source": "https://www.einpresswire.com/article/794889498/condado-tacos-launches-burrito-lto-inspired-by-guest-insights-from-bikky"},
+  {"name": "Tiki Taco", "source": "https://lite.aol.com/sports/other/story/0022/20250617/9468159.htm"}
+ ],
+ "updates": [
+  {"date": "2025-03", "text": "Condado Tacos launched a burrito limited-time offer based on guest insights from Bikky.", "source": "https://www.einpresswire.com/article/794889498/condado-tacos-launches-burrito-lto-inspired-by-guest-insights-from-bikky"},
+  {"date": "2025-09", "text": "Mellow Mushroom announced it uses Bikky for data-driven marketing and expansion; the release describes Data Assistant as Bikky's recently launched AI analyst that answers questions about guest data in seconds.", "source": "https://www.globenewswire.com/news-release/2025/09/02/3142606/0/en/Mellow-Mushroom-powers-data-driven-marketing-and-expansion-with-Bikky.html"},
+  {"date": "2026-04", "text": "Bubbakoo's Burritos chose Bikky to power personalization and its data strategy.", "source": "https://bikky.com/press-release/bubbakoos-burritos-powers-personalization-and-data-driven-growth-with-bikky"}
+ ],
+ "features": [
+  "Prebuilt integrations with POS, online ordering, payment and loyalty systems",
+  "Cleaned, standardized and de-duplicated guest profiles across all locations and channels",
+  "Guest frequency, retention and lifetime value analytics",
+  "Menu and channel performance tied to guest behavior (useful for testing LTOs)",
+  "Campaign and loyalty ROI measurement",
+  "Guest segments for personalized marketing",
+  "Data Assistant: ask questions of your guest data in plain language",
+  "Data sharing to a warehouse or files (Snowflake, SFTP, CSV)"
+ ],
+ "pricing": {"text": "Custom pricing; Bikky does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "bikky.com could not be fetched; facts come from search results of Bikky press releases and trade press. Other brands named as customers in press coverage: Bojangles (800 locations, March 2024), Dave's Hot Chicken, Long John Silver's, Robeks, MOD Pizza (April 2024), Playa Bowls, Haven Hot Chicken (Dec 2024), Postino. Snowflake/SFTP/CSV sharing is carried over from the current review and was not re-verified this session. The Tiki Taco source is an AOL syndication of the June 17, 2025 GlobeNewswire release. Funding: ~$8M Series A (Dec 2023) per third-party profiles. No 2026 product launch found."}

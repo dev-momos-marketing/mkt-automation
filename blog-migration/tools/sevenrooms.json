@@ -1,0 +1,58 @@
+{
+ "name": "SevenRooms",
+ "website": "https://sevenrooms.com/",
+ "oneLiner": "Reservations, table management, guest CRM and marketing platform for restaurants and hospitality venues, owned by DoorDash since June 2025.",
+ "bestFor": "Full-service restaurants, hotel F&B, nightlife and hospitality groups that want reservations, guest profiles and retention marketing in one system.",
+ "customers": [
+  {
+   "name": "Union Square Hospitality Group",
+   "source": "https://www.theworlds50best.com/partners/sevenrooms.html"
+  },
+  {
+   "name": "Wolfgang Puck",
+   "source": "https://www.theworlds50best.com/partners/sevenrooms.html"
+  },
+  {
+   "name": "Nobu Restaurants",
+   "source": "https://www.theworlds50best.com/partners/sevenrooms.html"
+  },
+  {
+   "name": "Dishoom",
+   "source": "https://www.theworlds50best.com/partners/sevenrooms.html"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-03",
+   "text": "Released AI features: AI Responses for review replies, AI Feedback Summary and AI Note Polish.",
+   "source": "https://www.prnewswire.com/news-releases/sevenrooms-unveils-new-ai-features-to-power-superhuman-hospitality-helping-restaurants-personalize-streamline--save-time-302415937.html"
+  },
+  {
+   "date": "2025-06",
+   "text": "DoorDash completed its acquisition of SevenRooms (announced at about $1.2 billion); SevenRooms leadership stayed on to run the product.",
+   "source": "https://about.doordash.com/en-us/news/doordash-completes-acquisition-of-sevenrooms"
+  },
+  {
+   "date": "2026-07",
+   "text": "Launched guest intelligence tools led by Voice AI (built on ElevenLabs), which answers calls, books reservations and recognizes returning guests, now with group cross-selling, payment collection and performance reporting.",
+   "source": "https://sevenrooms.com/press/guest-intelligence-tools-launch/"
+  }
+ ],
+ "features": [
+  "Reservations and waitlist management with direct booking",
+  "AI table management: seating, pacing and cover forecasting",
+  "Guest CRM with profiles holding preferences, allergies, occasions and visit history",
+  "Automated marketing and segmentation by email and SMS",
+  "Voice AI that answers the phone and takes reservations",
+  "Review and feedback tools with AI reply drafting and feedback summaries",
+  "Secure payment collection for deposits and group bookings",
+  "Reservation channel partnerships such as TheFork in Europe, the UK and Australia"
+ ],
+ "pricing": {
+  "text": "Custom pricing; SevenRooms does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "acquired",
+ "notes": "Acquired by DoorDash, closed June 13, 2025 (DoorDash 10-Q: $1,152M total consideration). Still sold under the SevenRooms brand. Dropped from current review: 'one of the fastest-growing hospitality CRM platforms' and 'backed by investors including L Catterton' (outdated after the acquisition). Online ordering and loyalty modules listed in the current review were not re-verified this session; left out of features. Customers from World's 50 Best partner page (also lists Marriott, MGM Resorts, Mandarin Oriental, Wynn, NoHo Hospitality, Black Sheep, Bloomin' Brands, Topgolf). Venue count conflicts (13,000+ in DoorDash release vs 16,000+ on older partner page); avoid citing. Voice AI '400,000 calls for 600+ restaurants' and 'up to 25% more reservations' are vendor-reported. A June 2026 'One Place to Manage Every Reservation' launch was seen only as a headline."
+}

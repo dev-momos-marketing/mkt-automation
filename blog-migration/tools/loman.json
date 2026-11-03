@@ -1,0 +1,25 @@
+{"name": "Loman", "website": "https://loman.ai/",
+ "oneLiner": "AI phone agent for restaurants that answers calls around the clock, takes orders and reservations, and sends them into the POS.",
+ "bestFor": "Independent and multi-unit restaurants, especially high-call-volume pizza and takeout concepts, that miss phone orders during rushes.",
+ "customers": [
+  {"name": "Big Apple Pizza", "source": "https://www.casestudies.com/company/loman/case-study/big-apple-pizza-eliminates-100-of-missed-calls-with-loman"},
+  {"name": "Taqueria El Arquito", "source": "https://www.casestudies.com/company/loman/case-study/taqueria-el-arquito-triples-phone-orders-with-loman"},
+  {"name": "Brick Oven Pizza", "source": "https://www.businesswire.com/news/home/20260603602542/en/Loman-AI-Partners-With-Shift4-to-Bring-the-1-Voice-AI-for-Restaurants-to-Customers-Across-the-Shift4-Ecosystem"}
+ ],
+ "updates": [
+  {"date": "2026-01", "text": "Partnered with SpotOn so restaurants on SpotOn POS can switch on Loman phone automation from their SpotOn account.", "source": "https://www.businesswire.com/news/home/20260128093558/en"},
+  {"date": "2026-06", "text": "Partnered with Shift4 to offer Loman's voice AI to restaurants across the Shift4 ecosystem.", "source": "https://www.businesswire.com/news/home/20260603602542/en/Loman-AI-Partners-With-Shift4-to-Bring-the-1-Voice-AI-for-Restaurants-to-Customers-Across-the-Shift4-Ecosystem"},
+  {"date": "2026-07", "text": "Joined the Toast Partner Ecosystem; phone orders flow into existing Toast workflows. Loman said its agent was live in more than 1,500 restaurants.", "source": "https://www.businesswire.com/news/home/20260720599451/en/"}
+ ],
+ "features": [
+  "Answers every restaurant call 24/7, including several calls at once during rushes",
+  "Takes full phone orders and sends them into the POS (Toast, Square, Clover, SpotOn, NCR, Shift4 and others)",
+  "Takes card payments over the phone",
+  "Books reservations, including through OpenTable",
+  "Answers menu, hours and other common caller questions",
+  "Trained on each restaurant's menu during setup",
+  "Charged per location"
+ ],
+ "pricing": {"text": "Not published; Starter, Premium and Enterprise tiers are all quoted by sales ('Contact us').", "source": "https://pricingsaas.com/companies/loman", "checked": "2026-11"},
+ "status": "active",
+ "notes": "loman.ai could not be fetched; details from Business Wire releases and search snippets. Funding: $3.5M seed led by Next Coast Ventures, Aug 2025. Previously listed prices ($199/month and $399/month plus $149 setup, 600 minutes included) were replaced by contact-us pricing in June 2026 per a third-party tracker, so they are dropped. Toast release date taken from its URL. Dropped from current review: 'the only AI phone agent purpose-built for restaurants', 'goes live in under a day', 'unlimited simultaneous calls' and Aloha/Olo POS sync (not confirmed in this research; Olo was mentioned only by an aggregator). Customer outcomes ('tripled phone orders', '100% of missed calls eliminated') are vendor-reported."}

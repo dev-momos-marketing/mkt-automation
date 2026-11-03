@@ -1,0 +1,26 @@
+{"name": "MarginEdge", "website": "https://www.marginedge.com/",
+ "oneLiner": "Restaurant back-office platform that turns invoices and POS data into daily food cost, inventory and P&L numbers, with invoice processing, bill pay, ordering and recipe costing in one subscription.",
+ "bestFor": "Independent restaurants and small-to-mid restaurant groups that want to cut manual invoice entry and see food cost in near real time rather than at month-end.",
+ "customers": [
+  {"name": "Skopos Hospitality Group", "source": "https://www.casestudies.com/company/marginedge"},
+  {"name": "Crooked Hammock Brewery", "source": "https://www.casestudies.com/company/marginedge"},
+  {"name": "South Block", "source": "https://www.casestudies.com/company/marginedge"},
+  {"name": "The Tavern at Ivy City Smokehouse", "source": "https://www.casestudies.com/company/marginedge"}
+ ],
+ "updates": [
+  {"date": "2025-04", "text": "MarginEdge marked 10 years in business and 10,000 restaurant customers.", "source": "https://www.businesswire.com/news/home/20250424302573/en/MarginEdge-Celebrates-10-Years-of-Innovation-and-10000-Customers"},
+  {"date": "2026-08", "text": "Raised $80 million (Series D equity plus debt) co-led by Schooner Capital and Ten Coves Capital, to build more AI products on the restaurant purchasing data it processes.", "source": "https://axios.com/pro/enterprise-software-deals/2026/08/06/restaurant-tech-marginedge-wonder-80-million"}
+ ],
+ "features": [
+  "Invoice capture from photos, email or EDI, processed automatically",
+  "Daily food and beverage cost from POS sales plus invoice data",
+  "Bill pay included in the subscription",
+  "Vendor ordering and order guides",
+  "Inventory counts and recipe and menu-item costing",
+  "Price-change alerts on items you buy",
+  "Budgeting and P&L views, with accounting system sync (e.g. QuickBooks)",
+  "Integrations with dozens of POS systems"
+ ],
+ "pricing": {"text": "Published flat price per location per month with unlimited invoices and bill pay. MarginEdge's pricing page has shown $330 per location per month; 2026 third-party trackers report $350, plus $150 for the Freepour bar-inventory add-on. Confirm the current figure on marginedge.com/pricing before publishing.", "source": "https://www.marginedge.com/pricing/", "checked": "2026-11"},
+ "status": "active",
+ "notes": "marginedge.com could not be fetched; the pricing page appeared only as a search snippet ($330), while two 2026 aggregators say $330 was replaced by $350. Toast users reportedly need Toast's $50/location/month Restaurant Management Suite for the API integration (third-party claim). Current review's '60+ POS integrations' not re-verified; replaced with 'dozens'. A single investor-profile page mentions a 2026 AI assistant ('Tom the Tomato') for ordering and waste flags; not included, unverified. Customer names come from case-study titles on casestudies.com (MarginEdge stories), not the vendor site directly. Platform reportedly processes $28B of restaurant purchasing (Series D coverage)."}

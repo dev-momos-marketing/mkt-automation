@@ -1,0 +1,24 @@
+{"name": "Jolt (SmartSense by Digi)", "website": "https://www.jolt.com/",
+ "oneLiner": "Operations app for restaurants and convenience stores (digital checklists, food safety logs, labeling, scheduling and training), owned by Digi International since August 2025 and part of its SmartSense business.",
+ "bestFor": "Quick-service and franchise restaurant groups that want shift-level task accountability and food safety records, especially those also considering SmartSense temperature sensors.",
+ "customers": [
+  {"name": "A&W Restaurants", "source": "https://www.fastcasual.com/press-releases/aw-teams-up-with-jolt-to-streamline-operations/"},
+  {"name": "White Spot Hospitality", "source": "https://www.newswire.ca/news-releases/white-spot-hospitality-selects-jolt-for-operation-management-879689110.html"}
+ ],
+ "updates": [
+  {"date": "2025-08", "text": "Digi International acquired Jolt for about $145.5 million and placed it in its SmartSense unit.", "source": "https://www.businesswire.com/news/home/20250818839282/en/Digi-Acquires-Jolt-to-Accelerate-ARR-Growth-and-Strengthen-SmartSense%E2%80%99s-Market-Leading-Offerings"},
+  {"date": "2026-01", "text": "SmartSense by Digi launched SmartSense ONE at NRF 2026, a modular platform combining SmartSense and Jolt capabilities in seven core modules.", "source": "https://www.businesswire.com/news/home/20260112546747/en/SmartSense-by-Digi-Launches-SmartSense-ONE-at-NRF-2026"}
+ ],
+ "features": [
+  "Digital checklists and task lists with photo proof and manager sign-off",
+  "Food safety logs and temperature records, with sensor monitoring through SmartSense",
+  "Date code and prep label printing",
+  "Drag-and-drop employee scheduling and a time clock",
+  "Training library and information hub for staff",
+  "Text notifications and team communication",
+  "Multi-location reporting on task completion and performance",
+  "POS integration, including PAR Brink"
+ ],
+ "pricing": {"text": "Custom pricing; Jolt's main pricing page directs buyers to sales. A third-party site reports a $116 per location per month price and $99 setup fee on a Jolt 'Lists' landing page, not verified.", "source": null, "checked": "2026-11"},
+ "status": "acquired",
+ "notes": "Acquired by Digi International (NASDAQ: DGII) on Aug 18 2025; Jolt's CEO said customers would keep the same Jolt platform, and in 2026 Jolt is sold as part of SmartSense ONE. Jolt still uses its own brand and site. Dropped from the original review: '300,000 deskless workers' and '700 million tasks' (unverified; a 2022 PAR release said 300,000+ restaurant managers), Capterra 4.7/5 rating, clients McDonald's, Smoothie King, Jimmy John's and Buffalo Wild Wings (not confirmed by vendor or press in this research), and 'starts at approximately $90/month' (third-party estimates conflict: $89.99, $116 per location). A&W and White Spot announcements are from 2022. Jolt and SmartSense exhibited at Dairy Queen's DQ Connect 2026 franchise event (https://digi.com/company/press-releases/2026/smartsense-and-jolt-to-in-dairy-queen-connect-2026), which does not confirm DQ as a customer. Founder origin story not re-verified."}

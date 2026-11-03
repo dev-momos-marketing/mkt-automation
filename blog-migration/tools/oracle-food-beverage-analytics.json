@@ -1,0 +1,47 @@
+{
+ "name": "Oracle Simphony Reporting and Analytics",
+ "website": "https://www.oracle.com/food-beverage/restaurant-pos-systems/restaurant-analytics/",
+ "oneLiner": "Oracle's enterprise restaurant reporting and analytics, part of the Oracle Simphony POS platform (formerly MICROS), for multi-brand and multi-region operators.",
+ "bestFor": "Large and global restaurant and hospitality groups already running Oracle Simphony POS that need enterprise-wide reporting and BI integration.",
+ "customers": [
+  {
+   "name": "Starbucks",
+   "source": "https://www.paymentsdive.com/news/oracle-adds-restaurant-payment-acceptance/626420/"
+  },
+  {
+   "name": "Pret A Manger",
+   "source": "https://www.paymentsdive.com/news/oracle-adds-restaurant-payment-acceptance/626420/"
+  },
+  {
+   "name": "Sonic",
+   "source": "https://www.paymentsdive.com/news/oracle-adds-restaurant-payment-acceptance/626420/"
+  },
+  {
+   "name": "Sercotel",
+   "source": "https://www.hospitalityupgrade.com/news/sercotel-transforms-its-operations-with-oracle-cloud"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-03",
+   "text": "Oracle and NetSuite launched an AI-powered restaurant operations solution that pulls Simphony Cloud and other POS data into a central back office covering inventory, purchasing, scheduling, production and cash management.",
+   "source": "https://www.oracle.com/news/announcement/oracle-and-netsuite-deliver-new-ai-powered-solution-for-restaurant-operations-2026-03-31/"
+  }
+ ],
+ "features": [
+  "Enterprise sales and revenue reporting across locations, brands and regions",
+  "Automated report distribution and mobile alerts for critical events",
+  "Multi-location exports combined into one file with custom headers",
+  "Guest check search with drill-down to the check image",
+  "POS waste detail via reason codes during the business day for inventory tracking",
+  "Business Intelligence API to feed Oracle Analytics Cloud or third-party BI tools",
+  "Native integration with Simphony POS and Oracle back-office/finance systems"
+ ],
+ "pricing": {
+  "text": "Custom enterprise pricing; Oracle does not publish prices for Simphony.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Current review calls it 'Oracle Food & Beverage Analytics'; Oracle's name is Simphony Reporting and Analytics (Oracle Restaurants / Food and Beverage, formerly MICROS). Website in current review (oracle.com/industries/food-beverage/) may redirect; product page used here. IMPORTANT: Oracle announced end of life for several Reporting and Analytics modules, including the Forecasting and Budget module, Financial Forms, Cost Tiers, Upload Interfaces and Templates, Enterprise Maintenance Services and the weather service integration (https://docs.oracle.com/en/industries/food-beverage/simphony/simrn/service_change_announcements.htm, date not confirmed); drop 'forecasting and trend analysis at scale' from the current review or qualify it. Features from Reporting and Analytics 20.3 release notes (https://docs.oracle.com/en/industries/food-beverage/simphony/simrn/reporting_and_analytics_20_3.htm, release date not confirmed) and Oracle's analytics page. Starbucks/Pret/Sonic come from a ~2022 Payments Dive article on Simphony POS (not specifically analytics); no 2025-2026 customer win found."
+}

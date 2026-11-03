@@ -1,0 +1,25 @@
+{"name": "Botpress",
+ "website": "https://botpress.com/",
+ "oneLiner": "AI agent platform for building, deploying and managing custom chatbots and support agents across web, messaging and voice channels, with a visual builder plus code-level control.",
+ "bestFor": "Restaurant groups with in-house developers or an agency partner that want a fully custom AI agent wired into their own POS, reservation and CRM systems, rather than an off-the-shelf restaurant tool.",
+ "customers": [
+  {"name": "Windstream", "source": "https://botpress.com/customers/windstream"},
+  {"name": "Able", "source": "https://botpress.com/customers/able"},
+  {"name": "Ruby Labs", "source": "https://botpress.com/customers/ruby-labs"}
+ ],
+ "updates": [
+  {"date": "2025-06", "text": "Raised a $25M Series B led by Framework Venture Partners, with Deloitte Ventures and HubSpot Ventures participating, to scale its infrastructure for production AI agents.", "source": "https://martechvibe.com/article/botpress-raises-25m-in-series-b-funding"},
+  {"date": "2026-05", "text": "Changed its pricing structure for new workspaces from May 14, 2026; existing workspaces keep the earlier plan-plus-AI-Spend model.", "source": "https://www.featurebase.app/blog/botpress-pricing"}
+ ],
+ "features": [
+  "Visual agent studio for designing conversation flows, with code hooks for custom logic",
+  "Autonomous LLM-driven agents that can call tools and APIs to complete tasks",
+  "Knowledge bases built from documents and websites to answer questions",
+  "One build deployed to web chat, WhatsApp, Messenger, Instagram, SMS and other channels",
+  "Prebuilt integrations and an integration hub, plus APIs for connecting POS, CRM or booking systems",
+  "Botpress Desk, a built-in AI helpdesk with human handoff that can also connect to Zendesk, Intercom and Freshdesk",
+  "Analytics and conversation logs for monitoring and improving agents"
+ ],
+ "pricing": {"text": "Free tier available; paid plans listed by third-party sources at about $89/month (Plus) and $495/month (Team), each plus AI usage, with custom Enterprise pricing. Pricing changed for new workspaces in May 2026, so confirm on botpress.com/pricing.", "source": "https://botpress.com/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Not restaurant-specific: Botpress is a general AI agent builder; no restaurant customer case study found. Customers listed are from Botpress's own case-study pages. Kia, Shell and Siemens are mentioned as customers in a 2023 Business Wire release and third-party reviews, but no Botpress case study was found, so they were left out. Dropped from current review: 'hundreds of thousands of agents deployed' (not re-verified) and the Hostie citation. The $89/month price is from third-party sites, and Botpress changed pricing for new workspaces on 2026-05-14; botpress.com could not be fetched to confirm current plan names and prices. Desk launch date not confirmed (docs say available on request for Team, Managed and Enterprise)."}

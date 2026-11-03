@@ -1,0 +1,35 @@
+{
+ "name": "Zonka Feedback",
+ "website": "https://www.zonkafeedback.com/",
+ "oneLiner": "Customer feedback and survey platform with AI analysis that collects NPS, CSAT and CES feedback across email, SMS, WhatsApp, web, kiosks and QR codes and turns it into themes, alerts and follow-up.",
+ "bestFor": "Restaurant groups and multi-location hospitality brands that want to run guest surveys across many channels, including in-store tablets and QR codes, and analyze open-text feedback.",
+ "customers": [
+  {
+   "name": "Jones the Grocer",
+   "source": "https://www.zonkafeedback.com/customer-stories"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025",
+   "text": "Launched AI Feedback Intelligence, which unifies feedback from surveys, chats, tickets and reviews and analyzes themes and sentiment; followed by a redesign into hubs including an Intelligence Hub and a Reputation Hub with Google review management.",
+   "source": "https://www.zonkafeedback.com/blog/zonka-feedbacks-year-in-review-2025"
+  }
+ ],
+ "features": [
+  "Surveys by email, SMS, WhatsApp, web, in-app, offline tablet kiosks and QR codes",
+  "NPS, CSAT and CES measurement with location-level dashboards",
+  "AI thematic and sentiment analysis of open-text responses",
+  "Real-time alerts and case management to close the loop with unhappy guests",
+  "Reputation hub with Google review management",
+  "Survey logic and pre-filled customer data to tie responses to orders or visits",
+  "Integrations with CRMs and help desks such as Salesforce, HubSpot and Zendesk, plus Zapier"
+ ],
+ "pricing": {
+  "text": "Not published; Zonka's own blog describes quote-based annual plans.",
+  "source": "https://www.zonkafeedback.com/blog/zonka-feedback-vs-qualtrics",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from current review: Starter $79 / Professional $149 / Growth $299 pricing and '7-day free trial' (no longer confirmed; third-party sites list $199 and $999/month plans, others say custom). Month of the AI Feedback Intelligence launch not confirmed (2025). No 2026 release found before search budget ran out. Jones the Grocer uses Zonka at 8 Dubai locations (tablet kiosks, online and email surveys). '50+ integrations' not re-checked."
+}

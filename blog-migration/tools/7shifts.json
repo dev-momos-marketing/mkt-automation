@@ -1,0 +1,26 @@
+{"name": "7shifts", "website": "https://www.7shifts.com/",
+ "oneLiner": "Restaurant-only workforce platform covering scheduling, time clocking, tip management, payroll and, since 2026, employee training.",
+ "bestFor": "Independent restaurants through multi-unit and franchise groups that want scheduling, labor-cost control, tips and payroll in one tool built for shift-based hospitality teams.",
+ "customers": [
+  {"name": "HCI Hospitality (Freddy's Frozen Custard & Steakburgers franchisee)", "source": "https://www.7shifts.com/blog/hci-freddys-case-study/"},
+  {"name": "Boston Pizza (Regina)", "source": "https://www.7shifts.com/blog/video-scheduling-boston-pizza-restaurant/"},
+  {"name": "Conshy Girls Restaurant Group", "source": "https://www.7shifts.com/blog/client-spotlight-conshy-girls/"},
+  {"name": "Pitango Gelato", "source": "https://www.7shifts.com/blog/pitango-gelato-case-study/"}
+ ],
+ "updates": [
+  {"date": "2025-07", "text": "Moved to a new plan lineup (free Comp, Essentials, Pro and Premium), effective July 2, 2025.", "source": "https://developers.7shifts.com/changelog/changes-to-7shifts-pricing-plans"},
+  {"date": "2026-09", "text": "Launched Employee Training: operators build courses and quizzes, assign them by role, department or location, and track completion inside the same app staff use for schedules. Included in the Premium plan.", "source": "https://www.7shifts.com/employee-training/"}
+ ],
+ "features": [
+  "Drag-and-drop scheduling with sales and labor forecasting",
+  "Mobile app for staff to swap shifts, set availability and message the team",
+  "Time clock with schedule enforcement through POS and payroll integrations",
+  "Labor budgeting and labor-cost reporting against sales",
+  "Tip pooling, tip management and payouts",
+  "Restaurant payroll as an add-on",
+  "Employee onboarding packages and in-app training courses",
+  "Task management and shift checklists for managers"
+ ],
+ "pricing": {"text": "Free Comp plan for one location with up to 15 employees. Paid plans per location per month billed annually: Essentials $39.99 (up to 30 employees), Pro $79.99, Premium $134.99 ($44.99 / $89.99 / $149.99 billed monthly). Enterprise is quoted. Payroll is billed separately. 14-day free trial of Pro.", "source": "https://www.7shifts.com/pricing/", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing page could not be fetched; prices come from search snippets of 7shifts.com (pricing and compare pages). A third-party tracker reported plan changes around late September/early October 2026 (including a Premium price cut), so re-check 7shifts.com/pricing before publishing. Dropped from current review: 'paid plans start at $29.99/month' (outdated), 'most widely adopted workforce management solution' (unverifiable), and customers Bareburger, Modern Market and Sauce Pizza & Wine (not confirmed in this research). A March 5, 2026 PR Newswire release reportedly named new enterprise partnerships with IHOP, HCI Hospitality, Boston Pizza Franchise Group and Hattie B's plus an ADP Workforce Now integration, but I only saw it through aggregator profiles (CB Insights, Fundz), so IHOP and Hattie B's are left out of customers. Employee Training launch date (Sep 9, 2026) comes from a PR Newswire headline listed by an aggregator. Scale claims (55,000 restaurant locations) are vendor-reported."}

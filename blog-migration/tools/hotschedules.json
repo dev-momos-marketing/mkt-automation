@@ -1,0 +1,27 @@
+{"name": "HotSchedules (Fourth)",
+ "website": "https://www.fourth.com/",
+ "oneLiner": "Restaurant employee scheduling and labor management software, now part of Fourth's workforce and inventory platform, with AI labor forecasting and the Fourth iQ manager app.",
+ "bestFor": "Multi-unit and enterprise restaurant groups that want AI demand forecasting, scheduling, time and attendance, and labor cost control in one system.",
+ "customers": [
+  {"name": "Noodles & Company", "source": "https://uk.fourth.com/case-study/noodles-company"},
+  {"name": "Texas Corral", "source": "https://fourth.com/case-study/texas-corral"},
+  {"name": "FreeRange Concepts", "source": "https://fourth.com/case-study/freerange-concepts-creates-success"},
+  {"name": "Snooze, an A.M. Eatery", "source": "https://www.fsrmagazine.com/industry-news/snooze-chooses-hotschedules-simplify-scheduling-and-reporting-600-employees-2/"}
+ ],
+ "updates": [
+  {"date": "2025-07", "text": "AI Forecast began factoring in ticketed local events such as concerts and plays near each location, on by default.", "source": "https://help.hotschedules.com/hc/en-us/articles/40396610065677-Q3-2025-July-September-US-Release-Summary"},
+  {"date": "2025-09", "text": "Fourth released Fourth iQ 2.0 with the iQ App, giving managers real-time recommendations and alerts across scheduling, HR and inventory on mobile, tablet or web.", "source": "https://www.businesswire.com/news/home/20250915841255/en/Fourth-Announces-the-Release-of-the-iQ-App-to-Supercharge-Manager-Performance"},
+  {"date": "2025-11", "text": "Fourth iQ 2.2 added alerts that help restaurant managers prevent inventory shortfalls from the iQ App.", "source": "https://www.businesswire.com/news/home/20251118470758/en"}
+ ],
+ "features": [
+  "AI labor forecasting from sales history, weather and local events",
+  "Demand-based schedule building with a schedule score for coverage and cost",
+  "Mobile app for shift swaps, availability, messaging and a shift marketplace",
+  "Time and attendance with labor law compliance controls",
+  "Labor budget tracking and scheduled-vs-actual reporting",
+  "Fourth iQ App with manager recommendations and alerts across workforce, HR and inventory",
+  "Connects to Fourth's inventory, HR and payroll modules and to restaurant POS systems"
+ ],
+ "pricing": {"text": "Custom pricing; not published.", "source": null, "checked": "2026-11"},
+ "status": "renamed",
+ "notes": "HotSchedules merged with Fourth in 2019 and now operates under the Fourth brand; HotSchedules remains the scheduling product name (hotschedules.com help center still live). Use fourth.com as the website. Customer counts conflict across sources (7,000 customers/120,000 locations vs 15,000+ customers), so left out. Vendor case-study percentages (e.g. 75% less scheduling time) left out. Snooze release date not confirmed. 'Pricing based on number of locations and selected modules' from current review not confirmed. No 2026 Fourth announcement found; an iQ 3.0 release was slated for early 2026 but not confirmed."}

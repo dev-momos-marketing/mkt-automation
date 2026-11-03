@@ -1,0 +1,20 @@
+{"name": "ClearCOGS", "website": "https://www.clearcogs.com/",
+ "oneLiner": "AI demand forecasting for restaurants that turns POS sales data into daily prep lists, ordering recommendations and alerts to cut food waste and overproduction.",
+ "bestFor": "Restaurants and multi-unit groups, especially on Toast, that lose margin to overproduction, spoilage and guesswork in daily prep and ordering.",
+ "customers": [],
+ "updates": [
+  {"date": "2025-04", "text": "Raised a $3.8 million seed round led by Closed Loop Partners to fund product development and customer acquisition.", "source": "https://restauranttechnologynews.com/2025/04/clearcogs-secures-3-8-million-to-help-restaurants-cut-waste-and-optimize-operations-with-ai-forecasting-engine/"},
+  {"date": "2025-09", "text": "Launched an open API that delivers its forecasts and prescriptive recommendations into restaurants' existing tools and workflows.", "source": "https://www.accessnewswire.com/newsroom/en/computers-technology-and-internet/clearcogs-api-brings-predictive-intelligence-to-restaurant-workfl-1078820"}
+ ],
+ "features": [
+  "AI demand forecasts by menu item built from POS sales history",
+  "Daily prep lists and par recommendations",
+  "Purchasing and ordering quantity recommendations",
+  "Alerts for likely stock-outs, price changes and unusual sales",
+  "Forecasts that also inform labor planning",
+  "Toast integration available through the Toast integrations marketplace",
+  "Open API to push forecasts into other restaurant systems"
+ ],
+ "pricing": {"text": "Custom pricing; ClearCOGS does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "No customers named publicly by the vendor or press could be confirmed from search results (search budget ran out before a dedicated customer search); leave customers out of the review. Toast support article 'Get Started with the ClearCOGS Integration' (https://support.toasttab.com/article/Get-Started-with-the-ClearCOGS-Integration, last updated 2026-03) confirms the Toast integration and mentions an SMB product with top-item forecasts and out-of-stock, price-change and unusual-sales reports. Sources disagree on HQ (Chicago vs Philadelphia area). Dropped from current review: 'typically a monthly subscription that scales with number of locations' (unverified)."}

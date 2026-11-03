@@ -1,0 +1,23 @@
+{"name": "Slang AI", "website": "https://www.slang.ai/",
+ "oneLiner": "Voice AI phone host for restaurants: answers every call, handles questions and reservations, and connects to reservation and event platforms; its Superhost product (Oct 2026) adds guest memory for full-service restaurants.",
+ "bestFor": "Full-service and reservation-driven restaurants and groups that miss calls during service and want an AI host that handles reservations and questions, rather than live phone ordering.",
+ "customers": [
+  {"name": "Gusto54 Restaurant Group", "source": "https://www.webull.com/news/15695286279685120"}
+ ],
+ "updates": [
+  {"date": "2026-02", "text": "Raised a $36M Series B led by US Venture Partners (total funding $68M); Slang said it served 2,000+ restaurant locations.", "source": "https://slang.ai/press-releases/slang-ai-raises-36m-series-b"},
+  {"date": "2026-10", "text": "Launched Superhost for full-service restaurants: remembers prior conversations, preferences and visit history, follows restaurant-set policy controls, and speaks nearly 100 languages.", "source": "https://www.webull.com/news/15695286279685120"}
+ ],
+ "features": [
+  "Answers every inbound call 24/7 in a natural voice",
+  "Handles common questions (hours, location, menu, policies)",
+  "Takes and changes reservations through OpenTable, SevenRooms and Yelp integrations",
+  "Routes private-event inquiries (Tripleseat integration) and hands off to staff when needed",
+  "Texts callers links, e.g. to online ordering, instead of taking orders by voice",
+  "Superhost guest memory: recognizes regulars and their preferences",
+  "Restaurant-defined policy controls and custom greetings",
+  "Call analytics and summaries"
+ ],
+ "pricing": {"text": "Custom pricing; Slang AI does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "slang.ai could not be fetched. Dropped from the current review: 'tiered subscription plans starting at a flat monthly rate' (no published pricing found; a third-party analysis cites $450-600/location/month, unverified). A third-party review says Slang's own comparison table lists live voice ordering as 'not currently offered', so do not describe it as taking phone orders. Vendor-reported stats (25M+ calls, 95%+ guest satisfaction) are Slang's own figures. Superhost release (Oct 5, 2026 via PR Newswire) quoted via Webull syndication; language count reported as 'nearly 100' or 97. Only one named customer confirmed (Gusto54); search budget ran out before more could be checked."}

@@ -1,0 +1,25 @@
+{"name": "AskNicely", "website": "https://www.asknicely.com/",
+ "oneLiner": "Customer experience platform for multi-location service businesses: NPS/CSAT surveys sent after each visit, feedback routed to the frontline staff who served the customer, reputation management, and NiceAI analysis and agents.",
+ "bestFor": "Multi-location service brands (including hospitality) that want guest feedback to reach and coach individual frontline staff, not only head office. Not restaurant-specific; restaurant-focused tools such as Ovation are closer fits for many operators.",
+ "customers": [
+  {"name": "Cinch Home Services", "source": "https://asknicely.com/customers"},
+  {"name": "Century Fire Protection", "source": "https://asknicely.com/customers"},
+  {"name": "IntelliShift", "source": "https://vocalvideo.com/v/asknicely-customer-impact-kate-mcqueen"}
+ ],
+ "updates": [
+  {"date": "2026-03", "text": "Launched Ask NiceAI, a conversational AI interface inside the platform for asking questions of customer feedback data.", "source": "https://letsdatascience.com/news/asknicely-launches-ask-niceai-for-cx-699048ee"},
+  {"date": "2026-04", "text": "Launched Reputation Manager, which brings private survey responses, public online reviews and listing data into one system, with review requests and monitoring across review sites.", "source": "https://www.cmswire.com/the-wire/asknicely-launches-reputation-manager-to-turn-feedback-into-visibility-lower-costs-and-growth/"},
+  {"date": "2026-06", "text": "Added two AI agents: an Insights Agent that detects issues and trends and sends scheduled summaries to Slack or email, and a Response Agent that drafts replies to online reviews.", "source": "https://www.cmswire.com/the-wire/asknicely-launches-ai-agents-to-automate-customer-insights-and-reputation-management"}
+ ],
+ "features": [
+  "NPS, CSAT and other short surveys sent by email or SMS right after a visit or service",
+  "Feedback and mentions delivered to the individual staff member through a mobile app",
+  "Staff scorecards, leaderboards and coaching tools for frontline teams",
+  "Ask NiceAI: ask questions of feedback in plain language; theme and sentiment analysis of comments",
+  "Reputation Manager: review requests, review monitoring and listings alongside private survey data",
+  "AI agents that surface trends and draft responses to public reviews",
+  "Integrations with CRM, help desk and messaging tools (for example Salesforce, HubSpot, Zendesk, Slack)"
+ ],
+ "pricing": {"text": "Plans (Learn, Grow, Transform) priced by response volume and billed annually; NiceAI is an optional add-on. Search snippets of AskNicely's pricing page show Learn from $449/month billed annually, but third-party sources describe pricing as contact-sales, and the page could not be opened to confirm. Safest wording: pricing on request / starting price listed on asknicely.com/prices.", "source": "https://asknicely.com/prices", "checked": "2026-11"},
+ "status": "active",
+ "notes": "asknicely.com could not be fetched (host not allowed in this session); facts come from search results. No restaurant customer could be confirmed: the named customers are home services, fire protection and fleet software, so the review should not imply restaurant references. Dropped from current review: 'above-average response rates' (unverified) and '30+ native integrations' (count not confirmed). Updates dated by press-release date (Ask NiceAI 2026-03-30, Reputation Manager 2026-04-28, AI agents 2026-06-02). Pricing-page figures are unconfirmed; recheck before quoting a number."}

@@ -1,0 +1,48 @@
+{
+ "name": "Hi Auto",
+ "website": "https://hi.auto/",
+ "oneLiner": "Israeli-founded voice AI company whose AI order taker answers the drive-thru speaker, takes the order into the POS and upsells, built specifically for noisy drive-thru lanes.",
+ "bestFor": "Quick-service chains with high-volume drive-thrus that want automated, branded voice ordering across many stores.",
+ "customers": [
+  {
+   "name": "Bojangles",
+   "source": "https://www.restaurantdive.com/news/hi-auto-bojangles-expand-extend-600-stores-voice-ai/833707/"
+  },
+  {
+   "name": "Checkers & Rally's",
+   "source": "https://www.qsrmagazine.com/operations/technology/checkers-and-rallys-adds-spanish-voice-to-ai-drive-thru-ordering/"
+  },
+  {
+   "name": "Lee's Famous Recipe Chicken",
+   "source": "https://www.restaurantdive.com/news/hi-auto-window-intelligence-lees-famous-recipe-chicken/817723/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026",
+   "text": "Bojangles extended its partnership for multiple years and plans to add Hi Auto voice AI to 100 more drive-thrus by mid-2027 (on top of about 500), adding upsells that adjust to drive-thru queue length.",
+   "source": "https://www.restaurantdive.com/news/hi-auto-bojangles-expand-extend-600-stores-voice-ai/833707/"
+  },
+  {
+   "date": "2025",
+   "text": "Hi Auto said its system passed 100 million drive-thru orders a year across its customers.",
+   "source": "https://techbullion.com/voice-ai-goes-big-hi-auto-hits-100-million-orders/"
+  }
+ ],
+ "features": [
+  "AI order taking at the drive-thru speaker post",
+  "Noise handling tuned for drive-thru conditions",
+  "Order injection into the POS and kitchen display",
+  "Automated upselling, including suggestions based on queue length",
+  "Spanish-language ordering",
+  "Custom branded voice personas (for example Bojangles' 'Bo-Linda')",
+  "Pickup-window monitoring product (Window Intelligence), in beta with brands including Lee's"
+ ],
+ "pricing": {
+  "text": "Not published; custom pricing.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Update dates: the Bojangles extension is recent Restaurant Dive coverage (exact month not confirmed, likely 2026); the 100M-orders milestone was reported in 2025 (per current review) via TechBullion. A $15M Series A in April 2025 appears only on secondary pages and was not used. Dropped from current review: '96% order accuracy and 90%+ completion' (vendor figures vary between sources: 93-98%). Burger King New Zealand and Popeyes UK are named as customers in press summaries but no primary source was checked. Bojangles is also adding Spanish ordering across drive-thru, kiosk and app."
+}

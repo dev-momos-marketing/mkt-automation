@@ -1,0 +1,24 @@
+{
+ "name": "xtraCHEF by Toast",
+ "website": "https://pos.toasttab.com/products/xtrachef",
+ "oneLiner": "Toast's back-office tool for invoice automation, recipe costing and inventory, tying supplier costs to Toast POS sales data.",
+ "bestFor": "Restaurants already on Toast POS that want to stop keying invoices and track food cost and recipe margins.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Invoice automation: capture supplier invoices and extract line-item costs",
+  "Recipe and menu costing with prep/sub-recipes, yields and unit conversions (Pro)",
+  "Inventory management and counts (Pro)",
+  "Actual-vs-theoretical food cost variance reporting",
+  "Vendor management, ordering and product catalogs",
+  "Uses Toast POS sales data to connect costs to what sold",
+  "Accounting integrations for invoice and cost data"
+ ],
+ "pricing": {
+  "text": "Toast does not publish xtraCHEF prices; sold in Essentials and Pro tiers through Toast sales. Invoice automation is in both tiers, recipe costing and inventory only in Pro.",
+  "source": "https://support.toasttab.com/en/article/xtraCHEF-101",
+  "checked": "2026-11"
+ },
+ "status": "acquired",
+ "notes": "Acquired by Toast in 2021; still sold as 'xtraCHEF by Toast' (no rebrand found). No dated 2025 or 2026 xtraCHEF announcement found; a '10.4' release with an Inventory by COGS report and recipe variance prime-cost breakdown is mentioned on xtrachef.com/resources but undated. No named customers found (search budget ran out before a customer search). Third-party price estimates ($149-$349/month, $1,049 onboarding) conflict and are unverified; dropped. Sources disagree on whether xtraCHEF works without Toast POS; Toast positions it with Toast POS data. 'Accounting integration' carried from the current review, not re-verified. Website updated from toasttab.com/xtrachef to Toast's product page."
+}

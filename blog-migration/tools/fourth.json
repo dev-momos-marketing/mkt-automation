@@ -1,0 +1,23 @@
+{"name": "Fourth", "website": "https://www.fourth.com/",
+ "oneLiner": "Back-office platform for restaurants and hospitality covering workforce management (HotSchedules scheduling, time and attendance, HR and payroll), inventory and purchasing, and the Fourth iQ AI layer for forecasting and manager recommendations.",
+ "bestFor": "Multi-unit and enterprise restaurant groups that want labor, inventory and AI forecasting in one back-office suite.",
+ "customers": [
+  {"name": "Bar Louie", "source": "https://www.businesswire.com/news/home/20240912087030/en/Fourth-announces-the-release-of-Fourth-iQ-enabling-restaurants-to-embrace-AI-to-maximize-profits-at-every-location."}
+ ],
+ "updates": [
+  {"date": "2025-11", "text": "Fourth iQ 2.2 added AI recommendations in the iQ manager app to catch inventory shortfalls early, plus workforce recommendations for compliance and less manual admin.", "source": "https://www.fourth.com/press-release/fourth-iq-2-2-launch"},
+  {"date": "2026-01", "text": "Fourth iQ 2.3 added AI workforce alerts: spikes in early employee exits, which job boards bring the most hires, low schedule-compliance scores, and gaps between the AI and manager sales forecasts.", "source": "https://www.fsrmagazine.com/industry-news/fourth-launches-iq-2-3-with-ai-powered-workforce-alerts-for-restaurants/"},
+  {"date": "2026-03", "text": "Appointed Scott Collison, former CEO of Personify and Anaconda, as CEO to lead AI-led product development; Fourth is backed by Marlin Equity Partners. Fourth iQ 3.0, adding above-store AI views for senior leaders, was announced around the same time.", "source": "https://www.fsrmagazine.com/industry-news/fourth-hires-scott-collison-as-ceo/"}
+ ],
+ "features": [
+  "AI sales and labor demand forecasting (Fourth iQ)",
+  "iQ mobile app with next-best-action recommendations for store managers",
+  "Above-store AI views for area and senior leaders (iQ 3.0)",
+  "Employee scheduling and team app (HotSchedules)",
+  "Time and attendance, HR, recruiting and payroll services",
+  "Labor-law and schedule compliance alerts",
+  "Inventory, purchasing and recipe costing with AI inventory alerts"
+ ],
+ "pricing": {"text": "Custom pricing; Fourth does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "fourth.com could not be fetched; facts come from search results of Fourth press releases and trade press. Fourth's company boilerplate (seen in search summaries) cites 15,000+ customers and 100,000+ locations and names Chili's, Whataburger, Dunkin', Pizza Hut and Texas Roadhouse, but the exact source page could not be pinned down before the search budget ran out, so they are not listed as customers; verify on a fourth.com press release before using. Bar Louie (63 locations) is named in a September 2024 Fourth iQ release. iQ 2.3 Business Wire URL is dated 2026-01-14. iQ 3.0 exact launch date not confirmed (early 2026). Dropped from current review: Qdoba and Smokey Bones as clients (not confirmed) and 'Chili's reported a 20% improvement in scheduling accuracy' (unverified)."}

@@ -1,0 +1,25 @@
+{"name": "Chattermill", "website": "https://chattermill.com/",
+ "oneLiner": "Customer experience intelligence platform that unifies feedback from surveys, reviews, support conversations and social media and analyzes it with its own AI, Lyra.",
+ "bestFor": "Large consumer brands, including multi-country restaurant and hospitality groups, with high feedback volume across many channels and an insights or CX team to act on it.",
+ "customers": [
+  {"name": "HelloFresh", "source": "https://chattermill.com/blog/hellofresh-operations"},
+  {"name": "Uber", "source": "https://www.casestudies.com/company/chattermill"},
+  {"name": "Wise", "source": "https://www.casestudies.com/company/chattermill"},
+  {"name": "Limehome", "source": "https://www.g2.com/products/chattermill/reviews"}
+ ],
+ "updates": [
+  {"date": "2025-09", "text": "Introduced Observations and Highlights (proactive surfacing of changes in feedback) and Ask Lyra, a natural-language interface for questioning customer feedback data.", "source": "https://chattermill.com/newsroom"}
+ ],
+ "features": [
+  "Brings surveys, NPS, app and public reviews, support tickets and social comments into one dataset",
+  "Lyra AI tags themes and sentiment per topic, going beyond keyword matching",
+  "Ask Lyra: ask questions about feedback in plain language",
+  "Observations and Highlights that flag emerging issues and shifts automatically",
+  "Segmentation by market, location, customer type or time period",
+  "Role-based dashboards and reporting for different teams",
+  "APIs and MCP support so AI agents and other tools can work with the analyzed data",
+  "Lyra Agent (early preview): an AI agent that runs automated analysis across the platform"
+ ],
+ "pricing": {"text": "Custom pricing; Chattermill does not publish prices.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "No restaurant customer named publicly was found; closest hospitality customer is Limehome (serviced apartments), via a case study listed on G2. A chattermill.com testimonial mentions restaurant satisfaction by country and city but the company is not clear, so not used. Deliveroo appears only in older funding press as a client, not used. Uber and Wise case study titles come from casestudies.com; verify on chattermill.com/customers. Lyra Agent launch is undated (early-access page https://chattermill.com/lyra-agent-early-access and a LinkedIn post), so it is a feature, not a dated update. Original review had no stats to drop. Fit note: enterprise CX analytics rather than a restaurant-specific tool."}

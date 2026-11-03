@@ -1,0 +1,47 @@
+{
+ "name": "Tenzo",
+ "website": "https://www.gotenzo.com/",
+ "oneLiner": "London-based restaurant reporting and forecasting platform that pulls POS, labor, inventory, reservation and review data into one dashboard.",
+ "bestFor": "Multi-site restaurant operators in the UK and US that want consolidated performance reporting and AI sales forecasting on top of their existing systems.",
+ "customers": [
+  {
+   "name": "Lettuce Entertain You",
+   "source": "https://www.refreshmentmag.com/news/tenzo-secures-5m-series-a-extension-to-scale-hospitality-analytics-platform"
+  },
+  {
+   "name": "PrimoHoagies",
+   "source": "https://www.refreshmentmag.com/news/tenzo-secures-5m-series-a-extension-to-scale-hospitality-analytics-platform"
+  },
+  {
+   "name": "Parker Restaurant Group",
+   "source": "https://www.refreshmentmag.com/news/tenzo-secures-5m-series-a-extension-to-scale-hospitality-analytics-platform"
+  },
+  {
+   "name": "Pizza Pilgrims",
+   "source": "https://www.gotenzo.com/resources/insight/tenzo-announces-new-project-set-to-save-the-uk-restaurant-industry-100-million-by-2025-with-innovate-uk/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-04",
+   "text": "Raised a $5M first close of a Series A extension led by Edge VC, to double its integrations over 18 months and grow in the US; appointed Jane O'Riordan as board chair.",
+   "source": "https://www.refreshmentmag.com/news/tenzo-secures-5m-series-a-extension-to-scale-hospitality-analytics-platform"
+  }
+ ],
+ "features": [
+  "One dashboard for POS sales, labor, inventory, reservations and reviews",
+  "Machine learning sales forecasts that factor in weather, holidays and local events",
+  "Forecasts pushed into scheduling tools such as Planday and Deputy",
+  "Location benchmarking to spot top and underperforming sites",
+  "Automated daily and weekly performance reports",
+  "MCP connector so teams can query Tenzo data from AI assistants",
+  "Large integration library across POS, labor and inventory systems"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Tenzo does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from current review: 'entry-level plans in the low hundreds per location per month' (no source). '70+ integrations' appears only on a third-party review site (restauranttools.ai), not confirmed on Tenzo's site. Tenzo's '30-50% more accurate than rolling averages' forecast claim is self-reported. Pizza Pilgrims (and Nando's, The Fat Duck) come from a ~2020 Tenzo announcement, so may be dated. Sona integration mentioned by one listing, unverified. MCP connector from gotenzo.com homepage (date not confirmed). Tenzo is analytics/forecasting only, with no inventory counting or recipe costing (third-party review)."
+}

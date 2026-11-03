@@ -1,0 +1,44 @@
+{
+ "name": "MarketMan",
+ "website": "https://www.marketman.com/",
+ "oneLiner": "Cloud inventory, purchasing and food cost platform for restaurants, covering counts, recipe costing, supplier ordering and invoice processing.",
+ "bestFor": "Independent restaurants and multi-unit groups that want tighter control of inventory, purchasing and food cost, including Square sellers via the Square integration.",
+ "customers": [
+  {
+   "name": "Westville Restaurant Group",
+   "source": "https://www.marketman.com/case-study/how-westville-restaurant-group-uses-marketman-to-streamline-the-order-process"
+  },
+  {
+   "name": "ATFC, Ltd.",
+   "source": "https://www.marketman.com/case-study/hospitality-group-atfc-ltd-battles-rising-food-costs-with-marketman"
+  },
+  {
+   "name": "Taco del Mar (multi-unit franchisee)",
+   "source": "https://www.marketman.com/case-study/how-taco-del-mar-lowered-cogs-by-3-percent"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-04",
+   "text": "Square launched Square Restaurant Inventory by MarketMan globally, bringing ingredient and recipe management, purchase orders, vendor management, invoice scanning and waste tracking into the Square platform.",
+   "source": "https://squareup.com/ca/en/press/square-restaurant-inventory-marketman"
+  }
+ ],
+ "features": [
+  "Real-time inventory tracking and counts by location",
+  "Recipe and menu costing linked to current ingredient prices",
+  "Automated purchase orders and supplier ordering",
+  "Invoice scanning with automatic price updates and price-change alerts",
+  "Waste tracking and loss trends",
+  "POS and accounting integrations, including Square",
+  "Multi-location reporting on food cost and COGS",
+  "API access add-on for larger groups"
+ ],
+ "pricing": {
+  "text": "Not confirmed on MarketMan's site in this research; third-party trackers list Starter and Growth plans per location and report price increases in August 2026. Ask MarketMan for a quote.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from current review: 'approximately $239/month per location' (third-party sources conflict: $199-$299 Starter/Growth, Enterprise from $449; a tracker reports Aug 2026 price hikes). Dropped Bareburger, Dickey's Barbecue Pit and Thunderbird Food & Drink as customers (not re-confirmed). Customer stories found are vendor case studies, mostly undated. Third-party reviews are mixed (Capterra 4.7; another aggregator reports stability complaints)."
+}

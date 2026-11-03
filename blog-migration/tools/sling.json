@@ -1,0 +1,24 @@
+{
+ "name": "Sling (Sling by Toast)",
+ "website": "https://getsling.com/",
+ "oneLiner": "Employee scheduling, time tracking and team messaging app for shift-based businesses, owned by Toast and sold standalone or inside Toast as Sling by Toast.",
+ "bestFor": "Independent restaurants, cafes and small chains that want low-cost scheduling and team communication, especially Toast POS users.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Drag-and-drop shift scheduling with templates",
+  "Open shifts, shift swaps, availability and time-off requests",
+  "Time clock with clock in/out (paid plans)",
+  "Labor cost tracking and overtime management (paid plans)",
+  "Team messaging, newsfeed and tasks",
+  "Mobile app with shift alerts",
+  "Toast integration that syncs employees, wages, positions and POS sales into schedules"
+ ],
+ "pricing": {
+  "text": "Free plan for scheduling (capped at 30 users for accounts not created through Toast). Premium $2.00 and Business $4.00 per user per month, or $1.70 and $3.40 billed annually (15% annual discount); 15-day trial on paid plans. Toast customers get Sling Lite ('Scheduling Basics') in every Toast POS package and buy Sling Pro through Toast Shop.",
+  "source": "https://getsling.com/pricing/",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Acquired by Toast in 2021 (https://pos.toasttab.com/th-us/news/toast-acquires-sling-to-expand-its-team-management-suite); now branded 'Sling by Toast' inside Toast, and scheduling in Toast Web is a version of Sling. Price figures come from search snippets of getsling.com/pricing that may be dated; confirm before publishing. Some pages mention a 50-user free tier, conflicting with the 30-user cap. No public customer names or dated 2025-2026 product updates found before the search budget ran out (Toast help articles updated 2026 describe the integration). Current review's pricing matches the annual rates found."
+}

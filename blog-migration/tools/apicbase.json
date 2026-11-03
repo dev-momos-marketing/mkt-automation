@@ -1,0 +1,23 @@
+{"name": "Apicbase", "website": "https://www.apicbase.com/",
+ "oneLiner": "Back-of-house management platform for multi-site foodservice businesses, covering recipes and menu costing, inventory, purchasing and production, which Apicbase now describes as AI-powered.",
+ "bestFor": "Multi-unit restaurant groups, hotel F&B operations and central kitchens that want one system for recipes, food cost, stock and supplier ordering across sites.",
+ "customers": [
+  {"name": "Poule & Poulette", "source": "https://www.casestudies.com/company/apicbase"},
+  {"name": "Pentahotels", "source": "https://www.casestudies.com/company/apicbase"},
+  {"name": "The Avocado Show", "source": "https://www.casestudies.com/company/apicbase"}
+ ],
+ "updates": [
+  {"date": "2025-11", "text": "Hosted APX·25 (Apicbase Partnerships Experience), a new flagship event for hospitality, foodservice and technology executives.", "source": "https://www.eventbrite.be/e/apx25-apicbase-partnerships-experience-2025-registration-1473072502509"}
+ ],
+ "features": [
+  "Central recipe and ingredient library with automatic recipe and menu costing",
+  "Menu engineering and allergen information drawn from recipe data",
+  "Inventory counts and stock levels across locations",
+  "Supplier management and purchase ordering",
+  "Production planning for central kitchens and multi-outlet operations",
+  "Sales-based forecasting and food cost reporting across sites",
+  "Integrations with POS and ordering systems, including Square and Deliverect"
+ ],
+ "pricing": {"text": "Custom pricing; Apicbase does not publish prices. Quotes depend on the number of locations and modules.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Web search budget limited this research; apicbase.com could not be fetched. Customers come from casestudies.com, which indexes Apicbase's own case studies (Poule & Poulette multi-unit operations, Pentahotels multi-property menu rollouts, The Avocado Show inventory variance); verify on apicbase.com before citing details. No dated 2025-2026 product release was found; Apicbase exhibited at Hospitality Tech Expo, ExCeL London, 29-30 Sept 2026 (no source URL captured), and Partnerbase lists a Vita Mojo partnership (aggregator only, not used). The APX·25 date is from an Eventbrite listing (Nov 27). Integrations are from Square App Marketplace and Deliverect integration pages. Forecasting is from a 2021 funding article; the 'AI-powered' positioning is current per Apicbase's expo description, but specific AI features are unconfirmed. Original review had no stats to drop."}

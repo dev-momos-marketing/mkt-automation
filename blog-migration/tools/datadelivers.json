@@ -1,0 +1,24 @@
+{"name": "DataDelivers",
+ "website": "https://datadelivers.com/",
+ "oneLiner": "Restaurant-specific customer data platform that unifies POS, loyalty, online ordering and reservation data and matches anonymous card transactions to marketable guest profiles (Guest Connect).",
+ "bestFor": "Mid-sized and multi-unit restaurant brands that want to reach and measure the guests who are not in their loyalty program.",
+ "customers": [
+  {"name": "TGI Fridays", "source": "https://www.restaurantnews.com/tgi-fridays-taps-datadelivers-for-in-depth-customer-analytics-091322/"},
+  {"name": "Primanti Bros.", "source": "https://www.fsrmagazine.com/industry-news/primanti-bros-uses-datadelivers-platform-target-non-loyalty-members/"},
+  {"name": "Kahala Brands (Cold Stone Creamery)", "source": "https://hospitalitytech.com/how-kahala-brands-identifying-non-loyalty-members"}
+ ],
+ "updates": [
+  {"date": "2025", "text": "Published its 2025 Restaurant Guest Engagement Report on guest retention, based on data from tens of millions of guests across 2,000+ restaurant locations.", "source": "https://datadelivers.com/insights/2025-restaurant-guest-engagement-report/"}
+ ],
+ "features": [
+  "Ingests and unifies POS, loyalty, e-club, online ordering and reservation data into one guest view",
+  "Guest Connect matches anonymous credit card and POS transactions against a proprietary consumer dataset to build profiles of non-loyalty guests",
+  "Appends data to fill gaps in thin guest records",
+  "Segmentation and audience building for targeted email and digital campaigns",
+  "Prospect targeting for new restaurant openings",
+  "Campaign measurement tying marketing to visits and sales",
+  "Integrations with common restaurant POS, loyalty, email and ordering providers (including an Olo partnership)"
+ ],
+ "pricing": {"text": "Custom pricing; not published.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Customer coverage is from 2022-2024 trade press; no 2026 press release found. Update month for the 2025 report could not be confirmed (date given as year only). Guest/transaction counts differ between the 2025 and 2026 reports in search results, so left out. Vendor claims such as 'only 15-20% of guests are in loyalty programs' are self-reported and left out. 'Custom pricing based on data volume' in the current review could not be confirmed; changed to custom pricing. Bebee lists Baja Fresh, Taco Time, Planet Smoothie and Sweet Frog as clients, but that source is weak, so left out."}

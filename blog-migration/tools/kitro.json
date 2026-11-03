@@ -1,0 +1,56 @@
+{
+ "name": "KITRO",
+ "website": "https://www.kitro.ch/",
+ "oneLiner": "Swiss AI food waste tracker: a camera-and-scale device over the bin captures and classifies discarded food automatically, with dashboards for kitchen teams.",
+ "bestFor": "Hotels, resorts, buffets and high-volume catering kitchens measuring food waste for cost and ESG reporting; less suited to quick-service restaurants.",
+ "customers": [
+  {
+   "name": "Marriott International",
+   "source": "https://www.kitro.ch/case-studies/marriott-international"
+  },
+  {
+   "name": "Hyatt",
+   "source": "https://www.kitro.ch/case-studies/hyatt"
+  },
+  {
+   "name": "Pestana (Algarve hotel)",
+   "source": "https://grandeconsumo.com/en/Swiss-company-Kitro-enters-Portugal-to-reduce-food-waste-in-hotels-and-restaurants./"
+  },
+  {
+   "name": "Hyatt Inclusive Collection",
+   "source": "https://hotelinteractive.com/ai-food-waste-technology-gains-traction-with-hotel-operators/"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025",
+   "text": "Became a preferred partner of Marriott International, supporting Marriott's goal to halve food waste.",
+   "source": "https://www.kitro.ch/case-studies/marriott-international"
+  },
+  {
+   "date": "2026-02",
+   "text": "Published a Hyatt EAME case study reporting over EUR 1.7M saved and a 31% cut in food waste across properties (vendor-reported).",
+   "source": "https://www.kitro.ch/case-studies/hyatt"
+  },
+  {
+   "date": "2026-05",
+   "text": "Entered Portugal, starting with a flagship Pestana hotel in the Algarve.",
+   "source": "https://grandeconsumo.com/en/Swiss-company-Kitro-enters-Portugal-to-reduce-food-waste-in-hotels-and-restaurants./"
+  }
+ ],
+ "features": [
+  "In-bin device that photographs and weighs each disposal automatically, no manual logging",
+  "AI classification of waste by food type and edible vs inedible",
+  "Cost values per food category so waste is shown in money as well as weight",
+  "Dashboards and reports for chefs to adjust purchasing, production and buffet sizing",
+  "Sustainability and ESG reporting, relevant to EU food waste rules",
+  "Device rental on a monthly subscription, with a free assessment offered"
+ ],
+ "pricing": {
+  "text": "Business plan from CHF 349 per month for a single kitchen; Enterprise plan is custom-priced based on operational complexity. Discounts depend on contract length, property size and number of units.",
+  "source": "https://www.kitro.ch/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Marriott preferred partnership is dated 2025 with no month. Dropped from current review: 'reduces avoidable food waste by up to 60%' and 'lifts food profit margin by up to 8%' (vendor claims; an independent ScienceDirect study of HORECA sites found 23-51% reductions: https://www.sciencedirect.com/science/article/pii/S0956053X25001072), Four Seasons as a client (not confirmed), and 'onboarding in 2-4 weeks' (not confirmed). Company-reported totals (EUR 13M saved, 4.1M meals) in Hotel Interactive June 2026 are vendor figures. A third-party review says the multi-location central dashboard was not live at the time; confirm before claiming it. Customer base is hotels; weak fit for a QSR post (the current review already says so)."
+}

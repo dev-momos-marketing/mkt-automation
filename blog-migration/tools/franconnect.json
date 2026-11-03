@@ -1,0 +1,58 @@
+{
+ "name": "FranConnect",
+ "website": "https://www.franconnect.com/",
+ "oneLiner": "Franchise and multi-location management platform covering franchise development, onboarding, training, field operations, royalties and franchisee support, with Frannie AI agents.",
+ "bestFor": "Franchisors and multi-unit restaurant brands that want one system for the franchisor-franchisee relationship, from recruiting candidates to audits and royalties.",
+ "customers": [
+  {
+   "name": "Tropical Smoothie Cafe",
+   "source": "https://www.franconnect.com/en/customers/testimonials/"
+  },
+  {
+   "name": "Capriotti's",
+   "source": "https://www.franconnect.com/en/customers/testimonials/"
+  },
+  {
+   "name": "Papa Johns",
+   "source": "https://www.franconnect.com/en/company/about-us/"
+  },
+  {
+   "name": "Subway",
+   "source": "https://finance.yahoo.com/news/franconnect-achieves-record-breaking-bookings-151100691.html"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-01",
+   "text": "Launched Frannie AI, a suite of generative AI agents for franchise sales, operations, finance and training, later rolled out to Australian customers as a subscription.",
+   "source": "https://bradfordera.com/2025/01/09/franconnect-unveils-a-suite-of-ai-agents-empowering-franchises-and-multi-location-businesses-with-generative-ai-bots-that-automate-critical-business-outcomes"
+  },
+  {
+   "date": "2026-07",
+   "text": "Added a Candidate Coach AI assistant for franchise development, standardized project tracking for operations, and access to Training & Development (World Manager) inside the FranConnect app.",
+   "source": "https://help.franconnect.com/hc/en-us/articles/51910200448411-July-2026-Release-Updates"
+  },
+  {
+   "date": "2026-10",
+   "text": "Franchisee Support Agent that answers franchisee questions with citations from the brand's approved Hub content (listed as upcoming in the October 2026 release notes; a mobile version of the support agent shipped in May 2026).",
+   "source": "https://help.franconnect.com/hc/en-us/articles/56130474199579-October-2026-Release-Update-Upcoming-Release"
+  }
+ ],
+ "features": [
+  "Franchise development CRM for candidate leads and deal pipeline, with an AI candidate coach",
+  "New-unit onboarding and opening project tracking",
+  "Training and learning content (World Manager) inside the app",
+  "Field operations: audits, inspections and corrective tasks linked to audit questions",
+  "Royalty reporting plus AR aging and collections dashboards",
+  "Franchisee communication hub and AI support agent with cited answers",
+  "Marketing campaign dashboard and combined lead/unit map",
+  "Integrations with HubSpot, Salesforce, QuickBooks and POS systems"
+ ],
+ "pricing": {
+  "text": "Custom pricing; FranConnect does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Active and shipping monthly releases (help.franconnect.com release notes Feb-Oct 2026). CEO Gabby Wong (IFA 2026 event page). Subway is from FranConnect's Jan 2025 release on 2024 results ('welcomed three of the largest global franchise concepts, including Subway'); current use not reconfirmed. FranConnect says it works with nearly 1,500 multi-location brands (self-reported). Dropped from current review: '1.3 million locations', 'over 20 years', and the unverified restaurant list Wing Zone/QDOBA/Taco John's/Tijuana Flats/HOA Brands (Wing Zone appears with Capriotti's on the testimonials page; the others were not confirmed). Integration list (HubSpot, QuickBooks, Salesforce) carried from the current review, not re-verified. Fits franchisors more than single-brand operators."
+}

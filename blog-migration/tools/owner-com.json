@@ -1,0 +1,53 @@
+{
+ "name": "Owner.com",
+ "website": "https://www.owner.com/",
+ "oneLiner": "All-in-one platform for independent restaurants: AI-built website, commission-free online ordering, branded app, automated marketing and loyalty, and now POS and AI phone ordering.",
+ "bestFor": "Independent and small multi-location restaurants that want more direct, commission-free orders and less reliance on third-party delivery apps.",
+ "customers": [
+  {
+   "name": "Saffron Indian Restaurant",
+   "source": "https://www.owner.com/case-studies/saffron"
+  },
+  {
+   "name": "Goi Cuon",
+   "source": "https://www.owner.com/case-studies/goi-cuon"
+  },
+  {
+   "name": "Doo-Dah Diner",
+   "source": "https://www.owner.com/case-studies/doo-dah-diner"
+  },
+  {
+   "name": "Township Line Pizza",
+   "source": "https://www.owner.com/case-studies/township-line-pizza"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-08",
+   "text": "Raised a $240M Series D led by Goldman Sachs Alternatives at a $2.3B valuation, to expand from restaurant ordering and marketing into an AI operating system for local businesses.",
+   "source": "https://am.gs.com/en-au/advisors/news/press-release/2026/owner-raises-240m-gs-alts"
+  },
+  {
+   "date": "2026-08",
+   "text": "Product scope now includes a restaurant POS and AI phone ordering that takes real orders by phone, alongside websites, ordering and marketing.",
+   "source": "https://siliconangle.com/2026/08/28/owner-raises-240m-for-its-restaurant-management-platform/"
+  }
+ ],
+ "features": [
+  "AI-built restaurant website optimized for search",
+  "Commission-free online ordering and catering",
+  "Branded mobile ordering app",
+  "Automated SMS and email marketing based on order history",
+  "Loyalty and rewards program",
+  "AI phone ordering that places orders directly",
+  "Restaurant POS",
+  "Customer support handled for guests"
+ ],
+ "pricing": {
+  "text": "Flex: $249/month plus 5% restaurant fee per order. Flat Rate: $499/month with no restaurant order fee. Both plans include the same features, with no long-term contract. Guests pay a 5% order support fee; card processing is 2.9% + $0.30 per transaction (per Owner's blog).",
+  "source": "https://www.owner.com/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Case-study results (sales lifts, fees saved) are vendor-reported, not used. Exact launch dates for Owner POS and AI phone ordering not found; timing rests on the Aug 2026 Series D coverage. Owner says it passed $100M ARR (company figure). Fit: built for independents, not large chains; consider this when placing it in a 'chain management' list. Current review's 'Pricing: available on request' is outdated: Owner publishes pricing."
+}

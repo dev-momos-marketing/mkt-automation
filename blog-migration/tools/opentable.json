@@ -1,0 +1,25 @@
+{"name": "OpenTable", "website": "https://www.opentable.com/",
+ "oneLiner": "Restaurant reservation network and table management system owned by Booking Holdings, now adding AI features for diners (Concierge) and restaurants.",
+ "bestFor": "Full-service and fine-dining restaurants and groups that take reservations and want access to OpenTable's diner network plus table, guest and marketing tools.",
+ "customers": [
+  {"name": "Piano Piano (Toronto)", "source": "https://www.opentable.ca/restaurant-solutions/en/?p=81716"},
+  {"name": "HMSHost (U.S. airport restaurants)", "source": "https://www.aviationpros.com/airport-business/airport-infrastructure-operations/airport-technology/press-release/21271895/hms-host-hmshost-partners-with-opentable-to-power-online-reservations-at-us-airport-restaurants-nationwide"}
+ ],
+ "updates": [
+  {"date": "2025-07", "text": "Launched Concierge, a generative AI assistant on restaurant profiles that answers diners' questions before they book.", "source": "https://www.placera.se/pressmeddelanden/booking-holdings-opentable-launches-gen-ai-powered-concierge-to-arm-diners-with-instant-insights-for-its-60-000-global-restaurants-20250715"},
+  {"date": "2026-07", "text": "Expanded Concierge into a broader AI dining assistant with natural-language restaurant search.", "source": "https://www.restaurantonline.co.uk/Article/2026/07/22/opentable-expands-its-ai-dining-assistant-concierge/"},
+  {"date": "2026-08", "text": "Released its largest product suite to date (20+ new or updated features): AI-generated restaurant profiles, Guest AI recommendations, voice AI partner integrations, and listings in Google, ChatGPT, Copilot, Perplexity and Alexa+. US and Canada first, other markets in Q4 2026.", "source": "https://itbrief.com.au/story/opentable-launches-ai-tools-to-help-restaurants-fill-seats"}
+ ],
+ "features": [
+  "Reservation network and booking widget for the restaurant's own website",
+  "Table management and floor plans",
+  "Guest profiles with visit history and preferences",
+  "Automated confirmations, reminders and email marketing (higher plans)",
+  "Concierge AI that answers diner questions on the restaurant profile",
+  "AI-generated restaurant profiles from the restaurant's website and operator input",
+  "Bookings distributed through AI assistants and search (Google, ChatGPT, Copilot, Perplexity, Alexa+)",
+  "Integrations with voice AI phone agents and POS systems such as Square"
+ ],
+ "pricing": {"text": "OpenTable sells tiered plans (Basic, Core, Pro) with monthly subscriptions and per-cover fees for network bookings. Current amounts could not be verified on opentable.com; third-party 2026 summaries list $149, $299 and $499 per month.", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "Owned by Booking Holdings. Concierge launch confirmed for July 2025. Dropped from original review: '60% of restaurant bookings happen outside business hours' (unsourced) and 'powered by Perplexity and OpenAI' (not confirmed in this research). Third-party sources report a 2% fee on prepaid reservations, no-show charges and deposits from January 2026 (unverified on opentable.com, not used). Other 2026 items seen but not verified with a primary source: OpenTable Media advertising product (Feb 2026), acquisition of Canadian reservation platform Libro (Apr 20 2026, listed on OpenTable's IR site https://opentablepr.gcs-web.com/). Piano Piano case study is OpenTable marketing (12% year-over-year cover and sales lift, undated). HMSHost partnership is older. Company-reported figures in the August 2026 release (AI-referred diners spend 20% more; 500,000+ monthly Concierge users) are vendor claims."}

@@ -1,0 +1,23 @@
+{"name": "Otter", "website": "https://www.tryotter.com/",
+ "oneLiner": "Restaurant technology for delivery-heavy operators: aggregates orders from Uber Eats, DoorDash, Grubhub and direct channels into one queue, with menu management, POS, kiosk, online and QR ordering, and sales reporting across channels.",
+ "bestFor": "Restaurants, multi-brand and virtual kitchens with a large share of third-party delivery orders that want one tablet, one menu and one report across channels.",
+ "customers": [
+  {"name": "Telly's Charburgers", "source": "https://www.tryotter.com/blog/restaurant-tips/all-in-one-pos-system"}
+ ],
+ "updates": [
+  {"date": "2025-01", "text": "Added a DoorDash plugin so staff can track Dashers and contact customers from the orders screen.", "source": "https://www.tryotter.com/blog/otter-products/january-15-2025-product-updates"},
+  {"date": "2025-05", "text": "Named one of the inaugural partners in DoorDash's Preferred Integrations Program, announced at the National Restaurant Association Show.", "source": "https://www.prnewswire.com/news-releases/otter-is-now-a-doordash-preferred-integration-partner-302459235.html"},
+  {"date": "2025-05", "text": "Added per-channel notification controls (POS, delivery apps, direct ordering).", "source": "https://www.tryotter.com/blog/otter-products/otter-may-21-product-updates"}
+ ],
+ "features": [
+  "One order queue for Uber Eats, DoorDash, Grubhub and direct orders",
+  "Central menu management pushed to every delivery platform",
+  "Pause stores and mark items unavailable across channels (including from the Otter Go mobile app)",
+  "Sales, menu-item and channel reporting across platforms",
+  "Uptime and order-issue monitoring",
+  "Own POS, kiosk, online ordering and QR ordering",
+  "Delivery integrations such as DoorDash courier tracking"
+ ],
+ "pricing": {"text": "Custom pricing; Otter does not publish a public price list (third-party sites describe tiered plans with add-ons).", "source": null, "checked": "2026-11"},
+ "status": "active",
+ "notes": "IMPORTANT: no product called 'Otter Pulse' could be found on tryotter.com or in search results. The current review describes a guest-feedback/NPS/CSAT survey platform (QR/SMS/email surveys, sentiment analysis), which does not match Otter, a delivery order-management and POS company. All of the review's feature claims about feedback collection, NPS/CSAT and reservation integrations are dropped. Otter's analytics are sales/channel reporting, so it fits a restaurant analytics list only as a delivery-sales analytics tool. Other customers named in Otter press (Business Wire, early 2025): Skyline Chili (middleware, Jan 2025) and Catapult (Feb 2025); source URLs not captured this session. A trade site reports September 2026 updates (photo assignment, AI menu descriptions, discounts, Uber Eats busy-mode sync), not confirmed from Otter itself. Search budget ran out before 2026 Otter announcements could be checked further. Do not confuse with Otter.ai (meeting transcription)."}
