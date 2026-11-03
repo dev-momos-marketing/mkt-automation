@@ -4,14 +4,42 @@
  "oneLiner": "AI guest experience platform for multi-location restaurant brands: AI agents, review management, a Unified Inbox, surveys, recovery and insights.",
  "bestFor": "Multi-location restaurant brands that want guest support, reviews and recovery handled across every location from one place.",
  "customers": [
-  {"name": "Papa Murphy's", "source": "https://www.momos.com/case-studies/papa-murphys-turns-guest-feedback-into-2m-in-recovered-revenue"},
-  {"name": "Potbelly", "source": "https://www.momos.com/case-studies/potbelly"},
-  {"name": "Condado Tacos", "source": "https://www.momos.com/case-studies/condado-tacos"},
-  {"name": "Caribou Coffee", "source": "https://www.momos.com/case-studies/caribou-coffee-achieves-61-more-google-reviews-and-boosts-revenue-across-57-locations"}
+  {
+   "name": "Papa Murphy's",
+   "source": "https://www.momos.com/case-studies/papa-murphys-turns-guest-feedback-into-2m-in-recovered-revenue"
+  },
+  {
+   "name": "Potbelly",
+   "source": "https://www.momos.com/case-studies/potbelly"
+  },
+  {
+   "name": "Condado Tacos",
+   "source": "https://www.momos.com/case-studies/condado-tacos"
+  },
+  {
+   "name": "Caribou Coffee",
+   "source": "https://www.momos.com/case-studies/caribou-coffee-achieves-61-more-google-reviews-and-boosts-revenue-across-57-locations"
+  },
+  {
+   "name": "Just Salad",
+   "source": "https://www.momos.com/case-studies/just-salad-consolidated-1000-monthly-customer-interactions-with-momos"
+  },
+  {
+   "name": "Lee's Famous Recipe Chicken",
+   "source": "https://www.momos.com/case-studies/how-lees-famous-recipe-chicken-boosted-review-response-rates-by-24-driving-faster-recovery-and-smarter-guest-feedback"
+  }
  ],
  "updates": [
-  {"date": "2025-12", "text": "2025 releases included AI copilots, AI ticket summaries, AI brand guidelines, mobile-first reports, and integrations with Paytronix, Square and Otter.", "source": "https://www.momos.com/blog/momos-guest-ai-2025-year-in-review"},
-  {"date": "2025", "text": "Potbelly partnered with Momos in 2025 to bring reviews, cases and guest messages across 472 locations into one view.", "source": "https://www.momos.com/case-studies/potbelly"}
+  {
+   "date": "2025-12",
+   "text": "2025 releases included AI copilots, AI ticket summaries, AI brand guidelines, mobile-first reports, and integrations with Paytronix, Square and Otter.",
+   "source": "https://www.momos.com/blog/momos-guest-ai-2025-year-in-review"
+  },
+  {
+   "date": "2025",
+   "text": "Potbelly partnered with Momos in 2025 to bring reviews, cases and guest messages across 472 locations into one view.",
+   "source": "https://www.momos.com/case-studies/potbelly"
+  }
  ],
  "features": [
   "Alfie, the Experience Agent, replies to guests in minutes, remembers visit history and preferences, and is trained on the brand voice.",
@@ -19,8 +47,79 @@
   "Works across website chat, in-app support, surveys, delivery apps and inbound enquiries, with escalation to the team when needed.",
   "Unified Inbox centralizes Google reviews, App Store feedback, social DMs and POS data, with AI triage and smart routing.",
   "Real-time translation and localized responses.",
-  "Papa Murphy's: $2M+ in recovered revenue via offers and 97.7% automation of review replies, across 1,000+ locations."
+  "Papa Murphy's: $2M+ in recovered revenue via offers and 97.7% automation of review replies, across 1,000+ locations.",
+  "Alfie works on Google, Yelp, OpenTable and TripAdvisor reviews; Instagram DMs, SMS, WhatsApp, Facebook and X; Uber, Deliveroo, DoorDash, GrabFood and Grubhub; website chat, mobile app, post-visit surveys, contact forms, email and phone.",
+  "Alfie recognizes high-value guests from visit history, spend and loyalty data, escalates to a person with the conversation history and a suggested next step, and tracks whether a guest returns after an issue.",
+  "AI tagging, categorization and real-time alerts in the Unified Inbox; AI summaries of long threads; guest spend, order history and ratings shown beside each ticket.",
+  "Rockie, the Intelligence Agent, surfaces incidents, root causes and risks across locations, ranks locations, answers questions in chat and sends personalized operator reports to your phone; it plugs into POS, CDP, loyalty and review data.",
+  "Setup is done with the Momos team: you share brand guidelines on day 1, Momos trains Alfie on brand voice, menu, FAQs and recovery playbooks on days 2-5, and you review and approve its replies before going live in week 1, with an onboarding specialist and ongoing customer success.",
+  "Surveys, customer recovery, customer data platform, direct email and SMS marketing, listings management and operational insights."
  ],
- "pricing": {"text": "Custom pricing; book a demo.", "source": "https://www.momos.com/book-a-demo", "checked": "2026-11"},
- "notes": "Dropped the old claim about Burger King, Shake Shack and 30,000+ locations: not on momos.com. momos.com says 20,000+ locations and 600+ brands."
+ "pricing": {
+  "text": "Custom pricing; book a demo.",
+  "source": "https://www.momos.com/book-a-demo",
+  "checked": "2026-11"
+ },
+ "notes": "Dropped the old claim about Burger King, Shake Shack and 30,000+ locations: not on momos.com. momos.com says 20,000+ locations and 600+ brands. momos.com/pricing returns 404; prices are quoted after a demo. No G2 product page with reviews was found for Momos, so no rating. Homepage-only claims (90%+ auto-resolution, <4 min response, 63.5% return rate) left out; numbers used come from the named case studies. Condado Tacos' case study gives both 2024 (text) and 2025 (header) as its start, so no year is used for it.",
+ "results": [
+  {
+   "customer": "Papa Murphy's",
+   "text": "Partnered in July 2024; 1,086 locations (1,000+). After one year: rating up from 3.96 to 4.72, 571,946 survey submissions, $2M+ recovered revenue via offers, 97.7% automation of review replies, 45% drop in incident rate, CSAT from 73.7% to 93.7%.",
+   "source": "https://www.momos.com/case-studies/papa-murphys-turns-guest-feedback-into-2m-in-recovered-revenue"
+  },
+  {
+   "customer": "Just Salad",
+   "text": "120+ locations: 1,200+ hours saved monthly, 99% faster response time, review response rate up from 75% to 95%, 1,000+ customer interactions consolidated per month; recovery offers sent from the Momos Inbox, and a redeemed winback offer prompts an updated review.",
+   "source": "https://www.momos.com/case-studies/just-salad-consolidated-1000-monthly-customer-interactions-with-momos"
+  },
+  {
+   "customer": "Lee's Famous Recipe Chicken",
+   "text": "130 locations, on Momos since early 2025: review response rate up from 77.8% to 96.5%, 85% of reviews auto-responded, 86% survey response rate.",
+   "source": "https://www.momos.com/case-studies/how-lees-famous-recipe-chicken-boosted-review-response-rates-by-24-driving-faster-recovery-and-smarter-guest-feedback"
+  },
+  {
+   "customer": "Caribou Coffee",
+   "text": "FoodVest Group runs Caribou Coffee in Bahrain and Saudi Arabia, with 57 locations on Momos: replies 450x faster (from 19 days to 1 hour), 61% more Google reviews, 94% CSAT.",
+   "source": "https://www.momos.com/case-studies/caribou-coffee-achieves-61-more-google-reviews-and-boosts-revenue-across-57-locations"
+  },
+  {
+   "customer": "Condado Tacos",
+   "text": "30+ locations; AI tags every complaint by type (order accuracy, wait time, service quality) so recurring patterns show up across the chain; connected to DoorDash, Facebook, Google, Grubhub, Olo, Punchh, Uber Eats and Yelp.",
+   "source": "https://www.momos.com/case-studies/condado-tacos"
+  },
+  {
+   "customer": "Potbelly",
+   "text": "472 locations, partnered in 2025: reviews, cases and guest messages in one view; the Guest Care team uses loyalty actions in the Unified Inbox to recover loyalty guests, with full history in one place; a new Contact Us form raised feedback submissions.",
+   "source": "https://www.momos.com/case-studies/potbelly"
+  }
+ ],
+ "pros": [
+  "Built only for restaurant and hospitality brands: reviews, guest support, surveys and recovery for every location in one platform",
+  "Alfie resolves cases end to end, including issuing loyalty points, coupons and offers through the loyalty and POS platforms",
+  "One agent covers reviews, social messages, delivery apps, website chat, the mobile app, email and phone",
+  "Location-level analytics and Rockie point to incidents and root causes by store",
+  "Momos trains Alfie on your brand voice, menu and recovery playbooks, with an onboarding specialist and ongoing customer success",
+  "Published case studies with named results (Papa Murphy's, Just Salad, Lee's Famous Recipe Chicken, Caribou Coffee)"
+ ],
+ "cons": [
+  {
+   "text": "No published prices and no self-serve trial; you book a demo and get a custom quote",
+   "source": "https://www.momos.com/book-a-demo"
+  },
+  {
+   "text": "Built for multi-location restaurant and hospitality brands, so a single-location restaurant or a business outside hospitality may need much less",
+   "source": "scope"
+  },
+  {
+   "text": "Going live runs through the Momos team: brand guidelines on day 1, training on days 2-5, review and approval in week 1, so you can't sign up and start the same day",
+   "source": "https://www.momos.com/alfie"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "custom quote after a demo",
+  "list": [],
+  "source": "https://www.momos.com/book-a-demo",
+  "checked": "2026-11"
+ }
 }
