@@ -1,14 +1,33 @@
-{"name": "Tidio", "website": "https://www.tidio.com/",
+{
+ "name": "Tidio",
+ "website": "https://www.tidio.com/",
  "oneLiner": "Customer service platform for small and midsize businesses combining live chat, the Lyro AI agent, Flows automation and a help desk.",
  "bestFor": "Small and midsize businesses, including restaurants, that want a website chat widget with an AI agent and no coding.",
  "customers": [
-  {"name": "Suitor", "source": "https://www.tidio.com/blog/suitor-case-study/"},
-  {"name": "Gecko Hospitality", "source": "https://www.tidio.com/blog/gecko-hospitality-case-study/"},
-  {"name": "Pastreez", "source": "https://www.tidio.com/blog/pastreez-case-study/"}
+  {
+   "name": "Suitor",
+   "source": "https://www.tidio.com/blog/suitor-case-study/"
+  },
+  {
+   "name": "Gecko Hospitality",
+   "source": "https://www.tidio.com/blog/gecko-hospitality-case-study/"
+  },
+  {
+   "name": "Pastreez",
+   "source": "https://www.tidio.com/blog/pastreez-case-study/"
+  }
  ],
  "updates": [
-  {"date": "2026-10", "text": "Tidio reported that Lyro ranked first in the default view of G2's AI CX Agent Evaluations (as of October 7, 2026), with the highest policy-compliance score among the agents evaluated.", "source": "https://www.tidio.com/blog/lyro-ai-cx-agent-g2-evaluations/"},
-  {"date": "undated", "text": "Lyro extended to email ticketing (Tidio product news; no date confirmed, not used in review).", "source": "https://www.tidio.com/blog/category/product-news/"}
+  {
+   "date": "2026-10",
+   "text": "Tidio reported that Lyro ranked first in the default view of G2's AI CX Agent Evaluations (as of October 7, 2026): it passed 40 of 46 tasks and tied for the top overall score among nine agents, with the highest policy-compliance score (92%).",
+   "source": "https://www.tidio.com/blog/lyro-ai-cx-agent-g2-evaluations/"
+  },
+  {
+   "date": "undated",
+   "text": "Lyro extended to email ticketing (Tidio product news; no date confirmed, not used in review).",
+   "source": "https://www.tidio.com/blog/category/product-news/"
+  }
  ],
  "features": [
   "Live chat widget for websites with mobile and desktop apps for agents",
@@ -19,5 +38,87 @@
   "Integrations with Instagram, Messenger and WhatsApp",
   "Analytics on conversations and AI resolutions"
  ],
- "pricing": {"text": "Free plan available; Starter $24.17 per month billed annually ($29 monthly); Growth from $49.17 per month billed annually; Plus custom; Lyro AI agent sold as an add-on based on AI conversations.", "source": "https://www.tidio.com/pricing/", "checked": "2026-11"},
- "notes": "tidio.com could not be fetched from this session; prices come from search snippets of tidio.com/pricing and 2026 pricing guides. Original's '$24/month' updated to $24.17 annually. The G2 ranking is reported by Tidio itself. Messaging integrations (Instagram, Messenger, WhatsApp) not re-verified and kept out of the review."}
+ "pricing": {
+  "text": "Free plan ($0: 50 billable conversations a month, 10 seats, 50 Lyro AI conversations for life). Starter $24.17 per month (100 billable conversations); Growth from $49.17 per month (from 250 billable conversations); Plus from $300 per month plus usage; Premium on request (from 3,000 Lyro conversations). Lyro AI Agent add-on from $32.50 per month for 50 Lyro conversations; Flows add-on from $24.17 per month. 7-day free trial of Starter, Growth, Lyro and Flows, no credit card. Annual billing gives 2 months free; the prices shown are the annual ones ($24.17 is $29 x 10/12).",
+  "source": "https://www.tidio.com/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "tidio.com could not be fetched from this session; prices come from search snippets of tidio.com/pricing and 2026 pricing guides. Original's '$24/month' updated to $24.17 annually. The G2 ranking is reported by Tidio itself. Messaging integrations (Instagram, Messenger, WhatsApp) not re-verified and kept out of the review. 2026-11: tidio.com/pricing was opened directly; plan prices and limits above come from it. The page shows a Monthly / Annually (2 months free) toggle without labeling the displayed prices; $24.17 and $49.17 match $29 and $59 with 2 months free, and 2026 guides call them annual prices. G2 rating (4.6, 1,879 reviews) from a G2 comparison page snippet; g2.com returned 403. The G2 Evaluations post (October 7, 2026) was opened directly.",
+ "pros": [
+  "Free plan with live chat, 10 seats and 50 lifetime Lyro conversations",
+  "Lyro answers from your website and knowledge base and hands chats to a person",
+  "No-code Flows for greetings, lead capture and FAQs",
+  "Starter at $24.17 per month, billed annually",
+  "Rated 4.6/5 on G2 from 1,879 reviews",
+  "Lyro ranked first in the default view of G2's AI CX Agent Evaluations (as reported by Tidio, October 2026), with 92% policy compliance"
+ ],
+ "cons": [
+  {
+   "text": "Lyro beyond the first 50 conversations is a paid add-on, from $32.50 a month for 50 Lyro conversations",
+   "source": "https://www.tidio.com/pricing/"
+  },
+  {
+   "text": "Plans are capped by billable conversations: 50 a month on Free and 100 on Starter",
+   "source": "https://www.tidio.com/pricing/"
+  },
+  {
+   "text": "Flows reaches 100 visitors a month on the Free and Starter plans; more needs the Flows add-on",
+   "source": "https://www.tidio.com/pricing/"
+  },
+  {
+   "text": "Built for small and midsize businesses; larger teams move to Plus (from $300 a month plus usage) or Premium on request",
+   "source": "https://www.tidio.com/pricing/"
+  }
+ ],
+ "plans": {
+  "trial": "7-day free trial of Starter, Growth, Lyro and Flows; no credit card",
+  "billing": "per month, billed annually (2 months free)",
+  "list": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "unit": "per month",
+    "note": "50 billable conversations a month, 10 seats, 50 lifetime Lyro conversations"
+   },
+   {
+    "name": "Starter",
+    "price": "$24.17",
+    "unit": "per month, billed annually",
+    "note": "100 billable conversations"
+   },
+   {
+    "name": "Growth",
+    "price": "from $49.17",
+    "unit": "per month, billed annually",
+    "note": "from 250 billable conversations"
+   },
+   {
+    "name": "Plus",
+    "price": "from $300",
+    "unit": "per month plus usage",
+    "note": null
+   },
+   {
+    "name": "Premium",
+    "price": null,
+    "unit": null,
+    "note": "on request; from 3,000 Lyro conversations"
+   },
+   {
+    "name": "Lyro AI Agent add-on",
+    "price": "from $32.50",
+    "unit": "per month",
+    "note": "from 50 Lyro conversations"
+   }
+  ],
+  "source": "https://www.tidio.com/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.6",
+  "reviews": 1879,
+  "source": "https://www.g2.com/products/tidio/reviews",
+  "checked": "2026-11"
+ }
+}
