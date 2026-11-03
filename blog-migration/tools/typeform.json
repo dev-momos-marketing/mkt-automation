@@ -1,0 +1,26 @@
+{"name": "Typeform", "website": "https://www.typeform.com/",
+ "oneLiner": "General-purpose form and survey builder known for its one-question-at-a-time conversational format, now with AI tools for building forms and analyzing answers.",
+ "bestFor": "Smaller restaurant groups and marketing teams that want polished, branded feedback, catering-inquiry or event forms live quickly, and do not need POS integration, location benchmarking or closed-loop alerts.",
+ "customers": [
+  {"name": "Barry's (fitness studios)", "source": "https://www.typeform.com/blog/build-trust-with-forms"},
+  {"name": "Calm", "source": "https://www.typeform.com/blog/5-ways-our-customers-are-using-typeform"},
+  {"name": "Designity", "source": "https://www.typeform.com/blog/empowering-a-design-platform-typeform-and-designity"},
+  {"name": "Double Denim Marketing", "source": "https://www.typeform.com/blog/how-double-denim-marketing-increased-leads-typeform"}
+ ],
+ "updates": [
+  {"date": "2025-02", "text": "Winter 2025 release added an AI suite: an AI form builder that drafts questions from a prompt, plus AI sentiment analysis and insight summaries on responses.", "source": "https://www.typeform.com/blog/typeform-launches-ai-suite"},
+  {"date": "2025-10", "text": "Launched an AI engagement platform at Typeforum 2025, including Typeform AI (beta) that builds forms and follow-up workflows from a chat prompt, and AI that answers respondents' questions or asks clarifying follow-ups inside a form.", "source": "https://www.destinationcrm.com/Articles/CRM-News/CRM-Across-the-Wire/Typeform-Launches-AI-Engagement-Platform-172107.aspx"}
+ ],
+ "features": [
+  "One-question-at-a-time conversational forms and surveys",
+  "Conditional logic and branching based on earlier answers",
+  "Large template library, including restaurant and hotel feedback templates",
+  "AI form builder that drafts a survey from a prompt",
+  "AI sentiment analysis and summaries of open-text responses",
+  "Share by link, email, website embed or QR code",
+  "Branding controls (logo removal from the Plus plan up)",
+  "Integrations with HubSpot, Salesforce, Slack, Google Sheets, Mailchimp and Zapier"
+ ],
+ "pricing": {"text": "Free plan (10 responses/month). Paid plans per month billed yearly: Basic $28 (100 responses/month), Plus $56 (1,000), Business $91 (10,000); billed monthly $39 / $79 / $129. Enterprise is quoted.", "source": "https://www.typeform.com/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing page could not be fetched directly; figures come from search snippets of typeform.com/pricing and typeform.com/ai-info, which agree. Third-party trackers report these prices took effect in 2026 (previously around $25/$50/$83 yearly) and mention extra tiers (Talent, Growth) not confirmed here; re-check before publishing. Dropped from current review: '$50+ for 1,000 responses on mid' tier wording (replace with the current figures above). 'Barcelona-based, founded in 2012' is commonly reported but was not re-checked in this research. No restaurant or hospitality customer story was found on Typeform's site; listed customers are Typeform's own case studies outside hospitality. Typeform remains a general-purpose tool, so it fits restaurants only as a lightweight survey option."}
