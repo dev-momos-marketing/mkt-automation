@@ -1,25 +1,134 @@
-{"name": "Marqii", "website": "https://www.marqii.com/",
+{
+ "name": "Marqii",
+ "website": "https://www.marqii.com/",
  "oneLiner": "Digital operations platform for restaurants that keeps menus, listings, reviews and social posts up to date from one dashboard, with POS menu sync, AI-suggested review replies and review generation.",
  "bestFor": "Multi-location restaurant brands and franchisees that want menu and listing accuracy plus review response handled in one restaurant-specific tool, with published per-location pricing.",
  "customers": [
-  {"name": "Romulus Restaurant Group (IHOP franchisee)", "source": "https://marqii.com/case-studies/romulus-restaurant-group"},
-  {"name": "Uccello's Hospitality Group", "source": "https://marqii.com/case-studies/uccellos"},
-  {"name": "California Tortilla", "source": "https://www.financialcontent.com/article/accwirecq-2026-7-21-marqii-launches-review-generation-in-partnership-with-thanx"}
+  {
+   "name": "Romulus Restaurant Group (IHOP franchisee)",
+   "source": "https://marqii.com/case-studies/romulus-restaurant-group"
+  },
+  {
+   "name": "Uccello's Hospitality Group",
+   "source": "https://marqii.com/case-studies/uccellos"
+  },
+  {
+   "name": "California Tortilla",
+   "source": "https://www.financialcontent.com/article/accwirecq-2026-7-21-marqii-launches-review-generation-in-partnership-with-thanx"
+  },
+  {
+   "name": "Everytable",
+   "source": "https://www.marqii.com/suggested-review-response"
+  },
+  {
+   "name": "Deschutes Brewery",
+   "source": "https://www.marqii.com/pricing"
+  }
  ],
  "updates": [
-  {"date": "2025-05", "text": "Launched Social Management for scheduling posts to Facebook and Google Business Profile from Marqii, with more channels and features planned.", "source": "https://www.marqii.com/press/marqii-launches-social-management"},
-  {"date": "2025-11", "text": "Launched First Party Reviews: branded review forms shared by link, QR code or website embed, with results included in Marqii's review insights.", "source": "https://marqii.com/press/marqii-launches-first-party-reviews"},
-  {"date": "2026-07", "text": "Launched Review Generation with Thanx: after a purchase, Marqii sends guests a text inviting them to review the restaurant on Google, Facebook or TripAdvisor.", "source": "https://www.financialcontent.com/article/accwirecq-2026-7-21-marqii-launches-review-generation-in-partnership-with-thanx"}
+  {
+   "date": "2025-05",
+   "text": "Launched Social Management for scheduling posts to Facebook and Google Business Profile from Marqii, with more channels and features planned.",
+   "source": "https://www.marqii.com/press/marqii-launches-social-management"
+  },
+  {
+   "date": "2025-11",
+   "text": "Launched First Party Reviews: branded review forms shared by link, QR code or website embed, with results included in Marqii's review insights.",
+   "source": "https://marqii.com/press/marqii-launches-first-party-reviews"
+  },
+  {
+   "date": "2026-07",
+   "text": "Launched Review Generation with Thanx: after a purchase, Marqii sends guests a text inviting them to review the restaurant on Google, Facebook or TripAdvisor.",
+   "source": "https://www.financialcontent.com/article/accwirecq-2026-7-21-marqii-launches-review-generation-in-partnership-with-thanx"
+  }
  ],
  "features": [
-  "Menu management that syncs POS menu changes to Google, Yelp and other sites",
-  "Listings management for hours, photos, offers and contact details",
-  "Review inbox for Google, Yelp, Facebook, OpenTable, Uber Eats, Grubhub, ezCater and more",
-  "AI-suggested review replies, plus a managed review response service for high-volume brands",
-  "First-party review forms and SMS review requests after a purchase",
-  "Social post scheduling for Facebook and Google Business Profile",
-  "Multi-location dashboard and review insights"
+  "Menu management that syncs POS menu changes to Google, Yelp, Facebook, Apple Maps and other sites, with menus marked up so search engines and AI bots can read them",
+  "Listings management with unlimited updates to 70+ listings publishers: hours, photos, holidays, dining attributes, contact info, specials and offers, and preferred ordering links",
+  "Review monitoring on Yelp, Google, Facebook, DoorDash, Grubhub, Uber Eats and ezCater, with review responses on Yelp, Google and Facebook (Growth plan and up)",
+  "Review widgets, custom review notifications, review insights with sentiment analysis and AI review summaries",
+  "Suggested Review Response: one-click AI drafts with customizable prompts and tone settings for positive, neutral and negative reviews, 'suggested by AI, approved by you' (Scale plan and up)",
+  "Managed Review Response: Marqii's team writes replies on Google, Yelp and Facebook for brands with more than 50 reviews per month, escalates critical reviews and holds monthly check-ins on sentiment, response trends and keywords",
+  "Review Generation: when guests order through a Marqii partner, a templated text links them to leave a review (Google, Facebook, TripAdvisor or Marqii First Party Reviews); branded first-party review forms shared by link, QR code or website embed",
+  "Social Management with Google Posts and Apple Showcase",
+  "Host: SEO and GEO-optimized location pages with embedded menus and hours; hours, menu and FAQ website widgets; an MCP server connection to AI platforms",
+  "Multi-location dashboard and search analytics"
  ],
- "pricing": {"text": "Published per location per month on an annual contract: Base (menus and location data) $74.99, Pro (adds reviews) $119.99, Kitchen Sync (adds advanced reviews) $149.99. Add-ons: AI-suggested review responses $15 and social management $20 per location per month. Custom pricing for large multi-unit accounts.", "source": "https://marqii.com/pricing", "checked": "2026-11"},
+ "pricing": {
+  "text": "Published per location per month on an annual contract: Base (listings + menus) $90, Growth (adds reviews) $145, Scale (full suite: AI-suggested replies, review generation, social) $180, Marqii Package (adds Host location pages) $250. Add-ons: Managed Review Response bundles of 50/100/250/500 reviews at $100/$150/$250/$375 per month ($2.00 to $0.75 per review; platform fee if bought standalone); Review Generation platform fee $100 per month per brand (included in Scale and Marqii Package) plus $15 per bundle of 1,000 SMS. No free trial; free demo.",
+  "source": "https://www.marqii.com/pricing",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "Pricing figures come from search-result snippets of marqii.com/pricing (WebFetch blocked); confirm before publishing. Marqii claims 15,000+ restaurants on its homepage (an older page says 12,000); vendor figure, not used. Case-study metrics (e.g. Romulus 94% response rate) are vendor-reported. Nothing in the current review was found to be wrong; the review spells the name 'Marquii' once, which should be 'Marqii'."}
+ "notes": "Pricing and plans read on marqii.com/pricing in November 2026 (curl); the tiers changed since the last check (new Growth, Scale and Marqii Package plans; AI-suggested replies moved into Scale). The pricing page lists review responses on Yelp, Google and Facebook only, and monitoring for DoorDash, Grubhub, Uber Eats and ezCater; OpenTable is no longer named, so it was dropped. G2 lists Marqii with a single review, too few for a rating, so none is cited. Marqii claims 15,000+ restaurants on its homepage; vendor figure, not used. Case-study metrics (e.g. Romulus 94% response rate) are vendor-reported. The 'response time under 30 seconds' claim on the Suggested Review Response page is a vendor claim, not used.",
+ "pros": [
+  "Built only for restaurants: POS menu sync, delivery and catering review monitoring, restaurant-specific reply prompts",
+  "Published per-location prices for every plan and add-on",
+  "Two ways to answer reviews: AI drafts a manager approves (Scale and up) or done-for-you replies from Marqii's team, priced per review",
+  "Listings, menus, reviews, social posts and location pages in one dashboard, with unlimited updates to 70+ listings publishers",
+  "Review insights with sentiment analysis and AI review summaries"
+ ],
+ "cons": [
+  {
+   "text": "No free trial or free plan; Marqii offers a free demo",
+   "source": "https://www.marqii.com/pricing"
+  },
+  {
+   "text": "Plans are billed per location on an annual contract",
+   "source": "https://www.marqii.com/pricing"
+  },
+  {
+   "text": "Replies only on Google, Yelp and Facebook; DoorDash, Grubhub, Uber Eats and ezCater reviews are monitored only",
+   "source": "https://www.marqii.com/pricing"
+  },
+  {
+   "text": "Base ($90) has no review tools; AI-suggested replies start on Scale ($180 per location per month)",
+   "source": "https://www.marqii.com/pricing"
+  },
+  {
+   "text": "Host location pages come only with the Marqii Package ($250 per location per month)",
+   "source": "https://www.marqii.com/pricing"
+  },
+  {
+   "text": "Managed replies and review-generation texts cost extra (from $100 per month), and review texts go only to guests who order through a Marqii partner",
+   "source": "https://www.marqii.com/review-generation"
+  },
+  {
+   "text": "Built only for restaurants, so brands outside hospitality need another tool",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "per location per month, annual contract",
+  "list": [
+   {
+    "name": "Base",
+    "price": "$90",
+    "unit": "per location per month, annual contract",
+    "note": "Listings and menus: 70+ publishers, POS menu sync, website widgets, search analytics, MCP server"
+   },
+   {
+    "name": "Growth",
+    "price": "$145",
+    "unit": "per location per month, annual contract",
+    "note": "Adds review monitoring and responses, review insights, sentiment analysis, AI review summaries"
+   },
+   {
+    "name": "Scale",
+    "price": "$180",
+    "unit": "per location per month, annual contract",
+    "note": "Adds AI-suggested review responses, review generation and social management"
+   },
+   {
+    "name": "Marqii Package",
+    "price": "$250",
+    "unit": "per location per month, annual contract",
+    "note": "Adds Host location pages, 100 review generation messages and 100 automated third-party review responses per location"
+   }
+  ],
+  "addons": "Managed Review Response from $100 per month (50 reviews) to $375 (500 reviews); Review Generation $100 per month per brand plus $15 per 1,000 SMS",
+  "source": "https://www.marqii.com/pricing",
+  "checked": "2026-11"
+ }
+}
