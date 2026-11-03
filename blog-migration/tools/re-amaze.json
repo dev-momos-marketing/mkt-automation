@@ -1,24 +1,120 @@
-{"name": "Re:amaze",
+{
+ "name": "Re:amaze",
  "website": "https://www.reamaze.com/",
  "oneLiner": "Helpdesk and AI customer service platform for ecommerce and online businesses, with a shared inbox, live chat, bots and multi-brand support (sold as Re:amaze by GoDaddy).",
- "bestFor": "Online stores and brands, including food and beverage brands selling online, that run several storefronts on Shopify, BigCommerce or WooCommerce.",
+ "bestFor": "Online stores and brands, including food and beverage brands selling online, that run one or several storefronts on Shopify or BigCommerce.",
  "customers": [
-  {"name": "Built Bar", "source": "https://www.shopify.in/ph/plus/partners/re-amaze"},
-  {"name": "Todd Snyder", "source": "https://www.shopify.in/ph/plus/partners/re-amaze"},
-  {"name": "Beer Cartel", "source": "https://www.casestudies.com/company/reamaze-by-godaddy/case-study/australias-award-winning-online-beer-retail-shop-beer-cartel-implements-reamaze-across-multiple-businesses-for-better-customer-service"}
+  {
+   "name": "Built Bar",
+   "source": "https://www.shopify.in/ph/plus/partners/re-amaze"
+  },
+  {
+   "name": "Todd Snyder",
+   "source": "https://www.shopify.in/ph/plus/partners/re-amaze"
+  },
+  {
+   "name": "Beer Cartel",
+   "source": "https://www.casestudies.com/company/reamaze-by-godaddy/case-study/australias-award-winning-online-beer-retail-shop-beer-cartel-implements-reamaze-across-multiple-businesses-for-better-customer-service"
+  }
  ],
  "updates": [
-  {"date": "2025-08", "text": "Intents, which sort incoming messages, now run on AI and need no extra training data.", "source": "https://www.reamaze.com/blog/reamaze-ai-intents/"},
-  {"date": "2025-09", "text": "The AI context used for generated replies and FAQs now also powers response templates, quick replies, appointment and shopper bots, suggested responses and the AI FAQ bot.", "source": "https://www.reamaze.com/blog/ai-customer-support-tools/"}
+  {
+   "date": "2025-08",
+   "text": "Intents, which sort incoming messages, now run on AI and need no extra training data.",
+   "source": "https://www.reamaze.com/blog/reamaze-ai-intents/"
+  },
+  {
+   "date": "2025-09",
+   "text": "The AI context used for generated replies and FAQs now also powers response templates, quick replies, appointment and shopper bots, suggested responses and the AI FAQ bot.",
+   "source": "https://www.reamaze.com/blog/ai-customer-support-tools/"
+  }
  ],
  "features": [
-  "Shared inbox for email, live chat, social media, SMS and voice",
+  "Shared inbox for email, live chat, social media, SMS, VoIP and video calls",
   "AI Agent (beta) trained on your help content, extended from chat to email and SMS",
-  "Order details from Shopify, BigCommerce and WooCommerce inside conversations",
+  "Order details from Shopify and BigCommerce (and payments from Stripe) inside conversations",
   "Chatbots and Cues (proactive, trigger-based chat messages)",
-  "Multiple brands with separate inboxes, help centers and branding in one account",
-  "AI-powered Intents for sorting messages",
+  "Multiple brands with separate inboxes, help centers and branding in one account (Pro and Plus)",
+  "AI-powered Intents for sorting messages, plus AI-suggested FAQs, conversation summaries and sentiment analysis",
   "FAQ / help center"
  ],
- "pricing": {"text": "Per-user plans: Basic $29, Pro $49 and Plus $69 per user/month; a Starter plan is $59/month flat for up to 500 responded conversations. Annual billing is discounted. Free trial available.", "source": "https://www.reamaze.com/pricing", "checked": "2026-11"},
- "notes": "reamaze.com could not be fetched; prices come from a May 2026 snapshot of the pricing page quoted in third-party guides and should be confirmed on reamaze.com/pricing. Built Bar and Todd Snyder appear as testimonials on Shopify's Re:amaze partner page; the Built Bar '5.6x faster' figure comes only from a third-party listing and was not used. Original's '$29/month for 3 team members' was replaced (pricing is now per user). The AI Agent email/SMS expansion appears to be from 2026 but I couldn't confirm the month, so it isn't dated."}
+ "pricing": {
+  "text": "Per team member per month, billed monthly: Basic $29 (1 brand, 5 AI resolutions per user per month), Pro $49 (unlimited brands, 10 AI resolutions) and Plus $69 (unlimited brands, 20 AI resolutions); annual billing lowers these to $26.10, $44.10 and $62.10. Starter is $59 per month flat for unlimited team members and up to 500 responded conversations a month. 14-day free trial with all Plus features, no credit card; no free plan.",
+  "source": "https://www.reamaze.com/pricing",
+  "checked": "2026-11"
+ },
+ "notes": "reamaze.com could not be fetched; prices come from a May 2026 snapshot of the pricing page quoted in third-party guides and should be confirmed on reamaze.com/pricing. Built Bar and Todd Snyder appear as testimonials on Shopify's Re:amaze partner page; the Built Bar '5.6x faster' figure comes only from a third-party listing and was not used. Original's '$29/month for 3 team members' was replaced (pricing is now per user). The AI Agent email/SMS expansion appears to be from 2026 but I couldn't confirm the month, so it isn't dated. 2026-11: reamaze.com/pricing, the homepage and /integrations fetched directly; prices confirmed. WooCommerce isn't on the integrations page (Shopify, BigCommerce, Stripe, WordPress are), so it was dropped. The homepage no longer mentions GoDaddy, but GoDaddy's Re:amaze help center (reamaze.godaddy.com) confirms the acquisition. G2 rating from a g2.com search snippet (4.6 from 140 reviews).",
+ "featuresSource": [
+  "https://www.reamaze.com/",
+  "https://www.reamaze.com/integrations"
+ ],
+ "pros": [
+  "One inbox for email, live chat, social, SMS, voice and video",
+  "Shopify and BigCommerce order details shown inside each conversation",
+  "Several brands, each with its own inbox and help center, under one login (Pro and Plus)",
+  "Published prices, including a flat-rate Starter plan with unlimited team members",
+  "14-day free trial of the Plus features, no credit card",
+  "4.6/5 on G2"
+ ],
+ "cons": [
+  {
+   "text": "The AI Agent is still labeled beta",
+   "source": "https://www.reamaze.com/"
+  },
+  {
+   "text": "AI resolutions are capped per user per month: 5 on Basic, 10 on Pro, 20 on Plus",
+   "source": "https://www.reamaze.com/pricing"
+  },
+  {
+   "text": "Basic covers one brand; multi-brand support needs Pro or Plus",
+   "source": "https://www.reamaze.com/pricing"
+  },
+  {
+   "text": "Starter is capped at 500 responded conversations a month",
+   "source": "https://www.reamaze.com/pricing"
+  },
+  {
+   "text": "Built for ecommerce and online businesses, so its listed integrations center on online stores and a restaurant group may need another tool for POS or reservation data",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "14-day free trial with all Plus features, no credit card",
+  "billing": "per team member per month, billed monthly; annual billing discounted",
+  "list": [
+   {
+    "name": "Basic",
+    "price": "$29",
+    "unit": "per team member per month",
+    "note": "$26.10 billed annually; 1 brand"
+   },
+   {
+    "name": "Pro",
+    "price": "$49",
+    "unit": "per team member per month",
+    "note": "$44.10 billed annually; unlimited brands"
+   },
+   {
+    "name": "Plus",
+    "price": "$69",
+    "unit": "per team member per month",
+    "note": "$62.10 billed annually; unlimited brands"
+   },
+   {
+    "name": "Starter",
+    "price": "$59",
+    "unit": "per month, flat",
+    "note": "unlimited team members, up to 500 responded conversations a month"
+   }
+  ],
+  "source": "https://www.reamaze.com/pricing",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.6",
+  "reviews": 140,
+  "source": "https://www.g2.com/products/re-amaze/reviews",
+  "checked": "2026-11"
+ }
+}
