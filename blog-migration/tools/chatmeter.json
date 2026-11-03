@@ -1,26 +1,100 @@
-{"name": "Chatmeter (now Alchemer Reputation Management)", "website": "https://www.alchemer.com/chatmeter/",
+{
+ "name": "Chatmeter (now Alchemer Reputation Management)",
+ "website": "https://www.chatmeter.com/",
  "oneLiner": "Reputation, listings and local SEO platform for multi-location brands, acquired by Alchemer in September 2025 and now sold as part of Alchemer's customer feedback platform.",
  "bestFor": "Multi-location restaurant chains and franchise brands that want review management, listings and AI review analysis alongside survey feedback in one enterprise platform.",
  "customers": [
-  {"name": "A&W", "source": "https://www.alchemer.com/resources/case-study/a-w/"},
-  {"name": "MR MIKES Steakhouse Casual", "source": "https://www.chatmeter.com/wp-content/uploads/2023/09/Chatmeter_MRMIKES_CaseStudy.pdf"},
-  {"name": "Driven Brands", "source": "https://www.chatmeter.com/resource/case-study/driven-brands-2/"}
+  {
+   "name": "A&W",
+   "source": "https://www.alchemer.com/resources/case-study/a-w/"
+  },
+  {
+   "name": "MR MIKES Steakhouse Casual",
+   "source": "https://www.chatmeter.com/wp-content/uploads/2023/09/Chatmeter_MRMIKES_CaseStudy.pdf"
+  },
+  {
+   "name": "Driven Brands",
+   "source": "https://www.chatmeter.com/resource/case-study/driven-brands-2/"
+  }
  ],
  "updates": [
-  {"date": "2025-07", "text": "Launched Pulse Ai: Competitive Intelligence, with competitor overviews and a regional insights map down to individual locations.", "source": "https://www.chatmeter.com/resource/press-release/competitive-intelligence/"},
-  {"date": "2025-09", "text": "Alchemer, a survey and customer feedback company, acquired Chatmeter from PSG; terms were not disclosed.", "source": "https://www.chatmeter.com/resource/press-release/alchemer-acquires-chatmeter/"},
-  {"date": "2026-03", "text": "Alchemer launched AI Auto-Responder in Reputation Management, which drafts and publishes on-brand review replies under rules by rating, platform and text, and routes sensitive reviews to a person first.", "source": "https://www.businesswire.com/news/home/20260331545291/en/Alchemer-Launches-AI-Auto-Responder-to-Transform-Customer-Review-Engagement-with-On-Brand-Automation-at-Scale"}
+  {
+   "date": "2025-07",
+   "text": "Launched Pulse Ai: Competitive Intelligence, with competitor overviews and a regional insights map down to individual locations.",
+   "source": "https://www.chatmeter.com/resource/press-release/competitive-intelligence/"
+  },
+  {
+   "date": "2025-09",
+   "text": "Alchemer, a survey and customer feedback company, acquired Chatmeter from PSG; terms were not disclosed.",
+   "source": "https://www.chatmeter.com/resource/press-release/alchemer-acquires-chatmeter/"
+  },
+  {
+   "date": "2026-03",
+   "text": "Alchemer launched AI Auto-Responder in Reputation Management, which drafts and publishes on-brand review replies under rules by rating, platform and text, and routes sensitive reviews to a person first.",
+   "source": "https://www.businesswire.com/news/home/20260331545291/en/Alchemer-Launches-AI-Auto-Responder-to-Transform-Customer-Review-Engagement-with-On-Brand-Automation-at-Scale"
+  }
  ],
  "features": [
-  "Review monitoring and responses across 100+ review sites from one dashboard",
+  "Review monitoring and responses across 100+ review sites from one dashboard, with bulk responses, suggested replies and templates",
   "AI Auto-Responder with rules for which reviews get automated replies and risk flags for sensitive ones",
-  "Pulse Ai: Signals, which answers plain-language questions about reviews, social posts and surveys, including photos in reviews",
+  "Pulse Ai: Signals, which answers plain-language questions about reviews, social posts and surveys, including photos in reviews, with drill-down by location, region or provider",
   "Competitive Intelligence with location-level comparisons against nearby competitors",
-  "Listings management and local SEO tracking per location",
+  "Listings management for Google, Apple Maps and 70+ directories, with bulk editing and alerts, plus local SEO tracking per location",
+  "Local Pages: search-optimized landing pages for every location, with multi-language support",
+  "Analytics Studio dashboards and automated reports, with connections to BI tools such as Tableau and Domo",
   "Review generation to collect more customer reviews",
   "Delivery app review data from Uber Eats, DoorDash and Grubhub for restaurant brands",
   "Survey and direct feedback through the wider Alchemer platform"
  ],
- "pricing": {"text": "Custom pricing; contact sales for a quote.", "source": null, "checked": "2026-11"},
+ "pricing": {
+  "text": "No published prices; Alchemer offers a 30-minute demo and quotes reputation management individually. Its public price list (alchemer.com/plans-pricing) covers survey licenses only.",
+  "source": "https://www.alchemer.com/plans-pricing/",
+  "checked": "2026-11"
+ },
  "status": "acquired",
- "notes": "Acquired by Alchemer (a KKR portfolio company) on 2025-09-24. chatmeter.com says reputation management is now integrated into Alchemer; G2 lists it as 'Alchemer Reputation Management (formerly Chatmeter)'; Alchemer still uses 'Chatmeter by Alchemer' at alchemer.com/chatmeter. Website set to that Alchemer page because the original link (chatmeter.com) now points to Alchemer; confirm the preferred link. Alchemer announced a broader AI platform, Iris, with general availability in Q4 2026 (CMSWire), not included as an update. The delivery-app integration (Uber Eats, DoorDash, Grubhub) comes from an older press release (accessnewswire); still listed but not re-dated. Original review's feature list kept in substance; 'automated review requests via SMS' reworded as review generation (channel not confirmed)."}
+ "notes": "Acquired by Alchemer (a KKR portfolio company) on 2025-09-24. chatmeter.com says reputation management is now integrated into Alchemer; G2 lists it as 'Alchemer Reputation Management (formerly Chatmeter)'; Alchemer still uses 'Chatmeter by Alchemer' at alchemer.com/chatmeter. Website set to that Alchemer page because the original link (chatmeter.com) now points to Alchemer; confirm the preferred link. Alchemer announced a broader AI platform, Iris, with general availability in Q4 2026 (CMSWire), not included as an update. The delivery-app integration (Uber Eats, DoorDash, Grubhub) comes from an older press release (accessnewswire); still listed but not re-dated. Original review's feature list kept in substance; 'automated review requests via SMS' reworded as review generation (channel not confirmed). 2026-11 update: website changed to https://www.chatmeter.com/ (the live posts link it; the page now announces that Chatmeter is part of Alchemer and links to alchemer.com/chatmeter, which describes the product: 100+ review sites, bulk and suggested replies, Listings, Competitive Intelligence, Local Pages, Analytics Studio with Tableau and Domo, Pulse AI, 30-minute demo). chatmeter.com lists Google, Apple Maps and 70+ directories for listings. Alchemer's current page doesn't mention the delivery-app integration. G2 rating 4.5 from G2 search snippets (118 to 120 reviews depending on the page); G2 itself returns 403 to fetches, so the count is left out. No reputation management price is published; alchemer.com/plans-pricing lists survey licenses only.",
+ "pros": [
+  "Reviews from 100+ sites, listings for Google, Apple Maps and 70+ directories, local pages and competitor benchmarks in one platform",
+  "AI Auto-Responder (2026) posts on-brand replies under your rules and routes sensitive reviews to a person first",
+  "Pulse Ai answers plain-language questions about feedback, down to a location, region or review site",
+  "Review and listings data sit next to Alchemer's survey tools since the 2025 acquisition",
+  "Analytics Studio connects review data to BI tools such as Tableau and Domo",
+  "Rated 4.5 out of 5 on G2 (listed as Alchemer Reputation Management)"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; reputation management is quoted after a demo, and Alchemer's public price list covers survey licenses only",
+   "source": "https://www.alchemer.com/plans-pricing/"
+  },
+  {
+   "text": "No self-serve trial for reputation management; the next step is a 30-minute personalized demo",
+   "source": "https://www.alchemer.com/chatmeter/"
+  },
+  {
+   "text": "Brand in transition: chatmeter.com now announces the move to Alchemer, and the product is sold under Alchemer's name",
+   "source": "https://www.chatmeter.com/"
+  },
+  {
+   "text": "Narrower than all-in-one suites: the product page lists reviews, listings, local pages, competitive intelligence, analytics and Pulse AI, with no customer messaging such as texting or webchat",
+   "source": "https://www.alchemer.com/chatmeter/"
+  },
+  {
+   "text": "Built for multi-location brands, so a single restaurant may pay for more platform than it needs",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "custom quote after a demo",
+  "list": [],
+  "source": "https://www.alchemer.com/chatmeter/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.5",
+  "reviews": null,
+  "source": "https://www.g2.com/products/chatmeter/reviews",
+  "checked": "2026-11"
+ }
+}

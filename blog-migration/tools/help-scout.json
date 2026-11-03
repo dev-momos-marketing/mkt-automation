@@ -1,14 +1,33 @@
-{"name": "Help Scout", "website": "https://www.helpscout.com/",
+{
+ "name": "Help Scout",
+ "website": "https://www.helpscout.com/",
  "oneLiner": "Shared-inbox help desk for small and mid-size teams, with live chat (Beacon), a knowledge base (Docs), an AI agent (AI Answers) and channels including WhatsApp and SMS.",
  "bestFor": "Small and mid-size teams that want an easy shared inbox with chat, a help center and optional AI answers.",
  "customers": [
-  {"name": "OnePageCRM", "source": "https://www.helpscout.com/customers/"},
-  {"name": "Litmus", "source": "https://www.casestudies.com/company/help-scout"},
-  {"name": "Mabel's Labels", "source": "https://www.casestudies.com/company/help-scout"}
+  {
+   "name": "OnePageCRM",
+   "source": "https://www.helpscout.com/customers/"
+  },
+  {
+   "name": "Litmus",
+   "source": "https://www.casestudies.com/company/help-scout"
+  },
+  {
+   "name": "Mabel's Labels",
+   "source": "https://www.casestudies.com/company/help-scout"
+  }
  ],
  "updates": [
-  {"date": "2026-03", "text": "Winter 2026 seasonal release added WhatsApp as a channel (available from the Plus plan), conversation routing, availability status and an Aircall integration, and previewed SLAs, SMS, configurable AI agents and AI Answers for email.", "source": "https://updates.helpscout.com/releases/2026-winter/"},
-  {"date": "2026-07", "text": "Native two-way SMS: teams connect their own Twilio number and handle texts in the shared inbox, available for all paid plans.", "source": "https://articles.helpscout.com/blog/introducing-native-sms-in-help-scout/"}
+  {
+   "date": "2026-08",
+   "text": "Native two-way SMS: teams connect their own Twilio account and handle texts in the shared inbox next to email, chat and WhatsApp, available on all paid plans.",
+   "source": "https://articles.helpscout.com/blog/introducing-native-sms-in-help-scout/"
+  },
+  {
+   "date": "2026-08",
+   "text": "Native two-way SMS: teams connect their own Twilio account and handle texts in the shared inbox next to email, chat and WhatsApp, available on all paid plans.",
+   "source": "https://articles.helpscout.com/blog/introducing-native-sms-in-help-scout/"
+  }
  ],
  "features": [
   "Shared inbox with collision detection, assignments and internal notes",
@@ -20,5 +39,85 @@
   "Workflows and automatic reassignment when teammates are away",
   "Customer profiles and reports"
  ],
- "pricing": {"text": "Free plan for up to 5 users; Standard $25, Plus $45 and Pro $75 per user per month billed annually. AI Answers billed at $0.75 per resolution.", "source": "https://www.helpscout.com/pricing", "checked": "2026-11"},
- "notes": "Help Scout briefly billed by contacts helped (late 2024) and returned to per-user pricing. WhatsApp date (March 2026) comes from a pricing tracker (pricingsaas.com/companies/helpscout/diffs/2026W11); the SMS month (July 2026) comes from a search snippet of updates.helpscout.com, the blog post itself is undated in search results; please confirm. Litmus and Mabel's Labels come from a case-study aggregator listing Help Scout stories; OnePageCRM is on helpscout.com/customers. Help Scout's '73% resolution' homepage claim not used. helpscout.com could not be fetched."}
+ "pricing": {
+  "text": "Free plan for up to 5 users (1 inbox, 1 Docs site). Standard $25 (up to 25 users), Plus $45 (up to 50 users) and Pro $75 (unlimited users, minimum 10) per user per month billed annually; monthly billing costs about 16% more. 15-day free trial on Standard and Plus, no credit card; Pro is sold through a demo. AI Answers is an add-on at $0.75 per resolution, with a monthly cap and 3 months of unlimited resolutions free on new accounts.",
+  "source": "https://www.helpscout.com/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "Help Scout briefly billed by contacts helped (late 2024) and returned to per-user pricing. WhatsApp date (March 2026) comes from a pricing tracker (pricingsaas.com/companies/helpscout/diffs/2026W11); the SMS month (July 2026) comes from a search snippet of updates.helpscout.com, the blog post itself is undated in search results; please confirm. Litmus and Mabel's Labels come from a case-study aggregator listing Help Scout stories; OnePageCRM is on helpscout.com/customers. Help Scout's '73% resolution' homepage claim not used. helpscout.com could not be fetched. 2026-11 update: helpscout.com/pricing fetched directly; the Annual toggle is active by default, so $25/$45/$75 are annual rates (-16% badge). The pricing page now lists WhatsApp, Instagram and Messenger under Standard. The SMS article is dated August 4, 2026 (earlier sheet said July). G2 rating and count from a G2 search snippet of the main reviews page (G2 returns 403 to fetches).",
+ "pros": [
+  "Free plan for up to 5 users",
+  "Email, chat, WhatsApp, SMS and social messages in one shared inbox with collision detection, assignments and notes",
+  "Docs knowledge base and Beacon chat widget included",
+  "AI Answers billed only per resolution ($0.75), with a monthly spending cap",
+  "15-day free trial on Standard and Plus with no credit card",
+  "Rated 4.4 out of 5 on G2 (428 reviews)"
+ ],
+ "cons": [
+  {
+   "text": "AI drafts are on Plus and Pro; Standard has the AI Inbox assistant only",
+   "source": "https://www.helpscout.com/pricing/"
+  },
+  {
+   "text": "AI Answers costs $0.75 per resolution on top of seat prices",
+   "source": "https://www.helpscout.com/pricing/"
+  },
+  {
+   "text": "User caps: Standard allows up to 25 users and Plus up to 50; Pro needs at least 10 users and is sold through a demo",
+   "source": "https://www.helpscout.com/pricing/"
+  },
+  {
+   "text": "SMS needs your own Twilio account",
+   "source": "https://articles.helpscout.com/blog/introducing-native-sms-in-help-scout/"
+  },
+  {
+   "text": "Phone calls come through an Aircall add-on; there's no built-in voice channel",
+   "source": "https://www.helpscout.com/pricing/"
+  }
+ ],
+ "plans": {
+  "trial": "15-day free trial on Standard and Plus, no credit card; free plan for up to 5 users",
+  "billing": "per user per month, billed annually (monthly billing about 16% more)",
+  "list": [
+   {
+    "name": "Free",
+    "price": "$0",
+    "unit": "",
+    "note": "up to 5 users, 1 inbox, 1 Docs site"
+   },
+   {
+    "name": "Standard",
+    "price": "$25",
+    "unit": "per user per month, billed annually",
+    "note": "up to 25 users"
+   },
+   {
+    "name": "Plus",
+    "price": "$45",
+    "unit": "per user per month, billed annually",
+    "note": "up to 50 users"
+   },
+   {
+    "name": "Pro",
+    "price": "$75",
+    "unit": "per user per month, billed annually",
+    "note": "minimum 10 users, via demo"
+   },
+   {
+    "name": "AI Answers",
+    "price": "$0.75",
+    "unit": "per resolution",
+    "note": "add-on, billed monthly"
+   }
+  ],
+  "source": "https://www.helpscout.com/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 428,
+  "source": "https://www.g2.com/products/help-scout/reviews",
+  "checked": "2026-11"
+ }
+}
