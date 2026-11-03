@@ -1,0 +1,26 @@
+{"name": "Manychat", "website": "https://manychat.com/",
+ "oneLiner": "Chat marketing and automation platform for Instagram, Facebook Messenger, WhatsApp, TikTok and SMS that turns social followers into conversations, leads and sales.",
+ "bestFor": "Restaurants and small groups with an active Instagram or Facebook following that want to automate DMs, comment replies, promotions and simple loyalty or sign-up flows without code. It is a social messaging tool, not an operations or chain-management system.",
+ "customers": [
+  {"name": "Nike", "source": "https://www.summitpartners.com/news/manychat-raises-140m-to-fuel-the-future-of-ai-driven-customer-engagement-on-social-and-messaging-platforms"},
+  {"name": "The New York Times", "source": "https://www.summitpartners.com/news/manychat-raises-140m-to-fuel-the-future-of-ai-driven-customer-engagement-on-social-and-messaging-platforms"},
+  {"name": "Restaurant chain client of Astral Restaurant Systems (Manychat case study: 7,000 visits, $52,000 extra sales)", "source": "https://manychat.com/blog/how-this-restaurant-produced-7000-visits-and-52000-in-extra-sales-using-manychat/"}
+ ],
+ "updates": [
+  {"date": "2025-04", "text": "Raised a $140M Series B led by Summit Partners to invest in AI agents across social and messaging channels and expand globally.", "source": "https://techcrunch.com/2025/04/22/manychat-taps-140m-to-boost-its-business-messaging-platform-with-ai"},
+  {"date": "2025-10", "text": "Launched Follow to DM, which sends an automatic first message to every new Instagram follower (the 'Say hi to new followers' automation).", "source": null},
+  {"date": "2026-03", "text": "Moved to Active Contact-based pricing on March 2, 2026 with Free, Essential, Pro, Business and Advanced plans; the free plan now covers 25 active contacts.", "source": "https://help.manychat.com/hc/en-us/articles/25800323349020-Active-Contacts"}
+ ],
+ "features": [
+  "Automated replies to Instagram DMs, story replies and post comments",
+  "Messenger, WhatsApp, TikTok, SMS and email channels from one account",
+  "Visual drag-and-drop flow builder with templates, no code needed",
+  "AI steps and intents that answer free-text questions and collect details such as emails",
+  "Broadcasts and sequences for promotions, menu news and discount codes",
+  "Lead capture into contact fields and tags, with growth tools like keyword triggers and ad-to-DM entry points",
+  "Integrations with Shopify, Google Sheets, HubSpot, Zapier and Make, plus API on the top plan",
+  "Live chat inbox so staff can take over a conversation"
+ ],
+ "pricing": {"text": "Priced by active contacts per month (since March 2, 2026). Free plan up to 25 active contacts. Pro (2,500 contacts) is $39/month billed monthly or $29/month billed annually; Business (7,500 contacts) is $99/month monthly or $69/month annually. Essential (250 contacts) and Advanced (25,000 contacts, includes API) are also listed. Overage is charged per extra contact. WhatsApp conversation fees from Meta are extra. Prices vary by region.", "source": "https://help.manychat.com/hc/en-us/articles/25800228332572-Pro-plan", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing comes from search snippets of Manychat's help center (Pro and Business plan articles); the pricing page snippet showed slightly different figures for Essential ($14) and Advanced ($139 annual / $199 monthly per community post), so re-check manychat.com/pricing before publishing. Dropped from current review: 'Paid plans start at $15/month' (legacy pre-March-2026 pricing; free plan is no longer 1,000 contacts) and the utm_source=chatgpt.com tracking parameter on the website link. Follow to DM launch (Oct 22, 2025) was seen only via a Yahoo Finance press-release headline in search results; no URL captured, so source is null. Scale claims (over 1 million / 1.5 million businesses in 170 countries) are vendor-reported and vary by source. The restaurant case study is from a marketing agency's client; the ROI figures are vendor-published. Other restaurant case studies (La Catrina, Eddy's Cantina) were only found on third-party mirror sites. Fit note: Manychat is a social DM marketing tool; it does not do chain operations, so it fits 'AI agents for restaurant chain management' only for marketing use."}

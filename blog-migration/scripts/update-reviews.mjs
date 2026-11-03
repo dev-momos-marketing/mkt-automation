@@ -1,9 +1,10 @@
 // Rewrites tool reviews in "best software" posts (see scripts/reviews.mjs). For each post folder in
 // reviews/:
 //   <NN>-<tool>.html  replaces the section from the "NN. Tool" heading to the next heading
-//   meta.json         {"fields": {"Title": [[from, to]]}, "text": [[from, to]], "swap": {"13": "Ada"}}:
-//                     exact text fixes in string fields and in the rest of the post (e.g. "24 Best" →
-//                     "18 Best"), and slots where a different tool replaces the reviewed one
+//   meta.json         {"fields": {"Title": [[from, to]]}, "text": [[from, to]], "swap": {"13": "Ada"},
+//                     "embedText": {"<ID>": [[from, to]]}}: exact text fixes in string fields, in the
+//                     rest of the post (e.g. "24 Best" → "18 Best") and inside an embed's code, and
+//                     slots where a different tool replaces the reviewed one
 //   embeds/<ID>.html  replaces that embed's code in the Embeds field
 // Each review is checked first: same heading, images, embeds and links as the section it replaces,
 // the label order, a features list, numbers found in tools/<tool>.json, and no 8-word run shared with
@@ -89,6 +90,15 @@ try {
         let embedsChanged = false
         for (const [id, code] of plan.embeds) {
             if (codes.get(id) !== code) { codes.set(id, code); embedsChanged = true; changed.push(`embed ${id}`) }
+        }
+        for (const [id, pairs] of Object.entries(plan.meta.embedText ?? {})) {
+            let code = codes.get(id)
+            if (code === undefined) { problems.push(`${slug}: there's no embed ${id}`); continue }
+            for (const [from, to] of pairs) {
+                if (code.includes(from)) code = code.replace(from, to)
+                else if (!code.includes(to)) problems.push(`${slug}: embed ${id} doesn't contain "${from}"`)
+            }
+            if (code !== codes.get(id)) { codes.set(id, code); embedsChanged = true; changed.push(`embed ${id}`) }
         }
         if (embedsChanged) fieldData[embedsDef.id] = { type: "string", value: embedsField([...codes].map(([id, code]) => ({ id, html: code }))) }
         if (html !== String(entry.value ?? "")) {

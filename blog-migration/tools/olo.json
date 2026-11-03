@@ -1,0 +1,27 @@
+{"name": "Olo", "website": "https://www.olo.com/",
+ "oneLiner": "Restaurant commerce platform for digital ordering, delivery and marketplace integration, payments, guest data and (since late 2025) loyalty; privately owned by Thoma Bravo since September 2025.",
+ "bestFor": "Multi-unit and enterprise restaurant brands that want to run branded web and app ordering, pipe marketplace orders into the POS, and build guest data and loyalty on top of that ordering data.",
+ "customers": [
+  {"name": "Ben & Jerry's (Olo Ordering, Rails and Olo Pay)", "source": "https://www.sec.gov/Archives/edgar/data/1431695/000143169525000015/oloq12025exhibit991.htm"},
+  {"name": "Gong Cha (Olo Rails)", "source": "https://www.sec.gov/Archives/edgar/data/1431695/000143169525000015/oloq12025exhibit991.htm"},
+  {"name": "Pilot Travel Centers (Olo Rails)", "source": "https://www.sec.gov/Archives/edgar/data/1431695/000143169525000015/oloq12025exhibit991.htm"},
+  {"name": "Jason's Deli (Order suite, Olo Pay and Catering+)", "source": "https://www.sec.gov/Archives/edgar/data/1431695/000143169525000007/oloq42024exhibit991.htm"}
+ ],
+ "updates": [
+  {"date": "2025-09", "text": "Thoma Bravo completed its roughly $2 billion all-cash acquisition of Olo ($10.25 per share); Olo stock stopped trading on the NYSE and the company is now private.", "source": "https://www.olo.com/thoma-bravo-completes-acquisition-of-olo"},
+  {"date": "2025-12", "text": "Completed the acquisition of loyalty platform Spendgo and launched Olo Loyalty, which pairs loyalty with Olo's guest data and marketing tools.", "source": "https://www.restaurantbusinessonline.com/technology/olo-acquires-spendgo-launches-its-own-loyalty-offering"},
+  {"date": "2026-03", "text": "Unveiled the Olo App at its Beyond4 conference: a consumer ordering app across Olo-powered restaurants, positioned as a 'second-party' channel between a brand's own app and third-party marketplaces, with a flat per-order fee instead of commissions. Trade press reported its launch in October 2026.", "source": "https://www.nrn.com/restaurant-technology/olo-launches-first-consumer-facing-digital-ordering-app"}
+ ],
+ "features": [
+  "Branded online and app ordering for pickup, delivery, curbside and catering",
+  "Rails: brings DoorDash, Uber Eats, Grubhub and other marketplace orders straight into the POS",
+  "Dispatch: on-demand delivery through third-party courier networks from the brand's own channels",
+  "Olo Pay for card-not-present and in-store payments",
+  "Guest Data Platform and marketing tools built on ordering data",
+  "Olo Loyalty (from the Spendgo acquisition), including phone-number enrollment in store",
+  "Olo Accounts (formerly Borderless): one passwordless guest login across Olo-powered restaurants",
+  "Centralized menu management across locations and channels"
+ ],
+ "pricing": {"text": "Custom pricing; contact Olo for a quote.", "source": null, "checked": "2026-11"},
+ "status": "acquired",
+ "notes": "Lead confirmed: Thoma Bravo took Olo private (closed September 12, 2025); Olo still operates and sells under its own name. Customer names come from Olo's own 2025/Q4 2024 earnings releases (SEC exhibits). Older lists naming Shake Shack, Chili's, Wingstop were not confirmed as current; a 2023 earnings call said Wingstop intended to leave Olo, so do not use Wingstop. Olo App launch timing and scope: unveiled March 2026, launch reported October 20, 2026 by Fast Casual; rollout scope at launch was unclear. Scale figures (750-800+ brands, ~88,000-90,000 locations) are vendor-reported. No dropped numbers from the current review beyond its general 'largest chains' / 'unmatched' framing, which is unverifiable."}

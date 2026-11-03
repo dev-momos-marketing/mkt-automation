@@ -1,0 +1,33 @@
+{
+ "name": "Lightspeed Restaurant",
+ "website": "https://www.lightspeedhq.com/pos/restaurant/",
+ "oneLiner": "Cloud restaurant POS from Lightspeed Commerce with table and order management, integrated payments, inventory, multi-location reporting and, since 2026, Lightspeed AI assistants.",
+ "bestFor": "Full-service restaurants, bars and growing multi-location groups that want a cloud POS with integrated payments, deep reporting and service-pacing tools.",
+ "customers": [
+  {"name": "Five Guys (Koeppel Companies franchise)", "source": "https://www.lightspeedhq.com/customers/five-guys/"},
+  {"name": "Dean & David", "source": "https://www.lightspeedhq.com/pos/restaurant/customers/"},
+  {"name": "Cafe Lola (Johnson City, Tenn.)", "source": "https://www.hotelmanagement.net/tech/lightspeed-restaurant-expands-new-markets"}
+ ],
+ "updates": [
+  {"date": "2026-01", "text": "Launched Lightspeed AI, an intelligence layer with conversational assistants inside Lightspeed Restaurant that answer operators' questions about their sales and operations.", "source": "https://www.nasdaq.com/press-release/lightspeed-commerce-launches-lightspeed-ai-new-ai-powered-intelligence-layer-retail"},
+  {"date": "2025-11", "text": "Unveiled Tempo, service-pacing intelligence that uses real-time dining-flow data to show table pacing, order flow and occupancy, rolled out first to flagship Lightspeed Restaurant customers.", "source": "https://www.lightspeedhq.com/news/lightspeed-commerce-unveils-tempo-a-revolutionary-new-pacing-intelligence-for-restaurants/"},
+  {"date": "2026-03", "text": "Added digital checklists (Lightspeed Tasks), table pacing and reservations improvements to the restaurant platform.", "source": "https://k-series-support.lightspeedhq.com/hc/articles/47746434645275-What-s-new-March-2026-Table-pacing-digital-checklists-reservations-and-more"}
+ ],
+ "features": [
+  "Cloud POS on iPad with floor plans, table management and coursing",
+  "Integrated Lightspeed Payments, including pay-at-table and mobile tap-to-pay",
+  "Kitchen display system and order routing",
+  "Inventory and recipe tracking with menu performance reports",
+  "Multi-location menu management and consolidated reporting",
+  "Online ordering, reservations and loyalty add-ons",
+  "Tempo service-pacing insights for full-service dining rooms",
+  "Lightspeed AI assistants for questions about sales and operations"
+ ],
+ "pricing": {
+  "text": "US plans published by Lightspeed: Essential from $189/month and Premium from $399/month (payment processing and add-ons such as KDS screens and reservations cost extra); custom pricing for larger groups.",
+  "source": "https://www.lightspeedhq.com/pos/restaurant/pricing/",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Owner: Lightspeed Commerce Inc. (NYSE/TSX: LSPD). Dropped from the current review: 'trusted by over 150,000 businesses worldwide' (not re-verified) and the claim that reporting and inventory are 'genuinely stronger than most competitors' (subjective). The $189 Essential price still appears on Lightspeed's US pricing page per search results; a cheaper Starter tier is disputed by third parties, so it was left out. Prices vary by region (UK/AU differ). Tempo availability differs by region and plan per Lightspeed's own support pages. Lightspeed Restaurant also operates in Europe as the K-Series platform."
+}

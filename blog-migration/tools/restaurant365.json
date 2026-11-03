@@ -1,0 +1,32 @@
+{
+ "name": "Restaurant365",
+ "website": "https://www.restaurant365.com/",
+ "oneLiner": "Cloud back-office platform for restaurants that combines restaurant accounting, inventory and food costing, scheduling, payroll and reporting, with an AI layer (R365 AI) built on the restaurant P&L.",
+ "bestFor": "Multi-location restaurant groups and franchisees that want accounting, inventory and workforce management in one system tied to the P&L.",
+ "customers": [
+  {"name": "Villa Restaurant Group", "source": "https://njbiz.com/villa-restaurant-group-operations-excellence-award-2025/"},
+  {"name": "Wholly Stromboli", "source": "https://www.restaurant365.com/in-the-news/restaurant365-announces-winners-of-the-2025-customer-excellence-awards/"},
+  {"name": "Johnson's Landing", "source": "https://www.restaurant365.com/in-the-news/restaurant365-announces-winners-of-the-2025-customer-excellence-awards/"}
+ ],
+ "updates": [
+  {"date": "2026-05", "text": "Introduced R365 AI at the National Restaurant Association Show: an intelligence engine built on the full restaurant P&L, with AI dashboards, an AI advisor, a labor management suite and AI scheduling (scheduling in early access).", "source": "https://www.restaurant365.com/in-the-news/restaurant365-adds-ai-engine-to-r365-management-platform"},
+  {"date": "2025-09", "text": "Launched its first Customer Excellence Awards, recognizing customers in accounting, operations and workforce.", "source": "https://www.restaurant365.com/in-the-news/restaurant365-announces-winners-of-the-2025-customer-excellence-awards/"},
+  {"date": "2026-06", "text": "Appointed Kate Hastings as Chief Customer Officer as it expanded investment in customer success.", "source": "https://www.finanznachrichten.de/nachrichten-2026-06/68842390-restaurant365-names-kate-hastings-chief-customer-officer-as-it-expands-investment-in-customer-success-008.htm"}
+ ],
+ "features": [
+  "Restaurant-specific accounting with automated invoice processing, bank reconciliation and multi-entity P&Ls",
+  "Inventory, recipe costing and theoretical vs. actual food cost reporting",
+  "Employee scheduling and labor management tied to sales forecasts",
+  "Payroll and HR built for hourly restaurant teams, including tips",
+  "POS integrations that bring daily sales into the books automatically",
+  "Multi-location reporting and budgeting, including franchise royalty tracking",
+  "R365 AI dashboards and an AI advisor that surface P&L, labor and cost insights"
+ ],
+ "pricing": {
+  "text": "Per-location bundles billed quarterly or annually, with custom quotes for larger groups. Restaurant365's own pages show different dollar figures, so check the pricing page for current rates.",
+  "source": "https://www.restaurant365.com/pricing/",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from the current review: 'used by over 52,000 restaurant locations' (not confirmed in this research), the 'typically starts around $400-$500/month' price (vendor pages show conflicting figures: $469/$689 on the partner referral page, $489-$539 for Professional on the operations page; review sites list $435-$499), and the named clients Portillo's, Walk-On's and Newk's (not re-verified within the search budget; may still be true). 'The only platform that natively combines accounting with operations' is a superlative to avoid. Orange County Business Journal reports a $1B valuation and $100M+ annual revenue (https://www.ocbj.com/news/weekly-news/tony-smith-expanding-menu-restaurant365/). Villa Restaurant Group (400+ locations) won the 2025 Operations award."
+}

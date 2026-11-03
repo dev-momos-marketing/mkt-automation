@@ -18,5 +18,29 @@
    "list of 15 best Voice of Customer tools",
    "list of 12 best Voice of Customer tools"
   ]
- ]
+ ],
+ "swap": {
+  "5": "Chatmeter",
+  "8": "Tattle"
+ },
+ "embedText": {
+  "OrcEHc4R8": [
+   [
+    ">Forsta</a>",
+    ">Chatmeter</a>"
+   ],
+   [
+    "Combined market research and experience data",
+    "Review and social listening across locations"
+   ],
+   [
+    ">Delighted</a>",
+    ">Tattle</a>"
+   ],
+   [
+    "Fast, simple NPS and CSAT surveys",
+    "Guest feedback tied to orders and visits"
+   ]
+  ]
+ }
 }

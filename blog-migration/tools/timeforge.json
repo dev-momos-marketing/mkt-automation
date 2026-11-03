@@ -1,0 +1,29 @@
+{
+ "name": "TimeForge",
+ "website": "https://timeforge.com/",
+ "oneLiner": "Restaurant and retail labor management software for scheduling, time and attendance and labor compliance, with Lineup.ai's AI sales and labor forecasting built in since 2024.",
+ "bestFor": "Restaurant groups and franchise operators (quick service and casual dining) that want sales-driven schedules, time tracking and labor compliance in one system, using AI forecasts from their POS data.",
+ "customers": [
+  {"name": "Hard Eight BBQ", "source": "https://timeforge.com/?p=28657"},
+  {"name": "Great Harvest Bread Co. (Great Harvest Franchising, preferred vendor)", "source": "https://www.grocerydive.com/press-release/20221206-timeforge-selected-as-preferred-vendor-by-great-harvest-franchising-inc-1"}
+ ],
+ "updates": [
+  {"date": "2025-07", "text": "Joined Square's app ecosystem with an integration that pulls Square POS sales into TimeForge to forecast labor and set staffing levels.", "source": "https://www.einpresswire.com/article/830531198/timeforge-joins-square-s-ecosystem-to-make-managing-teams-easier-than-ever"}
+ ],
+ "features": [
+  "AI sales and labor forecasting from POS history (Lineup.ai technology), in 15-minute increments",
+  "Sales-driven, auto-generated employee schedules matched to forecast demand",
+  "Time and attendance with clock-in tracking and real-time alerts when labor runs over target",
+  "Labor law compliance support, including overtime rules and predictive (fair workweek) scheduling",
+  "Employee self-service for availability, shift swaps and time off",
+  "Multi-unit reporting on labor cost against sales",
+  "POS integrations including Toast, Square and others"
+ ],
+ "pricing": {
+  "text": "Custom pricing; contact TimeForge for a quote. Older vendor blog posts and third-party directories show conflicting figures, so none are quoted.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Replaces the Lineup.ai review: TimeForge (Lubbock, TX; founded 1998) added Lineup.ai to its platform in August 2024 (https://timeforge.com/?p=30903, https://hospitalitytech.com/timeforge-adds-lineupai-its-platform-ai-powered-forecasting-labor-solutions); Lineup.ai's forecasting now sits inside TimeForge. A TimeForge blog post names Jamba, Blue Ribbon Restaurants and Original Joe's with 25-40% scheduling-time reductions, but it reads as marketing content, so they were left out. Vendor claims such as 'up to 95% forecast accuracy' are unverified and left out. A Heartland Restaurant POS integration is mentioned by a directory listing but no dated announcement was found, so it was left out. Pricing: a TimeForge blog post cites $1.50/$2.00 per employee per month and an AWG reseller page cites $295/month per location (grocery); both may be dated and don't match third-party listings, so they're not quoted."
+}

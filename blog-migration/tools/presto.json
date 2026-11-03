@@ -1,0 +1,48 @@
+{
+ "name": "Presto Voice (Presto)",
+ "website": "https://presto.com/",
+ "oneLiner": "Drive-thru voice AI that takes quick-service orders through the existing headset and POS; now run by privately held Presto Phoenix after Presto Automation's assets were sold in late 2024.",
+ "bestFor": "Multi-unit QSR chains and franchise groups with high-volume drive-thrus that want to automate order-taking.",
+ "customers": [
+  {
+   "name": "Carl's Jr. / Hardee's",
+   "source": "https://restaurantbusinessonline.com/technology/ai-supplier-presto-sold-group-including-lender-former-investor"
+  },
+  {
+   "name": "Taco John's",
+   "source": "https://restaurantbusinessonline.com/technology/ai-supplier-presto-sold-group-including-lender-former-investor"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-09",
+   "text": "Partnered with ElevenLabs to use its more lifelike text-to-speech voices in Presto Voice at the drive-thru.",
+   "source": "https://presto.com/presto-and-elevenlabs-partner-to-bring-the-most-realisticvoice-ai-platform-to-restaurant-drive-thrus/"
+  },
+  {
+   "date": "2026-01",
+   "text": "Raised $10 million (led by Metropolitan Partners Group) to scale enterprise QSR deployments, saying the product had moved past pilots to hundreds of drive-thru lanes.",
+   "source": "https://presto.com/presto-adds-10m-to-accelerate-ai-leadership-for-enterprise-qsr-brands/"
+  },
+  {
+   "date": "2026",
+   "text": "Joined the Toast Partner Ecosystem so Toast POS restaurants can send voice-taken drive-thru orders straight to the kitchen.",
+   "source": "https://salestechstar.com/partner-management-channel-enablement/presto-announces-integration-with-toast-to-expand-voice-ai-for-drive-thru-automation/"
+  }
+ ],
+ "features": [
+  "AI voice ordering at the drive-thru speaker post",
+  "Runs on the restaurant's existing headsets and POS, with a Toast integration",
+  "Suggestive upselling during the order",
+  "Multi-language ordering",
+  "Lifelike synthetic voices (ElevenLabs), including custom brand voices",
+  "Centralized menu management across locations"
+ ],
+ "pricing": {
+  "text": "Custom pricing; contact Presto.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "acquired",
+ "notes": "Lead confirmed and clarified: Presto Automation (Nasdaq: PRST) was delisted, defaulted on its Metropolitan Partners loan in September 2024, and its assets were sold in December 2024 to a group led by Remus Capital (with Link Ventures and Metropolitan); the business now operates as Presto Phoenix with $18M of new capital, and existing customers carried over. Presto Voice is still sold as of 2026 (funding news in January 2026). A second '$10M' Business Wire item is dated September 2026 and may be a separate round or the same one re-reported; unresolved. Toast integration date not confirmed (listed as 2026 from the funding release mentioning it as recent). The OpenAI/ChatGPT collaboration is from March 2023 (pre-sale) so it is not listed as an update. Dropped from current review: Wienerschnitzel, Captain D's and Fazoli's as customers (not confirmed in current sources; some date from the public-company era) and 'Voice AI market leader' (vendor claim). Vendor's '95% of orders without staff intervention' claim is old and unverified; do not use."
+}
