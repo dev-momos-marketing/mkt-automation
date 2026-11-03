@@ -1,14 +1,33 @@
-{"name": "Aircall", "website": "https://aircall.io/",
+{
+ "name": "Aircall",
+ "website": "https://aircall.io/",
  "oneLiner": "Cloud phone system and AI-powered customer communications platform for sales and support teams, with an AI Voice Agent, AI Assist and deep CRM and helpdesk integrations. Aircall says more than 22,000 businesses use it.",
  "bestFor": "Teams that handle a lot of customer calls and want their phone system connected to their CRM or helpdesk, with AI to answer and summarize calls.",
  "customers": [
-  {"name": "Baguette Atelier", "source": "https://aircall.io/customer-stories/baguette-atelier/"},
-  {"name": "Birdies", "source": "https://aircall.io/customer-stories/birdies/"},
-  {"name": "Doxo", "source": "https://aircall.io/customer-stories/doxo/"}
+  {
+   "name": "Baguette Atelier",
+   "source": "https://aircall.io/customer-stories/baguette-atelier/"
+  },
+  {
+   "name": "Birdies",
+   "source": "https://aircall.io/customer-stories/birdies/"
+  },
+  {
+   "name": "Doxo",
+   "source": "https://aircall.io/customer-stories/doxo/"
+  }
  ],
  "updates": [
-  {"date": "2026-05", "text": "Aircall acquired Vogent, a San Francisco AI voice agent company (May 6, 2026), to strengthen its AI Voice Agent with speech models, turn-taking and control over how AI behaves on live calls.", "source": "https://www.businesswire.com/news/home/20260506396746/en/Aircall-Acquires-Vogent-to-Advance-Its-AI-Voice-Agent-Built-Natively-into-Business-Phones"},
-  {"date": "2026-09", "text": "September 2026 product update: AI Voice Agent templates and AI Voice Agent Campaigns, which call an uploaded contact list (10 to 5,000 contacts) with an AI agent; available on every plan.", "source": "https://aircall.io/blog/news/aircall-insider-sept-2026/"}
+  {
+   "date": "2026-05",
+   "text": "Aircall acquired Vogent, a San Francisco AI voice agent company (May 6, 2026), to strengthen its AI Voice Agent with speech models, turn-taking and control over how AI behaves on live calls.",
+   "source": "https://www.businesswire.com/news/home/20260506396746/en/Aircall-Acquires-Vogent-to-Advance-Its-AI-Voice-Agent-Built-Natively-into-Business-Phones"
+  },
+  {
+   "date": "2026-09",
+   "text": "September 2026 product update: AI Voice Agent templates and AI Voice Agent Campaigns, which call an uploaded contact list (10 to 5,000 contacts) with an AI agent; available on every plan.",
+   "source": "https://aircall.io/blog/news/aircall-insider-sept-2026/"
+  }
  ],
  "features": [
   "Local, toll-free and international business numbers",
@@ -18,7 +37,76 @@
   "Call recording, live monitoring, whisper and barge for supervisors",
   "SMS/MMS and WhatsApp messaging",
   "Integrations with CRMs and helpdesks such as Salesforce, HubSpot, Zendesk and Intercom",
-  "Real-time and historical call analytics"
+  "Real-time and historical call analytics",
+  "Shared inbox for SMS and MMS conversations (Essentials and up)"
  ],
- "pricing": {"text": "Essentials $30 per license/month and Professional $50 per license/month, billed annually, minimum 3 licenses; Custom is quoted. AI Assist is a $9/license/month add-on on Essentials.", "source": "https://aircall.io/pricing/", "checked": "2026-11"},
- "notes": "The original's '100+ countries' number coverage could not be confirmed on an Aircall page and was dropped. A third-party directory claims AI Voice Agents launched April 2026; Aircall's own release dates the launch to April 2025, so that was used. aircall.io could not be fetched; pricing confirmed across several third-party pages."}
+ "pricing": {
+  "text": "Essentials $30 and Professional $50 per license per month, billed annually (annual billing saves 25% against paying monthly), minimum 3 licenses; Enterprise is custom pricing with a minimum of 25 licenses. Every plan includes 50 minutes of AI Voice Agents per month; extra minutes are usage-based ($0.29 per minute pay as you go, or bundles). AI call summaries are in Professional; on Essentials they come with the AI Assist add-on; AI Assist Pro is $49 per seat per month. 7-day free trial.",
+  "source": "https://aircall.io/pricing/",
+  "checked": "2026-11"
+ },
+ "notes": "The original's '100+ countries' number coverage could not be confirmed on an Aircall page and was dropped. A third-party directory claims AI Voice Agents launched April 2026; Aircall's own release dates the launch to April 2025, so that was used. aircall.io could not be fetched; pricing confirmed across several third-party pages. November 2026: aircall.io/pricing fetched directly. The 'Custom' plan is now called Enterprise (minimum 25 licenses); the $9 AI Assist add-on price is no longer shown (only AI Assist Pro at $49 per seat per month). The 7-day trial comes from aircall.io/en-au/c/free-trial/ ('Get your free 7-day trial'); the pricing page only says 'free access'. 250+ integrations from the Essentials plan features. G2 rating from search snippets of g2.com/products/aircall/reviews (4.4 from 1,682; other G2 pages show 1,644 to 1,679).",
+ "pros": [
+  "CRM and helpdesk connections: 250+ integrations including Salesforce, HubSpot, Zendesk and Intercom",
+  "AI Voice Agent answers routine calls 24/7, with 50 minutes a month included on every plan",
+  "Supervisor tools: call recording, live monitoring, whisper and barge",
+  "Published prices from $30 per license per month",
+  "Rated 4.4/5 on G2 from 1,682 reviews",
+  "Widely used: Aircall says more than 22,000 businesses use it"
+ ],
+ "cons": [
+  {
+   "text": "Minimum of 3 licenses on Essentials and Professional; Enterprise starts at 25 licenses",
+   "source": "https://aircall.io/pricing/"
+  },
+  {
+   "text": "AI call summaries are included only in Professional; Essentials needs the AI Assist add-on",
+   "source": "https://aircall.io/pricing/"
+  },
+  {
+   "text": "AI Voice Agent use beyond the included 50 minutes a month is billed by the minute ($0.29 pay as you go) or in bundles",
+   "source": "https://aircall.io/pricing/"
+  },
+  {
+   "text": "No free plan; a 7-day free trial, then a paid plan",
+   "source": "https://aircall.io/en-au/c/free-trial/"
+  },
+  {
+   "text": "Phone and messaging only: email tickets and live chat need a helpdesk, which Aircall connects to",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": "7-day free trial",
+  "billing": "per license per month, billed annually; minimum 3 licenses",
+  "list": [
+   {
+    "name": "Essentials",
+    "price": "$30",
+    "unit": "per license per month, billed annually",
+    "note": "Minimum 3 licenses; 50 AI Voice Agent minutes a month"
+   },
+   {
+    "name": "Professional",
+    "price": "$50",
+    "unit": "per license per month, billed annually",
+    "note": "Adds AI call summaries, smart routing, Power Dialer, full API"
+   },
+   {
+    "name": "Enterprise",
+    "price": "Custom",
+    "unit": "quoted",
+    "note": "Minimum 25 licenses"
+   }
+  ],
+  "source": "https://aircall.io/pricing/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.4",
+  "reviews": 1682,
+  "source": "https://www.g2.com/products/aircall/reviews",
+  "checked": "2026-11"
+ }
+}

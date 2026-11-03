@@ -1,16 +1,42 @@
-{"name": "Ovation", "website": "https://ovationup.com/",
+{
+ "name": "Ovation",
+ "website": "https://ovationup.com/",
  "oneLiner": "AI-first guest experience platform built for multi-unit restaurants: two-question SMS surveys, real-time guest recovery, review and listings management, and AI insights from guest feedback.",
  "bestFor": "Multi-unit and enterprise restaurant brands that want to catch and fix bad experiences quickly through text-based feedback, and reply to public reviews from the same dashboard.",
  "customers": [
-  {"name": "Dave's Hot Chicken", "source": "https://ovationup.com/case-study/daves-hot-chicken/"},
-  {"name": "Curry Up Now", "source": "https://ovationup.com/case-study/curry-up-now/"},
-  {"name": "Bareburger", "source": "https://ovationup.com/case-study/bareburger/"},
-  {"name": "Taziki's Mediterranean Cafe", "source": "https://www.qsrweb.com/resources/how-tazikis-mediterranean-cafe-skyrocketed-survey-volume-ovation-case-study"}
+  {
+   "name": "Dave's Hot Chicken",
+   "source": "https://ovationup.com/case-study/daves-hot-chicken/"
+  },
+  {
+   "name": "Curry Up Now",
+   "source": "https://ovationup.com/case-study/curry-up-now/"
+  },
+  {
+   "name": "Bareburger",
+   "source": "https://ovationup.com/case-study/bareburger/"
+  },
+  {
+   "name": "Taziki's Mediterranean Cafe",
+   "source": "https://www.qsrweb.com/resources/how-tazikis-mediterranean-cafe-skyrocketed-survey-volume-ovation-case-study"
+  }
  ],
  "updates": [
-  {"date": "2025-10", "text": "Fall 2025 release added reputation management: reviews from Google, Yelp, Facebook and others, listings across 50+ directories and social in one place, with AI-suggested review replies or templates.", "source": "https://ovationup.com/fall-2025-release/"},
-  {"date": "2026-02", "text": "Raised $3 million from nearly a dozen of its own restaurant customers, bringing total funding to $12 million, to expand AI-driven insights and product development.", "source": "https://ovationup.com/3-million-round/"},
-  {"date": "2026-05", "text": "Spring 2026 release added Brand Voice, tone instructions applied across winback messages, automated responses and review replies, plus a Menu Item Performance Report linking guest sentiment to order data.", "source": "https://ovationup.com/spring-2026-release/"}
+  {
+   "date": "2025-10",
+   "text": "Fall 2025 release added reputation management: reviews from Google, Yelp, Facebook and others, listings across 50+ directories and social in one place, with AI-suggested review replies or templates.",
+   "source": "https://ovationup.com/fall-2025-release/"
+  },
+  {
+   "date": "2026-02",
+   "text": "Raised $3 million from nearly a dozen of its own restaurant customers, bringing total funding to $12 million, to expand AI-driven insights and product development.",
+   "source": "https://ovationup.com/3-million-round/"
+  },
+  {
+   "date": "2026-05",
+   "text": "Spring 2026 release added Brand Voice, tone instructions applied across winback messages, automated responses and review replies, plus a Menu Item Performance Report linking guest sentiment to order data.",
+   "source": "https://ovationup.com/spring-2026-release/"
+  }
  ],
  "features": [
   "Two-question SMS surveys sent automatically after orders, through POS and ordering integrations or table QR codes",
@@ -20,8 +46,54 @@
   "Listings management across 50+ directories and social posting",
   "AI categorization of written feedback into restaurant-specific themes such as food quality, speed and cleanliness",
   "Competitive Pulse benchmarking against up to five competitors per location",
-  "Reports linking guest sentiment to menu items and order data"
+  "Reports linking guest sentiment to menu items and order data",
+  "Integrations with over 50 POS, online ordering and loyalty systems",
+  "Operational insights across 35+ feedback categories, with heat maps and custom dashboards",
+  "Text marketing and Call-to-Text winback campaigns",
+  "Long-form follow-up surveys tied to what guests ordered"
  ],
- "pricing": {"text": "Custom pricing; Ovation quotes per account (physical locations and ghost kitchens, with volume discounts) and does not publish prices.", "source": "https://ovationup.com/?p=25", "checked": "2026-11"},
+ "pricing": {
+  "text": "Custom pricing; Ovation quotes per account (physical locations and ghost kitchens, with volume discounts) and does not publish prices.",
+  "source": "https://ovationup.com/?p=25",
+  "checked": "2026-11"
+ },
  "status": "active",
- "notes": "Product is marketed as Ovation at ovationup.com (company sometimes called Ovation Up); founder and CEO Zack Oates. Other 2025 releases: Spring 2025 (April, ROI and long-form survey tools) and Summer 2025 (July, Competitive Pulse and Review Response Visibility), per restaurantnews.com. The Fall 2025 release date (October 15, 2025) comes from search results. Third-party sites (Capterra, GetApp) list a $99/user starting price that does not match Ovation's own custom-quote page; not used. Other brands with case studies on ovationup.com: PDQ Chicken, Earthbar, Big Chicken, VIA 313, Sticky's Finger Joint, Righteous Slice. Nothing in the current review needed dropping; its description matches current positioning."}
+ "notes": "Product is marketed as Ovation at ovationup.com (company sometimes called Ovation Up); founder and CEO Zack Oates. Other 2025 releases: Spring 2025 (April, ROI and long-form survey tools) and Summer 2025 (July, Competitive Pulse and Review Response Visibility), per restaurantnews.com. The Fall 2025 release date (October 15, 2025) comes from search results. Third-party sites (Capterra, GetApp) list a $99/user starting price that does not match Ovation's own custom-quote page; not used. Other brands with case studies on ovationup.com: PDQ Chicken, Earthbar, Big Chicken, VIA 313, Sticky's Finger Joint, Righteous Slice. Nothing in the current review needed dropping; its description matches current positioning. November 2026 check: ovationup.com lists three packages (Retention Marketing, Digital Table Touch, Full CX Suite) with prices hidden and promises a custom quote within 24 hours; no free trial is mentioned. G2's Ovation Up listing showed 4.0 from 2 reviews in a July 2026 snapshot, too few to cite, so no rating key. The 50+ integrations and 35+ categories come from the ovationup.com homepage. The homepage also claims an average 18x feedback increase over long-form surveys (vendor claim, used only qualitatively).",
+ "pros": [
+  "Restaurant-specific: built for multi-unit restaurants, with feedback themes such as food quality, speed and cleanliness",
+  "Short SMS surveys: two questions sent automatically after an order through POS and ordering integrations or table QR codes",
+  "Fast guest recovery: real-time alerts on negative feedback and AI-suggested replies shaped by Brand Voice",
+  "Private feedback, public reviews and listings in one dashboard since the fall 2025 release",
+  "Connects with over 50 POS, online ordering and loyalty systems (ovationup.com)",
+  "Backed by its own customers: $3 million from nearly a dozen restaurant customers in February 2026"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; Ovation gives a custom quote per account after a demo or chat",
+   "source": "https://ovationup.com/?p=25"
+  },
+  {
+   "text": "No free trial is offered on the pricing page or homepage; you schedule a demo",
+   "source": "https://ovationup.com/?p=25"
+  },
+  {
+   "text": "Review and listings management is newer than the survey product: it was added in the fall 2025 release",
+   "source": "https://ovationup.com/fall-2025-release/"
+  },
+  {
+   "text": "Few independent reviews: G2 lists only a couple of user reviews, too few to judge it by",
+   "source": "https://www.g2.com/products/ovation-up-ovation/reviews"
+  },
+  {
+   "text": "Built for restaurants, so groups that also run non-restaurant businesses may need another tool for those",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "Custom quote per account, counting physical locations and ghost kitchens, with volume discounts",
+  "list": [],
+  "source": "https://ovationup.com/?p=25",
+  "checked": "2026-11"
+ }
+}
