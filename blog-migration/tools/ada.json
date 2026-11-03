@@ -4,14 +4,46 @@
  "oneLiner": "AI customer service agent platform that automates conversations across chat, messaging, email and voice.",
  "bestFor": "Brands with high support volume that want an AI agent to resolve routine questions across channels before a person steps in.",
  "customers": [
-  {"name": "Betsson", "source": "https://www.ada.cx"},
-  {"name": "Cebu Pacific", "source": "https://www.ada.cx"},
-  {"name": "monday.com", "source": "https://www.ada.cx"},
-  {"name": "Malaysia Airlines", "source": "https://www.ada.cx/media-center/"}
+  {
+   "name": "Betsson",
+   "source": "https://www.ada.cx"
+  },
+  {
+   "name": "Cebu Pacific",
+   "source": "https://www.ada.cx"
+  },
+  {
+   "name": "monday.com",
+   "source": "https://www.ada.cx"
+  },
+  {
+   "name": "Malaysia Airlines",
+   "source": "https://www.ada.cx/media-center/"
+  },
+  {
+   "name": "Pinterest",
+   "source": "https://www.ada.cx/platform/"
+  },
+  {
+   "name": "Barnes & Noble",
+   "source": "https://www.ada.cx/platform/"
+  },
+  {
+   "name": "IPSY",
+   "source": "https://www.ada.cx/platform/"
+  }
  ],
  "updates": [
-  {"date": "2026-02", "text": "Unified Reasoning Engine: one intelligence layer for Ada's agents across voice, chat, messaging and email; Playbooks (structured workflows) available on voice as well as chat and messaging.", "source": "https://www.ada.cx/blog/category/product-updates-and-ada-news/"},
-  {"date": "2026-07", "text": "Builder update: native AI generation in 60 languages, images in automated conversations, enterprise audit logging, and APIs for extending Ada.", "source": "https://www.ada.cx/blog/agentic-ai-customer-service-updates-july-2026/"}
+  {
+   "date": "2026-02",
+   "text": "Unified Reasoning Engine: one intelligence layer for Ada's agents across voice, chat, messaging and email; Playbooks (structured workflows) available on voice as well as chat and messaging.",
+   "source": "https://www.ada.cx/blog/category/product-updates-and-ada-news/"
+  },
+  {
+   "date": "2026-07",
+   "text": "Builder update: native AI generation in 60 languages, images in automated conversations, enterprise audit logging, and APIs for extending Ada.",
+   "source": "https://www.ada.cx/blog/agentic-ai-customer-service-updates-july-2026/"
+  }
  ],
  "features": [
   "One AI agent across chat, messaging, email and voice, powered by the Unified Reasoning Engine.",
@@ -20,8 +52,54 @@
   "Images in automated conversations.",
   "APIs to connect the agent to business systems and extend it into any customer experience.",
   "Integrations with helpdesks such as Dixa for handoff to human agents.",
-  "Enterprise audit logging."
+  "Enterprise audit logging.",
+  "Channels: voice, email, chat, messenger, WhatsApp, SMS, Instagram, in-app and custom channels, all through one reasoning layer.",
+  "Integrations with Zendesk, Salesforce, ServiceNow, Genesys, Amazon Connect, Twilio Flex, Freshworks and Aircall, plus open APIs, SDKs and MCP support.",
+  "Security and compliance: SOC 2, HIPAA, GDPR, PCI DSS, CCPA/CPRA, PIPEDA and AIUC-1; zero data retention with LLM providers."
  ],
- "pricing": {"text": "No published prices; custom quotes from Ada's sales team, mainly priced by conversations.", "source": null, "checked": "2026-11"},
- "notes": "Replaces Drift (sunset announced March 2026) in best-customer-support-software. Customer outcome figures on ada.cx are vendor-reported and not used. Third-party per-resolution prices are unsourced estimates and not used."
+ "pricing": {
+  "text": "No published prices. Ada's default model charges for every conversation the AI agent has with end users; a resolution-based model is offered to enterprises with specific needs. Pricing follows a demo call.",
+  "source": "https://www.ada.cx/platform/",
+  "checked": "2026-11"
+ },
+ "notes": "Replaces Drift (sunset announced March 2026) in best-customer-support-software. Customer outcome figures on ada.cx are vendor-reported and not used. Third-party per-resolution prices are unsourced estimates and not used. November 2026: ada.cx/pricing shows no prices, only a form for a 30-minute call; the conversation-based model is from the pricing FAQ on ada.cx/platform. G2 shows 4.6 out of 5 (176 reviews on the main page snippet; 173-176 across snapshots).",
+ "pros": [
+  "One AI agent and reasoning layer across voice, email, chat, WhatsApp, SMS and Instagram",
+  "Native AI generation in 60 languages",
+  "Connects to Zendesk, Salesforce, ServiceNow, Genesys and other helpdesk and contact-center tools, with open APIs and MCP support",
+  "Security and compliance coverage including SOC 2, HIPAA, GDPR and PCI DSS",
+  "Rated 4.6 out of 5 on G2"
+ ],
+ "cons": [
+  {
+   "text": "No published prices; you book a 30-minute demo call to talk pricing",
+   "source": "https://www.ada.cx/pricing/"
+  },
+  {
+   "text": "Charged per conversation by default, so the bill grows with message volume",
+   "source": "https://www.ada.cx/platform/"
+  },
+  {
+   "text": "Handoff to people runs through a helpdesk you connect, such as Zendesk, Salesforce or Dixa",
+   "source": "https://www.ada.cx/platform/"
+  },
+  {
+   "text": "Built for brands with high support volume, so a smaller restaurant group may not have enough conversations to justify it",
+   "source": "scope"
+  }
+ ],
+ "plans": {
+  "trial": null,
+  "billing": "per conversation by default; resolution-based pricing for some enterprises",
+  "list": [],
+  "source": "https://www.ada.cx/platform/",
+  "checked": "2026-11"
+ },
+ "rating": {
+  "site": "G2",
+  "score": "4.6",
+  "reviews": 176,
+  "source": "https://www.g2.com/products/ada-support-inc-ada/reviews",
+  "checked": "2026-11"
+ }
 }
