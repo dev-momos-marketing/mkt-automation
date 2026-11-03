@@ -1,0 +1,24 @@
+{"name": "Voiceflow", "website": "https://www.voiceflow.com/",
+ "oneLiner": "Toronto-based platform for building, testing and running AI chat and voice agents for customer experience, with a visual workflow canvas and LLM-driven playbooks.",
+ "bestFor": "Restaurant groups with an in-house digital, marketing or CX team that want to build their own custom chat or phone agent (FAQs, reservations, order status) and connect it to their own systems. It is a build-it-yourself platform with no restaurant-specific templates or POS integrations out of the box.",
+ "customers": [
+  {"name": "Trilogy", "source": "https://www.voiceflow.com/stories/automating-60-of-customer-support-for-90-products-in-12-weeks-how-ai-automation-transformed-trilogy"},
+  {"name": "Turo", "source": "https://www.voiceflow.com/"},
+  {"name": "Roam", "source": "https://www.voiceflow.com/"}
+ ],
+ "updates": [
+  {"date": "2026-02", "text": "Unveiled Voiceflow V4 (generally available to all users by March 2026): agents built from autonomous playbooks, deterministic visual workflows and tools, with the agent routing between them and different LLMs assignable to different parts of an agent.", "source": "https://www.voiceflow.com/stories/everything-we-launched-v4"}
+ ],
+ "features": [
+  "Visual canvas for structured workflows with explicit steps, branches and conditions",
+  "Playbooks: LLM-driven skills described in natural language that the agent routes to",
+  "Chat agents for websites and messaging, plus voice agents for phone lines",
+  "Knowledge base that grounds answers in your own documents and web pages",
+  "Choice of AI models per part of the agent (fast model for routing, reasoning model for complex tasks)",
+  "API, custom functions and integrations to connect CRMs, helpdesks and other systems",
+  "Testing, transcripts and analytics to monitor agent conversations",
+  "Shared workspace so multiple editors design and review agents together"
+ ],
+ "pricing": {"text": "Free plan available. Pro about $60 per editor per month and Business about $150 per month, with extra editor seats and usage-based credits; Enterprise is quoted. Figures from third-party pricing reviews; the official pricing page reportedly routes businesses to a demo.", "source": "https://www.featurebase.app/blog/voiceflow-pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "No acquisition or new funding found for 2025-2026 (last round $15M in 2023). Dropped from current review: 'used by over 250,000 teams' (unverified here), 'sub-500ms response latency' (unverified), 'paid plans start from $50/month' (outdated; Pro is now reported at $60), and named Zapier/Make integrations (not confirmed). No restaurant or hospitality customers found; customers listed are general CX brands named on voiceflow.com (Turo and Roam appear on the homepage per search snippets; Vodafone, Sage and Home Depot appear as logos). Credit allowances changed during 2026 (now reportedly dollar-denominated), so re-check pricing before publishing."}

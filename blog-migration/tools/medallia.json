@@ -1,0 +1,31 @@
+{
+ "name": "Medallia",
+ "website": "https://www.medallia.com/",
+ "oneLiner": "Enterprise experience management platform that collects customer and employee feedback across surveys, reviews, contact-center conversations and digital channels, and uses AI to find themes and route action to front-line teams.",
+ "bestFor": "Large, multi-location restaurant and hospitality brands with CX teams that need enterprise-grade feedback analytics across locations and channels; too heavy for independents.",
+ "customers": [
+  {"name": "Noodles & Company", "source": "https://www.businesswire.com/news/home/20200902005524/en/"},
+  {"name": "Best Western", "source": "https://www.medallia.com/resource/how-best-western-uses-feedback-signals-to-make-operational-changes-that-power-guest-loyalty/"}
+ ],
+ "updates": [
+  {"date": "2026-06", "text": "A lender group led by Blackstone, Apollo and FS KKR took ownership from Thoma Bravo in a debt-for-equity recapitalization, investing $150 million of new capital; Medallia said it keeps its $500 million AI investment commitment.", "source": "https://www.businesswire.com/news/home/20260617496002/en/Medallia-Announces-Milestone-Agreement-with-Group-Led-by-Blackstone-Apollo-and-FSK-to-Transition-Ownership-and-Position-Company-for-Next-Era-of-Growth"},
+  {"date": "2026-02", "text": "Unveiled its innovation agenda at Experience '26, including AI-driven topic modeling and action planning embedded in front-line workflows.", "source": "https://getready.medallia.com/press-release/medallia-unveils-latest-innovation-agenda-at-experience-26"},
+  {"date": "2026-09", "text": "H2 2026 release expanded multilingual AI analysis, added self-service survey distribution and previewed agentic automation.", "source": "https://www.cmswire.com/customer-experience/medallia-h2-2026-release-expands-multilingual-ai/"}
+ ],
+ "features": [
+  "Omnichannel feedback collection: web, email, SMS, QR code, in-app and receipt surveys",
+  "Review and social listening alongside solicited feedback",
+  "AI text analytics that detect themes, sentiment and urgent issues",
+  "Contact-center speech and conversation analytics",
+  "Role-based dashboards that compare locations, regions and brands",
+  "Closed-loop alerts and case management for front-line follow-up",
+  "AI summaries and action planning for front-line managers (Frontline-Ready AI)"
+ ],
+ "pricing": {
+  "text": "Custom enterprise pricing; Medallia does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "OWNERSHIP CHANGE: Thoma Bravo (owner since its ~$6.4B take-private in 2021) handed Medallia to its lenders in June 2026 (Bloomberg Law: https://news.bloomberglaw.com/bankruptcy-law/blackstone-led-creditors-take-over-ailing-software-firm-medallia). The product continues to be sold and developed. The Noodles & Company story dates from 2020; no newer named restaurant customer was found within budget. Medallia has a restaurants and food service offering (https://getready.medallia.com/?p=4640). Frontline-Ready AI went GA in July 2026 per trade coverage (not confirmed on Medallia's own site). No unverifiable stats in the current review to drop."
+}
