@@ -1,0 +1,49 @@
+{
+ "name": "PreciTaste",
+ "website": "https://precitaste.com/",
+ "oneLiner": "AI kitchen management platform that forecasts demand and tells crews what to prep, cook and order, using POS data and computer vision.",
+ "bestFor": "QSR and fast-casual chains and franchisees (including bakery-case concepts) that want to cut prep waste and stockouts.",
+ "customers": [
+  {
+   "name": "Bluemont Group (Dunkin' franchisee, 90+ locations)",
+   "source": "https://loyalty360.org/content-gallery/daily-news/loyalty360-reads-bluemont-group-collabs-with-precitaste-for-ai-powered-donut-ordering-with-dunkin"
+  },
+  {
+   "name": "Mac Haik Restaurant Group (First Watch franchisee)",
+   "source": "https://www.intel.com/content/www/us/en/customer-spotlight/stories/mac-haik-restaurant-group-customer-story.html"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-12",
+   "text": "Partnership with PAR Technology that pulls historical sales data from PAR's POS automatically to speed up onboarding for PreciTaste's forecasting tools.",
+   "source": "https://www.fastcasual.com/news/precitaste-par-partner-to-streamline-ai-kitchen-management-onboarding"
+  },
+  {
+   "date": "2026-02",
+   "text": "Dunkin' franchisee Bluemont Group rolled out PreciTaste's Do'Cast AI donut and Munchkin ordering, which combines demand forecasting with camera-based shelf monitoring, across 90+ locations.",
+   "source": "https://loyalty360.org/content-gallery/daily-news/loyalty360-reads-bluemont-group-collabs-with-precitaste-for-ai-powered-donut-ordering-with-dunkin"
+  },
+  {
+   "date": "2026-07",
+   "text": "Closed a seven-figure revenue-based financing from Round2 Capital to fund rollout and product expansion in Europe.",
+   "source": "https://www.sahmcapital.com/news/content/round2-capital-provides-7-figure-revenue-based-financing-to-precitaste-2026-07-14"
+  }
+ ],
+ "features": [
+  "Prep Assistant: daily prep lists from location-level demand forecasts",
+  "Planner Assistant: production planning across the day",
+  "Station Assistant: real-time cook guidance at the line",
+  "Computer vision that monitors ingredient levels and display cases",
+  "Automated bakery/donut ordering (Do'Cast) from forecasts and shelf images",
+  "Forecasts that account for sales trends, weather, seasonality and local events",
+  "POS integrations including PAR and Toast"
+ ],
+ "pricing": {
+  "text": "Custom pricing; PreciTaste does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Chipotle piloted PreciTaste's kitchen management system in 2022 (https://newsroom.chipotle.com/2022-09-27-CHIPOTLE-PILOTS-ADVANCED-TECHNOLOGY-TO-ENHANCE-THE-EMPLOYEE-AND-GUEST-EXPERIENCE), but no current Chipotle deployment was confirmed, so Chipotle is left out of customers; describe it only as a 2022 pilot if used. Mac Haik's 90%+ prep-accuracy figure is from a vendor/Intel case study. Round2 financing amount not disclosed ('seven-figure'). Toast integration documented at https://intercom.help/toast-central/en/articles/14487853-get-started-with-the-precitaste-integration. Fast Casual also covered honeygrow and Dig/Urbanbelly using AI for prep, but the PreciTaste link could not be confirmed from search snippets."
+}

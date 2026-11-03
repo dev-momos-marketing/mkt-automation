@@ -1,0 +1,49 @@
+{
+ "name": "Tripleseat",
+ "website": "https://tripleseat.com/",
+ "oneLiner": "Event sales and management platform for restaurants, hotels and venues, handling event leads, proposals, BEOs, contracts and payments.",
+ "bestFor": "Restaurants, restaurant groups and hotels with an active private dining, group booking or catering business.",
+ "customers": [
+  {
+   "name": "Bentley's Oyster Bar & Grill (Corrigan Collection)",
+   "source": "https://tripleseat.com/case-studies/bentleys-oyster-bar-grill/"
+  },
+  {
+   "name": "McCormick & Kuleto's",
+   "source": "https://tripleseat.com/case-studies/mccormick-kuletos/"
+  },
+  {
+   "name": "Hakkasan Mayfair (TAO Group)",
+   "source": "https://tripleseat.com/?p=29385"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2025-07",
+   "text": "Integration with Reserve with Google so venues can capture event inquiries directly from Google Search and Maps.",
+   "source": "https://www.hotelnewsresource.com/article137111.html"
+  },
+  {
+   "date": "2025-07",
+   "text": "PartyPay online card payments expanded beyond the US to the UK, Canada, Australia and Europe, part of Tripleseat's 2025 feature round-up that also added sales goals by user or location.",
+   "source": "https://tripleseat.com/articles/raising-the-bar-tripleseat-feature-highlights/"
+  }
+ ],
+ "features": [
+  "Event lead capture from website forms, TripleseatDirect and Google",
+  "Proposals, contracts and e-signatures",
+  "Banquet event orders (BEOs) and event documents",
+  "Calendar and space availability across rooms and locations",
+  "Online payments and deposits through PartyPay",
+  "Guest CRM with booking history and spend",
+  "Sales goals and event revenue reporting by user and location",
+  "AI tools for drafting venue descriptions and responding to leads"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Tripleseat does not publish software prices (quote on request). PartyPay processing is pay-as-you-go.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "File slug is 'tripeseat' (typo in the post), product name is Tripleseat. Dropped from the current review: 'typically starts around $499/month' (no vendor source; third-party estimates differ), customers Kimpton Hotels, Fox Restaurant Concepts and Levy Restaurants (not confirmed in this search), 'most widely adopted' (unverifiable). Tripleseat says it serves 20,000+ venues (vendor claim). The PartyPay international launch was dated July 15, 2025 in a Hotel News Resource listing; the cited source is Tripleseat's 2025 recap. Tripleseat also announced an AI platform, 'Tripleseat Intelligence' (https://martechseries.com/predictive-ai/ai-platforms-machine-learning/tripleseat-unveils-ai-suite-to-transform-event-management/), but its date could not be confirmed, so it is not in updates. Also: March 2025 TimeForge partnership on event staffing (no URL captured), General Atlantic strategic investment and acquisition of Gather (dates not confirmed). User conference renamed Tripleseat Ignite (Aug 25-26, 2026, Boston)."
+}

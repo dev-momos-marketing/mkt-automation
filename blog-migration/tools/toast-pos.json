@@ -1,0 +1,54 @@
+{
+ "name": "Toast",
+ "website": "https://pos.toasttab.com/",
+ "oneLiner": "Restaurant-specific POS and management platform (NYSE: TOST) covering point of sale, online ordering, kitchen display, payroll and team management, marketing, loyalty and multi-location controls.",
+ "bestFor": "Restaurants from single locations to multi-unit and franchise groups that want POS, ordering, payroll and guest marketing from one vendor.",
+ "customers": [
+  {
+   "name": "Captain Parker's Pub",
+   "source": "https://pos.toasttab.com/blog/captain-parkers-pub"
+  },
+  {
+   "name": "Kaldi's Coffee",
+   "source": "https://pos.toasttab.com/blog/on-the-line/toast-customer-loyalty-analytics"
+  },
+  {
+   "name": "Craft Lounge",
+   "source": "https://pos.toasttab.com/blog/on-the-line/toast-customer-loyalty-analytics"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-05",
+   "text": "Spring 2026 release launched Toast IQ Grow, a premium package with an AI Marketing Agent, a marketing success manager and Marketing Essentials, and relaunched the Toast Local guest app with loyalty built in.",
+   "source": "https://pos.toasttab.com/news/toast-debuts-toast-iq-grow-spring-release-2026"
+  },
+  {
+   "date": "2026-08",
+   "text": "Q2 2026 results: about 9,500 net new locations in the quarter, roughly 180,000 live locations and $2.4B ARR as of June 30, 2026.",
+   "source": "https://www.businesswire.com/news/home/20260804267340/en/"
+  },
+  {
+   "date": "2026-07",
+   "text": "Announced its 2026-2027 independent restaurant Customer Advisory Board.",
+   "source": "https://pos.toasttab.com/news/2026-2027-toast-independent-customer-advisory-board"
+  }
+ ],
+ "features": [
+  "POS on counter terminals, kiosks and Toast Go handhelds",
+  "Online ordering, delivery integrations and the Toast Local guest app",
+  "Kitchen display system",
+  "Central menu and pricing management across locations",
+  "Payroll, team management and scheduling (Sling by Toast)",
+  "Loyalty, gift cards and email/SMS marketing",
+  "Toast IQ AI features, including an AI marketing agent in Toast IQ Grow",
+  "Multi-location reporting"
+ ],
+ "pricing": {
+  "text": "Not re-confirmed in this research; Toast quotes plans through sales (a free Starter Kit and paid plans have been advertised on toasttab.com). Check the current pricing page before publishing a figure.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Dropped from current review: '127,000 restaurant locations' (outdated; Toast reported ~180,000 live locations at June 30, 2026), '24.46% market share' (unsourced), '$69/month per location' (not verified this round). Restaurant clients in current review (Nothing Bundt Cakes, Papa Gino's & D'Angelo, The Human Bean, Bar Louie, Costa Vida, Juice It Up, Pepper Lunch) were not re-verified; search budget ran out. Customer stories reused from the toast-loyalty fact sheet; Captain Parker's dates from the COVID period. BWH Hotels endorsed Toast for its properties (no primary URL captured). Toast and Instacart announced a partnership in Feb 2026 (no URL captured)."
+}

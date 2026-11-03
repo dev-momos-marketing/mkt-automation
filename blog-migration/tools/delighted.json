@@ -1,0 +1,33 @@
+{
+ "name": "Delighted (by Qualtrics)",
+ "website": "https://delighted.com/",
+ "oneLiner": "Simple NPS/CSAT survey tool owned by Qualtrics, retired on June 30, 2026.",
+ "bestFor": "No longer available; former users were directed to Qualtrics or other survey tools.",
+ "customers": [],
+ "updates": [
+  {
+   "date": "2026-06",
+   "text": "Qualtrics shut Delighted down: monthly subscriptions were prorated to end June 30, 2026, customer access ended by July 1, 2026, and customer data was to be deleted after the sunset.",
+   "source": "https://help.delighted.com/article/840-delighted-sunset-faq"
+  },
+  {
+   "date": "2025-07",
+   "text": "Annual renewals stopped as part of the announced sunset; Qualtrics offered a Delighted + Qualtrics Graduation Program to move customers to its platform.",
+   "source": "https://basecamp.qualtrics.com/page/delighted-qualtrics-graduation-program"
+  }
+ ],
+ "features": [
+  "(Historical) NPS, CSAT, CES, 5-star, smiley and thumbs survey formats",
+  "(Historical) Distribution by email, SMS, web, link and kiosk",
+  "(Historical) Text analytics on open-ended responses",
+  "(Historical) Dashboards, alerts and email digests",
+  "(Historical) Integrations with tools such as Salesforce, Slack, HubSpot and Zendesk"
+ ],
+ "pricing": {
+  "text": "No longer sold; the product was sunset on June 30, 2026.",
+  "source": "https://help.delighted.com/article/840-delighted-sunset-faq",
+  "checked": "2026-11"
+ },
+ "status": "sunset",
+ "notes": "SUNSET: Delighted was retired by Qualtrics on June 30, 2026 (one FAQ version says access terminated July 1, 2026). Remove it from the survey software list or replace it. The '2025-07' date for annual renewals ending comes from third-party migration guides (e.g. SmartSurvey) citing the FAQ; the Graduation Program page itself is undated. Dropped from the current review: customer list (DoorDash, Instacart, OpenTable, Allbirds), pricing (free 25 responses, $99 and $249/month), 37 languages and 30+ integrations, all obsolete after the shutdown."
+}

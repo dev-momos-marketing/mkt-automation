@@ -1,0 +1,24 @@
+{
+ "name": "Lineup.ai (part of TimeForge)",
+ "website": "https://www.lineup.ai/",
+ "oneLiner": "AI sales, labor and menu-item forecasting with automated scheduling for restaurants, now part of TimeForge's labor management suite.",
+ "bestFor": "Multi-location restaurant operators who want AI demand forecasting to drive schedules and prep, particularly those open to TimeForge's broader scheduling and labor platform.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "AI sales forecasting by hour, day and week from POS history",
+  "External signals such as weather and local events in the forecast",
+  "Labor forecasting with staffing targets per shift and location",
+  "Automated schedule generation",
+  "Menu-item forecasting to guide ordering and prep",
+  "Multi-location reporting on forecast and labor variance",
+  "Access to TimeForge's 15-minute forecasting and labor tools"
+ ],
+ "pricing": {
+  "text": "Custom pricing; no vendor-published price found (a GetApp listing shows 'from $79/month', not confirmed by the vendor).",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "acquired",
+ "notes": "ACQUIRED: TimeForge (labor management software, founded 1998) added Lineup.ai to its product suite in August 2024 (https://www.fsrmagazine.com/industry-news/timeforge-adds-lineup-ai-to-product-suite/ and https://hospitalitytech.com/timeforge-adds-lineupai-its-platform-ai-powered-forecasting-labor-solutions). Lineup.ai was previously built by Lineup, LLC, a subsidiary of 1848 Ventures. TimeForge said Lineup would remain available. No named customers and no 2025-2026 updates found (search budget ran out). Directory listings now show TimeForge as vendor and very small team size. Consider listing it as TimeForge (with Lineup.ai forecasting) instead. The '$79/month' figure is third-party only, so it was left out of the pricing text."
+}

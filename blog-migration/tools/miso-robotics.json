@@ -1,0 +1,49 @@
+{
+ "name": "Miso Robotics (Flippy)",
+ "website": "https://misorobotics.com/",
+ "oneLiner": "Maker of Flippy, a robotic fry station, and Zippy, an AI operations dashboard for restaurants built on its 2026 acquisition of Zignyl.",
+ "bestFor": "High-volume QSR and venue kitchens (including stadiums) willing to pilot robotic frying, and operators who want an AI operations dashboard.",
+ "customers": [
+  {
+   "name": "White Castle",
+   "source": "https://fortune.com/2026/02/26/robot-disruption-fast-food-short-order-cook-flippy-labor-shortage"
+  },
+  {
+   "name": "Jersey Mike's (Zignyl/Zippy customer)",
+   "source": "https://www.restaurantbusinessonline.com/technology/flippy-maker-miso-robotics-acquires-operations-app-zignyl"
+  },
+  {
+   "name": "Jamba (Zignyl/Zippy customer)",
+   "source": "https://www.restaurantbusinessonline.com/technology/flippy-maker-miso-robotics-acquires-operations-app-zignyl"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-02",
+   "text": "Acquired Zignyl, an AI restaurant operations and employee incentives app, and folded it into Zippy, a conversational operations dashboard that also shows Flippy ROI, live video and maintenance data.",
+   "source": "https://www.restaurantbusinessonline.com/technology/flippy-maker-miso-robotics-acquires-operations-app-zignyl"
+  },
+  {
+   "date": "2026-04",
+   "text": "Shipped Flippy to its first NBA arena, its first stadium deployment, marking an expansion into arenas and live-event venues.",
+   "source": "https://info.misorobotics.com/flippy-ships-to-its-first-nba-arena"
+  }
+ ],
+ "features": [
+  "Flippy Fry Station: robotic arm that loads, fries, shakes and dumps baskets",
+  "Computer vision to identify food and track cook times",
+  "Handles dozens of fried menu items such as fries, onion rings and chicken",
+  "Designed to fit existing fry lines with limited construction",
+  "Remote monitoring and maintenance support",
+  "Zippy AI dashboard: ask operational questions in plain language",
+  "Employee incentive and performance tracking (from Zignyl)",
+  "Robotics-as-a-service subscription model"
+ ],
+ "pricing": {
+  "text": "No published price; Flippy is offered on a robotics-as-a-service subscription with quotes on request.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Fortune (Feb 2026) reported Miso had 14 Flippy units in the field (White Castle and Insert Coin), about $385K net revenue in 2024, and ended partnerships with CaliBurger and Panera. The footprint is small, so position Flippy as an emerging or pilot-stage option. Jack in the Box ran Flippy (20 locations reported in June 2025) but current status is unconfirmed, so it was left out. Dropped from the current review: QDOBA, Cinnabon, Scooter's Coffee (no source found); Jersey Mike's and Jamba are customers of Zignyl/Zippy software, not Flippy. Website link in the current review had a utm_source=chatgpt.com tag; use the clean URL. Also reported: April 2026 support partnership with AwesomeOS and acquisition of Zume Pizza's patent portfolio (no confirmed source URL/date captured). Miso's own site claims Flippy has passed 5M baskets (vendor claim)."
+}

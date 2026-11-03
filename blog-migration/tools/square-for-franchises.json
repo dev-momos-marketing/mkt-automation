@@ -1,0 +1,57 @@
+{
+ "name": "Square for Franchises",
+ "website": "https://squareup.com/us/en/franchises",
+ "oneLiner": "Square's franchise management layer on top of its POS: centralized reporting, menu management, and royalty and fee calculation for franchisors, while each franchisee keeps its own Square account.",
+ "bestFor": "Emerging and growing restaurant franchise brands (QSR, cafe, fast casual, dessert) that want POS, payments and franchisor controls from one vendor.",
+ "customers": [
+  {
+   "name": "Whit's Frozen Custard",
+   "source": "https://squareup.com/us/en/press/whits"
+  },
+  {
+   "name": "Steak Escape",
+   "source": "https://squareup.com/us/en/press/steak-escape"
+  },
+  {
+   "name": "Cascadia Pizza Co.",
+   "source": "https://squareup.com/us/en/press/cascadia"
+  },
+  {
+   "name": "Groucho's Deli",
+   "source": "https://www.businesswire.com/news/home/20250916207216/en"
+  }
+ ],
+ "updates": [
+  {
+   "date": "2026-03",
+   "text": "Steak Escape moved its 23 locations to Square, using Square for Franchises for back-end franchise management alongside Square's loyalty, marketing and online ordering.",
+   "source": "https://squareup.com/us/en/press/steak-escape"
+  },
+  {
+   "date": "2026-08",
+   "text": "Cascadia Pizza Co. returned to Square, using the Square Franchise Suite for centralized reporting and menu management across corporate and franchise locations.",
+   "source": "https://squareup.com/us/en/press/cascadia"
+  },
+  {
+   "date": "2026-09",
+   "text": "Whit's Frozen Custard brought its roughly 100 locations in 11 states onto Square Register, Square KDS, Square for Restaurants and Square for Franchises.",
+   "source": "https://squareup.com/us/en/press/whits"
+  }
+ ],
+ "features": [
+  "Centralized sales reporting across corporate and franchise locations",
+  "Brand-wide menu management pushed to all locations",
+  "Royalty and fee setup as a percentage of gross or net sales or a fixed amount",
+  "Royalty reports by location, location group and date, collected via Square Invoices",
+  "Franchisees keep their own Square accounts and payouts",
+  "Runs on Square for Restaurants POS, KDS, kiosk and online ordering",
+  "First-party loyalty and marketing, plus integrations such as Restaurant365"
+ ],
+ "pricing": {
+  "text": "Square for Franchises pricing is custom through Square's sales team. Locations also pay for Square for Restaurants (Free, Plus and Premium plans published per location per month on Square's pricing page) plus card processing fees.",
+  "source": "https://square.com/us/en/point-of-sale/restaurants/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "The current review's pricing (Free, Plus $49, Premium $149 per location) is Square for Restaurants pricing, not Square for Franchises; third-party sources disagree on the current Plus price ($49/$60/$69), so quote the pricing page rather than numbers. Square's 2026 Cascadia release calls the product 'Square Franchise Suite', which may be a newer name; the product page still says Square for Franchises. Royalty and fee calculation launched in October 2024 (Square community product update). Dropped: 'used by thousands of restaurant and retail franchise locations worldwide' (no source). Whit's '$2,000 per location savings' is a franchisee estimate relayed in Square's release. Also cited: JARS by Fabio Viviani (2023, BusinessWire). Built on Square's 2022 acquisition of GoParrot (Restaurant Dive)."
+}

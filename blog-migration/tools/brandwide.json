@@ -1,0 +1,24 @@
+{
+ "name": "BrandWide",
+ "website": "https://meetbrandwide.com/",
+ "oneLiner": "All-in-one franchise management platform from Soffront Corporation covering franchise development CRM, onboarding, training, audits, royalties and franchisee marketing.",
+ "bestFor": "Emerging and mid-sized franchisors (any industry, including restaurant franchises) that want one system for franchise sales, onboarding, operations and royalties.",
+ "customers": [],
+ "updates": [],
+ "features": [
+  "Franchise development CRM for tracking and nurturing franchise leads",
+  "Franchisee onboarding with document handling and e-signature (DocuSign integration)",
+  "Learning management for franchisee and staff training",
+  "Field audits and compliance checklists for location visits",
+  "Royalty calculation, invoicing and collection (QuickBooks Online and Stripe integrations)",
+  "Franchisee helpdesk and intranet for support requests and shared documents",
+  "Local marketing tools and dashboards across the franchise system"
+ ],
+ "pricing": {
+  "text": "Custom pricing; BrandWide does not publish prices (contact the vendor for a quote).",
+  "source": "https://www.softwareadvice.co.uk/software/146131/brandwide",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Search budget ran out before a dedicated customer search could finish; no publicly named customers (restaurant or otherwise) were found, and no 2025-2026 product announcements. BrandWide is a product of Soffront Corp. (CRM vendor since 1992) and is listed as an IFA supplier (https://franchise.org/suppliers/brandwide). It is general-purpose franchise software, not restaurant-specific. Dropped from the current review: 'used by franchise brands in fast casual dining' / 'called out by restaurant franchisors' (no named source), 'more affordable than FranConnect' and 'costs decrease as the franchise grows' (unverified), 'no free trial' (unverified). Integration counts differ between listings (8 on Capterra vs 23 on GetApp). Status inferred active from 2026 directory listings; meetbrandwide.com could not be fetched."
+}

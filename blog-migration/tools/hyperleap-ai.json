@@ -1,0 +1,30 @@
+{
+ "name": "Hyperleap AI",
+ "website": "https://hyperleap.ai/",
+ "oneLiner": "AI chatbot platform that answers guests on a website, WhatsApp, Instagram and Facebook Messenger from one knowledge base, with a restaurant 'AI front desk' package.",
+ "bestFor": "Independent restaurants and small multi-location groups, especially in WhatsApp-first markets, that want an inexpensive AI chat assistant across web and messaging.",
+ "customers": [
+  {
+   "name": "Jungle Lodges & Resorts (Karnataka state tourism, India)",
+   "source": "https://hyperleap.ai/chatbot-for-multi-location-businesses"
+  }
+ ],
+ "updates": [],
+ "features": [
+  "One AI agent deployed on website chat, WhatsApp (Business API), Instagram DM and Facebook Messenger",
+  "Answers grounded in your uploaded documents, menus and FAQs",
+  "Restaurant front-desk flows: menu, hours, dietary questions and sharing a reservation link",
+  "Routes allergy questions to staff instead of guessing",
+  "Collects event and large-party requests and captures leads",
+  "Shared knowledge base that can serve several locations",
+  "Multilingual responses",
+  "Studio and API add-on for custom builds"
+ ],
+ "pricing": {
+  "text": "Plus $40/month, Pro $100/month, Max $200/month; each with a 7-day free trial (card required). AI response allowances differ between Hyperleap's own pages, so check the live pricing page.",
+  "source": "https://hyperleap.ai/pricing",
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Only customer found is Jungle Lodges & Resorts (a resort group, not a restaurant), named on Hyperleap's own site; no independent coverage. Hyperleap's pages disagree on its results (40% vs 11% rise in direct bookings), so keep numbers out. The current review's '35% of inquiries after hours' and '3,300+ leads in 90 days' appear only on Hyperleap's site; drop or attribute clearly to the vendor. 'Official Meta Technology Provider' and '100+ languages' not confirmed in search results; dropped. Older Hyperleap pages mention a free 300-response tier; the current pricing page says no free plan. No dated 2025-2026 announcements found (search budget ran out before a dedicated search)."
+}
