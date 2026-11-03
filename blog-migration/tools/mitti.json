@@ -1,0 +1,27 @@
+{"name": "Mitti (formerly SafetyCulture)", "website": "https://mitti.com/",
+ "oneLiner": "Frontline operations platform, renamed from SafetyCulture to Mitti in August 2026, for digital inspections, checklists, corrective actions, training, sensors and asset tracking across sites.",
+ "bestFor": "Multi-site restaurant and hospitality operators that want food-safety, hygiene and brand-standard inspections, issue follow-up and staff training in one mobile app, with a free tier for small teams.",
+ "customers": [
+  {"name": "Snooze, an A.M. Eatery", "source": "https://safetyculture.com/customers/snooze-eatery"},
+  {"name": "Fishbowl", "source": "https://safetyculture.com/hospitality/restaurant-management"},
+  {"name": "Trippas White Group", "source": "https://safetyculture.com/hospitality/restaurant-management"},
+  {"name": "Sodexo", "source": "https://safetyculture.com/hospitality/restaurant-management"}
+ ],
+ "updates": [
+  {"date": "2026-04", "text": "Brought on the team behind Twine, a Sydney AI startup, to speed up its agentic AI work.", "source": null},
+  {"date": "2026-07", "text": "Bundled monthly AI credits into every plan (Free, Premium and Enterprise), per a pricing tracker.", "source": "https://pricingsaas.com/companies/safetyculture/diffs/2026W30"},
+  {"date": "2026-08", "text": "SafetyCulture rebranded as Mitti, repositioning as one operations system for frontline work (software, sensors, supply ordering and insurance) and adding an AI Assistant, AI issue creation, monitoring agents and 5 Star Benchmarking, a single score per location for multi-site operators.", "source": "https://mitti.com/media-releases/safetyculture-becomes-mitti-unveiling-a-platform-built-for-the-future-of-frontline-work"}
+ ],
+ "features": [
+  "Digital inspections and checklists with photos, notes and scoring, plus a large public template library",
+  "Corrective actions and issue reporting assigned to staff with due dates",
+  "Analytics across locations, including 5 Star Benchmarking for one score per site",
+  "Training courses and lessons delivered on mobile",
+  "Temperature and environmental sensors with alerts",
+  "Asset tracking and maintenance records",
+  "AI assistant, AI-created issues and agents for routine monitoring",
+  "Integrations marketplace and Mitti Supply automatic reordering from inspections"
+ ],
+ "pricing": {"text": "Free plan for up to 10 team members. Premium about $24 per seat per month billed annually or $29 monthly (A$29 in Australia); lower-cost Lite seats for completing inspections and training. Enterprise is quoted (site-based). Figures from third-party listings; vendor pricing page not confirmed after the rebrand.", "source": "https://fieldservicesoftware.io/software/safetyculture/", "checked": "2026-11"},
+ "status": "renamed",
+ "notes": "RENAMED: SafetyCulture became Mitti on August 11, 2026 (Business Wire / mitti.com media release; also itbrief.com.au and startlandnews.com). Review heading and website link (safetyculture.com) should be updated to Mitti / mitti.com. The insurance arm SafetyCulture Care is now Mitti Insurance. Twine acquihire (April 2026) seen only in an aggregator tear sheet and trade-press headline; source null. Unconfirmed reports of layoffs in May 2026 left out. Dropped from current review: 'typically starts in the low hundreds per month for small teams' (not supported; there is a free plan and per-seat pricing). Customer quotes for Fishbowl, Trippas White Group and Sodexo come from a search snippet of the vendor's restaurant management page; Snooze is a full customer story (old safetyculture.com URLs may redirect to mitti.com). Scale claim (2 million workers, 80,000 organizations) is vendor-reported."}

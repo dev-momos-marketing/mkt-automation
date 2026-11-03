@@ -1,6 +1,7 @@
 {
  "swap": {
-  "12": "Bikky"
+  "12": "Bikky",
+  "11": "Mitti"
  },
  "embedText": {
   "oAU4Dh2ac": [
@@ -11,6 +12,10 @@
    [
     "Guest feedback &amp; sentiment analytics tied to actual visits",
     "Guest data platform tying visits and spend to marketing"
+   ],
+   [
+    ">SafetyCulture</a>",
+    ">Mitti</a>"
    ]
   ]
  }
