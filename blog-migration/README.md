@@ -210,9 +210,11 @@ Once the blog template has no old Section layers left (and is published), **Acti
 
 ## Rewriting tool reviews
 
-The "best software" posts' tool reviews are rewritten from researched fact sheets. `tools/<tool>.json` holds one tool's facts (what it is, notable customers and dated updates with source URLs, key features, published pricing), shared by every post that reviews it. `reviews/<slug>/<NN>-<tool>.html` is the new review that replaces the post's section from its "NN. Tool" heading to the next heading; `meta.json` holds exact text fixes for fields and the rest of the post (e.g. "24 Best" → "18 Best"); `embeds/<ID>.html` replaces an embed's code.
+The "best software" posts' tool reviews are rewritten from researched fact sheets. `tools/<tool>.json` holds one tool's facts (what it is, notable customers and dated updates, key features, pros, sourced cons, published plans and prices, and a G2 rating where one was checked, each with source URLs), shared by every post that reviews it. `reviews/<slug>/<NN>-<tool>.html` is the new review that replaces the post's section from its "NN. Tool" heading to the next heading; `meta.json` holds exact text fixes for fields and the rest of the post (e.g. "24 Best" → "18 Best"); `embeds/<ID>.html` replaces an embed's code.
 
-**Actions → Blog reviews** with the post slugs. Before saving, every review must keep its section's heading, images, embeds and links and the label order (with **Notable customers** and **What's new** before the features), list its features as a 4–6 item list, use no number missing from its fact sheet, and share no 8-word run with any other review on the blog. It reads the posts back, marks translations **needs review**, and never publishes.
+Every review has the same shape: an intro that opens with the tool's name linked to its website, then **Key features** (4–6), **Pros** (3–6), **Cons** (2–5) and **Price and plans**, each label on its own line and each list item starting with a bold lead-in and a colon.
+
+**Actions → Blog reviews** with the post slugs. Before saving, every review must keep its section's heading, images, embeds and links, link the tool's name to the website in its fact sheet, follow that shape, use no number missing from its fact sheet, and share no 8-word run with any other review on the blog (lead-ins and the price and plans don't count). It reads the posts back, marks translations **needs review**, and never publishes.
 
 ## After publishing
 

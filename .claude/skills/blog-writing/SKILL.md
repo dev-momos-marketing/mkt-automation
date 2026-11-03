@@ -173,7 +173,15 @@ Every post opens with a "Key takeaways" box: 3–5 one-sentence takeaways (at mo
 
 ## Tool reviews in best-software posts
 
-Each review keeps its post's structure and adds two lines before the features: **Notable customers:** (named by the vendor or press, with sources) and **What's new:** (dated 2025–2026 updates). Features are a 4–6 item list with bold lead-ins. Facts come from the tool's fact sheet in `blog-migration/tools/`, researched once and shared; write each post's review from that post's angle so no two reviews share a sentence. Prices only when the vendor publishes them; otherwise "custom pricing". See the README's "Rewriting tool reviews".
+Each review in a "best software" post has the same shape:
+
+1. **Intro**: one or two paragraphs that open with the tool's name linked to its website ("[Salesflare](https://salesflare.com/) is a sales CRM built for…"), saying what it is, who it's for and what it does, angled to the post's topic. The section's images and internal links stay.
+2. **Key features**: a 4–6 item list, each item a bold lead-in with a colon ("**Automated CRM data input:** …").
+3. **Pros**: 3–6 items in the same style, drawn from the fact sheet. A rating is cited only with its site ("a 4.8/5 rating on G2").
+4. **Cons**: 2–5 items, each one sourced: plan limits, minimums, add-ons, no free plan, or the tool's scope.
+5. **Price and plans**: the trial or free plan, then each published plan and price, from the vendor's own pricing page. No published prices means saying so (custom pricing, quote after a demo).
+
+The labels are lines of their own (**Key features**, **Pros**, **Cons**, **Price and plans**). Facts come from the tool's fact sheet in `blog-migration/tools/` (`pros`, `cons`, `plans`, `rating`), researched once and shared; write each post's review from that post's angle so no two reviews share a sentence. See the README's "Rewriting tool reviews".
 
 ## Checklist before you commit
 

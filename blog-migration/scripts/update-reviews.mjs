@@ -6,8 +6,8 @@
 //                     "18 Best"), and slots where a different tool replaces the reviewed one
 //   embeds/<ID>.html  replaces that embed's code in the Embeds field
 // Each review is checked first: same heading, images, embeds and links as the section it replaces,
-// the label order, a features list, numbers found in tools/<tool>.json, and no 8-word run shared with
-// any other review on the blog. A section whose text already matches is skipped. Translations are
+// the tool's name linked to its website, the Key features, Pros, Cons and Price and plans lists,
+// numbers found in tools/<tool>.json, and no 8-word run shared with any other review on the blog. A section whose text already matches is skipped. Translations are
 // marked "needs review". A dry run unless --apply; never publishes.
 //
 // Usage: npm run reviews -- --posts slug-a,slug-b [--apply]
@@ -44,7 +44,7 @@ try {
     const content = field(FIELD_NAMES.content)
     const embedsDef = field(FIELD_NAMES.embeds)
     // Every review section on the blog, for the uniqueness check.
-    const allReviews = items.flatMap(i => sections(i.fieldData[content.id]?.value ?? "").filter(s => s.n).map(s => ({ slug: i.slug, n: s.n, text: flat(s.html.replace(/^<h2\b[^>]*>[\s\S]*?<\/h2>/, "")) })))
+    const allReviews = items.flatMap(i => sections(i.fieldData[content.id]?.value ?? "").filter(s => s.n).map(s => ({ slug: i.slug, n: s.n, html: s.html })))
     const updates = []
     const problems = []
     for (const [slug, plan] of plans) {
@@ -59,8 +59,9 @@ try {
             if (flat(parts[at].html) === flat(review.html)) continue
             const facts = await readFile(new URL(`../tools/${review.tool}.json`, import.meta.url), "utf8").catch(() => "")
             if (!facts) { problems.push(`${slug}: no tools/${review.tool}.json for ${review.file}`); continue }
-            const others = allReviews.filter(r => !(r.slug === slug && r.n === review.n)).map(r => r.text)
-                .concat([...plans.values()].flatMap(p => p.reviews).filter(r => r !== review).map(r => flat(r.html.replace(/<h2\b[^>]*>[\s\S]*?<\/h2>/, ""))))
+            // Other reviews on the blog, minus the posts being rewritten now (their new reviews count instead).
+            const others = allReviews.filter(r => !plans.has(r.slug)).map(r => r.html)
+                .concat([...plans.values()].flatMap(p => p.reviews).filter(r => r !== review).map(r => r.html))
             const swap = plan.meta.swap?.[String(review.n)] ? `${review.n}. ${plan.meta.swap[String(review.n)]}` : ""
             const found = checkReview(review.html, { original: parts[at].html, facts, others, swap })
             if (found.length) { problems.push(...found.map(p => `${slug}/${review.file}: ${p}`)); continue }
