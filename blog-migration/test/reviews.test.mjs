@@ -57,8 +57,14 @@ test("checkReview reports missing assets, wrong labels, a missing list, unsource
     assert.match(checkReview(good.replace("<strong>Scales well:</strong>", "<strong>Scales well.</strong>"), { original, facts }).join(), /bold lead-in ending in a colon/)
     assert.match(checkReview(good.replace("<p><strong>Key features</strong></p>", "<p><strong>Notable customers:</strong> Acme.</p><p><strong>Key features</strong></p>"), { original, facts }).join(), /labels should be/)
     assert.match(checkReview(good.replace('<a href="https://www.zendesk.com/">Zendesk</a> is', "Zendesk is"), { original, facts }).join(), /name linked to its website/)
-    assert.match(checkReview(good.replace('href="https://www.zendesk.com/"', 'href="https://x.com"'), { original, facts }).join(), /link https:\/\/www.zendesk.com\/ is missing/)
+    assert.match(checkReview(good.replace('href="https://www.zendesk.com/"', 'href="https://x.com"'), { original, facts }).join(), /name should link to https:\/\/www.zendesk.com\//)
     assert.doesNotMatch(checkReview(good, { original: original.replace('href="https://www.zendesk.com/"', 'href="zendesk.com"'), facts }).join(), /link/)
+    // A new domain replaces the old "Website:" link; other old links still have to stay.
+    const moved = original.replace('href="https://www.zendesk.com/"', 'href="https://old-zendesk.com/"')
+    assert.deepEqual(checkReview(good, { original: moved, facts }), [])
+    assert.match(checkReview(good, { original: moved + '<p>See <a href="/glossary/csat">CSAT</a>.</p>', facts }).join(), /link \/glossary\/csat is missing/)
+    const linkedIntro = '<h2>2. Zendesk</h2><img src="https://framerusercontent.com/images/abc.png"><p><a href="https://zendesk.com/?utm_source=x">Zendesk</a> is a suite.</p>'
+    assert.deepEqual(checkReview(good, { original: linkedIntro, facts }), [])
 })
 
 test("checkReview doesn't count lead-ins or the price and plans toward copied text", () => {

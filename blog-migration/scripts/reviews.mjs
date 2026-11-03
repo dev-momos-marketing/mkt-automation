@@ -72,7 +72,6 @@ export function checkReview(html, { original, facts = "", others = [], swap = ""
     // without them too.
     const norm = href => href.replace(/^https?:\/\/(www\.)?momos\.com/, "").replace(/^\.\.\//, "/").replace(/^\.\//, "/blog/").replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "")
     const mineLinks = new Set([...String(html).matchAll(/href="([^"]+)"/g)].map(m => norm(m[1])))
-    if (!swap) for (const m of String(original).matchAll(/href="([^"]+)"/g)) if (!mineLinks.has(norm(m[1]))) problems.push(`the link ${m[1]} is missing`)
 
     // The review opens with the tool's name linked to its website, then Key features, Pros, Cons
     // and Price and plans, each a label on its own line. Features, pros and cons are lists whose
@@ -80,8 +79,18 @@ export function checkReview(html, { original, facts = "", others = [], swap = ""
     let website = ""
     try { website = JSON.parse(facts).website ?? "" } catch {}
     const intro = [...String(html).replace(/^[\s\S]*?<\/h2>/, "").matchAll(/<p>([\s\S]*?)<\/p>/g)].find(m => text(m[1]))
-    if (!intro || !/^\s*<a href="[^"]+">[^<]+<\/a>/.test(intro[1])) problems.push("the first paragraph should open with the tool's name linked to its website")
+    const linksName = intro && /^\s*<a href="[^"]+">[^<]+<\/a>/.test(intro[1])
+    if (!linksName) problems.push("the first paragraph should open with the tool's name linked to its website")
     else if (website && norm(intro[1].match(/href="([^"]+)"/)[1]) !== norm(website)) problems.push(`the tool's name should link to ${website}`)
+    // The old website link (a "Website:" line, or a link opening the old intro) is replaced by the
+    // name's link, which may point to a newer domain (meetsoci.com → soci.ai); every other link stays.
+    const oldIntro = [...String(original).replace(/^[\s\S]*?<\/h2>/, "").matchAll(/<p>([\s\S]*?)<\/p>/g)].find(m => text(m[1]))
+    const websiteLine = new Set([...String(original).matchAll(/<strong>\s*Website:?\s*<\/strong>:?[^<]*<a href="([^"]+)"/g)].map(m => norm(m[1]))
+        .concat(oldIntro?.[1].match(/^\s*<a href="([^"]+)"/) ? [norm(oldIntro[1].match(/^\s*<a href="([^"]+)"/)[1])] : []))
+    if (!swap) for (const m of String(original).matchAll(/href="([^"]+)"/g)) {
+        if (mineLinks.has(norm(m[1])) || (linksName && websiteLine.has(norm(m[1])))) continue
+        problems.push(`the link ${m[1]} is missing`)
+    }
     const found = labels(html)
     if (found.join("|") !== LABELS.join("|")) problems.push(`the labels should be ${LABELS.join(" → ")}, they are ${found.join(" → ") || "none"}`)
     for (const label of LABELS) if (!new RegExp(`<p>\\s*<strong>${label}<\\/strong>\\s*<\\/p>`).test(html)) problems.push(`"${label}" should be a line of its own: <p><strong>${label}</strong></p>`)
