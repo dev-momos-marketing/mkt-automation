@@ -1,0 +1,27 @@
+{"name": "Popmenu", "website": "https://get.popmenu.com/",
+ "oneLiner": "Restaurant marketing platform that bundles websites, interactive menus, online ordering, automated email/SMS marketing, AI phone answering, reservations and reputation tools.",
+ "bestFor": "Independent restaurants and small-to-mid multi-location groups that want their website, ordering, guest marketing and phone answering in one restaurant-specific platform.",
+ "customers": [
+  {"name": "La Parrilla (23-location Tex-Mex group)", "source": "https://www.casestudies.com/company/popmenu/case-study/la-parrilla-grows-online-ordering-revenue-past-25m-with-popmenu"},
+  {"name": "Steam Boys (8 locations, Tennessee)", "source": "https://www.casestudies.com/company/popmenu/case-study/steam-boys-drives-over-1500000-in-online-sales-with-popmenu"},
+  {"name": "The Hampton Social", "source": "https://www.casestudies.com/company/popmenu/case-study/the-hampton-social-grows-monthly-website-sessions-63-with-popmenu"},
+  {"name": "B&B Butchers & Restaurant (Berg Hospitality Group)", "source": "https://www.casestudies.com/company/popmenu/case-study/bb-butchers-and-restaurants-earns-over-450000-in-online-ordering-revenue-with-popmenu"}
+ ],
+ "updates": [
+  {"date": "2025-04", "text": "Popmenu's marketing, ordering and AI phone answering became available on Oracle Cloud Marketplace for Oracle (Simphony) restaurant customers.", "source": "https://www.prnewswire.com/news-releases/popmenus-digital-marketing-suite-now-available-on-oracle-cloud-marketplace-302428814.html"},
+  {"date": "2026-04", "text": "Partnered with Yext so restaurants can manage listings and online reputation across 70+ platforms such as Yelp, OpenTable and Facebook from Popmenu.", "source": "https://www.prnewswire.com/news-releases/popmenu-partners-with-yext-to-help-restaurants-easily-manage-their-online-reputation-across-70-platforms-302758253.html"},
+  {"date": "2026-10", "text": "Announced Spotlight Menu, a new menu technology release.", "source": "http://www.prnewswire.com/news-releases/popmenu-unveils-the-next-big-thing-in-restaurant-menu-technology-302909352.html"}
+ ],
+ "features": [
+  "Restaurant websites with interactive, SEO-friendly menus",
+  "Commission-free online ordering (flat per-order fee) and a branded consumer app",
+  "Automated and AI-drafted email, SMS and social campaigns with audience segmentation",
+  "AI phone answering for common guest questions, ordering and reservations",
+  "Digital waitlist and reservations",
+  "Guest feedback, reputation management and AI-drafted review replies",
+  "POS integrations including Square, Oracle and CAKE",
+  "Central marketing calendar and performance reporting across locations"
+ ],
+ "pricing": {"text": "Per month: Starter $179 ($159 prepaid annually), Essentials $299 ($269 annually), Premier $499 ($449 annually). Enterprise is quoted. Online orders carry a flat $1.00 fee per order; Popmenu takes no percentage of sales.", "source": "https://get.popmenu.com/pricing", "checked": "2026-11"},
+ "status": "active",
+ "notes": "Pricing comes from search snippets of get.popmenu.com/pricing (page not fetched directly); add-on costs (e.g. AI answering, extra locations) are only reported by third parties and are left out. Which plan includes AI phone answering was not confirmed. Spotlight Menu details beyond the release headline were not confirmed; describe it only as a menu technology launch or drop it. Customer case studies (on casestudies.com, mirroring Popmenu's own) carry vendor-reported revenue figures; do not repeat those numbers without attribution. Current review says 'Contact Popmenu for pricing'; that is outdated since prices are published. Its website link has a ?utm_source=chatgpt.com parameter; use https://get.popmenu.com/ instead. The '6.1 million calls answered' figure is from May 2024 and vendor-reported; not used."}

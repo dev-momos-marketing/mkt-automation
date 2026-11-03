@@ -1,0 +1,31 @@
+{
+ "name": "Winnow",
+ "website": "https://www.winnowsolutions.com/",
+ "oneLiner": "AI food waste management for commercial kitchens: a camera-and-scale bin system (Winnow Vision) that identifies and weighs discarded food, plus AI demand forecasting (Winnow Foresight) to cut overproduction.",
+ "bestFor": "High-volume kitchens with significant production waste, such as hotel restaurants, buffets, contract caterers and large multi-site restaurant groups; less of a fit for small quick-service units with little prep waste.",
+ "customers": [
+  {"name": "Hilton", "source": "https://www.hospitalitynet.org/news/4134632/winnow-announces-winnow-foresight-a-mobile-first-ai-powered-forecasting-tool-designed-to-predict-kitchen-demand-and-prevent-food-waste-developed-with-hilton-chefs"},
+  {"name": "IHG Hotels & Resorts", "source": "https://www.hospitalitynet.org/news/4093893/award-winning-ai-technology-helps-ihg-hotels-track-measure-and-reduce-food-waste"},
+  {"name": "Accor, Marriott and Mandarin Oriental", "source": "https://globetrender.com/2026/01/26/winnow-saving-us100-million-food-waste-hotels/"}
+ ],
+ "updates": [
+  {"date": "2026-09", "text": "Launched Winnow Foresight, a mobile-first AI forecasting web app developed with Hilton chefs that predicts item-level kitchen demand from occupancy and past service data, with no extra hardware.", "source": "https://www.hospitalitynet.org/news/4134632/winnow-announces-winnow-foresight-a-mobile-first-ai-powered-forecasting-tool-designed-to-predict-kitchen-demand-and-prevent-food-waste-developed-with-hilton-chefs"},
+  {"date": "2026-07", "text": "Acquired Singapore-based AI food waste company Lumitics to expand in Asia-Pacific and the Middle East; Lumitics customers gain access to Winnow's VisionAI.", "source": "https://www.ttgasia.com/2026/07/20/winnow-acquires-lumitics-to-strengthen-ai-food-waste-solutions-in-asia-pacific/"}
+ ],
+ "features": [
+  "Smart bin with camera and scale that automatically identifies and weighs thrown-away food (Winnow Vision)",
+  "'Throw and go' logging so staff don't have to tag items manually",
+  "Waste data by food item, shift and stage (prep, spoilage, plate waste) with cost values",
+  "Kitchen-facing screens that show staff what is being wasted and what it costs",
+  "Reports and dashboards for chefs and managers, with multi-site comparisons",
+  "AI demand forecasting by item and service to plan production (Winnow Foresight)",
+  "Lower-cost manual tracking option for sites that don't need computer vision"
+ ],
+ "pricing": {
+  "text": "Custom pricing; Winnow does not publish prices.",
+  "source": null,
+  "checked": "2026-11"
+ },
+ "status": "active",
+ "notes": "Fit: Winnow's named customers are mainly hotels, contract caterers and retailers' food courts (IKEA was an earlier client); it fits QSR only loosely. Dropped from the current review: 'the average restaurant wastes 4-10% of all food purchased' (no named source), 'kitchens cutting food waste by up to 50% within the first year' (vendor claim, unsourced), and Compass Group as a named client (not re-verified). The '$100M+ a year saved by hospitality customers' figure is a Winnow claim reported by Globetrender, Jan 2026. The IHG announcement date could not be confirmed (likely 2023). Winnow was Highly Commended at The Staff Canteen Members' Choice Awards 2026."
+}
