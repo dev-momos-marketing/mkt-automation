@@ -13,7 +13,7 @@ jobs:
   describe:
     runs-on: ubuntu-latest
     env:
-      SF_DOMAIN: ${{ vars.SF_DOMAIN }}
+      SF_DOMAIN: ${{ vars.SF_DOMAIN || 'fun-ruby-7024.my.salesforce.com' }}
       SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
       SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
     steps:

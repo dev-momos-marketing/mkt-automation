@@ -128,7 +128,10 @@ Red flags: {{verification__red_flags}}
 
 ## Lead notifier: every new lead in one Slack channel
 
-Every 5 minutes the Worker asks Salesforce for leads created 10 to 5 minutes earlier (the lag gives Conversion time to sync its score), and Beacon posts the ones worth knowing to `SLACK_CHANNEL`. Salesforce is where every source lands, so the demo form, Conversion forms, conferences, referrals and partners all end up in the one channel.
+Every 5 minutes the Worker runs two checks on Salesforce, and Beacon posts what they find to `SLACK_CHANNEL`:
+
+1. **New leads** from named sources, created 10 to 5 minutes earlier (the lag gives Conversion time to score them).
+2. **Leads that just turned hot**, from any source: score at `HOT_SCORE` (50) or MQL Contact Hot ticked. In Salesforce these are mostly imported leads with no source that warmed up later. Each is posted once: the Worker remembers it in a Cloudflare KV store (`SEEN`), which Cloudflare creates on the first deploy. At most 10 a run; past that, one "and N more" line.
 
 ```
 🔥 *Burger Co* · Ana Lopez, VP Marketing
@@ -136,9 +139,10 @@ Inbound · score 85 · owner @Jill
 Open in Salesforce
 ```
 
-- 🔥 the Conversion score is `HOT_SCORE` or more. 🟢 everything else that passes.
-- `SKIP_SOURCES` (Outbound): never posted, the rep created the lead.
+- 🔥 the score (`Lead_Score_Total__c`) is `HOT_SCORE` or more, or MQL Contact Hot is ticked. 🟢 everything else that passes.
+- `NOTIFY_SOURCES` (Inbound, referrals, partners, conference attendees and hosts, events): posted.
 - `SCORE_ONLY_SOURCES` (Conference SDR, Marketing SDR): posted only when 🔥.
+- Any other Lead Source is not posted: blank (bulk imports, nearly all leads in Salesforce), `outbound_ae`, `outbound_sdr` (the rep made them) and Sales Agency.
 - Status Disqualified, Junk, Spam, Unqualified or Duplicate: not posted.
 - The owner is mentioned when Beacon can find their Slack account by email; otherwise their name is shown.
 
@@ -147,9 +151,9 @@ The code is `worker/src/notify.ts`. The settings are in `worker/wrangler.toml` u
 Setup:
 
 1. Salesforce admin: an External Client App with the client-credentials flow, run as a read-only integration user that can read Leads.
-2. Run the **Salesforce fields** GitHub Action (repository secrets `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, variable `SF_DOMAIN`). It lists the Lead fields and source values. Put the source field in `LEAD_SOURCE_FIELD`, Conversion's score field in `LEAD_SCORE_FIELD`, and check `SKIP_SOURCES` and `SCORE_ONLY_SOURCES` against the real values.
+2. Run the **Salesforce fields** GitHub Action (repository secrets `SF_CLIENT_ID` and `SF_CLIENT_SECRET`; the domain is already in the workflow). It lists the Lead fields, the Lead Source values as stored, and how scores are spread. Keep `NOTIFY_SOURCES`, `SCORE_ONLY_SOURCES` and `HOT_SCORE` in step with it.
 3. Slack: give Beacon the `chat:write` and `users:read.email` scopes, and invite it to the channel (`/invite @Beacon`).
-4. Cloudflare Worker secrets: `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, `SLACK_BOT_TOKEN`. Set `SF_DOMAIN` in `wrangler.toml`.
+4. Cloudflare Worker secrets: `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, `SLACK_BOT_TOKEN`. `SF_DOMAIN` is already in `wrangler.toml`.
 5. The notifier stays off until all of these are set. Check the Worker's **Logs** for `"notifier"` lines: each run logs how many leads it saw, posted and skipped, and why.
 6. When the channel looks right, remove the Slack step from the Zapier Zap so demo-form leads don't post twice.
 
