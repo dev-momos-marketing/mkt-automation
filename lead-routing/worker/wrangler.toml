@@ -21,6 +21,22 @@ NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
+# Lead notifier (src/notify.ts): new Salesforce leads go to this Slack channel every 5 minutes.
+# It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set (see the bottom of this file).
+SF_DOMAIN = ""
+SLACK_CHANNEL = "vincent-test-beacon"
+LEAD_SOURCE_FIELD = "LeadSource"
+# Conversion's score field on Lead. Empty: every lead posts as 🟢, no 🔥 and no score filter.
+LEAD_SCORE_FIELD = ""
+HOT_SCORE = "70"
+# Never posted: the rep created these leads.
+SKIP_SOURCES = "Outbound (AE),Outbound (SDR)"
+# Posted only when the score is hot: these convert poorly unless the lead is strong.
+SCORE_ONLY_SOURCES = "Conference (SDR),Marketing (SDR)"
+
+# Runs the lead notifier. Cloudflare only runs crons on the live deployment, not on Previews.
+[triggers]
+crons = ["*/5 * * * *"]
 
 # At most 5 form submissions a minute from one IP address. Extra ones get the popup without
 # calling Claude or Zapier, so a bot can't flood Slack and Salesforce.
@@ -52,3 +68,7 @@ simple = { limit = 5, period = 60 }
 #   ANTHROPIC_API_KEY   required
 #   ZAPIER_HOOK_URL     optional. When set, Claude researches each lead after the redirect
 #                       and sends the result to Zapier (Salesforce + Slack).
+#   SF_CLIENT_ID        lead notifier: Salesforce External Client App, client-credentials flow,
+#   SF_CLIENT_SECRET    read-only integration user (Lead read). Also set SF_DOMAIN above.
+#   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write, and
+#                       users:read.email to mention the lead owner. Invite Beacon to the channel.

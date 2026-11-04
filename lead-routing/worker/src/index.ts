@@ -3,11 +3,14 @@
 // 2. Answers the Framer form: fit goes to the AE's calendar, a confident not-fit to NOT_FIT_URL.
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
+// 4. Every 5 minutes (cron in wrangler.toml): new Salesforce leads from every source go to one
+//    Slack channel through Beacon. See notify.ts.
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
+import { notifyLeads, type NotifyEnv } from "./notify.ts";
 
-export interface Env {
+export interface Env extends NotifyEnv {
   ANTHROPIC_API_KEY: string;
   ZAPIER_HOOK_URL?: string; // optional: no Zapier, no background research
   JAMES_URL: string;
@@ -157,6 +160,10 @@ async function verifyAndSend(form: FormData, instant: Instant, url: string, fit:
 }
 
 export default {
+  async scheduled(event: { scheduledTime: number }, env: Env, ctx: Ctx): Promise<void> {
+    ctx.waitUntil(notifyLeads(new Date(event.scheduledTime), env).catch((err) => console.error("notifier failed", err instanceof Error ? err.message : err)));
+  },
+
   async fetch(req: Request, env: Env, ctx: Ctx): Promise<Response> {
     const headers = cors(req, env);
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
