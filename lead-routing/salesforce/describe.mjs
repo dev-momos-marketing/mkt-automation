@@ -35,7 +35,14 @@ const INTERESTING = /source|channel|score|grade|conversion|rating|status|owner|l
 
 const out = [];
 for (const object of ["Lead", "Opportunity"]) {
-  const d = await get(`/sobjects/${object}/describe`);
+  let d;
+  try {
+    d = await get(`/sobjects/${object}/describe`);
+  } catch (e) {
+    // Usually the integration user's profile can't read this object. Report it and carry on.
+    out.push(`## ${object}`, "", `Could not read ${object}: ${String(e.message).slice(0, 200)}`, "");
+    continue;
+  }
   out.push(`## ${object}`, "", "| API name | Label | Type | Values |", "|---|---|---|---|");
   for (const f of d.fields) {
     if (!INTERESTING.test(f.name) && !INTERESTING.test(f.label)) continue;
