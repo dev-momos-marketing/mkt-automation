@@ -10,7 +10,7 @@ if (!SF_DOMAIN || !SF_CLIENT_ID || !SF_CLIENT_SECRET) {
   process.exit(1);
 }
 
-const base = SF_DOMAIN.replace(/\/+$/, "").replace(/^(?!https:\/\/)/, "https://");
+const base = SF_DOMAIN.replace(/\/+$/, "").replace(/^https?:\/\//, "").replace(/^/, "https://");
 
 async function login() {
   const res = await fetch(`${base}/services/oauth2/token`, {

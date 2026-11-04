@@ -23,7 +23,7 @@ ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 RESEARCH_MODEL = "haiku"
 # Lead notifier (src/notify.ts): new Salesforce leads go to this Slack channel every 5 minutes.
 # It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set (see the bottom of this file).
-SF_DOMAIN = ""
+SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
 SLACK_CHANNEL = "vincent-test-beacon"
 LEAD_SOURCE_FIELD = "LeadSource"
 # Conversion's score field on Lead. Empty: every lead posts as 🟢, no 🔥 and no score filter.
@@ -69,6 +69,6 @@ simple = { limit = 5, period = 60 }
 #   ZAPIER_HOOK_URL     optional. When set, Claude researches each lead after the redirect
 #                       and sends the result to Zapier (Salesforce + Slack).
 #   SF_CLIENT_ID        lead notifier: Salesforce External Client App, client-credentials flow,
-#   SF_CLIENT_SECRET    read-only integration user (Lead read). Also set SF_DOMAIN above.
+#   SF_CLIENT_SECRET    read-only integration user (Lead read). SF_DOMAIN is above.
 #   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write, and
 #                       users:read.email to mention the lead owner. Invite Beacon to the channel.

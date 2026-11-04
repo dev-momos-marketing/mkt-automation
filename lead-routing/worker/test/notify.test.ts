@@ -3,7 +3,7 @@ import assert from "node:assert/strict";
 import { decide, leadQuery, message, notifyLeads, type NotifyEnv, type SfLead } from "../src/notify.ts";
 
 const env: NotifyEnv = {
-  SF_DOMAIN: "momos.my.salesforce.com",
+  SF_DOMAIN: "http://momos.my.salesforce.com/", // as pasted from a browser: http and a trailing slash
   SF_CLIENT_ID: "id",
   SF_CLIENT_SECRET: "secret",
   SLACK_BOT_TOKEN: "xoxb-test",

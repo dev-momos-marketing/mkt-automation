@@ -147,9 +147,9 @@ The code is `worker/src/notify.ts`. The settings are in `worker/wrangler.toml` u
 Setup:
 
 1. Salesforce admin: an External Client App with the client-credentials flow, run as a read-only integration user that can read Leads.
-2. Run the **Salesforce fields** GitHub Action (repository secrets `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, variable `SF_DOMAIN`). It lists the Lead fields and source values. Put the source field in `LEAD_SOURCE_FIELD`, Conversion's score field in `LEAD_SCORE_FIELD`, and check `SKIP_SOURCES` and `SCORE_ONLY_SOURCES` against the real values.
+2. Run the **Salesforce fields** GitHub Action (repository secrets `SF_CLIENT_ID` and `SF_CLIENT_SECRET`; the domain is already in the workflow). It lists the Lead fields and source values. Put the source field in `LEAD_SOURCE_FIELD`, Conversion's score field in `LEAD_SCORE_FIELD`, and check `SKIP_SOURCES` and `SCORE_ONLY_SOURCES` against the real values.
 3. Slack: give Beacon the `chat:write` and `users:read.email` scopes, and invite it to the channel (`/invite @Beacon`).
-4. Cloudflare Worker secrets: `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, `SLACK_BOT_TOKEN`. Set `SF_DOMAIN` in `wrangler.toml`.
+4. Cloudflare Worker secrets: `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, `SLACK_BOT_TOKEN`. `SF_DOMAIN` is already in `wrangler.toml`.
 5. The notifier stays off until all of these are set. Check the Worker's **Logs** for `"notifier"` lines: each run logs how many leads it saw, posted and skipped, and why.
 6. When the channel looks right, remove the Slack step from the Zapier Zap so demo-form leads don't post twice.
 

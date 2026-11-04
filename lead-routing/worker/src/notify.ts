@@ -86,7 +86,7 @@ export function leadQuery(scheduled: Date, env: NotifyEnv): string {
 }
 
 async function salesforce(env: NotifyEnv): Promise<{ token: string; instanceUrl: string }> {
-  const base = env.SF_DOMAIN!.trim().replace(/\/+$/, "").replace(/^(?!https:\/\/)/, "https://");
+  const base = env.SF_DOMAIN!.trim().replace(/\/+$/, "").replace(/^https?:\/\//, "").replace(/^/, "https://");
   const res = await fetch(`${base}/services/oauth2/token`, {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
