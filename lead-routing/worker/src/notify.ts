@@ -1,10 +1,10 @@
-// Lead notifier: every 5 minutes, posts the new Salesforce leads worth knowing about to one
+// Lead notifier: every 30 minutes, posts the new Salesforce leads worth knowing about to one
 // Slack channel, through the Beacon app. Salesforce is the one place every source lands
 // (demo form, Conversion forms, conferences, referrals, partners), so this covers all of them.
 //
 // Two checks per run:
 // 1. New leads from named sources (Inbound, referrals, partners, conferences): leads created
-//    between 10 and 5 minutes before the run, so Conversion has time to score them. Runs don't
+//    between 35 and 5 minutes before the run, so Conversion has time to score them. Runs don't
 //    overlap, so each is posted once.
 // 2. Leads that just turned hot (score at HOT_SCORE or MQL Contact Hot ticked), any source. In
 //    Salesforce these are mostly imported leads that warmed up later. Posted once: the SEEN store
@@ -39,9 +39,9 @@ export type SfLead = {
 export type Decision = { post: false; why: string } | { post: true; hot: boolean };
 
 const API = "v62.0";
-const WINDOW_MS = 5 * 60_000;
+const WINDOW_MS = 30 * 60_000; // the cron interval in wrangler.toml: change both together
 const SYNC_LAG_MS = 5 * 60_000;
-const HOT_LOOKBACK_MS = 15 * 60_000; // overlaps runs on purpose; SEEN stops repeats
+const HOT_LOOKBACK_MS = 45 * 60_000; // overlaps runs on purpose; SEEN stops repeats
 const SEEN_TTL_S = 180 * 24 * 3600;
 const MAX_HOT_POSTS = 10; // per run, so a bulk update can't flood the channel
 const JUNK_STATUS = /disqualif|junk|spam|unqualif|duplicate/i;
@@ -107,7 +107,7 @@ export function leadQuery(scheduled: Date, env: NotifyEnv): string {
   return `SELECT ${selectFields(env)} FROM Lead WHERE CreatedDate >= ${soqlDate(start)} AND CreatedDate < ${soqlDate(end)} AND IsConverted = false ORDER BY CreatedDate`;
 }
 
-// Leads changed in the last 15 minutes that are hot now. Null when no score or flag is set up.
+// Leads changed in the last 45 minutes that are hot now. Null when no score or flag is set up.
 export function hotQuery(scheduled: Date, env: NotifyEnv): string | null {
   const hot: string[] = [];
   const score = env.LEAD_SCORE_FIELD?.trim();

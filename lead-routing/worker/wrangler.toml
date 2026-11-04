@@ -21,7 +21,7 @@ NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
-# Lead notifier (src/notify.ts): new Salesforce leads go to this Slack channel every 5 minutes.
+# Lead notifier (src/notify.ts): new Salesforce leads go to this Slack channel every 30 minutes.
 # It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set (see the bottom of this file).
 SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
 SLACK_CHANNEL = "vincent-test-beacon"
@@ -45,7 +45,8 @@ binding = "SEEN"
 
 # Runs the lead notifier. Cloudflare only runs crons on the live deployment, not on Previews.
 [triggers]
-crons = ["*/5 * * * *"]
+# Every 30 minutes. If you change it, change WINDOW_MS in src/notify.ts to match.
+crons = ["*/30 * * * *"]
 
 # At most 5 form submissions a minute from one IP address. Extra ones get the popup without
 # calling Claude or Zapier, so a bot can't flood Slack and Salesforce.
