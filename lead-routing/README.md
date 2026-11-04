@@ -134,10 +134,19 @@ Every 30 minutes the Worker runs two checks on Salesforce, and Beacon posts what
 2. **Leads that just turned hot**, from any source: score at `HOT_SCORE` (50) or MQL Contact Hot ticked. In Salesforce these are mostly imported leads with no source that warmed up later. Each is posted once: the Worker remembers it in a Cloudflare KV store (`SEEN`), which Cloudflare creates on the first deploy. At most 10 a run; past that, one "and N more" line.
 
 ```
-🔥 *Burger Co* · Ana Lopez, VP Marketing
-Inbound · score 85 · owner @Jill
-Open in Salesforce
+🔥 Hot lead: Tattle
+Isabella Jiao · Marketing
+isabella@tattle.com · +1 555 0100
+Owner @Sri        Status New (Uncontacted)   Source Inbound · Website Form
+Locations 12      Based in Austin, TX, US    Website tattle.com
+Why it's hot: MQL Contact Hot is ticked
+Score 21 · profile fit 15 (B)
+Points from: Website 4 · Email opens 2
+Gong flow: In progress · UTM: google / brand
+[Open in Salesforce]
 ```
+
+Empty fields are left out. The extra fields are in `DETAIL_FIELDS` in `worker/src/notify.ts`; each run checks which ones the integration user can read, so a hidden field shortens the post instead of breaking it. If the owner shows as a name instead of an @mention, the Worker's Logs say why (`missing_scope`: Beacon needs `users:read.email`; `users_not_found`: their Slack email differs from Salesforce).
 
 - 🔥 the score (`Lead_Score_Total__c`) is `HOT_SCORE` or more, or MQL Contact Hot is ticked. 🟢 everything else that passes.
 - `NOTIFY_SOURCES` (Inbound, referrals, partners, conference attendees and hosts, events): posted.

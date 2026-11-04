@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { decide, hotQuery, leadQuery, message, notifyLeads, type NotifyEnv, type SfLead } from "../src/notify.ts";
+import { blocks, decide, hotQuery, leadQuery, message, notifyLeads, type NotifyEnv, type SfLead } from "../src/notify.ts";
 
 const env: NotifyEnv = {
   SF_DOMAIN: "http://momos.my.salesforce.com/", // as pasted from a browser: http and a trailing slash
@@ -172,5 +172,69 @@ test("a bulk update posts 10 hot leads and one line for the rest", async () => {
     assert.equal(SEEN.store.size, 13);
   } finally {
     sf.restore();
+  }
+});
+
+test("detailed post: who, reach, where, why hot, score breakdown", () => {
+  const rich = lead({
+    Name: "Isabella Jiao", Title: "Marketing", Company: "Tattle", LeadSource: null, Conversion_Score__c: 21,
+    MQL_Contact_Hot_c__c: true, NoofOutlets__c: 12, Email: "isabella@tattle.com", Phone: "+1 555 0100",
+    Website: "tattle.com", City: "Austin", State: "TX", Country: "United States", Industry: "Restaurants",
+    CreatedDate: "2026-10-01T08:00:00.000+0000", Lead_Score_Profile_Fit__c: 15, Lead_Score_Profile_Tier__c: "B",
+    Lead_Score_Website_Engagement__c: 4, Lead_Score_Email_Open_Engagement__c: 2, Lead_Score_Form_Submission__c: 0,
+    Gong__Flow_Status__c: "In progress", Description: "Wants <reviews> & social",
+  });
+  const b = blocks(rich, { ...env, HOT_SCORE: "50" }, true, "https://sf", "U123") as any[];
+  const all = JSON.stringify(b);
+  assert.equal(b[0].text.text, "🔥 Hot lead: Tattle");
+  assert.match(b[1].text.text, /\*Isabella Jiao\* · Marketing\n<mailto:isabella@tattle\.com\|isabella@tattle\.com> · \+1 555 0100/);
+  const fields = b[2].fields.map((x: any) => x.text);
+  assert.ok(fields.includes("*Owner*\n<@U123>"));
+  assert.ok(fields.includes("*Locations*\n12"));
+  assert.ok(fields.includes("*Based in*\nAustin, TX, United States"));
+  assert.ok(fields.includes("*Website*\n<https://tattle.com|tattle.com>"));
+  assert.ok(fields.includes("*Created*\n2026-10-01"));
+  assert.match(b[3].text.text, /\*Why it's hot:\* MQL Contact Hot is ticked\n\*Score 21\* · profile fit 15 \(B\)\nPoints from: Website 4 · Email opens 2$/);
+  assert.match(all, /Gong flow: In progress/);
+  assert.match(all, /Wants &lt;reviews&gt; &amp; social/); // escaped, can't inject links or mentions
+  assert.equal(b.at(-1).elements[0].url, "https://sf/lightning/r/Lead/00Q1/view");
+});
+
+test("detailed post skips what's empty", () => {
+  const b = blocks(lead({ Title: null, Conversion_Score__c: 40 }), env, false, "https://sf", null) as any[];
+  assert.equal(b[0].text.text, "🟢 New lead: Burger Co");
+  const all = JSON.stringify(b);
+  assert.doesNotMatch(all, /Why it's hot|Based in|Website|Points from/);
+  assert.match(all, /Jill Bucci/);
+});
+
+test("only detail fields Salesforce lets us read are queried", async () => {
+  let soql = "";
+  let posted: any;
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
+    const url = String(input);
+    if (url.endsWith("/services/oauth2/token")) return Response.json({ access_token: "t", instance_url: "https://sf" });
+    if (url.endsWith("/sobjects/Lead/describe")) return Response.json({ fields: [{ name: "Email" }, { name: "City" }] });
+    if (url.includes("/query?q=")) {
+      const q = decodeURIComponent(url.split("q=")[1]);
+      if (q.includes("CreatedDate >=")) soql = q;
+      return Response.json({ records: q.includes("CreatedDate >=") ? [lead({ Email: "a@b.co", City: "Austin" })] : [] });
+    }
+    if (url.includes("users.lookupByEmail")) return Response.json({ ok: false, error: "missing_scope" });
+    if (url.endsWith("chat.postMessage")) {
+      posted = JSON.parse(String(init?.body));
+      return Response.json({ ok: true });
+    }
+    throw new Error(`unexpected ${url}`);
+  }) as typeof fetch;
+  try {
+    await notifyLeads(new Date("2026-11-04T10:30:00Z"), { ...env, SEEN: fakeKv() });
+    assert.match(soql, /, Email, City FROM Lead/);
+    assert.doesNotMatch(soql, /Phone|Gong__Flow_Status__c/);
+    assert.ok(Array.isArray(posted.blocks));
+    assert.match(posted.text, /Burger Co/); // plain text kept for notifications
+  } finally {
+    globalThis.fetch = realFetch;
   }
 });
