@@ -63,4 +63,23 @@ const counts = async (field) => {
 out.push("## Leads created in the last 90 days, by LeadSource", "", "| LeadSource | Leads |", "|---|---|", ...(await counts("LeadSource")), "");
 out.push("## Leads created in the last 90 days, by Status", "", "| Status | Leads |", "|---|---|", ...(await counts("Status")), "");
 
+// Score spread for leads from real sources, to pick the 🔥 bar. Counts and averages only.
+const stats = async (where, label) => {
+  try {
+    const r = await get(`/query?q=${encodeURIComponent(`SELECT COUNT(Id) n, MIN(Lead_Score_Total__c) lo, AVG(Lead_Score_Total__c) avg, MAX(Lead_Score_Total__c) hi FROM Lead WHERE CreatedDate = LAST_N_DAYS:90 AND ${where}`)}`);
+    const x = r.records[0] ?? {};
+    return `| ${label} | ${x.n} | ${x.lo ?? ""} | ${x.avg != null ? Math.round(x.avg) : ""} | ${x.hi ?? ""} |`;
+  } catch (e) {
+    return `| ${label} | could not query: ${String(e.message).slice(0, 120)} | | | |`;
+  }
+};
+out.push("## Lead_Score_Total__c, leads created in the last 90 days", "", "| Leads | Count | Min | Avg | Max |", "|---|---|---|---|---|",
+  await stats("LeadSource != null", "with a Lead Source"),
+  await stats("LeadSource = 'Inbound'", "Inbound"),
+  await stats("Lead_Score_Total__c >= 50", "score 50+"),
+  await stats("Lead_Score_Total__c >= 100", "score 100+"),
+  await stats("MQL_Contact_Hot_c__c = true", "MQL Contact Hot ticked"),
+  await stats("Status = 'MQLs (ICP-Verified)'", "Status MQLs (ICP-Verified)"),
+  "");
+
 console.log(out.join("\n"));
