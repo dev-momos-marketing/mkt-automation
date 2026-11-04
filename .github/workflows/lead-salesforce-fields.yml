@@ -1,0 +1,28 @@
+# Salesforce fields: read-only. Lists the Lead and Opportunity fields (source, channel, score,
+# status, owner) and lead counts by source, so the lead notifier filters on real field names.
+# Prints field names and counts only, never names or emails. See lead-routing/salesforce/describe.mjs.
+name: Salesforce fields
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  describe:
+    runs-on: ubuntu-latest
+    env:
+      SF_DOMAIN: ${{ vars.SF_DOMAIN }}
+      SF_CLIENT_ID: ${{ secrets.SF_CLIENT_ID }}
+      SF_CLIENT_SECRET: ${{ secrets.SF_CLIENT_SECRET }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Describe Lead and Opportunity
+        run: |
+          set -o pipefail
+          node lead-routing/salesforce/describe.mjs | tee fields.md
+          cat fields.md >> "$GITHUB_STEP_SUMMARY"
