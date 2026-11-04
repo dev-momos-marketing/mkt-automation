@@ -128,9 +128,9 @@ Red flags: {{verification__red_flags}}
 
 ## Lead notifier: every new lead in one Slack channel
 
-Every 5 minutes the Worker runs two checks on Salesforce, and Beacon posts what they find to `SLACK_CHANNEL`:
+Every 30 minutes the Worker runs two checks on Salesforce, and Beacon posts what they find to `SLACK_CHANNEL`:
 
-1. **New leads** from named sources, created 10 to 5 minutes earlier (the lag gives Conversion time to score them).
+1. **New leads** from named sources, created 35 to 5 minutes earlier (the lag gives Conversion time to score them).
 2. **Leads that just turned hot**, from any source: score at `HOT_SCORE` (50) or MQL Contact Hot ticked. In Salesforce these are mostly imported leads with no source that warmed up later. Each is posted once: the Worker remembers it in a Cloudflare KV store (`SEEN`), which Cloudflare creates on the first deploy. At most 10 a run; past that, one "and N more" line.
 
 ```

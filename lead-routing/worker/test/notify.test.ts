@@ -49,9 +49,9 @@ test("without a score field every lead posts as 🟢", () => {
   assert.equal(decide(lead({ LeadSource: "Conference (SDR)" }), noScore).post, false);
 });
 
-test("query covers 10 to 5 minutes before the run", () => {
-  const q = leadQuery(new Date("2026-11-04T10:15:00.000Z"), env);
-  assert.match(q, /CreatedDate >= 2026-11-04T10:05:00Z AND CreatedDate < 2026-11-04T10:10:00Z/);
+test("query covers 35 to 5 minutes before the run", () => {
+  const q = leadQuery(new Date("2026-11-04T10:30:00.000Z"), env);
+  assert.match(q, /CreatedDate >= 2026-11-04T09:55:00Z AND CreatedDate < 2026-11-04T10:25:00Z/);
   assert.match(q, /Conversion_Score__c/);
   assert.match(q, /Owner\.Email/);
   assert.match(q, /MQL_Contact_Hot_c__c/);
@@ -99,9 +99,9 @@ test("notifier stays off without settings", async () => {
   assert.deepEqual(result, { posted: 0, skipped: 0, hot: 0 });
 });
 
-test("hot query looks back 15 minutes for score or flag", () => {
-  const q = hotQuery(new Date("2026-11-04T10:15:00Z"), { ...env, HOT_SCORE: "50" })!;
-  assert.match(q, /LastModifiedDate >= 2026-11-04T10:00:00Z/);
+test("hot query looks back 45 minutes for score or flag", () => {
+  const q = hotQuery(new Date("2026-11-04T10:30:00Z"), { ...env, HOT_SCORE: "50" })!;
+  assert.match(q, /LastModifiedDate >= 2026-11-04T09:45:00Z/);
   assert.match(q, /\(Conversion_Score__c >= 50 OR MQL_Contact_Hot_c__c = true\)/);
   assert.equal(hotQuery(new Date(), { ...env, LEAD_SCORE_FIELD: "", LEAD_HOT_FLAG_FIELD: "" }), null);
 });
@@ -139,8 +139,8 @@ test("a lead that turns hot is posted once, whatever its source", async () => {
     const first = await notifyLeads(new Date("2026-11-04T10:15:00Z"), { ...env, SEEN });
     assert.equal(first.hot, 1);
     assert.match(sf.posts[0], /^🔥 \*Imported Co\*/);
-    // Next run still sees it in the 15-minute window: not posted again.
-    const second = await notifyLeads(new Date("2026-11-04T10:20:00Z"), { ...env, SEEN });
+    // Next run still sees it in the 45-minute window: not posted again.
+    const second = await notifyLeads(new Date("2026-11-04T10:45:00Z"), { ...env, SEEN });
     assert.equal(second.hot, 0);
     assert.equal(sf.posts.length, 1);
   } finally {
