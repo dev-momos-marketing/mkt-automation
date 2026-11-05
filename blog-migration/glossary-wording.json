@@ -1,0 +1,223 @@
+{
+    "about": "Brand wording for the Glossary collection (English), from the Momos Marketing Brand Guide, 01 · tone of voice: guests, not customers; agent, never assistant or copilot; resolves, not replies; sentence case. Each phrase is an exact, case-sensitive edit chosen by hand: a 'customer' in a quoted study, another company's policy or wording, an industry name or metric, an 'also called' synonym, a case-study figure or a search-style FAQ question stays as it is. Term names go to sentence case where the article already writes them that way; names in keepNames keep their capitals.",
+    "keepNames": [
+        "Net Promoter Score",
+        "Google Business Profile",
+        "Customer Effort Score",
+        "Customer Satisfaction Score"
+    ],
+    "phrases": [
+        {
+            "find": "Our guest AI for multi-location restaurants",
+            "replace": "Our Guest AI Platform for multi-location restaurants"
+        },
+        {
+            "find": "the Alfie assistant draft and send brand-approved replies in your voice around the clock",
+            "replace": "the Alfie agent resolve reviews around the clock, with brand-approved replies in your voice"
+        },
+        {
+            "find": "our Alfie assistant in the ",
+            "replace": "our Alfie agent in the "
+        },
+        {
+            "find": "Our Alfie assistant in the ",
+            "replace": "Our Alfie agent in the "
+        },
+        {
+            "find": "Alfie loyalty assistant",
+            "replace": "Alfie loyalty agent"
+        },
+        {
+            "find": "our Alfie assistant drafts and sends replies",
+            "replace": "our Alfie agent resolves reviews"
+        },
+        {
+            "find": "Our Alfie assistant drafts and sends replies",
+            "replace": "Our Alfie agent resolves reviews"
+        },
+        {
+            "find": "AI categorization sorts them by topic and sentiment, our Alfie assistant drafts replies,",
+            "replace": "AI categorization sorts them by topic and sentiment, our Alfie agent resolves them,"
+        },
+        {
+            "find": "our Alfie assistant drafts replies",
+            "replace": "our Alfie agent resolves reviews"
+        },
+        {
+            "find": "Alfie, our AI assistant, replies in your brand's voice",
+            "replace": "Alfie, our AI agent, resolves reviews in your brand's voice"
+        },
+        {
+            "find": "You get AI categorization by topic and sentiment, Alfie AI replies in your brand's voice and reporting",
+            "replace": "You get AI categorization by topic and sentiment, reviews resolved by our Alfie agent in your brand's voice, and reporting"
+        },
+        {
+            "find": "You also get AI categorization, Alfie AI replies in your brand's voice and reporting",
+            "replace": "You also get AI categorization, reviews resolved by our Alfie agent in your brand's voice, and reporting"
+        },
+        {
+            "find": "You also get Alfie AI replies in your brand's voice, recovery offers",
+            "replace": "You also get reviews resolved by our Alfie agent in your brand's voice, recovery offers"
+        },
+        {
+            "find": "since reviewers are already customers.",
+            "replace": "since reviewers are already guests."
+        },
+        {
+            "find": "Only customers who ordered through the app",
+            "replace": "Only guests who ordered through the app"
+        },
+        {
+            "find": "Customers who ordered through the app",
+            "replace": "Guests who ordered through the app"
+        },
+        {
+            "find": "Customers who ordered in the app",
+            "replace": "Guests who ordered in the app"
+        },
+        {
+            "find": "the reply reaches the customer by email",
+            "replace": "the reply reaches the guest by email"
+        },
+        {
+            "find": "the only one shown to customers",
+            "replace": "the only one shown to guests"
+        },
+        {
+            "find": "so customers can rate the delivery itself",
+            "replace": "so guests can rate the delivery itself"
+        },
+        {
+            "find": "Replies on these apps usually reach the customer privately",
+            "replace": "Replies on these apps usually reach the guest privately"
+        },
+        {
+            "find": "recover customers from negative feedback",
+            "replace": "recover guests from negative feedback"
+        },
+        {
+            "find": "loyalty members and direct online customers",
+            "replace": "loyalty members and direct online guests"
+        },
+        {
+            "find": "loyalty members and online customers",
+            "replace": "loyalty members and online guests"
+        },
+        {
+            "find": "It's any interaction in which a customer forms",
+            "replace": "It's any interaction in which a guest forms"
+        },
+        {
+            "find": "How do moments of truth relate to a customer journey map?",
+            "replace": "How do moments of truth relate to a guest journey map?"
+        },
+        {
+            "find": "future customers browsing the app",
+            "replace": "future guests browsing the app"
+        },
+        {
+            "find": "keep them as customers.",
+            "replace": "keep them as guests."
+        },
+        {
+            "find": "winning back customers after negative feedback",
+            "replace": "winning back guests after negative feedback"
+        },
+        {
+            "find": "takeout and delivery customers",
+            "replace": "takeout and delivery guests"
+        },
+        {
+            "find": "These systems see members and digital customers clearly",
+            "replace": "These systems see members and digital guests clearly"
+        },
+        {
+            "find": "surfaces customer insights",
+            "replace": "surfaces guest insights"
+        },
+        {
+            "find": "The app prompts customers",
+            "replace": "The app prompts guests"
+        },
+        {
+            "find": "collect ratings and comments from customers after each order",
+            "replace": "collect ratings and comments from guests after each order"
+        },
+        {
+            "find": "where customers post public ratings and reviews",
+            "replace": "where guests post public ratings and reviews"
+        },
+        {
+            "find": "between the restaurant and the customer",
+            "replace": "between the restaurant and the guest"
+        },
+        {
+            "find": "turns a survey into a customer experience program",
+            "replace": "turns a survey into a guest experience program"
+        },
+        {
+            "find": "how customers and employees experience your business",
+            "replace": "how guests and employees experience your business"
+        },
+        {
+            "find": "the Rosie AI copilot",
+            "replace": "our Rosie agent"
+        },
+        {
+            "find": " assistant drafts and sends replies in your brand's voice, with AI categorization",
+            "replace": " agent resolves reviews in your brand's voice, with AI categorization"
+        },
+        {
+            "find": "An AI copilot that drafts replies",
+            "replace": "An AI agent that drafts replies"
+        },
+        {
+            "find": "AI copilot that drafts replies",
+            "replace": "AI agent that drafts replies"
+        },
+        {
+            "find": "when the assistant is trained to sound like your brand",
+            "replace": "when the agent is trained to sound like your brand"
+        },
+        {
+            "find": "when the assistant follows your brand voice",
+            "replace": "when the agent follows your brand voice"
+        },
+        {
+            "find": "guardrails on what the assistant may promise",
+            "replace": "guardrails on what the agent may promise"
+        },
+        {
+            "find": "AI assistants can draft a negative review response in seconds",
+            "replace": "AI agents can draft a negative review response in seconds"
+        },
+        {
+            "find": "AI assistants can draft replies in your brand's voice",
+            "replace": "AI agents can draft replies in your brand's voice"
+        },
+        {
+            "find": "An AI assistant trained on your brand voice",
+            "replace": "An AI agent trained on your brand voice"
+        },
+        {
+            "find": "an AI assistant can draft replies to routine positive reviews",
+            "replace": "an AI agent can draft replies to routine positive reviews"
+        },
+        {
+            "find": "use an AI assistant to act on survey feedback",
+            "replace": "use an AI agent to act on survey feedback"
+        },
+        {
+            "find": " drafts and sends replies in your brand's voice. AI categorization, recovery offers",
+            "replace": " resolves reviews in your brand's voice. AI categorization, recovery offers"
+        },
+        {
+            "find": " drafts and sends replies in your brand's voice, and reporting covers every location in one dashboard.",
+            "replace": " resolves reviews in your brand's voice, and reporting covers every location in one dashboard."
+        },
+        {
+            "find": " drafts and sends replies. AI categorization and recovery offers",
+            "replace": " resolves reviews. AI categorization and recovery offers"
+        }
+    ]
+}

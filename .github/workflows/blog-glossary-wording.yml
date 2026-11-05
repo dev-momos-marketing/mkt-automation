@@ -1,0 +1,75 @@
+# Glossary wording: brings the Glossary's English text in line with the brand guide's tone of voice
+# (guests, agent, resolves, sentence case), from blog-migration/glossary-wording.json. A dry run
+# unless "apply" is ticked; a push that changes the wording list runs the dry run. Never publishes.
+# See blog-migration/README.md.
+name: Glossary wording
+
+on:
+  workflow_dispatch:
+    inputs:
+      terms:
+        description: Term slugs, separated by commas, or "all"
+        type: string
+        default: all
+        required: true
+      apply:
+        description: Save the changes (leave unticked for a dry run)
+        type: boolean
+        default: false
+  push:
+    branches-ignore: [main]
+    paths:
+      - blog-migration/glossary-wording.json
+      - blog-migration/scripts/wording.mjs
+      - blog-migration/scripts/glossary-wording.mjs
+
+permissions:
+  contents: read
+
+concurrency:
+  group: blog-framer-writes
+  cancel-in-progress: false
+
+defaults:
+  run:
+    working-directory: blog-migration
+
+jobs:
+  wording:
+    runs-on: ubuntu-latest
+    env:
+      FRAMER_PROJECT_URL: ${{ vars.FRAMER_PROJECT_URL || secrets.FRAMER_PROJECT_URL || 'https://framer.com/projects/Momos-Website-2025--g23b4Eds5wkUvpvpnYbL-8Quzu' }}
+      FRAMER_API_KEY: ${{ secrets.FRAMER_API_KEY }}
+      GLOSSARY_COLLECTION: ${{ vars.GLOSSARY_COLLECTION }}
+      TERMS: ${{ inputs.terms || 'all' }}
+      APPLY: ${{ github.event_name == 'workflow_dispatch' && inputs.apply && '--apply' || '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: blog-migration/package-lock.json
+      - run: npm ci
+      - run: npm test
+      - name: Change the wording
+        run: |
+          set -o pipefail
+          if [ -z "$FRAMER_API_KEY" ]; then
+            echo "::error::Add the FRAMER_API_KEY repository secret. See blog-migration/README.md."
+            exit 1
+          fi
+          target=()
+          if [ "$(echo "$TERMS" | tr -d ' ')" != "all" ]; then target=(--terms "$(echo "$TERMS" | tr -d ' ')"); fi
+          status=0
+          npm run -s glossary-wording -- "${target[@]}" $APPLY 2>&1 | tee wording.log || status=$?
+          mode="dry run"; [ -n "$APPLY" ] && mode="applied"
+          { echo "## Glossary wording ($mode)"; echo; echo '```'; cat wording.log; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          exit $status
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: glossary-wording
+          path: blog-migration/out/glossary-wording/
+          retention-days: 30
+          if-no-files-found: ignore
