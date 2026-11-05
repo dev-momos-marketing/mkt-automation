@@ -168,6 +168,12 @@ The pages get lighter in step 7, when the old Section blocks and their 140 Embed
 
 `link-fixes.json` lists dead links found on the live blog and glossary, each with the page that replaces it, or `null` to remove the link and keep its text. **Actions → Blog fix links → Run workflow** changes them in every text field of the Blog and Glossary collections, in English and in each translation (a translation keeps its status). A push that changes the list runs the dry run; the **blog-fix-links** download has `report.csv` with every link changed. Tick **apply** to save. It checks each new link loads on momos.com first, and lists any dead link it can't find in the CMS: those sit in an Embed layer on the template and are fixed by hand. If the glossary collection's name doesn't contain "Glossary", set a `GLOSSARY_COLLECTION` variable.
 
+## Glossary wording
+
+`glossary-wording.json` brings the Glossary's English text in line with the brand guide's tone of voice (Marketing Brand Guide, 01): guests, not customers; agent, never assistant or copilot; resolves, not replies; sentence case. Each phrase edit is exact and chosen by hand: a "customer" in a quoted study, another company's policy, an industry name or metric, an "also called" synonym, a case-study figure or a search-style FAQ question stays. Each term's name goes to sentence case in its title, headings and short labels, where the article already writes it that way; names in `keepNames` (Net Promoter Score…) keep their capitals, and book titles are left alone.
+
+**Actions → Glossary wording → Run workflow**: the run page lists every text before and after, and the **glossary-wording** download has `report.csv`. A push that changes the list runs the dry run. Tick **apply** to save. Translations aren't changed.
+
 ## Rewriting a post
 
 A post's body can be written in this repo: `posts/<slug>.html`, from the first H2 on (the title stays in its own field), with `<p>⟦embed:ID⟧</p>` where each of its embeds goes. Use `<h2>`/`<h3>`, `<p>`, `<ul>`/`<ol>`/`<li>`, `<strong>`, `<em>` and `<a href="/blog/slug">` or `/glossary/slug`.

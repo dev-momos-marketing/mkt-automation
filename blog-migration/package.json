@@ -13,6 +13,7 @@
     "migrate": "node scripts/migrate.mjs",
     "links": "node scripts/links.mjs",
     "fix-links": "node scripts/fix-links.mjs",
+    "glossary-wording": "node scripts/glossary-wording.mjs",
     "write": "node scripts/write.mjs",
     "faqs": "node scripts/faqs.mjs",
     "takeaways": "node scripts/add-takeaways.mjs",
