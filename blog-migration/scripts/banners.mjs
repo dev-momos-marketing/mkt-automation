@@ -368,8 +368,8 @@ ${banner.html()}
 // Code that already promotes Momos: the "See Momos in action" buttons, demo links, product boxes.
 const PROMO = /momos-cta-btn|See Momos in action|See how it works|Book a demo|Talk to us|Get started|Try Momos|momos\.com\/(book-a-demo|product\/|alfie|rockie|case-studies)/i
 export const isPromoEmbed = code => PROMO.test(String(code ?? ""))
-// Headings that close a post: its FAQ, where to start, conclusion. No banner goes before them or after.
-const TAIL = /\bFAQs?\b|frequently asked|where to start|which strategies to start|conclusion|final thoughts|wrapping up|bottom line|in summary|next steps/i
+// Headings that close a post: its FAQ, where to start, conclusion, a closing call to action, sources.
+const TAIL = /\bFAQs?\b|frequently asked|where to start|which strategies to start|conclusion|final \w+|key takeaways?|takeaways for|wrap(ping)? up|bottom line|in summary|next steps|sources|appendix|references|^ready to\b|^want\b|starts here|what you can do (today|now)|looking ahead|^stop losing/i
 // A list of tools ("The 12 Best Restaurant Analytics Software", then "1. Momos", "2. Tenzo"…) and a
 // "Best software for…" section.
 const TOOLS = /\bbest\b.*\b(software|tools?|platforms?|apps?|solutions?|systems?|ai)\b|\balternatives?\b|\b(software|tools?) (for|to)\b/i
@@ -404,7 +404,7 @@ export function placeBanners(html, kinds, embeds = new Map()) {
     const promo = secs.map(s => MOMOS.test(s.heading ?? "") ||
         s.embeds.some(id => !isBannerId(id) && isPromoEmbed(embeds.get(id))) ||
         PRODUCT_LINK.test(s.html) ||
-        (text(s.html.replace(/⟦embed:[^⟧]+⟧/g, "")).match(/\bmomos\b/gi) ?? []).length >= 2)
+        (text(s.html.replace(/⟦embed:[^⟧]+⟧/g, "")).match(/\bmomos\b/gi) ?? []).length >= 1)
     // Tool lists: the list's heading and the numbered sections after it.
     const tools = secs.map(() => false)
     secs.forEach((s, i) => {
@@ -421,7 +421,10 @@ export function placeBanners(html, kinds, embeds = new Map()) {
         i = Math.max(i, j)
     }
     const tail = secs.findIndex((s, i) => i > firstH2 && TAIL.test(s.heading ?? ""))
-    const end = tail < 0 ? secs.length - 1 : tail - 1
+    const last = (tail < 0 ? secs.length : tail) - 1
+    // …and never before the last section ahead of them when it reads as a closing pitch (no list
+    // and no subheadings, like "Your Stores Deserve to Be Found").
+    const end = /<(ul|ol|li|h3)\b/i.test(secs[last]?.html ?? "") ? last : last - 1
     const endsWithEmbed = s => /⟦embed:[^⟧]+⟧\s*<\/p>\s*$/.test(s.html.trim())
     const candidates = []
     for (let i = firstH2 + 1; i <= end; i++) {
