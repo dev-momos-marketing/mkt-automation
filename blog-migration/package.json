@@ -20,7 +20,8 @@
     "replace-embeds": "node scripts/replace-embeds.mjs",
     "remove-old-fields": "node scripts/remove-old-fields.mjs",
     "reviews": "node scripts/update-reviews.mjs",
-    "test": "node --test test/*.test.mjs"
+    "test": "node --test test/*.test.mjs",
+    "banners": "node scripts/add-banners.mjs"
   },
   "dependencies": {
     "acorn": "^8.14.0",

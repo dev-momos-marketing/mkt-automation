@@ -202,6 +202,31 @@ A post saved this way is overwritten from the file the next time it's written, s
 - It checks the house style (`scripts/takeaways.mjs`): 3–5 takeaways of one or two sentences, no "X, not Y", no hype words, no number the post doesn't contain.
 - Translated pages don't show the box until their text gets the line; their Content is marked **needs review**. It never publishes.
 
+## Alfie and Rockie banners
+
+`banners.json` names one or two banners for each post (`["rockieRanked", "alfiePeek"]`): the first leads, about a third of the way in; the second follows, about two thirds in. The designs are in `scripts/banners.mjs`:
+
+| Banner | Agent | What it shows |
+| --- | --- | --- |
+| `alfieReply` | Alfie | A guest complaint and Alfie's recovery reply, with a "See Alfie in action" button |
+| `alfieInbox` | Alfie | "Every review, answered.": Google, Yelp and TripAdvisor reviews marked Replied |
+| `alfieNight` | Alfie | "Alfie works the night shift.": a 2:47 AM guest question and Alfie's answer |
+| `alfieQuiz` | Alfie | "A 1-star review lands at 9 pm on Friday…": picking an answer shows "With Alfie: within minutes" |
+| `proof` | Alfie | A Papa Murphy's receipt: $2M+ recovered, 97.7% of review replies automated (its case study) |
+| `rockieAnswer` | Rockie | "Which locations dropped CSAT last week?" with the answer and the reason |
+| `rockieRanked` | Rockie | "Every location, ranked. The why included.": a location leaderboard |
+| `rockieReport` | Rockie | "Your locations, summed up before your coffee.": a 7:00 phone report |
+| `duo` | Both | Alfie talks to your guests; Rockie tells you what they're saying |
+| `alfiePeek`, `rockiePeek` | One | A one-line strip with the agent peeking in |
+
+**Actions → Blog banners** (posts `all`, or slugs) puts each banner's `⟦embed:bnRockieRanked⟧` line in the post's Content and its code in the Embeds field. Leave **apply** unticked first: the run page lists every post and the heading each banner goes before.
+
+- **Where they go** (`placeBanners`): before an H2, never in the intro or the first section, never before or after the closing sections (FAQ, where to start, conclusion), and never next to a section that already promotes Momos: a "See Momos in action" button or another promoting embed, a link to a product page or demo, a heading naming Momos, or two mentions of Momos in the text. In a list of tools, at most one banner, between two reviews and two sections away from the Momos one. Banners are at least two sections apart. A post with no room is skipped and the run says so.
+- Banners have no scripts, so they're in the page's HTML and sit in a shadow root. Images are the characters from momos.com/alfie and /rockie, served from framerusercontent.com.
+- Running it again updates the banners' code (change a design in `scripts/banners.mjs` and run it on `all`) and never adds a second line. To move a banner, delete its line in Framer and run it again; to drop one, delete its line and remove it from `banners.json`.
+- A post written from `posts/<slug>.html` is skipped: `npm run banners -- --files` puts its banners in the file and `posts/<slug>.embeds/`, and Blog write saves them.
+- Translations are kept and marked **needs review**; translated pages show banners once their Content gets the lines. It never publishes.
+
 ## Replacing embeds with text
 
 Some older posts draw plain content, such as a numbered list, inside an embed. That's heavier than text, and the list's headings and words sit outside the post's own text. `replacements/<slug>/<ID>.html` holds the native HTML that takes the place of the post's `⟦embed:ID⟧` line, and `replacements/<slug>/embeds/<NEW>.html` any smaller embed it still needs, such as the table that followed a list. **Actions → Blog replace embeds** (posts `all`, or slugs) makes the swap.
