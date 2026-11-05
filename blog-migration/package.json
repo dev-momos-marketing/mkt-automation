@@ -12,6 +12,7 @@
     "setup": "node scripts/setup.mjs",
     "migrate": "node scripts/migrate.mjs",
     "links": "node scripts/links.mjs",
+    "fix-links": "node scripts/fix-links.mjs",
     "write": "node scripts/write.mjs",
     "faqs": "node scripts/faqs.mjs",
     "takeaways": "node scripts/add-takeaways.mjs",

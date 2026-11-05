@@ -164,6 +164,10 @@ The pages get lighter in step 7, when the old Section blocks and their 140 Embed
 - English text only. Translated anchor text differs per language, so translations are left as they are.
 - Each run adds up to **max** more links per post, so run it on new posts only (name them in **posts**). It never publishes.
 
+## Fixing dead links
+
+`link-fixes.json` lists dead links found on the live blog and glossary, each with the page that replaces it, or `null` to remove the link and keep its text. **Actions → Blog fix links → Run workflow** changes them in every text field of the Blog and Glossary collections, in English and in each translation (a translation keeps its status). A push that changes the list runs the dry run; the **blog-fix-links** download has `report.csv` with every link changed. Tick **apply** to save. It checks each new link loads on momos.com first, and lists any dead link it can't find in the CMS: those sit in an Embed layer on the template and are fixed by hand. If the glossary collection's name doesn't contain "Glossary", set a `GLOSSARY_COLLECTION` variable.
+
 ## Rewriting a post
 
 A post's body can be written in this repo: `posts/<slug>.html`, from the first H2 on (the title stays in its own field), with `<p>⟦embed:ID⟧</p>` where each of its embeds goes. Use `<h2>`/`<h3>`, `<p>`, `<ul>`/`<ol>`/`<li>`, `<strong>`, `<em>` and `<a href="/blog/slug">` or `/glossary/slug`.

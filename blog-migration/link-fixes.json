@@ -1,0 +1,13 @@
+[
+    { "from": "/product/review-boosting", "to": "/product/ai-review-manager" },
+    { "from": "/bi-and-analytics", "to": "/product/operational-insights" },
+    { "from": "/customer-engagement", "to": "/product/direct-marketing" },
+    { "from": "/blog/restaurant-data-analytics", "to": "/blog/using-restaurant-data-analytics-to-grow-revenue" },
+    { "from": "/unlocking-customer-growth-how-ai-turns-customer-satisfaction-into-repeat-guests", "to": null },
+    { "from": "/growth-marketing", "to": null },
+    { "from": "/releases-and-updates/momos-copilot-update-engage-retain-recover-every-customer-with-ai-concierge-alfie", "to": "/archives/releases-and-updates/momos-copilot-update-engage-retain-recover-every-customer-with-ai-concierge-alfie" },
+    { "from": "/releases-and-updates/momos-copilot-update-prevent-incidents-at-every-location-before-they-cost-you", "to": "/archives/releases-and-updates/momos-copilot-update-prevent-incidents-at-every-location-before-they-cost-you" },
+    { "from": "/releases-and-updates/october-product-updates-social-media-management-loyalty-integrations", "to": "/archives/releases-and-updates/october-product-updates-social-media-management-loyalty-integrations" },
+    { "from": "/fr", "to": "/fr-ca/" },
+    { "from": "https://www.oracle.com/industries/food-beverage/", "to": null }
+]
