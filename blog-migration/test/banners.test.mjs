@@ -64,6 +64,18 @@ test("placeBanners puts at most one banner inside a list of tools, away from the
     assert.ok(placed[0].index >= 5, `too close to the Momos review: ${placed[0].heading}`)
 })
 
+test("no banner before a closing call to action or a closing pitch", () => {
+    const body = n => "<p>" + "word ".repeat(n) + "</p>"
+    const post = "<p>Intro.</p>" +
+        ["What Changed This Year", "Where Most Brands Slip", "How Leaders Respond", "Why Speed Matters Now"].map(h => `<h2>${h}</h2>${body(150)}`).join("") +
+        `<h2>Your Stores Deserve to Be Found</h2>${body(60)}<h2>Want to Fix Problems Before They Cost You?</h2>${body(40)}<h2>Topic: FAQ</h2>${body(40)}`
+    const placed = placeBanners(post, ["duo", "alfiePeek"])
+    assert.ok(placed.length >= 1)
+    for (const p of placed) assert.ok(!["Your Stores Deserve to Be Found", "Want to Fix Problems Before They Cost You?", "Topic: FAQ"].includes(p.heading), p.heading)
+    const momos = "<p>Intro.</p><h2>One Thing To Know</h2>" + body(100) + "<h2>Two Things To Know</h2>" + body(100) + "<h2>Three Things</h2><p>Momos helps here.</p><h2>Four Things To Know</h2>" + body(100) + "<h2>FAQ</h2>" + body(10)
+    for (const p of placeBanners(momos, ["duo"])) assert.ok(!["Three Things", "Four Things To Know"].includes(p.heading), p.heading)
+})
+
 test("a post with no room gets no banner", () => {
     assert.deepEqual(placeBanners("<p>Intro.</p><h2>About Momos</h2><p>Momos.</p><h2>FAQ</h2><p>x</p>", ["duo"]), [])
 })
