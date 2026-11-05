@@ -39,6 +39,7 @@ try {
 
     const rows = []
     const plans = []
+    const used = new Set()
     const names = []
     for (const item of items) {
         const all = fields.map(f => String(item.fieldData[f.id]?.value ?? "")).join("\n").replace(/<[^>]+>/g, " ")
@@ -52,7 +53,10 @@ try {
             if (!entry || typeof entry.value !== "string") continue
             const { html, changes } = applyWording(entry.value, { phrases: rules.phrases, term: { from, to } })
             if (!changes.length) continue
-            for (const c of changes) rows.push({ term: item.slug, field: field.name, rule: c.rule, before: c.before.trim(), after: c.after.trim() })
+            for (const c of changes) {
+                rows.push({ term: item.slug, field: field.name, rule: c.rule, before: c.before.trim(), after: c.after.trim() })
+                for (const p of rules.phrases) if (c.before.includes(p.find) && c.after.includes(p.replace)) used.add(p)
+            }
             const byLocale = Object.fromEntries(Object.entries(entry.valueByLocale ?? {})
                 .filter(([, v]) => v && v.status !== "new")
                 .map(([id, v]) => [id, { action: "ignore", needsReview: v.status === "needsReview" }]))
@@ -73,8 +77,7 @@ try {
     }
     await writeFile(new URL("report.csv", OUT), csv(rows, ["term", "field", "rule", "before", "after"]))
     // Every phrase edit should change something somewhere; one that doesn't is a typo in the list.
-    const used = rules.phrases.filter(p => rows.some(r => r.after.includes(p.replace) && r.before.includes(p.find)))
-    const unused = rules.phrases.filter(p => !used.includes(p)).map(p => p.find)
+    const unused = rules.phrases.filter(p => !used.has(p)).map(p => p.find)
     if (unused.length && !only.length) console.log(`::warning::These phrase edits matched nothing (already done, or the text differs):\n- ${unused.join("\n- ")}`)
 
     if (apply && plans.length) {
