@@ -123,4 +123,47 @@ try {
   out.push(`Score breakdown failed: ${String(e.message).slice(0, 200)}`, "");
 }
 
+// Does the score predict deals? Compare leads that converted or reached SQL with the rest.
+// Counts and averages only.
+const agg = async (where) => {
+  try {
+    const r = await get(`/query?q=${encodeURIComponent(`SELECT COUNT(Id) n, AVG(Lead_Score_Total__c) avg, MAX(Lead_Score_Total__c) hi FROM Lead WHERE ${where}`)}`);
+    const x = r.records[0] ?? {};
+    return [x.n ?? 0, x.avg != null ? Math.round(x.avg * 10) / 10 : "", x.hi ?? ""];
+  } catch (e) {
+    return [`error: ${String(e.message).slice(0, 100)}`, "", ""];
+  }
+};
+const GROUPS = [
+  ["Converted (became contact/opportunity)", "IsConverted = true"],
+  ["Reached SQL (date set)", "Date_Reached_Sales_Accepted_SQL__c != null"],
+  ["Status Sales Accepted (SQL)", "Status = 'Sales Accepted (SQL)'"],
+  ["Inbound, converted", "LeadSource = 'Inbound' AND IsConverted = true"],
+  ["Inbound, not converted", "LeadSource = 'Inbound' AND IsConverted = false"],
+  ["Everyone else (open, not SQL)", "IsConverted = false AND Date_Reached_Sales_Accepted_SQL__c = null"],
+];
+out.push("## Does the score predict deals?", "", "| Group | Leads | Avg score | Max score |", "|---|---|---|---|");
+for (const [label, where] of GROUPS) out.push(`| ${label} | ${(await agg(where)).join(" | ")} |`);
+out.push("");
+const BANDS = [["0 or blank", "(Lead_Score_Total__c = null OR Lead_Score_Total__c = 0)"], ["1-9", "Lead_Score_Total__c >= 1 AND Lead_Score_Total__c < 10"],
+  ["10-24", "Lead_Score_Total__c >= 10 AND Lead_Score_Total__c < 25"], ["25-49", "Lead_Score_Total__c >= 25 AND Lead_Score_Total__c < 50"], ["50+", "Lead_Score_Total__c >= 50"]];
+out.push("## Conversion rate by score band", "", "| Score | Leads | Converted | Reached SQL | % converted | % SQL |", "|---|---|---|---|---|---|");
+for (const [label, where] of BANDS) {
+  const [all] = await agg(where);
+  const [conv] = await agg(`${where} AND IsConverted = true`);
+  const [sql] = await agg(`${where} AND (IsConverted = true OR Date_Reached_Sales_Accepted_SQL__c != null)`);
+  const pct = (a) => (typeof a === "number" && typeof all === "number" && all > 0 ? `${Math.round((a / all) * 1000) / 10}%` : "");
+  out.push(`| ${label} | ${all} | ${conv} | ${sql} | ${pct(conv)} | ${pct(sql)} |`);
+}
+out.push("");
+try {
+  for (const f of ["Lead_Score_Engagement_Tier__c", "Lead_Score_Profile_Tier__c", "LeadSource"]) {
+    const r = await get(`/query?q=${encodeURIComponent(`SELECT ${f} v, COUNT(Id) n, AVG(Lead_Score_Total__c) avg FROM Lead WHERE IsConverted = true OR Date_Reached_Sales_Accepted_SQL__c != null GROUP BY ${f} ORDER BY COUNT(Id) DESC LIMIT 12`)}`);
+    out.push(`## Converted or SQL leads by ${f.replace("__c", "")}`, "", "| Value | Leads | Avg score |", "|---|---|---|",
+      ...r.records.map((x) => `| ${x.v ?? "(blank)"} | ${x.n} | ${x.avg != null ? Math.round(x.avg) : ""} |`), "");
+  }
+} catch (e) {
+  out.push(`Breakdown failed: ${String(e.message).slice(0, 200)}`, "");
+}
+
 console.log(out.join("\n"));
