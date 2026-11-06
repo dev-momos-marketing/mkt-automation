@@ -43,8 +43,21 @@ const WINDOW_MS = 30 * 60_000; // the cron interval in wrangler.toml: change bot
 const SYNC_LAG_MS = 5 * 60_000;
 const HOT_LOOKBACK_MS = 45 * 60_000; // overlaps runs on purpose; SEEN stops repeats
 const SEEN_TTL_S = 180 * 24 * 3600;
+// Bump the version when the hot rules change, so leads already hot under the new rules aren't posted as new.
+const SEED_KEY = "seeded:score-50";
 const MAX_HOT_POSTS = 10; // per run, so a bulk update can't flood the channel
 const JUNK_STATUS = /disqualif|junk|spam|unqualif|duplicate/i;
+const PLACEHOLDER = /^(not provided|n\/?a|unknown|none|null|test|-+|\.+)?$/i;
+
+// Imports leave "null" in empty name fields ("null null", "null Not Provided").
+export const clean = (v: unknown) => (v == null ? "" : String(v).replace(/\bnull\b/gi, "").replace(/\s+/g, " ").trim());
+
+// A lead nobody can act on: junk status, or no real company ("Not Provided", "N/A", blank).
+export function junkReason(lead: SfLead): string | null {
+  if (lead.Status && JUNK_STATUS.test(lead.Status)) return `status ${lead.Status}`;
+  if (PLACEHOLDER.test(clean(lead.Company))) return `company "${clean(lead.Company) || "blank"}"`;
+  return null;
+}
 
 const list = (s?: string) =>
   (s ?? "").split(",").map((x) => x.trim().toLowerCase()).filter(Boolean);
@@ -70,7 +83,8 @@ export function isHot(lead: SfLead, env: NotifyEnv): boolean {
 // Which leads reach the channel. Order: junk status, then the source, then 🔥.
 // Only named sources post: most leads in Salesforce are bulk imports with no source.
 export function decide(lead: SfLead, env: NotifyEnv): Decision {
-  if (lead.Status && JUNK_STATUS.test(lead.Status)) return { post: false, why: `status ${lead.Status}` };
+  const junk = junkReason(lead);
+  if (junk) return { post: false, why: junk };
   const source = sourceOf(lead, env).toLowerCase();
   const hot = isHot(lead, env);
   if (list(env.NOTIFY_SOURCES).includes(source)) return { post: true, hot };
@@ -81,11 +95,11 @@ export function decide(lead: SfLead, env: NotifyEnv): Decision {
 export function message(lead: SfLead, env: NotifyEnv, hot: boolean, instanceUrl: string, ownerSlackId: string | null): string {
   const score = scoreOf(lead, env);
   const owner = ownerSlackId ? `<@${ownerSlackId}>` : (lead.Owner?.Name ?? "no owner");
-  const who = [lead.Name, lead.Title].filter(Boolean).join(", ");
+  const who = [clean(lead.Name) || "(no name)", clean(lead.Title)].filter(Boolean).join(", ");
   const locField = env.LEAD_LOCATIONS_FIELD?.trim();
   const locations = locField && lead[locField] != null && lead[locField] !== "" ? `${lead[locField]} locations` : null;
   const parts = [
-    `${hot ? "🔥" : "🟢"} *${lead.Company || "Unknown company"}*${who ? ` · ${who}` : ""}`,
+    `${hot ? "🔥" : "🟢"} *${clean(lead.Company) || "Unknown company"}*${who ? ` · ${who}` : ""}`,
     [sourceOf(lead, env) || "no source", locations, score != null ? `score ${score}` : null, `owner ${owner}`].filter(Boolean).join(" · "),
     `<${instanceUrl}/lightning/r/Lead/${lead.Id}/view|Open in Salesforce>`,
   ];
@@ -104,12 +118,12 @@ export function blocks(lead: SfLead, env: NotifyEnv, hot: boolean, instanceUrl: 
   const flag = env.LEAD_HOT_FLAG_FIELD?.trim();
   const locField = env.LEAD_LOCATIONS_FIELD?.trim();
   const owner = ownerSlackId ? `<@${ownerSlackId}>` : esc(lead.Owner?.Name ?? "no owner");
-  const company = String(lead.Company || "Unknown company");
+  const company = clean(lead.Company) || "Unknown company";
   const out: unknown[] = [
     { type: "header", text: { type: "plain_text", text: `${hot ? "🔥 Hot lead" : "🟢 New lead"}: ${company}`.slice(0, 150), emoji: true } },
   ];
 
-  const who = [lead.Name ? `*${esc(lead.Name)}*` : null, has(lead.Title) ? esc(lead.Title) : null].filter(Boolean).join(" · ");
+  const who = [`*${esc(clean(lead.Name) || "(no name)")}*`, clean(lead.Title) ? esc(clean(lead.Title)) : null].filter(Boolean).join(" · ");
   const reach = [
     has(f("Email")) ? `<mailto:${esc(f("Email"))}|${esc(f("Email"))}>` : null,
     has(f("Phone")) ? esc(f("Phone")) : null,
@@ -203,13 +217,14 @@ export function leadQuery(scheduled: Date, env: NotifyEnv, extra: string[] = [])
 }
 
 // Leads changed in the last 45 minutes that are hot now. Null when no score or flag is set up.
-export function hotQuery(scheduled: Date, env: NotifyEnv, extra: string[] = []): string | null {
+export function hotQuery(scheduled: Date | null, env: NotifyEnv, extra: string[] = []): string | null {
   const hot: string[] = [];
   const score = env.LEAD_SCORE_FIELD?.trim();
   const flag = env.LEAD_HOT_FLAG_FIELD?.trim();
   if (score) hot.push(`${score} >= ${Number(env.HOT_SCORE || 70)}`);
   if (flag) hot.push(`${flag} = true`);
   if (!hot.length) return null;
+  if (!scheduled) return `SELECT Id FROM Lead WHERE IsConverted = false AND (${hot.join(" OR ")}) LIMIT 2000`;
   const since = new Date(scheduled.getTime() - HOT_LOOKBACK_MS);
   return `SELECT ${selectFields(env, extra)} FROM Lead WHERE LastModifiedDate >= ${soqlDate(since)} AND IsConverted = false AND (${hot.join(" OR ")}) ORDER BY LastModifiedDate LIMIT 200`;
 }
@@ -312,10 +327,17 @@ export async function notifyLeads(scheduled: Date, env: NotifyEnv): Promise<{ po
   // 2. Leads that just turned hot, any source. Needs SEEN, or they would repeat every run.
   let hot = 0;
   const hq = hotQuery(scheduled, env, extra);
-  if (hq && env.SEEN) {
+  if (hq && env.SEEN && !(await env.SEEN.get(SEED_KEY))) {
+    // First run with these hot rules: leads already hot are old news. Remember them without
+    // posting, so from now on only leads that newly become hot are posted.
+    const already = await query(sf, hotQuery(null, env)!);
+    for (const lead of already) await env.SEEN.put(seenKey(lead), "1", { expirationTtl: SEEN_TTL_S });
+    await env.SEEN.put(SEED_KEY, new Date().toISOString());
+    console.log(JSON.stringify({ notifier: "hot leads remembered without posting", count: already.length }));
+  } else if (hq && env.SEEN) {
     const waiting: SfLead[] = [];
     for (const lead of await query(sf, hq)) {
-      if (lead.Status && JUNK_STATUS.test(lead.Status)) continue;
+      if (junkReason(lead)) continue;
       if (!(await env.SEEN.get(seenKey(lead)))) waiting.push(lead);
     }
     for (const lead of waiting.slice(0, MAX_HOT_POSTS)) if (await post(lead, true)) hot++;

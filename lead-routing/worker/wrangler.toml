@@ -26,11 +26,12 @@ RESEARCH_MODEL = "haiku"
 SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
 SLACK_CHANNEL = "vincent-test-beacon"
 LEAD_SOURCE_FIELD = "LeadSource"
-# Conversion's total score on Lead. 🔥 at HOT_SCORE or more, or when MQL Contact Hot is ticked
-# (Conversion ticks it at 50: in the last 90 days, the leads at 50+ and the ticked ones are the same 20).
+# Conversion's total score on Lead. 🔥 when a lead reaches HOT_SCORE.
 LEAD_SCORE_FIELD = "Lead_Score_Total__c"
 HOT_SCORE = "50"
-LEAD_HOT_FLAG_FIELD = "MQL_Contact_Hot_c__c"
+# Off: MQL Contact Hot stays ticked after the score drops (173 of 209 ticked open leads scored
+# under 50 on Nov 6), so it posted stale leads. 🔥 is the score alone.
+LEAD_HOT_FLAG_FIELD = ""
 LEAD_LOCATIONS_FIELD = "NoofOutlets__c"
 # Lead Source values (as stored in Salesforce) that are posted. Anything else is not: blank
 # (bulk imports, most leads), outbound_ae / outbound_sdr (the rep made them) and Sales Agency.
