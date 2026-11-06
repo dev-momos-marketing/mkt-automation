@@ -99,4 +99,28 @@ out.push("## Lead_Score_Total__c, leads created in the last 90 days", "", "| Lea
   await stats("Status = 'MQLs (ICP-Verified)'", "Status MQLs (ICP-Verified)"),
   "");
 
+// How the score is built: each part's spread, the tiers, and the numbers behind the top leads.
+// Numbers and tiers only, no names or emails.
+const PARTS = ["Lead_Score_Total__c", "Lead_Score_Profile_Fit__c", "Lead_Score_Form_Submission__c", "Lead_Score_Email_Open_Engagement__c",
+  "Lead_Score_Email_Click_Engagement__c", "Lead_Score_Website_Engagement__c", "Lead_Score_Event_Engagement__c", "Lead_Score_Offline_Engagement__c"];
+try {
+  out.push("## Score parts, open leads with a score", "", "| Part | Leads > 0 | Min | Avg | Max |", "|---|---|---|---|---|");
+  for (const f of PARTS) {
+    const r = await get(`/query?q=${encodeURIComponent(`SELECT COUNT(Id) n, MIN(${f}) lo, AVG(${f}) avg, MAX(${f}) hi FROM Lead WHERE IsConverted = false AND ${f} > 0`)}`);
+    const x = r.records[0] ?? {};
+    out.push(`| ${f.replace("Lead_Score_", "").replace("__c", "")} | ${x.n} | ${x.lo ?? ""} | ${x.avg != null ? Math.round(x.avg * 10) / 10 : ""} | ${x.hi ?? ""} |`);
+  }
+  out.push("");
+  for (const f of ["Lead_Score_Profile_Tier__c", "Lead_Score_Engagement_Tier__c"]) {
+    const r = await get(`/query?q=${encodeURIComponent(`SELECT ${f} v, COUNT(Id) n, AVG(Lead_Score_Total__c) avg FROM Lead WHERE IsConverted = false GROUP BY ${f} ORDER BY COUNT(Id) DESC LIMIT 15`)}`);
+    out.push(`## ${f.replace("__c", "")}`, "", "| Value | Leads | Avg total score |", "|---|---|---|",
+      ...r.records.map((x) => `| ${x.v ?? "(blank)"} | ${x.n} | ${x.avg != null ? Math.round(x.avg) : ""} |`), "");
+  }
+  const top = await get(`/query?q=${encodeURIComponent(`SELECT ${PARTS.join(", ")}, Lead_Score_Profile_Tier__c, Lead_Score_Engagement_Tier__c, MQL_Contact_Hot_c__c, LeadSource, Status FROM Lead WHERE IsConverted = false AND Lead_Score_Total__c > 0 ORDER BY Lead_Score_Total__c DESC LIMIT 15`)}`);
+  out.push("## Top 15 scores, broken down", "", "| Total | Fit | Form | Open | Click | Web | Event | Offline | Fit tier | Eng. tier | Hot tick | Source | Status |", "|---|---|---|---|---|---|---|---|---|---|---|---|---|",
+    ...top.records.map((x) => `| ${PARTS.map((f) => x[f] ?? "").join(" | ")} | ${x.Lead_Score_Profile_Tier__c ?? ""} | ${x.Lead_Score_Engagement_Tier__c ?? ""} | ${x.MQL_Contact_Hot_c__c ? "yes" : ""} | ${x.LeadSource ?? ""} | ${x.Status ?? ""} |`), "");
+} catch (e) {
+  out.push(`Score breakdown failed: ${String(e.message).slice(0, 200)}`, "");
+}
+
 console.log(out.join("\n"));
