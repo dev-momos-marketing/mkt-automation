@@ -73,12 +73,29 @@ const stats = async (where, label) => {
     return `| ${label} | could not query: ${String(e.message).slice(0, 120)} | | | |`;
   }
 };
+// All time, not just 90 days: how many leads the hot check could ever pick up.
+const allTime = async (where) => {
+  try {
+    const r = await get(`/query?q=${encodeURIComponent(`SELECT COUNT(Id) n FROM Lead WHERE IsConverted = false AND ${where}`)}`);
+    return r.records[0]?.n ?? 0;
+  } catch (e) {
+    return `error: ${String(e.message).slice(0, 120)}`;
+  }
+};
+out.push("## Open leads, all time", "", "| Leads | Count |", "|---|---|",
+  `| MQL Contact Hot ticked | ${await allTime("MQL_Contact_Hot_c__c = true")} |`,
+  `| ticked, score under 50 | ${await allTime("MQL_Contact_Hot_c__c = true AND (Lead_Score_Total__c < 50 OR Lead_Score_Total__c = null)")} |`,
+  `| score 50+ | ${await allTime("Lead_Score_Total__c >= 50")} |`,
+  `| hot and changed in the last 24h | ${await allTime("(Lead_Score_Total__c >= 50 OR MQL_Contact_Hot_c__c = true) AND LastModifiedDate = LAST_N_DAYS:1")} |`,
+  "");
+
 out.push("## Lead_Score_Total__c, leads created in the last 90 days", "", "| Leads | Count | Min | Avg | Max |", "|---|---|---|---|---|",
   await stats("LeadSource != null", "with a Lead Source"),
   await stats("LeadSource = 'Inbound'", "Inbound"),
   await stats("Lead_Score_Total__c >= 50", "score 50+"),
   await stats("Lead_Score_Total__c >= 100", "score 100+"),
   await stats("MQL_Contact_Hot_c__c = true", "MQL Contact Hot ticked"),
+  await stats("MQL_Contact_Hot_c__c = true AND (Lead_Score_Total__c < 50 OR Lead_Score_Total__c = null)", "ticked but score under 50"),
   await stats("Status = 'MQLs (ICP-Verified)'", "Status MQLs (ICP-Verified)"),
   "");
 
