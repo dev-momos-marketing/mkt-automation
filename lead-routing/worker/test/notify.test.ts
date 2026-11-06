@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { decide, hotQuery, leadQuery, message, notifyLeads, type NotifyEnv, type SfLead } from "../src/notify.ts";
+import { blocks, clean, decide, hotQuery, leadQuery, message, notifyLeads, type NotifyEnv, type SfLead } from "../src/notify.ts";
 
 const env: NotifyEnv = {
   SF_DOMAIN: "http://momos.my.salesforce.com/", // as pasted from a browser: http and a trailing slash
@@ -106,8 +106,8 @@ test("hot query looks back 45 minutes for score or flag", () => {
   assert.equal(hotQuery(new Date(), { ...env, LEAD_SCORE_FIELD: "", LEAD_HOT_FLAG_FIELD: "" }), null);
 });
 
-function fakeKv() {
-  const store = new Map<string, string>();
+function fakeKv(seeded = true) {
+  const store = new Map<string, string>(seeded ? [["seeded:score-50", "2026-11-06"]] : []);
   return { store, get: async (k: string) => store.get(k) ?? null, put: async (k: string, v: string) => void store.set(k, v) };
 }
 
@@ -119,6 +119,7 @@ function fakeSalesforce(fresh: SfLead[], hot: SfLead[]) {
     if (url.endsWith("/services/oauth2/token")) return Response.json({ access_token: "t", instance_url: "https://sf" });
     if (url.includes("/query?q=")) {
       const q = decodeURIComponent(url.split("q=")[1]);
+      if (q.startsWith("SELECT Id FROM Lead")) return Response.json({ records: hot }); // first-run seed
       return Response.json({ records: q.includes("LastModifiedDate") ? hot : fresh });
     }
     if (url.includes("users.lookupByEmail")) return Response.json({ ok: false });
@@ -169,7 +170,117 @@ test("a bulk update posts 10 hot leads and one line for the rest", async () => {
     assert.equal(r.hot, 10);
     assert.equal(sf.posts.length, 11);
     assert.match(sf.posts[10], /and 3 more leads turned hot/);
-    assert.equal(SEEN.store.size, 13);
+    assert.equal(SEEN.store.size, 14); // 13 leads + the seed marker
+  } finally {
+    sf.restore();
+  }
+});
+
+test("detailed post: who, reach, where, why hot, score breakdown", () => {
+  const rich = lead({
+    Name: "Isabella Jiao", Title: "Marketing", Company: "Tattle", LeadSource: null, Conversion_Score__c: 21,
+    MQL_Contact_Hot_c__c: true, NoofOutlets__c: 12, Email: "isabella@tattle.com", Phone: "+1 555 0100",
+    Website: "tattle.com", City: "Austin", State: "TX", Country: "United States", Industry: "Restaurants",
+    CreatedDate: "2026-10-01T08:00:00.000+0000", Lead_Score_Profile_Fit__c: 15, Lead_Score_Profile_Tier__c: "B",
+    Lead_Score_Website_Engagement__c: 4, Lead_Score_Email_Open_Engagement__c: 2, Lead_Score_Form_Submission__c: 0,
+    Gong__Flow_Status__c: "In progress", Description: "Wants <reviews> & social",
+  });
+  const b = blocks(rich, { ...env, HOT_SCORE: "50" }, true, "https://sf", "U123") as any[];
+  const all = JSON.stringify(b);
+  assert.equal(b[0].text.text, "🔥 Hot lead: Tattle");
+  assert.match(b[1].text.text, /\*Isabella Jiao\* · Marketing\n<mailto:isabella@tattle\.com\|isabella@tattle\.com> · \+1 555 0100/);
+  const fields = b[2].fields.map((x: any) => x.text);
+  assert.ok(fields.includes("*Owner*\n<@U123>"));
+  assert.ok(fields.includes("*Locations*\n12"));
+  assert.ok(fields.includes("*Based in*\nAustin, TX, United States"));
+  assert.ok(fields.includes("*Website*\n<https://tattle.com|tattle.com>"));
+  assert.ok(fields.includes("*Created*\n2026-10-01"));
+  assert.match(b[3].text.text, /\*Why it's hot:\* MQL Contact Hot is ticked\n\*Score 21\* · profile fit 15 \(B\)\nPoints from: Website 4 · Email opens 2$/);
+  assert.match(all, /Gong flow: In progress/);
+  assert.match(all, /Wants &lt;reviews&gt; &amp; social/); // escaped, can't inject links or mentions
+  assert.equal(b.at(-1).elements[0].url, "https://sf/lightning/r/Lead/00Q1/view");
+});
+
+test("detailed post skips what's empty", () => {
+  const b = blocks(lead({ Title: null, Conversion_Score__c: 40 }), env, false, "https://sf", null) as any[];
+  assert.equal(b[0].text.text, "🟢 New lead: Burger Co");
+  const all = JSON.stringify(b);
+  assert.doesNotMatch(all, /Why it's hot|Based in|Website|Points from/);
+  assert.match(all, /Jill Bucci/);
+});
+
+test("only detail fields Salesforce lets us read are queried", async () => {
+  let soql = "";
+  let posted: any;
+  const realFetch = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
+    const url = String(input);
+    if (url.endsWith("/services/oauth2/token")) return Response.json({ access_token: "t", instance_url: "https://sf" });
+    if (url.endsWith("/sobjects/Lead/describe")) return Response.json({ fields: [{ name: "Email" }, { name: "City" }] });
+    if (url.includes("/query?q=")) {
+      const q = decodeURIComponent(url.split("q=")[1]);
+      if (q.includes("CreatedDate >=")) soql = q;
+      return Response.json({ records: q.includes("CreatedDate >=") ? [lead({ Email: "a@b.co", City: "Austin" })] : [] });
+    }
+    if (url.includes("users.lookupByEmail")) return Response.json({ ok: false, error: "missing_scope" });
+    if (url.endsWith("chat.postMessage")) {
+      posted = JSON.parse(String(init?.body));
+      return Response.json({ ok: true });
+    }
+    throw new Error(`unexpected ${url}`);
+  }) as typeof fetch;
+  try {
+    await notifyLeads(new Date("2026-11-04T10:30:00Z"), { ...env, SEEN: fakeKv() });
+    assert.match(soql, /, Email, City FROM Lead/);
+    assert.doesNotMatch(soql, /Phone|Gong__Flow_Status__c/);
+    assert.ok(Array.isArray(posted.blocks));
+    assert.match(posted.text, /Burger Co/); // plain text kept for notifications
+  } finally {
+    globalThis.fetch = realFetch;
+  }
+});
+
+test("first run remembers leads already hot without posting them", async () => {
+  const SEEN = fakeKv(false);
+  const old = [lead({ Id: "00QA", Conversion_Score__c: 52 }), lead({ Id: "00QB", Conversion_Score__c: 60 })];
+  const sf = fakeSalesforce([], old);
+  try {
+    const first = await notifyLeads(new Date("2026-11-06T02:00:00Z"), { ...env, HOT_SCORE: "50", SEEN });
+    assert.equal(first.hot, 0);
+    assert.equal(sf.posts.length, 0);
+    assert.ok(SEEN.store.has("hot:00QA") && SEEN.store.has("hot:00QB") && SEEN.store.has("seeded:score-50"));
+    // Next run: the same leads changed again. Still not posted, they were already hot.
+    const second = await notifyLeads(new Date("2026-11-06T02:30:00Z"), { ...env, HOT_SCORE: "50", SEEN });
+    assert.equal(second.hot, 0);
+    assert.equal(sf.posts.length, 0);
+  } finally {
+    sf.restore();
+  }
+});
+
+test("seed query lists every hot lead, with no time window", () => {
+  const q = hotQuery(null, { ...env, HOT_SCORE: "50", LEAD_HOT_FLAG_FIELD: "" })!;
+  assert.equal(q, "SELECT Id FROM Lead WHERE IsConverted = false AND (Conversion_Score__c >= 50) LIMIT 2000");
+});
+
+test("leads with no real company are junk, null names are cleaned", () => {
+  assert.equal(decide(lead({ Company: "Not Provided", Conversion_Score__c: 90 }), env).post, false);
+  assert.equal(decide(lead({ Company: "N/A" }), env).post, false);
+  assert.equal(decide(lead({ Company: null }), env).post, false);
+  assert.equal(decide(lead({ Company: "null" }), env).post, false);
+  assert.equal(decide(lead({ Company: "T2D Concepts" }), env).post, true);
+  assert.equal(clean("null null"), "");
+  assert.equal(clean("null Not Provided"), "Not Provided");
+  assert.match(message(lead({ Company: "T2D Concepts", Name: "null null", Title: null }), env, true, "https://x", null), /^🔥 \*T2D Concepts\* · \(no name\)\n/);
+});
+
+test("a junk lead that turns hot isn't posted", async () => {
+  const SEEN = fakeKv();
+  const sf = fakeSalesforce([], [lead({ Id: "00QJ", Company: "Not Provided", Name: "null Not Provided", Conversion_Score__c: 70 })]);
+  try {
+    const r = await notifyLeads(new Date("2026-11-06T02:00:00Z"), { ...env, SEEN });
+    assert.equal(r.hot, 0);
+    assert.equal(sf.posts.length, 0);
   } finally {
     sf.restore();
   }
