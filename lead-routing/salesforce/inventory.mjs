@@ -257,4 +257,60 @@ await grouped("Imported leads: engagement tier", `SELECT Lead_Score_Engagement_T
   table("Senior prospects by year created", ["Year", "Leads"], count(best, (r) => String(r.CreatedDate).slice(0, 4)).sort().map(([k, n]) => `| ${k} | ${n} |`));
 }
 
+// 11. Pure prospects: no customers, no Momos staff, no staff lists, no converted or junk leads.
+// Customers = brands with a case study on momos.com, plus any company with more than 20 people as
+// leads (staff lists). Counts and company domains only, never an address or a person's name.
+{
+  const rows = [];
+  let page = await tryQuery("SELECT Email, Title, Company, Industry, Country, NoofOutlets__c, LeadSource, Status, IsConverted, CreatedBy.Name, CreatedDate, Gong__Current_Flow_Name__c, Lead_Score_Profile_Tier__c FROM Lead");
+  while (page && !page.error) {
+    rows.push(...page.records);
+    page = page.nextRecordsUrl ? await get(page.nextRecordsUrl.replace(/^\/services\/data\/v[\d.]+/, "")).catch((e) => ({ error: String(e) })) : null;
+  }
+  const CASE_STUDIES = /caribou|condado|island ?wing|ezell|guzman|\bgyg\b|hash ?house|hopdoddy|baskin|black ?rock|br\.coffee|\ben ?group\b|lee'?s ?famous|leesfamous|\boue\b|san ?pedro ?fish|sumo ?sushi|just ?salad|mr\.? ?pickle|papa ?murph|paris ?baguette|poke ?theory|potbelly|taco ?time|bb\.?q ?chicken|bbqchicken|chili'?s|brinker/i;
+  const MOMOS = /(^|\.)momos\.(com|ai|io|co)$|^momos/i;
+  const FREE = /^(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|aol|proton|protonmail|gmx|mail|yandex|qq|163)\./i;
+  const JUNK = /disqualif|junk|spam|unqualif|duplicate/i;
+  const SENIOR = /\b(owner|founder|co-?founder|ceo|coo|cmo|cfo|cto|chief|president|partner|principal|vp|vice president|svp|evp|head|director|gm|general manager)\b/i;
+  const FUNC = [["marketing", /market|brand|digital|growth|social|loyalty|crm|guest|cx|customer|experience|communications/i], ["operations", /operat|ops\b|franchis|area|district|regional|restaurant|store|multi-unit/i], ["it / tech", /\bit\b|tech|information|systems/i], ["finance", /financ|cfo|account|controller/i]];
+  const domainOf = (e) => String(e ?? "").toLowerCase().split("@")[1] ?? "";
+  const root = (d) => d.split(".").slice(-3).join(".").replace(/^(rest|fhs|fr|www|mail)\./, "");
+  const people = new Map();
+  for (const r of rows) { const d = domainOf(r.Email); if (d && !FREE.test(d)) people.set(root(d), (people.get(root(d)) ?? 0) + 1); }
+  const why = (r) => {
+    const d = domainOf(r.Email);
+    if (r.IsConverted) return "converted already";
+    if (r.Status && JUNK.test(r.Status)) return "junk / disqualified / duplicate";
+    if (MOMOS.test(d) || /momos/i.test(r.Company ?? "")) return "Momos staff";
+    if (CASE_STUDIES.test(d) || CASE_STUDIES.test(r.Company ?? "")) return "customer (case study brand)";
+    if (!d) return "no email";
+    if (!FREE.test(d) && people.get(root(d)) > 20) return "staff list (20+ people at one company)";
+    return "";
+  };
+  const removed = new Map();
+  const pure = [];
+  for (const r of rows) { const w = why(r); if (w) removed.set(w, (removed.get(w) ?? 0) + 1); else pure.push(r); }
+  table(`Pure prospects: what was taken out (of ${rows.length})`, ["Reason", "Leads"], [...[...removed].sort((a, b) => b[1] - a[1]).map(([k, n]) => `| ${k} | ${n} |`), `| **left: pure prospects** | **${pure.length}** |`]);
+  const company = pure.filter((r) => !FREE.test(domainOf(r.Email)));
+  const senior = company.filter((r) => r.Title && SENIOR.test(r.Title));
+  const fb = (arr) => arr.filter((r) => /food|hospitality|restaurant/i.test(r.Industry ?? "")).length;
+  const doms = (arr) => new Set(arr.map((r) => root(domainOf(r.Email)))).size;
+  table("Pure prospects", ["Group", "Leads", "Companies", "F&B or hospitality"], [
+    `| all | ${pure.length} | ${doms(pure)} | ${fb(pure)} |`,
+    `| company email | ${company.length} | ${doms(company)} | ${fb(company)} |`,
+    `| company email and a title | ${company.filter((r) => r.Title).length} | ${doms(company.filter((r) => r.Title))} | ${fb(company.filter((r) => r.Title))} |`,
+    `| company email and a senior title | ${senior.length} | ${doms(senior)} | ${fb(senior)} |`,
+  ]);
+  const count = (arr, key) => { const m = new Map(); for (const r of arr) { const k = key(r) || "(blank)"; m.set(k, (m.get(k) ?? 0) + 1); } return [...m].sort((a, b) => b[1] - a[1]); };
+  const band = (r) => { const n = Number(r.NoofOutlets__c); if (!r.NoofOutlets__c) return "(blank)"; return n <= 5 ? "1-5" : n <= 49 ? "6-49" : n <= 249 ? "50-249" : "250+"; };
+  table("Senior pure prospects by function", ["Function", "Leads"], count(senior, (r) => FUNC.find(([, re]) => re.test(r.Title))?.[0] ?? "other / general").map(([k, n]) => `| ${k} | ${n} |`));
+  table("Senior pure prospects by country (top 15)", ["Country", "Leads"], count(senior, (r) => r.Country).slice(0, 15).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior pure prospects by locations", ["Locations", "Leads"], count(senior, band).map(([k, n]) => `| ${k} | ${n} |`));
+  table("Senior pure prospects by profile tier", ["Tier", "Leads"], count(senior, (r) => r.Lead_Score_Profile_Tier__c).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior pure prospects by status", ["Status", "Leads"], count(senior, (r) => r.Status).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior pure prospects by Lead Source", ["Lead Source", "Leads"], count(senior, (r) => r.LeadSource).slice(0, 12).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior pure prospects: ever in a Gong sequence", ["", "Leads"], [`| yes | ${senior.filter((r) => r.Gong__Current_Flow_Name__c).length} |`, `| no | ${senior.filter((r) => !r.Gong__Current_Flow_Name__c).length} |`]);
+  table("Pure prospects: companies with the most people (top 25)", ["Domain", "Leads"], count(company, (r) => root(domainOf(r.Email))).slice(0, 25).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+}
+
 console.log(out.join("\n"));
