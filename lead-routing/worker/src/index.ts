@@ -3,8 +3,8 @@
 // 2. Answers the Framer form: fit goes to the AE's calendar, a confident not-fit to NOT_FIT_URL.
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
-// 4. Every 5 minutes (cron in wrangler.toml): new Salesforce leads from every source go to one
-//    Slack channel through Beacon. See notify.ts.
+// 4. Every 30 minutes (cron in wrangler.toml): new Salesforce leads that reps added by hand go
+//    to one Slack channel through Beacon. See notify.ts.
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";

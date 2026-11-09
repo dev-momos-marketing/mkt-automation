@@ -21,27 +21,18 @@ NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
-# Lead notifier (src/notify.ts): new Salesforce leads go to this Slack channel every 30 minutes.
-# It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set (see the bottom of this file).
+# Lead notifier (src/notify.ts): every 30 minutes, Beacon posts the leads reps added to Salesforce
+# by hand to this Slack channel. It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set
+# (see the bottom of this file).
 SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
 SLACK_CHANNEL = "vincent-test-beacon"
 LEAD_SOURCE_FIELD = "LeadSource"
-# Conversion's total score on Lead. 🔥 at HOT_SCORE or more, or when MQL Contact Hot is ticked
-# (Conversion ticks it at 50: in the last 90 days, the leads at 50+ and the ticked ones are the same 20).
-LEAD_SCORE_FIELD = "Lead_Score_Total__c"
-HOT_SCORE = "50"
-LEAD_HOT_FLAG_FIELD = "MQL_Contact_Hot_c__c"
 LEAD_LOCATIONS_FIELD = "NoofOutlets__c"
-# Lead Source values (as stored in Salesforce) that are posted. Anything else is not: blank
-# (bulk imports, most leads), outbound_ae / outbound_sdr (the rep made them) and Sales Agency.
-NOTIFY_SOURCES = "Inbound,Inbound (SDR),External Referral,Momos_employee_referral,Partnerships,Partnerships (Otter),Conference (Attendee),Conference (Host),Events & Tradeshow"
-# Posted only when 🔥: these convert poorly unless the lead is strong.
-SCORE_ONLY_SOURCES = "Conference (SDR),Marketing (SDR)"
-
-# The lead notifier's memory of which hot leads it already posted. Cloudflare creates the
-# store on the first deploy (no id needed here).
-[[kv_namespaces]]
-binding = "SEEN"
+# Salesforce users whose leads are never posted. Momos Marketing is the demo form's automation:
+# those Inbound leads already reach Slack through Zapier.
+SKIP_CREATORS = "Momos Marketing"
+# More than this many leads from one person in a run is an import: one line instead of each lead.
+BULK_LIMIT = "10"
 
 # Runs the lead notifier. Cloudflare only runs crons on the live deployment, not on Previews.
 [triggers]
