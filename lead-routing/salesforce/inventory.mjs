@@ -194,4 +194,67 @@ await grouped("Imported leads: engagement tier", `SELECT Lead_Score_Engagement_T
   table("Imported leads: score parts (leads with points)", ["Part", "Leads", "Avg", "Max"], parts);
 }
 
+// 10. The whole Lead table without staff lists: what real prospects are left.
+// Counts and company domains only, never an address or a person's name.
+{
+  const rows = [];
+  let page = await tryQuery("SELECT Email, Title, Company, Industry, Country, NoofOutlets__c, LeadSource, Status, IsConverted, CreatedBy.Name, CreatedDate FROM Lead");
+  while (page && !page.error) {
+    rows.push(...page.records);
+    page = page.nextRecordsUrl ? await get(page.nextRecordsUrl.replace(/^\/services\/data\/v[\d.]+/, "")).catch((e) => ({ error: String(e) })) : null;
+  }
+  const FREE = /^(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|aol|proton|protonmail|gmx|mail|yandex|qq|163)\./i;
+  const JUNK = /disqualif|junk|spam|unqualif|duplicate/i;
+  const SENIOR = /\b(owner|founder|co-?founder|ceo|coo|cmo|cfo|cto|chief|president|partner|principal|vp|vice president|svp|evp|head|director|gm|general manager)\b/i;
+  const FUNC = [["marketing", /market|brand|digital|growth|social|loyalty|crm|guest|cx|customer|experience|communications/i], ["operations", /operat|ops\b|franchis|area|district|regional|restaurant|store|multi-unit/i], ["it / tech", /\bit\b|tech|information|digital transformation|systems/i], ["finance", /financ|cfo|account|controller/i]];
+  const root = (d) => d.split(".").slice(-3).join(".").replace(/^(rest|fhs|www|mail)\./, "");
+  const domainOf = (e) => String(e ?? "").toLowerCase().split("@")[1] ?? "";
+  const people = new Map();
+  for (const r of rows) { const d = domainOf(r.Email); if (d && !FREE.test(d)) people.set(root(d), (people.get(root(d)) ?? 0) + 1); }
+  const HEAVY = 20;
+  const heavy = [...people].filter(([, n]) => n > HEAVY).sort((a, b) => b[1] - a[1]);
+  const heavySet = new Set(heavy.map(([d]) => d));
+  let inHeavy = 0, junk = 0, converted = 0, noEmail = 0, freeMail = 0;
+  const pool = [];
+  for (const r of rows) {
+    const d = domainOf(r.Email);
+    if (r.IsConverted) { converted++; continue; }
+    if (r.Status && JUNK.test(r.Status)) { junk++; continue; }
+    if (!d) { noEmail++; continue; }
+    if (heavySet.has(root(d))) { inHeavy++; continue; }
+    if (FREE.test(d)) freeMail++;
+    pool.push(r);
+  }
+  table(`All leads (${rows.length} read)`, ["Group", "Leads"], [
+    `| converted already | ${converted} |`,
+    `| junk / disqualified / duplicate | ${junk} |`,
+    `| no email | ${noEmail} |`,
+    `| at a company with more than ${HEAVY} people in Salesforce (staff lists) | ${inHeavy} |`,
+    `| left: the prospect pool | ${pool.length} |`,
+    `| of those, personal email (Gmail...) | ${freeMail} |`,
+  ]);
+  table(`Companies with more than ${HEAVY} people as leads (${heavy.length}; likely customers or staff lists)`, ["Domain", "Leads"], heavy.slice(0, 60).map(([d, n]) => `| ${cell(d)} | ${n} |`));
+  const withTitle = pool.filter((r) => r.Title && String(r.Title).trim());
+  const senior = withTitle.filter((r) => SENIOR.test(r.Title));
+  const fb = pool.filter((r) => /food|hospitality|restaurant/i.test(r.Industry ?? ""));
+  const loc = pool.filter((r) => Number(r.NoofOutlets__c) >= 6);
+  const best = pool.filter((r) => r.Title && SENIOR.test(r.Title) && !FREE.test(domainOf(r.Email)));
+  table("The prospect pool", ["Group", "Leads"], [
+    `| all | ${pool.length} |`,
+    `| distinct companies (email domains) | ${new Set(pool.map((r) => root(domainOf(r.Email)))).size} |`,
+    `| has a title | ${withTitle.length} |`,
+    `| senior title (owner, founder, C-level, VP, head, director, GM) | ${senior.length} |`,
+    `| senior title and a company email | ${best.length} |`,
+    `| distinct companies among those | ${new Set(best.map((r) => root(domainOf(r.Email)))).size} |`,
+    `| industry F&B or hospitality | ${fb.length} |`,
+    `| 6+ locations recorded | ${loc.length} |`,
+  ]);
+  const count = (arr, key) => { const m = new Map(); for (const r of arr) { const k = key(r) || "(blank)"; m.set(k, (m.get(k) ?? 0) + 1); } return [...m].sort((a, b) => b[1] - a[1]); };
+  table("Senior prospects by function", ["Function", "Leads"], count(best, (r) => FUNC.find(([, re]) => re.test(r.Title))?.[0] ?? "other / general").map(([k, n]) => `| ${k} | ${n} |`));
+  table("Senior prospects by country (top 15)", ["Country", "Leads"], count(best, (r) => r.Country).slice(0, 15).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior prospects by industry (top 10)", ["Industry", "Leads"], count(best, (r) => r.Industry).slice(0, 10).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior prospects by creator (top 10)", ["Creator", "Leads"], count(best, (r) => r.CreatedBy?.Name).slice(0, 10).map(([k, n]) => `| ${cell(k)} | ${n} |`));
+  table("Senior prospects by year created", ["Year", "Leads"], count(best, (r) => String(r.CreatedDate).slice(0, 4)).sort().map(([k, n]) => `| ${k} | ${n} |`));
+}
+
 console.log(out.join("\n"));
