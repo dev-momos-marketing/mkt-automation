@@ -146,4 +146,52 @@ const conv = await tryQuery(`SELECT COUNT() FROM Lead WHERE ${batch} AND (IsConv
 const touched = await tryQuery(`SELECT COUNT() FROM Lead WHERE ${batch} AND Status != 'New (Uncontacted)'`);
 table("Import days: what happened since", ["Count", "Leads"], [`| converted or SQL | ${conv.totalSize ?? "?"} |`, `| moved past New (Uncontacted) | ${touched.totalSize ?? "?"} |`]);
 
+// 9. Who the imported leads are. Reads emails to count domains and role inboxes (info@, sales@);
+// prints domain counts and categories only, never an address or a person's name.
+{
+  const rows = [];
+  let page = await tryQuery(`SELECT Email, Company FROM Lead WHERE ${batch}`);
+  while (page && !page.error) {
+    rows.push(...page.records);
+    page = page.nextRecordsUrl ? await get(page.nextRecordsUrl.replace(/^\/services\/data\/v[\d.]+/, "")).catch((e) => ({ error: String(e) })) : null;
+  }
+  const FREE = /^(gmail|googlemail|yahoo|ymail|hotmail|outlook|live|msn|icloud|me|aol|proton|protonmail|gmx|mail|yandex|qq|163)\./i;
+  const ROLE = /^(info|contact|hello|hi|admin|office|sales|marketing|events?|catering|reservations?|booking|bookings|enquiries|inquiries|support|team|careers|jobs|hr|accounts?|billing|orders?|manager|gm|press|media|partners?|franchise|franchising)$/i;
+  const domains = new Map();
+  const companies = new Map();
+  let free = 0, role = 0, bad = 0;
+  for (const r of rows) {
+    const [local, domain] = String(r.Email ?? "").toLowerCase().split("@");
+    if (!domain) { bad++; continue; }
+    if (FREE.test(domain)) free++;
+    else domains.set(domain, (domains.get(domain) ?? 0) + 1);
+    if (ROLE.test(local.replace(/[0-9._-]+$/, ""))) role++;
+    const c = (r.Company ?? "(blank)").trim() || "(blank)";
+    companies.set(c, (companies.get(c) ?? 0) + 1);
+  }
+  const top = (m, n) => [...m].sort((a, b) => b[1] - a[1]).slice(0, n);
+  table(`Imported leads: email kinds (${rows.length} read)`, ["Kind", "Leads"], [
+    `| free email (Gmail, Yahoo, Outlook...) | ${free} |`,
+    `| company domain | ${rows.length - free - bad} |`,
+    `| distinct company domains | ${domains.size} |`,
+    `| role inbox (info@, sales@, events@...) | ${role} |`,
+    `| no valid email | ${bad} |`,
+  ]);
+  table("Imported leads: top 30 company domains", ["Domain", "Leads"], top(domains, 30).map(([d, n]) => `| ${cell(d)} | ${n} |`));
+  const sizes = new Map();
+  for (const n of domains.values()) { const b = n === 1 ? "1" : n <= 5 ? "2-5" : n <= 20 ? "6-20" : n <= 100 ? "21-100" : "100+"; sizes.set(b, (sizes.get(b) ?? 0) + 1); }
+  table("Imported leads: people per company domain", ["People", "Domains"], ["1", "2-5", "6-20", "21-100", "100+"].map((b) => `| ${b} | ${sizes.get(b) ?? 0} |`));
+  table("Imported leads: top 30 Company values", ["Company", "Leads"], top(companies, 30).map(([c, n]) => `| ${cell(c)} | ${n} |`));
+}
+await grouped("Imported leads: engagement tier", `SELECT Lead_Score_Engagement_Tier__c tier, COUNT(Id) n FROM Lead WHERE ${batch} GROUP BY Lead_Score_Engagement_Tier__c ORDER BY COUNT(Id) DESC`, ["tier", "n"]);
+{
+  const parts = [];
+  for (const f of ["Lead_Score_Email_Open_Engagement__c", "Lead_Score_Email_Click_Engagement__c", "Lead_Score_Website_Engagement__c", "Lead_Score_Form_Submission__c", "Lead_Score_Event_Engagement__c"]) {
+    const r = await tryQuery(`SELECT COUNT(Id) n, AVG(${f}) a, MAX(${f}) m FROM Lead WHERE ${batch} AND ${f} > 0`);
+    const x = r.records?.[0] ?? {};
+    parts.push(`| \`${f.replace("Lead_Score_", "").replace("__c", "")}\` | ${x.n ?? "?"} | ${x.a == null ? "" : Number(x.a).toFixed(1)} | ${x.m ?? ""} |`);
+  }
+  table("Imported leads: score parts (leads with points)", ["Part", "Leads", "Avg", "Max"], parts);
+}
+
 console.log(out.join("\n"));
