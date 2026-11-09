@@ -125,4 +125,9 @@ await grouped("Contacts by Lead Source", "SELECT LeadSource, COUNT(Id) n FROM Co
 await grouped("Leads by Lead Source Detail, all time", "SELECT Specific_Lead_Source__c, COUNT(Id) n FROM Lead GROUP BY Specific_Lead_Source__c ORDER BY COUNT(Id) DESC LIMIT 20", ["Specific_Lead_Source__c", "n"]);
 await grouped("Leads by Engage flow status, all time", "SELECT Gong__Flow_Status__c, COUNT(Id) n FROM Lead GROUP BY Gong__Flow_Status__c ORDER BY COUNT(Id) DESC LIMIT 20", ["Gong__Flow_Status__c", "n"]);
 
+// 7. Who creates leads: staff user names (never lead names), by source, and how many land per day.
+await grouped("Leads created in the last 90 days, by creator and Lead Source", "SELECT CreatedBy.Name creator, CreatedBy.IsActive active, LeadSource, COUNT(Id) n FROM Lead WHERE CreatedDate = LAST_N_DAYS:90 GROUP BY CreatedBy.Name, CreatedBy.IsActive, LeadSource ORDER BY COUNT(Id) DESC LIMIT 60", ["creator", "active", "LeadSource", "n"]);
+await grouped("Busiest creator-days in the last 90 days (bulk imports show as big days)", "SELECT CreatedBy.Name creator, DAY_ONLY(CreatedDate) day, COUNT(Id) n FROM Lead WHERE CreatedDate = LAST_N_DAYS:90 GROUP BY CreatedBy.Name, DAY_ONLY(CreatedDate) ORDER BY COUNT(Id) DESC LIMIT 40", ["creator", "day", "n"]);
+await grouped("Active users by profile", "SELECT Profile.Name profile, UserType, COUNT(Id) n FROM User WHERE IsActive = true GROUP BY Profile.Name, UserType ORDER BY COUNT(Id) DESC", ["profile", "UserType", "n"]);
+
 console.log(out.join("\n"));
