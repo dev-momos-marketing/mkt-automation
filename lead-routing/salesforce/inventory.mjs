@@ -130,4 +130,20 @@ await grouped("Leads created in the last 90 days, by creator and Lead Source", "
 await grouped("Busiest creator-days in the last 90 days (bulk imports show as big days)", "SELECT CreatedBy.Name creator, DAY_ONLY(CreatedDate) day, COUNT(Id) n FROM Lead WHERE CreatedDate = LAST_N_DAYS:90 GROUP BY CreatedBy.Name, DAY_ONLY(CreatedDate) ORDER BY COUNT(Id) DESC LIMIT 40", ["creator", "day", "n"]);
 await grouped("Active users by profile", "SELECT Profile.Name profile, UserType, COUNT(Id) n FROM User WHERE IsActive = true GROUP BY Profile.Name, UserType ORDER BY COUNT(Id) DESC", ["profile", "UserType", "n"]);
 
+// 8. What the big imports were: Tai Nguyen's busiest days, grouped by the fields an import carries.
+const batch = "CreatedBy.Name = 'Tai Nguyen' AND (DAY_ONLY(CreatedDate) = 2026-10-23 OR DAY_ONLY(CreatedDate) = 2026-09-11 OR DAY_ONLY(CreatedDate) = 2026-10-30 OR DAY_ONLY(CreatedDate) = 2026-09-08)";
+for (const [field, label] of [["DAY_ONLY(CreatedDate)", "day"], ["Campaign_Source__c", "campaign"], ["Latest_Sequence__c", "sequence"], ["Country", "country"], ["Industry", "industry"], ["BrandSector__c", "sector"], ["Lead_Score_Profile_Tier__c", "tier"], ["Specific_Lead_Source__c", "detail"], ["Status", "status"], ["Owner.Name", "owner"], ["LastModifiedBy.Name", "lastBy"]]) {
+  await grouped(`Import days, by ${field}`, `SELECT ${field} ${label}, COUNT(Id) n FROM Lead WHERE ${batch} GROUP BY ${field} ORDER BY COUNT(Id) DESC LIMIT 15`, [label, "n"]);
+}
+const filled = [];
+for (const f of ["Title", "Phone", "Email", "Website", "NoofOutlets__c", "LinkedIn__c", "DOZISF__ZoomInfo_Id__c", "Lead_Score_Total__c", "Gong__Current_Flow_Name__c", "ConferenceEvent__c"]) {
+  const r = await tryQuery(`SELECT COUNT() FROM Lead WHERE ${batch} AND ${f} != null`);
+  filled.push(`| \`${f}\` | ${r.error ? "?" : r.totalSize} |`);
+}
+const all = await tryQuery(`SELECT COUNT() FROM Lead WHERE ${batch}`);
+table(`Import days: fields filled (of ${all.totalSize ?? "?"} leads)`, ["Field", "Filled"], filled);
+const conv = await tryQuery(`SELECT COUNT() FROM Lead WHERE ${batch} AND (IsConverted = true OR Date_Reached_Sales_Accepted_SQL__c != null)`);
+const touched = await tryQuery(`SELECT COUNT() FROM Lead WHERE ${batch} AND Status != 'New (Uncontacted)'`);
+table("Import days: what happened since", ["Count", "Leads"], [`| converted or SQL | ${conv.totalSize ?? "?"} |`, `| moved past New (Uncontacted) | ${touched.totalSize ?? "?"} |`]);
+
 console.log(out.join("\n"));
