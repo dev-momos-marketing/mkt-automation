@@ -21,32 +21,35 @@ NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
-# Lead notifier (src/notify.ts): new Salesforce leads go to this Slack channel every 30 minutes.
-# It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set (see the bottom of this file).
+# Lead notifier (src/notify.ts): every 30 minutes, Beacon posts the leads reps added to Salesforce
+# by hand to this Slack channel. It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set
+# (see the bottom of this file).
 SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
-SLACK_CHANNEL = "vincent-test-beacon"
 LEAD_SOURCE_FIELD = "LeadSource"
-# Conversion's total score on Lead. 🔥 at HOT_SCORE or more, or when MQL Contact Hot is ticked
-# (Conversion ticks it at 50: in the last 90 days, the leads at 50+ and the ticked ones are the same 20).
-LEAD_SCORE_FIELD = "Lead_Score_Total__c"
-HOT_SCORE = "50"
-LEAD_HOT_FLAG_FIELD = "MQL_Contact_Hot_c__c"
 LEAD_LOCATIONS_FIELD = "NoofOutlets__c"
-# Lead Source values (as stored in Salesforce) that are posted. Anything else is not: blank
-# (bulk imports, most leads), outbound_ae / outbound_sdr (the rep made them) and Sales Agency.
-NOTIFY_SOURCES = "Inbound,Inbound (SDR),External Referral,Momos_employee_referral,Partnerships,Partnerships (Otter),Conference (Attendee),Conference (Host),Events & Tradeshow"
-# Posted only when 🔥: these convert poorly unless the lead is strong.
-SCORE_ONLY_SOURCES = "Conference (SDR),Marketing (SDR)"
+# Salesforce users whose leads are never posted. Momos Marketing is the demo form's automation:
+# those Inbound leads already reach Slack through Zapier.
+SKIP_CREATORS = "Momos Marketing"
+# More than this many leads from one person in a run is an import: one line instead of each lead.
+BULK_LIMIT = "10"
+# Who inbound alerts tag: "James=<Slack member ID or email>,Jill=<Slack member ID or email>".
+# An email is looked up in Slack (Beacon needs users:read.email). Empty: the post shows the name.
+AE_SLACK = ""
+# Who gets the daily check (src/inbound.ts) as a Beacon DM: Slack member IDs or emails, comma
+# separated. Empty: it goes to the inbound channel.
+DAILY_REPORT_TO = ""
 
-# The lead notifier's memory of which hot leads it already posted. Cloudflare creates the
+# Repeat submissions (7 days) and the daily counts for the health check. Cloudflare creates the
 # store on the first deploy (no id needed here).
 [[kv_namespaces]]
-binding = "SEEN"
+binding = "LEADS"
 
-# Runs the lead notifier. Cloudflare only runs crons on the live deployment, not on Previews.
+# Cloudflare only runs crons on the live deployment, not on Previews.
 [triggers]
-# Every 30 minutes. If you change it, change WINDOW_MS in src/notify.ts to match.
-crons = ["*/30 * * * *"]
+# "*/30 * * * *": the lead notifier. If you change it, change WINDOW_MS in src/notify.ts to match.
+# "0 1 * * *": the daily health check and turned-away roll-up (DAILY_CRON in src/index.ts).
+# "*/5 * * * *": research retries for leads Claude couldn't research in time (RETRY_CRON).
+crons = ["*/30 * * * *", "0 1 * * *", "*/5 * * * *"]
 
 # At most 5 form submissions a minute from one IP address. Extra ones get the popup without
 # calling Claude or Zapier, so a bot can't flood Slack and Salesforce.
@@ -80,5 +83,17 @@ simple = { limit = 5, period = 60 }
 #                       and sends the result to Zapier (Salesforce + Slack).
 #   SF_CLIENT_ID        lead notifier: Salesforce External Client App, client-credentials flow,
 #   SF_CLIENT_SECRET    read-only integration user (Lead read). SF_DOMAIN is above.
+#   SLACK_SIGNING_SECRET  Ask Beacon (src/ask.ts): the Slack app's Signing Secret (Basic
+#                       Information). Without it, /slack/events answers 503.
+#   SLACK_CHANNEL       lead notifier (src/notify.ts): channel ID for leads reps add by hand
+#                       (#top-funnel-deal, or a test channel while testing).
+#   INBOUND_SLACK_CHANNEL  inbound alerts (src/inbound.ts): the inbound leads channel's ID (C...),
+#                       the one the Zapier Slack step posts to. Kept out of this public file.
+#                       Without it, demo requests aren't posted by the Worker.
+#   AI_GATEWAY_URL      optional: Cloudflare AI Gateway for every Claude call (src/claude.ts),
+#                       https://gateway.ai.cloudflare.com/v1/<account id>/default/anthropic.
+#                       Stops "403 Request not allowed". Not set: straight to api.anthropic.com.
+#   AI_GATEWAY_TOKEN    with AI_GATEWAY_URL: a Cloudflare API token with AI Gateway permission
+#                       (sent as cf-aig-authorization). The default gateway needs it.
 #   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write, and
 #                       users:read.email to mention the lead owner. Invite Beacon to the channel.

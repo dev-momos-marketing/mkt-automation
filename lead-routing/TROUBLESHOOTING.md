@@ -70,18 +70,11 @@ Do this whenever something feels off, and after any change. Use a normal browser
 
 1. Log in to **console.anthropic.com** → **Billing**. Check there's credit left and the **monthly spend limit** hasn't been reached. Add credit or raise the limit. About $25 a month is plenty for us.
 2. Check **status.anthropic.com** for an outage.
-3. If only the research is broken, leads still reach the calendars and only the summary is missing. If the fit check is broken too (spend limit hit or outage), every lead gets the popup and arrives in Slack as "follow_up", so AEs need to reach out by hand until it's fixed.
+3. If only the research is broken, leads still reach the calendars and only the summary is missing. If the fit check is broken too (spend limit hit or outage), every lead still gets their AE's calendar, marked "fit check unavailable".
 4. One ❔ now and then is normal: the lookup took too long.
 
 ### Problem 5: A real restaurant brand got the "thanks" popup instead of a calendar
-**Usually this is on purpose.** Only leads the AI is confident are a good fit book a demo straight away. These get the popup and land in **Slack and Salesforce marked "follow_up"** for their AE to contact:
-- brands with **1–5 locations**
-- leads the AI wasn't sure about
-- leads that came in while the AI was slow or down
-
-Check Slack first. They should be there.
-
-If they're **not** in Slack, the AI decided they were "not fit":
+Every lead gets a calendar unless it's spam or the AI is sure it's not a fit. So the AI decided this one was "not fit":
 
 1. Find their details: **Zapier** → **Zap History** → the run around that time marked **"Stopped by filter"**. Click it to see their name, email and company.
 2. Reach out to them by hand. The popup also gave them **sales@momos.com**, so check that inbox too.

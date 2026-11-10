@@ -5,10 +5,9 @@ Framer form ──► Cloudflare Worker
                   ├─ spam check + region (instant)
                   ├─ Claude Haiku: ICP fit? (max 3s, spinner on the form)
                   │
-                  ├─ confident fit, Jill  ──► Jill's Google Calendar
-                  ├─ confident fit, James ──► James's Google Calendar
-                  ├─ 1-5 locations / maybe / no answer ──► thank-you popup, AE follows up
-                  └─ not fit / spam       ──► thank-you popup
+                  ├─ fit / maybe / no answer, Jill  ──► Jill's Google Calendar
+                  ├─ fit / maybe / no answer, James ──► James's Google Calendar
+                  └─ confident not fit / spam       ──► thank-you popup
 
                   optional, after the redirect:
                   └─ Claude Opus + web search ──► JSON ──► Zapier ──► Salesforce + Slack
@@ -35,10 +34,9 @@ To change who gets which region, edit `ROUTES` in `worker/src/route.ts`.
 
 Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country and location count, and judges from what it already knows. There is no web search or website lookup here, so it stays fast (about 1 to 1.5 seconds).
 
-- `fit` with confidence 0.7 or more: the visitor gets their AE's calendar (`status: routed`).
-- `not_fit` with confidence 0.8 or more: thank-you popup, no follow-up (`status: not_fit`).
-- The order is always **spam → ICP → region**. A confident fit is always routed: if the country, time zone and IP don't settle the region, it's guessed from the IP country, then Claude's guess of the company's HQ, then East (Jill).
-- Anything else (`maybe`, unsure, Claude over 3 seconds or failing), and every 1–5 location lead: thank-you popup, and the region's AE follows up (`status: follow_up`, sent to Zapier with `ae` set).
+- Every lead gets their AE's calendar (`status: routed`), whatever the location count, unless it is spam or Claude answers `not_fit` with confidence 0.8 or more. Those get the thank-you popup (`status: not_fit` or `spam`).
+- The order is always **spam → ICP → region**. Every booking has an AE: if the country, time zone and IP don't settle the region, it's guessed from the IP country, then Claude's guess of the company's HQ, then East (Jill).
+- A `maybe`, a low-confidence answer, or Claude over 3 seconds or failing still books the calendar. `routing.reason` says why (for example `claude maybe 0.6: size unclear` or `fit check unavailable`), so the AE can see it in Slack.
 
 Obvious spam (filled honeypot, form filled in under 2 seconds, bad or throwaway email) never reaches Claude.
 
@@ -115,35 +113,85 @@ Zapier setup:
 
 1. Trigger: **Webhooks by Zapier > Catch Hook** (not Raw). Copy its URL into the `ZAPIER_HOOK_URL` secret.
 2. **Salesforce Create Lead**: map `lead__*` and `utm__*` fields. Put `verification__summary` in the description.
-3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`.
-4. **Slack** message:
+3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`. Leads Claude was unsure about are `routed`, so they always post. Only spam and confident not-fits stop.
+4. **Slack** message to #inbound-form-get-started (kept; Beacon's inbound alerts post to their own channel, see below):
 
 ```
-{{routing__ae}} · {{routing__region}} · {{verification__verdict}} · ICP {{fit__icp_fit}}
+{{routing__ae}} · {{routing__region}} · {{verification__verdict}} · ICP {{fit__icp_fit}} · {{routing__reason}}
 {{lead__first_name}} {{lead__last_name}}, {{lead__job_title}} at {{verification__company_name}}
 {{lead__email}} · {{lead__country}} · Locations: said {{lead__locations}}, found {{verification__locations_found}}
 {{verification__summary}}
 Red flags: {{verification__red_flags}}
 ```
 
-## Lead notifier: every new lead in one Slack channel
+## Claude through Cloudflare AI Gateway
 
-Every 30 minutes the Worker runs two checks on Salesforce, and Beacon posts what they find to `SLACK_CHANNEL`:
+Set the Worker secret `AI_GATEWAY_URL` and every Claude call (fit check and research) goes through Cloudflare AI Gateway. The gateway reaches Anthropic from a fixed place, so the Worker's location no longer matters: this stops the `403 Request not allowed` errors that came from Cloudflare running the Worker in regions Anthropic doesn't serve. The gateway's dashboard also logs every call.
 
-1. **New leads** from named sources, created 35 to 5 minutes earlier (the lag gives Conversion time to score them).
-2. **Leads that just turned hot**, from any source: score at `HOT_SCORE` (50) or MQL Contact Hot ticked. In Salesforce these are mostly imported leads with no source that warmed up later. Each is posted once: the Worker remembers it in a Cloudflare KV store (`SEEN`), which Cloudflare creates on the first deploy. At most 10 a run; past that, one "and N more" line.
+1. Cloudflare dashboard → **AI** → **AI Gateway** → **Create authentication token** (AI Gateway permission). The `default` gateway is created on the first call that carries this token.
+2. Worker → **Settings → Variables and Secrets**, add two **Secrets**:
+   - `AI_GATEWAY_URL`: `https://gateway.ai.cloudflare.com/v1/<account id>/default/anthropic` (the account ID is in the dashboard address bar).
+   - `AI_GATEWAY_TOKEN`: the token from step 1.
+
+No `AI_GATEWAY_URL`: calls go straight to `api.anthropic.com`, as before. Code: `worker/src/claude.ts`.
+
+## Inbound alerts: every demo request in Slack, from the Worker
+
+After the research, Beacon posts each demo request to the channel in the `INBOUND_SLACK_CHANNEL` Worker secret itself, so no lead depends on Zapier's filter to be seen. Zapier only creates the Salesforce lead. Code: `worker/src/inbound.ts`.
 
 ```
-🔥 *Burger Co* · Ana Lopez, VP Marketing
-Inbound · score 85 · owner @Jill
+🟡 *New demo request → @Jill* (unsure, booked anyway) · us_east
+*Sam Rivera* · Owner
+*Taco Place* · website · Fast casual
+sam@tacoplace.com · US · HQ US
+Locations: said *1-5* · found *About 70* 🔺
+Booking check: claude maybe 0.6: size unclear
+Research: ⚠️ suspicious (0.7) · ICP maybe · works there: yes
+Franchise owner of Taco Place units.
+_Source: google / brand_
+```
+
+- 🟢 Claude was sure; 🟡 it wasn't, and the lead booked anyway. Spam and confident not-fits aren't posted.
+- 🔺 the web found at least twice the form's answer (and 10 or more), e.g. "said 1-5, found 70".
+- ⚠️ *Not in Salesforce*: Zapier failed. Add the lead by hand.
+- ↩️ the same email submitted again within 7 days: one short line in place of a new post.
+- The AE is tagged when `AE_SLACK` is set in `worker/wrangler.toml` (`James=<Slack member ID or email>,Jill=...`). Empty: the name is shown.
+- The fit check retries once inside its 3 seconds. If the research still fails, the post goes out at once with "⏳ research pending". A 5-minute cron retries it for about 2 hours (2, 5, 10, 20, 30, 45, 60, 90 and 120 minutes after the first try) and updates the same post when it works, or says it gave up.
+- Every day at 01:00 UTC, Beacon sends a 🚨 check as a DM to each person in `DAILY_REPORT_TO` (`worker/wrangler.toml`, Slack member IDs or emails; empty sends it to the inbound channel) if the day before had no submissions, any Zapier error, or 2 or more Claude failures, and a 🚫 line listing the leads that were turned away. Nothing is posted on a good day with no turn-aways.
+
+Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. The Zap's own Slack step can stay: it keeps posting to its channel (#inbound-form-get-started), and Beacon posts to this one.
+
+## Ask Beacon: answers when tagged in Slack
+
+Tag `@Beacon` with a question and it answers in the thread: "who is Burger Co?", "how many leads came in this week, by source?", "how many demo requests yesterday, and who was turned away?". It posts "⏳ Looking into it…" and edits in the answer, usually within 10 to 20 seconds. Code: `worker/src/ask.ts`.
+
+Claude (Haiku by default; set `BEACON_MODEL` to change it) can only read. Its tools:
+- `find_leads`: Salesforce leads by company, name or email, with status, source, owner and a link
+- `lead_stats`: lead counts for the last N days by source, status, owner, creator or country
+- `demo_requests`: demo form submissions, spam and turned-away leads per day (the `LEADS` store)
+- `web_search`: the open web, up to 3 searches per question
+
+In a thread, Beacon reads the thread first (with the `channels:history` scope) so follow-up questions work.
+
+Setup, in the Slack app (api.slack.com/apps → Beacon):
+1. **Basic Information** → copy the **Signing Secret** into the Worker secret `SLACK_SIGNING_SECRET`.
+2. **OAuth & Permissions** → bot scopes `app_mentions:read` and `channels:history` (plus `groups:history` for private channels). Reinstall the app.
+3. **Event Subscriptions** → on. Request URL: `https://momos-lead-routing.marketing-team-a27.workers.dev/slack/events` (Slack checks it right away; the Worker must already have the secret). Under **Subscribe to bot events**, add `app_mention`. Save.
+
+## Lead notifier: leads reps add, in one Slack channel
+
+Every 30 minutes the Worker checks Salesforce for leads created 35 to 5 minutes earlier, and Beacon posts the ones reps added by hand to the channel in the `SLACK_CHANNEL` Worker secret (a channel ID).
+
+```
+🟢 *Burger Co* · Ana Lopez, VP Marketing
+Conference (Attendee) · 24 locations · added by James Burdick · owner @Jill
 Open in Salesforce
 ```
 
-- 🔥 the score (`Lead_Score_Total__c`) is `HOT_SCORE` or more, or MQL Contact Hot is ticked. 🟢 everything else that passes.
-- `NOTIFY_SOURCES` (Inbound, referrals, partners, conference attendees and hosts, events): posted.
-- `SCORE_ONLY_SOURCES` (Conference SDR, Marketing SDR): posted only when 🔥.
-- Any other Lead Source is not posted: blank (bulk imports, nearly all leads in Salesforce), `outbound_ae`, `outbound_sdr` (the rep made them) and Sales Agency.
+- Leads made by a user in `SKIP_CREATORS` (Momos Marketing, the demo form's automation) are not posted: Inbound leads already reach Slack through Zapier.
+- When one person creates more than `BULK_LIMIT` (10) leads in a run, it's an import: Beacon posts one "imported N leads" line. In the last 90 days, 31,491 of 31,779 new leads were imports.
 - Status Disqualified, Junk, Spam, Unqualified or Duplicate: not posted.
+- There is no score check. Conversion.ai's `Lead_Score_Total__c` is mostly email opens and clicks, and it didn't predict which leads converted.
 - The owner is mentioned when Beacon can find their Slack account by email; otherwise their name is shown.
 
 The code is `worker/src/notify.ts`. The settings are in `worker/wrangler.toml` under `[vars]`. Edit them there, not in the Cloudflare dashboard: each deploy resets dashboard values to the file.
@@ -151,11 +199,11 @@ The code is `worker/src/notify.ts`. The settings are in `worker/wrangler.toml` u
 Setup:
 
 1. Salesforce admin: an External Client App with the client-credentials flow, run as a read-only integration user that can read Leads.
-2. Run the **Salesforce fields** GitHub Action (repository secrets `SF_CLIENT_ID` and `SF_CLIENT_SECRET`; the domain is already in the workflow). It lists the Lead fields, the Lead Source values as stored, and how scores are spread. Keep `NOTIFY_SOURCES`, `SCORE_ONLY_SOURCES` and `HOT_SCORE` in step with it.
+2. Run the **Salesforce fields** GitHub Action (repository secrets `SF_CLIENT_ID` and `SF_CLIENT_SECRET`; the domain is already in the workflow). It lists the Lead fields, the Lead Source values as stored, and who creates leads. Keep `SKIP_CREATORS` in step with it.
 3. Slack: give Beacon the `chat:write` and `users:read.email` scopes, and invite it to the channel (`/invite @Beacon`).
 4. Cloudflare Worker secrets: `SF_CLIENT_ID`, `SF_CLIENT_SECRET`, `SLACK_BOT_TOKEN`. `SF_DOMAIN` is already in `wrangler.toml`.
 5. The notifier stays off until all of these are set. Check the Worker's **Logs** for `"notifier"` lines: each run logs how many leads it saw, posted and skipped, and why.
-6. When the channel looks right, remove the Slack step from the Zapier Zap so demo-form leads don't post twice.
+6. Keep the Slack step in the Zapier Zap: it is how demo-form leads reach Slack.
 
 ## Test
 

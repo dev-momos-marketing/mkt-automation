@@ -1,6 +1,7 @@
 // The gate: a fast Claude call that decides ICP fit before the visitor is redirected.
 // Claude judges from the form alone: no web search and no homepage lookup, to keep it fast.
 import Anthropic from "@anthropic-ai/sdk";
+import { claudeClient, type ClaudeRoute } from "./claude.ts";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { z } from "zod";
 import type { FormData } from "./route.ts";
@@ -15,14 +16,14 @@ export const Fit = z.object({
 });
 export type Fit = z.infer<typeof Fit>;
 
-// Only a confident fit books a demo. A confident not_fit is turned away. Everything in
-// between (maybe, unsure, no answer) gets the popup and the AE follows up.
+// Only a confident not_fit (NOT_FIT_MIN_CONFIDENCE) is turned away. Everything else books the AE.
+// FIT_MIN_CONFIDENCE only decides whether routing.reason says "ok" or why Claude was unsure.
 export const FIT_MIN_CONFIDENCE = 0.7;
 export const NOT_FIT_MIN_CONFIDENCE = 0.8;
 
 const SYSTEM = `You screen demo requests for Momos, a customer experience platform for restaurant and F&B brands (reviews, social, messaging, AI agents). Decide in one step whether this lead should get a sales demo.
 
-Only a fit books a demo straight away, so be strict. Anything else is followed up by a person later, so nothing is lost by answering maybe.
+Every lead books a demo unless you answer not_fit with high confidence, so a wrong not_fit turns away a real buyer. When unsure, answer maybe.
 
 ICP:
 - fit: you are confident it is a restaurant, cafe, bar, QSR, bakery, F&B franchise, food hall or hospitality group with 6+ locations, or a franchisor / brand HQ, and the job title belongs to someone who could buy software for it (owner, founder, executive, marketing, operations, CX, digital, IT, franchise).
@@ -52,7 +53,7 @@ export function companyDomain(email = ""): string | null {
 
 export type Timings = { claude_ms: number };
 
-export async function checkFit(apiKey: string, form: FormData, timeoutMs: number, timings?: Timings): Promise<Fit> {
+export async function checkFit(apiKey: string, form: FormData, timeoutMs: number, timings?: Timings, route: ClaudeRoute = {}): Promise<Fit> {
   const started = Date.now();
   const domain = companyDomain(String(form.email ?? ""));
 
@@ -65,7 +66,7 @@ export async function checkFit(apiKey: string, form: FormData, timeoutMs: number
     locations: form.locations,
   };
 
-  const client = new Anthropic({ apiKey, timeout: timeoutMs, maxRetries: 0 });
+  const client = claudeClient(apiKey, timeoutMs, route);
   const response = await client.messages.parse({
     model: "claude-haiku-5-5",
     // The answer is about 40 tokens. Output tokens are most of the wait, so keep it short.

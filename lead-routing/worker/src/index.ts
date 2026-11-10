@@ -1,16 +1,28 @@
 // Momos lead routing Worker.
 // 1. Spam check and region in microseconds, then a fast Claude call decides ICP fit (max 3s).
-// 2. Answers the Framer form: fit goes to the AE's calendar, a confident not-fit to NOT_FIT_URL.
+// 2. Answers the Framer form: the AE's calendar, unless the lead is spam or a confident not-fit
+//    (NOT_FIT_URL).
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
-// 4. Every 5 minutes (cron in wrangler.toml): new Salesforce leads from every source go to one
-//    Slack channel through Beacon. See notify.ts.
+// 4. Beacon posts each demo request to INBOUND_SLACK_CHANNEL itself, after the research, so no
+//    lead depends on Zapier's filter to be seen. Daily at 01:00 UTC: a health alert and the
+//    turned-away roll-up. See inbound.ts.
+// 5. Every 30 minutes (cron in wrangler.toml): new Salesforce leads that reps added by hand go
+//    to SLACK_CHANNEL through Beacon. See notify.ts.
+// 6. POST /slack/events: answers @Beacon questions in Slack threads. See ask.ts.
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
+import { claudeRoute } from "./claude.ts";
+import { handleSlackEvents } from "./ask.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
+import { dailyReport, queueResearch, reportInbound, retryResearch, type InboundEnv, type InboundLead } from "./inbound.ts";
 
-export interface Env extends NotifyEnv {
+// The crons in wrangler.toml: the daily report, the research retries, and the 30-minute notifier.
+export const DAILY_CRON = "0 1 * * *";
+export const RETRY_CRON = "*/5 * * * *";
+
+export interface Env extends NotifyEnv, InboundEnv {
   ANTHROPIC_API_KEY: string;
   ZAPIER_HOOK_URL?: string; // optional: no Zapier, no background research
   JAMES_URL: string;
@@ -18,6 +30,10 @@ export interface Env extends NotifyEnv {
   NOT_FIT_URL: string;
   ALLOWED_ORIGINS: string; // comma separated
   RESEARCH_MODEL?: string; // "haiku" (default) or "opus"
+  AI_GATEWAY_URL?: string; // Cloudflare AI Gateway for Claude calls, see claude.ts. Empty: straight to Anthropic
+  AI_GATEWAY_TOKEN?: string; // secret, only for an authenticated gateway
+  SLACK_SIGNING_SECRET?: string; // secret: lets Beacon answer @mentions (ask.ts)
+  BEACON_MODEL?: string; // Claude model for @Beacon answers, default claude-haiku-5-5
   SUBMIT_LIMIT?: { limit(options: { key: string }): Promise<{ success: boolean }> }; // see wrangler.toml
 }
 
@@ -27,6 +43,9 @@ type Ctx = { waitUntil(p: Promise<unknown>): void };
 const FIT_BUDGET_MS = 3_000;
 // Cloudflare stops background work 30s after the response, so the research gets 25s.
 const CLAUDE_BUDGET_MS = 25_000;
+// A retry needs at least this much time left to be worth starting.
+const MIN_RETRY_MS = 500;
+const RESEARCH_RETRY_MIN_MS = 5_000;
 const AE_NAMES = { james: "James", jill: "Jill" } as const;
 
 function cors(req: Request, env: Env): Record<string, string> {
@@ -48,21 +67,30 @@ function withTimeout<T>(p: Promise<T>, ms: number, message: string): Promise<T> 
 
 export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: string };
 
-// Only a confident ICP fit books a demo. A confident not_fit is turned away. Everything else,
-// including no answer in time, gets the popup and goes to Zapier for the AE to follow up.
+// Every lead books a demo except a confident not_fit, which is turned away. A maybe, an unsure
+// answer, no answer in time or a failed check all book the AE's calendar: a missed lead costs
+// more than a demo with a weak one. The reason says why, so the AE can see it in Slack.
 async function gate(form: FormData, instant: Instant, env: Env, timings: Timings): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
-  try {
-    const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS, timings), FIT_BUDGET_MS, "fit check took too long");
-    if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
-    if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
-      return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
+  // A fast failure (403 Request not allowed, 529 busy) is tried once more inside the same 3 s.
+  const deadline = Date.now() + FIT_BUDGET_MS;
+  let error = "fit check took too long";
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const left = deadline - Date.now();
+    if (left < MIN_RETRY_MS) break;
+    try {
+      const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, left, timings, claudeRoute(env)), left, "fit check took too long");
+      if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
+        return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
+      }
+      if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
+      return { instant: { ...instant, reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
+    } catch (err) {
+      error = err instanceof Error ? err.message : String(err);
+      console.log(JSON.stringify({ fit_attempt: attempt + 1, error }));
     }
-    return { instant: { ...instant, status: "follow_up", reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
-  } catch (err) {
-    const error = err instanceof Error ? err.message : String(err);
-    return { instant: { ...instant, status: "follow_up", reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
   }
+  return { instant: { ...instant, reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
 }
 
 // True when this IP has sent more than the limit in wrangler.toml. Fails open if the limiter is missing or errors.
@@ -140,31 +168,83 @@ function researchModel(env: Env): ResearchModel {
   return env.RESEARCH_MODEL?.trim().toLowerCase() === "opus" ? "opus" : "haiku";
 }
 
-async function verifyAndSend(form: FormData, instant: Instant, url: string, fit: FitResult, env: Env, hook: string) {
+// After the visitor has their answer: research the lead (one retry), send it to Zapier for
+// Salesforce, then post it to Slack. Each step runs even if the one before failed.
+async function afterAnswer(form: FormData, instant: Instant, url: string, fit: FitResult, env: Env) {
   let v: Verification | null = null;
   let error: string | undefined;
   // Obvious spam skips Claude to save time and money. It still goes to Zapier so nothing disappears.
   if (instant.status !== "spam") {
-    try {
-      v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, CLAUDE_BUDGET_MS, researchModel(env)), CLAUDE_BUDGET_MS, "Claude took too long");
-    } catch (err) {
-      error = err instanceof Error ? err.message : String(err);
+    const deadline = Date.now() + CLAUDE_BUDGET_MS;
+    for (let attempt = 0; attempt < 2 && !v; attempt++) {
+      const left = deadline - Date.now();
+      if (attempt > 0 && left < RESEARCH_RETRY_MIN_MS) break;
+      try {
+        v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, left, researchModel(env), claudeRoute(env)), left, "Claude took too long");
+      } catch (err) {
+        error = err instanceof Error ? err.message : String(err);
+      }
     }
   }
-  const res = await fetch(hook, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(zapierPayload(form, instant, url, fit, v, error)),
-  });
-  if (!res.ok) console.error("Zapier returned", res.status);
+  const payload = zapierPayload(form, instant, url, fit, v, error);
+  let salesforce: { ok: boolean; error?: string } = { ok: true };
+  if (env.ZAPIER_HOOK_URL) {
+    try {
+      const res = await fetch(env.ZAPIER_HOOK_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
+      if (!res.ok) salesforce = { ok: false, error: `Zapier returned ${res.status}` };
+    } catch (err) {
+      salesforce = { ok: false, error: `Zapier unreachable: ${err instanceof Error ? err.message : String(err)}` };
+    }
+    if (!salesforce.ok) console.error(JSON.stringify({ zapier: "failed", error: salesforce.error }));
+  } else {
+    salesforce = { ok: false, error: "no ZAPIER_HOOK_URL set" };
+  }
+  const lead: InboundLead = {
+    firstName: payload.lead.first_name,
+    lastName: payload.lead.last_name,
+    email: payload.lead.email,
+    company: payload.lead.company,
+    title: payload.lead.job_title,
+    country: payload.lead.country,
+    locations: payload.lead.locations,
+    status: instant.status,
+    reason: instant.reason,
+    ae: payload.routing.ae,
+    region: instant.region,
+    fit: { icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : undefined },
+    research: v ? { ...v } : { verdict: "unavailable", error: error ?? (instant.status === "spam" ? "skipped for spam" : "") },
+    utm: { source: payload.utm.utm_source, campaign: payload.utm.utm_campaign },
+    salesforce,
+  };
+  // Research failed on a lead that gets posted: post now, marked pending, and retry from the cron.
+  const retry = !v && (instant.status === "routed" || instant.status === "follow_up") && !!env.LEADS?.list && !!env.INBOUND_SLACK_CHANNEL;
+  if (retry) lead.research = { verdict: "pending", error };
+  const posted = await reportInbound(lead, env);
+  if (retry && posted.posted === "lead" && posted.ts && posted.channel) {
+    await queueResearch(env, { lead, form: form as Record<string, unknown>, instant: instant as unknown as Record<string, unknown>, channel: posted.channel, ts: posted.ts });
+  }
+}
+
+// One research try for the retry cron, with the full 25 s.
+function researcher(env: Env) {
+  return async (form: Record<string, unknown>, instant: Record<string, unknown>) => {
+    const v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form as FormData, instant as unknown as Instant, CLAUDE_BUDGET_MS, researchModel(env), claudeRoute(env)), CLAUDE_BUDGET_MS, "Claude took too long");
+    return { ...v };
+  };
 }
 
 export default {
-  async scheduled(event: { scheduledTime: number }, env: Env, ctx: Ctx): Promise<void> {
-    ctx.waitUntil(notifyLeads(new Date(event.scheduledTime), env).catch((err) => console.error("notifier failed", err instanceof Error ? err.message : err)));
+  async scheduled(event: { scheduledTime: number; cron?: string }, env: Env, ctx: Ctx): Promise<void> {
+    const when = new Date(event.scheduledTime);
+    const name = event.cron === DAILY_CRON ? "daily report" : event.cron === RETRY_CRON ? "research retry" : "notifier";
+    const job: Promise<unknown> =
+      event.cron === DAILY_CRON ? dailyReport(when, env) : event.cron === RETRY_CRON ? retryResearch(env, researcher(env), when.getTime()) : notifyLeads(when, env);
+    ctx.waitUntil(job.catch((err) => console.error(`${name} failed`, err instanceof Error ? err.message : err)));
   },
 
   async fetch(req: Request, env: Env, ctx: Ctx): Promise<Response> {
+    // Slack events (@Beacon questions) have their own path and their own checks.
+    if (new URL(req.url).pathname === "/slack/events" && req.method === "POST") return handleSlackEvents(req, env, ctx, claudeRoute(env));
     const headers = cors(req, env);
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
     if (req.method !== "POST") return new Response("POST only", { status: 405, headers });
@@ -192,8 +272,8 @@ export default {
     const cf = (req as Request & { cf?: IpLocation }).cf ?? {};
     const started = Date.now();
     const timings: Timings = { claude_ms: 0 };
-    // 1. Spam, then the 1-5 locations rule (instantRoute). 2. Claude's ICP check (gate).
-    // 3. Region: if the visitor's clues weren't enough, guess it so a confident fit is always routed.
+    // 1. Spam (instantRoute). 2. Claude's ICP check (gate): only a confident not-fit is turned away.
+    // 3. Region: if the visitor's clues weren't enough, guess it so every booking has an AE.
     const ip: IpLocation = { country: cf.country, regionCode: cf.regionCode };
     const gated = await gate(form, instantRoute(form, ip), env, timings);
     const fit = gated.fit;
@@ -213,7 +293,7 @@ export default {
       fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
       total_ms: Date.now() - started, ...timings,
     }));
-    if (env.ZAPIER_HOOK_URL) ctx.waitUntil(verifyAndSend(form, instant, url, fit, env, env.ZAPIER_HOOK_URL));
+    if (env.ZAPIER_HOOK_URL || env.INBOUND_SLACK_CHANNEL || env.LEADS) ctx.waitUntil(afterAnswer(form, instant, url, fit, env));
     // ae and region are only for checking tests in the browser console. The form only uses url.
     return Response.json({ url, status: instant.status, ae: instant.status === "routed" ? instant.ae : null, region: instant.region }, { headers });
   },

@@ -26,3 +26,8 @@ jobs:
           set -o pipefail
           node lead-routing/salesforce/describe.mjs | tee fields.md
           cat fields.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Inventory for lifecycle automation
+        run: |
+          set -o pipefail
+          node lead-routing/salesforce/inventory.mjs | tee inventory.md
+          cat inventory.md >> "$GITHUB_STEP_SUMMARY"
