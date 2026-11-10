@@ -256,6 +256,7 @@ test("anything short of a confident not_fit books the AE, with the reason for Sl
     assert.equal(sent[0].routing.ae, "James");
     assert.match(sent[0].routing.reason, new RegExp(`claude ${answer.icp_fit} ${answer.confidence}`));
     assert.equal(sent[0].verification.verdict, "verified", "they are still researched");
+    assert.equal(sent.length, 1, "unsure leads always reach Zapier, so they post to Slack");
   }
 });
 

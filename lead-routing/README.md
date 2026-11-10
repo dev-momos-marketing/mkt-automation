@@ -113,11 +113,11 @@ Zapier setup:
 
 1. Trigger: **Webhooks by Zapier > Catch Hook** (not Raw). Copy its URL into the `ZAPIER_HOOK_URL` secret.
 2. **Salesforce Create Lead**: map `lead__*` and `utm__*` fields. Put `verification__summary` in the description.
-3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`.
+3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`. Leads Claude was unsure about are `routed`, so they always post. Only spam and confident not-fits stop.
 4. **Slack** message:
 
 ```
-{{routing__ae}} · {{routing__region}} · {{verification__verdict}} · ICP {{fit__icp_fit}}
+{{routing__ae}} · {{routing__region}} · {{verification__verdict}} · ICP {{fit__icp_fit}} · {{routing__reason}}
 {{lead__first_name}} {{lead__last_name}}, {{lead__job_title}} at {{verification__company_name}}
 {{lead__email}} · {{lead__country}} · Locations: said {{lead__locations}}, found {{verification__locations_found}}
 {{verification__summary}}
