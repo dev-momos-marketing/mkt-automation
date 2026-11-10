@@ -313,4 +313,13 @@ await grouped("Imported leads: engagement tier", `SELECT Lead_Score_Engagement_T
   table("Pure prospects: companies with the most people (top 25)", ["Domain", "Leads"], count(company, (r) => root(domainOf(r.Email))).slice(0, 25).map(([k, n]) => `| ${cell(k)} | ${n} |`));
 }
 
+// 12. Is the demo form still reaching Salesforce? Leads from the form automation's user, by day.
+await grouped("Demo form leads (Momos Marketing), last 30 days by day", "SELECT DAY_ONLY(CreatedDate) day, LeadSource, COUNT(Id) n FROM Lead WHERE CreatedBy.Name = 'Momos Marketing' AND CreatedDate = LAST_N_DAYS:30 GROUP BY DAY_ONLY(CreatedDate), LeadSource ORDER BY DAY_ONLY(CreatedDate) DESC", ["day", "LeadSource", "n"]);
+{
+  const r = await tryQuery("SELECT CreatedDate, LeadSource, Status, Specific_Lead_Source__c FROM Lead WHERE CreatedBy.Name = 'Momos Marketing' ORDER BY CreatedDate DESC LIMIT 10");
+  if (r.error) out.push("## Latest demo form leads", "", `Could not read: ${cell(r.error)}`, "");
+  else table("Latest 10 demo form leads (time only)", ["Created (UTC)", "Lead Source", "Detail", "Status"], r.records.map((x) => `| ${x.CreatedDate} | ${cell(x.LeadSource)} | ${cell(x.Specific_Lead_Source__c)} | ${cell(x.Status)} |`));
+}
+await grouped("All leads created in the last 7 days, by creator", "SELECT CreatedBy.Name creator, COUNT(Id) n FROM Lead WHERE CreatedDate = LAST_N_DAYS:7 GROUP BY CreatedBy.Name ORDER BY COUNT(Id) DESC", ["creator", "n"]);
+
 console.log(out.join("\n"));
