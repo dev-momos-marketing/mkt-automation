@@ -21,12 +21,6 @@ NOT_FIT_URL = "https://www.momos.com/thank-you"
 ALLOWED_ORIGINS = "https://www.momos.com,https://momos.com"
 # Which Claude researches each lead in the background: "haiku" (cheap) or "opus" (thorough).
 RESEARCH_MODEL = "haiku"
-# Cloudflare AI Gateway for every Claude call (src/claude.ts). Calls then reach Anthropic from a
-# fixed place, which stops "403 Request not allowed" from regions Anthropic doesn't serve.
-# Format: https://gateway.ai.cloudflare.com/v1/<account id>/<gateway name>/anthropic
-# Empty: calls go straight to api.anthropic.com. An authenticated gateway also needs the
-# AI_GATEWAY_TOKEN secret.
-AI_GATEWAY_URL = ""
 # Lead notifier (src/notify.ts): every 30 minutes, Beacon posts the leads reps added to Salesforce
 # by hand to this Slack channel. It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set
 # (see the bottom of this file).
@@ -93,6 +87,10 @@ simple = { limit = 5, period = 60 }
 #   INBOUND_SLACK_CHANNEL  inbound alerts (src/inbound.ts): the inbound leads channel's ID (C...),
 #                       the one the Zapier Slack step posts to. Kept out of this public file.
 #                       Without it, demo requests aren't posted by the Worker.
-#   AI_GATEWAY_TOKEN    optional: only for an AI Gateway with "Authenticated Gateway" on.
+#   AI_GATEWAY_URL      optional: Cloudflare AI Gateway for every Claude call (src/claude.ts),
+#                       https://gateway.ai.cloudflare.com/v1/<account id>/default/anthropic.
+#                       Stops "403 Request not allowed". Not set: straight to api.anthropic.com.
+#   AI_GATEWAY_TOKEN    with AI_GATEWAY_URL: a Cloudflare API token with AI Gateway permission
+#                       (sent as cf-aig-authorization). The default gateway needs it.
 #   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write, and
 #                       users:read.email to mention the lead owner. Invite Beacon to the channel.
