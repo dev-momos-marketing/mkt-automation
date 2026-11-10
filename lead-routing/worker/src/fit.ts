@@ -15,14 +15,14 @@ export const Fit = z.object({
 });
 export type Fit = z.infer<typeof Fit>;
 
-// Only a confident fit books a demo. A confident not_fit is turned away. Everything in
-// between (maybe, unsure, no answer) gets the popup and the AE follows up.
+// Only a confident not_fit (NOT_FIT_MIN_CONFIDENCE) is turned away. Everything else books the AE.
+// FIT_MIN_CONFIDENCE only decides whether routing.reason says "ok" or why Claude was unsure.
 export const FIT_MIN_CONFIDENCE = 0.7;
 export const NOT_FIT_MIN_CONFIDENCE = 0.8;
 
 const SYSTEM = `You screen demo requests for Momos, a customer experience platform for restaurant and F&B brands (reviews, social, messaging, AI agents). Decide in one step whether this lead should get a sales demo.
 
-Only a fit books a demo straight away, so be strict. Anything else is followed up by a person later, so nothing is lost by answering maybe.
+Every lead books a demo unless you answer not_fit with high confidence, so a wrong not_fit turns away a real buyer. When unsure, answer maybe.
 
 ICP:
 - fit: you are confident it is a restaurant, cafe, bar, QSR, bakery, F&B franchise, food hall or hospitality group with 6+ locations, or a franchisor / brand HQ, and the job title belongs to someone who could buy software for it (owner, founder, executive, marketing, operations, CX, digital, IT, franchise).

@@ -41,9 +41,9 @@ export const ROUTES: Record<Region, AEKey> = {
   unknown: "jill",
 };
 
-// Location answers that never book a demo straight away. They get the thank-you popup and
-// the region's AE follows up later. Claude isn't asked, which also makes them faster.
-export const FOLLOW_UP_BUCKETS: string[] = ["1-5"];
+// Location answers that never book a demo straight away: the thank-you popup, and the region's
+// AE follows up later, without asking Claude. Empty: every location count can book (1-5 included).
+export const FOLLOW_UP_BUCKETS: string[] = [];
 
 // Matches every country in the form. Latin America and the Caribbean aren't listed here,
 // so the visitor's time zone decides (Eastern-ish goes to Jill, Pacific/Mountain to James).
@@ -139,8 +139,7 @@ export function guessRegion(country = "", ip: IpLocation = {}, companyRegion: Re
   return companyRegion !== "unknown" ? companyRegion : "us_east";
 }
 
-// The checks that need no AI, in priority order: spam first, then the location-count part of
-// the ICP check. Claude's ICP check (index.ts) runs next, and the region decides the AE last.
+// The checks that need no AI, in priority order: spam first, then FOLLOW_UP_BUCKETS (empty now). Claude's ICP check (index.ts) runs next, and the region decides the AE last.
 export function instantRoute(d: FormData, ip: IpLocation = {}): Instant {
   const spam = spamReason(d);
   if (spam) return { status: "spam", reason: spam, region: "unknown", regionSure: false, ae: null };

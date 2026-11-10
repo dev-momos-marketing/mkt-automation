@@ -1,6 +1,7 @@
 // Momos lead routing Worker.
 // 1. Spam check and region in microseconds, then a fast Claude call decides ICP fit (max 3s).
-// 2. Answers the Framer form: fit goes to the AE's calendar, a confident not-fit to NOT_FIT_URL.
+// 2. Answers the Framer form: the AE's calendar, unless the lead is spam or a confident not-fit
+//    (NOT_FIT_URL).
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
 // 4. Every 30 minutes (cron in wrangler.toml): new Salesforce leads that reps added by hand go
@@ -48,20 +49,21 @@ function withTimeout<T>(p: Promise<T>, ms: number, message: string): Promise<T> 
 
 export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: string };
 
-// Only a confident ICP fit books a demo. A confident not_fit is turned away. Everything else,
-// including no answer in time, gets the popup and goes to Zapier for the AE to follow up.
+// Every lead books a demo except a confident not_fit, which is turned away. A maybe, an unsure
+// answer, no answer in time or a failed check all book the AE's calendar: a missed lead costs
+// more than a demo with a weak one. The reason says why, so the AE can see it in Slack.
 async function gate(form: FormData, instant: Instant, env: Env, timings: Timings): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
   try {
     const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS, timings), FIT_BUDGET_MS, "fit check took too long");
-    if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
     if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
       return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
     }
-    return { instant: { ...instant, status: "follow_up", reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
+    if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
+    return { instant: { ...instant, reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
   } catch (err) {
     const error = err instanceof Error ? err.message : String(err);
-    return { instant: { ...instant, status: "follow_up", reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
+    return { instant: { ...instant, reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
   }
 }
 
@@ -192,8 +194,8 @@ export default {
     const cf = (req as Request & { cf?: IpLocation }).cf ?? {};
     const started = Date.now();
     const timings: Timings = { claude_ms: 0 };
-    // 1. Spam, then the 1-5 locations rule (instantRoute). 2. Claude's ICP check (gate).
-    // 3. Region: if the visitor's clues weren't enough, guess it so a confident fit is always routed.
+    // 1. Spam (instantRoute). 2. Claude's ICP check (gate): only a confident not-fit is turned away.
+    // 3. Region: if the visitor's clues weren't enough, guess it so every booking has an AE.
     const ip: IpLocation = { country: cf.country, regionCode: cf.regionCode };
     const gated = await gate(form, instantRoute(form, ip), env, timings);
     const fit = gated.fit;
