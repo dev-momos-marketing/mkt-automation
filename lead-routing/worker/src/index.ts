@@ -13,10 +13,11 @@ import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type Ip
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
-import { dailyReport, reportInbound, type InboundEnv, type InboundLead } from "./inbound.ts";
+import { dailyReport, queueResearch, reportInbound, retryResearch, type InboundEnv, type InboundLead } from "./inbound.ts";
 
-// The daily cron in wrangler.toml. Every other cron run is the 30-minute lead notifier.
+// The crons in wrangler.toml: the daily report, the research retries, and the 30-minute notifier.
 export const DAILY_CRON = "0 1 * * *";
+export const RETRY_CRON = "*/5 * * * *";
 
 export interface Env extends NotifyEnv, InboundEnv {
   ANTHROPIC_API_KEY: string;
@@ -208,14 +209,30 @@ async function afterAnswer(form: FormData, instant: Instant, url: string, fit: F
     utm: { source: payload.utm.utm_source, campaign: payload.utm.utm_campaign },
     salesforce,
   };
-  await reportInbound(lead, env);
+  // Research failed on a lead that gets posted: post now, marked pending, and retry from the cron.
+  const retry = !v && (instant.status === "routed" || instant.status === "follow_up") && !!env.LEADS?.list && !!env.INBOUND_SLACK_CHANNEL;
+  if (retry) lead.research = { verdict: "pending", error };
+  const posted = await reportInbound(lead, env);
+  if (retry && posted.posted === "lead" && posted.ts && posted.channel) {
+    await queueResearch(env, { lead, form: form as Record<string, unknown>, instant: instant as unknown as Record<string, unknown>, channel: posted.channel, ts: posted.ts });
+  }
+}
+
+// One research try for the retry cron, with the full 25 s.
+function researcher(env: Env) {
+  return async (form: Record<string, unknown>, instant: Record<string, unknown>) => {
+    const v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form as FormData, instant as unknown as Instant, CLAUDE_BUDGET_MS, researchModel(env)), CLAUDE_BUDGET_MS, "Claude took too long");
+    return { ...v };
+  };
 }
 
 export default {
   async scheduled(event: { scheduledTime: number; cron?: string }, env: Env, ctx: Ctx): Promise<void> {
     const when = new Date(event.scheduledTime);
-    const job = event.cron === DAILY_CRON ? dailyReport(when, env) : notifyLeads(when, env);
-    ctx.waitUntil(job.catch((err) => console.error(event.cron === DAILY_CRON ? "daily report failed" : "notifier failed", err instanceof Error ? err.message : err)));
+    const name = event.cron === DAILY_CRON ? "daily report" : event.cron === RETRY_CRON ? "research retry" : "notifier";
+    const job: Promise<unknown> =
+      event.cron === DAILY_CRON ? dailyReport(when, env) : event.cron === RETRY_CRON ? retryResearch(env, researcher(env), when.getTime()) : notifyLeads(when, env);
+    ctx.waitUntil(job.catch((err) => console.error(`${name} failed`, err instanceof Error ? err.message : err)));
   },
 
   async fetch(req: Request, env: Env, ctx: Ctx): Promise<Response> {

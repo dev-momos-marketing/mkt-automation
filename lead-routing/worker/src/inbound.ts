@@ -5,6 +5,9 @@
 // - A repeat submission from the same email within 7 days gets one short line, not a new post.
 // - "said 1-5, found 70+" gets a 🔺, because people often answer for their own store.
 // - If Zapier fails, the post says the lead isn't in Salesforce.
+// - The AE is tagged (AE_SLACK). If the research fails, the post goes out at once marked
+//   "research pending", and the 5-minute cron retries for about 2 hours, then fills it in
+//   (retryResearch in index.ts).
 // - Once a day: a health alert (no submissions, Zapier errors, Claude failures) and a one-line
 //   roll-up of the leads that were turned away, so a wrong not-fit still gets seen.
 //
@@ -14,11 +17,14 @@
 export type Kv = {
   get(key: string): Promise<string | null>;
   put(key: string, value: string, options?: { expirationTtl?: number }): Promise<void>;
+  delete?(key: string): Promise<void>;
+  list?(options: { prefix: string; cursor?: string }): Promise<{ keys: { name: string }[]; list_complete: boolean; cursor?: string }>;
 };
 
 export interface InboundEnv {
   SLACK_BOT_TOKEN?: string;
   INBOUND_SLACK_CHANNEL?: string; // channel ID (C...) or name. Empty: no inbound posts
+  AE_SLACK?: string; // who to tag: "James=U0123,Jill=jill@momos.com" (a Slack ID or an email to look up)
   LEADS?: Kv;
 }
 
@@ -36,7 +42,7 @@ export type InboundLead = {
   region: string;
   fit: { icp_fit: string; confidence?: number };
   research: {
-    verdict: string; // verified | suspicious | spam | unavailable
+    verdict: string; // verified | suspicious | spam | unavailable | pending (being retried)
     icp_fit?: string;
     confidence?: number;
     company_name?: string;
@@ -83,10 +89,13 @@ const ordinal = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? "th" : ["
 const VERDICT_ICON: Record<string, string> = { verified: "✅", suspicious: "⚠️", spam: "⛔", unavailable: "❔" };
 const clean = (s = "") => s.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c]!).trim();
 
-export function inboundMessage(l: InboundLead): string {
+const aeLabel = (l: InboundLead, aeSlackId?: string | null) => (aeSlackId ? `<@${aeSlackId}>` : l.ae || "no AE");
+
+export function inboundMessage(l: InboundLead, aeSlackId?: string | null): string {
   const r = l.research;
   const sure = l.reason === "ok";
-  const head = sure ? `🟢 *New demo request → ${l.ae || "no AE"}*` : `🟡 *New demo request → ${l.ae || "no AE"}* (unsure, booked anyway)`;
+  const ae = aeLabel(l, aeSlackId);
+  const head = sure ? `🟢 *New demo request → ${ae}*` : `🟡 *New demo request → ${ae}* (unsure, booked anyway)`;
   const name = clean(`${l.firstName} ${l.lastName}`) || "No name";
   const company = clean(r.company_name || l.company) || "Unknown company";
   const site = r.company_website ? ` · <${r.company_website}|website>` : "";
@@ -98,7 +107,9 @@ export function inboundMessage(l: InboundLead): string {
     `${clean(l.email)} · ${clean(l.country) || "no country"}${r.hq_country ? ` · HQ ${clean(r.hq_country)}` : ""}`,
     `Locations: said *${clean(l.locations) || "?"}*${found}`,
     `Booking check: ${sure ? `${l.fit.icp_fit}${l.fit.confidence != null ? ` ${l.fit.confidence}` : ""}` : clean(l.reason)}`,
-    r.verdict === "unavailable"
+    r.verdict === "pending"
+      ? `Research: ⏳ Claude didn't answer, retrying in the background. This post updates when it's done.`
+      : r.verdict === "unavailable"
       ? `Research: ❔ unavailable${r.error ? ` (${clean(r.error).slice(0, 80)})` : ""}`
       : `Research: ${VERDICT_ICON[r.verdict] ?? ""} ${r.verdict}${r.confidence != null ? ` (${r.confidence})` : ""} · ICP ${r.icp_fit ?? "?"} · works there: ${r.person_matches_company ? "yes" : "no"}`,
   ];
@@ -109,21 +120,46 @@ export function inboundMessage(l: InboundLead): string {
   return lines.join("\n");
 }
 
-export function repeatMessage(l: InboundLead, count: number): string {
-  return `↩️ ${clean(`${l.firstName} ${l.lastName}`) || "Someone"} (${clean(l.company) || "unknown company"}) submitted the demo form again: ${ordinal(count)} time this week. → ${l.ae || "no AE"}`;
+export function repeatMessage(l: InboundLead, count: number, aeSlackId?: string | null): string {
+  return `↩️ ${clean(`${l.firstName} ${l.lastName}`) || "Someone"} (${clean(l.company) || "unknown company"}) submitted the demo form again: ${ordinal(count)} time this week. → ${aeLabel(l, aeSlackId)}`;
 }
 
-export async function slackPost(token: string, channel: string, text: string): Promise<{ ok: boolean; error?: string }> {
+type SlackResult = { ok: boolean; error?: string; ts?: string; channel?: string };
+
+async function slackCall(token: string, method: string, body: Record<string, unknown>): Promise<SlackResult> {
   try {
-    const res = await fetch("https://slack.com/api/chat.postMessage", {
+    const res = await fetch(`https://slack.com/api/${method}`, {
       method: "POST",
       headers: { "content-type": "application/json; charset=utf-8", authorization: `Bearer ${token.trim()}` },
-      body: JSON.stringify({ channel: channel.trim(), text, unfurl_links: false, unfurl_media: false }),
+      body: JSON.stringify(body),
     });
-    const json = (await res.json()) as { ok: boolean; error?: string };
-    return json.ok ? { ok: true } : { ok: false, error: json.error ?? `HTTP ${res.status}` };
+    const json = (await res.json()) as SlackResult;
+    return json.ok ? { ok: true, ts: json.ts, channel: json.channel } : { ok: false, error: json.error ?? `HTTP ${res.status}` };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
+  }
+}
+
+export const slackPost = (token: string, channel: string, text: string) =>
+  slackCall(token, "chat.postMessage", { channel: channel.trim(), text, unfurl_links: false, unfurl_media: false });
+
+export const slackUpdate = (token: string, channel: string, ts: string, text: string) =>
+  slackCall(token, "chat.update", { channel, ts, text });
+
+// The AE's Slack ID from AE_SLACK ("James=U0123,Jill=jill@momos.com"). An email is looked up
+// (needs users:read.email). Null when not set up or not found: the post shows the name.
+export async function aeSlackId(env: InboundEnv, ae: string): Promise<string | null> {
+  if (!ae || !env.AE_SLACK || !env.SLACK_BOT_TOKEN) return null;
+  const entry = env.AE_SLACK.split(",").map((x) => x.split("=").map((y) => y.trim())).find(([name]) => name?.toLowerCase() === ae.toLowerCase());
+  const value = entry?.[1];
+  if (!value) return null;
+  if (!value.includes("@")) return value;
+  try {
+    const res = await fetch(`https://slack.com/api/users.lookupByEmail?email=${encodeURIComponent(value)}`, { headers: { authorization: `Bearer ${env.SLACK_BOT_TOKEN.trim()}` } });
+    const json = (await res.json()) as { ok: boolean; user?: { id: string } };
+    return json.ok && json.user ? json.user.id : null;
+  } catch {
+    return null;
   }
 }
 
@@ -148,7 +184,7 @@ async function countSubmission(kv: Kv | undefined, email: string): Promise<numbe
 }
 
 // Called once per form submission, after the research and the Zapier send. Never throws.
-export async function reportInbound(l: InboundLead, env: InboundEnv, now = new Date()): Promise<{ posted: "lead" | "repeat" | "none"; error?: string }> {
+export async function reportInbound(l: InboundLead, env: InboundEnv, now = new Date()): Promise<{ posted: "lead" | "repeat" | "none"; error?: string; ts?: string; channel?: string }> {
   try {
     if (env.LEADS) {
       const key = dayKey(now);
@@ -157,20 +193,21 @@ export async function reportInbound(l: InboundLead, env: InboundEnv, now = new D
       if (l.status === "spam") day.spam++;
       if (!l.salesforce.ok) day.zapier_errors++;
       if (l.fit.icp_fit === "unavailable") day.claude_failures++;
-      if (l.research.verdict === "unavailable" && l.status !== "spam") day.claude_failures++;
+      if ((l.research.verdict === "unavailable" || l.research.verdict === "pending") && l.status !== "spam") day.claude_failures++;
       if (l.status === "not_fit") day.not_fit = [...day.not_fit, { company: l.company || "?", reason: l.reason.replace(/^claude: /, "") }].slice(-50);
       await env.LEADS.put(key, JSON.stringify(day), { expirationTtl: DAY_TTL_S });
     }
     if (!env.SLACK_BOT_TOKEN || !env.INBOUND_SLACK_CHANNEL) return { posted: "none" };
     if (l.status === "spam" || l.status === "not_fit") return { posted: "none" };
     const count = await countSubmission(env.LEADS, l.email);
-    const text = count > 1 ? repeatMessage(l, count) : inboundMessage(l);
+    const tag = await aeSlackId(env, l.ae);
+    const text = count > 1 ? repeatMessage(l, count, tag) : inboundMessage(l, tag);
     const out = await slackPost(env.SLACK_BOT_TOKEN, env.INBOUND_SLACK_CHANNEL, text);
     if (!out.ok) {
       console.error(JSON.stringify({ inbound: "slack error", error: out.error }));
       return { posted: "none", error: out.error };
     }
-    return { posted: count > 1 ? "repeat" : "lead" };
+    return { posted: count > 1 ? "repeat" : "lead", ts: out.ts, channel: out.channel };
   } catch (err) {
     const error = err instanceof Error ? err.message : String(err);
     console.error(JSON.stringify({ inbound: "failed", error }));
@@ -203,4 +240,80 @@ export async function dailyReport(now: Date, env: InboundEnv): Promise<{ sent: n
   }
   console.log(JSON.stringify({ inbound: "daily", date: dayKey(yesterday), ...day, not_fit: day.not_fit.length, sent }));
   return { sent };
+}
+
+// Research retries after the visitor's request is long gone. Each failed lead waits in LEADS
+// under retry:<id> and the 5-minute cron tries again on this schedule (minutes after the
+// first try), then gives up and says so in the post.
+export const RETRY_AFTER_MIN = [2, 5, 10, 20, 30, 45, 60, 90, 120];
+const RETRY_TTL_S = 24 * 3600;
+
+export type PendingResearch = {
+  lead: InboundLead;
+  form: Record<string, unknown>;
+  instant: Record<string, unknown>;
+  channel: string;
+  ts: string;
+  attempts: number; // research tries so far, the first one included
+  next: number; // epoch ms
+  first: number; // epoch ms of the first try
+};
+
+export async function queueResearch(env: InboundEnv, p: Omit<PendingResearch, "attempts" | "next" | "first">, now = Date.now()): Promise<void> {
+  if (!env.LEADS) return;
+  const id = `retry:${now}-${Math.random().toString(36).slice(2, 8)}`;
+  const item: PendingResearch = { ...p, attempts: 1, first: now, next: now + RETRY_AFTER_MIN[0] * 60_000 };
+  await env.LEADS.put(id, JSON.stringify(item), { expirationTtl: RETRY_TTL_S });
+}
+
+export type Researcher = (form: Record<string, unknown>, instant: Record<string, unknown>) => Promise<InboundLead["research"]>;
+
+// Runs from the 5-minute cron. At most `max` leads a run, so one run stays short.
+export async function retryResearch(env: InboundEnv, research: Researcher, now = Date.now(), max = 5): Promise<{ done: number; failed: number; gave_up: number }> {
+  const result = { done: 0, failed: 0, gave_up: 0 };
+  if (!env.LEADS?.list || !env.SLACK_BOT_TOKEN) return result;
+  const keys: string[] = [];
+  let cursor: string | undefined;
+  do {
+    const page = await env.LEADS.list({ prefix: "retry:", cursor });
+    keys.push(...page.keys.map((k) => k.name));
+    cursor = page.list_complete ? undefined : page.cursor;
+  } while (cursor);
+  let handled = 0;
+  for (const key of keys) {
+    if (handled >= max) break;
+    const raw = await env.LEADS.get(key);
+    if (!raw) continue;
+    const item = JSON.parse(raw) as PendingResearch;
+    if (item.next > now) continue;
+    handled++;
+    const tag = await aeSlackId(env, item.lead.ae);
+    let found: InboundLead["research"] | null = null;
+    try {
+      found = await research(item.form, item.instant);
+    } catch (err) {
+      console.log(JSON.stringify({ research_retry: item.attempts + 1, error: err instanceof Error ? err.message : String(err) }));
+    }
+    if (found) {
+      const mins = Math.round((now - item.first) / 60_000);
+      const text = `${inboundMessage({ ...item.lead, research: found }, tag)}\n_Research added after ${item.attempts + 1} tries (${mins} min)._`;
+      await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, text);
+      await env.LEADS.delete?.(key);
+      result.done++;
+      continue;
+    }
+    const attempts = item.attempts + 1;
+    const wait = RETRY_AFTER_MIN[attempts - 1];
+    if (wait == null) {
+      const text = inboundMessage({ ...item.lead, research: { verdict: "unavailable", error: `gave up after ${attempts} tries` } }, tag);
+      await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, text);
+      await env.LEADS.delete?.(key);
+      result.gave_up++;
+      continue;
+    }
+    await env.LEADS.put(key, JSON.stringify({ ...item, attempts, next: item.first + wait * 60_000 }), { expirationTtl: RETRY_TTL_S });
+    result.failed++;
+  }
+  if (handled) console.log(JSON.stringify({ research_retries: handled, ...result }));
+  return result;
 }

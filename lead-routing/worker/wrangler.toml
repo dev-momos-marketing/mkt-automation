@@ -33,6 +33,9 @@ LEAD_LOCATIONS_FIELD = "NoofOutlets__c"
 SKIP_CREATORS = "Momos Marketing"
 # More than this many leads from one person in a run is an import: one line instead of each lead.
 BULK_LIMIT = "10"
+# Who inbound alerts tag: "James=<Slack member ID or email>,Jill=<Slack member ID or email>".
+# An email is looked up in Slack (Beacon needs users:read.email). Empty: the post shows the name.
+AE_SLACK = ""
 
 # Repeat submissions (7 days) and the daily counts for the health check. Cloudflare creates the
 # store on the first deploy (no id needed here).
@@ -43,7 +46,8 @@ binding = "LEADS"
 [triggers]
 # "*/30 * * * *": the lead notifier. If you change it, change WINDOW_MS in src/notify.ts to match.
 # "0 1 * * *": the daily health check and turned-away roll-up (DAILY_CRON in src/index.ts).
-crons = ["*/30 * * * *", "0 1 * * *"]
+# "*/5 * * * *": research retries for leads Claude couldn't research in time (RETRY_CRON).
+crons = ["*/30 * * * *", "0 1 * * *", "*/5 * * * *"]
 
 # At most 5 form submissions a minute from one IP address. Extra ones get the popup without
 # calling Claude or Zapier, so a bot can't flood Slack and Salesforce.

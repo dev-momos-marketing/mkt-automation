@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import worker, { DAILY_CRON, type Env } from "../src/index.ts";
-import { dailyMessages, dailyReport, firstNumber, inboundMessage, reportInbound, sizeMismatch, type InboundLead, type Kv } from "../src/inbound.ts";
+import worker, { DAILY_CRON, RETRY_CRON, type Env } from "../src/index.ts";
+import { aeSlackId, dailyMessages, dailyReport, firstNumber, inboundMessage, queueResearch, reportInbound, retryResearch, sizeMismatch, type InboundLead, type Kv } from "../src/inbound.ts";
 
 function fakeKv() {
   const store = new Map<string, string>();
@@ -186,6 +186,161 @@ test("a demo request posts to Slack even when Zapier fails", async () => {
     assert.match(posts[0], /^🟢 \*New demo request → James\*/);
     assert.match(posts[0], /⚠️ \*Not in Salesforce:\* Zapier returned 500/);
     assert.equal(JSON.parse(LEADS.store.values().next().value!).zapier_errors, 1);
+  } finally {
+    globalThis.fetch = real;
+  }
+});
+
+function fullKv() {
+  const store = new Map<string, string>();
+  const kv: Kv & { store: Map<string, string> } = {
+    store,
+    get: async (k) => store.get(k) ?? null,
+    put: async (k, v) => void store.set(k, v),
+    delete: async (k) => void store.delete(k),
+    list: async ({ prefix }) => ({ keys: [...store.keys()].filter((k) => k.startsWith(prefix)).map((name) => ({ name })), list_complete: true }),
+  };
+  return kv;
+}
+
+function slackApi() {
+  const calls: { method: string; body: any }[] = [];
+  const real = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
+    const url = String(input instanceof Request ? input.url : input);
+    if (url.startsWith("https://slack.com/api/users.lookupByEmail")) {
+      return Response.json(url.includes("jill%40momos.com") ? { ok: true, user: { id: "UJILL" } } : { ok: false, error: "users_not_found" });
+    }
+    if (url.startsWith("https://slack.com/api/")) {
+      const method = url.split("/api/")[1];
+      const body = JSON.parse(String(init?.body));
+      calls.push({ method, body });
+      return Response.json({ ok: true, ts: body.ts ?? "1700000000.000100", channel: "C0INBOUND1" });
+    }
+    throw new Error(`unexpected ${url}`);
+  }) as typeof fetch;
+  return { calls, restore: () => (globalThis.fetch = real) };
+}
+
+test("the AE is tagged from AE_SLACK, by Slack ID or email", async () => {
+  const slack = slackApi();
+  try {
+    assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x", AE_SLACK: "James=U0JAMES, Jill=jill@momos.com" }, "James"), "U0JAMES");
+    assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x", AE_SLACK: "James=U0JAMES, Jill=jill@momos.com" }, "jill"), "UJILL");
+    assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x", AE_SLACK: "James=nobody@momos.com" }, "James"), null);
+    assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x" }, "James"), null);
+    assert.match(inboundMessage(lead(), "UJILL"), /^🟡 \*New demo request → <@UJILL>\*/);
+    const LEADS = fullKv();
+    await reportInbound(lead(), { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS });
+    await reportInbound(lead(), { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS });
+    assert.match(slack.calls[0].body.text, /→ <@UJILL>/);
+    assert.match(slack.calls[1].body.text, /^↩️ .* → <@UJILL>$/);
+  } finally {
+    slack.restore();
+  }
+});
+
+test("failed research posts at once as pending, then the cron fills it in", async () => {
+  const LEADS = fullKv();
+  const slack = slackApi();
+  const env = { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", LEADS };
+  const t0 = Date.parse("2026-11-10T10:00:00Z");
+  const pending = lead({ research: { verdict: "pending", error: "403 Request not allowed" } });
+  try {
+    const posted = await reportInbound(pending, env, new Date(t0));
+    assert.match(slack.calls[0].body.text, /Research: ⏳ Claude didn't answer, retrying/);
+    await queueResearch(env, { lead: pending, form: {}, instant: {}, channel: posted.channel!, ts: posted.ts! }, t0);
+    let tries = 0;
+    const flaky = async () => {
+      if (++tries < 2) throw new Error("403 Request not allowed");
+      return { verdict: "verified", icp_fit: "fit", confidence: 0.9, locations_found: "72", summary: "Franchise group, 72 units." };
+    };
+    // Not due yet at +1 minute.
+    assert.deepEqual(await retryResearch(env, flaky, t0 + 60_000), { done: 0, failed: 0, gave_up: 0 });
+    // +2 minutes: fails again, waits for +5.
+    assert.deepEqual(await retryResearch(env, flaky, t0 + 2 * 60_000), { done: 0, failed: 1, gave_up: 0 });
+    assert.deepEqual(await retryResearch(env, flaky, t0 + 4 * 60_000), { done: 0, failed: 0, gave_up: 0 });
+    // +5 minutes: works. The original post is updated in place.
+    assert.deepEqual(await retryResearch(env, flaky, t0 + 5 * 60_000), { done: 1, failed: 0, gave_up: 0 });
+    const update = slack.calls.find((c) => c.method === "chat.update")!;
+    assert.equal(update.body.channel, "C0INBOUND1");
+    assert.equal(update.body.ts, "1700000000.000100");
+    assert.match(update.body.text, /Research: ✅ verified \(0\.9\)/);
+    assert.match(update.body.text, /found \*72\* 🔺/);
+    assert.match(update.body.text, /Research added after 3 tries \(5 min\)/);
+    assert.equal([...LEADS.store.keys()].filter((k) => k.startsWith("retry:")).length, 0);
+  } finally {
+    slack.restore();
+  }
+});
+
+test("research that never works gives up after about 2 hours and says so", async () => {
+  const LEADS = fullKv();
+  const slack = slackApi();
+  const env = { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", LEADS };
+  const t0 = Date.parse("2026-11-10T10:00:00Z");
+  try {
+    await queueResearch(env, { lead: lead({ research: { verdict: "pending" } }), form: {}, instant: {}, channel: "C0INBOUND1", ts: "1.2" }, t0);
+    const broken = async () => { throw new Error("busy"); };
+    let gaveUp = 0;
+    for (let m = 0; m <= 130; m += 5) gaveUp += (await retryResearch(env, broken, t0 + m * 60_000)).gave_up;
+    assert.equal(gaveUp, 1);
+    const last = slack.calls.filter((c) => c.method === "chat.update").at(-1)!;
+    assert.match(last.body.text, /Research: ❔ unavailable \(gave up after 10 tries\)/);
+    assert.equal(LEADS.store.size, 0);
+  } finally {
+    slack.restore();
+  }
+});
+
+test("the 5-minute cron runs the research retries", async () => {
+  const LEADS = fullKv();
+  const slack = slackApi();
+  const env = { ANTHROPIC_API_KEY: "k", JAMES_URL: "j", JILL_URL: "l", NOT_FIT_URL: "n", ALLOWED_ORIGINS: "", SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", LEADS } as Env;
+  const waits: Promise<unknown>[] = [];
+  try {
+    await worker.scheduled({ scheduledTime: Date.now(), cron: RETRY_CRON }, env, { waitUntil: (p) => waits.push(p) });
+    await Promise.all(waits);
+    assert.equal(slack.calls.length, 0, "nothing queued, nothing posted");
+  } finally {
+    slack.restore();
+  }
+});
+
+test("a form submission whose research fails is posted as pending and queued for the cron", async () => {
+  const LEADS = fullKv();
+  const posts: any[] = [];
+  const real = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
+    const req = input instanceof Request ? input : new Request(input, init);
+    if (req.url.includes("hooks.zapier.com")) return new Response("ok");
+    if (req.url === "https://slack.com/api/chat.postMessage") {
+      posts.push(JSON.parse(await req.text()));
+      return Response.json({ ok: true, ts: "1700000000.000200", channel: "C0INBOUND1" });
+    }
+    if (req.url.includes("api.anthropic.com")) {
+      const json = (await req.clone().json()) as any;
+      if (json.tools) return Response.json({ type: "error", error: { type: "permission_error", message: "Request not allowed" } }, { status: 403 });
+      return Response.json({ id: "m", type: "message", role: "assistant", model: "claude-haiku-5-5", stop_reason: "end_turn", content: [{ type: "text", text: JSON.stringify({ icp_fit: "fit", confidence: 0.9, reason: "QSR chain.", hq_region: "us_west" }) }], usage: { input_tokens: 1, output_tokens: 1 } });
+    }
+    throw new Error("unexpected fetch " + req.url);
+  }) as typeof fetch;
+  const env = { ANTHROPIC_API_KEY: "k", ZAPIER_HOOK_URL: "https://hooks.zapier.com/hooks/catch/1/2/", JAMES_URL: "https://james.example", JILL_URL: "https://jill.example", NOT_FIT_URL: "https://notfit.example", ALLOWED_ORIGINS: "https://www.momos.com", SLACK_BOT_TOKEN: "xoxb", INBOUND_SLACK_CHANNEL: "C0INBOUND1", LEADS } as Env;
+  const waits: Promise<unknown>[] = [];
+  try {
+    await worker.fetch(
+      new Request("https://w.example", { method: "POST", headers: { origin: "https://www.momos.com" }, body: JSON.stringify({ firstName: "Ana", lastName: "Lopez", email: "ana@burgerco.com", company: "Burger Co", title: "VP Marketing", country: "US", locations: "6-49", timezone: "America/Los_Angeles", elapsedMs: 9000 }) }),
+      env,
+      { waitUntil: (p) => waits.push(p) },
+    );
+    await Promise.all(waits);
+    assert.equal(posts.length, 1);
+    assert.match(posts[0].text, /Research: ⏳/);
+    const queued = [...LEADS.store.entries()].filter(([k]) => k.startsWith("retry:"));
+    assert.equal(queued.length, 1);
+    const item = JSON.parse(queued[0][1]);
+    assert.equal(item.ts, "1700000000.000200");
+    assert.equal(item.lead.company, "Burger Co");
   } finally {
     globalThis.fetch = real;
   }
