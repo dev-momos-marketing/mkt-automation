@@ -124,6 +124,16 @@ Zapier setup:
 Red flags: {{verification__red_flags}}
 ```
 
+## Claude through Cloudflare AI Gateway
+
+Set `AI_GATEWAY_URL` in `worker/wrangler.toml` and every Claude call (fit check and research) goes through Cloudflare AI Gateway. The gateway reaches Anthropic from a fixed place, so the Worker's location no longer matters: this stops the `403 Request not allowed` errors that came from Cloudflare running the Worker in regions Anthropic doesn't serve. The gateway's dashboard also logs every call.
+
+1. Cloudflare dashboard → **AI** → **AI Gateway** → **Create Gateway**, name it (for example `momos-leads`).
+2. Copy the gateway's Anthropic URL: `https://gateway.ai.cloudflare.com/v1/<account id>/<gateway name>/anthropic`.
+3. Put it in `AI_GATEWAY_URL`. If you turn on **Authenticated Gateway**, also add its token as the Worker secret `AI_GATEWAY_TOKEN`.
+
+Empty `AI_GATEWAY_URL`: calls go straight to `api.anthropic.com`, as before. Code: `worker/src/claude.ts`.
+
 ## Inbound alerts: every demo request in Slack, from the Worker
 
 After the research, Beacon posts each demo request to the channel in the `INBOUND_SLACK_CHANNEL` Worker secret itself, so no lead depends on Zapier's filter to be seen. Zapier only creates the Salesforce lead. Code: `worker/src/inbound.ts`.

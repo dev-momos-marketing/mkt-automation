@@ -1,5 +1,6 @@
 // The background part: Claude checks the lead on the web and returns structured JSON.
 import Anthropic from "@anthropic-ai/sdk";
+import { claudeClient, type ClaudeRoute } from "./claude.ts";
 import { betaZodOutputFormat } from "@anthropic-ai/sdk/helpers/beta/zod";
 import { z } from "zod";
 import type { FormData, Instant } from "./route.ts";
@@ -72,6 +73,7 @@ export async function verifyLead(
   instant: Instant,
   timeoutMs: number,
   which: ResearchModel = "haiku",
+  route: ClaudeRoute = {},
 ): Promise<Verification> {
   const domain = String(form.email ?? "").split("@")[1] ?? "";
   const mx = domain ? await hasMailServer(domain) : null;
@@ -89,7 +91,7 @@ export async function verifyLead(
     instant_region: instant.region,
   };
 
-  const client = new Anthropic({ apiKey, timeout: timeoutMs, maxRetries: 0 });
+  const client = claudeClient(apiKey, timeoutMs, route);
   const messages: Anthropic.Beta.BetaMessageParam[] = [
     { role: "user", content: `<lead>\n${JSON.stringify(lead, null, 2)}\n</lead>` },
   ];

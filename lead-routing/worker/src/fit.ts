@@ -1,6 +1,7 @@
 // The gate: a fast Claude call that decides ICP fit before the visitor is redirected.
 // Claude judges from the form alone: no web search and no homepage lookup, to keep it fast.
 import Anthropic from "@anthropic-ai/sdk";
+import { claudeClient, type ClaudeRoute } from "./claude.ts";
 import { zodOutputFormat } from "@anthropic-ai/sdk/helpers/zod";
 import { z } from "zod";
 import type { FormData } from "./route.ts";
@@ -52,7 +53,7 @@ export function companyDomain(email = ""): string | null {
 
 export type Timings = { claude_ms: number };
 
-export async function checkFit(apiKey: string, form: FormData, timeoutMs: number, timings?: Timings): Promise<Fit> {
+export async function checkFit(apiKey: string, form: FormData, timeoutMs: number, timings?: Timings, route: ClaudeRoute = {}): Promise<Fit> {
   const started = Date.now();
   const domain = companyDomain(String(form.email ?? ""));
 
@@ -65,7 +66,7 @@ export async function checkFit(apiKey: string, form: FormData, timeoutMs: number
     locations: form.locations,
   };
 
-  const client = new Anthropic({ apiKey, timeout: timeoutMs, maxRetries: 0 });
+  const client = claudeClient(apiKey, timeoutMs, route);
   const response = await client.messages.parse({
     model: "claude-haiku-5-5",
     // The answer is about 40 tokens. Output tokens are most of the wait, so keep it short.

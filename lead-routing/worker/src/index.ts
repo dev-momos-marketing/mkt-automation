@@ -12,6 +12,7 @@
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
+import { claudeRoute } from "./claude.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
 import { dailyReport, queueResearch, reportInbound, retryResearch, type InboundEnv, type InboundLead } from "./inbound.ts";
 
@@ -27,6 +28,8 @@ export interface Env extends NotifyEnv, InboundEnv {
   NOT_FIT_URL: string;
   ALLOWED_ORIGINS: string; // comma separated
   RESEARCH_MODEL?: string; // "haiku" (default) or "opus"
+  AI_GATEWAY_URL?: string; // Cloudflare AI Gateway for Claude calls, see claude.ts. Empty: straight to Anthropic
+  AI_GATEWAY_TOKEN?: string; // secret, only for an authenticated gateway
   SUBMIT_LIMIT?: { limit(options: { key: string }): Promise<{ success: boolean }> }; // see wrangler.toml
 }
 
@@ -72,7 +75,7 @@ async function gate(form: FormData, instant: Instant, env: Env, timings: Timings
     const left = deadline - Date.now();
     if (left < MIN_RETRY_MS) break;
     try {
-      const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, left, timings), left, "fit check took too long");
+      const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, left, timings, claudeRoute(env)), left, "fit check took too long");
       if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
         return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
       }
@@ -173,7 +176,7 @@ async function afterAnswer(form: FormData, instant: Instant, url: string, fit: F
       const left = deadline - Date.now();
       if (attempt > 0 && left < RESEARCH_RETRY_MIN_MS) break;
       try {
-        v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, left, researchModel(env)), left, "Claude took too long");
+        v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, left, researchModel(env), claudeRoute(env)), left, "Claude took too long");
       } catch (err) {
         error = err instanceof Error ? err.message : String(err);
       }
@@ -221,7 +224,7 @@ async function afterAnswer(form: FormData, instant: Instant, url: string, fit: F
 // One research try for the retry cron, with the full 25 s.
 function researcher(env: Env) {
   return async (form: Record<string, unknown>, instant: Record<string, unknown>) => {
-    const v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form as FormData, instant as unknown as Instant, CLAUDE_BUDGET_MS, researchModel(env)), CLAUDE_BUDGET_MS, "Claude took too long");
+    const v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form as FormData, instant as unknown as Instant, CLAUDE_BUDGET_MS, researchModel(env), claudeRoute(env)), CLAUDE_BUDGET_MS, "Claude took too long");
     return { ...v };
   };
 }
