@@ -167,11 +167,12 @@ Tag `@Beacon` with a question and it answers in the thread: "who is Burger Co?",
 
 Claude (Haiku by default; set `BEACON_MODEL` to change it) can only read. Its tools:
 - `find_leads`: Salesforce leads by company, name or email, with status, source, owner and a link
-- `lead_stats`: lead counts for the last N days by source, status, owner, creator or country
+- `list_leads`: recent leads filtered by source, status, owner or creator, with their status (stage) and a link
+- `lead_stats`: lead counts for the last N days by source, status, owner, creator or country, optionally for one source
 - `demo_requests`: demo form submissions, spam and turned-away leads per day (the `LEADS` store)
 - `web_search`: the open web, up to 3 searches per question
 
-In a thread, Beacon reads the thread first (with the `channels:history` scope) so follow-up questions work.
+In a thread, Beacon reads the thread first (with the `channels:history` scope) so follow-up questions work. Once Beacon has answered in a thread, replies there get an answer without tagging it again: add the bot events `message.channels` and `message.groups` (private channels) for that.
 
 Setup, in the Slack app (api.slack.com/apps → Beacon):
 1. **Basic Information** → copy the **Signing Secret** into the Worker secret `SLACK_SIGNING_SECRET`.

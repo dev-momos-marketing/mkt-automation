@@ -1,7 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import worker, { type Env } from "../src/index.ts";
-import { slackSignatureOk, soqlText } from "../src/ask.ts";
+import { resetBeaconUserId, runTool, slackSignatureOk, soqlEq, soqlText } from "../src/ask.ts";
 
 const SECRET = "test-signing-secret";
 
@@ -166,5 +166,90 @@ test("a question in Beacon's DM is answered in the conversation, not a thread", 
     assert.equal(own.waits.length, 0);
   } finally {
     globalThis.fetch = real;
+  }
+});
+
+test("list_leads filters by source, status, owner and creator; lead_stats can filter by source", async () => {
+  const soql: string[] = [];
+  const real = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request) => {
+    const url = String(input instanceof Request ? input.url : input);
+    if (url.endsWith("/services/oauth2/token")) return Response.json({ access_token: "t", instance_url: "https://momos.my.salesforce.com" });
+    if (url.includes("/query?q=")) {
+      const q = decodeURIComponent(url.split("q=")[1]);
+      soql.push(q);
+      if (q.includes("GROUP BY")) return Response.json({ records: [{ v: "New (Uncontacted)", n: 12 }, { v: "Engaged", n: 3 }] });
+      return Response.json({ records: [{ Id: "00Q1", Name: "Ana Lopez", Company: "Burger Co", Title: "VP", Status: "Engaged", LeadSource: "Inbound", CreatedDate: "2026-11-09T01:00:00.000+0000", Owner: { Name: "Jill" }, CreatedBy: { Name: "Momos Marketing" } }] });
+    }
+    throw new Error("unexpected fetch " + url);
+  }) as typeof fetch;
+  try {
+    const listed = (await runTool("list_leads", { days: 7, source: "Inbound", status: "Engaged", owner: "Jill", created_by: "O'Hara" }, env)) as any;
+    assert.match(soql[0], /CreatedDate = LAST_N_DAYS:7 AND LeadSource = 'Inbound' AND Status = 'Engaged' AND Owner\.Name LIKE '%Jill%' AND CreatedBy\.Name LIKE '%O\\'Hara%'/);
+    assert.match(soql[0], /LIMIT 25$/);
+    assert.equal(listed.leads[0].status, "Engaged");
+    assert.match(listed.leads[0].link, /lightning\/r\/Lead\/00Q1\/view/);
+    const stats = (await runTool("lead_stats", { days: 7, group_by: "status", source: "Inbound" }, env)) as any;
+    assert.match(soql[1], /LAST_N_DAYS:7 AND LeadSource = 'Inbound' GROUP BY Status/);
+    assert.deepEqual(stats.counts[0], { value: "New (Uncontacted)", leads: 12 });
+    assert.equal(soqlEq("a'b"), "a\\'b");
+  } finally {
+    globalThis.fetch = real;
+  }
+});
+
+function followUpFetch(beaconInThread: boolean) {
+  const calls: { method: string; body: any }[] = [];
+  const real = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
+    const req = input instanceof Request ? input : new Request(input, init);
+    if (req.url.startsWith("https://slack.com/api/")) {
+      const method = req.url.split("/api/")[1].split("?")[0];
+      const text = req.method === "POST" ? await req.text() : "";
+      calls.push({ method, body: text ? JSON.parse(text || "{}") : null });
+      if (method === "auth.test") return Response.json({ ok: true, user_id: "UBEACON" });
+      if (method === "conversations.replies") return Response.json({ ok: true, messages: [{ ts: "7.0", user: "U2", text: "Hey <@UBEACON> latest inbound?" }, ...(beaconInThread ? [{ ts: "7.1", user: "UBEACON", text: "18 inbound leads" }] : []), { ts: "7.2", user: "U2", text: "list them all" }] });
+      return Response.json({ ok: true, ts: "7.3", channel: "C1" });
+    }
+    if (req.url.includes("api.anthropic.com")) {
+      return Response.json({ id: "m", type: "message", role: "assistant", model: "claude-haiku-5-5", stop_reason: "end_turn", stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 }, content: [{ type: "text", text: "Here are all 18." }] });
+    }
+    throw new Error("unexpected fetch " + req.url);
+  }) as typeof fetch;
+  return { calls, restore: () => (globalThis.fetch = real) };
+}
+
+test("a reply in a thread Beacon is already in gets answered without a tag", async () => {
+  resetBeaconUserId();
+  const f = followUpFetch(true);
+  try {
+    const { waits } = await post({ type: "event_callback", event: { type: "message", channel_type: "group", user: "U2", text: "list them all", channel: "C1", ts: "7.2", thread_ts: "7.0" } });
+    await Promise.all(waits);
+    const placeholder = f.calls.find((c) => c.method === "chat.postMessage")!;
+    assert.equal(placeholder.body.thread_ts, "7.0");
+    assert.equal(f.calls.find((c) => c.method === "chat.update")!.body.text, "Here are all 18.");
+  } finally {
+    f.restore();
+  }
+});
+
+test("thread replies are left alone when Beacon isn't in the thread, or when the reply tags it", async () => {
+  resetBeaconUserId();
+  const f = followUpFetch(false);
+  try {
+    const notIn = await post({ type: "event_callback", event: { type: "message", channel_type: "channel", user: "U2", text: "list them all", channel: "C1", ts: "7.2", thread_ts: "7.0" } });
+    await Promise.all(notIn.waits);
+    assert.equal(f.calls.filter((c) => c.method === "chat.postMessage").length, 0);
+    // A tagged reply comes as app_mention too: the message event must not answer it a second time.
+    const tagged = await post({ type: "event_callback", event: { type: "message", channel_type: "group", user: "U2", text: "<@UBEACON> list them", channel: "C1", ts: "7.4", thread_ts: "7.0" } });
+    await Promise.all(tagged.waits);
+    assert.equal(f.calls.filter((c) => c.method === "chat.postMessage").length, 0);
+    // A plain channel message (not in a thread) is ignored without any Slack calls.
+    const before = f.calls.length;
+    const plain = await post({ type: "event_callback", event: { type: "message", channel_type: "group", user: "U2", text: "hello team", channel: "C1", ts: "8.0" } });
+    assert.equal(plain.waits.length, 0);
+    assert.equal(f.calls.length, before);
+  } finally {
+    f.restore();
   }
 });

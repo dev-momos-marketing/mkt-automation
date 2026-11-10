@@ -6,9 +6,14 @@
 //
 // Claude can only read. Its tools:
 // - find_leads: Salesforce leads by company, name or email
+// - list_leads: recent leads filtered by source, status, owner or creator, with their status
 // - lead_stats: lead counts for the last N days, by source, status, owner, creator or country
+//   (optionally for one source only)
 // - demo_requests: demo form submissions, spam and turned-away leads per day (LEADS store)
 // - web_search: the open web, for questions about a company or a person's role
+//
+// In a thread Beacon has already answered in, replies get an answer without tagging it again
+// (needs the message.channels and message.groups bot events).
 //
 // Needs the SLACK_SIGNING_SECRET secret and, in the Slack app, Event Subscriptions pointed at
 // /slack/events with the app_mention bot event (and message.im for questions in Beacon's DM).
@@ -53,6 +58,8 @@ export async function slackSignatureOk(secret: string, timestamp: string | null,
 // --- Tools
 
 // Text from Slack goes into a SOQL string: escape it, and keep it short.
+// For = comparisons (no LIKE wildcards to escape).
+export const soqlEq = (s: string) => s.slice(0, 80).replace(/\\/g, "\\\\").replace(/'/g, "\\'");
 export const soqlText = (s: string) => s.slice(0, 80).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/[%_]/g, (c) => `\\${c}`);
 
 const GROUP_FIELDS: Record<string, string> = { source: "LeadSource", status: "Status", owner: "Owner.Name", creator: "CreatedBy.Name", country: "Country" };
@@ -64,11 +71,27 @@ export const TOOLS: Anthropic.Beta.BetaToolUnion[] = [
     input_schema: { type: "object", properties: { text: { type: "string", description: "Company, person or email to look for" } }, required: ["text"] },
   },
   {
-    name: "lead_stats",
-    description: "Count Salesforce leads created in the last N days, grouped by source, status, owner, creator or country.",
+    name: "list_leads",
+    description: "List Salesforce leads created in the last N days, newest first, with name, company, title, status (their stage), source, owner, who created it, location count and a Salesforce link. Filter by Lead Source (e.g. Inbound), status, owner name or creator name. Use it for questions like 'latest inbound leads and their stages'.",
     input_schema: {
       type: "object",
-      properties: { days: { type: "integer", minimum: 1, maximum: 365 }, group_by: { type: "string", enum: Object.keys(GROUP_FIELDS) } },
+      properties: {
+        days: { type: "integer", minimum: 1, maximum: 90 },
+        source: { type: "string", description: "Lead Source exactly as stored, e.g. Inbound, Conference (Attendee), outbound_ae" },
+        status: { type: "string", description: "e.g. New (Uncontacted), Engaged, Sales Accepted (SQL)" },
+        owner: { type: "string", description: "Part of the owner's name" },
+        created_by: { type: "string", description: "Part of the creator's name, e.g. Momos Marketing for demo form leads" },
+        limit: { type: "integer", minimum: 1, maximum: 25 },
+      },
+      required: ["days"],
+    },
+  },
+  {
+    name: "lead_stats",
+    description: "Count Salesforce leads created in the last N days, grouped by source, status, owner, creator or country. Give source to count only that Lead Source (e.g. status split of Inbound leads).",
+    input_schema: {
+      type: "object",
+      properties: { days: { type: "integer", minimum: 1, maximum: 365 }, group_by: { type: "string", enum: Object.keys(GROUP_FIELDS) }, source: { type: "string" } },
       required: ["days", "group_by"],
     },
   },
@@ -106,12 +129,30 @@ export async function runTool(name: string, input: Record<string, unknown>, env:
       converted: r.IsConverted ?? false, link: `${sf.instanceUrl}/lightning/r/Lead/${r.Id}/view`,
     }));
   }
+  if (name === "list_leads") {
+    const days = Math.min(90, Math.max(1, Math.floor(Number(input.days) || 7)));
+    const limit = Math.min(25, Math.max(1, Math.floor(Number(input.limit) || 25)));
+    const where = [`CreatedDate = LAST_N_DAYS:${days}`];
+    if (input.source) where.push(`LeadSource = '${soqlEq(String(input.source))}'`);
+    if (input.status) where.push(`Status = '${soqlEq(String(input.status))}'`);
+    if (input.owner) where.push(`Owner.Name LIKE '%${soqlText(String(input.owner))}%'`);
+    if (input.created_by) where.push(`CreatedBy.Name LIKE '%${soqlText(String(input.created_by))}%'`);
+    const rows = await query(sf, `SELECT Id, Name, Company, Title, Status, LeadSource, Country, NoofOutlets__c, CreatedDate, Owner.Name, CreatedBy.Name FROM Lead WHERE ${where.join(" AND ")} ORDER BY CreatedDate DESC LIMIT ${limit}`);
+    return {
+      days, shown: rows.length, limited_to: limit,
+      leads: rows.map((r) => ({
+        name: r.Name, company: r.Company, title: r.Title, status: r.Status, source: r.LeadSource ?? null, country: r.Country ?? null, locations: r.NoofOutlets__c ?? null,
+        created: String(r.CreatedDate ?? "").slice(0, 10), owner: r.Owner?.Name ?? null, created_by: r.CreatedBy?.Name ?? null, link: `${sf.instanceUrl}/lightning/r/Lead/${r.Id}/view`,
+      })),
+    };
+  }
   if (name === "lead_stats") {
     const field = GROUP_FIELDS[String(input.group_by)];
     if (!field) return { error: `group_by must be one of ${Object.keys(GROUP_FIELDS).join(", ")}` };
     const days = Math.min(365, Math.max(1, Math.floor(Number(input.days) || 30)));
-    const rows = (await query(sf, `SELECT ${field} v, COUNT(Id) n FROM Lead WHERE CreatedDate = LAST_N_DAYS:${days} GROUP BY ${field} ORDER BY COUNT(Id) DESC LIMIT 25`)) as unknown as { v: string | null; n: number }[];
-    return { days, group_by: input.group_by, counts: rows.map((r) => ({ value: r.v ?? "(blank)", leads: r.n })) };
+    const source = input.source ? ` AND LeadSource = '${soqlEq(String(input.source))}'` : "";
+    const rows = (await query(sf, `SELECT ${field} v, COUNT(Id) n FROM Lead WHERE CreatedDate = LAST_N_DAYS:${days}${source} GROUP BY ${field} ORDER BY COUNT(Id) DESC LIMIT 25`)) as unknown as { v: string | null; n: number }[];
+    return { days, group_by: input.group_by, source: input.source ?? "all", counts: rows.map((r) => ({ value: r.v ?? "(blank)", leads: r.n })) };
   }
   return { error: `Unknown tool ${name}` };
 }
@@ -119,6 +160,13 @@ export async function runTool(name: string, input: Record<string, unknown>, env:
 // --- Claude
 
 const system = (today: string) => `You are Beacon, the sales assistant for Momos, a customer experience platform for restaurant and F&B brands. People on the Momos sales and marketing team tag you in Slack with questions about leads, demo requests and companies. Today is ${today}.
+
+What Beacon is: one Cloudflare Worker that runs Momos lead routing, and you are its voice in Slack. Besides answering questions, the same Worker does this on its own, so describe it when asked:
+- Book a Demo form on momos.com: checks spam, asks Claude whether the lead fits Momos, and sends the visitor to their AE's calendar (James for West US and APAC, Jill for East US, Europe and the Middle East). Only spam and clear not-fits get a thank-you popup.
+- After each form submission: researches the company on the web, sends the lead to Zapier (which creates it in Salesforce), and posts it in #top-funnel-deal with the research and the AE.
+- Every 30 minutes: posts new leads that reps added by hand in Salesforce to #top-funnel-deal.
+- Every day at 8 am Vietnam time: a health check and a list of leads that were turned away, sent to Vincent.
+You can't trigger those posts on request; they happen when a lead comes in. If someone wants to see recent leads, list them with your tools.
 
 Use your tools to look things up. You can only read: you can't change anything in Salesforce or elsewhere. Never make up a number, a lead or a company fact. If the tools don't have it, say so in one line.
 
@@ -222,6 +270,44 @@ export async function answerMention(event: SlackEvent, env: AskEnv, route: Claud
   console.log(JSON.stringify({ ask: "answered", channel: event.channel, chars: answer.length }));
 }
 
+// Beacon's own Slack user ID, to spot its messages in a thread and its tag in a reply.
+let botUserId: string | null = null;
+async function beaconUserId(env: AskEnv): Promise<string | null> {
+  if (botUserId) return botUserId;
+  try {
+    const res = await fetch("https://slack.com/api/auth.test", { method: "POST", headers: { authorization: `Bearer ${env.SLACK_BOT_TOKEN!.trim()}` } });
+    const json = (await res.json()) as { ok: boolean; user_id?: string };
+    botUserId = json.ok && json.user_id ? json.user_id : null;
+  } catch {
+    botUserId = null;
+  }
+  return botUserId;
+}
+export const resetBeaconUserId = () => void (botUserId = null);
+
+// A reply in a channel thread without a tag: answer it only if Beacon already posted in that
+// thread. A reply that tags Beacon is left to the app_mention event, so it's answered once.
+export async function answerFollowUp(event: SlackEvent, env: AskEnv, route: ClaudeRoute = {}): Promise<boolean> {
+  if (!env.SLACK_BOT_TOKEN || !event.channel || !event.thread_ts || event.thread_ts === event.ts) return false;
+  const me = await beaconUserId(env);
+  if (!me || (event.text ?? "").includes(`<@${me}>`) || event.user === me) return false;
+  try {
+    const res = await fetch(`https://slack.com/api/conversations.replies?channel=${encodeURIComponent(event.channel)}&ts=${encodeURIComponent(event.thread_ts)}&limit=50`, {
+      headers: { authorization: `Bearer ${env.SLACK_BOT_TOKEN.trim()}` },
+    });
+    const json = (await res.json()) as { ok: boolean; messages?: { user?: string }[]; error?: string };
+    if (!json.ok) {
+      console.log(JSON.stringify({ ask: "thread check failed", error: json.error }));
+      return false;
+    }
+    if (!json.messages?.some((m) => m.user === me)) return false;
+  } catch {
+    return false;
+  }
+  await answerMention(event, env, route);
+  return true;
+}
+
 // POST /slack/events
 export async function handleSlackEvents(req: Request, env: AskEnv, ctx: Ctx, route: ClaudeRoute = {}): Promise<Response> {
   const body = await req.text();
@@ -244,8 +330,11 @@ export async function handleSlackEvents(req: Request, env: AskEnv, ctx: Ctx, rou
   if (req.headers.get("x-slack-retry-num")) return new Response("ok");
   const mention = event?.type === "app_mention";
   const dm = event?.type === "message" && event.channel_type === "im" && !event.subtype;
+  const threadReply = event?.type === "message" && (event.channel_type === "channel" || event.channel_type === "group") && !event.subtype && !!event.thread_ts && event.thread_ts !== event.ts;
   if (payload.type === "event_callback" && event && (mention || dm) && !event.bot_id) {
     ctx.waitUntil(answerMention(event, env, route).catch((err) => console.error("answer failed", err instanceof Error ? err.message : err)));
+  } else if (payload.type === "event_callback" && event && threadReply && !event.bot_id) {
+    ctx.waitUntil(answerFollowUp(event, env, route).catch((err) => console.error("follow-up failed", err instanceof Error ? err.message : err)));
   }
   return new Response("ok");
 }
