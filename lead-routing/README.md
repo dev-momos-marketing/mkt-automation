@@ -114,7 +114,7 @@ Zapier setup:
 1. Trigger: **Webhooks by Zapier > Catch Hook** (not Raw). Copy its URL into the `ZAPIER_HOOK_URL` secret.
 2. **Salesforce Create Lead**: map `lead__*` and `utm__*` fields. Put `verification__summary` in the description.
 3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`. Leads Claude was unsure about are `routed`, so they always post. Only spam and confident not-fits stop.
-4. **Slack** message:
+4. **Slack** message (remove this step once the Worker's inbound alerts are live, see below):
 
 ```
 {{routing__ae}} · {{routing__region}} · {{verification__verdict}} · ICP {{fit__icp_fit}} · {{routing__reason}}
@@ -123,6 +123,31 @@ Zapier setup:
 {{verification__summary}}
 Red flags: {{verification__red_flags}}
 ```
+
+## Inbound alerts: every demo request in Slack, from the Worker
+
+After the research, Beacon posts each demo request to the channel in the `INBOUND_SLACK_CHANNEL` Worker secret itself, so no lead depends on Zapier's filter to be seen. Zapier only creates the Salesforce lead. Code: `worker/src/inbound.ts`.
+
+```
+🟡 *New demo request → Jill* (unsure, booked anyway) · us_east
+*Sam Rivera* · Owner
+*Taco Place* · website · Fast casual
+sam@tacoplace.com · US · HQ US
+Locations: said *1-5* · found *About 70* 🔺
+Booking check: claude maybe 0.6: size unclear
+Research: ⚠️ suspicious (0.7) · ICP maybe · works there: yes
+Franchise owner of Taco Place units.
+_Source: google / brand_
+```
+
+- 🟢 Claude was sure; 🟡 it wasn't, and the lead booked anyway. Spam and confident not-fits aren't posted.
+- 🔺 the web found at least twice the form's answer (and 10 or more), e.g. "said 1-5, found 70".
+- ⚠️ *Not in Salesforce*: Zapier failed. Add the lead by hand.
+- ↩️ the same email submitted again within 7 days: one short line in place of a new post.
+- The fit check and the research each retry once when Claude fails fast (403, busy).
+- Every day at 01:00 UTC, Beacon posts a 🚨 check if the day before had no submissions, any Zapier error, or 2 or more Claude failures, and a 🚫 line listing the leads that were turned away. Nothing is posted on a good day with no turn-aways.
+
+Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the inbound channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. Once the Worker posts, delete the Slack step from the Zap so leads don't post twice.
 
 ## Lead notifier: leads reps add, in one Slack channel
 

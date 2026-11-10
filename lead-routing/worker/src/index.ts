@@ -4,14 +4,21 @@
 //    (NOT_FIT_URL).
 // 3. Optional: if ZAPIER_HOOK_URL is set, Claude researches the lead after answering and
 //    the result goes to Zapier (Salesforce + Slack).
-// 4. Every 30 minutes (cron in wrangler.toml): new Salesforce leads that reps added by hand go
-//    to one Slack channel through Beacon. See notify.ts.
+// 4. Beacon posts each demo request to INBOUND_SLACK_CHANNEL itself, after the research, so no
+//    lead depends on Zapier's filter to be seen. Daily at 01:00 UTC: a health alert and the
+//    turned-away roll-up. See inbound.ts.
+// 5. Every 30 minutes (cron in wrangler.toml): new Salesforce leads that reps added by hand go
+//    to SLACK_CHANNEL through Beacon. See notify.ts.
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
+import { dailyReport, reportInbound, type InboundEnv, type InboundLead } from "./inbound.ts";
 
-export interface Env extends NotifyEnv {
+// The daily cron in wrangler.toml. Every other cron run is the 30-minute lead notifier.
+export const DAILY_CRON = "0 1 * * *";
+
+export interface Env extends NotifyEnv, InboundEnv {
   ANTHROPIC_API_KEY: string;
   ZAPIER_HOOK_URL?: string; // optional: no Zapier, no background research
   JAMES_URL: string;
@@ -28,6 +35,9 @@ type Ctx = { waitUntil(p: Promise<unknown>): void };
 const FIT_BUDGET_MS = 3_000;
 // Cloudflare stops background work 30s after the response, so the research gets 25s.
 const CLAUDE_BUDGET_MS = 25_000;
+// A retry needs at least this much time left to be worth starting.
+const MIN_RETRY_MS = 500;
+const RESEARCH_RETRY_MIN_MS = 5_000;
 const AE_NAMES = { james: "James", jill: "Jill" } as const;
 
 function cors(req: Request, env: Env): Record<string, string> {
@@ -54,17 +64,25 @@ export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: stri
 // more than a demo with a weak one. The reason says why, so the AE can see it in Slack.
 async function gate(form: FormData, instant: Instant, env: Env, timings: Timings): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
-  try {
-    const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, FIT_BUDGET_MS, timings), FIT_BUDGET_MS, "fit check took too long");
-    if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
-      return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
+  // A fast failure (403 Request not allowed, 529 busy) is tried once more inside the same 3 s.
+  const deadline = Date.now() + FIT_BUDGET_MS;
+  let error = "fit check took too long";
+  for (let attempt = 0; attempt < 2; attempt++) {
+    const left = deadline - Date.now();
+    if (left < MIN_RETRY_MS) break;
+    try {
+      const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, left, timings), left, "fit check took too long");
+      if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
+        return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
+      }
+      if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
+      return { instant: { ...instant, reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
+    } catch (err) {
+      error = err instanceof Error ? err.message : String(err);
+      console.log(JSON.stringify({ fit_attempt: attempt + 1, error }));
     }
-    if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
-    return { instant: { ...instant, reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
-  } catch (err) {
-    const error = err instanceof Error ? err.message : String(err);
-    return { instant: { ...instant, reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
   }
+  return { instant: { ...instant, reason: "fit check unavailable" }, fit: { icp_fit: "unavailable", error } };
 }
 
 // True when this IP has sent more than the limit in wrangler.toml. Fails open if the limiter is missing or errors.
@@ -142,28 +160,62 @@ function researchModel(env: Env): ResearchModel {
   return env.RESEARCH_MODEL?.trim().toLowerCase() === "opus" ? "opus" : "haiku";
 }
 
-async function verifyAndSend(form: FormData, instant: Instant, url: string, fit: FitResult, env: Env, hook: string) {
+// After the visitor has their answer: research the lead (one retry), send it to Zapier for
+// Salesforce, then post it to Slack. Each step runs even if the one before failed.
+async function afterAnswer(form: FormData, instant: Instant, url: string, fit: FitResult, env: Env) {
   let v: Verification | null = null;
   let error: string | undefined;
   // Obvious spam skips Claude to save time and money. It still goes to Zapier so nothing disappears.
   if (instant.status !== "spam") {
-    try {
-      v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, CLAUDE_BUDGET_MS, researchModel(env)), CLAUDE_BUDGET_MS, "Claude took too long");
-    } catch (err) {
-      error = err instanceof Error ? err.message : String(err);
+    const deadline = Date.now() + CLAUDE_BUDGET_MS;
+    for (let attempt = 0; attempt < 2 && !v; attempt++) {
+      const left = deadline - Date.now();
+      if (attempt > 0 && left < RESEARCH_RETRY_MIN_MS) break;
+      try {
+        v = await withTimeout(verifyLead(env.ANTHROPIC_API_KEY.trim(), form, instant, left, researchModel(env)), left, "Claude took too long");
+      } catch (err) {
+        error = err instanceof Error ? err.message : String(err);
+      }
     }
   }
-  const res = await fetch(hook, {
-    method: "POST",
-    headers: { "content-type": "application/json" },
-    body: JSON.stringify(zapierPayload(form, instant, url, fit, v, error)),
-  });
-  if (!res.ok) console.error("Zapier returned", res.status);
+  const payload = zapierPayload(form, instant, url, fit, v, error);
+  let salesforce: { ok: boolean; error?: string } = { ok: true };
+  if (env.ZAPIER_HOOK_URL) {
+    try {
+      const res = await fetch(env.ZAPIER_HOOK_URL, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(payload) });
+      if (!res.ok) salesforce = { ok: false, error: `Zapier returned ${res.status}` };
+    } catch (err) {
+      salesforce = { ok: false, error: `Zapier unreachable: ${err instanceof Error ? err.message : String(err)}` };
+    }
+    if (!salesforce.ok) console.error(JSON.stringify({ zapier: "failed", error: salesforce.error }));
+  } else {
+    salesforce = { ok: false, error: "no ZAPIER_HOOK_URL set" };
+  }
+  const lead: InboundLead = {
+    firstName: payload.lead.first_name,
+    lastName: payload.lead.last_name,
+    email: payload.lead.email,
+    company: payload.lead.company,
+    title: payload.lead.job_title,
+    country: payload.lead.country,
+    locations: payload.lead.locations,
+    status: instant.status,
+    reason: instant.reason,
+    ae: payload.routing.ae,
+    region: instant.region,
+    fit: { icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : undefined },
+    research: v ? { ...v } : { verdict: "unavailable", error: error ?? (instant.status === "spam" ? "skipped for spam" : "") },
+    utm: { source: payload.utm.utm_source, campaign: payload.utm.utm_campaign },
+    salesforce,
+  };
+  await reportInbound(lead, env);
 }
 
 export default {
-  async scheduled(event: { scheduledTime: number }, env: Env, ctx: Ctx): Promise<void> {
-    ctx.waitUntil(notifyLeads(new Date(event.scheduledTime), env).catch((err) => console.error("notifier failed", err instanceof Error ? err.message : err)));
+  async scheduled(event: { scheduledTime: number; cron?: string }, env: Env, ctx: Ctx): Promise<void> {
+    const when = new Date(event.scheduledTime);
+    const job = event.cron === DAILY_CRON ? dailyReport(when, env) : notifyLeads(when, env);
+    ctx.waitUntil(job.catch((err) => console.error(event.cron === DAILY_CRON ? "daily report failed" : "notifier failed", err instanceof Error ? err.message : err)));
   },
 
   async fetch(req: Request, env: Env, ctx: Ctx): Promise<Response> {
@@ -215,7 +267,7 @@ export default {
       fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
       total_ms: Date.now() - started, ...timings,
     }));
-    if (env.ZAPIER_HOOK_URL) ctx.waitUntil(verifyAndSend(form, instant, url, fit, env, env.ZAPIER_HOOK_URL));
+    if (env.ZAPIER_HOOK_URL || env.INBOUND_SLACK_CHANNEL || env.LEADS) ctx.waitUntil(afterAnswer(form, instant, url, fit, env));
     // ae and region are only for checking tests in the browser console. The form only uses url.
     return Response.json({ url, status: instant.status, ae: instant.status === "routed" ? instant.ae : null, region: instant.region }, { headers });
   },

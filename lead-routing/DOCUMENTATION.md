@@ -195,6 +195,8 @@ Runs only when the `ZAPIER_HOOK_URL` secret is set, and is skipped for spam.
 }
 ```
 
+> Since Nov 2026 the Worker posts every demo request to Slack itself (`worker/src/inbound.ts`, see README "Inbound alerts"). Delete the Zap's Slack step once that is live, so leads don't post twice.
+
 **Zap steps**
 1. **Catch Hook**
 2. **Filter:** only continue if `routing__status` exactly matches `routed`, **OR** `routing__status` exactly matches `follow_up` (two conditions joined with **+ OR**). Every lead Claude was unsure about is `routed` now, so it always reaches Slack. Only spam and confident not-fits stop here.

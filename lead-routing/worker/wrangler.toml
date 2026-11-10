@@ -34,10 +34,16 @@ SKIP_CREATORS = "Momos Marketing"
 # More than this many leads from one person in a run is an import: one line instead of each lead.
 BULK_LIMIT = "10"
 
-# Runs the lead notifier. Cloudflare only runs crons on the live deployment, not on Previews.
+# Repeat submissions (7 days) and the daily counts for the health check. Cloudflare creates the
+# store on the first deploy (no id needed here).
+[[kv_namespaces]]
+binding = "LEADS"
+
+# Cloudflare only runs crons on the live deployment, not on Previews.
 [triggers]
-# Every 30 minutes. If you change it, change WINDOW_MS in src/notify.ts to match.
-crons = ["*/30 * * * *"]
+# "*/30 * * * *": the lead notifier. If you change it, change WINDOW_MS in src/notify.ts to match.
+# "0 1 * * *": the daily health check and turned-away roll-up (DAILY_CRON in src/index.ts).
+crons = ["*/30 * * * *", "0 1 * * *"]
 
 # At most 5 form submissions a minute from one IP address. Extra ones get the popup without
 # calling Claude or Zapier, so a bot can't flood Slack and Salesforce.
@@ -71,5 +77,8 @@ simple = { limit = 5, period = 60 }
 #                       and sends the result to Zapier (Salesforce + Slack).
 #   SF_CLIENT_ID        lead notifier: Salesforce External Client App, client-credentials flow,
 #   SF_CLIENT_SECRET    read-only integration user (Lead read). SF_DOMAIN is above.
+#   INBOUND_SLACK_CHANNEL  inbound alerts (src/inbound.ts): the inbound leads channel's ID (C...),
+#                       the one the Zapier Slack step posts to. Kept out of this public file.
+#                       Without it, demo requests aren't posted by the Worker.
 #   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write, and
 #                       users:read.email to mention the lead owner. Invite Beacon to the channel.
