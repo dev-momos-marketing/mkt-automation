@@ -11,7 +11,7 @@
 //    to SLACK_CHANNEL through Beacon. See notify.ts.
 // 6. POST /slack/events: answers @Beacon questions in Slack threads. See ask.ts.
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
-import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
+import { checkFit, FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 import { claudeRoute } from "./claude.ts";
 import { handleSlackEvents } from "./ask.ts";
@@ -67,9 +67,10 @@ function withTimeout<T>(p: Promise<T>, ms: number, message: string): Promise<T> 
 
 export type FitResult = Fit | { icp_fit: "unavailable" | "skipped"; error?: string };
 
-// Every lead books a demo except a confident not_fit, which is turned away. A maybe, an unsure
-// answer, no answer in time or a failed check all book the AE's calendar: a missed lead costs
-// more than a demo with a weak one. The reason says why, so the AE can see it in Slack.
+// Every lead that isn't spam books the AE's calendar, whatever Claude says: fit, maybe, not_fit,
+// no answer in time or a failed check, and 1-5 locations. A missed lead costs more than a demo
+// with a weak one. Claude's answer only labels the lead: the reason goes to Slack and Zapier so
+// the AE knows what to expect.
 async function gate(form: FormData, instant: Instant, env: Env, timings: Timings): Promise<{ instant: Instant; fit: FitResult }> {
   if (instant.status !== "routed") return { instant, fit: { icp_fit: "skipped" } };
   // A fast failure (403 Request not allowed, 529 busy) is tried once more inside the same 3 s.
@@ -80,9 +81,6 @@ async function gate(form: FormData, instant: Instant, env: Env, timings: Timings
     if (left < MIN_RETRY_MS) break;
     try {
       const fit = await withTimeout(checkFit(env.ANTHROPIC_API_KEY.trim(), form, left, timings, claudeRoute(env)), left, "fit check took too long");
-      if (fit.icp_fit === "not_fit" && fit.confidence >= NOT_FIT_MIN_CONFIDENCE) {
-        return { instant: { ...instant, status: "not_fit", reason: `claude: ${fit.reason}`, ae: null }, fit };
-      }
       if (fit.icp_fit === "fit" && fit.confidence >= FIT_MIN_CONFIDENCE) return { instant, fit };
       return { instant: { ...instant, reason: `claude ${fit.icp_fit} ${fit.confidence}: ${fit.reason}` }, fit };
     } catch (err) {

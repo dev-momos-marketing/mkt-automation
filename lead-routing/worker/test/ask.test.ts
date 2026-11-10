@@ -20,7 +20,7 @@ const env = {
 async function post(body: unknown, opts: { badSig?: boolean; retry?: boolean; ts?: number } = {}) {
   const raw = JSON.stringify(body);
   const { ts, sig } = await sign(raw, opts.ts);
-  const headers: Record<string, string> = { "content-type": "application/json", "x-slack-request-timestamp": ts, "x-slack-signature": opts.badSig ? sig.replace(/.$/, "0") : sig };
+  const headers: Record<string, string> = { "content-type": "application/json", "x-slack-request-timestamp": ts, "x-slack-signature": opts.badSig ? sig.slice(0, -1) + (sig.endsWith("0") ? "1" : "0") : sig };
   if (opts.retry) headers["x-slack-retry-num"] = "1";
   const waits: Promise<unknown>[] = [];
   const res = await worker.fetch(new Request("https://w.example/slack/events", { method: "POST", headers, body: raw }), env, { waitUntil: (p) => waits.push(p) });

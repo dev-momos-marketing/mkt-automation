@@ -63,6 +63,7 @@ test("the Slack post shows unsure bookings, size mismatches and Salesforce failu
   assert.match(text, /Booking check: claude maybe 0\.6: size unclear/);
   assert.match(text, /Research: ⚠️ suspicious \(0\.7\) · ICP maybe · works there: yes/);
   assert.doesNotMatch(text, /Not in Salesforce/);
+  assert.match(inboundMessage(lead({ reason: "claude not_fit 0.9: agency" })), /^🟠 \*New demo request → Jill\* \(Claude thinks it's not a fit, booked anyway\)/);
   const sure = inboundMessage(lead({ reason: "ok", fit: { icp_fit: "fit", confidence: 0.9 }, locations: "6-49", research: { verdict: "verified", locations_found: "18" } }));
   assert.match(sure, /^🟢 \*New demo request → Jill\* · us_east/);
   assert.match(sure, /Booking check: fit 0\.9/);

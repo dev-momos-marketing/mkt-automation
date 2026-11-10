@@ -235,13 +235,13 @@ test("personal email is flagged to Claude", async () => {
   assert.ok((fitCalls[0].messages[0].content as string).includes('"personal_email": true'));
 });
 
-test("confident not_fit goes to the not-fit page", async () => {
+test("even a confident not_fit books the AE's calendar; only spam gets the popup", async () => {
   const notFit = { icp_fit: "not_fit", confidence: 0.95, reason: "Marketing agency, not F&B.", hq_region: "us_east" };
   const { json, sent } = await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", notFit) });
-  assert.equal(json.url, env.NOT_FIT_URL);
-  assert.equal(sent[0].routing.status, "not_fit");
-  assert.equal(sent[0].routing.ae, "");
-  assert.equal(sent[0].fit.reason, "Marketing agency, not F&B.");
+  assert.equal(json.url, env.JAMES_URL);
+  assert.equal(sent[0].routing.status, "routed");
+  assert.equal(sent[0].routing.ae, "James");
+  assert.match(sent[0].routing.reason, /^claude not_fit 0\.95: Marketing agency/);
 });
 
 test("anything short of a confident not_fit books the AE, with the reason for Slack", async () => {
@@ -265,10 +265,10 @@ test("1-5 locations go through the ICP check like everyone else", async () => {
   assert.equal(json.url, env.JAMES_URL);
   assert.equal(fitCalls.length, 1);
   assert.equal(sent[0].routing.status, "routed");
-  // A confident not_fit still gets the thank-you page.
+  // Even a confident not_fit books.
   const notFit = { icp_fit: "not_fit", confidence: 0.95, reason: "Single food truck.", hq_region: "us_west" };
   const turned = await run({ ...form, locations: "1-5" }, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", notFit) });
-  assert.equal(turned.json.url, env.NOT_FIT_URL);
+  assert.equal(turned.json.url, env.JAMES_URL);
 });
 
 test("?tz= on the page URL overrides the browser time zone (for testing)", async () => {
