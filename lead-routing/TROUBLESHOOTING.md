@@ -13,7 +13,7 @@ Owner: Vincent (Marketing) · Every account below logs in with **marketing-team@
 3. The visitor is then sent to the right person:
    - **Jill** (East US, Europe, Middle East, Africa): Jill's Google Calendar
    - **James** (West US, Asia-Pacific): James's Google Calendar
-   - **Not a fit, or junk**: a "Thanks for reaching out!" popup. They stay on the page.
+   - **Spam only** (fake email, bot, filled in under 2 seconds): a "Thanks for reaching out!" popup. Everyone else gets the calendar, even leads the AI thinks aren't a fit.
 4. About 30 seconds later, Claude looks the company up online. A summary lands in **Slack** and a lead is created in **Salesforce** (through **Zapier**). This lead is also stored in Conversion.ai.
 
 **It's built to fail safe.** If the AI or the routing service breaks, visitors land on the backup booking page **momos.com/book-a-demo-us**. Real prospects can still book. What you lose is the routing to James and the Slack/Salesforce summary.

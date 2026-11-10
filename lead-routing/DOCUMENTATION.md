@@ -82,7 +82,7 @@ The Worker decides in a fixed priority order: **spam → ICP → region**. A lea
    - the form was filled in under 2 seconds
    - the email is invalid
    - the email is on the throwaway list (mailinator, yopmail, 10minutemail, etc.)
-3. **ICP check.** Claude Haiku 5.5 (max 3 s) answers fit, maybe or not_fit with a confidence score (see section 5). Only a confident not_fit stops here; every other lead continues, 1–5 locations included.
+3. **ICP check.** Claude Haiku 5.5 (max 3 s) answers fit, maybe or not_fit with a confidence score (see section 5). Nothing stops here: every lead that isn't spam continues, 1–5 locations and not-fits included. The answer only labels the lead for the AE.
 4. **Region → AE.** Country plus browser time zone, with Cloudflare's IP lookup as a backup (see section 4). **Every booked lead gets an AE.** If those clues don't settle the region (e.g. country "Other" with no usable time zone, or a US lead whose computer is on a non-US time zone), the Worker guesses it in this order: the visitor's IP location (country, and the state in North America), then Claude's guess of the company's HQ (`hq_region` from the ICP check), then East (Jill). Guessed regions are flagged `routing.region_guessed = true`.
 5. **Answer.** The Worker returns one URL:
    - **Jill:** `https://calendar.app.google/RgDyFpMoE46wfyFv9`
@@ -136,12 +136,12 @@ The form has no State field on purpose, to keep it short. The time zone does tha
 | **maybe** | F&B but size unclear, a non-buyer title, or can't tell what the company does. **Restaurant-focused marketing agencies** are also maybe, because they often run Momos for several brands. |
 | **not_fit** | Clearly not F&B (general agencies, consultancies, software vendors, investors, recruiters, schools), job seekers, students, journalists, people selling to Momos. Also **companies that sell to restaurants**: POS/payments (Toast, Square, Lightspeed), delivery/ordering (DoorDash, Uber Eats, Olo, ChowNow), reservations (OpenTable, SevenRooms, Resy), review software (Birdeye, Podium, Yext, Reputation, Ovation), food distributors. |
 
-**Every lead books a demo unless it is a confident not-fit** (since Nov 2026). What happens to each answer:
+**Every lead that isn't spam books a demo** (since Nov 10, 2026). Claude's answer only labels it:
 
 | Claude's answer | Visitor sees | `routing.status` | Follow-up |
 |---|---|---|---|
 | fit, confidence ≥ 0.7 (`FIT_MIN_CONFIDENCE`) | Their AE's calendar | `routed` | — |
-| not_fit, confidence ≥ 0.8 (`NOT_FIT_MIN_CONFIDENCE`) | Thank-you popup | `not_fit` | None |
+| not_fit, any confidence | Their AE's calendar | `routed` | Slack post marked 🟠 "Claude thinks it's not a fit" |
 | maybe, low-confidence fit or not_fit, or no answer within 3 s | Their AE's calendar | `routed` | `routing.reason` says why |
 | 1–5 locations | Same as any other lead: Claude decides | | |
 
@@ -387,7 +387,7 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 | Slack shows `unavailable` verdicts | Research took over 25 s or errored | Occasional is fine; frequent means check Anthropic status and credit |
 | No web search cost in the Console | Research not running | Check the `ZAPIER_HOOK_URL` secret exists, and that Zapier History shows runs with verification filled in |
 | Framer: "Component file does not exist" or code cut off | Paste was truncated | Re-paste in parts, check the last line is `}`, re-insert the component |
-| A real restaurant got the popup | The gate was over-confident: it answered `not_fit` at 0.8 or more | Check its log line. Adjust the prompt or raise `NOT_FIT_MIN_CONFIDENCE`. |
+| A real restaurant got the popup | The spam check caught it (hidden field, under 2 s, bad or throwaway email, 6+ a minute) | Check its log line for the spam reason. |
 
 ---
 
@@ -411,7 +411,7 @@ Worker changes go live when pushed to `main`. Form changes go live when pasted i
 | No State field | Shorter form. The browser time zone gives East vs West, with the IP as a backup. |
 | Claude decides before the redirect, not while typing | One clean check on submit. Pre-checking while typing was rejected. |
 | No homepage or web lookup in the gate | Speed: about 2 s total instead of 3+ s. Web research happens afterwards. |
-| Every lead books unless it's a confident not-fit (Nov 2026) | Too many real leads got the popup. A missed lead costs more than a weak demo. Replaced the Oct 2026 "only confident fits book" rule. |
+| Every lead that isn't spam books (Nov 10, 2026) | 34 real demo requests were lost between Oct 22 and Nov 9. A missed lead costs more than a weak demo. Replaced "only confident fits book" (Oct 2026) and "confident not-fits get the popup" (Nov 10 morning). |
 | 1–5 locations go through the ICP check like everyone else (Nov 2026) | Same reason. Before, they always got the popup. |
 | Restaurant marketing agencies count as maybe | They can be customers managing several brands. |
 | Software vendors to restaurants count as not-fit | They're vendors or competitors, not customers. |

@@ -97,7 +97,8 @@ export function inboundMessage(l: InboundLead, aeSlackId?: string | null): strin
   const r = l.research;
   const sure = l.reason === "ok";
   const ae = aeLabel(l, aeSlackId);
-  const head = sure ? `🟢 *New demo request → ${ae}*` : `🟡 *New demo request → ${ae}* (unsure, booked anyway)`;
+  const flagged = /^claude not_fit/.test(l.reason);
+  const head = sure ? `🟢 *New demo request → ${ae}*` : flagged ? `🟠 *New demo request → ${ae}* (Claude thinks it's not a fit, booked anyway)` : `🟡 *New demo request → ${ae}* (unsure, booked anyway)`;
   const name = clean(`${l.firstName} ${l.lastName}`) || "No name";
   const company = clean(r.company_name || l.company) || "Unknown company";
   const site = r.company_website ? ` · <${r.company_website}|website>` : "";

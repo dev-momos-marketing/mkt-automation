@@ -5,9 +5,9 @@ Framer form ──► Cloudflare Worker
                   ├─ spam check + region (instant)
                   ├─ Claude Haiku: ICP fit? (max 3s, spinner on the form)
                   │
-                  ├─ fit / maybe / no answer, Jill  ──► Jill's Google Calendar
-                  ├─ fit / maybe / no answer, James ──► James's Google Calendar
-                  └─ confident not fit / spam       ──► thank-you popup
+                  ├─ any lead that isn't spam, Jill  ──► Jill's Google Calendar
+                  ├─ any lead that isn't spam, James ──► James's Google Calendar
+                  └─ spam                            ──► thank-you popup
 
                   optional, after the redirect:
                   └─ Claude Opus + web search ──► JSON ──► Zapier ──► Salesforce + Slack
@@ -34,13 +34,13 @@ To change who gets which region, edit `ROUTES` in `worker/src/route.ts`.
 
 Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country and location count, and judges from what it already knows. There is no web search or website lookup here, so it stays fast (about 1 to 1.5 seconds).
 
-- Every lead gets their AE's calendar (`status: routed`), whatever the location count, unless it is spam or Claude answers `not_fit` with confidence 0.8 or more. Those get the thank-you popup (`status: not_fit` or `spam`).
+- Every lead that isn't spam gets their AE's calendar (`status: routed`), whatever the location count and whatever Claude answers. Only spam gets the thank-you popup (`status: spam`).
 - The order is always **spam → ICP → region**. Every booking has an AE: if the country, time zone and IP don't settle the region, it's guessed from the IP country, then Claude's guess of the company's HQ, then East (Jill).
 - A `maybe`, a low-confidence answer, or Claude over 3 seconds or failing still books the calendar. `routing.reason` says why (for example `claude maybe 0.6: size unclear` or `fit check unavailable`), so the AE can see it in Slack.
 
 Obvious spam (filled honeypot, form filled in under 2 seconds, bad or throwaway email) never reaches Claude.
 
-What counts as ICP is the prompt in `worker/src/fit.ts`. The confidence bars are `FIT_MIN_CONFIDENCE` and `NOT_FIT_MIN_CONFIDENCE` in the same file.
+What counts as ICP is the prompt in `worker/src/fit.ts`. Since Nov 10, 2026 Claude's answer never turns a lead away: only spam gets the thank-you popup. `FIT_MIN_CONFIDENCE` only decides whether the Slack post says 🟢 (sure) or 🟡/🟠 (unsure / Claude thinks it's not a fit).
 
 Every lead writes one line to the Worker's **Logs** tab: company, region, AE, Claude's verdict and confidence. Check it now and then to see who is being turned away.
 
