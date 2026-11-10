@@ -7,7 +7,7 @@ const env: NotifyEnv = {
   SF_CLIENT_ID: "id",
   SF_CLIENT_SECRET: "secret",
   SLACK_BOT_TOKEN: "xoxb-test",
-  SLACK_CHANNEL: "vincent-test-beacon",
+  SLACK_CHANNEL: "top-funnel-deal",
   LEAD_SOURCE_FIELD: "LeadSource",
   LEAD_LOCATIONS_FIELD: "NoofOutlets__c",
   SKIP_CREATORS: "Momos Marketing",
@@ -67,7 +67,7 @@ function fakeSalesforce(fresh: SfLead[]) {
     if (url.includes("users.lookupByEmail")) return Response.json({ ok: true, user: { id: "U123" } });
     if (url.endsWith("chat.postMessage")) {
       const body = JSON.parse(String(init?.body));
-      assert.equal(body.channel, "vincent-test-beacon");
+      assert.equal(body.channel, "top-funnel-deal");
       posts.push(body.text);
       return Response.json({ ok: true });
     }

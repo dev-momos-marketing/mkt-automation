@@ -25,7 +25,7 @@ RESEARCH_MODEL = "haiku"
 # by hand to this Slack channel. It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set
 # (see the bottom of this file).
 SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
-SLACK_CHANNEL = "vincent-test-beacon"
+SLACK_CHANNEL = "top-funnel-deal"
 LEAD_SOURCE_FIELD = "LeadSource"
 LEAD_LOCATIONS_FIELD = "NoofOutlets__c"
 # Salesforce users whose leads are never posted. Momos Marketing is the demo form's automation:
