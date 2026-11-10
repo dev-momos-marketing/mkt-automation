@@ -138,3 +138,33 @@ test("a mention with no question gets the help text", async () => {
     globalThis.fetch = real;
   }
 });
+
+test("a question in Beacon's DM is answered in the conversation, not a thread", async () => {
+  const posts: any[] = [];
+  const real = globalThis.fetch;
+  globalThis.fetch = (async (input: string | URL | Request, init?: RequestInit) => {
+    const req = input instanceof Request ? input : new Request(input, init);
+    if (req.url.startsWith("https://slack.com/api/")) {
+      posts.push({ method: req.url.split("/api/")[1], body: JSON.parse(await req.text()) });
+      return Response.json({ ok: true, ts: "5.2", channel: "D1" });
+    }
+    if (req.url.includes("api.anthropic.com")) {
+      return Response.json({ id: "m", type: "message", role: "assistant", model: "claude-haiku-5-5", stop_reason: "end_turn", stop_sequence: null, usage: { input_tokens: 1, output_tokens: 1 }, content: [{ type: "text", text: "Hi! Ask me about leads." }] });
+    }
+    throw new Error("unexpected fetch " + req.url);
+  }) as typeof fetch;
+  try {
+    const { waits } = await post({ type: "event_callback", event: { type: "message", channel_type: "im", user: "U2", text: "hello?", channel: "D1", ts: "5.1" } });
+    await Promise.all(waits);
+    assert.equal(posts[0].body.channel, "D1");
+    assert.equal(posts[0].body.thread_ts, undefined, "no thread in a DM");
+    assert.equal(posts.find((p) => p.method === "chat.update").body.text, "Hi! Ask me about leads.");
+    // Edits and Beacon's own DM messages don't trigger an answer.
+    const edit = await post({ type: "event_callback", event: { type: "message", subtype: "message_changed", channel_type: "im", channel: "D1", ts: "5.3" } });
+    assert.equal(edit.waits.length, 0);
+    const own = await post({ type: "event_callback", event: { type: "message", channel_type: "im", bot_id: "B1", text: "x", channel: "D1", ts: "5.4" } });
+    assert.equal(own.waits.length, 0);
+  } finally {
+    globalThis.fetch = real;
+  }
+});

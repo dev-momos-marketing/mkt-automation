@@ -11,7 +11,8 @@
 // - web_search: the open web, for questions about a company or a person's role
 //
 // Needs the SLACK_SIGNING_SECRET secret and, in the Slack app, Event Subscriptions pointed at
-// /slack/events with the app_mention bot event. Salesforce answers need the SF_* secrets.
+// /slack/events with the app_mention bot event (and message.im for questions in Beacon's DM).
+// Salesforce answers need the SF_* secrets. Every Slack event writes a "slack" line to the logs.
 import type Anthropic from "@anthropic-ai/sdk";
 import { claudeClient, type ClaudeRoute } from "./claude.ts";
 import { dayKey, slackPost, slackUpdate, type DayStats, type Kv } from "./inbound.ts";
@@ -163,7 +164,7 @@ export async function answerQuestion(question: string, thread: string, env: AskE
 
 // --- Slack events
 
-type SlackEvent = { type: string; user?: string; bot_id?: string; text?: string; channel?: string; ts?: string; thread_ts?: string };
+type SlackEvent = { type: string; subtype?: string; channel_type?: string; user?: string; bot_id?: string; text?: string; channel?: string; ts?: string; thread_ts?: string };
 
 const HELP = `Tag me with a question, for example:
 • *@Beacon who is Burger Co?* (Salesforce + the web)
@@ -189,7 +190,9 @@ async function threadContext(env: AskEnv, channel: string, threadTs: string, ski
 
 export async function answerMention(event: SlackEvent, env: AskEnv, route: ClaudeRoute = {}): Promise<void> {
   if (!env.SLACK_BOT_TOKEN || !event.channel || !event.ts) return;
-  const threadTs = event.thread_ts ?? event.ts;
+  // In a channel Beacon answers in a thread. In its DM it answers in the conversation itself.
+  const dm = event.channel_type === "im";
+  const threadTs = dm ? event.thread_ts : (event.thread_ts ?? event.ts);
   const question = (event.text ?? "").replace(/<@[A-Z0-9]+>/g, "").trim();
   if (!question) {
     await fetch("https://slack.com/api/chat.postMessage", {
@@ -204,6 +207,7 @@ export async function answerMention(event: SlackEvent, env: AskEnv, route: Claud
     headers: { "content-type": "application/json; charset=utf-8", authorization: `Bearer ${env.SLACK_BOT_TOKEN.trim()}` },
     body: JSON.stringify({ channel: event.channel, thread_ts: threadTs, text: "⏳ Looking into it…" }),
   }).then((r) => r.json() as Promise<{ ok: boolean; ts?: string; channel?: string; error?: string }>);
+  if (!placeholder.ok) console.error(JSON.stringify({ ask: "slack post failed", channel: event.channel, error: placeholder.error }));
   const thread = event.thread_ts ? await threadContext(env, event.channel, event.thread_ts, event.ts) : "";
   let answer: string;
   try {
@@ -223,7 +227,10 @@ export async function handleSlackEvents(req: Request, env: AskEnv, ctx: Ctx, rou
   const body = await req.text();
   if (!env.SLACK_SIGNING_SECRET) return new Response("Slack events aren't set up", { status: 503 });
   const ok = await slackSignatureOk(env.SLACK_SIGNING_SECRET, req.headers.get("x-slack-request-timestamp"), req.headers.get("x-slack-signature"), body);
-  if (!ok) return new Response("bad signature", { status: 401 });
+  if (!ok) {
+    console.log(JSON.stringify({ slack: "bad signature" }));
+    return new Response("bad signature", { status: 401 });
+  }
   let payload: { type?: string; challenge?: string; event?: SlackEvent };
   try {
     payload = JSON.parse(body);
@@ -231,10 +238,13 @@ export async function handleSlackEvents(req: Request, env: AskEnv, ctx: Ctx, rou
     return new Response("bad body", { status: 400 });
   }
   if (payload.type === "url_verification") return new Response(payload.challenge ?? "", { headers: { "content-type": "text/plain" } });
+  const event = payload.event;
+  console.log(JSON.stringify({ slack: "event", type: payload.type, event: event?.type, channel_type: event?.channel_type ?? null, channel: event?.channel ?? null, retry: req.headers.get("x-slack-retry-num") }));
   // Slack retries when it didn't get an answer in 3 s. The first delivery is already being handled.
   if (req.headers.get("x-slack-retry-num")) return new Response("ok");
-  const event = payload.event;
-  if (payload.type === "event_callback" && event?.type === "app_mention" && !event.bot_id) {
+  const mention = event?.type === "app_mention";
+  const dm = event?.type === "message" && event.channel_type === "im" && !event.subtype;
+  if (payload.type === "event_callback" && event && (mention || dm) && !event.bot_id) {
     ctx.waitUntil(answerMention(event, env, route).catch((err) => console.error("answer failed", err instanceof Error ? err.message : err)));
   }
   return new Response("ok");
