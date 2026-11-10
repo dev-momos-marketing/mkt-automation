@@ -114,7 +114,7 @@ Zapier setup:
 1. Trigger: **Webhooks by Zapier > Catch Hook** (not Raw). Copy its URL into the `ZAPIER_HOOK_URL` secret.
 2. **Salesforce Create Lead**: map `lead__*` and `utm__*` fields. Put `verification__summary` in the description.
 3. **Filter**: only continue if `routing__status` is `routed` OR `follow_up`. Leads Claude was unsure about are `routed`, so they always post. Only spam and confident not-fits stop.
-4. **Slack** message (remove this step once the Worker's inbound alerts are live, see below):
+4. **Slack** message to #inbound-form-get-started (kept; Beacon's inbound alerts post to their own channel, see below):
 
 ```
 {{routing__ae}} · {{routing__region}} · {{verification__verdict}} · ICP {{fit__icp_fit}} · {{routing__reason}}
@@ -159,11 +159,11 @@ _Source: google / brand_
 - The fit check retries once inside its 3 seconds. If the research still fails, the post goes out at once with "⏳ research pending". A 5-minute cron retries it for about 2 hours (2, 5, 10, 20, 30, 45, 60, 90 and 120 minutes after the first try) and updates the same post when it works, or says it gave up.
 - Every day at 01:00 UTC, Beacon sends a 🚨 check as a DM to each person in `DAILY_REPORT_TO` (`worker/wrangler.toml`, Slack member IDs or emails; empty sends it to the inbound channel) if the day before had no submissions, any Zapier error, or 2 or more Claude failures, and a 🚫 line listing the leads that were turned away. Nothing is posted on a good day with no turn-aways.
 
-Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the inbound channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. Once the Worker posts, delete the Slack step from the Zap so leads don't post twice.
+Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. The Zap's own Slack step can stay: it keeps posting to its channel (#inbound-form-get-started), and Beacon posts to this one.
 
 ## Lead notifier: leads reps add, in one Slack channel
 
-Every 30 minutes the Worker checks Salesforce for leads created 35 to 5 minutes earlier, and Beacon posts the ones reps added by hand to `SLACK_CHANNEL`.
+Every 30 minutes the Worker checks Salesforce for leads created 35 to 5 minutes earlier, and Beacon posts the ones reps added by hand to the channel in the `SLACK_CHANNEL` Worker secret (a channel ID).
 
 ```
 🟢 *Burger Co* · Ana Lopez, VP Marketing

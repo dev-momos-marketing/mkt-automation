@@ -25,7 +25,6 @@ RESEARCH_MODEL = "haiku"
 # by hand to this Slack channel. It stays off until the SF_* and SLACK_BOT_TOKEN secrets are set
 # (see the bottom of this file).
 SF_DOMAIN = "fun-ruby-7024.my.salesforce.com"
-SLACK_CHANNEL = "top-funnel-deal"
 LEAD_SOURCE_FIELD = "LeadSource"
 LEAD_LOCATIONS_FIELD = "NoofOutlets__c"
 # Salesforce users whose leads are never posted. Momos Marketing is the demo form's automation:
@@ -84,6 +83,8 @@ simple = { limit = 5, period = 60 }
 #                       and sends the result to Zapier (Salesforce + Slack).
 #   SF_CLIENT_ID        lead notifier: Salesforce External Client App, client-credentials flow,
 #   SF_CLIENT_SECRET    read-only integration user (Lead read). SF_DOMAIN is above.
+#   SLACK_CHANNEL       lead notifier (src/notify.ts): channel ID for leads reps add by hand
+#                       (#top-funnel-deal, or a test channel while testing).
 #   INBOUND_SLACK_CHANNEL  inbound alerts (src/inbound.ts): the inbound leads channel's ID (C...),
 #                       the one the Zapier Slack step posts to. Kept out of this public file.
 #                       Without it, demo requests aren't posted by the Worker.

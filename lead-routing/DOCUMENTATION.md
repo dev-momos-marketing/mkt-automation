@@ -195,7 +195,7 @@ Runs only when the `ZAPIER_HOOK_URL` secret is set, and is skipped for spam.
 }
 ```
 
-> Since Nov 2026 the Worker posts every demo request to Slack itself (`worker/src/inbound.ts`, see README "Inbound alerts"). Delete the Zap's Slack step once that is live, so leads don't post twice.
+> Since Nov 2026 the Worker posts every demo request to Slack itself (`worker/src/inbound.ts`, see README "Inbound alerts"). The Zap's Slack step stays and keeps posting to #inbound-form-get-started; Beacon posts to its own channel.
 
 **Zap steps**
 1. **Catch Hook**
