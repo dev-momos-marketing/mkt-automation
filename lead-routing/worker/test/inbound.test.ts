@@ -345,3 +345,23 @@ test("a form submission whose research fails is posted as pending and queued for
     globalThis.fetch = real;
   }
 });
+
+test("the daily check goes to Vincent as a DM, or to the channel when nobody is set", async () => {
+  const LEADS = fullKv();
+  LEADS.store.set("day:2026-11-09", JSON.stringify({ submissions: 0, spam: 0, zapier_errors: 0, claude_failures: 0, not_fit: [] }));
+  const slack = slackApi();
+  try {
+    const base = { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", LEADS };
+    assert.equal((await dailyReport(new Date("2026-11-10T01:00:00Z"), { ...base, DAILY_REPORT_TO: "U0VINCENT" })).sent, 1);
+    assert.equal(slack.calls[0].body.channel, "U0VINCENT");
+    assert.match(slack.calls[0].body.text, /no demo form submissions/);
+    // An email that Slack can't find falls back to the channel.
+    await dailyReport(new Date("2026-11-10T01:00:00Z"), { ...base, DAILY_REPORT_TO: "nobody@momos.com" });
+    assert.equal(slack.calls[1].body.channel, "C0INBOUND1");
+    // An email Slack finds is DM'd.
+    await dailyReport(new Date("2026-11-10T01:00:00Z"), { ...base, DAILY_REPORT_TO: "jill@momos.com" });
+    assert.equal(slack.calls[2].body.channel, "UJILL");
+  } finally {
+    slack.restore();
+  }
+});

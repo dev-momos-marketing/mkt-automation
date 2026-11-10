@@ -146,7 +146,7 @@ _Source: google / brand_
 - ↩️ the same email submitted again within 7 days: one short line in place of a new post.
 - The AE is tagged when `AE_SLACK` is set in `worker/wrangler.toml` (`James=<Slack member ID or email>,Jill=...`). Empty: the name is shown.
 - The fit check retries once inside its 3 seconds. If the research still fails, the post goes out at once with "⏳ research pending". A 5-minute cron retries it for about 2 hours (2, 5, 10, 20, 30, 45, 60, 90 and 120 minutes after the first try) and updates the same post when it works, or says it gave up.
-- Every day at 01:00 UTC, Beacon posts a 🚨 check if the day before had no submissions, any Zapier error, or 2 or more Claude failures, and a 🚫 line listing the leads that were turned away. Nothing is posted on a good day with no turn-aways.
+- Every day at 01:00 UTC, Beacon sends a 🚨 check as a DM to each person in `DAILY_REPORT_TO` (`worker/wrangler.toml`, Slack member IDs or emails; empty sends it to the inbound channel) if the day before had no submissions, any Zapier error, or 2 or more Claude failures, and a 🚫 line listing the leads that were turned away. Nothing is posted on a good day with no turn-aways.
 
 Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the inbound channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. Once the Worker posts, delete the Slack step from the Zap so leads don't post twice.
 

@@ -36,6 +36,9 @@ BULK_LIMIT = "10"
 # Who inbound alerts tag: "James=<Slack member ID or email>,Jill=<Slack member ID or email>".
 # An email is looked up in Slack (Beacon needs users:read.email). Empty: the post shows the name.
 AE_SLACK = ""
+# Who gets the daily check (src/inbound.ts) as a Beacon DM: Slack member IDs or emails, comma
+# separated. Empty: it goes to the inbound channel.
+DAILY_REPORT_TO = ""
 
 # Repeat submissions (7 days) and the daily counts for the health check. Cloudflare creates the
 # store on the first deploy (no id needed here).

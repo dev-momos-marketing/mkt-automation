@@ -9,7 +9,8 @@
 //   "research pending", and the 5-minute cron retries for about 2 hours, then fills it in
 //   (retryResearch in index.ts).
 // - Once a day: a health alert (no submissions, Zapier errors, Claude failures) and a one-line
-//   roll-up of the leads that were turned away, so a wrong not-fit still gets seen.
+//   roll-up of the leads that were turned away, so a wrong not-fit still gets seen. Sent as a
+//   DM to DAILY_REPORT_TO (Vincent), or to the inbound channel if nobody is set.
 //
 // Off until INBOUND_SLACK_CHANNEL and SLACK_BOT_TOKEN are set. Counts and repeats need the LEADS
 // KV store; without it, every submission posts and the daily report is skipped.
@@ -25,6 +26,7 @@ export interface InboundEnv {
   SLACK_BOT_TOKEN?: string;
   INBOUND_SLACK_CHANNEL?: string; // channel ID (C...) or name. Empty: no inbound posts
   AE_SLACK?: string; // who to tag: "James=U0123,Jill=jill@momos.com" (a Slack ID or an email to look up)
+  DAILY_REPORT_TO?: string; // who gets the daily check as a Beacon DM: Slack member IDs or emails, comma separated
   LEADS?: Kv;
 }
 
@@ -151,8 +153,12 @@ export const slackUpdate = (token: string, channel: string, ts: string, text: st
 export async function aeSlackId(env: InboundEnv, ae: string): Promise<string | null> {
   if (!ae || !env.AE_SLACK || !env.SLACK_BOT_TOKEN) return null;
   const entry = env.AE_SLACK.split(",").map((x) => x.split("=").map((y) => y.trim())).find(([name]) => name?.toLowerCase() === ae.toLowerCase());
-  const value = entry?.[1];
-  if (!value) return null;
+  return entry?.[1] ? slackUserId(env, entry[1]) : null;
+}
+
+// A Slack member ID as is, or an email looked up in Slack (needs users:read.email). Null if not found.
+export async function slackUserId(env: InboundEnv, value: string): Promise<string | null> {
+  if (!value || !env.SLACK_BOT_TOKEN) return null;
   if (!value.includes("@")) return value;
   try {
     const res = await fetch(`https://slack.com/api/users.lookupByEmail?email=${encodeURIComponent(value)}`, { headers: { authorization: `Bearer ${env.SLACK_BOT_TOKEN.trim()}` } });
@@ -225,18 +231,24 @@ export function dailyMessages(day: DayStats, date: string): string[] {
   if (problems.length) out.push(`🚨 *Lead routing check for ${date}*\n${problems.map((p) => `• ${p}`).join("\n")}`);
   if (day.not_fit.length) {
     const list = day.not_fit.map((n) => `${clean(n.company)} (${clean(n.reason).slice(0, 60)})`).join("; ");
-    out.push(`🚫 ${day.not_fit.length} turned away on ${date}: ${list}. Reply here if any of them is a real lead.`);
+    out.push(`🚫 ${day.not_fit.length} turned away on ${date}: ${list}. Tell the AE if any of them is a real lead.`);
   }
   return out;
 }
 
+// Goes to each person in DAILY_REPORT_TO as a Beacon DM. Without anyone set (or found), it goes
+// to the inbound channel so the check is never lost.
 export async function dailyReport(now: Date, env: InboundEnv): Promise<{ sent: number }> {
-  if (!env.LEADS || !env.SLACK_BOT_TOKEN || !env.INBOUND_SLACK_CHANNEL) return { sent: 0 };
+  if (!env.LEADS || !env.SLACK_BOT_TOKEN) return { sent: 0 };
+  const people = (env.DAILY_REPORT_TO ?? "").split(",").map((x) => x.trim()).filter(Boolean);
+  const targets = (await Promise.all(people.map((p) => slackUserId(env, p)))).filter((x): x is string => !!x);
+  if (!targets.length && env.INBOUND_SLACK_CHANNEL) targets.push(env.INBOUND_SLACK_CHANNEL);
+  if (!targets.length) return { sent: 0 };
   const yesterday = new Date(now.getTime() - 24 * 3600 * 1000);
   const day = await readDay(env.LEADS, dayKey(yesterday));
   let sent = 0;
   for (const text of dailyMessages(day, yesterday.toISOString().slice(0, 10))) {
-    if ((await slackPost(env.SLACK_BOT_TOKEN, env.INBOUND_SLACK_CHANNEL, text)).ok) sent++;
+    for (const to of targets) if ((await slackPost(env.SLACK_BOT_TOKEN, to, text)).ok) sent++;
   }
   console.log(JSON.stringify({ inbound: "daily", date: dayKey(yesterday), ...day, not_fit: day.not_fit.length, sent }));
   return { sent };
