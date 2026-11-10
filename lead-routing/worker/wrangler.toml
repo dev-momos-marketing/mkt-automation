@@ -83,6 +83,8 @@ simple = { limit = 5, period = 60 }
 #                       and sends the result to Zapier (Salesforce + Slack).
 #   SF_CLIENT_ID        lead notifier: Salesforce External Client App, client-credentials flow,
 #   SF_CLIENT_SECRET    read-only integration user (Lead read). SF_DOMAIN is above.
+#   SLACK_SIGNING_SECRET  Ask Beacon (src/ask.ts): the Slack app's Signing Secret (Basic
+#                       Information). Without it, /slack/events answers 503.
 #   SLACK_CHANNEL       lead notifier (src/notify.ts): channel ID for leads reps add by hand
 #                       (#top-funnel-deal, or a test channel while testing).
 #   INBOUND_SLACK_CHANNEL  inbound alerts (src/inbound.ts): the inbound leads channel's ID (C...),

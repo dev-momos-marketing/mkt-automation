@@ -161,6 +161,23 @@ _Source: google / brand_
 
 Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. The Zap's own Slack step can stay: it keeps posting to its channel (#inbound-form-get-started), and Beacon posts to this one.
 
+## Ask Beacon: answers when tagged in Slack
+
+Tag `@Beacon` with a question and it answers in the thread: "who is Burger Co?", "how many leads came in this week, by source?", "how many demo requests yesterday, and who was turned away?". It posts "⏳ Looking into it…" and edits in the answer, usually within 10 to 20 seconds. Code: `worker/src/ask.ts`.
+
+Claude (Haiku by default; set `BEACON_MODEL` to change it) can only read. Its tools:
+- `find_leads`: Salesforce leads by company, name or email, with status, source, owner and a link
+- `lead_stats`: lead counts for the last N days by source, status, owner, creator or country
+- `demo_requests`: demo form submissions, spam and turned-away leads per day (the `LEADS` store)
+- `web_search`: the open web, up to 3 searches per question
+
+In a thread, Beacon reads the thread first (with the `channels:history` scope) so follow-up questions work.
+
+Setup, in the Slack app (api.slack.com/apps → Beacon):
+1. **Basic Information** → copy the **Signing Secret** into the Worker secret `SLACK_SIGNING_SECRET`.
+2. **OAuth & Permissions** → bot scopes `app_mentions:read` and `channels:history` (plus `groups:history` for private channels). Reinstall the app.
+3. **Event Subscriptions** → on. Request URL: `https://momos-lead-routing.marketing-team-a27.workers.dev/slack/events` (Slack checks it right away; the Worker must already have the secret). Under **Subscribe to bot events**, add `app_mention`. Save.
+
 ## Lead notifier: leads reps add, in one Slack channel
 
 Every 30 minutes the Worker checks Salesforce for leads created 35 to 5 minutes earlier, and Beacon posts the ones reps added by hand to the channel in the `SLACK_CHANNEL` Worker secret (a channel ID).

@@ -9,10 +9,12 @@
 //    turned-away roll-up. See inbound.ts.
 // 5. Every 30 minutes (cron in wrangler.toml): new Salesforce leads that reps added by hand go
 //    to SLACK_CHANNEL through Beacon. See notify.ts.
+// 6. POST /slack/events: answers @Beacon questions in Slack threads. See ask.ts.
 import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type IpLocation } from "./route.ts";
 import { checkFit, FIT_MIN_CONFIDENCE, NOT_FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 import { claudeRoute } from "./claude.ts";
+import { handleSlackEvents } from "./ask.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
 import { dailyReport, queueResearch, reportInbound, retryResearch, type InboundEnv, type InboundLead } from "./inbound.ts";
 
@@ -30,6 +32,8 @@ export interface Env extends NotifyEnv, InboundEnv {
   RESEARCH_MODEL?: string; // "haiku" (default) or "opus"
   AI_GATEWAY_URL?: string; // Cloudflare AI Gateway for Claude calls, see claude.ts. Empty: straight to Anthropic
   AI_GATEWAY_TOKEN?: string; // secret, only for an authenticated gateway
+  SLACK_SIGNING_SECRET?: string; // secret: lets Beacon answer @mentions (ask.ts)
+  BEACON_MODEL?: string; // Claude model for @Beacon answers, default claude-haiku-5-5
   SUBMIT_LIMIT?: { limit(options: { key: string }): Promise<{ success: boolean }> }; // see wrangler.toml
 }
 
@@ -239,6 +243,8 @@ export default {
   },
 
   async fetch(req: Request, env: Env, ctx: Ctx): Promise<Response> {
+    // Slack events (@Beacon questions) have their own path and their own checks.
+    if (new URL(req.url).pathname === "/slack/events" && req.method === "POST") return handleSlackEvents(req, env, ctx, claudeRoute(env));
     const headers = cors(req, env);
     if (req.method === "OPTIONS") return new Response(null, { status: 204, headers });
     if (req.method !== "POST") return new Response("POST only", { status: 405, headers });

@@ -84,7 +84,7 @@ export function leadQuery(scheduled: Date, env: NotifyEnv): string {
   return `SELECT ${[...fields].join(", ")} FROM Lead WHERE CreatedDate >= ${soqlDate(start)} AND CreatedDate < ${soqlDate(end)} AND IsConverted = false ORDER BY CreatedDate`;
 }
 
-async function salesforce(env: NotifyEnv): Promise<{ token: string; instanceUrl: string }> {
+export async function salesforce(env: NotifyEnv): Promise<{ token: string; instanceUrl: string }> {
   const base = env.SF_DOMAIN!.trim().replace(/\/+$/, "").replace(/^https?:\/\//, "").replace(/^/, "https://");
   const res = await fetch(`${base}/services/oauth2/token`, {
     method: "POST",
@@ -122,7 +122,7 @@ async function slackIdFor(env: NotifyEnv, email: string | null | undefined, cach
   }
 }
 
-async function query(sf: { token: string; instanceUrl: string }, soql: string): Promise<SfLead[]> {
+export async function query(sf: { token: string; instanceUrl: string }, soql: string): Promise<SfLead[]> {
   const res = await fetch(`${sf.instanceUrl}/services/data/${API}/query?q=${encodeURIComponent(soql)}`, {
     headers: { authorization: `Bearer ${sf.token}` },
   });
