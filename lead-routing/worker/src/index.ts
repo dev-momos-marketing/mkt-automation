@@ -14,6 +14,7 @@ import { guessRegion, instantRoute, ROUTES, type FormData, type Instant, type Ip
 import { checkFit, FIT_MIN_CONFIDENCE, type Fit, type Timings } from "./fit.ts";
 import { verifyLead, type ResearchModel, type Verification } from "./verify.ts";
 import { claudeRoute } from "./claude.ts";
+import { inRoundRobin, roundRobinAe } from "./roundrobin.ts";
 import { handleSlackEvents } from "./ask.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
 import { dailyReport, queueResearch, reportInbound, retryResearch, type InboundEnv, type InboundLead } from "./inbound.ts";
@@ -280,13 +281,22 @@ export default {
       const region = guessRegion(String(form.country ?? ""), ip, "hq_region" in fit ? fit.hq_region : "unknown");
       instant = { ...instant, region, ae: instant.ae ? ROUTES[region] : null };
     }
+    // 4. Big brands (50+ locations) take turns between Jill and James, whatever the region.
+    let roundRobin = false;
+    if (instant.status === "routed" && inRoundRobin(form.locations)) {
+      const ae = await roundRobinAe(env.LEADS, String(form.email ?? ""));
+      if (ae) {
+        instant = { ...instant, ae };
+        roundRobin = true;
+      }
+    }
     const url = urlFor(instant, env);
     // One line per lead in Cloudflare's Logs tab. No email or name, just enough to audit the gate.
     console.log(JSON.stringify({
       company: form.company, status: instant.status, reason: instant.reason, region: instant.region,
       // Why this region: what the form said and where Cloudflare thinks the visitor is.
       form_country: form.country, timezone: form.timezone, ip_country: cf.country ?? null, ip_region: cf.regionCode ?? null,
-      region_guessed: !instant.regionSure,
+      region_guessed: !instant.regionSure, round_robin: roundRobin,
       ae: instant.ae, icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : null,
       fit_reason: "reason" in fit ? fit.reason : null, fit_error: "error" in fit ? fit.error : null,
       total_ms: Date.now() - started, ...timings,
