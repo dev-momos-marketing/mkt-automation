@@ -141,6 +141,7 @@ export function zapierPayload(form: FormData, instant: Instant, url: string, fit
       redirect_url: url,
       // Claude may place the company somewhere else than the form did. Worth a look in Slack.
       region_mismatch: !!v && v.region !== "unknown" && v.region !== instant.region,
+      round_robin: !!instant.roundRobin,
     },
     fit,
     verification: v ?? { verdict: "unavailable", error: error ?? "" },
@@ -210,6 +211,7 @@ async function afterAnswer(form: FormData, instant: Instant, url: string, fit: F
     reason: instant.reason,
     ae: payload.routing.ae,
     region: instant.region,
+    roundRobin: !!instant.roundRobin,
     fit: { icp_fit: fit.icp_fit, confidence: "confidence" in fit ? fit.confidence : undefined },
     research: v ? { ...v } : { verdict: "unavailable", error: error ?? (instant.status === "spam" ? "skipped for spam" : "") },
     utm: { source: payload.utm.utm_source, campaign: payload.utm.utm_campaign },
@@ -286,7 +288,7 @@ export default {
     if (instant.status === "routed" && inRoundRobin(form.locations)) {
       const ae = await roundRobinAe(env.LEADS, String(form.email ?? ""));
       if (ae) {
-        instant = { ...instant, ae };
+        instant = { ...instant, ae, roundRobin: true };
         roundRobin = true;
       }
     }

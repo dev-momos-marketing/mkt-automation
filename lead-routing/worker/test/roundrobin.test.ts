@@ -78,3 +78,21 @@ test("spam never enters the round robin", async () => {
   assert.equal(await submit(env, { email: "x@mailinator.com", locations: "250+", timezone: "America/New_York" }), "https://notfit.example");
   assert.equal([...(env.LEADS as ReturnType<typeof fakeKv>).store.keys()].filter((k) => k.startsWith("rr:")).length, 0);
 });
+
+test("round robin counts each new lead once, per month and all time", async () => {
+  const { roundRobinAe, roundRobinCounts } = await import("../src/roundrobin.ts");
+  const store = new Map<string, string>();
+  const kv = { get: async (k: string) => store.get(k) ?? null, put: async (k: string, v: string) => void store.set(k, v) };
+  const nov = new Date("2026-11-13T10:00:00Z");
+  const dec = new Date("2026-12-02T10:00:00Z");
+  await roundRobinAe(kv, "a@x.com", nov); // jill
+  await roundRobinAe(kv, "b@x.com", nov); // james
+  await roundRobinAe(kv, "a@x.com", nov); // repeat: jill again, not counted
+  await roundRobinAe(kv, "c@x.com", dec); // jill
+  const n = await roundRobinCounts(kv, "2026-11", dec);
+  assert.deepEqual(n.this_month, { jill: 1, james: 1 });
+  assert.deepEqual(n.all_time, { jill: 2, james: 1 });
+  assert.equal(n.last, "jill");
+  assert.equal(n.next_up, "james");
+  assert.deepEqual((await roundRobinCounts(kv, undefined, dec)).this_month, { jill: 1, james: 0 });
+});
