@@ -30,6 +30,8 @@ The form has no State field. West vs East comes from the visitor's browser time 
 
 To change who gets which region, edit `ROUTES` in `worker/src/route.ts`.
 
+**Round robin for big brands:** a lead that picks **50-249** or **250+** locations goes to Jill and James in turn, whatever the region. The same email within 30 days goes back to the AE it got before. Leads with 1-5 or 6-49 locations keep region routing. The turn is kept in the `LEADS` KV store; if it's missing or fails, the region's AE is used. Each lead's log line shows `round_robin: true` when it applied. Code: `worker/src/roundrobin.ts` (`ROUND_ROBIN_BUCKETS` and `ROUND_ROBIN_AES`).
+
 ## ICP check
 
 Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country and location count, and judges from what it already knows. There is no web search or website lookup here, so it stays fast (about 1 to 1.5 seconds).

@@ -366,3 +366,8 @@ test("the daily check goes to Vincent as a DM, or to the channel when nobody is 
     slack.restore();
   }
 });
+
+test("a round robin lead says so in Slack instead of the region", () => {
+  assert.match(inboundMessage(lead({ roundRobin: true })), /🔄 round robin \(50\+\)/);
+  assert.doesNotMatch(inboundMessage(lead()), /round robin/);
+});

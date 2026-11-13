@@ -10,6 +10,7 @@
 // - lead_stats: lead counts for the last N days, by source, status, owner, creator or country
 //   (optionally for one source only)
 // - demo_requests: demo form submissions, spam and turned-away leads per day (LEADS store)
+// - round_robin: the Jill / James split for 50+ location leads (LEADS store)
 // - web_search: the open web, for questions about a company or a person's role
 //
 // In a thread Beacon has already answered in, replies get an answer without tagging it again
@@ -20,6 +21,7 @@
 // Salesforce answers need the SF_* secrets. Every Slack event writes a "slack" line to the logs.
 import type Anthropic from "@anthropic-ai/sdk";
 import { claudeClient, type ClaudeRoute } from "./claude.ts";
+import { roundRobinCounts } from "./roundrobin.ts";
 import { dayKey, slackPost, slackUpdate, type DayStats, type Kv } from "./inbound.ts";
 import { query, salesforce, type NotifyEnv } from "./notify.ts";
 
@@ -100,10 +102,19 @@ export const TOOLS: Anthropic.Beta.BetaToolUnion[] = [
     description: "Demo form submissions on momos.com per day for the last N days (up to 14): total submissions, spam, and the leads turned away as not a fit, with the reason.",
     input_schema: { type: "object", properties: { days: { type: "integer", minimum: 1, maximum: 14 } }, required: ["days"] },
   },
+  {
+    name: "round_robin",
+    description: "How many 50+ location leads went to Jill and to James in the round robin: for a month (YYYY-MM, default this month) and since the start, plus who got the last one and who's next.",
+    input_schema: { type: "object", properties: { month: { type: "string", description: "YYYY-MM" } } },
+  },
   { type: "web_search_20250305", name: "web_search", max_uses: 3 },
 ];
 
 export async function runTool(name: string, input: Record<string, unknown>, env: AskEnv, now = new Date()): Promise<unknown> {
+  if (name === "round_robin") {
+    if (!env.LEADS) return { error: "The round robin store isn't set up." };
+    return roundRobinCounts(env.LEADS, input.month ? String(input.month) : undefined, now);
+  }
   if (name === "demo_requests") {
     if (!env.LEADS) return { error: "The demo request counts aren't set up." };
     const days = Math.min(14, Math.max(1, Number(input.days) || 7));
@@ -162,7 +173,7 @@ export async function runTool(name: string, input: Record<string, unknown>, env:
 const system = (today: string) => `You are Beacon, the sales assistant for Momos, a customer experience platform for restaurant and F&B brands. People on the Momos sales and marketing team tag you in Slack with questions about leads, demo requests and companies. Today is ${today}.
 
 What Beacon is: one Cloudflare Worker that runs Momos lead routing, and you are its voice in Slack. Besides answering questions, the same Worker does this on its own, so describe it when asked:
-- Book a Demo form on momos.com: checks spam, asks Claude whether the lead fits Momos, and sends the visitor to their AE's calendar (James for West US and APAC, Jill for East US, Europe and the Middle East). Only spam and clear not-fits get a thank-you popup.
+- Book a Demo form on momos.com: checks spam, asks Claude whether the lead fits Momos, and sends the visitor to their AE's calendar (James for West US and APAC, Jill for East US, Europe and the Middle East). Leads with 50-249 or 250+ locations skip the region and go to Jill and James in turn (round robin, same AE again for a repeat email within 30 days). Only spam gets a thank-you popup; every other lead books, even 1-5.
 - After each form submission: researches the company on the web, sends the lead to Zapier (which creates it in Salesforce), and posts it in #top-funnel-deal with the research and the AE.
 - Every 30 minutes: posts new leads that reps added by hand in Salesforce to #top-funnel-deal.
 - Every day at 8 am Vietnam time: a health check and a list of leads that were turned away, sent to Vincent.

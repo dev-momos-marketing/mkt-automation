@@ -42,6 +42,7 @@ export type InboundLead = {
   reason: string;
   ae: string; // James, Jill or ""
   region: string;
+  roundRobin?: boolean; // 50+ locations: Jill and James take turns
   fit: { icp_fit: string; confidence?: number };
   research: {
     verdict: string; // verified | suspicious | spam | unavailable | pending (being retried)
@@ -104,7 +105,7 @@ export function inboundMessage(l: InboundLead, aeSlackId?: string | null): strin
   const site = r.company_website ? ` · <${r.company_website}|website>` : "";
   const found = r.locations_found ? ` · found *${clean(r.locations_found)}*${sizeMismatch(l.locations, r.locations_found) ? " 🔺" : ""}` : "";
   const lines = [
-    `${head} · ${l.region}`,
+    `${head} · ${l.roundRobin ? "🔄 round robin (50+)" : l.region}`,
     `*${name}* · ${clean(l.title) || "no title"}`,
     `*${company}*${site}${r.industry ? ` · ${clean(r.industry)}` : ""}`,
     `${clean(l.email)} · ${clean(l.country) || "no country"}${r.hq_country ? ` · HQ ${clean(r.hq_country)}` : ""}`,

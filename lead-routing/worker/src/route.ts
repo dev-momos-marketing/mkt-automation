@@ -30,6 +30,8 @@ export type Instant = {
   // The Worker then guesses it (guessRegion) once Claude's ICP check is back.
   regionSure: boolean;
   ae: AEKey | null;
+  // True when Jill and James took turns on this lead (50+ locations, roundrobin.ts).
+  roundRobin?: boolean;
 };
 
 // Region -> AE
