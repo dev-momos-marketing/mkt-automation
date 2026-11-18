@@ -180,7 +180,8 @@ Setup, in the Slack app (api.slack.com/apps → Beacon):
 1. **Basic Information** → copy the **Signing Secret** into the Worker secret `SLACK_SIGNING_SECRET`.
 2. **OAuth & Permissions** → bot scopes `app_mentions:read` and `channels:history` (plus `groups:history` for private channels). Reinstall the app.
 3. **Event Subscriptions** → on. Request URL: `https://momos-lead-routing.marketing-team-a27.workers.dev/slack/events` (Slack checks it right away; the Worker must already have the secret). Under **Subscribe to bot events**, add `app_mention`. Save.
-4. To ask Beacon in its own DM too: add the bot scope `im:history` and the bot event `message.im`, and turn on **App Home → Messages Tab → Allow users to send messages**. Reinstall.
+4. To let Beacon tag people ("@Beacon tag James on this"): add the bot scope `users:read`. Reinstall. Beacon finds the person and tags them in a new reply, since Slack doesn't notify people tagged in an edited message.
+5. To ask Beacon in its own DM too: add the bot scope `im:history` and the bot event `message.im`, and turn on **App Home → Messages Tab → Allow users to send messages**. Reinstall.
 
 Beacon only hears mentions in channels it's a member of. In a private channel, invite it first. Every Slack event writes a `"slack"` line to the Worker's logs, and a failed post writes `"slack post failed"` with Slack's reason.
 

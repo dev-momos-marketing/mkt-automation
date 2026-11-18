@@ -253,3 +253,26 @@ test("thread replies are left alone when Beacon isn't in the thread, or when the
     f.restore();
   }
 });
+
+test("Beacon tags people, never the whole channel", async () => {
+  const { cleanAnswer, tagsSomeone } = await import("../src/ask.ts");
+  assert.equal(tagsSomeone("Looping in <@U012ABC> for this one."), true);
+  assert.equal(tagsSomeone("No tag here."), false);
+  assert.equal(cleanAnswer("Hey <!channel> and <!here|here>, see @everyone"), "Hey  and , see everyone");
+});
+
+test("find_slack_member matches by name and skips bots and old accounts", async () => {
+  const { findSlackMembers } = await import("../src/inbound.ts");
+  const real = globalThis.fetch;
+  globalThis.fetch = (async () => Response.json({ ok: true, members: [
+    { id: "U1", real_name: "James Example", profile: { real_name: "James Example", email: "james@example.com", title: "AE" } },
+    { id: "U2", real_name: "James Gone", deleted: true },
+    { id: "B1", real_name: "James Bot", is_bot: true },
+    { id: "U3", real_name: "Jill Example", profile: { real_name: "Jill Example" } },
+  ] })) as typeof fetch;
+  try {
+    assert.deepEqual(await findSlackMembers("xoxb", "james"), [{ id: "U1", name: "James Example", title: "AE" }]);
+  } finally {
+    globalThis.fetch = real;
+  }
+});
