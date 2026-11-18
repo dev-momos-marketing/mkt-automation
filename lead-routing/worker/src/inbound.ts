@@ -89,43 +89,61 @@ export function sizeMismatch(bucket: string, found = ""): boolean {
 }
 
 const ordinal = (n: number) => `${n}${n % 100 >= 11 && n % 100 <= 13 ? "th" : ["th", "st", "nd", "rd"][n % 10] ?? "th"}`;
-const VERDICT_ICON: Record<string, string> = { verified: "✅", suspicious: "⚠️", spam: "⛔", unavailable: "❔" };
 const clean = (s = "") => s.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;", "&": "&amp;" })[c]!).trim();
 
 const aeLabel = (l: InboundLead, aeSlackId?: string | null) => (aeSlackId ? `<@${aeSlackId}>` : l.ae || "no AE");
 
+const REGION_NAME: Record<string, string> = { us_west: "West US", us_east: "East US", emea: "Europe and Middle East", apac: "APAC", unknown: "region unknown" };
+const FIT_NAME: Record<string, string> = { fit: "Good fit", maybe: "Unsure", not_fit: "Not a fit", unavailable: "Check failed" };
+const VERDICT_NAME: Record<string, string> = { verified: "✅ Verified", suspicious: "⚠️ Suspicious", spam: "⛔ Looks like spam" };
+const sentence = (s: string) => {
+  const t = clean(s).replace(/\s+/g, " ");
+  return t ? t[0].toUpperCase() + t.slice(1) + (/[.!?]$/.test(t) ? "" : ".") : "";
+};
+
+// The booking check in words: "Not a fit (0.6). Single-location cafe."
+function fitLine(l: InboundLead): string {
+  const m = /^claude (\w+) ([\d.]+): (.*)$/.exec(l.reason);
+  if (m) return `${FIT_NAME[m[1]] ?? m[1]} (${m[2]}). ${sentence(m[3])}`;
+  if (l.reason === "ok") return `${FIT_NAME[l.fit.icp_fit] ?? l.fit.icp_fit}${l.fit.confidence != null ? ` (${l.fit.confidence})` : ""}.`;
+  return sentence(l.reason);
+}
+
 export function inboundMessage(l: InboundLead, aeSlackId?: string | null): string {
   const r = l.research;
   const sure = l.reason === "ok";
-  const ae = aeLabel(l, aeSlackId);
   const flagged = /^claude not_fit/.test(l.reason);
-  const head = sure ? `🟢 *New demo request → ${ae}*` : flagged ? `🟠 *New demo request → ${ae}* (Claude thinks it's not a fit, booked anyway)` : `🟡 *New demo request → ${ae}* (unsure, booked anyway)`;
+  const icon = sure ? "🟢" : flagged ? "🟠" : "🟡";
+  const where = l.roundRobin ? "🔄 Round robin (50+)" : REGION_NAME[l.region] ?? l.region;
   const name = clean(`${l.firstName} ${l.lastName}`) || "No name";
   const company = clean(r.company_name || l.company) || "Unknown company";
   const site = r.company_website ? ` · <${r.company_website}|website>` : "";
-  const found = r.locations_found ? ` · found *${clean(r.locations_found)}*${sizeMismatch(l.locations, r.locations_found) ? " 🔺" : ""}` : "";
-  const lines = [
-    `${head} · ${l.roundRobin ? "🔄 round robin (50+)" : l.region}`,
-    `*${name}* · ${clean(l.title) || "no title"}`,
+  const found = r.locations_found ? `, found *${clean(r.locations_found)}*` : "";
+  const lines = [`${icon} *New demo request for ${aeLabel(l, aeSlackId)}* · ${where}`];
+  if (!sure) lines.push(flagged ? "_Claude doesn't think this is a fit. The demo was booked anyway._" : "_Claude isn't sure this is a fit. The demo was booked anyway._");
+  lines.push(
+    "",
+    `*${name}*${l.title ? `, ${clean(l.title)}` : ""}`,
     `*${company}*${site}${r.industry ? ` · ${clean(r.industry)}` : ""}`,
-    `${clean(l.email)} · ${clean(l.country) || "no country"}${r.hq_country ? ` · HQ ${clean(r.hq_country)}` : ""}`,
-    `Locations: said *${clean(l.locations) || "?"}*${found}`,
-    `Booking check: ${sure ? `${l.fit.icp_fit}${l.fit.confidence != null ? ` ${l.fit.confidence}` : ""}` : clean(l.reason)}`,
-    r.verdict === "pending"
-      ? `Research: ⏳ Claude didn't answer, retrying in the background. This post updates when it's done.`
-      : r.verdict === "unavailable"
-      ? `Research: ❔ unavailable${r.error ? ` (${clean(r.error).slice(0, 80)})` : ""}`
-      : `Research: ${VERDICT_ICON[r.verdict] ?? ""} ${r.verdict}${r.confidence != null ? ` (${r.confidence})` : ""} · ICP ${r.icp_fit ?? "?"} · works there: ${r.person_matches_company ? "yes" : "no"}`,
-  ];
-  if (r.red_flags?.length) lines.push(`Red flags: ${clean(r.red_flags.join("; "))}`);
-  if (r.summary) lines.push(clean(r.summary));
+    `${clean(l.email)} · ${clean(l.country) || "No country"}${r.hq_country ? ` · HQ ${clean(r.hq_country)}` : ""}`,
+    "",
+    `*Locations:* said *${clean(l.locations) || "?"}*${found}${r.locations_found && sizeMismatch(l.locations, r.locations_found) ? " 🔺 far more than the form says" : ""}`,
+    `*Fit check:* ${fitLine(l)}`,
+  );
+  if (r.verdict === "pending") lines.push("*Research:* ⏳ Claude didn't answer. Retrying in the background, and this post updates when it's done.");
+  else if (r.verdict === "unavailable") lines.push(`*Research:* ❔ Unavailable${r.error ? ` (${clean(r.error).slice(0, 80)})` : ""}`);
+  else {
+    lines.push(`*Research:* ${VERDICT_NAME[r.verdict] ?? clean(r.verdict)}${r.confidence != null ? ` (${r.confidence})` : ""} · Works there: ${r.person_matches_company ? "yes" : "no"}`);
+    for (const f of (r.red_flags ?? []).slice(0, 3)) lines.push(`• ${sentence(f)}`);
+    if (r.summary) lines.push(sentence(r.summary));
+  }
   if (l.utm.source || l.utm.campaign) lines.push(`_Source: ${clean(l.utm.source) || "-"} / ${clean(l.utm.campaign) || "-"}_`);
   if (!l.salesforce.ok) lines.push(`⚠️ *Not in Salesforce:* ${clean(l.salesforce.error ?? "Zapier failed")}. Add it by hand.`);
   return lines.join("\n");
 }
 
 export function repeatMessage(l: InboundLead, count: number, aeSlackId?: string | null): string {
-  return `↩️ ${clean(`${l.firstName} ${l.lastName}`) || "Someone"} (${clean(l.company) || "unknown company"}) submitted the demo form again: ${ordinal(count)} time this week. → ${aeLabel(l, aeSlackId)}`;
+  return `↩️ ${clean(`${l.firstName} ${l.lastName}`) || "Someone"} (${clean(l.company) || "unknown company"}) submitted the demo form again, the ${ordinal(count)} time this week. AE: ${aeLabel(l, aeSlackId)}`;
 }
 
 type SlackResult = { ok: boolean; error?: string; ts?: string; channel?: string };
@@ -150,6 +168,11 @@ export const slackPost = (token: string, channel: string, text: string) =>
 export const slackUpdate = (token: string, channel: string, ts: string, text: string) =>
   slackCall(token, "chat.update", { channel, ts, text });
 
+export const slackReply = (token: string, channel: string, threadTs: string | undefined, text: string) =>
+  slackCall(token, "chat.postMessage", { channel: channel.trim(), thread_ts: threadTs, text, unfurl_links: false, unfurl_media: false });
+
+export const slackDelete = (token: string, channel: string, ts: string) => slackCall(token, "chat.delete", { channel, ts });
+
 // The AE's Slack ID from AE_SLACK ("James=U0123,Jill=jill@momos.com"). An email is looked up
 // (needs users:read.email). Null when not set up or not found: the post shows the name.
 export async function aeSlackId(env: InboundEnv, ae: string): Promise<string | null> {
@@ -169,6 +192,30 @@ export async function slackUserId(env: InboundEnv, value: string): Promise<strin
   } catch {
     return null;
   }
+}
+
+// Slack members whose name or email contains the text, for tagging. Needs the users:read scope
+// (users:read.email to match emails). At most 5, people only.
+export async function findSlackMembers(token: string, text: string): Promise<{ id: string; name: string; title?: string }[] | { error: string }> {
+  const q = text.trim().toLowerCase().replace(/^@/, "");
+  if (!q) return { error: "Give a name or email." };
+  const out: { id: string; name: string; title?: string }[] = [];
+  let cursor = "";
+  for (let page = 0; page < 5 && out.length < 5; page++) {
+    const res = await fetch(`https://slack.com/api/users.list?limit=200${cursor ? `&cursor=${encodeURIComponent(cursor)}` : ""}`, { headers: { authorization: `Bearer ${token.trim()}` } });
+    type Member = { id: string; deleted?: boolean; is_bot?: boolean; name?: string; real_name?: string; profile?: { display_name?: string; real_name?: string; email?: string; title?: string } };
+    const json = (await res.json()) as { ok: boolean; error?: string; members?: Member[]; response_metadata?: { next_cursor?: string } };
+    if (!json.ok) return { error: json.error === "missing_scope" ? "Beacon needs the users:read scope in Slack to find people." : `Slack: ${json.error}` };
+    for (const m of json.members ?? []) {
+      if (m.deleted || m.is_bot || m.id === "USLACKBOT") continue;
+      const hay = [m.name, m.real_name, m.profile?.display_name, m.profile?.real_name, m.profile?.email].filter(Boolean).join(" ").toLowerCase();
+      if (hay.includes(q)) out.push({ id: m.id, name: m.profile?.real_name || m.real_name || m.name || m.id, title: m.profile?.title || undefined });
+      if (out.length >= 5) break;
+    }
+    cursor = json.response_metadata?.next_cursor ?? "";
+    if (!cursor) break;
+  }
+  return out;
 }
 
 export const dayKey = (d: Date) => `day:${d.toISOString().slice(0, 10)}`;

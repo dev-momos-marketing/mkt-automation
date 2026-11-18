@@ -95,5 +95,6 @@ simple = { limit = 5, period = 60 }
 #                       Stops "403 Request not allowed". Not set: straight to api.anthropic.com.
 #   AI_GATEWAY_TOKEN    with AI_GATEWAY_URL: a Cloudflare API token with AI Gateway permission
 #                       (sent as cf-aig-authorization). The default gateway needs it.
-#   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write, and
-#                       users:read.email to mention the lead owner. Invite Beacon to the channel.
+#   SLACK_BOT_TOKEN     lead notifier: Beacon's bot token (xoxb-...). Scopes: chat:write,
+#                       users:read (to find and tag people) and users:read.email (to tag the
+#                       lead owner). Invite Beacon to the channel.
