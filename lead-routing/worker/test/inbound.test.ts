@@ -56,24 +56,33 @@ test("location counts the research found", () => {
   assert.equal(sizeMismatch("1-5", "Unknown"), false);
 });
 
-test("the Slack post shows unsure bookings, size mismatches and Salesforce failures", () => {
-  const text = inboundMessage(lead());
-  assert.match(text, /^🟡 \*New demo request for Jill\* · East US\n_Claude isn't sure this is a fit\. The demo was booked anyway\._/);
-  assert.match(text, /\*Locations:\* said \*1-5\*, found \*About 70-98 brand-wide\* 🔺 far more than the form says/);
-  assert.match(text, /\*Fit check:\* Unsure \(0\.6\)\. Size unclear\./);
-  assert.match(text, /\*Research:\* ⚠️ Suspicious \(0\.7\) · Works there: yes/);
-  assert.doesNotMatch(text, /Not in Salesforce/);
-  assert.match(inboundMessage(lead({ reason: "claude not_fit 0.9: agency" })), /^🟠 \*New demo request for Jill\* · East US\n_Claude doesn't think this is a fit\. The demo was booked anyway\._/);
-  const sure = inboundMessage(lead({ reason: "ok", fit: { icp_fit: "fit", confidence: 0.9 }, locations: "6-49", research: { verdict: "verified", locations_found: "18" } }));
-  assert.match(sure, /^🟢 \*New demo request for Jill\* · East US\n\n/);
-  assert.match(sure, /\*Fit check:\* Good fit \(0\.9\)\./);
-  assert.doesNotMatch(sure, /🔺/);
-  const failed = inboundMessage(lead({ salesforce: { ok: false, error: "Zapier returned 500" }, research: { verdict: "unavailable", error: "403 Request not allowed" } }));
-  assert.match(failed, /⚠️ \*Not in Salesforce:\* Zapier returned 500/);
-  assert.match(failed, /\*Research:\* ❔ Unavailable \(403 Request not allowed\)/);
+test("the Slack post is one fact per line and ends with the follow-up", () => {
+  const text = inboundMessage(lead({ country: "MY", research: { ...lead().research, company_name: "Taco Place Malaysia (Taco Holdings Sdn Bhd)", company_website: "https://www.tacoplace.com/" } }));
+  assert.equal(
+    text,
+    [
+      "*Taco Place Malaysia*",
+      "👤 Sam Rivera, Owner",
+      "✉️ sam@tacoplace.com",
+      "🌏 Malaysia",
+      "🏬 About 70-98 brand-wide (form said 1-5)",
+      "🔗 <https://www.tacoplace.com/|tacoplace.com>",
+      "👉 Jill follow up. Bigger account than the form says.",
+    ].join("\n"),
+  );
+  assert.doesNotMatch(text, /Claude|Fit check|Research|0\.\d|🟡|Not in Salesforce/);
+  const sure = inboundMessage(lead({ reason: "ok", locations: "6-49", research: { verdict: "verified", locations_found: "18", person_matches_company: true } }));
+  assert.match(sure, /^\*Taco Place\*\n/);
+  assert.match(sure, /\n🏬 18 locations\n/);
+  assert.match(sure, /👉 Jill follow up\. Demo is booked\.$/);
+  assert.match(inboundMessage(lead({ reason: "claude not_fit 0.9: agency", research: { verdict: "verified", person_matches_company: true } })), /Check they're a restaurant before the call\.$/);
+  assert.match(inboundMessage(lead({ research: { verdict: "verified", person_matches_company: false } })), /Confirm their role early in the call\.$/);
+  const failed = inboundMessage(lead({ title: "", country: "", salesforce: { ok: false, error: "Zapier returned 500" }, research: { verdict: "unavailable", error: "403 Request not allowed" } }));
+  assert.match(failed, /^\*Taco Place\*\n👤 Sam Rivera\n✉️ sam@tacoplace\.com\n🏬 1-5 locations\n/, "empty lines are left out");
+  assert.match(failed, /Check the company before the call\.\n⚠️ Not in Salesforce yet\. Add it by hand\.$/);
   // Form text can't inject Slack links or mentions.
   assert.match(inboundMessage(lead({ company: "<!channel>", research: { verdict: "verified" } })), /&lt;!channel&gt;/);
-});
+})
 
 test("a repeat submission within 7 days posts one short line", async () => {
   const LEADS = fakeKv();
@@ -184,8 +193,9 @@ test("a demo request posts to Slack even when Zapier fails", async () => {
     await Promise.all(waits);
     assert.equal(fitTries, 2);
     assert.equal(posts.length, 1);
-    assert.match(posts[0], /^🟢 \*New demo request for James\*/);
-    assert.match(posts[0], /⚠️ \*Not in Salesforce:\* Zapier returned 500/);
+    assert.match(posts[0], /^\*Burger Co\*\n/);
+    assert.match(posts[0], /👉 James follow up\. Demo is booked\./);
+    assert.match(posts[0], /⚠️ Not in Salesforce yet\. Add it by hand\.$/);
     assert.equal(JSON.parse(LEADS.store.values().next().value!).zapier_errors, 1);
   } finally {
     globalThis.fetch = real;
@@ -230,11 +240,11 @@ test("the AE is tagged from AE_SLACK, by Slack ID or email", async () => {
     assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x", AE_SLACK: "James=U0JAMES, Jill=jill@momos.com" }, "jill"), "UJILL");
     assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x", AE_SLACK: "James=nobody@momos.com" }, "James"), null);
     assert.equal(await aeSlackId({ SLACK_BOT_TOKEN: "x" }, "James"), null);
-    assert.match(inboundMessage(lead(), "UJILL"), /^🟡 \*New demo request for <@UJILL>\*/);
+    assert.match(inboundMessage(lead(), "UJILL"), /\n👉 <@UJILL> follow up\./);
     const LEADS = fullKv();
     await reportInbound(lead(), { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS });
     await reportInbound(lead(), { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS });
-    assert.match(slack.calls[0].body.text, /for <@UJILL>/);
+    assert.match(slack.calls[0].body.text, /👉 <@UJILL> follow up/);
     assert.match(slack.calls[1].body.text, /^↩️ .* AE: <@UJILL>$/);
   } finally {
     slack.restore();
@@ -249,7 +259,7 @@ test("failed research posts at once as pending, then the cron fills it in", asyn
   const pending = lead({ research: { verdict: "pending", error: "403 Request not allowed" } });
   try {
     const posted = await reportInbound(pending, env, new Date(t0));
-    assert.match(slack.calls[0].body.text, /\*Research:\* ⏳ Claude didn't answer\. Retrying/);
+    assert.match(slack.calls[0].body.text, /Research is still running\. This post updates when it's done\./);
     await queueResearch(env, { lead: pending, form: {}, instant: {}, channel: posted.channel!, ts: posted.ts! }, t0);
     let tries = 0;
     const flaky = async () => {
@@ -266,9 +276,9 @@ test("failed research posts at once as pending, then the cron fills it in", asyn
     const update = slack.calls.find((c) => c.method === "chat.update")!;
     assert.equal(update.body.channel, "C0INBOUND1");
     assert.equal(update.body.ts, "1700000000.000100");
-    assert.match(update.body.text, /\*Research:\* ✅ Verified \(0\.9\)/);
-    assert.match(update.body.text, /found \*72\* 🔺/);
-    assert.match(update.body.text, /Research added after 3 tries \(5 min\)/);
+    assert.match(update.body.text, /🏬 72 locations \(form said 1-5\)/);
+    assert.match(update.body.text, /Bigger account than the form says\.$/);
+    assert.doesNotMatch(update.body.text, /still running/);
     assert.equal([...LEADS.store.keys()].filter((k) => k.startsWith("retry:")).length, 0);
   } finally {
     slack.restore();
@@ -287,7 +297,7 @@ test("research that never works gives up after about 2 hours and says so", async
     for (let m = 0; m <= 130; m += 5) gaveUp += (await retryResearch(env, broken, t0 + m * 60_000)).gave_up;
     assert.equal(gaveUp, 1);
     const last = slack.calls.filter((c) => c.method === "chat.update").at(-1)!;
-    assert.match(last.body.text, /\*Research:\* ❔ Unavailable \(gave up after 10 tries\)/);
+    assert.match(last.body.text, /Check the company before the call\.$/);
     assert.equal(LEADS.store.size, 0);
   } finally {
     slack.restore();
@@ -336,7 +346,7 @@ test("a form submission whose research fails is posted as pending and queued for
     );
     await Promise.all(waits);
     assert.equal(posts.length, 1);
-    assert.match(posts[0].text, /\*Research:\* ⏳/);
+    assert.match(posts[0].text, /Research is still running/);
     const queued = [...LEADS.store.entries()].filter(([k]) => k.startsWith("retry:"));
     assert.equal(queued.length, 1);
     const item = JSON.parse(queued[0][1]);
@@ -367,13 +377,17 @@ test("the daily check goes to Vincent as a DM, or to the channel when nobody is 
   }
 });
 
-test("a round robin lead says so in Slack instead of the region", () => {
-  assert.match(inboundMessage(lead({ roundRobin: true })), /· 🔄 Round robin \(50\+\)\n/);
-  assert.doesNotMatch(inboundMessage(lead()), /Round robin/);
-});
-
-test("the Slack post keeps research short: 3 red flags at most, full sentences", () => {
-  const text = inboundMessage(lead({ research: { verdict: "suspicious", confidence: 0.6, person_matches_company: false, red_flags: ["email domain does not match", "no F&B presence", "claimed size not verified", "a fourth flag"], summary: "real cafe, one location" } }));
-  assert.match(text, /\n• Email domain does not match\.\n• No F&amp;B presence\.\n• Claimed size not verified\.\nReal cafe, one location\./);
-  assert.doesNotMatch(text, /fourth flag/);
+test("a lead the research calls spam isn't posted, but shows in the daily roll-up", async () => {
+  const LEADS = fakeKv();
+  const slack = fakeSlack();
+  const now = new Date("2026-11-10T12:00:00Z");
+  try {
+    const out = await reportInbound(lead({ company: "Business Tips Center", research: { verdict: "spam", person_matches_company: false } }), { SLACK_BOT_TOKEN: "xoxb", INBOUND_SLACK_CHANNEL: "C1", LEADS }, now);
+    assert.equal(out.posted, "none");
+    assert.equal(slack.posts.length, 0);
+    const day = JSON.parse(LEADS.store.get("day:2026-11-10")!);
+    assert.deepEqual(day.not_fit, [{ company: "Business Tips Center", reason: "research says spam, but the demo is booked" }]);
+  } finally {
+    slack.restore();
+  }
 });

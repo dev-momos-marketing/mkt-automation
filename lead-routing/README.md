@@ -142,23 +142,22 @@ No `AI_GATEWAY_URL`: calls go straight to `api.anthropic.com`, as before. Code: 
 After the research, Beacon posts each demo request to the channel in the `INBOUND_SLACK_CHANNEL` Worker secret itself, so no lead depends on Zapier's filter to be seen. Zapier only creates the Salesforce lead. Code: `worker/src/inbound.ts`.
 
 ```
-🟡 *New demo request → @Jill* (unsure, booked anyway) · us_east
-*Sam Rivera* · Owner
-*Taco Place* · website · Fast casual
-sam@tacoplace.com · US · HQ US
-Locations: said *1-5* · found *About 70* 🔺
-Booking check: claude maybe 0.6: size unclear
-Research: ⚠️ suspicious (0.7) · ICP maybe · works there: yes
-Franchise owner of Taco Place units.
-_Source: google / brand_
+*Taco Place*
+👤 Sam Rivera, Owner
+✉️ sam@tacoplace.com
+🌏 United States
+🏬 About 70 brand-wide (form said 1-5)
+🔗 tacoplace.com
+👉 @Jill follow up. Bigger account than the form says.
 ```
 
-- 🟢 Claude was sure; 🟡 it wasn't, and the lead booked anyway. Spam and confident not-fits aren't posted.
-- 🔺 the web found at least twice the form's answer (and 10 or more), e.g. "said 1-5, found 70".
-- ⚠️ *Not in Salesforce*: Zapier failed. Add the lead by hand.
+- One fact per line, always in this order. A line with nothing to show is left out. Scores, verdicts and the research summary stay in Salesforce.
+- The last line tags the AE and gives one plain next step: "Demo is booked.", "Bigger account than the form says." (the web found at least twice the form's answer, and 10 or more), "Confirm their role early in the call.", "Check they're a restaurant before the call." or "Check the company before the call." (research failed).
+- Spam and confident not-fits aren't posted. Neither is a booked lead the research calls spam: it goes in the daily 🚫 roll-up instead.
+- ⚠️ Not in Salesforce yet: Zapier failed. Add the lead by hand.
 - ↩️ the same email submitted again within 7 days: one short line in place of a new post.
 - The AE is tagged when `AE_SLACK` is set in `worker/wrangler.toml` (`James=<Slack member ID or email>,Jill=...`). Empty: the name is shown.
-- The fit check retries once inside its 3 seconds. If the research still fails, the post goes out at once with "⏳ research pending". A 5-minute cron retries it for about 2 hours (2, 5, 10, 20, 30, 45, 60, 90 and 120 minutes after the first try) and updates the same post when it works, or says it gave up.
+- The fit check retries once inside its 3 seconds. If the research still fails, the post goes out at once saying the research is still running. A 5-minute cron retries it for about 2 hours (2, 5, 10, 20, 30, 45, 60, 90 and 120 minutes after the first try) and updates the same post when it works, or says it gave up.
 - Every day at 01:00 UTC, Beacon sends a 🚨 check as a DM to each person in `DAILY_REPORT_TO` (`worker/wrangler.toml`, Slack member IDs or emails; empty sends it to the inbound channel) if the day before had no submissions, any Zapier error, or 2 or more Claude failures, and a 🚫 line listing the leads that were turned away. Nothing is posted on a good day with no turn-aways.
 
 Setup: add the Worker secret `INBOUND_SLACK_CHANNEL` (the channel's ID, `C...`; in Slack: channel name → About → Channel ID) and invite Beacon to that channel (`/invite @Beacon`). The `LEADS` KV store (repeats and daily counts) is created by Cloudflare on the first deploy. The Zap's own Slack step can stay: it keeps posting to its channel (#inbound-form-get-started), and Beacon posts to this one.
