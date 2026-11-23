@@ -126,6 +126,7 @@ function sizeLine(l: InboundLead): string {
 function nextStep(l: InboundLead): string {
   const r = l.research;
   if (r.locations_found && sizeMismatch(l.locations, r.locations_found)) return "Bigger account than the form says.";
+  if (l.status === "follow_up") return "No demo booked (personal email, under 6 locations). Email them.";
   if (r.verdict === "pending") return "Research is still running. This post updates when it's done.";
   if (r.verdict === "unavailable") return "Check the company before the call.";
   if (/^claude not_fit/.test(l.reason)) return "Check they're a restaurant before the call.";

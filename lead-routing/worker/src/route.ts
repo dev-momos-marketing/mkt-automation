@@ -43,6 +43,18 @@ export const ROUTES: Record<Region, AEKey> = {
   unknown: "jill",
 };
 
+// Free personal email providers. Shared with the fit check (fit.ts).
+export const FREE_EMAIL = new Set([
+  "gmail.com", "googlemail.com", "yahoo.com", "ymail.com", "outlook.com", "hotmail.com", "live.com", "msn.com",
+  "icloud.com", "me.com", "mac.com", "aol.com", "proton.me", "protonmail.com", "gmx.com", "gmx.net", "zoho.com",
+  "yandex.com", "mail.com", "qq.com", "163.com", "naver.com",
+]);
+export const isPersonalEmail = (email = "") => FREE_EMAIL.has(email.trim().toLowerCase().split("@")[1] ?? "");
+
+// A personal email (Gmail etc.) books a demo only with 6+ locations. Smaller ones, or no answer,
+// get the thank-you popup and the region's AE follows up by email.
+export const PERSONAL_EMAIL_BOOKS: string[] = ["6-49", "50-249", "250+"];
+
 // Location answers that never book a demo straight away: the thank-you popup, and the region's
 // AE follows up later, without asking Claude. Empty: every location count can book (1-5 included).
 export const FOLLOW_UP_BUCKETS: string[] = [];
@@ -141,13 +153,17 @@ export function guessRegion(country = "", ip: IpLocation = {}, companyRegion: Re
   return companyRegion !== "unknown" ? companyRegion : "us_east";
 }
 
-// The checks that need no AI, in priority order: spam first, then FOLLOW_UP_BUCKETS (empty now). Claude's ICP check (index.ts) runs next, and the region decides the AE last.
+// The checks that need no AI, in priority order: spam first, then a personal email under 6 locations,
+// then FOLLOW_UP_BUCKETS (empty now). Claude's ICP check (index.ts) runs next, and the region decides the AE last.
 export function instantRoute(d: FormData, ip: IpLocation = {}): Instant {
   const spam = spamReason(d);
   if (spam) return { status: "spam", reason: spam, region: "unknown", regionSure: false, ae: null };
 
   // The region is only used to name the AE: the one who gets the booking or does the follow-up.
   const { region, sure: regionSure } = locate(String(d.country ?? ""), String(d.timezone ?? ""), ip);
+  if (isPersonalEmail(String(d.email ?? "")) && !PERSONAL_EMAIL_BOOKS.includes(String(d.locations ?? ""))) {
+    return { status: "follow_up", reason: `personal email, ${d.locations || "no"} locations`, region, regionSure, ae: ROUTES[region] };
+  }
   if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, regionSure, ae: ROUTES[region] };
   return { status: "routed", reason: "ok", region, regionSure, ae: ROUTES[region] };
 }

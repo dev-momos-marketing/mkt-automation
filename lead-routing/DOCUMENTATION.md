@@ -144,6 +144,7 @@ The form has no State field on purpose, to keep it short. The time zone does tha
 | not_fit, any confidence | Their AE's calendar | `routed` | Slack post marked 🟠 "Claude thinks it's not a fit" |
 | maybe, low-confidence fit or not_fit, or no answer within 3 s | Their AE's calendar | `routed` | `routing.reason` says why |
 | 1–5 locations | Same as any other lead: Claude decides | | |
+| Personal email (Gmail etc.) with 1–5 locations or none | Thank-you popup, no Claude call | `follow_up` | The region's AE emails them. Slack says "No demo booked" |
 
 `FOLLOW_UP_BUCKETS` in `worker/src/route.ts` is empty. Put `"1-5"` back in it to send small brands to the popup again.
 

@@ -235,6 +235,23 @@ test("personal email is flagged to Claude", async () => {
   assert.ok((fitCalls[0].messages[0].content as string).includes('"personal_email": true'));
 });
 
+test("a personal email books only with 6+ locations; smaller ones get the popup and a follow-up", async () => {
+  for (const locations of ["6-49", "50-249", "250+"]) assert.equal(instantRoute({ ...form, email: "ana@gmail.com", locations }).status, "routed", locations);
+  for (const locations of ["1-5", ""]) {
+    const r = instantRoute({ ...form, email: "Ana@GMAIL.com ", locations });
+    assert.equal(r.status, "follow_up", locations || "blank");
+    assert.equal(r.ae, "james", "the region's AE still follows up");
+  }
+  assert.equal(instantRoute({ ...form, email: "ana@outlook.com", locations: "1-5" }).status, "follow_up");
+  assert.equal(instantRoute({ ...form, email: "ana@burgerco.com", locations: "1-5" }).status, "routed", "a company email under 6 still books");
+  const { json, sent, fitCalls } = await run({ ...form, email: "ana@gmail.com", locations: "1-5" }, claudeOk);
+  assert.equal(json.url, env.NOT_FIT_URL, "thank-you popup");
+  assert.equal(fitCalls.length, 0, "no fit check needed");
+  assert.equal(sent[0].routing.status, "follow_up");
+  assert.equal(sent[0].routing.reason, "personal email, 1-5 locations");
+  assert.equal(sent[0].routing.ae, "James");
+});
+
 test("even a confident not_fit books the AE's calendar; only spam gets the popup", async () => {
   const notFit = { icp_fit: "not_fit", confidence: 0.95, reason: "Marketing agency, not F&B.", hq_region: "us_east" };
   const { json, sent } = await run(form, claudeOk, { fit: () => claudeJson("claude-haiku-5-5", notFit) });
