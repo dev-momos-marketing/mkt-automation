@@ -7,7 +7,7 @@
 //
 // Counters: each new assignment adds one to rr:count:<YYYY-MM>:<ae> and rr:count:all:<ae>.
 // A repeat email doesn't count again. Ask Beacon "round robin split" to see them.
-import type { AEKey } from "./route.ts";
+import { locationBucket, type AEKey } from "./route.ts";
 import type { Kv } from "./inbound.ts";
 
 export const ROUND_ROBIN_BUCKETS = ["50-249", "250+"];
@@ -22,7 +22,7 @@ async function bump(kv: Kv, key: string) {
   await kv.put(key, String(n + 1));
 }
 
-export const inRoundRobin = (locations: unknown) => ROUND_ROBIN_BUCKETS.includes(String(locations ?? ""));
+export const inRoundRobin = (locations: unknown) => ROUND_ROBIN_BUCKETS.includes(locationBucket(locations));
 
 // The AE for this lead, or null to keep the region's AE.
 export async function roundRobinAe(kv: Kv | undefined, email: string, now = new Date()): Promise<AEKey | null> {

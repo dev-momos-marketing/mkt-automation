@@ -125,8 +125,13 @@ function sizeLine(l: InboundLead): string {
 // One plain next step for the AE. Rules, not AI wording, so the line is always short and the same.
 function nextStep(l: InboundLead): string {
   const r = l.research;
+  if (l.status === "follow_up") {
+    const big = r.locations_found && (firstNumber(r.locations_found) ?? 0) >= 6;
+    return big
+      ? `No demo booked (personal email, under 6 locations), but the brand has ${clean(r.locations_found)}. Email them today.`
+      : "No demo booked (personal email, under 6 locations). Email them.";
+  }
   if (r.locations_found && sizeMismatch(l.locations, r.locations_found)) return "Bigger account than the form says.";
-  if (l.status === "follow_up") return "No demo booked (personal email, under 6 locations). Email them.";
   if (r.verdict === "pending") return "Research is still running. This post updates when it's done.";
   if (r.verdict === "unavailable") return "Check the company before the call.";
   if (/^claude not_fit/.test(l.reason)) return "Check they're a restaurant before the call.";
@@ -260,7 +265,7 @@ export async function reportInbound(l: InboundLead, env: InboundEnv, now = new D
       if (!l.salesforce.ok) day.zapier_errors++;
       if (l.fit.icp_fit === "unavailable") day.claude_failures++;
       if ((l.research.verdict === "unavailable" || l.research.verdict === "pending") && l.status !== "spam") day.claude_failures++;
-      if (l.status === "not_fit" || (l.status !== "spam" && l.research.verdict === "spam")) day.not_fit = [...day.not_fit, { company: l.company || "?", reason: l.status === "not_fit" ? l.reason.replace(/^claude: /, "") : "research says spam, but the demo is booked" }].slice(-50);
+      if (l.status === "not_fit" || (l.status !== "spam" && l.research.verdict === "spam")) day.not_fit = [...day.not_fit, { company: l.company || "?", reason: l.status === "not_fit" ? l.reason.replace(/^claude: /, "") : l.status === "follow_up" ? "research says spam (personal email, not booked)" : "research says spam, but the demo is booked" }].slice(-50);
       await env.LEADS.put(key, JSON.stringify(day), { expirationTtl: DAY_TTL_S });
     }
     if (!env.SLACK_BOT_TOKEN || !env.INBOUND_SLACK_CHANNEL) return { posted: "none" };
