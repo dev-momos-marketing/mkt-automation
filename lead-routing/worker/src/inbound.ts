@@ -1,9 +1,13 @@
 // Inbound alerts: the Worker posts each demo request to Slack itself, through Beacon, so a lead
 // never depends on Zapier's filter to be seen. Zapier only creates the Salesforce lead.
 //
-// - One post per demo request that isn't spam or a confident not-fit, after the research.
+// - One post per demo request that isn't spam or a confident not-fit, after the research. One fact
+//   per line (company, person, email, country, locations, website), then the AE tag and one plain
+//   next step. No scores or verdicts: those stay in Salesforce.
+// - A lead the research calls spam doesn't post either. It goes in the daily roll-up, since its
+//   demo is still booked.
 // - A repeat submission from the same email within 7 days gets one short line, not a new post.
-// - "said 1-5, found 70+" gets a 🔺, because people often answer for their own store.
+// - "said 1-5, found 70+" shows both numbers, because people often answer for their own store.
 // - If Zapier fails, the post says the lead isn't in Salesforce.
 // - The AE is tagged (AE_SLACK). If the research fails, the post goes out at once marked
 //   "research pending", and the 5-minute cron retries for about 2 hours, then fills it in
@@ -93,53 +97,59 @@ const clean = (s = "") => s.replace(/[<>&]/g, (c) => ({ "<": "&lt;", ">": "&gt;"
 
 const aeLabel = (l: InboundLead, aeSlackId?: string | null) => (aeSlackId ? `<@${aeSlackId}>` : l.ae || "no AE");
 
-const REGION_NAME: Record<string, string> = { us_west: "West US", us_east: "East US", emea: "Europe and Middle East", apac: "APAC", unknown: "region unknown" };
-const FIT_NAME: Record<string, string> = { fit: "Good fit", maybe: "Unsure", not_fit: "Not a fit", unavailable: "Check failed" };
-const VERDICT_NAME: Record<string, string> = { verified: "✅ Verified", suspicious: "⚠️ Suspicious", spam: "⛔ Looks like spam" };
-const sentence = (s: string) => {
-  const t = clean(s).replace(/\s+/g, " ");
-  return t ? t[0].toUpperCase() + t.slice(1) + (/[.!?]$/.test(t) ? "" : ".") : "";
-};
+const host = (url: string) => url.replace(/^https?:\/\//, "").replace(/^www\./, "").replace(/\/$/, "");
 
-// The booking check in words: "Not a fit (0.6). Single-location cafe."
-function fitLine(l: InboundLead): string {
-  const m = /^claude (\w+) ([\d.]+): (.*)$/.exec(l.reason);
-  if (m) return `${FIT_NAME[m[1]] ?? m[1]} (${m[2]}). ${sentence(m[3])}`;
-  if (l.reason === "ok") return `${FIT_NAME[l.fit.icp_fit] ?? l.fit.icp_fit}${l.fit.confidence != null ? ` (${l.fit.confidence})` : ""}.`;
-  return sentence(l.reason);
+// "MY" -> "Malaysia". Anything that isn't a two-letter code is shown as typed.
+function countryName(code: string): string {
+  const c = clean(code);
+  if (!/^[A-Za-z]{2}$/.test(c)) return c;
+  try {
+    return new Intl.DisplayNames(["en"], { type: "region" }).of(c.toUpperCase()) ?? c;
+  } catch {
+    return c;
+  }
 }
 
+// "Paris Baguette Malaysia (Berjaya Paris Baguette Sdn Bhd)" -> "Paris Baguette Malaysia".
+const shortName = (s = "") => clean(s.replace(/\s*\([^)]*\)/g, " ").replace(/\s+/g, " "));
+
+// The size line: what the web found when it found something, else the form's answer.
+function sizeLine(l: InboundLead): string {
+  const found = clean(l.research.locations_found ?? "");
+  const said = clean(l.locations);
+  if (!found) return said ? `${said} locations` : "";
+  const size = /^[~\d,+\-– ]+$/.test(found) ? `${found} locations` : found;
+  return said && sizeMismatch(l.locations, found) ? `${size} (form said ${said})` : size;
+}
+
+// One plain next step for the AE. Rules, not AI wording, so the line is always short and the same.
+function nextStep(l: InboundLead): string {
+  const r = l.research;
+  if (r.locations_found && sizeMismatch(l.locations, r.locations_found)) return "Bigger account than the form says.";
+  if (r.verdict === "pending") return "Research is still running. This post updates when it's done.";
+  if (r.verdict === "unavailable") return "Check the company before the call.";
+  if (/^claude not_fit/.test(l.reason)) return "Check they're a restaurant before the call.";
+  if (r.person_matches_company === false) return "Confirm their role early in the call.";
+  return "Demo is booked.";
+}
+
+// The lead post: one fact per line, then who follows up and what to do. A line with nothing to
+// show is left out. No scores, verdicts or AI wording: those stay in Salesforce.
 export function inboundMessage(l: InboundLead, aeSlackId?: string | null): string {
   const r = l.research;
-  const sure = l.reason === "ok";
-  const flagged = /^claude not_fit/.test(l.reason);
-  const icon = sure ? "🟢" : flagged ? "🟠" : "🟡";
-  const where = l.roundRobin ? "🔄 Round robin (50+)" : REGION_NAME[l.region] ?? l.region;
-  const name = clean(`${l.firstName} ${l.lastName}`) || "No name";
-  const company = clean(r.company_name || l.company) || "Unknown company";
-  const site = r.company_website ? ` · <${r.company_website}|website>` : "";
-  const found = r.locations_found ? `, found *${clean(r.locations_found)}*` : "";
-  const lines = [`${icon} *New demo request for ${aeLabel(l, aeSlackId)}* · ${where}`];
-  if (!sure) lines.push(flagged ? "_Claude doesn't think this is a fit. The demo was booked anyway._" : "_Claude isn't sure this is a fit. The demo was booked anyway._");
-  lines.push(
-    "",
-    `*${name}*${l.title ? `, ${clean(l.title)}` : ""}`,
-    `*${company}*${site}${r.industry ? ` · ${clean(r.industry)}` : ""}`,
-    `${clean(l.email)} · ${clean(l.country) || "No country"}${r.hq_country ? ` · HQ ${clean(r.hq_country)}` : ""}`,
-    "",
-    `*Locations:* said *${clean(l.locations) || "?"}*${found}${r.locations_found && sizeMismatch(l.locations, r.locations_found) ? " 🔺 far more than the form says" : ""}`,
-    `*Fit check:* ${fitLine(l)}`,
-  );
-  if (r.verdict === "pending") lines.push("*Research:* ⏳ Claude didn't answer. Retrying in the background, and this post updates when it's done.");
-  else if (r.verdict === "unavailable") lines.push(`*Research:* ❔ Unavailable${r.error ? ` (${clean(r.error).slice(0, 80)})` : ""}`);
-  else {
-    lines.push(`*Research:* ${VERDICT_NAME[r.verdict] ?? clean(r.verdict)}${r.confidence != null ? ` (${r.confidence})` : ""} · Works there: ${r.person_matches_company ? "yes" : "no"}`);
-    for (const f of (r.red_flags ?? []).slice(0, 3)) lines.push(`• ${sentence(f)}`);
-    if (r.summary) lines.push(sentence(r.summary));
-  }
-  if (l.utm.source || l.utm.campaign) lines.push(`_Source: ${clean(l.utm.source) || "-"} / ${clean(l.utm.campaign) || "-"}_`);
-  if (!l.salesforce.ok) lines.push(`⚠️ *Not in Salesforce:* ${clean(l.salesforce.error ?? "Zapier failed")}. Add it by hand.`);
-  return lines.join("\n");
+  const name = clean(`${l.firstName} ${l.lastName}`);
+  const person = [name, clean(l.title)].filter(Boolean).join(", ");
+  const lines = [
+    `*${shortName(r.company_name || l.company) || "Unknown company"}*`,
+    person && `👤 ${person}`,
+    l.email && `✉️ ${clean(l.email)}`,
+    l.country && `🌏 ${countryName(l.country)}`,
+    sizeLine(l) && `🏬 ${sizeLine(l)}`,
+    r.company_website && `🔗 <${r.company_website}|${clean(host(r.company_website))}>`,
+    `👉 ${aeLabel(l, aeSlackId)} follow up. ${nextStep(l)}`,
+    !l.salesforce.ok && "⚠️ Not in Salesforce yet. Add it by hand.",
+  ];
+  return lines.filter(Boolean).join("\n");
 }
 
 export function repeatMessage(l: InboundLead, count: number, aeSlackId?: string | null): string {
@@ -249,11 +259,11 @@ export async function reportInbound(l: InboundLead, env: InboundEnv, now = new D
       if (!l.salesforce.ok) day.zapier_errors++;
       if (l.fit.icp_fit === "unavailable") day.claude_failures++;
       if ((l.research.verdict === "unavailable" || l.research.verdict === "pending") && l.status !== "spam") day.claude_failures++;
-      if (l.status === "not_fit") day.not_fit = [...day.not_fit, { company: l.company || "?", reason: l.reason.replace(/^claude: /, "") }].slice(-50);
+      if (l.status === "not_fit" || (l.status !== "spam" && l.research.verdict === "spam")) day.not_fit = [...day.not_fit, { company: l.company || "?", reason: l.status === "not_fit" ? l.reason.replace(/^claude: /, "") : "research says spam, but the demo is booked" }].slice(-50);
       await env.LEADS.put(key, JSON.stringify(day), { expirationTtl: DAY_TTL_S });
     }
     if (!env.SLACK_BOT_TOKEN || !env.INBOUND_SLACK_CHANNEL) return { posted: "none" };
-    if (l.status === "spam" || l.status === "not_fit") return { posted: "none" };
+    if (l.status === "spam" || l.status === "not_fit" || l.research.verdict === "spam") return { posted: "none" };
     const count = await countSubmission(env.LEADS, l.email);
     const tag = await aeSlackId(env, l.ae);
     const text = count > 1 ? repeatMessage(l, count, tag) : inboundMessage(l, tag);
@@ -357,7 +367,8 @@ export async function retryResearch(env: InboundEnv, research: Researcher, now =
     }
     if (found) {
       const mins = Math.round((now - item.first) / 60_000);
-      const text = `${inboundMessage({ ...item.lead, research: found }, tag)}\n_Research added after ${item.attempts + 1} tries (${mins} min)._`;
+      const text = inboundMessage({ ...item.lead, research: found }, tag);
+      console.log(JSON.stringify({ research_retry: "done", attempts: item.attempts + 1, mins }));
       await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, text);
       await env.LEADS.delete?.(key);
       result.done++;
