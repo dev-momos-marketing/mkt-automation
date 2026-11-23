@@ -18,6 +18,7 @@ import { inRoundRobin, roundRobinAe } from "./roundrobin.ts";
 import { handleSlackEvents } from "./ask.ts";
 import { notifyLeads, type NotifyEnv } from "./notify.ts";
 import { dailyReport, queueResearch, reportInbound, retryResearch, type InboundEnv, type InboundLead } from "./inbound.ts";
+import { linkSalesforce, queueLink } from "./sflink.ts";
 
 // The crons in wrangler.toml: the daily report, the research retries, and the 30-minute notifier.
 export const DAILY_CRON = "0 1 * * *";
@@ -222,8 +223,9 @@ async function afterAnswer(form: FormData, instant: Instant, url: string, fit: F
   if (retry) lead.research = { verdict: "pending", error };
   const posted = await reportInbound(lead, env);
   if (retry && posted.posted === "lead" && posted.ts && posted.channel) {
-    await queueResearch(env, { lead, form: form as Record<string, unknown>, instant: instant as unknown as Record<string, unknown>, channel: posted.channel, ts: posted.ts });
+    await queueResearch(env, { lead, form: form as Record<string, unknown>, instant: instant as unknown as Record<string, unknown>, channel: posted.channel, ts: posted.ts, postKey: posted.postKey });
   }
+  if (posted.posted === "lead" && posted.postKey && salesforce.ok) await queueLink(env, posted.postKey, lead.email);
 }
 
 // One research try for the retry cron, with the full 25 s.
@@ -239,7 +241,11 @@ export default {
     const when = new Date(event.scheduledTime);
     const name = event.cron === DAILY_CRON ? "daily report" : event.cron === RETRY_CRON ? "research retry" : "notifier";
     const job: Promise<unknown> =
-      event.cron === DAILY_CRON ? dailyReport(when, env) : event.cron === RETRY_CRON ? retryResearch(env, researcher(env), when.getTime()) : notifyLeads(when, env);
+      event.cron === DAILY_CRON
+        ? dailyReport(when, env)
+        : event.cron === RETRY_CRON
+          ? Promise.all([retryResearch(env, researcher(env), when.getTime()), linkSalesforce(env, when.getTime())])
+          : notifyLeads(when, env);
     ctx.waitUntil(job.catch((err) => console.error(`${name} failed`, err instanceof Error ? err.message : err)));
   },
 

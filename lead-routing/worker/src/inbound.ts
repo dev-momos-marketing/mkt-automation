@@ -64,6 +64,7 @@ export type InboundLead = {
   };
   utm: { source: string; campaign: string };
   salesforce: { ok: boolean; error?: string }; // the Zapier send
+  salesforceUrl?: string; // the lead's Salesforce record, filled in by the 5-minute cron (sflink.ts)
 };
 
 export type DayStats = {
@@ -152,6 +153,7 @@ export function inboundMessage(l: InboundLead, aeSlackId?: string | null): strin
     l.country && `🌏 ${countryName(l.country)}`,
     sizeLine(l) && `🏬 ${sizeLine(l)}`,
     r.company_website && `🔗 <${r.company_website}|${clean(host(r.company_website))}>`,
+    l.salesforceUrl && `📇 <${l.salesforceUrl}|Open in Salesforce>`,
     `👉 ${aeLabel(l, aeSlackId)} follow up. ${nextStep(l)}`,
     !l.salesforce.ok && "⚠️ Not in Salesforce yet. Add it by hand.",
   ];
@@ -255,7 +257,29 @@ async function countSubmission(kv: Kv | undefined, email: string): Promise<numbe
 }
 
 // Called once per form submission, after the research and the Zapier send. Never throws.
-export async function reportInbound(l: InboundLead, env: InboundEnv, now = new Date()): Promise<{ posted: "lead" | "repeat" | "none"; error?: string; ts?: string; channel?: string }> {
+export type PostRef = { channel: string; ts: string };
+// Every copy of one lead's post (the channel, and the AE's DM) and the lead as last shown, so
+// the cron can redraw them all when the research or the Salesforce link comes in.
+export type PostRecord = { lead: InboundLead; posts: PostRef[] };
+const POST_TTL_S = 2 * 24 * 3600;
+
+export async function readPost(env: InboundEnv, key: string): Promise<PostRecord | null> {
+  const raw = await env.LEADS?.get(key);
+  return raw ? (JSON.parse(raw) as PostRecord) : null;
+}
+
+// Changes the lead in a post record and redraws every copy of the post. False if the record is gone.
+export async function updatePosts(env: InboundEnv, key: string, change: (l: InboundLead) => InboundLead): Promise<boolean> {
+  const rec = await readPost(env, key);
+  if (!rec || !env.LEADS || !env.SLACK_BOT_TOKEN) return false;
+  const lead = change(rec.lead);
+  await env.LEADS.put(key, JSON.stringify({ ...rec, lead }), { expirationTtl: POST_TTL_S });
+  const text = inboundMessage(lead, await aeSlackId(env, lead.ae));
+  for (const p of rec.posts) await slackUpdate(env.SLACK_BOT_TOKEN, p.channel, p.ts, text);
+  return true;
+}
+
+export async function reportInbound(l: InboundLead, env: InboundEnv, now = new Date()): Promise<{ posted: "lead" | "repeat" | "none"; error?: string; ts?: string; channel?: string; postKey?: string }> {
   try {
     if (env.LEADS) {
       const key = dayKey(now);
@@ -278,7 +302,19 @@ export async function reportInbound(l: InboundLead, env: InboundEnv, now = new D
       console.error(JSON.stringify({ inbound: "slack error", error: out.error }));
       return { posted: "none", error: out.error };
     }
-    return { posted: count > 1 ? "repeat" : "lead", ts: out.ts, channel: out.channel };
+    // The same post in the AE's DM, so they see their own leads without scrolling the channel.
+    const posts: PostRef[] = out.ts && out.channel ? [{ channel: out.channel, ts: out.ts }] : [];
+    if (tag) {
+      const dm = await slackPost(env.SLACK_BOT_TOKEN, tag, text);
+      if (dm.ok && dm.ts && dm.channel) posts.push({ channel: dm.channel, ts: dm.ts });
+      else console.error(JSON.stringify({ inbound: "ae dm failed", error: dm.error }));
+    }
+    let postKey: string | undefined;
+    if (count === 1 && env.LEADS && posts.length) {
+      postKey = `post:${posts[0].channel}:${posts[0].ts}`;
+      await env.LEADS.put(postKey, JSON.stringify({ lead: l, posts } satisfies PostRecord), { expirationTtl: POST_TTL_S });
+    }
+    return { posted: count > 1 ? "repeat" : "lead", ts: out.ts, channel: out.channel, postKey };
   } catch (err) {
     const error = err instanceof Error ? err.message : String(err);
     console.error(JSON.stringify({ inbound: "failed", error }));
@@ -331,6 +367,7 @@ export type PendingResearch = {
   instant: Record<string, unknown>;
   channel: string;
   ts: string;
+  postKey?: string; // the post record to redraw (channel + AE DM). Older items only have channel/ts.
   attempts: number; // research tries so far, the first one included
   next: number; // epoch ms
   first: number; // epoch ms of the first try
@@ -373,9 +410,9 @@ export async function retryResearch(env: InboundEnv, research: Researcher, now =
     }
     if (found) {
       const mins = Math.round((now - item.first) / 60_000);
-      const text = inboundMessage({ ...item.lead, research: found }, tag);
       console.log(JSON.stringify({ research_retry: "done", attempts: item.attempts + 1, mins }));
-      await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, text);
+      if (!(item.postKey && (await updatePosts(env, item.postKey, (l) => ({ ...l, research: found! })))))
+        await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, inboundMessage({ ...item.lead, research: found }, tag));
       await env.LEADS.delete?.(key);
       result.done++;
       continue;
@@ -383,8 +420,9 @@ export async function retryResearch(env: InboundEnv, research: Researcher, now =
     const attempts = item.attempts + 1;
     const wait = RETRY_AFTER_MIN[attempts - 1];
     if (wait == null) {
-      const text = inboundMessage({ ...item.lead, research: { verdict: "unavailable", error: `gave up after ${attempts} tries` } }, tag);
-      await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, text);
+      const gaveUp: InboundLead["research"] = { verdict: "unavailable", error: `gave up after ${attempts} tries` };
+      if (!(item.postKey && (await updatePosts(env, item.postKey, (l) => ({ ...l, research: gaveUp })))))
+        await slackUpdate(env.SLACK_BOT_TOKEN, item.channel, item.ts, inboundMessage({ ...item.lead, research: gaveUp }, tag));
       await env.LEADS.delete?.(key);
       result.gave_up++;
       continue;

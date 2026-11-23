@@ -1,6 +1,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import worker, { DAILY_CRON, RETRY_CRON, type Env } from "../src/index.ts";
+import { linkSalesforce, queueLink, soqlString } from "../src/sflink.ts";
 import { aeSlackId, dailyMessages, dailyReport, firstNumber, inboundMessage, queueResearch, reportInbound, retryResearch, sizeMismatch, type InboundLead, type Kv } from "../src/inbound.ts";
 
 function fakeKv() {
@@ -228,7 +229,8 @@ function slackApi() {
       const method = url.split("/api/")[1];
       const body = JSON.parse(String(init?.body));
       calls.push({ method, body });
-      return Response.json({ ok: true, ts: body.ts ?? "1700000000.000100", channel: "C0INBOUND1" });
+      const dm = String(body.channel ?? "").startsWith("U");
+      return Response.json({ ok: true, ts: body.ts ?? (dm ? "1700000000.000200" : "1700000000.000100"), channel: dm ? `D_${body.channel}` : body.channel ?? "C0INBOUND1" });
     }
     throw new Error(`unexpected ${url}`);
   }) as typeof fetch;
@@ -246,8 +248,12 @@ test("the AE is tagged from AE_SLACK, by Slack ID or email", async () => {
     const LEADS = fullKv();
     await reportInbound(lead(), { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS });
     await reportInbound(lead(), { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS });
+    // The lead goes to the channel and, as the same post, to the AE's DM. So does a repeat line.
+    assert.deepEqual(slack.calls.map((c) => c.body.channel), ["C0INBOUND1", "UJILL", "C0INBOUND1", "UJILL"]);
     assert.match(slack.calls[0].body.text, /👉 <@UJILL> follow up/);
-    assert.match(slack.calls[1].body.text, /^↩️ .* AE: <@UJILL>$/);
+    assert.equal(slack.calls[1].body.text, slack.calls[0].body.text);
+    assert.match(slack.calls[2].body.text, /^↩️ .* AE: <@UJILL>$/);
+    assert.equal(slack.calls[3].body.text, slack.calls[2].body.text);
   } finally {
     slack.restore();
   }
@@ -389,6 +395,63 @@ test("a lead the research calls spam isn't posted, but shows in the daily roll-u
     assert.equal(slack.posts.length, 0);
     const day = JSON.parse(LEADS.store.get("day:2026-11-10")!);
     assert.deepEqual(day.not_fit, [{ company: "Business Tips Center", reason: "research says spam, but the demo is booked" }]);
+  } finally {
+    slack.restore();
+  }
+});
+
+test("the Salesforce link is added to the channel post and the AE's DM once Zapier has made the lead", async () => {
+  const LEADS = fullKv();
+  const slack = slackApi();
+  const env = { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS, SF_DOMAIN: "momos.my.salesforce.com", SF_CLIENT_ID: "id", SF_CLIENT_SECRET: "s" };
+  const t0 = Date.parse("2026-11-10T10:00:00Z");
+  try {
+    const posted = await reportInbound(lead({ research: { verdict: "pending" } }), env, new Date(t0));
+    assert.equal(posted.postKey, "post:C0INBOUND1:1700000000.000100");
+    assert.doesNotMatch(slack.calls[0].body.text, /Salesforce/, "no link before the lead exists");
+    await queueLink(env, posted.postKey!, "Sam@TacoPlace.com", t0);
+    const asked: string[] = [];
+    let url: string | null = null;
+    const lookup = async (email: string) => (asked.push(email), url);
+    // Not in Salesforce yet at +1 minute: try again later, nothing posted.
+    assert.deepEqual(await linkSalesforce(env, t0 + 60_000, lookup), { linked: 0, waiting: 1, gave_up: 0 });
+    assert.deepEqual(await linkSalesforce(env, t0 + 2 * 60_000, lookup), { linked: 0, waiting: 0, gave_up: 0 }, "not due yet");
+    url = "https://momos.my.salesforce.com/lightning/r/Lead/00Q1/view";
+    assert.deepEqual(await linkSalesforce(env, t0 + 3 * 60_000, lookup), { linked: 1, waiting: 0, gave_up: 0 });
+    assert.deepEqual(asked, ["sam@tacoplace.com", "sam@tacoplace.com"]);
+    const updates = slack.calls.filter((c) => c.method === "chat.update");
+    assert.deepEqual(updates.map((u) => [u.body.channel, u.body.ts]), [["C0INBOUND1", "1700000000.000100"], ["D_UJILL", "1700000000.000200"]]);
+    for (const u of updates) assert.match(u.body.text, /\n📇 <https:\/\/momos\.my\.salesforce\.com\/lightning\/r\/Lead\/00Q1\/view\|Open in Salesforce>\n👉 <@UJILL> follow up/);
+    assert.equal([...LEADS.store.keys()].filter((k) => k.startsWith("sflink:")).length, 0);
+  } finally {
+    slack.restore();
+  }
+});
+
+test("the link survives a research update, and the lookup gives up quietly after an hour", async () => {
+  const LEADS = fullKv();
+  const slack = slackApi();
+  const env = { SLACK_BOT_TOKEN: "x", INBOUND_SLACK_CHANNEL: "C0INBOUND1", AE_SLACK: "Jill=UJILL", LEADS, SF_DOMAIN: "d", SF_CLIENT_ID: "id", SF_CLIENT_SECRET: "s" };
+  const t0 = Date.parse("2026-11-10T10:00:00Z");
+  try {
+    const pending = lead({ research: { verdict: "pending" } });
+    const posted = await reportInbound(pending, env, new Date(t0));
+    await queueResearch(env, { lead: pending, form: {}, instant: {}, channel: posted.channel!, ts: posted.ts!, postKey: posted.postKey }, t0);
+    await queueLink(env, posted.postKey!, pending.email, t0);
+    await linkSalesforce(env, t0 + 60_000, async () => "https://sf.example/lightning/r/Lead/00Q2/view");
+    await retryResearch(env, async () => ({ verdict: "verified", locations_found: "72", person_matches_company: true }), t0 + 2 * 60_000);
+    const last = slack.calls.filter((c) => c.method === "chat.update").slice(-2);
+    assert.deepEqual(last.map((u) => u.body.channel), ["C0INBOUND1", "D_UJILL"], "the research update redraws both copies");
+    for (const u of last) {
+      assert.match(u.body.text, /Open in Salesforce/, "the link stays");
+      assert.match(u.body.text, /🏬 72 locations \(form said 1-5\)/, "and the research is in");
+    }
+    // A lead Zapier never made: tries for about an hour, then stops without posting anything.
+    await queueLink(env, "post:C0INBOUND1:missing", "nobody@x.com", t0);
+    let gaveUp = 0;
+    for (let m = 0; m <= 70; m++) gaveUp += (await linkSalesforce(env, t0 + m * 60_000, async () => null)).gave_up;
+    assert.equal(gaveUp, 1);
+    assert.equal(soqlString("o'brien@x.com"), "'o\\'brien@x.com'");
   } finally {
     slack.restore();
   }

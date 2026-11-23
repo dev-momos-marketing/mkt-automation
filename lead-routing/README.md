@@ -155,6 +155,8 @@ After the research, Beacon posts each demo request to the channel in the `INBOUN
 
 - One fact per line, always in this order. A line with nothing to show is left out. Scores, verdicts and the research summary stay in Salesforce.
 - The last line tags the AE and gives one plain next step: "Demo is booked.", "Bigger account than the form says." (the web found at least twice the form's answer, and 10 or more), "Confirm their role early in the call.", "Check they're a restaurant before the call." or "Check the company before the call." (research failed).
+- The same post also goes to the tagged AE as a Beacon DM, so each AE sees their own leads without scrolling the channel. Repeat lines go to both too. Needs `AE_SLACK`.
+- 📇 *Open in Salesforce* appears on the post (channel and DM) once Zapier has made the lead, usually within a few minutes: the 5-minute cron looks the lead up by email and edits the link in, for about an hour (`worker/src/sflink.ts`). Needs the `SF_*` secrets. If the lead never shows up, the post just has no link.
 - Spam and confident not-fits aren't posted. Neither is a booked lead the research calls spam: it goes in the daily 🚫 roll-up instead.
 - ⚠️ Not in Salesforce yet: Zapier failed. Add the lead by hand.
 - ↩️ the same email submitted again within 7 days: one short line in place of a new post.
