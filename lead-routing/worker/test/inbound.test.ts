@@ -80,6 +80,8 @@ test("the Slack post is one fact per line and ends with the follow-up", () => {
   const failed = inboundMessage(lead({ title: "", country: "", salesforce: { ok: false, error: "Zapier returned 500" }, research: { verdict: "unavailable", error: "403 Request not allowed" } }));
   assert.match(failed, /^\*Taco Place\*\n👤 Sam Rivera\n✉️ sam@tacoplace\.com\n🏬 1-5 locations\n/, "empty lines are left out");
   assert.match(failed, /Check the company before the call\.\n⚠️ Not in Salesforce yet\. Add it by hand\.$/);
+  assert.match(inboundMessage(lead({ status: "follow_up", email: "sam@gmail.com", research: { verdict: "verified", person_matches_company: true } })), /👉 Jill follow up\. No demo booked \(personal email, under 6 locations\)\. Email them\.$/);
+  assert.match(inboundMessage(lead({ status: "follow_up", email: "sam@gmail.com", research: { verdict: "verified", locations_found: "20+", person_matches_company: true } })), /No demo booked \(personal email, under 6 locations\), but the brand has 20\+\. Email them today\.$/);
   // Form text can't inject Slack links or mentions.
   assert.match(inboundMessage(lead({ company: "<!channel>", research: { verdict: "verified" } })), /&lt;!channel&gt;/);
 })

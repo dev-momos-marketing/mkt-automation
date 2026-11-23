@@ -43,6 +43,40 @@ export const ROUTES: Record<Region, AEKey> = {
   unknown: "jill",
 };
 
+// Free personal email providers. Shared with the fit check (fit.ts).
+// Exact domains, plus the big providers' country versions (yahoo.co.uk, hotmail.com.au, outlook.sg…).
+export const FREE_EMAIL = new Set([
+  "gmail.com", "googlemail.com", "icloud.com", "me.com", "mac.com", "aol.com", "proton.me", "protonmail.com", "pm.me",
+  "gmx.com", "gmx.net", "gmx.de", "web.de", "zohomail.com", "yandex.com", "yandex.ru", "mail.com", "mail.ru",
+  "fastmail.com", "tutanota.com", "tuta.io", "hey.com", "duck.com", "hushmail.com", "inbox.com",
+  "qq.com", "163.com", "126.com", "sina.com", "sohu.com", "naver.com", "daum.net", "hanmail.net", "rediffmail.com",
+  "comcast.net", "att.net", "verizon.net", "sbcglobal.net", "bellsouth.net", "cox.net", "charter.net", "earthlink.net",
+  "btinternet.com", "sky.com", "virginmedia.com", "orange.fr", "free.fr", "laposte.net", "libero.it", "t-online.de",
+  "bigpond.com", "optusnet.com.au", "shaw.ca", "rogers.com", "sympatico.ca", "singnet.com.sg", "streamyx.com",
+]);
+const FREE_EMAIL_FAMILY = /^(gmail|googlemail|yahoo|ymail|rocketmail|hotmail|outlook|live|msn|aol|protonmail|gmx|yandex)\.(com|net|co|[a-z]{2})(\.[a-z]{2})?$/;
+
+// The email's domain, lower case, without spaces, a trailing dot or a display name ("Ana <ana@x.com>").
+export function emailDomain(email = ""): string {
+  const addr = (/<([^>]+)>/.exec(email)?.[1] ?? email).trim().toLowerCase();
+  return (addr.split("@").pop() ?? "").replace(/\.+$/, "").trim();
+}
+
+export function isPersonalEmail(email = ""): boolean {
+  const domain = emailDomain(email);
+  return !!domain && email.includes("@") && (FREE_EMAIL.has(domain) || FREE_EMAIL_FAMILY.test(domain));
+}
+
+// The form's location answer in its canonical form: "6–49 " -> "6-49", "250 +" -> "250+".
+export function locationBucket(v: unknown): string {
+  return String(v ?? "").replace(/[\u2010-\u2015\u2212]/g, "-").replace(/\s+/g, "").trim();
+}
+
+// A personal email (Gmail etc.) books a demo only with 6+ locations. Anything else (1-5, blank,
+// or an answer that isn't one of the form's buckets) gets the thank-you popup, and the region's AE
+// follows up by email. Strict on purpose: only these exact answers book.
+export const PERSONAL_EMAIL_BOOKS: string[] = ["6-49", "50-249", "250+"];
+
 // Location answers that never book a demo straight away: the thank-you popup, and the region's
 // AE follows up later, without asking Claude. Empty: every location count can book (1-5 included).
 export const FOLLOW_UP_BUCKETS: string[] = [];
@@ -141,13 +175,18 @@ export function guessRegion(country = "", ip: IpLocation = {}, companyRegion: Re
   return companyRegion !== "unknown" ? companyRegion : "us_east";
 }
 
-// The checks that need no AI, in priority order: spam first, then FOLLOW_UP_BUCKETS (empty now). Claude's ICP check (index.ts) runs next, and the region decides the AE last.
+// The checks that need no AI, in priority order: spam first, then a personal email under 6 locations,
+// then FOLLOW_UP_BUCKETS (empty now). Claude's ICP check (index.ts) runs next, and the region decides the AE last.
 export function instantRoute(d: FormData, ip: IpLocation = {}): Instant {
   const spam = spamReason(d);
   if (spam) return { status: "spam", reason: spam, region: "unknown", regionSure: false, ae: null };
 
   // The region is only used to name the AE: the one who gets the booking or does the follow-up.
   const { region, sure: regionSure } = locate(String(d.country ?? ""), String(d.timezone ?? ""), ip);
+  const bucket = locationBucket(d.locations);
+  if (isPersonalEmail(String(d.email ?? "")) && !PERSONAL_EMAIL_BOOKS.includes(bucket)) {
+    return { status: "follow_up", reason: `personal email, ${bucket ? `${bucket.slice(0, 20)} locations` : "no location count"}`, region, regionSure, ae: ROUTES[region] };
+  }
   if (FOLLOW_UP_BUCKETS.includes(String(d.locations ?? ""))) return { status: "follow_up", reason: `${d.locations} locations`, region, regionSure, ae: ROUTES[region] };
   return { status: "routed", reason: "ok", region, regionSure, ae: ROUTES[region] };
 }

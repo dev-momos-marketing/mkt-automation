@@ -7,6 +7,7 @@ Framer form ──► Cloudflare Worker
                   │
                   ├─ any lead that isn't spam, Jill  ──► Jill's Google Calendar
                   ├─ any lead that isn't spam, James ──► James's Google Calendar
+                  ├─ Gmail etc. under 6 locations    ──► thank-you popup, AE follows up by email
                   └─ spam                            ──► thank-you popup
 
                   optional, after the redirect:
@@ -36,13 +37,14 @@ To change who gets which region, edit `ROUTES` in `worker/src/route.ts`.
 
 Before answering the form, the Worker asks Claude Haiku 5.5 whether the lead is an ICP fit. Claude sees the company name, job title, email domain, country and location count, and judges from what it already knows. There is no web search or website lookup here, so it stays fast (about 1 to 1.5 seconds).
 
-- Every lead that isn't spam gets their AE's calendar (`status: routed`), whatever the location count and whatever Claude answers. Only spam gets the thank-you popup (`status: spam`).
+- Every lead that isn't spam gets their AE's calendar (`status: routed`), whatever the location count and whatever Claude answers. Spam gets the thank-you popup (`status: spam`).
+- Exception: a personal email books only with 6+ locations. It counts as personal when the domain is a free provider: Gmail, Outlook/Hotmail/Live, Yahoo, iCloud, Proton, AOL and about 50 more, including country versions such as `yahoo.co.uk` or `hotmail.com.au` (`FREE_EMAIL` and `FREE_EMAIL_FAMILY` in `worker/src/route.ts`). Only the answers `6-49`, `50-249` and `250+` book (spaces and long dashes are ignored). Anything else, `1-5`, blank or an odd value, gets the thank-you popup (`status: follow_up`, reason `personal email, 1-5 locations`). The lead still goes to Salesforce and Slack, and the post tells the region's AE to email them, with "Email them today" when the research finds 6+ locations anyway. Spam is checked first, so a junk Gmail is still spam. The rule is `PERSONAL_EMAIL_BOOKS` in `worker/src/route.ts`.
 - The order is always **spam → ICP → region**. Every booking has an AE: if the country, time zone and IP don't settle the region, it's guessed from the IP country, then Claude's guess of the company's HQ, then East (Jill).
 - A `maybe`, a low-confidence answer, or Claude over 3 seconds or failing still books the calendar. `routing.reason` says why (for example `claude maybe 0.6: size unclear` or `fit check unavailable`), so the AE can see it in Slack.
 
 Obvious spam (filled honeypot, form filled in under 2 seconds, bad or throwaway email) never reaches Claude.
 
-What counts as ICP is the prompt in `worker/src/fit.ts`. Since Nov 10, 2026 Claude's answer never turns a lead away: only spam gets the thank-you popup. `FIT_MIN_CONFIDENCE` only decides whether the Slack post says 🟢 (sure) or 🟡/🟠 (unsure / Claude thinks it's not a fit).
+What counts as ICP is the prompt in `worker/src/fit.ts`. Since Nov 10, 2026 Claude's answer never turns a lead away. `FIT_MIN_CONFIDENCE` only decides whether the Slack post says 🟢 (sure) or 🟡/🟠 (unsure / Claude thinks it's not a fit).
 
 Every lead writes one line to the Worker's **Logs** tab: company, region, AE, Claude's verdict and confidence. Check it now and then to see who is being turned away.
 
